@@ -45,10 +45,17 @@ public class test_reminder {
         String charterapi = charterapi_;
 
         String macaddress;
-        String default_operation = "Check";
+        //String default_operation = "Check";
         String operation = "";
-        String param;
+        String param = "";
 
+/*        String json_add5 = "{\"deviceId\":" + macaddress + ",\"reminders\":["
+                + "{\"operation\":Add,\"reminderChannelNumber\":" + channel + ",\"reminderProgramStart\":\"" + data + " 00:00\",\"reminderProgramId\":0,\"reminderOffset\":" + reminderOffset + "},"
+                + "{\"operation\":Add,\"reminderChannelNumber\":" + channel + ",\"reminderProgramStart\":\"" + data + " 00:30\",\"reminderProgramId\":0,\"reminderOffset\":" + reminderOffset + "},"
+                + "{\"operation\":Add,\"reminderChannelNumber\":" + channel + ",\"reminderProgramStart\":\"" + data + " 01:00\",\"reminderProgramId\":0,\"reminderOffset\":" + reminderOffset + "},"
+                + "{\"operation\":Add,\"reminderChannelNumber\":" + channel + ",\"reminderProgramStart\":\"" + data + " 01:30\",\"reminderProgramId\":0,\"reminderOffset\":" + reminderOffset + "},"
+                + "{\"operation\":Add,\"reminderChannelNumber\":" + channel + ",\"reminderProgramStart\":\"" + data + " 02:00\",\"reminderProgramId\":0,\"reminderOffset\":" + reminderOffset + "}]}";
+*/
 
         String synopsys="\nNAME" +
                 "\n\tReminders - java app for Add/Edit/Delete/Purge reminders and Check AMS/Change AMS registration on MACADDRESS." +
@@ -87,7 +94,7 @@ public class test_reminder {
 
         //try {
             //check the args[0]: MACADDRESS
-            if (args[0].equals("")) {
+            if (args[0].isEmpty()){
                 System.out.println("No macaddress specified!" + synopsys);
                 return;
             } else if (args[0].length() != 12) {
@@ -103,18 +110,29 @@ public class test_reminder {
         //}
 
         //check the args[1]: OPERATION
-        if (args[1].equalsIgnoreCase("change")) {
-            operation = "Change";
-            if (!args[2].equals("")){
-                param = args[2];
+        if (!args[1].isEmpty()){
+            if (args[1].equalsIgnoreCase("change")){
+                operation = args[1];
             }
-            System.out.print("[DBG] args[1] is correct: "+args[1]+" now operation="+operation+", ams="+ams_ip);
         }
+
+        //param - can be as count_reminders if operation=All/Add/Edit/Delete
+        //param - can be as ams_ip if operation=Change
+        if (!args[2].isEmpty()){
+            param = args[2];
+            //count_reminders = args[2];
+            //ams_ip = args[2];
+        }
+
+
 
         param = args[2];
 
-        if (args[1].equalsIgnoreCase("all")||args[1].equalsIgnoreCase("add")
-                ||args[1].equalsIgnoreCase("edit")||args[1].equalsIgnoreCase("delete")) {
+        if (args[1].equalsIgnoreCase("all")
+                ||args[1].equalsIgnoreCase("add")
+                ||args[1].equalsIgnoreCase("edit")
+                ||args[1].equalsIgnoreCase("delete")
+                ||args[1].equalsIgnoreCase("test")) {
             switch (args[2]){
                 case "48": count_reminders=48; break;
                 case "288": count_reminders=288; break;
@@ -124,14 +142,14 @@ public class test_reminder {
             operation = args[1];
         }
 
-        Reminder_middle request = new Reminder_middle();
+        Middle_request request = new Middle_request();
 
-        System.out.println("[DBG] preconditions: "+macaddress+" "+operation+" "+param);
+        System.out.println("[DBG]: "+macaddress+" "+operation+" "+param);
         switch (operation){
             case "Check":
             case "check": request.Check_registration(macaddress); break;
             case "Change":
-            case "change": request.Change_registration(macaddress, ams_ip); break;
+            case "change": request.Change_registration(macaddress, param); break;
             case "Purge":
             case "purge": request.Purge(macaddress); break;
             case "All":
@@ -142,6 +160,8 @@ public class test_reminder {
             case "edit": request.Edit(macaddress, count_reminders, reminderOffset, reminderOffset_new); break;
             case "Delete":
             case "delete": request.Delete(macaddress, count_reminders, reminderOffset); break;
+            case "test": request.generate_json(); break;
+            //case "test": request.generate_json(macaddress, operation, ); break;
             default: request.Check_registration(macaddress);
         }
     }

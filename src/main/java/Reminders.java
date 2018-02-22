@@ -1,7 +1,16 @@
 public class Reminders {
-    public String operation;
-    public int reminderChannelNumber;
-    public String reminderProgramStart;
-    public int reminderProgramId;
-    public int reminderOffset;
+    String operation;
+    int reminderChannelNumber;
+    String reminderProgramStart;
+    int reminderProgramId;
+    int reminderOffset;
+
+
+    public String getOperation() {
+        return operation;
+    }
+
+    public void setOperation(String operation) {
+        this.operation = operation;
+    }
 }
