@@ -12,8 +12,8 @@ import org.apache.http.util.EntityUtils;
 import java.util.ArrayList;
 import java.util.List;
 
-@Deprecated
-public class QuickStart {
+
+public class example_CloseableHttpClient {
 
     public static void main(String[] args) throws Exception {
         CloseableHttpClient httpclient = HttpClients.createDefault();

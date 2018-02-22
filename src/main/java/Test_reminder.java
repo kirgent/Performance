@@ -5,7 +5,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
 
-public class test_reminder {
+public class Test_reminder {
 
     private static int count_iterations = 1;
 
@@ -142,7 +142,7 @@ public class test_reminder {
             operation = args[1];
         }
 
-        Middle_request request = new Middle_request();
+        Middle request = new Middle();
 
         System.out.println("[DBG]: "+macaddress+" "+operation+" "+param);
         switch (operation){
@@ -158,10 +158,12 @@ public class test_reminder {
             case "add": request.Add(macaddress, count_reminders, reminderOffset); break;
             case "Edit":
             case "edit": request.Edit(macaddress, count_reminders, reminderOffset, reminderOffset_new); break;
+
             case "Delete":
             case "delete": request.Delete(macaddress, count_reminders, reminderOffset); break;
-            case "test": request.generate_json(); break;
-            //case "test": request.generate_json(macaddress, operation, ); break;
+
+            case "test": request.generate_json();break;
+
             default: request.Check_registration(macaddress);
         }
     }
