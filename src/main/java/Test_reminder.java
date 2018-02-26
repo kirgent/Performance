@@ -44,8 +44,7 @@ public class Test_reminder {
         String charterapi_d="http://specd.partnerapi.engprod-charter.net/api/pub/networksettingsmiddle/ns/settings";
         String charterapi = charterapi_;
 
-        String macaddress;
-        //String default_operation = "Check";
+        String macaddress = "A0722CB1AF24";
         String operation = "";
         String param = "";
 
@@ -124,8 +123,6 @@ public class Test_reminder {
             //ams_ip = args[2];
         }
 
-
-
         param = args[2];
 
         if (args[1].equalsIgnoreCase("all")
@@ -158,11 +155,10 @@ public class Test_reminder {
             case "add": request.Add(macaddress, count_reminders, reminderOffset); break;
             case "Edit":
             case "edit": request.Edit(macaddress, count_reminders, reminderOffset, reminderOffset_new); break;
-
             case "Delete":
             case "delete": request.Delete(macaddress, count_reminders, reminderOffset); break;
 
-            case "test": request.Generate_json(2); break;
+            case "test": System.out.println(request.Generate_json(3, "Add", 0)); break;
 
             default: request.Check_registration(macaddress);
         }

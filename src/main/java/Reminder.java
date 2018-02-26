@@ -20,7 +20,9 @@ class Reminder {
     //NOT-TESTED variant
     //@SerializedName("reminders")
     //public List<Reminders> reminders;
-    public ArrayList<Reminders> reminders;
+
+    @SerializedName("reminders")
+    public List<Reminders> reminders;
 
     //Reminder(String deviceId, List<String> reminders){
     //    this.deviceId = deviceId;
