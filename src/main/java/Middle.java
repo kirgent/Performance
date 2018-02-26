@@ -644,10 +644,7 @@ public class Middle {
     void generate_json(){
 
         //String json, String macaddress, String[] channel, String[] data, int[] reminderOffset) {
-
-
-        int reminderProgramId = 0;
-        int reminderOffset = 0;
+        System.out.println("generate_json:");
 
 
                /* //working variant:
@@ -665,28 +662,46 @@ public class Middle {
         String json2 = "";
         */
 
+        String macaddress = "A0722CB1AF24";
+        String operation = "Add";
+        int reminderChannelNumber = 2;
+        String reminderProgramStart = "2018-02-22 00:00";
+        //String reminderProgramStart2 = "00:00";
+        int reminderProgramId = 0;
+        int reminderOffset = 0;
 
-/*        //WORKING
+
+        //WORKING variant for one class Reminder + one class Reminders
+        final Gson GSON = new GsonBuilder().setPrettyPrinting().create();
+
+        //from class -> to string json
+        //class with fields:
+        Reminders[] rs = new Reminders[](operation, reminderChannelNumber, reminderProgramStart, reminderProgramId, reminderOffset);
+        Reminder r = new Reminder(macaddress, rs);
+        //create json structure:
+        String json = GSON.toJson(r);
+        System.out.println("[DBG] from class -> to string json:\n" + json);
+
+        //from json string -> to class
+        Reminder to_class = GSON.fromJson(json, Reminder.class);
+        System.out.println("[DBG] from json string -> to class:\n" + to_class.getDeviceId()+ " " + to_class.getClass());
+
+
+/*
+        // for ListArrays
         final Gson GSON = new GsonBuilder().setPrettyPrinting().create();
 
         //from class -> to string json
         Reminder from_class = new Reminder(macaddress, Arrays.asList("operation", "reminderChannelNumber", "reminderProgramStart", "reminderProgramId", "reminderOffset"));
         String json = GSON.toJson(from_class);
-        System.out.println("from class -> to string json:\n" + json);
+        System.out.println("[DBG] from class -> to string json:\n" + json);
 
         //from json string -> to class
         Reminder to_class = GSON.fromJson(json, Reminder.class);
-        System.out.println("from json string -> to class:\n" + to_class.getDeviceId()+ " " + to_class.getReminders_list());
+        System.out.println("[DBG] from json string -> to class:\n" + to_class.getDeviceId()+ " " + to_class.getReminders_list());
 */
 
-        String macaddress = "A0722CB1AF24";
-        String operation = "Add";
-        int reminderChannelNumber = 2;
-        String reminderProgramStart = "2018-02-22' '00:00";
-        String reminderProgramStart2 = "00:00";
-
-        String json_add1 = "{\"deviceId\":" + macaddress + ",\"reminders\":[{\"operation\":" + operation + ", \"reminderChannelNumber\":" + reminderChannelNumber + ", \"reminderProgramStart\":" + reminderProgramStart + ", \"reminderProgramId\":" + reminderProgramId + ", \"reminderOffset\":" + reminderOffset + "}]}";
-
+/*
         String json_add5 = "{\"deviceId\":" + macaddress + ",\"reminders\":["
                 + "{\"operation\":" + operation + ",\"reminderChannelNumber\":" + reminderChannelNumber + ",\"reminderProgramStart\":" + reminderProgramStart + ",\"reminderProgramId\":" + reminderProgramId + ",\"reminderOffset\":" + reminderOffset + "},"
                 + "{\"operation\":" + operation + ",\"reminderChannelNumber\":" + reminderChannelNumber + ",\"reminderProgramStart\":" + reminderProgramStart + ",\"reminderProgramId\":" + reminderProgramId + ",\"reminderOffset\":" + reminderOffset + "},"
@@ -694,15 +709,16 @@ public class Middle {
                 + "{\"operation\":" + operation + ",\"reminderChannelNumber\":" + reminderChannelNumber + ",\"reminderProgramStart\":" + reminderProgramStart + ",\"reminderProgramId\":" + reminderProgramId + ",\"reminderOffset\":" + reminderOffset + "},"
                 + "{\"operation\":" + operation + ",\"reminderChannelNumber\":" + reminderChannelNumber + ",\"reminderProgramStart\":" + reminderProgramStart + ",\"reminderProgramId\":" + reminderProgramId + ",\"reminderOffset\":" + reminderOffset + "}]}";
 
+        String json_add1 = "{\"deviceId\":" + macaddress + ",\"reminders\":[{\"operation\":" + operation + ", \"reminderChannelNumber\":" + reminderChannelNumber + ", \"reminderProgramStart\":" + reminderProgramStart + ", \"reminderProgramId\":" + reminderProgramId + ", \"reminderOffset\":" + reminderOffset + "}]}";
 
         //JSONObject obj = new JSONObject("{\"deviceId\":\"A0722CB1AF24\",\"reminders\":[{\"operation\":\"Add\",\"reminderChannelNumber\":2,\"reminderProgramStart\":\"2018-06-06 00:00\",\"reminderProgramId\":0,\"reminderOffset\":0}]}");
-        //JSONObject obj = new JSONObject("{\"deviceId\": \"A0722CB1AF24\"}");
-        JsonObject obj = new JsonParser().parse(json_add1).getAsJsonObject();
-        String jjj = obj.get("reminders").getAsJsonArray().toString();
-        System.out.println(obj);
-        System.out.println("\n");
-        System.out.println(obj.get("reminders").getAsJsonArray());
+        String trimmed = json_add1.trim();
+        JsonObject obj = new JsonParser().parse(trimmed ).getAsJsonObject();
+        System.out.println("1 full json as object: " + obj);
 
+        String sss = obj.get("reminders").getAsJsonArray().toString();
+        System.out.println("2 jsonarray: " + sss);
+*/
 
 //        String pageName = obj.getJSONObject("pageInfo").getString("pageName");
 //        JSONArray arr = obj.getJSONArray("posts");

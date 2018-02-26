@@ -6,6 +6,17 @@ public class Reminders {
     private int reminderOffset;
 
 
+    Reminders(
+    private String operation, int reminderChannelNumber, String reminderProgramStart, int reminderProgramId, int reminderOffset){
+        this.operation = operation;
+        this.reminderChannelNumber = reminderChannelNumber;
+        this.reminderProgramStart = reminderProgramStart;
+        this.reminderProgramId = reminderProgramId;
+        this.reminderOffset = reminderOffset;
+    }
+
+
+
     public String getOperation() {return operation;}
     public void setOperation(String operation) {this.operation = operation;}
 
