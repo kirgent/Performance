@@ -10,10 +10,12 @@ import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
 import java.io.*;
+import java.lang.reflect.Array;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLConnection;
 import java.nio.charset.StandardCharsets;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -48,16 +50,16 @@ public class Middle {
 
     private int count_iterations = 1;
 
-    private String data = "2018-02-22";
-    private String[] RACK_DATA = {"2018-02-22"};
+    private String yyyymmdd_data = "2018-02-22";
+    private String[] yyyymmdd = {"2018-02-22"};
     //RACK_DATA=( `date +%Y-%m-%d -d "tomorrow +1day"` `date +%Y-%m-%d -d "tomorrow +2day"` `date +%Y-%m-%d -d "tomorrow +3day"` `date +%Y-%m-%d -d "tomorrow +4day"` `date +%Y-%m-%d -d "tomorrow +5day"` `date +%Y-%m-%d -d "tomorrow +6day"` `date +%Y-%m-%d -d "tomorrow +7day"` `date +%Y-%m-%d -d "tomorrow +8day"` `date +%Y-%m-%d -d "tomorrow +9day"` `date +%Y-%m-%d -d "tomorrow +10day"` )
 
     //private int channel = 2;
     private String channel = "2";
     private String[] RACK_CHANNEL = {"2"};
 
-
     //private String startmessage="[DBG] date: NEW START: count_iterations="+count_iterations+", RACK_DATA=?, RACK_CHANNELS=?";
+
 
     void Purge(String macaddress) throws IOException {
         System.out.println("[DBG] start Purge:");
@@ -66,9 +68,7 @@ public class Middle {
         HttpClient client = HttpClients.createDefault();
         HttpPost request = new HttpPost(url);
 
-        String json_purge = "{\"deviceId\":\"" + macaddress + "\",\"reminders\":[" +
-                "{\"operation\":\"Purge\"}" +
-                "]}";
+        String json_purge = "{\"deviceId\":" + macaddress + ",\"reminders\":[{\"operation\":\"Purge\"}]}";
         StringEntity entity = new StringEntity(json_purge);
         request.setEntity(entity);
 
@@ -82,7 +82,7 @@ public class Middle {
                 + "[DBG] Request entity: " + request.getEntity());
 
         HttpResponse response = client.execute(request);
-        System.out.println("\n[DBG] Response string: " + response.toString());
+        //System.out.println("\n[DBG] Response string: " + response.toString());
         //+"\n[DBG] Response getStatusLine: "+response.getStatusLine());
 
         BufferedReader reader = new BufferedReader(new InputStreamReader(response.getEntity().getContent(), "UTF-8"));
@@ -242,7 +242,7 @@ public class Middle {
         //+"\n[DBG] Request getRequestLine: "+request.getRequestLine());
 
         HttpResponse response = client.execute(request);
-        System.out.println("\n[DBG] Response string: " + response.toString());
+        //System.out.println("\n[DBG] Response string: " + response.toString());
         //+"\n[DBG] Response getStatusLine: "+response.getStatusLine());
 
         BufferedReader reader = new BufferedReader(new InputStreamReader(response.getEntity().getContent(), "UTF-8"));
@@ -290,7 +290,7 @@ public class Middle {
                 + "\n[DBG] Request headers: " + Arrays.toString(request.getAllHeaders()));
 
         HttpResponse response = client.execute(request);
-        System.out.println("\n[DBG] Response string: " + response.toString());
+        //System.out.println("\n[DBG] Response string: " + response.toString());
         //+"\n[DBG] Response getStatusLine: "+response.getStatusLine());
 
         BufferedReader reader = new BufferedReader(new InputStreamReader(response.getEntity().getContent(), "UTF-8"));
@@ -316,54 +316,54 @@ public class Middle {
         System.out.println("[DBG] [date] start Add 48rems with Offset=" + reminderOffset + ", iteration=?/" + count_iterations + ", macaddress=" + macaddress + ", data=?, channel=?");
 
         String json_add48 = "{\"deviceId\":\"" + macaddress + "\",\"reminders\":[" +
-                "{\"operation\":\"Add\",\"reminderChannelNumber\":" + channel + ",\"reminderProgramStart\":\"" + data + " 00:00\",\"reminderProgramId\":0,\"reminderOffset\":" + reminderOffset + "}," +
-                "{\"operation\":\"Add\",\"reminderChannelNumber\":" + channel + ",\"reminderProgramStart\":\"" + data + " 00:30\",\"reminderProgramId\":0,\"reminderOffset\":" + reminderOffset + "}," +
-                "{\"operation\":\"Add\",\"reminderChannelNumber\":" + channel + ",\"reminderProgramStart\":\"" + data + " 01:00\",\"reminderProgramId\":0,\"reminderOffset\":" + reminderOffset + "}," +
-                "{\"operation\":\"Add\",\"reminderChannelNumber\":" + channel + ",\"reminderProgramStart\":\"" + data + " 01:30\",\"reminderProgramId\":0,\"reminderOffset\":" + reminderOffset + "}," +
-                "{\"operation\":\"Add\",\"reminderChannelNumber\":" + channel + ",\"reminderProgramStart\":\"" + data + " 02:00\",\"reminderProgramId\":0,\"reminderOffset\":" + reminderOffset + "}," +
-                "{\"operation\":\"Add\",\"reminderChannelNumber\":" + channel + ",\"reminderProgramStart\":\"" + data + " 02:30\",\"reminderProgramId\":0,\"reminderOffset\":" + reminderOffset + "}," +
-                "{\"operation\":\"Add\",\"reminderChannelNumber\":" + channel + ",\"reminderProgramStart\":\"" + data + " 03:00\",\"reminderProgramId\":0,\"reminderOffset\":" + reminderOffset + "}," +
-                "{\"operation\":\"Add\",\"reminderChannelNumber\":" + channel + ",\"reminderProgramStart\":\"" + data + " 03:30\",\"reminderProgramId\":0,\"reminderOffset\":" + reminderOffset + "}," +
-                "{\"operation\":\"Add\",\"reminderChannelNumber\":" + channel + ",\"reminderProgramStart\":\"" + data + " 04:00\",\"reminderProgramId\":0,\"reminderOffset\":" + reminderOffset + "}," +
-                "{\"operation\":\"Add\",\"reminderChannelNumber\":" + channel + ",\"reminderProgramStart\":\"" + data + " 04:30\",\"reminderProgramId\":0,\"reminderOffset\":" + reminderOffset + "}," +
-                "{\"operation\":\"Add\",\"reminderChannelNumber\":" + channel + ",\"reminderProgramStart\":\"" + data + " 05:00\",\"reminderProgramId\":0,\"reminderOffset\":" + reminderOffset + "}," +
-                "{\"operation\":\"Add\",\"reminderChannelNumber\":" + channel + ",\"reminderProgramStart\":\"" + data + " 05:30\",\"reminderProgramId\":0,\"reminderOffset\":" + reminderOffset + "}," +
-                "{\"operation\":\"Add\",\"reminderChannelNumber\":" + channel + ",\"reminderProgramStart\":\"" + data + " 06:00\",\"reminderProgramId\":0,\"reminderOffset\":" + reminderOffset + "}," +
-                "{\"operation\":\"Add\",\"reminderChannelNumber\":" + channel + ",\"reminderProgramStart\":\"" + data + " 06:30\",\"reminderProgramId\":0,\"reminderOffset\":" + reminderOffset + "}," +
-                "{\"operation\":\"Add\",\"reminderChannelNumber\":" + channel + ",\"reminderProgramStart\":\"" + data + " 07:00\",\"reminderProgramId\":0,\"reminderOffset\":" + reminderOffset + "}," +
-                "{\"operation\":\"Add\",\"reminderChannelNumber\":" + channel + ",\"reminderProgramStart\":\"" + data + " 07:30\",\"reminderProgramId\":0,\"reminderOffset\":" + reminderOffset + "}," +
-                "{\"operation\":\"Add\",\"reminderChannelNumber\":" + channel + ",\"reminderProgramStart\":\"" + data + " 08:00\",\"reminderProgramId\":0,\"reminderOffset\":" + reminderOffset + "}," +
-                "{\"operation\":\"Add\",\"reminderChannelNumber\":" + channel + ",\"reminderProgramStart\":\"" + data + " 08:30\",\"reminderProgramId\":0,\"reminderOffset\":" + reminderOffset + "}," +
-                "{\"operation\":\"Add\",\"reminderChannelNumber\":" + channel + ",\"reminderProgramStart\":\"" + data + " 09:00\",\"reminderProgramId\":0,\"reminderOffset\":" + reminderOffset + "}," +
-                "{\"operation\":\"Add\",\"reminderChannelNumber\":" + channel + ",\"reminderProgramStart\":\"" + data + " 09:30\",\"reminderProgramId\":0,\"reminderOffset\":" + reminderOffset + "}," +
-                "{\"operation\":\"Add\",\"reminderChannelNumber\":" + channel + ",\"reminderProgramStart\":\"" + data + " 10:00\",\"reminderProgramId\":0,\"reminderOffset\":" + reminderOffset + "}," +
-                "{\"operation\":\"Add\",\"reminderChannelNumber\":" + channel + ",\"reminderProgramStart\":\"" + data + " 10:30\",\"reminderProgramId\":0,\"reminderOffset\":" + reminderOffset + "}," +
-                "{\"operation\":\"Add\",\"reminderChannelNumber\":" + channel + ",\"reminderProgramStart\":\"" + data + " 11:00\",\"reminderProgramId\":0,\"reminderOffset\":" + reminderOffset + "}," +
-                "{\"operation\":\"Add\",\"reminderChannelNumber\":" + channel + ",\"reminderProgramStart\":\"" + data + " 11:30\",\"reminderProgramId\":0,\"reminderOffset\":" + reminderOffset + "}," +
-                "{\"operation\":\"Add\",\"reminderChannelNumber\":" + channel + ",\"reminderProgramStart\":\"" + data + " 12:00\",\"reminderProgramId\":0,\"reminderOffset\":" + reminderOffset + "}," +
-                "{\"operation\":\"Add\",\"reminderChannelNumber\":" + channel + ",\"reminderProgramStart\":\"" + data + " 12:30\",\"reminderProgramId\":0,\"reminderOffset\":" + reminderOffset + "}," +
-                "{\"operation\":\"Add\",\"reminderChannelNumber\":" + channel + ",\"reminderProgramStart\":\"" + data + " 13:00\",\"reminderProgramId\":0,\"reminderOffset\":" + reminderOffset + "}," +
-                "{\"operation\":\"Add\",\"reminderChannelNumber\":" + channel + ",\"reminderProgramStart\":\"" + data + " 13:30\",\"reminderProgramId\":0,\"reminderOffset\":" + reminderOffset + "}," +
-                "{\"operation\":\"Add\",\"reminderChannelNumber\":" + channel + ",\"reminderProgramStart\":\"" + data + " 14:00\",\"reminderProgramId\":0,\"reminderOffset\":" + reminderOffset + "}," +
-                "{\"operation\":\"Add\",\"reminderChannelNumber\":" + channel + ",\"reminderProgramStart\":\"" + data + " 14:30\",\"reminderProgramId\":0,\"reminderOffset\":" + reminderOffset + "}," +
-                "{\"operation\":\"Add\",\"reminderChannelNumber\":" + channel + ",\"reminderProgramStart\":\"" + data + " 15:00\",\"reminderProgramId\":0,\"reminderOffset\":" + reminderOffset + "}," +
-                "{\"operation\":\"Add\",\"reminderChannelNumber\":" + channel + ",\"reminderProgramStart\":\"" + data + " 15:30\",\"reminderProgramId\":0,\"reminderOffset\":" + reminderOffset + "}," +
-                "{\"operation\":\"Add\",\"reminderChannelNumber\":" + channel + ",\"reminderProgramStart\":\"" + data + " 16:00\",\"reminderProgramId\":0,\"reminderOffset\":" + reminderOffset + "}," +
-                "{\"operation\":\"Add\",\"reminderChannelNumber\":" + channel + ",\"reminderProgramStart\":\"" + data + " 16:30\",\"reminderProgramId\":0,\"reminderOffset\":" + reminderOffset + "}," +
-                "{\"operation\":\"Add\",\"reminderChannelNumber\":" + channel + ",\"reminderProgramStart\":\"" + data + " 17:00\",\"reminderProgramId\":0,\"reminderOffset\":" + reminderOffset + "}," +
-                "{\"operation\":\"Add\",\"reminderChannelNumber\":" + channel + ",\"reminderProgramStart\":\"" + data + " 17:30\",\"reminderProgramId\":0,\"reminderOffset\":" + reminderOffset + "}," +
-                "{\"operation\":\"Add\",\"reminderChannelNumber\":" + channel + ",\"reminderProgramStart\":\"" + data + " 18:00\",\"reminderProgramId\":0,\"reminderOffset\":" + reminderOffset + "}," +
-                "{\"operation\":\"Add\",\"reminderChannelNumber\":" + channel + ",\"reminderProgramStart\":\"" + data + " 18:30\",\"reminderProgramId\":0,\"reminderOffset\":" + reminderOffset + "}," +
-                "{\"operation\":\"Add\",\"reminderChannelNumber\":" + channel + ",\"reminderProgramStart\":\"" + data + " 19:00\",\"reminderProgramId\":0,\"reminderOffset\":" + reminderOffset + "}," +
-                "{\"operation\":\"Add\",\"reminderChannelNumber\":" + channel + ",\"reminderProgramStart\":\"" + data + " 19:30\",\"reminderProgramId\":0,\"reminderOffset\":" + reminderOffset + "}," +
-                "{\"operation\":\"Add\",\"reminderChannelNumber\":" + channel + ",\"reminderProgramStart\":\"" + data + " 20:00\",\"reminderProgramId\":0,\"reminderOffset\":" + reminderOffset + "}," +
-                "{\"operation\":\"Add\",\"reminderChannelNumber\":" + channel + ",\"reminderProgramStart\":\"" + data + " 20:30\",\"reminderProgramId\":0,\"reminderOffset\":" + reminderOffset + "}," +
-                "{\"operation\":\"Add\",\"reminderChannelNumber\":" + channel + ",\"reminderProgramStart\":\"" + data + " 21:00\",\"reminderProgramId\":0,\"reminderOffset\":" + reminderOffset + "}," +
-                "{\"operation\":\"Add\",\"reminderChannelNumber\":" + channel + ",\"reminderProgramStart\":\"" + data + " 21:30\",\"reminderProgramId\":0,\"reminderOffset\":" + reminderOffset + "}," +
-                "{\"operation\":\"Add\",\"reminderChannelNumber\":" + channel + ",\"reminderProgramStart\":\"" + data + " 22:00\",\"reminderProgramId\":0,\"reminderOffset\":" + reminderOffset + "}," +
-                "{\"operation\":\"Add\",\"reminderChannelNumber\":" + channel + ",\"reminderProgramStart\":\"" + data + " 22:30\",\"reminderProgramId\":0,\"reminderOffset\":" + reminderOffset + "}," +
-                "{\"operation\":\"Add\",\"reminderChannelNumber\":" + channel + ",\"reminderProgramStart\":\"" + data + " 23:00\",\"reminderProgramId\":0,\"reminderOffset\":" + reminderOffset + "}," +
-                "{\"operation\":\"Add\",\"reminderChannelNumber\":" + channel + ",\"reminderProgramStart\":\"" + data + " 23:30\",\"reminderProgramId\":0,\"reminderOffset\":" + reminderOffset + " }" +
+                "{\"operation\":\"Add\",\"reminderChannelNumber\":" + channel + ",\"reminderProgramStart\":\"" + yyyymmdd + " 00:00\",\"reminderProgramId\":0,\"reminderOffset\":" + reminderOffset + "}," +
+                "{\"operation\":\"Add\",\"reminderChannelNumber\":" + channel + ",\"reminderProgramStart\":\"" + yyyymmdd + " 00:30\",\"reminderProgramId\":0,\"reminderOffset\":" + reminderOffset + "}," +
+                "{\"operation\":\"Add\",\"reminderChannelNumber\":" + channel + ",\"reminderProgramStart\":\"" + yyyymmdd + " 01:00\",\"reminderProgramId\":0,\"reminderOffset\":" + reminderOffset + "}," +
+                "{\"operation\":\"Add\",\"reminderChannelNumber\":" + channel + ",\"reminderProgramStart\":\"" + yyyymmdd + " 01:30\",\"reminderProgramId\":0,\"reminderOffset\":" + reminderOffset + "}," +
+                "{\"operation\":\"Add\",\"reminderChannelNumber\":" + channel + ",\"reminderProgramStart\":\"" + yyyymmdd + " 02:00\",\"reminderProgramId\":0,\"reminderOffset\":" + reminderOffset + "}," +
+                "{\"operation\":\"Add\",\"reminderChannelNumber\":" + channel + ",\"reminderProgramStart\":\"" + yyyymmdd + " 02:30\",\"reminderProgramId\":0,\"reminderOffset\":" + reminderOffset + "}," +
+                "{\"operation\":\"Add\",\"reminderChannelNumber\":" + channel + ",\"reminderProgramStart\":\"" + yyyymmdd + " 03:00\",\"reminderProgramId\":0,\"reminderOffset\":" + reminderOffset + "}," +
+                "{\"operation\":\"Add\",\"reminderChannelNumber\":" + channel + ",\"reminderProgramStart\":\"" + yyyymmdd + " 03:30\",\"reminderProgramId\":0,\"reminderOffset\":" + reminderOffset + "}," +
+                "{\"operation\":\"Add\",\"reminderChannelNumber\":" + channel + ",\"reminderProgramStart\":\"" + yyyymmdd + " 04:00\",\"reminderProgramId\":0,\"reminderOffset\":" + reminderOffset + "}," +
+                "{\"operation\":\"Add\",\"reminderChannelNumber\":" + channel + ",\"reminderProgramStart\":\"" + yyyymmdd + " 04:30\",\"reminderProgramId\":0,\"reminderOffset\":" + reminderOffset + "}," +
+                "{\"operation\":\"Add\",\"reminderChannelNumber\":" + channel + ",\"reminderProgramStart\":\"" + yyyymmdd + " 05:00\",\"reminderProgramId\":0,\"reminderOffset\":" + reminderOffset + "}," +
+                "{\"operation\":\"Add\",\"reminderChannelNumber\":" + channel + ",\"reminderProgramStart\":\"" + yyyymmdd + " 05:30\",\"reminderProgramId\":0,\"reminderOffset\":" + reminderOffset + "}," +
+                "{\"operation\":\"Add\",\"reminderChannelNumber\":" + channel + ",\"reminderProgramStart\":\"" + yyyymmdd + " 06:00\",\"reminderProgramId\":0,\"reminderOffset\":" + reminderOffset + "}," +
+                "{\"operation\":\"Add\",\"reminderChannelNumber\":" + channel + ",\"reminderProgramStart\":\"" + yyyymmdd + " 06:30\",\"reminderProgramId\":0,\"reminderOffset\":" + reminderOffset + "}," +
+                "{\"operation\":\"Add\",\"reminderChannelNumber\":" + channel + ",\"reminderProgramStart\":\"" + yyyymmdd + " 07:00\",\"reminderProgramId\":0,\"reminderOffset\":" + reminderOffset + "}," +
+                "{\"operation\":\"Add\",\"reminderChannelNumber\":" + channel + ",\"reminderProgramStart\":\"" + yyyymmdd + " 07:30\",\"reminderProgramId\":0,\"reminderOffset\":" + reminderOffset + "}," +
+                "{\"operation\":\"Add\",\"reminderChannelNumber\":" + channel + ",\"reminderProgramStart\":\"" + yyyymmdd + " 08:00\",\"reminderProgramId\":0,\"reminderOffset\":" + reminderOffset + "}," +
+                "{\"operation\":\"Add\",\"reminderChannelNumber\":" + channel + ",\"reminderProgramStart\":\"" + yyyymmdd + " 08:30\",\"reminderProgramId\":0,\"reminderOffset\":" + reminderOffset + "}," +
+                "{\"operation\":\"Add\",\"reminderChannelNumber\":" + channel + ",\"reminderProgramStart\":\"" + yyyymmdd + " 09:00\",\"reminderProgramId\":0,\"reminderOffset\":" + reminderOffset + "}," +
+                "{\"operation\":\"Add\",\"reminderChannelNumber\":" + channel + ",\"reminderProgramStart\":\"" + yyyymmdd + " 09:30\",\"reminderProgramId\":0,\"reminderOffset\":" + reminderOffset + "}," +
+                "{\"operation\":\"Add\",\"reminderChannelNumber\":" + channel + ",\"reminderProgramStart\":\"" + yyyymmdd + " 10:00\",\"reminderProgramId\":0,\"reminderOffset\":" + reminderOffset + "}," +
+                "{\"operation\":\"Add\",\"reminderChannelNumber\":" + channel + ",\"reminderProgramStart\":\"" + yyyymmdd + " 10:30\",\"reminderProgramId\":0,\"reminderOffset\":" + reminderOffset + "}," +
+                "{\"operation\":\"Add\",\"reminderChannelNumber\":" + channel + ",\"reminderProgramStart\":\"" + yyyymmdd + " 11:00\",\"reminderProgramId\":0,\"reminderOffset\":" + reminderOffset + "}," +
+                "{\"operation\":\"Add\",\"reminderChannelNumber\":" + channel + ",\"reminderProgramStart\":\"" + yyyymmdd + " 11:30\",\"reminderProgramId\":0,\"reminderOffset\":" + reminderOffset + "}," +
+                "{\"operation\":\"Add\",\"reminderChannelNumber\":" + channel + ",\"reminderProgramStart\":\"" + yyyymmdd + " 12:00\",\"reminderProgramId\":0,\"reminderOffset\":" + reminderOffset + "}," +
+                "{\"operation\":\"Add\",\"reminderChannelNumber\":" + channel + ",\"reminderProgramStart\":\"" + yyyymmdd + " 12:30\",\"reminderProgramId\":0,\"reminderOffset\":" + reminderOffset + "}," +
+                "{\"operation\":\"Add\",\"reminderChannelNumber\":" + channel + ",\"reminderProgramStart\":\"" + yyyymmdd + " 13:00\",\"reminderProgramId\":0,\"reminderOffset\":" + reminderOffset + "}," +
+                "{\"operation\":\"Add\",\"reminderChannelNumber\":" + channel + ",\"reminderProgramStart\":\"" + yyyymmdd + " 13:30\",\"reminderProgramId\":0,\"reminderOffset\":" + reminderOffset + "}," +
+                "{\"operation\":\"Add\",\"reminderChannelNumber\":" + channel + ",\"reminderProgramStart\":\"" + yyyymmdd + " 14:00\",\"reminderProgramId\":0,\"reminderOffset\":" + reminderOffset + "}," +
+                "{\"operation\":\"Add\",\"reminderChannelNumber\":" + channel + ",\"reminderProgramStart\":\"" + yyyymmdd + " 14:30\",\"reminderProgramId\":0,\"reminderOffset\":" + reminderOffset + "}," +
+                "{\"operation\":\"Add\",\"reminderChannelNumber\":" + channel + ",\"reminderProgramStart\":\"" + yyyymmdd + " 15:00\",\"reminderProgramId\":0,\"reminderOffset\":" + reminderOffset + "}," +
+                "{\"operation\":\"Add\",\"reminderChannelNumber\":" + channel + ",\"reminderProgramStart\":\"" + yyyymmdd + " 15:30\",\"reminderProgramId\":0,\"reminderOffset\":" + reminderOffset + "}," +
+                "{\"operation\":\"Add\",\"reminderChannelNumber\":" + channel + ",\"reminderProgramStart\":\"" + yyyymmdd + " 16:00\",\"reminderProgramId\":0,\"reminderOffset\":" + reminderOffset + "}," +
+                "{\"operation\":\"Add\",\"reminderChannelNumber\":" + channel + ",\"reminderProgramStart\":\"" + yyyymmdd + " 16:30\",\"reminderProgramId\":0,\"reminderOffset\":" + reminderOffset + "}," +
+                "{\"operation\":\"Add\",\"reminderChannelNumber\":" + channel + ",\"reminderProgramStart\":\"" + yyyymmdd + " 17:00\",\"reminderProgramId\":0,\"reminderOffset\":" + reminderOffset + "}," +
+                "{\"operation\":\"Add\",\"reminderChannelNumber\":" + channel + ",\"reminderProgramStart\":\"" + yyyymmdd + " 17:30\",\"reminderProgramId\":0,\"reminderOffset\":" + reminderOffset + "}," +
+                "{\"operation\":\"Add\",\"reminderChannelNumber\":" + channel + ",\"reminderProgramStart\":\"" + yyyymmdd + " 18:00\",\"reminderProgramId\":0,\"reminderOffset\":" + reminderOffset + "}," +
+                "{\"operation\":\"Add\",\"reminderChannelNumber\":" + channel + ",\"reminderProgramStart\":\"" + yyyymmdd + " 18:30\",\"reminderProgramId\":0,\"reminderOffset\":" + reminderOffset + "}," +
+                "{\"operation\":\"Add\",\"reminderChannelNumber\":" + channel + ",\"reminderProgramStart\":\"" + yyyymmdd + " 19:00\",\"reminderProgramId\":0,\"reminderOffset\":" + reminderOffset + "}," +
+                "{\"operation\":\"Add\",\"reminderChannelNumber\":" + channel + ",\"reminderProgramStart\":\"" + yyyymmdd + " 19:30\",\"reminderProgramId\":0,\"reminderOffset\":" + reminderOffset + "}," +
+                "{\"operation\":\"Add\",\"reminderChannelNumber\":" + channel + ",\"reminderProgramStart\":\"" + yyyymmdd + " 20:00\",\"reminderProgramId\":0,\"reminderOffset\":" + reminderOffset + "}," +
+                "{\"operation\":\"Add\",\"reminderChannelNumber\":" + channel + ",\"reminderProgramStart\":\"" + yyyymmdd + " 20:30\",\"reminderProgramId\":0,\"reminderOffset\":" + reminderOffset + "}," +
+                "{\"operation\":\"Add\",\"reminderChannelNumber\":" + channel + ",\"reminderProgramStart\":\"" + yyyymmdd + " 21:00\",\"reminderProgramId\":0,\"reminderOffset\":" + reminderOffset + "}," +
+                "{\"operation\":\"Add\",\"reminderChannelNumber\":" + channel + ",\"reminderProgramStart\":\"" + yyyymmdd + " 21:30\",\"reminderProgramId\":0,\"reminderOffset\":" + reminderOffset + "}," +
+                "{\"operation\":\"Add\",\"reminderChannelNumber\":" + channel + ",\"reminderProgramStart\":\"" + yyyymmdd + " 22:00\",\"reminderProgramId\":0,\"reminderOffset\":" + reminderOffset + "}," +
+                "{\"operation\":\"Add\",\"reminderChannelNumber\":" + channel + ",\"reminderProgramStart\":\"" + yyyymmdd + " 22:30\",\"reminderProgramId\":0,\"reminderOffset\":" + reminderOffset + "}," +
+                "{\"operation\":\"Add\",\"reminderChannelNumber\":" + channel + ",\"reminderProgramStart\":\"" + yyyymmdd + " 23:00\",\"reminderProgramId\":0,\"reminderOffset\":" + reminderOffset + "}," +
+                "{\"operation\":\"Add\",\"reminderChannelNumber\":" + channel + ",\"reminderProgramStart\":\"" + yyyymmdd + " 23:30\",\"reminderProgramId\":0,\"reminderOffset\":" + reminderOffset + " }" +
                 "]}";
 
         String postfix_change = "/ams/Reminders?req=ChangeReminders";
@@ -375,7 +375,7 @@ public class Middle {
         request.setEntity(entity);
 
         for (int i = 1; i <= count_iterations; i++) {
-            for (String aRACK_DATA : RACK_DATA) {
+            for (String ayyyymmdd : yyyymmdd) {
                 for (String aRACK_CHANNEL : RACK_CHANNEL) {
                     //request.setHeader("Accept", "application/json");
                     //request.setHeader("Content-type", "application/json");
@@ -385,10 +385,10 @@ public class Middle {
                     System.out.println("[DBG] Request string: " + request.toString()
                             //+ "\n[DBG] Request json string: "+json_add48
                             + "\n[DBG] Request entity: " + request.getEntity()
-                            + "\n[DBG] [date]: iteration=" + i + "/" + count_iterations + ", data=" + aRACK_DATA + ", channel=" + aRACK_CHANNEL);
+                            + "\n[DBG] [date]: iteration=" + i + "/" + count_iterations + ", data=" + ayyyymmdd + ", channel=" + aRACK_CHANNEL);
 
                     HttpResponse response = client.execute(request);
-                    System.out.println("\n[DBG] Response string: " + response.toString());
+                    //System.out.println("\n[DBG] Response string: " + response.toString());
                     //+ "\n[DBG] Response getStatusLine: " + response.getStatusLine());
 
                     BufferedReader reader = new BufferedReader(new InputStreamReader(response.getEntity().getContent(), "UTF-8"));
@@ -407,102 +407,102 @@ public class Middle {
         System.out.println("[DBG] start Edit:");
 
         String json_delete48_add48 = "{\"deviceId\":\"" + macaddress + "\",\"reminders\":[" +
-                "{\"operation\":\"Delete\",\"reminderChannelNumber\":" + channel + ",\"reminderProgramStart\":\"" + data + " 00:00\",\"reminderProgramId\":0,\"reminderOffset\":" + reminderOffset + "}," +
-                "{\"operation\":\"Delete\",\"reminderChannelNumber\":" + channel + ",\"reminderProgramStart\":\"" + data + " 00:30\",\"reminderProgramId\":0,\"reminderOffset\":" + reminderOffset + "}," +
-                "{\"operation\":\"Delete\",\"reminderChannelNumber\":" + channel + ",\"reminderProgramStart\":\"" + data + " 01:00\",\"reminderProgramId\":0,\"reminderOffset\":" + reminderOffset + "}," +
-                "{\"operation\":\"Delete\",\"reminderChannelNumber\":" + channel + ",\"reminderProgramStart\":\"" + data + " 01:30\",\"reminderProgramId\":0,\"reminderOffset\":" + reminderOffset + "}," +
-                "{\"operation\":\"Delete\",\"reminderChannelNumber\":" + channel + ",\"reminderProgramStart\":\"" + data + " 02:00\",\"reminderProgramId\":0,\"reminderOffset\":" + reminderOffset + "}," +
-                "{\"operation\":\"Delete\",\"reminderChannelNumber\":" + channel + ",\"reminderProgramStart\":\"" + data + " 02:30\",\"reminderProgramId\":0,\"reminderOffset\":" + reminderOffset + "}," +
-                "{\"operation\":\"Delete\",\"reminderChannelNumber\":" + channel + ",\"reminderProgramStart\":\"" + data + " 03:00\",\"reminderProgramId\":0,\"reminderOffset\":" + reminderOffset + "}," +
-                "{\"operation\":\"Delete\",\"reminderChannelNumber\":" + channel + ",\"reminderProgramStart\":\"" + data + " 03:30\",\"reminderProgramId\":0,\"reminderOffset\":" + reminderOffset + "}," +
-                "{\"operation\":\"Delete\",\"reminderChannelNumber\":" + channel + ",\"reminderProgramStart\":\"" + data + " 04:00\",\"reminderProgramId\":0,\"reminderOffset\":" + reminderOffset + "}," +
-                "{\"operation\":\"Delete\",\"reminderChannelNumber\":" + channel + ",\"reminderProgramStart\":\"" + data + " 04:30\",\"reminderProgramId\":0,\"reminderOffset\":" + reminderOffset + "}," +
-                "{\"operation\":\"Delete\",\"reminderChannelNumber\":" + channel + ",\"reminderProgramStart\":\"" + data + " 05:00\",\"reminderProgramId\":0,\"reminderOffset\":" + reminderOffset + "}," +
-                "{\"operation\":\"Delete\",\"reminderChannelNumber\":" + channel + ",\"reminderProgramStart\":\"" + data + " 05:30\",\"reminderProgramId\":0,\"reminderOffset\":" + reminderOffset + "}," +
-                "{\"operation\":\"Delete\",\"reminderChannelNumber\":" + channel + ",\"reminderProgramStart\":\"" + data + " 06:00\",\"reminderProgramId\":0,\"reminderOffset\":" + reminderOffset + "}," +
-                "{\"operation\":\"Delete\",\"reminderChannelNumber\":" + channel + ",\"reminderProgramStart\":\"" + data + " 06:30\",\"reminderProgramId\":0,\"reminderOffset\":" + reminderOffset + "}," +
-                "{\"operation\":\"Delete\",\"reminderChannelNumber\":" + channel + ",\"reminderProgramStart\":\"" + data + " 07:00\",\"reminderProgramId\":0,\"reminderOffset\":" + reminderOffset + "}," +
-                "{\"operation\":\"Delete\",\"reminderChannelNumber\":" + channel + ",\"reminderProgramStart\":\"" + data + " 07:30\",\"reminderProgramId\":0,\"reminderOffset\":" + reminderOffset + "}," +
-                "{\"operation\":\"Delete\",\"reminderChannelNumber\":" + channel + ",\"reminderProgramStart\":\"" + data + " 08:00\",\"reminderProgramId\":0,\"reminderOffset\":" + reminderOffset + "}," +
-                "{\"operation\":\"Delete\",\"reminderChannelNumber\":" + channel + ",\"reminderProgramStart\":\"" + data + " 08:30\",\"reminderProgramId\":0,\"reminderOffset\":" + reminderOffset + "}," +
-                "{\"operation\":\"Delete\",\"reminderChannelNumber\":" + channel + ",\"reminderProgramStart\":\"" + data + " 09:00\",\"reminderProgramId\":0,\"reminderOffset\":" + reminderOffset + "}," +
-                "{\"operation\":\"Delete\",\"reminderChannelNumber\":" + channel + ",\"reminderProgramStart\":\"" + data + " 09:30\",\"reminderProgramId\":0,\"reminderOffset\":" + reminderOffset + "}," +
-                "{\"operation\":\"Delete\",\"reminderChannelNumber\":" + channel + ",\"reminderProgramStart\":\"" + data + " 10:00\",\"reminderProgramId\":0,\"reminderOffset\":" + reminderOffset + "}," +
-                "{\"operation\":\"Delete\",\"reminderChannelNumber\":" + channel + ",\"reminderProgramStart\":\"" + data + " 10:30\",\"reminderProgramId\":0,\"reminderOffset\":" + reminderOffset + "}," +
-                "{\"operation\":\"Delete\",\"reminderChannelNumber\":" + channel + ",\"reminderProgramStart\":\"" + data + " 11:00\",\"reminderProgramId\":0,\"reminderOffset\":" + reminderOffset + "}," +
-                "{\"operation\":\"Delete\",\"reminderChannelNumber\":" + channel + ",\"reminderProgramStart\":\"" + data + " 11:30\",\"reminderProgramId\":0,\"reminderOffset\":" + reminderOffset + "}," +
-                "{\"operation\":\"Delete\",\"reminderChannelNumber\":" + channel + ",\"reminderProgramStart\":\"" + data + " 12:00\",\"reminderProgramId\":0,\"reminderOffset\":" + reminderOffset + "}," +
-                "{\"operation\":\"Delete\",\"reminderChannelNumber\":" + channel + ",\"reminderProgramStart\":\"" + data + " 12:30\",\"reminderProgramId\":0,\"reminderOffset\":" + reminderOffset + "}," +
-                "{\"operation\":\"Delete\",\"reminderChannelNumber\":" + channel + ",\"reminderProgramStart\":\"" + data + " 13:00\",\"reminderProgramId\":0,\"reminderOffset\":" + reminderOffset + "}," +
-                "{\"operation\":\"Delete\",\"reminderChannelNumber\":" + channel + ",\"reminderProgramStart\":\"" + data + " 13:30\",\"reminderProgramId\":0,\"reminderOffset\":" + reminderOffset + "}," +
-                "{\"operation\":\"Delete\",\"reminderChannelNumber\":" + channel + ",\"reminderProgramStart\":\"" + data + " 14:00\",\"reminderProgramId\":0,\"reminderOffset\":" + reminderOffset + "}," +
-                "{\"operation\":\"Delete\",\"reminderChannelNumber\":" + channel + ",\"reminderProgramStart\":\"" + data + " 14:30\",\"reminderProgramId\":0,\"reminderOffset\":" + reminderOffset + "}," +
-                "{\"operation\":\"Delete\",\"reminderChannelNumber\":" + channel + ",\"reminderProgramStart\":\"" + data + " 15:00\",\"reminderProgramId\":0,\"reminderOffset\":" + reminderOffset + "}," +
-                "{\"operation\":\"Delete\",\"reminderChannelNumber\":" + channel + ",\"reminderProgramStart\":\"" + data + " 15:30\",\"reminderProgramId\":0,\"reminderOffset\":" + reminderOffset + "}," +
-                "{\"operation\":\"Delete\",\"reminderChannelNumber\":" + channel + ",\"reminderProgramStart\":\"" + data + " 16:00\",\"reminderProgramId\":0,\"reminderOffset\":" + reminderOffset + "}," +
-                "{\"operation\":\"Delete\",\"reminderChannelNumber\":" + channel + ",\"reminderProgramStart\":\"" + data + " 16:30\",\"reminderProgramId\":0,\"reminderOffset\":" + reminderOffset + "}," +
-                "{\"operation\":\"Delete\",\"reminderChannelNumber\":" + channel + ",\"reminderProgramStart\":\"" + data + " 17:00\",\"reminderProgramId\":0,\"reminderOffset\":" + reminderOffset + "}," +
-                "{\"operation\":\"Delete\",\"reminderChannelNumber\":" + channel + ",\"reminderProgramStart\":\"" + data + " 17:30\",\"reminderProgramId\":0,\"reminderOffset\":" + reminderOffset + "}," +
-                "{\"operation\":\"Delete\",\"reminderChannelNumber\":" + channel + ",\"reminderProgramStart\":\"" + data + " 18:00\",\"reminderProgramId\":0,\"reminderOffset\":" + reminderOffset + "}," +
-                "{\"operation\":\"Delete\",\"reminderChannelNumber\":" + channel + ",\"reminderProgramStart\":\"" + data + " 18:30\",\"reminderProgramId\":0,\"reminderOffset\":" + reminderOffset + "}," +
-                "{\"operation\":\"Delete\",\"reminderChannelNumber\":" + channel + ",\"reminderProgramStart\":\"" + data + " 19:00\",\"reminderProgramId\":0,\"reminderOffset\":" + reminderOffset + "}," +
-                "{\"operation\":\"Delete\",\"reminderChannelNumber\":" + channel + ",\"reminderProgramStart\":\"" + data + " 19:30\",\"reminderProgramId\":0,\"reminderOffset\":" + reminderOffset + "}," +
-                "{\"operation\":\"Delete\",\"reminderChannelNumber\":" + channel + ",\"reminderProgramStart\":\"" + data + " 20:00\",\"reminderProgramId\":0,\"reminderOffset\":" + reminderOffset + "}," +
-                "{\"operation\":\"Delete\",\"reminderChannelNumber\":" + channel + ",\"reminderProgramStart\":\"" + data + " 20:30\",\"reminderProgramId\":0,\"reminderOffset\":" + reminderOffset + "}," +
-                "{\"operation\":\"Delete\",\"reminderChannelNumber\":" + channel + ",\"reminderProgramStart\":\"" + data + " 21:00\",\"reminderProgramId\":0,\"reminderOffset\":" + reminderOffset + "}," +
-                "{\"operation\":\"Delete\",\"reminderChannelNumber\":" + channel + ",\"reminderProgramStart\":\"" + data + " 21:30\",\"reminderProgramId\":0,\"reminderOffset\":" + reminderOffset + "}," +
-                "{\"operation\":\"Delete\",\"reminderChannelNumber\":" + channel + ",\"reminderProgramStart\":\"" + data + " 22:00\",\"reminderProgramId\":0,\"reminderOffset\":" + reminderOffset + "}," +
-                "{\"operation\":\"Delete\",\"reminderChannelNumber\":" + channel + ",\"reminderProgramStart\":\"" + data + " 22:30\",\"reminderProgramId\":0,\"reminderOffset\":" + reminderOffset + "}," +
-                "{\"operation\":\"Delete\",\"reminderChannelNumber\":" + channel + ",\"reminderProgramStart\":\"" + data + " 23:00\",\"reminderProgramId\":0,\"reminderOffset\":" + reminderOffset + "}," +
-                "{\"operation\":\"Delete\",\"reminderChannelNumber\":" + channel + ",\"reminderProgramStart\":\"" + data + " 23:30\",\"reminderProgramId\":0,\"reminderOffset\":" + reminderOffset + "}," +
-                "{\"operation\":\"Add\",\"reminderChannelNumber\":" + channel + ",\"reminderProgramStart\":\"" + data + " 00:00\",\"reminderProgramId\":0,\"reminderOffset\":" + reminderOffset_new + "}," +
-                "{\"operation\":\"Add\",\"reminderChannelNumber\":" + channel + ",\"reminderProgramStart\":\"" + data + " 00:30\",\"reminderProgramId\":0,\"reminderOffset\":" + reminderOffset_new + "}," +
-                "{\"operation\":\"Add\",\"reminderChannelNumber\":" + channel + ",\"reminderProgramStart\":\"" + data + " 01:00\",\"reminderProgramId\":0,\"reminderOffset\":" + reminderOffset_new + "}," +
-                "{\"operation\":\"Add\",\"reminderChannelNumber\":" + channel + ",\"reminderProgramStart\":\"" + data + " 01:30\",\"reminderProgramId\":0,\"reminderOffset\":" + reminderOffset_new + "}," +
-                "{\"operation\":\"Add\",\"reminderChannelNumber\":" + channel + ",\"reminderProgramStart\":\"" + data + " 02:00\",\"reminderProgramId\":0,\"reminderOffset\":" + reminderOffset_new + "}," +
-                "{\"operation\":\"Add\",\"reminderChannelNumber\":" + channel + ",\"reminderProgramStart\":\"" + data + " 02:30\",\"reminderProgramId\":0,\"reminderOffset\":" + reminderOffset_new + "}," +
-                "{\"operation\":\"Add\",\"reminderChannelNumber\":" + channel + ",\"reminderProgramStart\":\"" + data + " 03:00\",\"reminderProgramId\":0,\"reminderOffset\":" + reminderOffset_new + "}," +
-                "{\"operation\":\"Add\",\"reminderChannelNumber\":" + channel + ",\"reminderProgramStart\":\"" + data + " 03:30\",\"reminderProgramId\":0,\"reminderOffset\":" + reminderOffset_new + "}," +
-                "{\"operation\":\"Add\",\"reminderChannelNumber\":" + channel + ",\"reminderProgramStart\":\"" + data + " 04:00\",\"reminderProgramId\":0,\"reminderOffset\":" + reminderOffset_new + "}," +
-                "{\"operation\":\"Add\",\"reminderChannelNumber\":" + channel + ",\"reminderProgramStart\":\"" + data + " 04:30\",\"reminderProgramId\":0,\"reminderOffset\":" + reminderOffset_new + "}," +
-                "{\"operation\":\"Add\",\"reminderChannelNumber\":" + channel + ",\"reminderProgramStart\":\"" + data + " 05:00\",\"reminderProgramId\":0,\"reminderOffset\":" + reminderOffset_new + "}," +
-                "{\"operation\":\"Add\",\"reminderChannelNumber\":" + channel + ",\"reminderProgramStart\":\"" + data + " 05:30\",\"reminderProgramId\":0,\"reminderOffset\":" + reminderOffset_new + "}," +
-                "{\"operation\":\"Add\",\"reminderChannelNumber\":" + channel + ",\"reminderProgramStart\":\"" + data + " 06:00\",\"reminderProgramId\":0,\"reminderOffset\":" + reminderOffset_new + "}," +
-                "{\"operation\":\"Add\",\"reminderChannelNumber\":" + channel + ",\"reminderProgramStart\":\"" + data + " 06:30\",\"reminderProgramId\":0,\"reminderOffset\":" + reminderOffset_new + "}," +
-                "{\"operation\":\"Add\",\"reminderChannelNumber\":" + channel + ",\"reminderProgramStart\":\"" + data + " 07:00\",\"reminderProgramId\":0,\"reminderOffset\":" + reminderOffset_new + "}," +
-                "{\"operation\":\"Add\",\"reminderChannelNumber\":" + channel + ",\"reminderProgramStart\":\"" + data + " 07:30\",\"reminderProgramId\":0,\"reminderOffset\":" + reminderOffset_new + "}," +
-                "{\"operation\":\"Add\",\"reminderChannelNumber\":" + channel + ",\"reminderProgramStart\":\"" + data + " 08:00\",\"reminderProgramId\":0,\"reminderOffset\":" + reminderOffset_new + "}," +
-                "{\"operation\":\"Add\",\"reminderChannelNumber\":" + channel + ",\"reminderProgramStart\":\"" + data + " 08:30\",\"reminderProgramId\":0,\"reminderOffset\":" + reminderOffset_new + "}," +
-                "{\"operation\":\"Add\",\"reminderChannelNumber\":" + channel + ",\"reminderProgramStart\":\"" + data + " 09:00\",\"reminderProgramId\":0,\"reminderOffset\":" + reminderOffset_new + "}," +
-                "{\"operation\":\"Add\",\"reminderChannelNumber\":" + channel + ",\"reminderProgramStart\":\"" + data + " 09:30\",\"reminderProgramId\":0,\"reminderOffset\":" + reminderOffset_new + "}," +
-                "{\"operation\":\"Add\",\"reminderChannelNumber\":" + channel + ",\"reminderProgramStart\":\"" + data + " 10:00\",\"reminderProgramId\":0,\"reminderOffset\":" + reminderOffset_new + "}," +
-                "{\"operation\":\"Add\",\"reminderChannelNumber\":" + channel + ",\"reminderProgramStart\":\"" + data + " 10:30\",\"reminderProgramId\":0,\"reminderOffset\":" + reminderOffset_new + "}," +
-                "{\"operation\":\"Add\",\"reminderChannelNumber\":" + channel + ",\"reminderProgramStart\":\"" + data + " 11:00\",\"reminderProgramId\":0,\"reminderOffset\":" + reminderOffset_new + "}," +
-                "{\"operation\":\"Add\",\"reminderChannelNumber\":" + channel + ",\"reminderProgramStart\":\"" + data + " 11:30\",\"reminderProgramId\":0,\"reminderOffset\":" + reminderOffset_new + "}," +
-                "{\"operation\":\"Add\",\"reminderChannelNumber\":" + channel + ",\"reminderProgramStart\":\"" + data + " 12:00\",\"reminderProgramId\":0,\"reminderOffset\":" + reminderOffset_new + "}," +
-                "{\"operation\":\"Add\",\"reminderChannelNumber\":" + channel + ",\"reminderProgramStart\":\"" + data + " 12:30\",\"reminderProgramId\":0,\"reminderOffset\":" + reminderOffset_new + "}," +
-                "{\"operation\":\"Add\",\"reminderChannelNumber\":" + channel + ",\"reminderProgramStart\":\"" + data + " 13:00\",\"reminderProgramId\":0,\"reminderOffset\":" + reminderOffset_new + "}," +
-                "{\"operation\":\"Add\",\"reminderChannelNumber\":" + channel + ",\"reminderProgramStart\":\"" + data + " 13:30\",\"reminderProgramId\":0,\"reminderOffset\":" + reminderOffset_new + "}," +
-                "{\"operation\":\"Add\",\"reminderChannelNumber\":" + channel + ",\"reminderProgramStart\":\"" + data + " 14:00\",\"reminderProgramId\":0,\"reminderOffset\":" + reminderOffset_new + "}," +
-                "{\"operation\":\"Add\",\"reminderChannelNumber\":" + channel + ",\"reminderProgramStart\":\"" + data + " 14:30\",\"reminderProgramId\":0,\"reminderOffset\":" + reminderOffset_new + "}," +
-                "{\"operation\":\"Add\",\"reminderChannelNumber\":" + channel + ",\"reminderProgramStart\":\"" + data + " 15:00\",\"reminderProgramId\":0,\"reminderOffset\":" + reminderOffset_new + "}," +
-                "{\"operation\":\"Add\",\"reminderChannelNumber\":" + channel + ",\"reminderProgramStart\":\"" + data + " 15:30\",\"reminderProgramId\":0,\"reminderOffset\":" + reminderOffset_new + "}," +
-                "{\"operation\":\"Add\",\"reminderChannelNumber\":" + channel + ",\"reminderProgramStart\":\"" + data + " 16:00\",\"reminderProgramId\":0,\"reminderOffset\":" + reminderOffset_new + "}," +
-                "{\"operation\":\"Add\",\"reminderChannelNumber\":" + channel + ",\"reminderProgramStart\":\"" + data + " 16:30\",\"reminderProgramId\":0,\"reminderOffset\":" + reminderOffset_new + "}," +
-                "{\"operation\":\"Add\",\"reminderChannelNumber\":" + channel + ",\"reminderProgramStart\":\"" + data + " 17:00\",\"reminderProgramId\":0,\"reminderOffset\":" + reminderOffset_new + "}," +
-                "{\"operation\":\"Add\",\"reminderChannelNumber\":" + channel + ",\"reminderProgramStart\":\"" + data + " 17:30\",\"reminderProgramId\":0,\"reminderOffset\":" + reminderOffset_new + "}," +
-                "{\"operation\":\"Add\",\"reminderChannelNumber\":" + channel + ",\"reminderProgramStart\":\"" + data + " 18:00\",\"reminderProgramId\":0,\"reminderOffset\":" + reminderOffset_new + "}," +
-                "{\"operation\":\"Add\",\"reminderChannelNumber\":" + channel + ",\"reminderProgramStart\":\"" + data + " 18:30\",\"reminderProgramId\":0,\"reminderOffset\":" + reminderOffset_new + "}," +
-                "{\"operation\":\"Add\",\"reminderChannelNumber\":" + channel + ",\"reminderProgramStart\":\"" + data + " 19:00\",\"reminderProgramId\":0,\"reminderOffset\":" + reminderOffset_new + "}," +
-                "{\"operation\":\"Add\",\"reminderChannelNumber\":" + channel + ",\"reminderProgramStart\":\"" + data + " 19:30\",\"reminderProgramId\":0,\"reminderOffset\":" + reminderOffset_new + "}," +
-                "{\"operation\":\"Add\",\"reminderChannelNumber\":" + channel + ",\"reminderProgramStart\":\"" + data + " 20:00\",\"reminderProgramId\":0,\"reminderOffset\":" + reminderOffset_new + "}," +
-                "{\"operation\":\"Add\",\"reminderChannelNumber\":" + channel + ",\"reminderProgramStart\":\"" + data + " 20:30\",\"reminderProgramId\":0,\"reminderOffset\":" + reminderOffset_new + "}," +
-                "{\"operation\":\"Add\",\"reminderChannelNumber\":" + channel + ",\"reminderProgramStart\":\"" + data + " 21:00\",\"reminderProgramId\":0,\"reminderOffset\":" + reminderOffset_new + "}," +
-                "{\"operation\":\"Add\",\"reminderChannelNumber\":" + channel + ",\"reminderProgramStart\":\"" + data + " 21:30\",\"reminderProgramId\":0,\"reminderOffset\":" + reminderOffset_new + "}," +
-                "{\"operation\":\"Add\",\"reminderChannelNumber\":" + channel + ",\"reminderProgramStart\":\"" + data + " 22:00\",\"reminderProgramId\":0,\"reminderOffset\":" + reminderOffset_new + "}," +
-                "{\"operation\":\"Add\",\"reminderChannelNumber\":" + channel + ",\"reminderProgramStart\":\"" + data + " 22:30\",\"reminderProgramId\":0,\"reminderOffset\":" + reminderOffset_new + "}," +
-                "{\"operation\":\"Add\",\"reminderChannelNumber\":" + channel + ",\"reminderProgramStart\":\"" + data + " 23:00\",\"reminderProgramId\":0,\"reminderOffset\":" + reminderOffset_new + "}," +
-                "{\"operation\":\"Add\",\"reminderChannelNumber\":" + channel + ",\"reminderProgramStart\":\"" + data + " 23:30\",\"reminderProgramId\":0,\"reminderOffset\":" + reminderOffset_new + "}" +
+                "{\"operation\":\"Delete\",\"reminderChannelNumber\":" + channel + ",\"reminderProgramStart\":\"" + yyyymmdd + " 00:00\",\"reminderProgramId\":0,\"reminderOffset\":" + reminderOffset + "}," +
+                "{\"operation\":\"Delete\",\"reminderChannelNumber\":" + channel + ",\"reminderProgramStart\":\"" + yyyymmdd + " 00:30\",\"reminderProgramId\":0,\"reminderOffset\":" + reminderOffset + "}," +
+                "{\"operation\":\"Delete\",\"reminderChannelNumber\":" + channel + ",\"reminderProgramStart\":\"" + yyyymmdd + " 01:00\",\"reminderProgramId\":0,\"reminderOffset\":" + reminderOffset + "}," +
+                "{\"operation\":\"Delete\",\"reminderChannelNumber\":" + channel + ",\"reminderProgramStart\":\"" + yyyymmdd + " 01:30\",\"reminderProgramId\":0,\"reminderOffset\":" + reminderOffset + "}," +
+                "{\"operation\":\"Delete\",\"reminderChannelNumber\":" + channel + ",\"reminderProgramStart\":\"" + yyyymmdd + " 02:00\",\"reminderProgramId\":0,\"reminderOffset\":" + reminderOffset + "}," +
+                "{\"operation\":\"Delete\",\"reminderChannelNumber\":" + channel + ",\"reminderProgramStart\":\"" + yyyymmdd + " 02:30\",\"reminderProgramId\":0,\"reminderOffset\":" + reminderOffset + "}," +
+                "{\"operation\":\"Delete\",\"reminderChannelNumber\":" + channel + ",\"reminderProgramStart\":\"" + yyyymmdd + " 03:00\",\"reminderProgramId\":0,\"reminderOffset\":" + reminderOffset + "}," +
+                "{\"operation\":\"Delete\",\"reminderChannelNumber\":" + channel + ",\"reminderProgramStart\":\"" + yyyymmdd + " 03:30\",\"reminderProgramId\":0,\"reminderOffset\":" + reminderOffset + "}," +
+                "{\"operation\":\"Delete\",\"reminderChannelNumber\":" + channel + ",\"reminderProgramStart\":\"" + yyyymmdd + " 04:00\",\"reminderProgramId\":0,\"reminderOffset\":" + reminderOffset + "}," +
+                "{\"operation\":\"Delete\",\"reminderChannelNumber\":" + channel + ",\"reminderProgramStart\":\"" + yyyymmdd + " 04:30\",\"reminderProgramId\":0,\"reminderOffset\":" + reminderOffset + "}," +
+                "{\"operation\":\"Delete\",\"reminderChannelNumber\":" + channel + ",\"reminderProgramStart\":\"" + yyyymmdd + " 05:00\",\"reminderProgramId\":0,\"reminderOffset\":" + reminderOffset + "}," +
+                "{\"operation\":\"Delete\",\"reminderChannelNumber\":" + channel + ",\"reminderProgramStart\":\"" + yyyymmdd + " 05:30\",\"reminderProgramId\":0,\"reminderOffset\":" + reminderOffset + "}," +
+                "{\"operation\":\"Delete\",\"reminderChannelNumber\":" + channel + ",\"reminderProgramStart\":\"" + yyyymmdd + " 06:00\",\"reminderProgramId\":0,\"reminderOffset\":" + reminderOffset + "}," +
+                "{\"operation\":\"Delete\",\"reminderChannelNumber\":" + channel + ",\"reminderProgramStart\":\"" + yyyymmdd + " 06:30\",\"reminderProgramId\":0,\"reminderOffset\":" + reminderOffset + "}," +
+                "{\"operation\":\"Delete\",\"reminderChannelNumber\":" + channel + ",\"reminderProgramStart\":\"" + yyyymmdd + " 07:00\",\"reminderProgramId\":0,\"reminderOffset\":" + reminderOffset + "}," +
+                "{\"operation\":\"Delete\",\"reminderChannelNumber\":" + channel + ",\"reminderProgramStart\":\"" + yyyymmdd + " 07:30\",\"reminderProgramId\":0,\"reminderOffset\":" + reminderOffset + "}," +
+                "{\"operation\":\"Delete\",\"reminderChannelNumber\":" + channel + ",\"reminderProgramStart\":\"" + yyyymmdd + " 08:00\",\"reminderProgramId\":0,\"reminderOffset\":" + reminderOffset + "}," +
+                "{\"operation\":\"Delete\",\"reminderChannelNumber\":" + channel + ",\"reminderProgramStart\":\"" + yyyymmdd + " 08:30\",\"reminderProgramId\":0,\"reminderOffset\":" + reminderOffset + "}," +
+                "{\"operation\":\"Delete\",\"reminderChannelNumber\":" + channel + ",\"reminderProgramStart\":\"" + yyyymmdd + " 09:00\",\"reminderProgramId\":0,\"reminderOffset\":" + reminderOffset + "}," +
+                "{\"operation\":\"Delete\",\"reminderChannelNumber\":" + channel + ",\"reminderProgramStart\":\"" + yyyymmdd + " 09:30\",\"reminderProgramId\":0,\"reminderOffset\":" + reminderOffset + "}," +
+                "{\"operation\":\"Delete\",\"reminderChannelNumber\":" + channel + ",\"reminderProgramStart\":\"" + yyyymmdd + " 10:00\",\"reminderProgramId\":0,\"reminderOffset\":" + reminderOffset + "}," +
+                "{\"operation\":\"Delete\",\"reminderChannelNumber\":" + channel + ",\"reminderProgramStart\":\"" + yyyymmdd + " 10:30\",\"reminderProgramId\":0,\"reminderOffset\":" + reminderOffset + "}," +
+                "{\"operation\":\"Delete\",\"reminderChannelNumber\":" + channel + ",\"reminderProgramStart\":\"" + yyyymmdd + " 11:00\",\"reminderProgramId\":0,\"reminderOffset\":" + reminderOffset + "}," +
+                "{\"operation\":\"Delete\",\"reminderChannelNumber\":" + channel + ",\"reminderProgramStart\":\"" + yyyymmdd + " 11:30\",\"reminderProgramId\":0,\"reminderOffset\":" + reminderOffset + "}," +
+                "{\"operation\":\"Delete\",\"reminderChannelNumber\":" + channel + ",\"reminderProgramStart\":\"" + yyyymmdd + " 12:00\",\"reminderProgramId\":0,\"reminderOffset\":" + reminderOffset + "}," +
+                "{\"operation\":\"Delete\",\"reminderChannelNumber\":" + channel + ",\"reminderProgramStart\":\"" + yyyymmdd + " 12:30\",\"reminderProgramId\":0,\"reminderOffset\":" + reminderOffset + "}," +
+                "{\"operation\":\"Delete\",\"reminderChannelNumber\":" + channel + ",\"reminderProgramStart\":\"" + yyyymmdd + " 13:00\",\"reminderProgramId\":0,\"reminderOffset\":" + reminderOffset + "}," +
+                "{\"operation\":\"Delete\",\"reminderChannelNumber\":" + channel + ",\"reminderProgramStart\":\"" + yyyymmdd + " 13:30\",\"reminderProgramId\":0,\"reminderOffset\":" + reminderOffset + "}," +
+                "{\"operation\":\"Delete\",\"reminderChannelNumber\":" + channel + ",\"reminderProgramStart\":\"" + yyyymmdd + " 14:00\",\"reminderProgramId\":0,\"reminderOffset\":" + reminderOffset + "}," +
+                "{\"operation\":\"Delete\",\"reminderChannelNumber\":" + channel + ",\"reminderProgramStart\":\"" + yyyymmdd + " 14:30\",\"reminderProgramId\":0,\"reminderOffset\":" + reminderOffset + "}," +
+                "{\"operation\":\"Delete\",\"reminderChannelNumber\":" + channel + ",\"reminderProgramStart\":\"" + yyyymmdd + " 15:00\",\"reminderProgramId\":0,\"reminderOffset\":" + reminderOffset + "}," +
+                "{\"operation\":\"Delete\",\"reminderChannelNumber\":" + channel + ",\"reminderProgramStart\":\"" + yyyymmdd + " 15:30\",\"reminderProgramId\":0,\"reminderOffset\":" + reminderOffset + "}," +
+                "{\"operation\":\"Delete\",\"reminderChannelNumber\":" + channel + ",\"reminderProgramStart\":\"" + yyyymmdd + " 16:00\",\"reminderProgramId\":0,\"reminderOffset\":" + reminderOffset + "}," +
+                "{\"operation\":\"Delete\",\"reminderChannelNumber\":" + channel + ",\"reminderProgramStart\":\"" + yyyymmdd + " 16:30\",\"reminderProgramId\":0,\"reminderOffset\":" + reminderOffset + "}," +
+                "{\"operation\":\"Delete\",\"reminderChannelNumber\":" + channel + ",\"reminderProgramStart\":\"" + yyyymmdd + " 17:00\",\"reminderProgramId\":0,\"reminderOffset\":" + reminderOffset + "}," +
+                "{\"operation\":\"Delete\",\"reminderChannelNumber\":" + channel + ",\"reminderProgramStart\":\"" + yyyymmdd + " 17:30\",\"reminderProgramId\":0,\"reminderOffset\":" + reminderOffset + "}," +
+                "{\"operation\":\"Delete\",\"reminderChannelNumber\":" + channel + ",\"reminderProgramStart\":\"" + yyyymmdd + " 18:00\",\"reminderProgramId\":0,\"reminderOffset\":" + reminderOffset + "}," +
+                "{\"operation\":\"Delete\",\"reminderChannelNumber\":" + channel + ",\"reminderProgramStart\":\"" + yyyymmdd + " 18:30\",\"reminderProgramId\":0,\"reminderOffset\":" + reminderOffset + "}," +
+                "{\"operation\":\"Delete\",\"reminderChannelNumber\":" + channel + ",\"reminderProgramStart\":\"" + yyyymmdd + " 19:00\",\"reminderProgramId\":0,\"reminderOffset\":" + reminderOffset + "}," +
+                "{\"operation\":\"Delete\",\"reminderChannelNumber\":" + channel + ",\"reminderProgramStart\":\"" + yyyymmdd + " 19:30\",\"reminderProgramId\":0,\"reminderOffset\":" + reminderOffset + "}," +
+                "{\"operation\":\"Delete\",\"reminderChannelNumber\":" + channel + ",\"reminderProgramStart\":\"" + yyyymmdd + " 20:00\",\"reminderProgramId\":0,\"reminderOffset\":" + reminderOffset + "}," +
+                "{\"operation\":\"Delete\",\"reminderChannelNumber\":" + channel + ",\"reminderProgramStart\":\"" + yyyymmdd + " 20:30\",\"reminderProgramId\":0,\"reminderOffset\":" + reminderOffset + "}," +
+                "{\"operation\":\"Delete\",\"reminderChannelNumber\":" + channel + ",\"reminderProgramStart\":\"" + yyyymmdd + " 21:00\",\"reminderProgramId\":0,\"reminderOffset\":" + reminderOffset + "}," +
+                "{\"operation\":\"Delete\",\"reminderChannelNumber\":" + channel + ",\"reminderProgramStart\":\"" + yyyymmdd + " 21:30\",\"reminderProgramId\":0,\"reminderOffset\":" + reminderOffset + "}," +
+                "{\"operation\":\"Delete\",\"reminderChannelNumber\":" + channel + ",\"reminderProgramStart\":\"" + yyyymmdd + " 22:00\",\"reminderProgramId\":0,\"reminderOffset\":" + reminderOffset + "}," +
+                "{\"operation\":\"Delete\",\"reminderChannelNumber\":" + channel + ",\"reminderProgramStart\":\"" + yyyymmdd + " 22:30\",\"reminderProgramId\":0,\"reminderOffset\":" + reminderOffset + "}," +
+                "{\"operation\":\"Delete\",\"reminderChannelNumber\":" + channel + ",\"reminderProgramStart\":\"" + yyyymmdd + " 23:00\",\"reminderProgramId\":0,\"reminderOffset\":" + reminderOffset + "}," +
+                "{\"operation\":\"Delete\",\"reminderChannelNumber\":" + channel + ",\"reminderProgramStart\":\"" + yyyymmdd + " 23:30\",\"reminderProgramId\":0,\"reminderOffset\":" + reminderOffset + "}," +
+                "{\"operation\":\"Add\",\"reminderChannelNumber\":" + channel + ",\"reminderProgramStart\":\"" + yyyymmdd + " 00:00\",\"reminderProgramId\":0,\"reminderOffset\":" + reminderOffset_new + "}," +
+                "{\"operation\":\"Add\",\"reminderChannelNumber\":" + channel + ",\"reminderProgramStart\":\"" + yyyymmdd + " 00:30\",\"reminderProgramId\":0,\"reminderOffset\":" + reminderOffset_new + "}," +
+                "{\"operation\":\"Add\",\"reminderChannelNumber\":" + channel + ",\"reminderProgramStart\":\"" + yyyymmdd + " 01:00\",\"reminderProgramId\":0,\"reminderOffset\":" + reminderOffset_new + "}," +
+                "{\"operation\":\"Add\",\"reminderChannelNumber\":" + channel + ",\"reminderProgramStart\":\"" + yyyymmdd + " 01:30\",\"reminderProgramId\":0,\"reminderOffset\":" + reminderOffset_new + "}," +
+                "{\"operation\":\"Add\",\"reminderChannelNumber\":" + channel + ",\"reminderProgramStart\":\"" + yyyymmdd + " 02:00\",\"reminderProgramId\":0,\"reminderOffset\":" + reminderOffset_new + "}," +
+                "{\"operation\":\"Add\",\"reminderChannelNumber\":" + channel + ",\"reminderProgramStart\":\"" + yyyymmdd + " 02:30\",\"reminderProgramId\":0,\"reminderOffset\":" + reminderOffset_new + "}," +
+                "{\"operation\":\"Add\",\"reminderChannelNumber\":" + channel + ",\"reminderProgramStart\":\"" + yyyymmdd + " 03:00\",\"reminderProgramId\":0,\"reminderOffset\":" + reminderOffset_new + "}," +
+                "{\"operation\":\"Add\",\"reminderChannelNumber\":" + channel + ",\"reminderProgramStart\":\"" + yyyymmdd + " 03:30\",\"reminderProgramId\":0,\"reminderOffset\":" + reminderOffset_new + "}," +
+                "{\"operation\":\"Add\",\"reminderChannelNumber\":" + channel + ",\"reminderProgramStart\":\"" + yyyymmdd + " 04:00\",\"reminderProgramId\":0,\"reminderOffset\":" + reminderOffset_new + "}," +
+                "{\"operation\":\"Add\",\"reminderChannelNumber\":" + channel + ",\"reminderProgramStart\":\"" + yyyymmdd + " 04:30\",\"reminderProgramId\":0,\"reminderOffset\":" + reminderOffset_new + "}," +
+                "{\"operation\":\"Add\",\"reminderChannelNumber\":" + channel + ",\"reminderProgramStart\":\"" + yyyymmdd + " 05:00\",\"reminderProgramId\":0,\"reminderOffset\":" + reminderOffset_new + "}," +
+                "{\"operation\":\"Add\",\"reminderChannelNumber\":" + channel + ",\"reminderProgramStart\":\"" + yyyymmdd + " 05:30\",\"reminderProgramId\":0,\"reminderOffset\":" + reminderOffset_new + "}," +
+                "{\"operation\":\"Add\",\"reminderChannelNumber\":" + channel + ",\"reminderProgramStart\":\"" + yyyymmdd + " 06:00\",\"reminderProgramId\":0,\"reminderOffset\":" + reminderOffset_new + "}," +
+                "{\"operation\":\"Add\",\"reminderChannelNumber\":" + channel + ",\"reminderProgramStart\":\"" + yyyymmdd + " 06:30\",\"reminderProgramId\":0,\"reminderOffset\":" + reminderOffset_new + "}," +
+                "{\"operation\":\"Add\",\"reminderChannelNumber\":" + channel + ",\"reminderProgramStart\":\"" + yyyymmdd + " 07:00\",\"reminderProgramId\":0,\"reminderOffset\":" + reminderOffset_new + "}," +
+                "{\"operation\":\"Add\",\"reminderChannelNumber\":" + channel + ",\"reminderProgramStart\":\"" + yyyymmdd + " 07:30\",\"reminderProgramId\":0,\"reminderOffset\":" + reminderOffset_new + "}," +
+                "{\"operation\":\"Add\",\"reminderChannelNumber\":" + channel + ",\"reminderProgramStart\":\"" + yyyymmdd + " 08:00\",\"reminderProgramId\":0,\"reminderOffset\":" + reminderOffset_new + "}," +
+                "{\"operation\":\"Add\",\"reminderChannelNumber\":" + channel + ",\"reminderProgramStart\":\"" + yyyymmdd + " 08:30\",\"reminderProgramId\":0,\"reminderOffset\":" + reminderOffset_new + "}," +
+                "{\"operation\":\"Add\",\"reminderChannelNumber\":" + channel + ",\"reminderProgramStart\":\"" + yyyymmdd + " 09:00\",\"reminderProgramId\":0,\"reminderOffset\":" + reminderOffset_new + "}," +
+                "{\"operation\":\"Add\",\"reminderChannelNumber\":" + channel + ",\"reminderProgramStart\":\"" + yyyymmdd + " 09:30\",\"reminderProgramId\":0,\"reminderOffset\":" + reminderOffset_new + "}," +
+                "{\"operation\":\"Add\",\"reminderChannelNumber\":" + channel + ",\"reminderProgramStart\":\"" + yyyymmdd + " 10:00\",\"reminderProgramId\":0,\"reminderOffset\":" + reminderOffset_new + "}," +
+                "{\"operation\":\"Add\",\"reminderChannelNumber\":" + channel + ",\"reminderProgramStart\":\"" + yyyymmdd + " 10:30\",\"reminderProgramId\":0,\"reminderOffset\":" + reminderOffset_new + "}," +
+                "{\"operation\":\"Add\",\"reminderChannelNumber\":" + channel + ",\"reminderProgramStart\":\"" + yyyymmdd + " 11:00\",\"reminderProgramId\":0,\"reminderOffset\":" + reminderOffset_new + "}," +
+                "{\"operation\":\"Add\",\"reminderChannelNumber\":" + channel + ",\"reminderProgramStart\":\"" + yyyymmdd + " 11:30\",\"reminderProgramId\":0,\"reminderOffset\":" + reminderOffset_new + "}," +
+                "{\"operation\":\"Add\",\"reminderChannelNumber\":" + channel + ",\"reminderProgramStart\":\"" + yyyymmdd + " 12:00\",\"reminderProgramId\":0,\"reminderOffset\":" + reminderOffset_new + "}," +
+                "{\"operation\":\"Add\",\"reminderChannelNumber\":" + channel + ",\"reminderProgramStart\":\"" + yyyymmdd + " 12:30\",\"reminderProgramId\":0,\"reminderOffset\":" + reminderOffset_new + "}," +
+                "{\"operation\":\"Add\",\"reminderChannelNumber\":" + channel + ",\"reminderProgramStart\":\"" + yyyymmdd + " 13:00\",\"reminderProgramId\":0,\"reminderOffset\":" + reminderOffset_new + "}," +
+                "{\"operation\":\"Add\",\"reminderChannelNumber\":" + channel + ",\"reminderProgramStart\":\"" + yyyymmdd + " 13:30\",\"reminderProgramId\":0,\"reminderOffset\":" + reminderOffset_new + "}," +
+                "{\"operation\":\"Add\",\"reminderChannelNumber\":" + channel + ",\"reminderProgramStart\":\"" + yyyymmdd + " 14:00\",\"reminderProgramId\":0,\"reminderOffset\":" + reminderOffset_new + "}," +
+                "{\"operation\":\"Add\",\"reminderChannelNumber\":" + channel + ",\"reminderProgramStart\":\"" + yyyymmdd + " 14:30\",\"reminderProgramId\":0,\"reminderOffset\":" + reminderOffset_new + "}," +
+                "{\"operation\":\"Add\",\"reminderChannelNumber\":" + channel + ",\"reminderProgramStart\":\"" + yyyymmdd + " 15:00\",\"reminderProgramId\":0,\"reminderOffset\":" + reminderOffset_new + "}," +
+                "{\"operation\":\"Add\",\"reminderChannelNumber\":" + channel + ",\"reminderProgramStart\":\"" + yyyymmdd + " 15:30\",\"reminderProgramId\":0,\"reminderOffset\":" + reminderOffset_new + "}," +
+                "{\"operation\":\"Add\",\"reminderChannelNumber\":" + channel + ",\"reminderProgramStart\":\"" + yyyymmdd + " 16:00\",\"reminderProgramId\":0,\"reminderOffset\":" + reminderOffset_new + "}," +
+                "{\"operation\":\"Add\",\"reminderChannelNumber\":" + channel + ",\"reminderProgramStart\":\"" + yyyymmdd + " 16:30\",\"reminderProgramId\":0,\"reminderOffset\":" + reminderOffset_new + "}," +
+                "{\"operation\":\"Add\",\"reminderChannelNumber\":" + channel + ",\"reminderProgramStart\":\"" + yyyymmdd + " 17:00\",\"reminderProgramId\":0,\"reminderOffset\":" + reminderOffset_new + "}," +
+                "{\"operation\":\"Add\",\"reminderChannelNumber\":" + channel + ",\"reminderProgramStart\":\"" + yyyymmdd + " 17:30\",\"reminderProgramId\":0,\"reminderOffset\":" + reminderOffset_new + "}," +
+                "{\"operation\":\"Add\",\"reminderChannelNumber\":" + channel + ",\"reminderProgramStart\":\"" + yyyymmdd + " 18:00\",\"reminderProgramId\":0,\"reminderOffset\":" + reminderOffset_new + "}," +
+                "{\"operation\":\"Add\",\"reminderChannelNumber\":" + channel + ",\"reminderProgramStart\":\"" + yyyymmdd + " 18:30\",\"reminderProgramId\":0,\"reminderOffset\":" + reminderOffset_new + "}," +
+                "{\"operation\":\"Add\",\"reminderChannelNumber\":" + channel + ",\"reminderProgramStart\":\"" + yyyymmdd + " 19:00\",\"reminderProgramId\":0,\"reminderOffset\":" + reminderOffset_new + "}," +
+                "{\"operation\":\"Add\",\"reminderChannelNumber\":" + channel + ",\"reminderProgramStart\":\"" + yyyymmdd + " 19:30\",\"reminderProgramId\":0,\"reminderOffset\":" + reminderOffset_new + "}," +
+                "{\"operation\":\"Add\",\"reminderChannelNumber\":" + channel + ",\"reminderProgramStart\":\"" + yyyymmdd + " 20:00\",\"reminderProgramId\":0,\"reminderOffset\":" + reminderOffset_new + "}," +
+                "{\"operation\":\"Add\",\"reminderChannelNumber\":" + channel + ",\"reminderProgramStart\":\"" + yyyymmdd + " 20:30\",\"reminderProgramId\":0,\"reminderOffset\":" + reminderOffset_new + "}," +
+                "{\"operation\":\"Add\",\"reminderChannelNumber\":" + channel + ",\"reminderProgramStart\":\"" + yyyymmdd + " 21:00\",\"reminderProgramId\":0,\"reminderOffset\":" + reminderOffset_new + "}," +
+                "{\"operation\":\"Add\",\"reminderChannelNumber\":" + channel + ",\"reminderProgramStart\":\"" + yyyymmdd + " 21:30\",\"reminderProgramId\":0,\"reminderOffset\":" + reminderOffset_new + "}," +
+                "{\"operation\":\"Add\",\"reminderChannelNumber\":" + channel + ",\"reminderProgramStart\":\"" + yyyymmdd + " 22:00\",\"reminderProgramId\":0,\"reminderOffset\":" + reminderOffset_new + "}," +
+                "{\"operation\":\"Add\",\"reminderChannelNumber\":" + channel + ",\"reminderProgramStart\":\"" + yyyymmdd + " 22:30\",\"reminderProgramId\":0,\"reminderOffset\":" + reminderOffset_new + "}," +
+                "{\"operation\":\"Add\",\"reminderChannelNumber\":" + channel + ",\"reminderProgramStart\":\"" + yyyymmdd + " 23:00\",\"reminderProgramId\":0,\"reminderOffset\":" + reminderOffset_new + "}," +
+                "{\"operation\":\"Add\",\"reminderChannelNumber\":" + channel + ",\"reminderProgramStart\":\"" + yyyymmdd + " 23:30\",\"reminderProgramId\":0,\"reminderOffset\":" + reminderOffset_new + "}" +
                 "]}";
 
         String url = "http://" + ams_ip + ":" + ams_port + postfix_change;
@@ -514,7 +514,7 @@ public class Middle {
 
         //System.out.println(startmessage);
         for (int i = 1; i <= count_iterations; i++) {
-            for (String aRACK_DATA : RACK_DATA) {
+            for (String ayyyymmdd : yyyymmdd) {
                 for (String aRACK_CHANNEL : RACK_CHANNEL) {
                     //request.setHeader("Accept", "application/json");
                     //request.setHeader("Content-type", "application/json");
@@ -524,10 +524,10 @@ public class Middle {
                     System.out.println("[DBG] Request string: " + request.toString()
                             //+ "\n[DBG] Request json string: " + json_delete48_add48
                             + "\n[DBG] Request entity: " + request.getEntity()
-                            + "\n[DBG] date: Edit(delete 48 + add 48) with Offset=" + reminderOffset + ", offset_new=" + reminderOffset_new + ", iteration=" + i + "/" + count_iterations + ", macaddress=" + macaddress + ", data=" + aRACK_DATA + ", channel=" + aRACK_CHANNEL);
+                            + "\n[DBG] date: Edit(delete 48 + add 48) with Offset=" + reminderOffset + ", offset_new=" + reminderOffset_new + ", iteration=" + i + "/" + count_iterations + ", macaddress=" + macaddress + ", data=" + ayyyymmdd + ", channel=" + aRACK_CHANNEL);
 
                     HttpResponse response = client.execute(request);
-                    System.out.println("\n[DBG] Response string: " + response.toString());
+                    //System.out.println("\n[DBG] Response string: " + response.toString());
                     //+ "\n[DBG] Response getStatusLine: " + response.getStatusLine());
 
                     BufferedReader reader = new BufferedReader(new InputStreamReader(response.getEntity().getContent(), "UTF-8"));
@@ -544,54 +544,54 @@ public class Middle {
         System.out.println("[DBG] start Delete:");
 
         String json_delete48 = "{\"deviceId\":\"" + macaddress + "\",\"reminders\":[" +
-                "{\"operation\":\"Delete\",\"reminderChannelNumber\":" + channel + ",\"reminderProgramStart\":\"" + data + " 00:00\",\"reminderProgramId\":0,\"reminderOffset\":" + reminderOffset + "}," +
-                "{\"operation\":\"Delete\",\"reminderChannelNumber\":" + channel + ",\"reminderProgramStart\":\"" + data + " 00:30\",\"reminderProgramId\":0,\"reminderOffset\":" + reminderOffset + "}," +
-                "{\"operation\":\"Delete\",\"reminderChannelNumber\":" + channel + ",\"reminderProgramStart\":\"" + data + " 01:00\",\"reminderProgramId\":0,\"reminderOffset\":" + reminderOffset + "}," +
-                "{\"operation\":\"Delete\",\"reminderChannelNumber\":" + channel + ",\"reminderProgramStart\":\"" + data + " 01:30\",\"reminderProgramId\":0,\"reminderOffset\":" + reminderOffset + "}," +
-                "{\"operation\":\"Delete\",\"reminderChannelNumber\":" + channel + ",\"reminderProgramStart\":\"" + data + " 02:00\",\"reminderProgramId\":0,\"reminderOffset\":" + reminderOffset + "}," +
-                "{\"operation\":\"Delete\",\"reminderChannelNumber\":" + channel + ",\"reminderProgramStart\":\"" + data + " 02:30\",\"reminderProgramId\":0,\"reminderOffset\":" + reminderOffset + "}," +
-                "{\"operation\":\"Delete\",\"reminderChannelNumber\":" + channel + ",\"reminderProgramStart\":\"" + data + " 03:00\",\"reminderProgramId\":0,\"reminderOffset\":" + reminderOffset + "}," +
-                "{\"operation\":\"Delete\",\"reminderChannelNumber\":" + channel + ",\"reminderProgramStart\":\"" + data + " 03:30\",\"reminderProgramId\":0,\"reminderOffset\":" + reminderOffset + "}," +
-                "{\"operation\":\"Delete\",\"reminderChannelNumber\":" + channel + ",\"reminderProgramStart\":\"" + data + " 04:00\",\"reminderProgramId\":0,\"reminderOffset\":" + reminderOffset + "}," +
-                "{\"operation\":\"Delete\",\"reminderChannelNumber\":" + channel + ",\"reminderProgramStart\":\"" + data + " 04:30\",\"reminderProgramId\":0,\"reminderOffset\":" + reminderOffset + "}," +
-                "{\"operation\":\"Delete\",\"reminderChannelNumber\":" + channel + ",\"reminderProgramStart\":\"" + data + " 05:00\",\"reminderProgramId\":0,\"reminderOffset\":" + reminderOffset + "}," +
-                "{\"operation\":\"Delete\",\"reminderChannelNumber\":" + channel + ",\"reminderProgramStart\":\"" + data + " 05:30\",\"reminderProgramId\":0,\"reminderOffset\":" + reminderOffset + "}," +
-                "{\"operation\":\"Delete\",\"reminderChannelNumber\":" + channel + ",\"reminderProgramStart\":\"" + data + " 06:00\",\"reminderProgramId\":0,\"reminderOffset\":" + reminderOffset + "}," +
-                "{\"operation\":\"Delete\",\"reminderChannelNumber\":" + channel + ",\"reminderProgramStart\":\"" + data + " 06:30\",\"reminderProgramId\":0,\"reminderOffset\":" + reminderOffset + "}," +
-                "{\"operation\":\"Delete\",\"reminderChannelNumber\":" + channel + ",\"reminderProgramStart\":\"" + data + " 07:00\",\"reminderProgramId\":0,\"reminderOffset\":" + reminderOffset + "}," +
-                "{\"operation\":\"Delete\",\"reminderChannelNumber\":" + channel + ",\"reminderProgramStart\":\"" + data + " 07:30\",\"reminderProgramId\":0,\"reminderOffset\":" + reminderOffset + "}," +
-                "{\"operation\":\"Delete\",\"reminderChannelNumber\":" + channel + ",\"reminderProgramStart\":\"" + data + " 08:00\",\"reminderProgramId\":0,\"reminderOffset\":" + reminderOffset + "}," +
-                "{\"operation\":\"Delete\",\"reminderChannelNumber\":" + channel + ",\"reminderProgramStart\":\"" + data + " 08:30\",\"reminderProgramId\":0,\"reminderOffset\":" + reminderOffset + "}," +
-                "{\"operation\":\"Delete\",\"reminderChannelNumber\":" + channel + ",\"reminderProgramStart\":\"" + data + " 09:00\",\"reminderProgramId\":0,\"reminderOffset\":" + reminderOffset + "}," +
-                "{\"operation\":\"Delete\",\"reminderChannelNumber\":" + channel + ",\"reminderProgramStart\":\"" + data + " 09:30\",\"reminderProgramId\":0,\"reminderOffset\":" + reminderOffset + "}," +
-                "{\"operation\":\"Delete\",\"reminderChannelNumber\":" + channel + ",\"reminderProgramStart\":\"" + data + " 10:00\",\"reminderProgramId\":0,\"reminderOffset\":" + reminderOffset + "}," +
-                "{\"operation\":\"Delete\",\"reminderChannelNumber\":" + channel + ",\"reminderProgramStart\":\"" + data + " 10:30\",\"reminderProgramId\":0,\"reminderOffset\":" + reminderOffset + "}," +
-                "{\"operation\":\"Delete\",\"reminderChannelNumber\":" + channel + ",\"reminderProgramStart\":\"" + data + " 11:00\",\"reminderProgramId\":0,\"reminderOffset\":" + reminderOffset + "}," +
-                "{\"operation\":\"Delete\",\"reminderChannelNumber\":" + channel + ",\"reminderProgramStart\":\"" + data + " 11:30\",\"reminderProgramId\":0,\"reminderOffset\":" + reminderOffset + "}," +
-                "{\"operation\":\"Delete\",\"reminderChannelNumber\":" + channel + ",\"reminderProgramStart\":\"" + data + " 12:00\",\"reminderProgramId\":0,\"reminderOffset\":" + reminderOffset + "}," +
-                "{\"operation\":\"Delete\",\"reminderChannelNumber\":" + channel + ",\"reminderProgramStart\":\"" + data + " 12:30\",\"reminderProgramId\":0,\"reminderOffset\":" + reminderOffset + "}," +
-                "{\"operation\":\"Delete\",\"reminderChannelNumber\":" + channel + ",\"reminderProgramStart\":\"" + data + " 13:00\",\"reminderProgramId\":0,\"reminderOffset\":" + reminderOffset + "}," +
-                "{\"operation\":\"Delete\",\"reminderChannelNumber\":" + channel + ",\"reminderProgramStart\":\"" + data + " 13:30\",\"reminderProgramId\":0,\"reminderOffset\":" + reminderOffset + "}," +
-                "{\"operation\":\"Delete\",\"reminderChannelNumber\":" + channel + ",\"reminderProgramStart\":\"" + data + " 14:00\",\"reminderProgramId\":0,\"reminderOffset\":" + reminderOffset + "}," +
-                "{\"operation\":\"Delete\",\"reminderChannelNumber\":" + channel + ",\"reminderProgramStart\":\"" + data + " 14:30\",\"reminderProgramId\":0,\"reminderOffset\":" + reminderOffset + "}," +
-                "{\"operation\":\"Delete\",\"reminderChannelNumber\":" + channel + ",\"reminderProgramStart\":\"" + data + " 15:00\",\"reminderProgramId\":0,\"reminderOffset\":" + reminderOffset + "}," +
-                "{\"operation\":\"Delete\",\"reminderChannelNumber\":" + channel + ",\"reminderProgramStart\":\"" + data + " 15:30\",\"reminderProgramId\":0,\"reminderOffset\":" + reminderOffset + "}," +
-                "{\"operation\":\"Delete\",\"reminderChannelNumber\":" + channel + ",\"reminderProgramStart\":\"" + data + " 16:00\",\"reminderProgramId\":0,\"reminderOffset\":" + reminderOffset + "}," +
-                "{\"operation\":\"Delete\",\"reminderChannelNumber\":" + channel + ",\"reminderProgramStart\":\"" + data + " 16:30\",\"reminderProgramId\":0,\"reminderOffset\":" + reminderOffset + "}," +
-                "{\"operation\":\"Delete\",\"reminderChannelNumber\":" + channel + ",\"reminderProgramStart\":\"" + data + " 17:00\",\"reminderProgramId\":0,\"reminderOffset\":" + reminderOffset + "}," +
-                "{\"operation\":\"Delete\",\"reminderChannelNumber\":" + channel + ",\"reminderProgramStart\":\"" + data + " 17:30\",\"reminderProgramId\":0,\"reminderOffset\":" + reminderOffset + "}," +
-                "{\"operation\":\"Delete\",\"reminderChannelNumber\":" + channel + ",\"reminderProgramStart\":\"" + data + " 18:00\",\"reminderProgramId\":0,\"reminderOffset\":" + reminderOffset + "}," +
-                "{\"operation\":\"Delete\",\"reminderChannelNumber\":" + channel + ",\"reminderProgramStart\":\"" + data + " 18:30\",\"reminderProgramId\":0,\"reminderOffset\":" + reminderOffset + "}," +
-                "{\"operation\":\"Delete\",\"reminderChannelNumber\":" + channel + ",\"reminderProgramStart\":\"" + data + " 19:00\",\"reminderProgramId\":0,\"reminderOffset\":" + reminderOffset + "}," +
-                "{\"operation\":\"Delete\",\"reminderChannelNumber\":" + channel + ",\"reminderProgramStart\":\"" + data + " 19:30\",\"reminderProgramId\":0,\"reminderOffset\":" + reminderOffset + "}," +
-                "{\"operation\":\"Delete\",\"reminderChannelNumber\":" + channel + ",\"reminderProgramStart\":\"" + data + " 20:00\",\"reminderProgramId\":0,\"reminderOffset\":" + reminderOffset + "}," +
-                "{\"operation\":\"Delete\",\"reminderChannelNumber\":" + channel + ",\"reminderProgramStart\":\"" + data + " 20:30\",\"reminderProgramId\":0,\"reminderOffset\":" + reminderOffset + "}," +
-                "{\"operation\":\"Delete\",\"reminderChannelNumber\":" + channel + ",\"reminderProgramStart\":\"" + data + " 21:00\",\"reminderProgramId\":0,\"reminderOffset\":" + reminderOffset + "}," +
-                "{\"operation\":\"Delete\",\"reminderChannelNumber\":" + channel + ",\"reminderProgramStart\":\"" + data + " 21:30\",\"reminderProgramId\":0,\"reminderOffset\":" + reminderOffset + "}," +
-                "{\"operation\":\"Delete\",\"reminderChannelNumber\":" + channel + ",\"reminderProgramStart\":\"" + data + " 22:00\",\"reminderProgramId\":0,\"reminderOffset\":" + reminderOffset + "}," +
-                "{\"operation\":\"Delete\",\"reminderChannelNumber\":" + channel + ",\"reminderProgramStart\":\"" + data + " 22:30\",\"reminderProgramId\":0,\"reminderOffset\":" + reminderOffset + "}," +
-                "{\"operation\":\"Delete\",\"reminderChannelNumber\":" + channel + ",\"reminderProgramStart\":\"" + data + " 23:00\",\"reminderProgramId\":0,\"reminderOffset\":" + reminderOffset + "}," +
-                "{\"operation\":\"Delete\",\"reminderChannelNumber\":" + channel + ",\"reminderProgramStart\":\"" + data + " 23:30\",\"reminderProgramId\":0,\"reminderOffset\":" + reminderOffset + " }" +
+                "{\"operation\":\"Delete\",\"reminderChannelNumber\":" + channel + ",\"reminderProgramStart\":\"" + yyyymmdd + " 00:00\",\"reminderProgramId\":0,\"reminderOffset\":" + reminderOffset + "}," +
+                "{\"operation\":\"Delete\",\"reminderChannelNumber\":" + channel + ",\"reminderProgramStart\":\"" + yyyymmdd + " 00:30\",\"reminderProgramId\":0,\"reminderOffset\":" + reminderOffset + "}," +
+                "{\"operation\":\"Delete\",\"reminderChannelNumber\":" + channel + ",\"reminderProgramStart\":\"" + yyyymmdd + " 01:00\",\"reminderProgramId\":0,\"reminderOffset\":" + reminderOffset + "}," +
+                "{\"operation\":\"Delete\",\"reminderChannelNumber\":" + channel + ",\"reminderProgramStart\":\"" + yyyymmdd + " 01:30\",\"reminderProgramId\":0,\"reminderOffset\":" + reminderOffset + "}," +
+                "{\"operation\":\"Delete\",\"reminderChannelNumber\":" + channel + ",\"reminderProgramStart\":\"" + yyyymmdd + " 02:00\",\"reminderProgramId\":0,\"reminderOffset\":" + reminderOffset + "}," +
+                "{\"operation\":\"Delete\",\"reminderChannelNumber\":" + channel + ",\"reminderProgramStart\":\"" + yyyymmdd + " 02:30\",\"reminderProgramId\":0,\"reminderOffset\":" + reminderOffset + "}," +
+                "{\"operation\":\"Delete\",\"reminderChannelNumber\":" + channel + ",\"reminderProgramStart\":\"" + yyyymmdd + " 03:00\",\"reminderProgramId\":0,\"reminderOffset\":" + reminderOffset + "}," +
+                "{\"operation\":\"Delete\",\"reminderChannelNumber\":" + channel + ",\"reminderProgramStart\":\"" + yyyymmdd + " 03:30\",\"reminderProgramId\":0,\"reminderOffset\":" + reminderOffset + "}," +
+                "{\"operation\":\"Delete\",\"reminderChannelNumber\":" + channel + ",\"reminderProgramStart\":\"" + yyyymmdd + " 04:00\",\"reminderProgramId\":0,\"reminderOffset\":" + reminderOffset + "}," +
+                "{\"operation\":\"Delete\",\"reminderChannelNumber\":" + channel + ",\"reminderProgramStart\":\"" + yyyymmdd + " 04:30\",\"reminderProgramId\":0,\"reminderOffset\":" + reminderOffset + "}," +
+                "{\"operation\":\"Delete\",\"reminderChannelNumber\":" + channel + ",\"reminderProgramStart\":\"" + yyyymmdd + " 05:00\",\"reminderProgramId\":0,\"reminderOffset\":" + reminderOffset + "}," +
+                "{\"operation\":\"Delete\",\"reminderChannelNumber\":" + channel + ",\"reminderProgramStart\":\"" + yyyymmdd + " 05:30\",\"reminderProgramId\":0,\"reminderOffset\":" + reminderOffset + "}," +
+                "{\"operation\":\"Delete\",\"reminderChannelNumber\":" + channel + ",\"reminderProgramStart\":\"" + yyyymmdd + " 06:00\",\"reminderProgramId\":0,\"reminderOffset\":" + reminderOffset + "}," +
+                "{\"operation\":\"Delete\",\"reminderChannelNumber\":" + channel + ",\"reminderProgramStart\":\"" + yyyymmdd + " 06:30\",\"reminderProgramId\":0,\"reminderOffset\":" + reminderOffset + "}," +
+                "{\"operation\":\"Delete\",\"reminderChannelNumber\":" + channel + ",\"reminderProgramStart\":\"" + yyyymmdd + " 07:00\",\"reminderProgramId\":0,\"reminderOffset\":" + reminderOffset + "}," +
+                "{\"operation\":\"Delete\",\"reminderChannelNumber\":" + channel + ",\"reminderProgramStart\":\"" + yyyymmdd + " 07:30\",\"reminderProgramId\":0,\"reminderOffset\":" + reminderOffset + "}," +
+                "{\"operation\":\"Delete\",\"reminderChannelNumber\":" + channel + ",\"reminderProgramStart\":\"" + yyyymmdd + " 08:00\",\"reminderProgramId\":0,\"reminderOffset\":" + reminderOffset + "}," +
+                "{\"operation\":\"Delete\",\"reminderChannelNumber\":" + channel + ",\"reminderProgramStart\":\"" + yyyymmdd + " 08:30\",\"reminderProgramId\":0,\"reminderOffset\":" + reminderOffset + "}," +
+                "{\"operation\":\"Delete\",\"reminderChannelNumber\":" + channel + ",\"reminderProgramStart\":\"" + yyyymmdd + " 09:00\",\"reminderProgramId\":0,\"reminderOffset\":" + reminderOffset + "}," +
+                "{\"operation\":\"Delete\",\"reminderChannelNumber\":" + channel + ",\"reminderProgramStart\":\"" + yyyymmdd + " 09:30\",\"reminderProgramId\":0,\"reminderOffset\":" + reminderOffset + "}," +
+                "{\"operation\":\"Delete\",\"reminderChannelNumber\":" + channel + ",\"reminderProgramStart\":\"" + yyyymmdd + " 10:00\",\"reminderProgramId\":0,\"reminderOffset\":" + reminderOffset + "}," +
+                "{\"operation\":\"Delete\",\"reminderChannelNumber\":" + channel + ",\"reminderProgramStart\":\"" + yyyymmdd + " 10:30\",\"reminderProgramId\":0,\"reminderOffset\":" + reminderOffset + "}," +
+                "{\"operation\":\"Delete\",\"reminderChannelNumber\":" + channel + ",\"reminderProgramStart\":\"" + yyyymmdd + " 11:00\",\"reminderProgramId\":0,\"reminderOffset\":" + reminderOffset + "}," +
+                "{\"operation\":\"Delete\",\"reminderChannelNumber\":" + channel + ",\"reminderProgramStart\":\"" + yyyymmdd + " 11:30\",\"reminderProgramId\":0,\"reminderOffset\":" + reminderOffset + "}," +
+                "{\"operation\":\"Delete\",\"reminderChannelNumber\":" + channel + ",\"reminderProgramStart\":\"" + yyyymmdd + " 12:00\",\"reminderProgramId\":0,\"reminderOffset\":" + reminderOffset + "}," +
+                "{\"operation\":\"Delete\",\"reminderChannelNumber\":" + channel + ",\"reminderProgramStart\":\"" + yyyymmdd + " 12:30\",\"reminderProgramId\":0,\"reminderOffset\":" + reminderOffset + "}," +
+                "{\"operation\":\"Delete\",\"reminderChannelNumber\":" + channel + ",\"reminderProgramStart\":\"" + yyyymmdd + " 13:00\",\"reminderProgramId\":0,\"reminderOffset\":" + reminderOffset + "}," +
+                "{\"operation\":\"Delete\",\"reminderChannelNumber\":" + channel + ",\"reminderProgramStart\":\"" + yyyymmdd + " 13:30\",\"reminderProgramId\":0,\"reminderOffset\":" + reminderOffset + "}," +
+                "{\"operation\":\"Delete\",\"reminderChannelNumber\":" + channel + ",\"reminderProgramStart\":\"" + yyyymmdd + " 14:00\",\"reminderProgramId\":0,\"reminderOffset\":" + reminderOffset + "}," +
+                "{\"operation\":\"Delete\",\"reminderChannelNumber\":" + channel + ",\"reminderProgramStart\":\"" + yyyymmdd + " 14:30\",\"reminderProgramId\":0,\"reminderOffset\":" + reminderOffset + "}," +
+                "{\"operation\":\"Delete\",\"reminderChannelNumber\":" + channel + ",\"reminderProgramStart\":\"" + yyyymmdd + " 15:00\",\"reminderProgramId\":0,\"reminderOffset\":" + reminderOffset + "}," +
+                "{\"operation\":\"Delete\",\"reminderChannelNumber\":" + channel + ",\"reminderProgramStart\":\"" + yyyymmdd + " 15:30\",\"reminderProgramId\":0,\"reminderOffset\":" + reminderOffset + "}," +
+                "{\"operation\":\"Delete\",\"reminderChannelNumber\":" + channel + ",\"reminderProgramStart\":\"" + yyyymmdd + " 16:00\",\"reminderProgramId\":0,\"reminderOffset\":" + reminderOffset + "}," +
+                "{\"operation\":\"Delete\",\"reminderChannelNumber\":" + channel + ",\"reminderProgramStart\":\"" + yyyymmdd + " 16:30\",\"reminderProgramId\":0,\"reminderOffset\":" + reminderOffset + "}," +
+                "{\"operation\":\"Delete\",\"reminderChannelNumber\":" + channel + ",\"reminderProgramStart\":\"" + yyyymmdd + " 17:00\",\"reminderProgramId\":0,\"reminderOffset\":" + reminderOffset + "}," +
+                "{\"operation\":\"Delete\",\"reminderChannelNumber\":" + channel + ",\"reminderProgramStart\":\"" + yyyymmdd + " 17:30\",\"reminderProgramId\":0,\"reminderOffset\":" + reminderOffset + "}," +
+                "{\"operation\":\"Delete\",\"reminderChannelNumber\":" + channel + ",\"reminderProgramStart\":\"" + yyyymmdd + " 18:00\",\"reminderProgramId\":0,\"reminderOffset\":" + reminderOffset + "}," +
+                "{\"operation\":\"Delete\",\"reminderChannelNumber\":" + channel + ",\"reminderProgramStart\":\"" + yyyymmdd + " 18:30\",\"reminderProgramId\":0,\"reminderOffset\":" + reminderOffset + "}," +
+                "{\"operation\":\"Delete\",\"reminderChannelNumber\":" + channel + ",\"reminderProgramStart\":\"" + yyyymmdd + " 19:00\",\"reminderProgramId\":0,\"reminderOffset\":" + reminderOffset + "}," +
+                "{\"operation\":\"Delete\",\"reminderChannelNumber\":" + channel + ",\"reminderProgramStart\":\"" + yyyymmdd + " 19:30\",\"reminderProgramId\":0,\"reminderOffset\":" + reminderOffset + "}," +
+                "{\"operation\":\"Delete\",\"reminderChannelNumber\":" + channel + ",\"reminderProgramStart\":\"" + yyyymmdd + " 20:00\",\"reminderProgramId\":0,\"reminderOffset\":" + reminderOffset + "}," +
+                "{\"operation\":\"Delete\",\"reminderChannelNumber\":" + channel + ",\"reminderProgramStart\":\"" + yyyymmdd + " 20:30\",\"reminderProgramId\":0,\"reminderOffset\":" + reminderOffset + "}," +
+                "{\"operation\":\"Delete\",\"reminderChannelNumber\":" + channel + ",\"reminderProgramStart\":\"" + yyyymmdd + " 21:00\",\"reminderProgramId\":0,\"reminderOffset\":" + reminderOffset + "}," +
+                "{\"operation\":\"Delete\",\"reminderChannelNumber\":" + channel + ",\"reminderProgramStart\":\"" + yyyymmdd + " 21:30\",\"reminderProgramId\":0,\"reminderOffset\":" + reminderOffset + "}," +
+                "{\"operation\":\"Delete\",\"reminderChannelNumber\":" + channel + ",\"reminderProgramStart\":\"" + yyyymmdd + " 22:00\",\"reminderProgramId\":0,\"reminderOffset\":" + reminderOffset + "}," +
+                "{\"operation\":\"Delete\",\"reminderChannelNumber\":" + channel + ",\"reminderProgramStart\":\"" + yyyymmdd + " 22:30\",\"reminderProgramId\":0,\"reminderOffset\":" + reminderOffset + "}," +
+                "{\"operation\":\"Delete\",\"reminderChannelNumber\":" + channel + ",\"reminderProgramStart\":\"" + yyyymmdd + " 23:00\",\"reminderProgramId\":0,\"reminderOffset\":" + reminderOffset + "}," +
+                "{\"operation\":\"Delete\",\"reminderChannelNumber\":" + channel + ",\"reminderProgramStart\":\"" + yyyymmdd + " 23:30\",\"reminderProgramId\":0,\"reminderOffset\":" + reminderOffset + " }" +
                 "]}";
 
         String url = "http://" + ams_ip + ":" + ams_port + postfix_change;
@@ -604,7 +604,7 @@ public class Middle {
 
         //System.out.println(startmessage);
         for (int i = 1; i <= count_iterations; i++) {
-            for (String aRACK_DATA : RACK_DATA) {
+            for (String ayyyymmdd : yyyymmdd) {
                 for (String aRACK_CHANNEL : RACK_CHANNEL) {
                     request.setHeader("Accept", "application/json");
                     request.setHeader("Content-type", "application/json");
@@ -614,10 +614,10 @@ public class Middle {
                     System.out.println("[DBG] Request string: " + request.toString()
                             //+ "\n[DBG] Request json string: " + json_delete48
                             + "\n[DBG] Request entity: " + request.getEntity()
-                            + "\n[DBG] date: Delete 48rems with Offset=" + reminderOffset + ", iteration=" + i + "/" + count_iterations + ", macaddress=" + macaddress + ", data=" + aRACK_DATA + ", channel=" + aRACK_CHANNEL);
+                            + "\n[DBG] date: Delete 48rems with Offset=" + reminderOffset + ", iteration=" + i + "/" + count_iterations + ", macaddress=" + macaddress + ", data=" + ayyyymmdd + ", channel=" + aRACK_CHANNEL);
 
                     HttpResponse response = client.execute(request);
-                    System.out.println("\n[DBG] Response string: " + response.toString());
+                    //System.out.println("\n[DBG] Response string: " + response.toString());
                     //+ "\n[DBG] Response getStatusLine: " + response.getStatusLine());
 
                     BufferedReader reader = new BufferedReader(new InputStreamReader(response.getEntity().getContent(), "UTF-8"));
@@ -630,53 +630,79 @@ public class Middle {
         }
     }
 
-    void read_json() {
-    }
-
-
-    public String generate_json(String json, int count_reminders){
+    public String Generate_json(String json, int count_reminders){
    //     String macaddress = "A0722CB1AF24";
    //     int reminderOffset = 0;
         String result = "";
         return result;
     }
 
-    void generate_json(){
-
+    void Generate_json(int count_remindres){
+        //int count_reminders = count_remindres;
         //String json, String macaddress, String[] channel, String[] data, int[] reminderOffset) {
-        System.out.println("generate_json:");
+        System.out.println("generate_json with count_reminders: " + count_remindres);
 
+/*        String json_add5 = "{\"deviceId\":" + macaddress + ",\"reminders\":["
+                + "{\"operation\":" + operation + ",\"reminderChannelNumber\":" + reminderChannelNumber + ",\"reminderProgramStart\":" + reminderProgramStart + ",\"reminderProgramId\":" + reminderProgramId + ",\"reminderOffset\":" + reminderOffset + "},"
+                + "{\"operation\":" + operation + ",\"reminderChannelNumber\":" + reminderChannelNumber + ",\"reminderProgramStart\":" + reminderProgramStart + ",\"reminderProgramId\":" + reminderProgramId + ",\"reminderOffset\":" + reminderOffset + "},"
+                + "{\"operation\":" + operation + ",\"reminderChannelNumber\":" + reminderChannelNumber + ",\"reminderProgramStart\":" + reminderProgramStart + ",\"reminderProgramId\":" + reminderProgramId + ",\"reminderOffset\":" + reminderOffset + "},"
+                + "{\"operation\":" + operation + ",\"reminderChannelNumber\":" + reminderChannelNumber + ",\"reminderProgramStart\":" + reminderProgramStart + ",\"reminderProgramId\":" + reminderProgramId + ",\"reminderOffset\":" + reminderOffset + "},"
+                + "{\"operation\":" + operation + ",\"reminderChannelNumber\":" + reminderChannelNumber + ",\"reminderProgramStart\":" + reminderProgramStart + ",\"reminderProgramId\":" + reminderProgramId + ",\"reminderOffset\":" + reminderOffset + "}]}";
+*/
 
-               /* //working variant:
-        String json = json_add5;
-        Reminder reminder = new Gson().fromJson(json, Reminder.class);
-        System.out.println("[DBG] count of reminders in class: " + reminder.reminders.length);
-        System.out.println("deviceId:\"" + reminder.deviceId + "\"");
-        for (int i = 0; i < reminder.reminders.length; i++) {
-            System.out.println("operation:\"" + reminder.reminders[i].getOperation() + "\" " +
-                    "reminderChannelNumber:" + reminder.reminders[i].getReminderChannelNumber() + " " +
-                    "reminderProgramStart:\"" + reminder.reminders[i].getReminderProgramStart() + "\" " +
-                    "reminderProgramId:" + reminder.reminders[i].getReminderProgramId() + " " +
-                    "reminderOffset:" + reminder.reminders[i].getReminderOffset());
-        }
-        String json2 = "";
-        */
 
         String macaddress = "A0722CB1AF24";
         String operation = "Add";
         int reminderChannelNumber = 2;
-        String reminderProgramStart = "2018-02-22 00:00";
-        //String reminderProgramStart2 = "00:00";
+        String[] hhmm = { "00:00", "00:30", "01:00", "01:30" };
+        String reminderProgramStart = "\"2018-03-01 "+hhmm[0]+"\"";
         int reminderProgramId = 0;
         int reminderOffset = 0;
 
+        String json = "{\"deviceId\":" + macaddress + ",\"reminders\":[{\"operation\":" + operation + ", \"reminderChannelNumber\":" + reminderChannelNumber + ", \"reminderProgramStart\":" + reminderProgramStart + ", \"reminderProgramId\":" + reminderProgramId + ", \"reminderOffset\":" + reminderOffset + "}]}";
+        String json_add2 = "{\"deviceId\":" + macaddress + ",\"reminders\":[{\"operation\": \"Delete\", \"reminderChannelNumber\":" + reminderChannelNumber + ", \"reminderProgramStart\":" + reminderProgramStart + ", \"reminderProgramId\":" + reminderProgramId + ", \"reminderOffset\":" + reminderOffset + "},{\"operation\":" + operation + ", \"reminderChannelNumber\":" + reminderChannelNumber + ", \"reminderProgramStart\":" + reminderProgramStart + ", \"reminderProgramId\":" + reminderProgramId + ", \"reminderOffset\":" + reminderOffset + "}]}";
 
-        //WORKING variant for one class Reminder + one class Reminders
+        ArrayList hhmm_list = new ArrayList();
+        hhmm_list.addAll(Arrays.asList(hhmm));
+        System.out.println("[DBG] hhmm_list: " + hhmm_list);
+
+
+        //WORKING parsing from json_string to Class:
+        Gson g = new Gson();
+        Reminder reminder = g.fromJson(json_add2, Reminder.class);
+        System.out.println("[DBG] parsing from json_string to Class: \nmacaddress: " + reminder.deviceId);
+        System.out.println("[DBG] count of reminders in class: " + reminder.reminders.size());
+            for(Reminders rems : reminder.reminders){System.out.println(
+                    "operation: " + rems.operation + ", " +
+                    "reminderChannelNumber: " + rems.reminderChannelNumber + ", " +
+                    "reminderProgramStart: " + rems.reminderProgramStart + ", " +
+                    "reminderProgramId: " + rems.reminderProgramId + ", " +
+                    "reminderOffset: " + rems.reminderOffset);
+            }
+
+        //parsing from Class to json_string
+        System.out.println("[DBG] parsing from Class to json_string: \n" + g.toJson(reminder));
+
+
+
+
+        //System.out.println(reminder.reminders.add(2, g));
+        //reminder.reminders.add(1,"hjg");
+
+        //for (int i=1; i<=count_remindres; i++){
+//            reminder.reminders.size()
+
+  //      }
+
+
+
+/*        //WORKING variant for one class Reminder + one class Reminders
+        //==============================================================
         final Gson GSON = new GsonBuilder().setPrettyPrinting().create();
 
         //from class -> to string json
         //class with fields:
-        Reminders[] rs = new Reminders[](operation, reminderChannelNumber, reminderProgramStart, reminderProgramId, reminderOffset);
+        Reminders rs = new Reminders(operation, reminderChannelNumber, reminderProgramStart, reminderProgramId, reminderOffset);
         Reminder r = new Reminder(macaddress, rs);
         //create json structure:
         String json = GSON.toJson(r);
@@ -685,12 +711,10 @@ public class Middle {
         //from json string -> to class
         Reminder to_class = GSON.fromJson(json, Reminder.class);
         System.out.println("[DBG] from json string -> to class:\n" + to_class.getDeviceId()+ " " + to_class.getClass());
+*/
 
 
 /*
-        // for ListArrays
-        final Gson GSON = new GsonBuilder().setPrettyPrinting().create();
-
         //from class -> to string json
         Reminder from_class = new Reminder(macaddress, Arrays.asList("operation", "reminderChannelNumber", "reminderProgramStart", "reminderProgramId", "reminderOffset"));
         String json = GSON.toJson(from_class);
@@ -701,34 +725,51 @@ public class Middle {
         System.out.println("[DBG] from json string -> to class:\n" + to_class.getDeviceId()+ " " + to_class.getReminders_list());
 */
 
+
+        //WORKING
+        //System.out.println();
+        //JsonObject jo = new JsonParser().parse(json_add2).getAsJsonObject();
+        //System.out.println("1 show full jsonobject: " + jo);
+        //show only jsonarray:
+        //String ja = jo.get("reminders").getAsJsonArray().toString();
+        //System.out.println("2 only jsonarray: " + ja);
+
+        System.out.println("\n\n");
+        JSONArray ar = new JSONArray();
+        JSONObject obj = new JSONObject();
+        JSONObject resultJson = new JSONObject();
+        String reminderProgramStart2 = "2018-03-01 "+hhmm[0];
+
+        resultJson.put("deviceId", macaddress);
+        resultJson.put("reminders", ar);
+
+        for (int i=0;i<count_remindres;i++){
+            ar.add(obj);
+        }
+        obj.put("operation", operation);
+        obj.put("reminderChannelNumber", reminderChannelNumber);
+        obj.put("reminderProgramStart", reminderProgramStart2);
+        obj.put("reminderProgramId", reminderProgramId);
+        obj.put("reminderOffset", reminderOffset);
+
+        System.out.println("[DBG] result json: " + resultJson);
+
 /*
-        String json_add5 = "{\"deviceId\":" + macaddress + ",\"reminders\":["
-                + "{\"operation\":" + operation + ",\"reminderChannelNumber\":" + reminderChannelNumber + ",\"reminderProgramStart\":" + reminderProgramStart + ",\"reminderProgramId\":" + reminderProgramId + ",\"reminderOffset\":" + reminderOffset + "},"
-                + "{\"operation\":" + operation + ",\"reminderChannelNumber\":" + reminderChannelNumber + ",\"reminderProgramStart\":" + reminderProgramStart + ",\"reminderProgramId\":" + reminderProgramId + ",\"reminderOffset\":" + reminderOffset + "},"
-                + "{\"operation\":" + operation + ",\"reminderChannelNumber\":" + reminderChannelNumber + ",\"reminderProgramStart\":" + reminderProgramStart + ",\"reminderProgramId\":" + reminderProgramId + ",\"reminderOffset\":" + reminderOffset + "},"
-                + "{\"operation\":" + operation + ",\"reminderChannelNumber\":" + reminderChannelNumber + ",\"reminderProgramStart\":" + reminderProgramStart + ",\"reminderProgramId\":" + reminderProgramId + ",\"reminderOffset\":" + reminderOffset + "},"
-                + "{\"operation\":" + operation + ",\"reminderChannelNumber\":" + reminderChannelNumber + ",\"reminderProgramStart\":" + reminderProgramStart + ",\"reminderProgramId\":" + reminderProgramId + ",\"reminderOffset\":" + reminderOffset + "}]}";
+        ja.add("reminderChannelNumber", reminderChannelNumber);
+        jo.put("reminderProgramStart", reminderProgramStart);
+        jo.put("reminderProgramId", reminderProgramId);
+        jo.put("reminderOffset", reminderOffset);
+        System.out.println("resultJson reminders: " + jo);
 
-        String json_add1 = "{\"deviceId\":" + macaddress + ",\"reminders\":[{\"operation\":" + operation + ", \"reminderChannelNumber\":" + reminderChannelNumber + ", \"reminderProgramStart\":" + reminderProgramStart + ", \"reminderProgramId\":" + reminderProgramId + ", \"reminderOffset\":" + reminderOffset + "}]}";
 
-        //JSONObject obj = new JSONObject("{\"deviceId\":\"A0722CB1AF24\",\"reminders\":[{\"operation\":\"Add\",\"reminderChannelNumber\":2,\"reminderProgramStart\":\"2018-06-06 00:00\",\"reminderProgramId\":0,\"reminderOffset\":0}]}");
-        String trimmed = json_add1.trim();
-        JsonObject obj = new JsonParser().parse(trimmed ).getAsJsonObject();
-        System.out.println("1 full json as object: " + obj);
+        obj.put("one", 2);
+        obj.put("three", 4);
 
-        String sss = obj.get("reminders").getAsJsonArray().toString();
-        System.out.println("2 jsonarray: " + sss);
+
+        resultJson.put("paramsObj", obj);
+        resultJson.put("paramsStr", "some string");
+        System.out.println(obj.toString());
+        System.out.println("resultJson: " + resultJson);
 */
-
-//        String pageName = obj.getJSONObject("pageInfo").getString("pageName");
-//        JSONArray arr = obj.getJSONArray("posts");
-//        for (int i = 0; i < arr.length(); i++)
-//        {
-//            String post_id = arr.getJSONObject(i).getString("post_id");
-//    ......
-//        }
-
-
-
     }
 }

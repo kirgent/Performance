@@ -4,32 +4,31 @@ import java.util.ArrayList;
 import java.util.List;
 
 class Reminder {
-    private String deviceId;
+    public  String deviceId;
 
-
-    //1st variant
-    //working variant:
+/*
+    //WORKING variant
     public Reminders reminders;
     Reminder(String deviceId, Reminders reminders){
         this.deviceId = deviceId;
         this.reminders = reminders;
     }
-    //public String[] getReminders() {return reminders[];};
-
-
-/*
-    //2nd variant
-    //not-tested
-    @SerializedName("reminders")
-    private List<String> reminders = new ArrayList<>();
-    Reminder(String deviceId, List<String> reminders){
-        this.deviceId = deviceId;
-        this.reminders = reminders;
-    }
-    //List<String> getReminders_list() {return reminders;}
-
+    //public String[] getReminders() {return reminders[]};
 */
 
+
+    //NOT-TESTED variant
+    //@SerializedName("reminders")
+    //public List<Reminders> reminders;
+    public ArrayList<Reminders> reminders;
+
+    //Reminder(String deviceId, List<String> reminders){
+    //    this.deviceId = deviceId;
+    //}
+    //List<String> getReminders_list() {return reminders;}
+
+
+
     //common
-    String getDeviceId() {return deviceId;}
+    //String getDeviceId() {return deviceId;}
 }

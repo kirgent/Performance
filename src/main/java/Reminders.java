@@ -1,22 +1,21 @@
-public class Reminders {
-    private String operation;
-    private int reminderChannelNumber;
-    private String reminderProgramStart;
-    private int reminderProgramId;
-    private int reminderOffset;
+class Reminders {
+    public String operation;
+    public int reminderChannelNumber;
+    public String reminderProgramStart;
+    public int reminderProgramId;
+    public int reminderOffset;
 
-
-    Reminders(
-    private String operation, int reminderChannelNumber, String reminderProgramStart, int reminderProgramId, int reminderOffset){
+/*
+    Reminders(String operation, int reminderChannelNumber, String reminderProgramStart, int reminderProgramId, int reminderOffset){
         this.operation = operation;
         this.reminderChannelNumber = reminderChannelNumber;
         this.reminderProgramStart = reminderProgramStart;
         this.reminderProgramId = reminderProgramId;
         this.reminderOffset = reminderOffset;
     }
+*/
 
-
-
+/*
     public String getOperation() {return operation;}
     public void setOperation(String operation) {this.operation = operation;}
 
@@ -31,4 +30,5 @@ public class Reminders {
 
     public int getReminderOffset() {return reminderOffset;}
     public void setReminderOffset(int reminderOffset) {this.reminderOffset = reminderOffset;}
+    */
 }

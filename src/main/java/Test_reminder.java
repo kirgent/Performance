@@ -162,7 +162,7 @@ public class Test_reminder {
             case "Delete":
             case "delete": request.Delete(macaddress, count_reminders, reminderOffset); break;
 
-            case "test": request.generate_json();break;
+            case "test": request.Generate_json(2); break;
 
             default: request.Check_registration(macaddress);
         }
