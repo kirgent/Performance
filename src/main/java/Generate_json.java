@@ -5,7 +5,7 @@ import java.util.Arrays;
 
 class Generate_json {
     //String json, String macaddress, String[] channel, String[] data, int[] reminderOffset) {
-    String macaddress="A0722CB1AF24";
+    String macaddress="6CB56BBA882C";
     int reminderOffset = 0;
 
     String json_add1 = "{\"deviceId\":" + macaddress+ ",\"reminders\":[{\"operation\":\"Add\",\"reminderChannelNumber\":2,\"reminderProgramStart\":\"2018-06-06 00:00\",\"reminderProgramId\":0,\"reminderOffset\":0}]}";
