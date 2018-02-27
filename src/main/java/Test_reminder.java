@@ -27,7 +27,7 @@ public class Test_reminder {
         String newstring = new SimpleDateFormat("yyyy-MM-dd").format(date);
         System.out.println(newstring); // 2011-01-18 */
 
-        int count_reminders_by_default = 48;
+        int count_reminders_by_default = 2;
         int count_reminders = count_reminders_by_default;
 
         int reminderOffset = 0;
@@ -154,9 +154,6 @@ public class Test_reminder {
             case "edit": request.Edit(macaddress, count_reminders, reminderOffset, reminderOffset_new); break;
             case "All":
             case "all": request.All(macaddress, count_reminders, reminderOffset, reminderOffset_new); break;
-
-            //case "test": System.out.println(request.Generate_json("2018-03-08",10, "Add", 0)); break;
-
             default: request.Check_registration(macaddress);
         }
     }

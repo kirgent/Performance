@@ -7,18 +7,18 @@ import java.io.IOException;
 import static org.junit.Assert.assertEquals;
 
 public class testMiddle {
-
     private int expected = 200;
+    private String macaddress = "6CB56BBA882C";
+    //private int count_reminders = 48;
+    private int reminderOffset = 0;
+    private int reminderOffset_new = 10;
+
     private Middle request = new Middle();
-    private String macaddress="6CB56BBA882C";
-    private String ams_ip="172.30.81.4";
-    private int count_reminders=48;
-    private int reminderOffset=0;
-    private int reminderOffset_new=10;
 
     @Test
     public void testChange_registration_to_valid_ams() throws IOException, InterruptedException {
         System.out.println("[DBG] testChange_registration_to_valid_ams:");
+        String ams_ip = "172.30.81.4";
         int actual = request.Change_registration(macaddress, ams_ip);
         System.out.println("[DBG] return code: " + actual);
         assertEquals(expected, actual);
@@ -44,15 +44,31 @@ public class testMiddle {
     @Test
     public void testAdd() throws IOException, InterruptedException {
         System.out.println("[DBG] testAdd:");
-        int actual = request.Add(macaddress, count_reminders, reminderOffset);
+        int actual = request.Add(macaddress, 48, reminderOffset);
         System.out.println("[DBG] return code: " + actual);
         assertEquals(expected, actual);
     }
 
     @Test
-    public void testDelete() throws IOException {
+    public void testAdd_1000rems() throws IOException, InterruptedException {
+        System.out.println("[DBG] testAdd:");
+        int actual = request.Add(macaddress, 1000, reminderOffset);
+        System.out.println("[DBG] return code: " + actual);
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    public void testAdd_1rems() throws IOException, InterruptedException {
+        System.out.println("[DBG] testAdd:");
+        int actual = request.Add(macaddress, 1, reminderOffset);
+        System.out.println("[DBG] return code: " + actual);
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    public void testDelete_48rems() throws IOException {
         System.out.println("[DBG] testDelete:");
-        int actual = request.Delete(macaddress, count_reminders, reminderOffset);
+        int actual = request.Delete(macaddress, 48, reminderOffset);
         System.out.println("[DBG] return code: " + actual);
         assertEquals(expected, actual);
     }
@@ -60,7 +76,7 @@ public class testMiddle {
     @Test
     public void testModify_operation() throws IOException {
         System.out.println("[DBG] testModify_operation:");
-        int actual = request.Modify(macaddress, count_reminders, reminderOffset, reminderOffset_new);
+        int actual = request.Modify(macaddress, 48, reminderOffset, reminderOffset_new);
         System.out.println("[DBG] return code: " + actual);
         assertEquals(expected, actual);
     }
@@ -68,7 +84,7 @@ public class testMiddle {
     @Test
     public void testModify_reminderOffset() throws IOException {
         System.out.println("[DBG] testModify_reminderOffset:");
-        int actual = request.Modify(macaddress, count_reminders, reminderOffset, reminderOffset_new);
+        int actual = request.Modify(macaddress, 48, reminderOffset, reminderOffset_new);
         System.out.println("[DBG] return code: " + actual);
         assertEquals(expected, actual);
     }
@@ -77,7 +93,7 @@ public class testMiddle {
     public void testModify_reminderOffset_new__invalid() throws IOException {
         int reminderOffset_new = -1;
         System.out.println("[DBG] testModify_reminderOffset_new__invalid:");
-        int actual = request.Modify(macaddress, count_reminders, reminderOffset, reminderOffset_new);
+        int actual = request.Modify(macaddress, 48, reminderOffset, reminderOffset_new);
         System.out.println("[DBG] return code: " + actual);
         assertEquals(expected, actual);
     }
@@ -86,7 +102,7 @@ public class testMiddle {
     public void testModify_reminderOffset_new__long() throws IOException {
         int reminderOffset_new = 32276;
         System.out.println("[DBG] testModify_reminderOffset_new__long:");
-        int actual = request.Modify(macaddress, count_reminders, reminderOffset, reminderOffset_new);
+        int actual = request.Modify(macaddress, 48, reminderOffset, reminderOffset_new);
         System.out.println("[DBG] return code: " + actual);
         assertEquals(expected, actual);
     }

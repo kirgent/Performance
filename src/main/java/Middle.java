@@ -25,18 +25,18 @@ import java.util.List;
 
 class Middle {
     private String macaddress = "6CB56BBA882C";
-    private int count_reminders;
 
-    Middle(String macaddress, int count_reminders){
+    Middle(String macaddress, int count_reminders) {
         this.macaddress = macaddress;
-        this.count_reminders = count_reminders;
+        int count_reminders1 = count_reminders;
     }
 
-    Middle(String macaddress){
+    Middle(String macaddress) {
         this.macaddress = macaddress;
     }
 
-    Middle(){}
+    Middle() {
+    }
 
     //new API
     //https://chalk.charter.com/pages/viewpage.action?pageId=115175031
@@ -68,16 +68,15 @@ class Middle {
     private int result = 0;
 
     private int count_iterations = 1;
-    private String[] rack_date = { "2018-03-01", "2018-03-02" };
-    private String[] rack_time48 = { "00:00", "00:30", "01:00", "01:30", "02:00", "02:30", "03:00", "03:30", "04:00", "04:30", "05:00", "05:30",
+    private String[] rack_date = {"2018-03-01", "2018-03-02"};
+    private String[] rack_time48 = {"00:00", "00:30", "01:00", "01:30", "02:00", "02:30", "03:00", "03:30", "04:00", "04:30", "05:00", "05:30",
             "06:00", "06:30", "07:00", "07:30", "08:00", "08:30", "09:00", "09:30", "10:00", "10:30", "11:00", "11:30",
             "12:00", "12:30", "13:00", "13:30", "14:00", "14:30", "15:00", "15:30", "16:00", "16:30", "17:00", "17:30",
-            "18:00", "18:30", "19:00", "19:30", "20:00", "20:30", "21:00", "21:30", "22:00", "22:30", "23:00", "23:30" };
-    private String[] rack_time288 = { "00:00", "00:05", "00:10", };
-    private String[] rack_time720 = { "00:00", "00:02", "00:04" };
-    private String[] rack_channel = { "2", "3", "4", "5", "6", "7", "8", "9", "10", "11" };
+            "18:00", "18:30", "19:00", "19:30", "20:00", "20:30", "21:00", "21:30", "22:00", "22:30", "23:00", "23:30"};
+    private String[] rack_time288 = {"00:00", "00:05", "00:10"};
+    private String[] rack_time720 = {"00:00", "00:02", "00:04"};
+    private String[] rack_channel = {"2", "3", "4", "5", "6", "7", "8", "9", "10", "11"};
 
-    private int reminderProgramId = 0;
     //private String startmessage="[DBG] date: NEW START: count_iterations="+count_iterations+", RACK_DATA=?, RACK_CHANNELS=?";
 
 
@@ -101,8 +100,8 @@ class Middle {
                 + "[DBG] Request entity: " + request.getEntity());
 
         HttpResponse response = client.execute(request);
-        //System.out.println("\n[DBG] Response string: " + response.toString());
-        //+"\n[DBG] Response getStatusLine: "+response.getStatusLine());
+        System.out.println("\n[DBG] Response getStatusLine: " + response.getStatusLine());
+        //+ "[DBG] Response string: " + response.toString());
 
         BufferedReader reader = new BufferedReader(new InputStreamReader(response.getEntity().getContent(), "UTF-8"));
         StringBuilder body = new StringBuilder();
@@ -148,8 +147,8 @@ class Middle {
         //+"\n[DBG] Request getRequestLine: "+request.getRequestLine());
 
         HttpResponse response = client.execute(request);
-        //System.out.println("\n[DBG] Response string: " + response.toString());
-        //+"\n[DBG] Response getStatusLine: "+response.getStatusLine());
+        System.out.println("\n[DBG] Response getStatusLine: " + response.getStatusLine());
+        //+ "[DBG] Response string: " + response.toString());
 
         BufferedReader reader = new BufferedReader(new InputStreamReader(response.getEntity().getContent(), "UTF-8"));
         StringBuilder body = new StringBuilder();
@@ -186,8 +185,8 @@ class Middle {
                 + "\n[DBG] Request headers: " + Arrays.toString(request.getAllHeaders()));
 
         HttpResponse response = client.execute(request);
-        //System.out.println("\n[DBG] Response string: " + response.toString());
-        //+"\n[DBG] Response getStatusLine: "+response.getStatusLine());
+        System.out.println("\n[DBG] Response getStatusLine: " + response.getStatusLine());
+        //+ "[DBG] Response string: " + response.toString());
 
         BufferedReader reader = new BufferedReader(new InputStreamReader(response.getEntity().getContent(), "UTF-8"));
         StringBuilder body = new StringBuilder();
@@ -218,35 +217,35 @@ class Middle {
         HttpClient client = HttpClients.createDefault();
         HttpPost request = new HttpPost(url);
 
-        ArrayList<String> date = new ArrayList<>(1);
-        date.add(rack_date[0]);
-        for (int i = 0; i < count_iterations; i++) {
-            System.out.println("for1");
-            for (int j = 0; j < date.size(); j++) {
-                System.out.println("for2");
+        //ArrayList<String> date = new ArrayList<>(count_reminders);
+        //date.add(rack_date[0]);
+        for (int c = 1; c <= count_iterations; c++) {
+            System.out.println("[DBG] [date] iteration=" + c + "/" + count_iterations);
+            for (int j = 0; j < rack_date.length; j++) {
+                //System.out.println("for2");
                 for (int k = 0; k < rack_channel.length; k++) {
-                    System.out.println("for3");
-                    /////////////////////////////////////
-                    String json = Generate_json(date, count_reminders, "Add", reminderOffset);
+                    //System.out.println("for3");
+
+                    String json = Generate_json(rack_date[j], count_reminders, "Add", reminderOffset);
                     System.out.println(json);
-                    /////////////////////////////////////
+
                     StringEntity entity = new StringEntity(json);
                     request.setEntity(entity);
 
-                    //request.setHeader("Accept", "application/json");
-                    //request.setHeader("Content-type", "application/json");
+                    request.setHeader("Accept", "application/json");
+                    request.setHeader("Content-type", "application/json");
                     //request.setHeader("Content-type", "text/plain");
                     //request.setHeader("User-Agent","curl/7.58.0");
                     //request.setHeader("Charset", "UTF-8");
 
                     System.out.println("[DBG] Request string: " + request.toString()
                             //+ "\n[DBG] Request json string: "+json_add48
-                            + "\n[DBG] Request entity: " + request.getEntity()
-                            + "\n[DBG] [date]: iteration=" + i + "/" + count_iterations + ", date=" + rack_date[j] + ", channel=" + rack_channel[k]);
+                            + "\n[DBG] Request entity: " + request.getEntity());
+                            //+ "\n[DBG] [date]: iteration=" + c + "/" + count_iterations + ", date=" + rack_date[j] + ", channel=" + rack_channel[k]);
 
                     HttpResponse response = client.execute(request);
-                    System.out.println("\n[DBG] Response string: " + response.toString()
-                    + "\n[DBG] Response getStatusLine: " + response.getStatusLine());
+                    System.out.println("\n[DBG] Response getStatusLine: " + response.getStatusLine());
+                            //+ "[DBG] Response string: " + response.toString());
 
                     BufferedReader reader = new BufferedReader(new InputStreamReader(response.getEntity().getContent(), "UTF-8"));
                     StringBuilder body = new StringBuilder();
@@ -255,25 +254,12 @@ class Middle {
                     }
                     Thread.sleep(1000);
                     result = response.getStatusLine().getStatusCode();
-                    if (result != 200){
+                    if (result != 200) {
                         break;
                     }
                 }
             }
         }
-/*        ArrayList<String> date = new ArrayList<>(rack_date.length);
-        for (int i=0; i<rack_date.length; i++) {
-          date.add(Arrays.toString(rack_date) + " " + Arrays.toString(rack_time48));
-          System.out.println("date.get(i): " + date.get(i));
-        }
-*/
-/*        ArrayList<String> channel = new ArrayList<>(rack_channel.length);
-        for (int i=0; i<rack_channel.length; i++) {
-            channel.add(Arrays.toString(rack_channel));
-            System.out.println("date.get(i): " + channel.get(i));
-        }
-*/
-
         return result;
     }
 
@@ -287,143 +273,29 @@ class Middle {
                 + "date count=" + rack_date.length + ", "
                 + "channel count=" + rack_channel.length);
 
-/*        String json_delete48_add48 = "{\"deviceId\":\"" + macaddress + "\",\"reminders\":[" +
-                "{\"operation\":\"Delete\",\"reminderChannelNumber\":" + channel + ",\"reminderProgramStart\":\"" + yyyymmdd + " 00:00\",\"reminderProgramId\":0,\"reminderOffset\":" + reminderOffset + "}," +
-                "{\"operation\":\"Delete\",\"reminderChannelNumber\":" + channel + ",\"reminderProgramStart\":\"" + yyyymmdd + " 00:30\",\"reminderProgramId\":0,\"reminderOffset\":" + reminderOffset + "}," +
-                "{\"operation\":\"Delete\",\"reminderChannelNumber\":" + channel + ",\"reminderProgramStart\":\"" + yyyymmdd + " 01:00\",\"reminderProgramId\":0,\"reminderOffset\":" + reminderOffset + "}," +
-                "{\"operation\":\"Delete\",\"reminderChannelNumber\":" + channel + ",\"reminderProgramStart\":\"" + yyyymmdd + " 01:30\",\"reminderProgramId\":0,\"reminderOffset\":" + reminderOffset + "}," +
-                "{\"operation\":\"Delete\",\"reminderChannelNumber\":" + channel + ",\"reminderProgramStart\":\"" + yyyymmdd + " 02:00\",\"reminderProgramId\":0,\"reminderOffset\":" + reminderOffset + "}," +
-                "{\"operation\":\"Delete\",\"reminderChannelNumber\":" + channel + ",\"reminderProgramStart\":\"" + yyyymmdd + " 02:30\",\"reminderProgramId\":0,\"reminderOffset\":" + reminderOffset + "}," +
-                "{\"operation\":\"Delete\",\"reminderChannelNumber\":" + channel + ",\"reminderProgramStart\":\"" + yyyymmdd + " 03:00\",\"reminderProgramId\":0,\"reminderOffset\":" + reminderOffset + "}," +
-                "{\"operation\":\"Delete\",\"reminderChannelNumber\":" + channel + ",\"reminderProgramStart\":\"" + yyyymmdd + " 03:30\",\"reminderProgramId\":0,\"reminderOffset\":" + reminderOffset + "}," +
-                "{\"operation\":\"Delete\",\"reminderChannelNumber\":" + channel + ",\"reminderProgramStart\":\"" + yyyymmdd + " 04:00\",\"reminderProgramId\":0,\"reminderOffset\":" + reminderOffset + "}," +
-                "{\"operation\":\"Delete\",\"reminderChannelNumber\":" + channel + ",\"reminderProgramStart\":\"" + yyyymmdd + " 04:30\",\"reminderProgramId\":0,\"reminderOffset\":" + reminderOffset + "}," +
-                "{\"operation\":\"Delete\",\"reminderChannelNumber\":" + channel + ",\"reminderProgramStart\":\"" + yyyymmdd + " 05:00\",\"reminderProgramId\":0,\"reminderOffset\":" + reminderOffset + "}," +
-                "{\"operation\":\"Delete\",\"reminderChannelNumber\":" + channel + ",\"reminderProgramStart\":\"" + yyyymmdd + " 05:30\",\"reminderProgramId\":0,\"reminderOffset\":" + reminderOffset + "}," +
-                "{\"operation\":\"Delete\",\"reminderChannelNumber\":" + channel + ",\"reminderProgramStart\":\"" + yyyymmdd + " 06:00\",\"reminderProgramId\":0,\"reminderOffset\":" + reminderOffset + "}," +
-                "{\"operation\":\"Delete\",\"reminderChannelNumber\":" + channel + ",\"reminderProgramStart\":\"" + yyyymmdd + " 06:30\",\"reminderProgramId\":0,\"reminderOffset\":" + reminderOffset + "}," +
-                "{\"operation\":\"Delete\",\"reminderChannelNumber\":" + channel + ",\"reminderProgramStart\":\"" + yyyymmdd + " 07:00\",\"reminderProgramId\":0,\"reminderOffset\":" + reminderOffset + "}," +
-                "{\"operation\":\"Delete\",\"reminderChannelNumber\":" + channel + ",\"reminderProgramStart\":\"" + yyyymmdd + " 07:30\",\"reminderProgramId\":0,\"reminderOffset\":" + reminderOffset + "}," +
-                "{\"operation\":\"Delete\",\"reminderChannelNumber\":" + channel + ",\"reminderProgramStart\":\"" + yyyymmdd + " 08:00\",\"reminderProgramId\":0,\"reminderOffset\":" + reminderOffset + "}," +
-                "{\"operation\":\"Delete\",\"reminderChannelNumber\":" + channel + ",\"reminderProgramStart\":\"" + yyyymmdd + " 08:30\",\"reminderProgramId\":0,\"reminderOffset\":" + reminderOffset + "}," +
-                "{\"operation\":\"Delete\",\"reminderChannelNumber\":" + channel + ",\"reminderProgramStart\":\"" + yyyymmdd + " 09:00\",\"reminderProgramId\":0,\"reminderOffset\":" + reminderOffset + "}," +
-                "{\"operation\":\"Delete\",\"reminderChannelNumber\":" + channel + ",\"reminderProgramStart\":\"" + yyyymmdd + " 09:30\",\"reminderProgramId\":0,\"reminderOffset\":" + reminderOffset + "}," +
-                "{\"operation\":\"Delete\",\"reminderChannelNumber\":" + channel + ",\"reminderProgramStart\":\"" + yyyymmdd + " 10:00\",\"reminderProgramId\":0,\"reminderOffset\":" + reminderOffset + "}," +
-                "{\"operation\":\"Delete\",\"reminderChannelNumber\":" + channel + ",\"reminderProgramStart\":\"" + yyyymmdd + " 10:30\",\"reminderProgramId\":0,\"reminderOffset\":" + reminderOffset + "}," +
-                "{\"operation\":\"Delete\",\"reminderChannelNumber\":" + channel + ",\"reminderProgramStart\":\"" + yyyymmdd + " 11:00\",\"reminderProgramId\":0,\"reminderOffset\":" + reminderOffset + "}," +
-                "{\"operation\":\"Delete\",\"reminderChannelNumber\":" + channel + ",\"reminderProgramStart\":\"" + yyyymmdd + " 11:30\",\"reminderProgramId\":0,\"reminderOffset\":" + reminderOffset + "}," +
-                "{\"operation\":\"Delete\",\"reminderChannelNumber\":" + channel + ",\"reminderProgramStart\":\"" + yyyymmdd + " 12:00\",\"reminderProgramId\":0,\"reminderOffset\":" + reminderOffset + "}," +
-                "{\"operation\":\"Delete\",\"reminderChannelNumber\":" + channel + ",\"reminderProgramStart\":\"" + yyyymmdd + " 12:30\",\"reminderProgramId\":0,\"reminderOffset\":" + reminderOffset + "}," +
-                "{\"operation\":\"Delete\",\"reminderChannelNumber\":" + channel + ",\"reminderProgramStart\":\"" + yyyymmdd + " 13:00\",\"reminderProgramId\":0,\"reminderOffset\":" + reminderOffset + "}," +
-                "{\"operation\":\"Delete\",\"reminderChannelNumber\":" + channel + ",\"reminderProgramStart\":\"" + yyyymmdd + " 13:30\",\"reminderProgramId\":0,\"reminderOffset\":" + reminderOffset + "}," +
-                "{\"operation\":\"Delete\",\"reminderChannelNumber\":" + channel + ",\"reminderProgramStart\":\"" + yyyymmdd + " 14:00\",\"reminderProgramId\":0,\"reminderOffset\":" + reminderOffset + "}," +
-                "{\"operation\":\"Delete\",\"reminderChannelNumber\":" + channel + ",\"reminderProgramStart\":\"" + yyyymmdd + " 14:30\",\"reminderProgramId\":0,\"reminderOffset\":" + reminderOffset + "}," +
-                "{\"operation\":\"Delete\",\"reminderChannelNumber\":" + channel + ",\"reminderProgramStart\":\"" + yyyymmdd + " 15:00\",\"reminderProgramId\":0,\"reminderOffset\":" + reminderOffset + "}," +
-                "{\"operation\":\"Delete\",\"reminderChannelNumber\":" + channel + ",\"reminderProgramStart\":\"" + yyyymmdd + " 15:30\",\"reminderProgramId\":0,\"reminderOffset\":" + reminderOffset + "}," +
-                "{\"operation\":\"Delete\",\"reminderChannelNumber\":" + channel + ",\"reminderProgramStart\":\"" + yyyymmdd + " 16:00\",\"reminderProgramId\":0,\"reminderOffset\":" + reminderOffset + "}," +
-                "{\"operation\":\"Delete\",\"reminderChannelNumber\":" + channel + ",\"reminderProgramStart\":\"" + yyyymmdd + " 16:30\",\"reminderProgramId\":0,\"reminderOffset\":" + reminderOffset + "}," +
-                "{\"operation\":\"Delete\",\"reminderChannelNumber\":" + channel + ",\"reminderProgramStart\":\"" + yyyymmdd + " 17:00\",\"reminderProgramId\":0,\"reminderOffset\":" + reminderOffset + "}," +
-                "{\"operation\":\"Delete\",\"reminderChannelNumber\":" + channel + ",\"reminderProgramStart\":\"" + yyyymmdd + " 17:30\",\"reminderProgramId\":0,\"reminderOffset\":" + reminderOffset + "}," +
-                "{\"operation\":\"Delete\",\"reminderChannelNumber\":" + channel + ",\"reminderProgramStart\":\"" + yyyymmdd + " 18:00\",\"reminderProgramId\":0,\"reminderOffset\":" + reminderOffset + "}," +
-                "{\"operation\":\"Delete\",\"reminderChannelNumber\":" + channel + ",\"reminderProgramStart\":\"" + yyyymmdd + " 18:30\",\"reminderProgramId\":0,\"reminderOffset\":" + reminderOffset + "}," +
-                "{\"operation\":\"Delete\",\"reminderChannelNumber\":" + channel + ",\"reminderProgramStart\":\"" + yyyymmdd + " 19:00\",\"reminderProgramId\":0,\"reminderOffset\":" + reminderOffset + "}," +
-                "{\"operation\":\"Delete\",\"reminderChannelNumber\":" + channel + ",\"reminderProgramStart\":\"" + yyyymmdd + " 19:30\",\"reminderProgramId\":0,\"reminderOffset\":" + reminderOffset + "}," +
-                "{\"operation\":\"Delete\",\"reminderChannelNumber\":" + channel + ",\"reminderProgramStart\":\"" + yyyymmdd + " 20:00\",\"reminderProgramId\":0,\"reminderOffset\":" + reminderOffset + "}," +
-                "{\"operation\":\"Delete\",\"reminderChannelNumber\":" + channel + ",\"reminderProgramStart\":\"" + yyyymmdd + " 20:30\",\"reminderProgramId\":0,\"reminderOffset\":" + reminderOffset + "}," +
-                "{\"operation\":\"Delete\",\"reminderChannelNumber\":" + channel + ",\"reminderProgramStart\":\"" + yyyymmdd + " 21:00\",\"reminderProgramId\":0,\"reminderOffset\":" + reminderOffset + "}," +
-                "{\"operation\":\"Delete\",\"reminderChannelNumber\":" + channel + ",\"reminderProgramStart\":\"" + yyyymmdd + " 21:30\",\"reminderProgramId\":0,\"reminderOffset\":" + reminderOffset + "}," +
-                "{\"operation\":\"Delete\",\"reminderChannelNumber\":" + channel + ",\"reminderProgramStart\":\"" + yyyymmdd + " 22:00\",\"reminderProgramId\":0,\"reminderOffset\":" + reminderOffset + "}," +
-                "{\"operation\":\"Delete\",\"reminderChannelNumber\":" + channel + ",\"reminderProgramStart\":\"" + yyyymmdd + " 22:30\",\"reminderProgramId\":0,\"reminderOffset\":" + reminderOffset + "}," +
-                "{\"operation\":\"Delete\",\"reminderChannelNumber\":" + channel + ",\"reminderProgramStart\":\"" + yyyymmdd + " 23:00\",\"reminderProgramId\":0,\"reminderOffset\":" + reminderOffset + "}," +
-                "{\"operation\":\"Delete\",\"reminderChannelNumber\":" + channel + ",\"reminderProgramStart\":\"" + yyyymmdd + " 23:30\",\"reminderProgramId\":0,\"reminderOffset\":" + reminderOffset + "}," +
-                "{\"operation\":\"Add\",\"reminderChannelNumber\":" + channel + ",\"reminderProgramStart\":\"" + yyyymmdd + " 00:00\",\"reminderProgramId\":0,\"reminderOffset\":" + reminderOffset_new + "}," +
-                "{\"operation\":\"Add\",\"reminderChannelNumber\":" + channel + ",\"reminderProgramStart\":\"" + yyyymmdd + " 00:30\",\"reminderProgramId\":0,\"reminderOffset\":" + reminderOffset_new + "}," +
-                "{\"operation\":\"Add\",\"reminderChannelNumber\":" + channel + ",\"reminderProgramStart\":\"" + yyyymmdd + " 01:00\",\"reminderProgramId\":0,\"reminderOffset\":" + reminderOffset_new + "}," +
-                "{\"operation\":\"Add\",\"reminderChannelNumber\":" + channel + ",\"reminderProgramStart\":\"" + yyyymmdd + " 01:30\",\"reminderProgramId\":0,\"reminderOffset\":" + reminderOffset_new + "}," +
-                "{\"operation\":\"Add\",\"reminderChannelNumber\":" + channel + ",\"reminderProgramStart\":\"" + yyyymmdd + " 02:00\",\"reminderProgramId\":0,\"reminderOffset\":" + reminderOffset_new + "}," +
-                "{\"operation\":\"Add\",\"reminderChannelNumber\":" + channel + ",\"reminderProgramStart\":\"" + yyyymmdd + " 02:30\",\"reminderProgramId\":0,\"reminderOffset\":" + reminderOffset_new + "}," +
-                "{\"operation\":\"Add\",\"reminderChannelNumber\":" + channel + ",\"reminderProgramStart\":\"" + yyyymmdd + " 03:00\",\"reminderProgramId\":0,\"reminderOffset\":" + reminderOffset_new + "}," +
-                "{\"operation\":\"Add\",\"reminderChannelNumber\":" + channel + ",\"reminderProgramStart\":\"" + yyyymmdd + " 03:30\",\"reminderProgramId\":0,\"reminderOffset\":" + reminderOffset_new + "}," +
-                "{\"operation\":\"Add\",\"reminderChannelNumber\":" + channel + ",\"reminderProgramStart\":\"" + yyyymmdd + " 04:00\",\"reminderProgramId\":0,\"reminderOffset\":" + reminderOffset_new + "}," +
-                "{\"operation\":\"Add\",\"reminderChannelNumber\":" + channel + ",\"reminderProgramStart\":\"" + yyyymmdd + " 04:30\",\"reminderProgramId\":0,\"reminderOffset\":" + reminderOffset_new + "}," +
-                "{\"operation\":\"Add\",\"reminderChannelNumber\":" + channel + ",\"reminderProgramStart\":\"" + yyyymmdd + " 05:00\",\"reminderProgramId\":0,\"reminderOffset\":" + reminderOffset_new + "}," +
-                "{\"operation\":\"Add\",\"reminderChannelNumber\":" + channel + ",\"reminderProgramStart\":\"" + yyyymmdd + " 05:30\",\"reminderProgramId\":0,\"reminderOffset\":" + reminderOffset_new + "}," +
-                "{\"operation\":\"Add\",\"reminderChannelNumber\":" + channel + ",\"reminderProgramStart\":\"" + yyyymmdd + " 06:00\",\"reminderProgramId\":0,\"reminderOffset\":" + reminderOffset_new + "}," +
-                "{\"operation\":\"Add\",\"reminderChannelNumber\":" + channel + ",\"reminderProgramStart\":\"" + yyyymmdd + " 06:30\",\"reminderProgramId\":0,\"reminderOffset\":" + reminderOffset_new + "}," +
-                "{\"operation\":\"Add\",\"reminderChannelNumber\":" + channel + ",\"reminderProgramStart\":\"" + yyyymmdd + " 07:00\",\"reminderProgramId\":0,\"reminderOffset\":" + reminderOffset_new + "}," +
-                "{\"operation\":\"Add\",\"reminderChannelNumber\":" + channel + ",\"reminderProgramStart\":\"" + yyyymmdd + " 07:30\",\"reminderProgramId\":0,\"reminderOffset\":" + reminderOffset_new + "}," +
-                "{\"operation\":\"Add\",\"reminderChannelNumber\":" + channel + ",\"reminderProgramStart\":\"" + yyyymmdd + " 08:00\",\"reminderProgramId\":0,\"reminderOffset\":" + reminderOffset_new + "}," +
-                "{\"operation\":\"Add\",\"reminderChannelNumber\":" + channel + ",\"reminderProgramStart\":\"" + yyyymmdd + " 08:30\",\"reminderProgramId\":0,\"reminderOffset\":" + reminderOffset_new + "}," +
-                "{\"operation\":\"Add\",\"reminderChannelNumber\":" + channel + ",\"reminderProgramStart\":\"" + yyyymmdd + " 09:00\",\"reminderProgramId\":0,\"reminderOffset\":" + reminderOffset_new + "}," +
-                "{\"operation\":\"Add\",\"reminderChannelNumber\":" + channel + ",\"reminderProgramStart\":\"" + yyyymmdd + " 09:30\",\"reminderProgramId\":0,\"reminderOffset\":" + reminderOffset_new + "}," +
-                "{\"operation\":\"Add\",\"reminderChannelNumber\":" + channel + ",\"reminderProgramStart\":\"" + yyyymmdd + " 10:00\",\"reminderProgramId\":0,\"reminderOffset\":" + reminderOffset_new + "}," +
-                "{\"operation\":\"Add\",\"reminderChannelNumber\":" + channel + ",\"reminderProgramStart\":\"" + yyyymmdd + " 10:30\",\"reminderProgramId\":0,\"reminderOffset\":" + reminderOffset_new + "}," +
-                "{\"operation\":\"Add\",\"reminderChannelNumber\":" + channel + ",\"reminderProgramStart\":\"" + yyyymmdd + " 11:00\",\"reminderProgramId\":0,\"reminderOffset\":" + reminderOffset_new + "}," +
-                "{\"operation\":\"Add\",\"reminderChannelNumber\":" + channel + ",\"reminderProgramStart\":\"" + yyyymmdd + " 11:30\",\"reminderProgramId\":0,\"reminderOffset\":" + reminderOffset_new + "}," +
-                "{\"operation\":\"Add\",\"reminderChannelNumber\":" + channel + ",\"reminderProgramStart\":\"" + yyyymmdd + " 12:00\",\"reminderProgramId\":0,\"reminderOffset\":" + reminderOffset_new + "}," +
-                "{\"operation\":\"Add\",\"reminderChannelNumber\":" + channel + ",\"reminderProgramStart\":\"" + yyyymmdd + " 12:30\",\"reminderProgramId\":0,\"reminderOffset\":" + reminderOffset_new + "}," +
-                "{\"operation\":\"Add\",\"reminderChannelNumber\":" + channel + ",\"reminderProgramStart\":\"" + yyyymmdd + " 13:00\",\"reminderProgramId\":0,\"reminderOffset\":" + reminderOffset_new + "}," +
-                "{\"operation\":\"Add\",\"reminderChannelNumber\":" + channel + ",\"reminderProgramStart\":\"" + yyyymmdd + " 13:30\",\"reminderProgramId\":0,\"reminderOffset\":" + reminderOffset_new + "}," +
-                "{\"operation\":\"Add\",\"reminderChannelNumber\":" + channel + ",\"reminderProgramStart\":\"" + yyyymmdd + " 14:00\",\"reminderProgramId\":0,\"reminderOffset\":" + reminderOffset_new + "}," +
-                "{\"operation\":\"Add\",\"reminderChannelNumber\":" + channel + ",\"reminderProgramStart\":\"" + yyyymmdd + " 14:30\",\"reminderProgramId\":0,\"reminderOffset\":" + reminderOffset_new + "}," +
-                "{\"operation\":\"Add\",\"reminderChannelNumber\":" + channel + ",\"reminderProgramStart\":\"" + yyyymmdd + " 15:00\",\"reminderProgramId\":0,\"reminderOffset\":" + reminderOffset_new + "}," +
-                "{\"operation\":\"Add\",\"reminderChannelNumber\":" + channel + ",\"reminderProgramStart\":\"" + yyyymmdd + " 15:30\",\"reminderProgramId\":0,\"reminderOffset\":" + reminderOffset_new + "}," +
-                "{\"operation\":\"Add\",\"reminderChannelNumber\":" + channel + ",\"reminderProgramStart\":\"" + yyyymmdd + " 16:00\",\"reminderProgramId\":0,\"reminderOffset\":" + reminderOffset_new + "}," +
-                "{\"operation\":\"Add\",\"reminderChannelNumber\":" + channel + ",\"reminderProgramStart\":\"" + yyyymmdd + " 16:30\",\"reminderProgramId\":0,\"reminderOffset\":" + reminderOffset_new + "}," +
-                "{\"operation\":\"Add\",\"reminderChannelNumber\":" + channel + ",\"reminderProgramStart\":\"" + yyyymmdd + " 17:00\",\"reminderProgramId\":0,\"reminderOffset\":" + reminderOffset_new + "}," +
-                "{\"operation\":\"Add\",\"reminderChannelNumber\":" + channel + ",\"reminderProgramStart\":\"" + yyyymmdd + " 17:30\",\"reminderProgramId\":0,\"reminderOffset\":" + reminderOffset_new + "}," +
-                "{\"operation\":\"Add\",\"reminderChannelNumber\":" + channel + ",\"reminderProgramStart\":\"" + yyyymmdd + " 18:00\",\"reminderProgramId\":0,\"reminderOffset\":" + reminderOffset_new + "}," +
-                "{\"operation\":\"Add\",\"reminderChannelNumber\":" + channel + ",\"reminderProgramStart\":\"" + yyyymmdd + " 18:30\",\"reminderProgramId\":0,\"reminderOffset\":" + reminderOffset_new + "}," +
-                "{\"operation\":\"Add\",\"reminderChannelNumber\":" + channel + ",\"reminderProgramStart\":\"" + yyyymmdd + " 19:00\",\"reminderProgramId\":0,\"reminderOffset\":" + reminderOffset_new + "}," +
-                "{\"operation\":\"Add\",\"reminderChannelNumber\":" + channel + ",\"reminderProgramStart\":\"" + yyyymmdd + " 19:30\",\"reminderProgramId\":0,\"reminderOffset\":" + reminderOffset_new + "}," +
-                "{\"operation\":\"Add\",\"reminderChannelNumber\":" + channel + ",\"reminderProgramStart\":\"" + yyyymmdd + " 20:00\",\"reminderProgramId\":0,\"reminderOffset\":" + reminderOffset_new + "}," +
-                "{\"operation\":\"Add\",\"reminderChannelNumber\":" + channel + ",\"reminderProgramStart\":\"" + yyyymmdd + " 20:30\",\"reminderProgramId\":0,\"reminderOffset\":" + reminderOffset_new + "}," +
-                "{\"operation\":\"Add\",\"reminderChannelNumber\":" + channel + ",\"reminderProgramStart\":\"" + yyyymmdd + " 21:00\",\"reminderProgramId\":0,\"reminderOffset\":" + reminderOffset_new + "}," +
-                "{\"operation\":\"Add\",\"reminderChannelNumber\":" + channel + ",\"reminderProgramStart\":\"" + yyyymmdd + " 21:30\",\"reminderProgramId\":0,\"reminderOffset\":" + reminderOffset_new + "}," +
-                "{\"operation\":\"Add\",\"reminderChannelNumber\":" + channel + ",\"reminderProgramStart\":\"" + yyyymmdd + " 22:00\",\"reminderProgramId\":0,\"reminderOffset\":" + reminderOffset_new + "}," +
-                "{\"operation\":\"Add\",\"reminderChannelNumber\":" + channel + ",\"reminderProgramStart\":\"" + yyyymmdd + " 22:30\",\"reminderProgramId\":0,\"reminderOffset\":" + reminderOffset_new + "}," +
-                "{\"operation\":\"Add\",\"reminderChannelNumber\":" + channel + ",\"reminderProgramStart\":\"" + yyyymmdd + " 23:00\",\"reminderProgramId\":0,\"reminderOffset\":" + reminderOffset_new + "}," +
-                "{\"operation\":\"Add\",\"reminderChannelNumber\":" + channel + ",\"reminderProgramStart\":\"" + yyyymmdd + " 23:30\",\"reminderProgramId\":0,\"reminderOffset\":" + reminderOffset_new + "}" +
-                "]}";
-*/
         String url = "http://" + ams_ip + ":" + ams_port + postfix_change;
         HttpClient client = HttpClients.createDefault();
         HttpPost request = new HttpPost(url);
 
-        StringEntity entity = new StringEntity(Generate_json(rack_date, count_reminders, "Delete", reminderOffset));
+        StringEntity entity = new StringEntity(Generate_json(rack_date[0], count_reminders, "Delete", reminderOffset));
         request.setEntity(entity);
 
-        ArrayList<String> date = new ArrayList<>();
-        for (int i=0; i<rack_date.length; i++) {
-            date.add(Arrays.toString(rack_date) + " " + Arrays.toString(rack_time48));
-            System.out.println("date.get(i): " + date.get(i));
-        }
-        ArrayList<String> channel = new ArrayList<>();
-        for (int i=0; i<rack_channel.length; i++) {
-            channel.add(Arrays.toString(rack_channel));
-            System.out.println("date.get(i): " + channel.get(i));
-        }
-
-        //System.out.println(startmessage);
-        for (int i = 1; i <= count_iterations; i++) {
-            System.out.println("for1");
-            for (int j=0; j<=date.size(); j++) {
-                System.out.println("for2");
-                for (int k=0; k<=channel.size(); k++) {
-                    System.out.println("for3");
-                    //request.setHeader("Accept", "application/json");
+        for (int c = 1; c <= count_iterations; c++) {
+            for (int j = 0; j <= rack_date.length; j++) {
+                for (int k = 0; k <= rack_channel.length; k++) {
+                    request.setHeader("Accept", "application/json");
                     //request.setHeader("Content-type", "application/json");
                     //request.setHeader("Content-type", "text/plain");
-                    request.setHeader("charset", "UTF-8");
+                    //request.setHeader("charset", "UTF-8");
 
                     System.out.println("[DBG] Request string: " + request.toString()
                             //+ "\n[DBG] Request json string: " + json_delete48_add48
                             + "\n[DBG] Request entity: " + request.getEntity()
-                            + "\n[DBG] date: Edit(delete 48 + add 48) with Offset=" + reminderOffset + ", offset_new=" + reminderOffset_new + ", iteration=" + i + "/" + count_iterations + ", macaddress=" + macaddress + ", data=" + date.get(j) + ", channel=" + channel.get(k));
+                            + "\n[DBG] date: Edit(delete48 + add48) reminderOffset=" + reminderOffset + ", reminderOffset_new=" + reminderOffset_new + ", iteration=" + c + "/" + count_iterations + ", macaddress=" + macaddress + ", data=" + rack_date[j] + ", channel=" + rack_channel[k]);
 
                     HttpResponse response = client.execute(request);
-                    //System.out.println("\n[DBG] Response string: " + response.toString());
-                    //+ "\n[DBG] Response getStatusLine: " + response.getStatusLine());
+                    System.out.println("\n[DBG] Response getStatusLine: " + response.getStatusLine());
+                    //+ "[DBG] Response string: " + response.toString());
 
                     BufferedReader reader = new BufferedReader(new InputStreamReader(response.getEntity().getContent(), "UTF-8"));
                     StringBuilder body = new StringBuilder();
@@ -501,41 +373,27 @@ class Middle {
         HttpPost request = new HttpPost(url);
 
         //StringEntity entity = new StringEntity(json_delete48);
-        StringEntity entity = new StringEntity(Generate_json(rack_date,5, "Delete", 0));
+        StringEntity entity = new StringEntity(Generate_json(rack_date[0], 5, "Delete", 0));
         //StringEntity entity = new StringEntity(new FileReader("src/main/resources/json_delete48.json").toString());
         request.setEntity(entity);
 
-        ArrayList<String> date = new ArrayList<>();
-        for (int i=0; i<rack_date.length; i++) {
-            date.add(Arrays.toString(rack_date) + " " + Arrays.toString(rack_time48));
-            System.out.println("date.get(i): " + date.get(i));
-        }
-        ArrayList<String> channel = new ArrayList<>();
-        for (int i=0; i<rack_channel.length; i++) {
-            channel.add(Arrays.toString(rack_channel));
-            System.out.println("date.get(i): " + channel.get(i));
-        }
-
         //System.out.println(startmessage);
-        for (int i = 1; i <= count_iterations; i++) {
-            System.out.println("for1");
-            for (int j=0; j<=date.size(); j++) {
-                System.out.println("for2");
-                for (int k=0; k<=channel.size(); k++) {
-                    System.out.println("for3");
+        for (int c = 1; c <= count_iterations; c++) {
+            for (int j = 0; j <= rack_date.length; j++) {
+                for (int k = 0; k <= rack_channel.length; k++) {
                     request.setHeader("Accept", "application/json");
                     request.setHeader("Content-type", "application/json");
                     //request.setHeader("Content-type", "text/plain");
-                    request.setHeader("charset", "UTF-8");
+                    //request.setHeader("charset", "UTF-8");
 
                     System.out.println("[DBG] Request string: " + request.toString()
                             //+ "\n[DBG] Request json string: " + json_delete48
                             + "\n[DBG] Request entity: " + request.getEntity()
-                            + "\n[DBG] date: Delete 48rems with Offset=" + reminderOffset + ", iteration=" + i + "/" + count_iterations + ", macaddress=" + macaddress + ", date=" + date.get(j) + ", channel=" + channel.get(k));
+                            + "\n[DBG] date: Delete rems with reminderOffset=" + reminderOffset + ", iteration=" + c + "/" + count_iterations + ", macaddress=" + macaddress + ", date=" + rack_date[j] + ", channel=" + rack_channel[k]);
 
                     HttpResponse response = client.execute(request);
-                    //System.out.println("\n[DBG] Response string: " + response.toString());
-                    //+ "\n[DBG] Response getStatusLine: " + response.getStatusLine());
+                    System.out.println("\n[DBG] Response getStatusLine: " + response.getStatusLine());
+                    //+ "[DBG] Response string: " + response.toString());
 
                     BufferedReader reader = new BufferedReader(new InputStreamReader(response.getEntity().getContent(), "UTF-8"));
                     StringBuilder body = new StringBuilder();
@@ -556,41 +414,24 @@ class Middle {
         return result;
     }
 
-    String Generate_json(ArrayList date, int count_remindres, String operation, int reminderOffset){
-        System.out.println("[DBG] [date] Generate_json: with count_reminders=" + count_remindres + ", " +
+    private String Generate_json(String date, int count_remindres, String operation, int reminderOffset) {
+        System.out.println("[DBG] [date] Generate_json: with date=" + date + ", " +
+                "count_reminders=" + count_remindres + ", " +
                 "operation=" + operation + ", " +
                 "reminderOffset=" + reminderOffset);
 
         int reminderChannelNumber = 2;
+        int reminderProgramId = 0;
 
         //String json1 = "{\"deviceId\":" + macaddress + ",\"reminders\":[{\"operation\":" + operation + ", \"reminderChannelNumber\":" + reminderChannelNumber + ", \"reminderProgramStart\":" + reminderProgramStart + ", \"reminderProgramId\":" + reminderProgramId + ", \"reminderOffset\":" + reminderOffset + "}]}";
         //String json2 = "{\"deviceId\":" + macaddress + ",\"reminders\":[{\"operation\": \"Delete\", \"reminderChannelNumber\":" + reminderChannelNumber + ", \"reminderProgramStart\":" + reminderProgramStart + ", \"reminderProgramId\":" + reminderProgramId + ", \"reminderOffset\":" + reminderOffset + "},{\"operation\":" + operation + ", \"reminderChannelNumber\":" + reminderChannelNumber + ", \"reminderProgramStart\":" + reminderProgramStart + ", \"reminderProgramId\":" + reminderProgramId + ", \"reminderOffset\":" + reminderOffset + "}]}";
 
-        //ArrayList hhmm_list = new ArrayList();
-        //hhmm_list.addAll(Arrays.asList(hhmm));
-        //System.out.println("[DBG] hhmm_list: " + hhmm_list);
 
-        JSONObject resultJson = new JSONObject();
-        JSONObject object = new JSONObject();
-        JSONArray array = new JSONArray();
-
-
-        object.put("operation", operation);
-        object.put("reminderChannelNumber", reminderChannelNumber);
-        //obj.put("reminderProgramStart", reminderProgramStart2);
-        //String result = "2018-12-31 " + hhmm[i];
-
-        //String[] xxx = {};
-        //ArrayList<String> date = new ArrayList<>(count_remindres);
-        for (int i = 0; i < 10; i++) {
-            System.out.println("!!!: " + date.get(i) + " !!! " + rack_time48[i]);
-            //date.add(rack_date[0] + " " + rack_time48[i]);
-        }
-/*        System.out.println("date.size(): " + date.size());
+/*        ArrayList<String> date = new ArrayList<>(count_remindres);
+        System.out.println("date.size(): " + date.size());
         for (int i = 0; i < date.size(); i++) {
             System.out.println("date.get(i): " + date.get(i));
         }
-        System.out.println("\n\n");
 */
 /*        ArrayList<String> channel = new ArrayList<>();
         for (int i=0; i<rack_channel.length; i++) {
@@ -598,16 +439,32 @@ class Middle {
             System.out.println("date.get(i): " + channel.get(i));
         }
 */
-        for (int i = 0; i < count_remindres; i++){
-            object.put("reminderProgramStart", date.get(i));
-            array.add(object);
-        }
-        object.put("reminderProgramId", reminderProgramId);
-        object.put("reminderOffset", reminderOffset);
-
+        JSONObject resultJson = new JSONObject();
         resultJson.put("deviceId", macaddress);
+
+        JSONArray array = new JSONArray();
         resultJson.put("reminders", array);
-        /*
+
+        for (int i = 0; i < count_remindres; i++) {
+            JSONObject object = new JSONObject();
+            object.put("operation", operation);
+            object.put("reminderChannelNumber", reminderChannelNumber);
+            object.put("reminderProgramId", reminderProgramId);
+            object.put("reminderOffset", reminderOffset);
+            object.put("reminderProgramStart", date + " " + rack_time48[i]);
+            array.add(object);
+            //System.out.println("date: " + date + " " + rack_time48[i]);
+        }
+        return resultJson.toJSONString();
+    }
+
+    private void Generate_json2(String date, int count_remindres, String operation, int reminderOffset) {
+        System.out.println("[DBG] [date] Generate_json: with date=" + date + ", " +
+                "count_reminders=" + count_remindres + ", " +
+                "operation=" + operation + ", " +
+                "reminderOffset=" + reminderOffset);
+
+         /*
         //WORKING parsing from json_string to Class:
         Gson g = new Gson();
         Reminder reminder = g.fromJson(json_add2, Reminder.class);
@@ -663,6 +520,5 @@ class Middle {
         String ja = jo.get("reminders").getAsJsonArray().toString();
         System.out.println("2 only jsonarray: " + ja);
 */
-        return resultJson.toJSONString();
     }
 }
