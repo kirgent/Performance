@@ -37,6 +37,12 @@ public class Test_reminder {
         String ams_ip = ams_ip_by_default;
 
 
+        String charterapi_ = "http://spec.partnerapi.engprod-charter.net/api/pub/networksettingsmiddle/ns/settings";
+        String charterapi_b = "http://specb.partnerapi.engprod-charter.net/api/pub/networksettingsmiddle/ns/settings";
+        String charterapi_c = "http://specc.partnerapi.engprod-charter.net/api/pub/networksettingsmiddle/ns/settings";
+        String charterapi_d = "http://specd.partnerapi.engprod-charter.net/api/pub/networksettingsmiddle/ns/settings";
+        String charterapi = charterapi_b;
+
 
         String macaddress = "";
         String operation = "";
@@ -141,9 +147,9 @@ public class Test_reminder {
         System.out.println("[DBG] used macaddress=" + macaddress + ", operation=" + operation + ", param="+param);
         switch (operation){
             case "Check":
-            case "check": request.Check_registration(macaddress); break;
+            case "check": request.Check_registration(macaddress, charterapi); break;
             case "Change":
-            case "change": request.Change_registration(macaddress, ams_ip); break;
+            case "change": request.Change_registration(macaddress, charterapi, ams_ip); break;
             case "Purge":
             case "purge": request.Purge(macaddress); break;
             case "Add":
@@ -154,7 +160,7 @@ public class Test_reminder {
             case "edit": request.Edit(macaddress, count_reminders, reminderOffset, reminderOffset_new); break;
             case "All":
             case "all": request.All(macaddress, count_reminders, reminderOffset, reminderOffset_new); break;
-            default: request.Check_registration(macaddress);
+            default: request.Check_registration(macaddress, charterapi);
         }
     }
 }

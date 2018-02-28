@@ -49,12 +49,7 @@ class Middle {
     private static String postfix_change = "/ams/Reminders?req=ChangeReminders";
 
 
-    private static String charterapi_ = "http://spec.partnerapi.engprod-charter.net/api/pub/networksettingsmiddle/ns/settings";
-    private static String charterapi_b = "http://specb.partnerapi.engprod-charter.net/api/pub/networksettingsmiddle/ns/settings";
-    private static String charterapi_c = "http://specc.partnerapi.engprod-charter.net/api/pub/networksettingsmiddle/ns/settings";
-    private static String charterapi_d = "http://specd.partnerapi.engprod-charter.net/api/pub/networksettingsmiddle/ns/settings";
-    //"http://specd.partnerapi.engprod-charter.net/api/pub/networksettingsmiddle/ns/settings?requestor=AMS";
-    String charterapi = charterapi_b;
+
 
     private String ams_ip = "172.30.81.4";
     private int ams_port = 8080;
@@ -81,7 +76,7 @@ class Middle {
 
 
     int Purge(String macaddress) throws IOException {
-        System.out.println("[DBG] [date] Purge:");
+        System.out.println("[DBG] [date] Purge: for macaddress=" + macaddress);
         String url = "http://" + ams_ip + ":" + ams_port + postfix_change;
         HttpClient client = HttpClients.createDefault();
         HttpPost request = new HttpPost(url);
@@ -90,17 +85,17 @@ class Middle {
         StringEntity entity = new StringEntity(json_purge);
         request.setEntity(entity);
 
-        //request.setHeader("Accept", "application/json");
-        //request.setHeader("Content-type", "application/json");
+        request.setHeader("Accept", "application/json");
+        request.setHeader("Content-type", "application/json");
         //request.setHeader("Content-type", "text/plain");
-        request.setHeader("charset", "UTF-8");
+        //request.setHeader("User-Agent","curl/7.58.0");
+        //request.setHeader("Charset", "UTF-8");
 
-        System.out.println("[DBG] Request string: " + request.toString()
-                //+ "[DBG] Request json string: "+json_purge
-                + "[DBG] Request entity: " + request.getEntity());
+        System.out.println("[DBG] Request string: " + request);
+                //+ "\n[DBG] Request entity: " + request.getEntity());
 
         HttpResponse response = client.execute(request);
-        System.out.println("\n[DBG] Response getStatusLine: " + response.getStatusLine());
+        System.out.println("[DBG] Response getStatusLine: " + response.getStatusLine());
         //+ "[DBG] Response string: " + response.toString());
 
         BufferedReader reader = new BufferedReader(new InputStreamReader(response.getEntity().getContent(), "UTF-8"));
@@ -129,9 +124,9 @@ class Middle {
         return response.getStatusLine().getStatusCode();
     }
 
-    int Check_registration(String macaddress) throws IOException {
-        System.out.println("[DBG] [date] Check_registration:"
-                + "\n[DBG] used charterapi: " + charterapi);
+    int Check_registration(String macaddress, String charterapi) throws IOException {
+        System.out.println("[DBG] [date] Check_registration:");
+//                + "\n[DBG] used charterapi: " + charterapi);
 
         String postfix = "/amsIp/";
         String url = charterapi + postfix + macaddress;
@@ -141,13 +136,13 @@ class Middle {
         //request.setHeader("Content-type", "text/plain");
         //request.setHeader("Content-type", "application/json");
         //request.setHeader("charset", "utf-8");
-        request.setHeader("User-Agent", "curl/7.58.0");
+        //request.setHeader("User-Agent", "curl/7.58.0");
         //request.setHeader("Charset", "UTF-8");
-        System.out.println("[DBG] Request string: " + request.toString());
-        //+"\n[DBG] Request getRequestLine: "+request.getRequestLine());
+        System.out.println("[DBG] Request string: " + request);
+                //+"\n[DBG] Request getRequestLine: "+request.getRequestLine());
 
         HttpResponse response = client.execute(request);
-        System.out.println("\n[DBG] Response getStatusLine: " + response.getStatusLine());
+        System.out.println("[DBG] Response getStatusLine: " + response.getStatusLine());
         //+ "[DBG] Response string: " + response.toString());
 
         BufferedReader reader = new BufferedReader(new InputStreamReader(response.getEntity().getContent(), "UTF-8"));
@@ -164,28 +159,30 @@ class Middle {
         return response.getStatusLine().getStatusCode();
     }
 
-    int Change_registration(String macaddress, String ams_ip) throws IOException {
-        System.out.println("[DBG] [date] Change_registration:"
-                + "\n[DBG] used charterapi: " + charterapi
-                + "\n[DBG] used ams: " + ams_ip + ":" + ams_port);
+    int Change_registration(String macaddress, String charterapi, String ams_ip) throws IOException {
+        System.out.println("[DBG] [date] Change_registration:");
+                //+ "\n[DBG] used charterapi: " + charterapi
+                //+ "\n[DBG] used ams:port " + ams_ip + ":" + ams_port);
 
         String postfix = "?requestor=AMS";
         String url = charterapi + postfix;
         HttpClient client = HttpClients.createDefault();
         HttpPost request = new HttpPost(url);
 
-        String json_change = "{\"setting\":{\"groups\":[{\"options\":[],\"id\":\"STB" + macaddress + "\",\"type\":\"device-stb\",\"amsid\":\"" + ams_ip + "\"}]}}";
-        StringEntity entity = new StringEntity(json_change);
+        String json_change_registration = "{\"setting\":{\"groups\":[{\"options\":[],\"id\":\"STB" + macaddress + "\",\"type\":\"device-stb\",\"amsid\":\"" + ams_ip + "\"}]}}";
+        String json_purge = "{\"deviceId\":" + macaddress + ",\"reminders\":[{\"operation\":\"Purge\"}]}";
+
+        StringEntity entity = new StringEntity(json_change_registration);
         request.setEntity(entity);
         request.setHeader("Accept", "application/json");
         request.setHeader("Content-type", "application/json");
         System.out.println("[DBG] Request string: " + request
-                + "\n[DBG] Request json string: " + json_change
-                + "\n[DBG] Request entity: " + request.getEntity()
-                + "\n[DBG] Request headers: " + Arrays.toString(request.getAllHeaders()));
+                + "\n[DBG] Request json string: " + json_change_registration);
+                //+ "\n[DBG] Request entity: " + request.getEntity()
+                //+ "\n[DBG] Request headers: " + request.getAllHeaders());
 
         HttpResponse response = client.execute(request);
-        System.out.println("\n[DBG] Response getStatusLine: " + response.getStatusLine());
+        System.out.println("[DBG] Response getStatusLine: " + response.getStatusLine());
         //+ "[DBG] Response string: " + response.toString());
 
         BufferedReader reader = new BufferedReader(new InputStreamReader(response.getEntity().getContent(), "UTF-8"));
@@ -212,7 +209,65 @@ class Middle {
                 + "data count=" + rack_date.length + ", "
                 + "channel count=" + rack_channel.length);
 
-        String postfix_change = "/ams/Reminders?req=ChangeReminders";
+        String url = "http://" + ams_ip + ":" + ams_port + postfix_change;
+        HttpClient client = HttpClients.createDefault();
+        HttpPost request = new HttpPost(url);
+
+        for (int c = 1; c <= count_iterations; c++) {
+            System.out.println("[DBG] [date] iteration=" + c + "/" + count_iterations);
+            for (int j = 0; j < rack_date.length; j++) {
+                //System.out.println("for2");
+                for (int k = 0; k < rack_channel.length; k++) {
+                    //System.out.println("for3");
+
+                    String json = Generate_json(macaddress, rack_date[j], rack_channel[k], count_reminders, "Add", reminderOffset);
+                    System.out.println(json);
+
+                    StringEntity entity = new StringEntity(json);
+                    request.setEntity(entity);
+
+                    request.setHeader("Accept", "application/json");
+                    request.setHeader("Content-type", "application/json");
+                    //request.setHeader("Content-type", "text/plain");
+                    //request.setHeader("User-Agent","curl/7.58.0");
+                    //request.setHeader("Charset", "UTF-8");
+
+                    System.out.println("[DBG] Request string: " + request
+                            //+ "\n[DBG] Request entity: " + request.getEntity());
+                            + "\n[DBG] [date]: iteration=" + c + "/" + count_iterations + ", date=" + rack_date[j] + ", channel=" + rack_channel[k]);
+
+                    HttpResponse response = client.execute(request);
+                    System.out.println("[DBG] Response getStatusLine: " + response.getStatusLine());
+                            //+ "[DBG] Response string: " + response.toString());
+
+                    BufferedReader reader = new BufferedReader(new InputStreamReader(response.getEntity().getContent(), "UTF-8"));
+                    StringBuilder body = new StringBuilder();
+                    for (String line = null; (line = reader.readLine()) != null; ) {
+                        System.out.println("[DBG] Response body: " + body.append(line).append("\n"));
+                    }
+                    Thread.sleep(1000);
+                    result = response.getStatusLine().getStatusCode();
+                    if (result != 200) {
+                        break;
+                    }
+                }
+                if (result != 200) {
+                    break;
+                }
+            }
+        }
+        return result;
+    }
+
+    int Add_new(String macaddress, int count_reminders, int reminderOffset) throws IOException, InterruptedException {
+        System.out.println("[DBG] [date] Add: for macaddress=" + macaddress + ", "
+                + "count_reminders=" + count_reminders + ", "
+                + "count_iterations=" + count_iterations + ", "
+                + "reminderOffset=" + reminderOffset + ", "
+                + "data count=" + rack_date.length + ", "
+                + "channel count=" + rack_channel.length);
+
+        String postfix_change = "/ams/Reminders?req=add";
         String url = "http://" + ams_ip + ":" + ams_port + postfix_change;
         HttpClient client = HttpClients.createDefault();
         HttpPost request = new HttpPost(url);
@@ -226,7 +281,7 @@ class Middle {
                 for (int k = 0; k < rack_channel.length; k++) {
                     //System.out.println("for3");
 
-                    String json = Generate_json(rack_date[j], count_reminders, "Add", reminderOffset);
+                    String json = Generate_json(macaddress, rack_date[j], rack_channel[k], count_reminders, "Add", reminderOffset);
                     System.out.println(json);
 
                     StringEntity entity = new StringEntity(json);
@@ -238,14 +293,14 @@ class Middle {
                     //request.setHeader("User-Agent","curl/7.58.0");
                     //request.setHeader("Charset", "UTF-8");
 
-                    System.out.println("[DBG] Request string: " + request.toString()
+                    System.out.println("[DBG] Request string: " + request
                             //+ "\n[DBG] Request json string: "+json_add48
-                            + "\n[DBG] Request entity: " + request.getEntity());
-                            //+ "\n[DBG] [date]: iteration=" + c + "/" + count_iterations + ", date=" + rack_date[j] + ", channel=" + rack_channel[k]);
+                            //+ "\n[DBG] Request entity: " + request.getEntity());
+                            + "\n[DBG] [date]: iteration=" + c + "/" + count_iterations + ", date=" + rack_date[j] + ", channel=" + rack_channel[k]);
 
                     HttpResponse response = client.execute(request);
-                    System.out.println("\n[DBG] Response getStatusLine: " + response.getStatusLine());
-                            //+ "[DBG] Response string: " + response.toString());
+                    System.out.println("[DBG] Response getStatusLine: " + response.getStatusLine());
+                    //+ "[DBG] Response string: " + response.toString());
 
                     BufferedReader reader = new BufferedReader(new InputStreamReader(response.getEntity().getContent(), "UTF-8"));
                     StringBuilder body = new StringBuilder();
@@ -257,6 +312,9 @@ class Middle {
                     if (result != 200) {
                         break;
                     }
+                }
+                if (result != 200) {
+                    break;
                 }
             }
         }
@@ -277,7 +335,7 @@ class Middle {
         HttpClient client = HttpClients.createDefault();
         HttpPost request = new HttpPost(url);
 
-        StringEntity entity = new StringEntity(Generate_json(rack_date[0], count_reminders, "Delete", reminderOffset));
+        StringEntity entity = new StringEntity(Generate_json(macaddress, rack_date[0], rack_channel[0], count_reminders, "Delete", reminderOffset));
         request.setEntity(entity);
 
         for (int c = 1; c <= count_iterations; c++) {
@@ -288,13 +346,13 @@ class Middle {
                     //request.setHeader("Content-type", "text/plain");
                     //request.setHeader("charset", "UTF-8");
 
-                    System.out.println("[DBG] Request string: " + request.toString()
+                    System.out.println("[DBG] Request string: " + request
                             //+ "\n[DBG] Request json string: " + json_delete48_add48
                             + "\n[DBG] Request entity: " + request.getEntity()
                             + "\n[DBG] date: Edit(delete48 + add48) reminderOffset=" + reminderOffset + ", reminderOffset_new=" + reminderOffset_new + ", iteration=" + c + "/" + count_iterations + ", macaddress=" + macaddress + ", data=" + rack_date[j] + ", channel=" + rack_channel[k]);
 
                     HttpResponse response = client.execute(request);
-                    System.out.println("\n[DBG] Response getStatusLine: " + response.getStatusLine());
+                    System.out.println("[DBG] Response getStatusLine: " + response.getStatusLine());
                     //+ "[DBG] Response string: " + response.toString());
 
                     BufferedReader reader = new BufferedReader(new InputStreamReader(response.getEntity().getContent(), "UTF-8"));
@@ -303,13 +361,19 @@ class Middle {
                         System.out.println("[DBG] Response body: " + body.append(line).append("\n"));
                     }
                     result = response.getStatusLine().getStatusCode();
+                    if (result != 200) {
+                        break;
+                    }
+                }
+                if (result != 200) {
+                    break;
                 }
             }
         }
         return result;
     }
 
-    int Delete(String macaddress, int count_reminders, int reminderOffset) throws IOException {
+    int Delete(String macaddress, int count_reminders, int reminderOffset) throws IOException, InterruptedException {
         System.out.println("[DBG] [date] Edit: for macaddress=" + macaddress + ", "
                 + "count_reminders=" + count_reminders + ", "
                 + "count_iterations=" + count_iterations + ", "
@@ -317,82 +381,30 @@ class Middle {
                 + "data count=" + rack_date.length + ", "
                 + "channel count=" + rack_channel.length);
 
-/*        String json_delete48 = "{\"deviceId\":\"" + macaddress + "\",\"reminders\":[" +
-                "{\"operation\":\"Delete\",\"reminderChannelNumber\":" + channel + ",\"reminderProgramStart\":\"" + yyyymmdd + " 00:00\",\"reminderProgramId\":0,\"reminderOffset\":" + reminderOffset + "}," +
-                "{\"operation\":\"Delete\",\"reminderChannelNumber\":" + channel + ",\"reminderProgramStart\":\"" + yyyymmdd + " 00:30\",\"reminderProgramId\":0,\"reminderOffset\":" + reminderOffset + "}," +
-                "{\"operation\":\"Delete\",\"reminderChannelNumber\":" + channel + ",\"reminderProgramStart\":\"" + yyyymmdd + " 01:00\",\"reminderProgramId\":0,\"reminderOffset\":" + reminderOffset + "}," +
-                "{\"operation\":\"Delete\",\"reminderChannelNumber\":" + channel + ",\"reminderProgramStart\":\"" + yyyymmdd + " 01:30\",\"reminderProgramId\":0,\"reminderOffset\":" + reminderOffset + "}," +
-                "{\"operation\":\"Delete\",\"reminderChannelNumber\":" + channel + ",\"reminderProgramStart\":\"" + yyyymmdd + " 02:00\",\"reminderProgramId\":0,\"reminderOffset\":" + reminderOffset + "}," +
-                "{\"operation\":\"Delete\",\"reminderChannelNumber\":" + channel + ",\"reminderProgramStart\":\"" + yyyymmdd + " 02:30\",\"reminderProgramId\":0,\"reminderOffset\":" + reminderOffset + "}," +
-                "{\"operation\":\"Delete\",\"reminderChannelNumber\":" + channel + ",\"reminderProgramStart\":\"" + yyyymmdd + " 03:00\",\"reminderProgramId\":0,\"reminderOffset\":" + reminderOffset + "}," +
-                "{\"operation\":\"Delete\",\"reminderChannelNumber\":" + channel + ",\"reminderProgramStart\":\"" + yyyymmdd + " 03:30\",\"reminderProgramId\":0,\"reminderOffset\":" + reminderOffset + "}," +
-                "{\"operation\":\"Delete\",\"reminderChannelNumber\":" + channel + ",\"reminderProgramStart\":\"" + yyyymmdd + " 04:00\",\"reminderProgramId\":0,\"reminderOffset\":" + reminderOffset + "}," +
-                "{\"operation\":\"Delete\",\"reminderChannelNumber\":" + channel + ",\"reminderProgramStart\":\"" + yyyymmdd + " 04:30\",\"reminderProgramId\":0,\"reminderOffset\":" + reminderOffset + "}," +
-                "{\"operation\":\"Delete\",\"reminderChannelNumber\":" + channel + ",\"reminderProgramStart\":\"" + yyyymmdd + " 05:00\",\"reminderProgramId\":0,\"reminderOffset\":" + reminderOffset + "}," +
-                "{\"operation\":\"Delete\",\"reminderChannelNumber\":" + channel + ",\"reminderProgramStart\":\"" + yyyymmdd + " 05:30\",\"reminderProgramId\":0,\"reminderOffset\":" + reminderOffset + "}," +
-                "{\"operation\":\"Delete\",\"reminderChannelNumber\":" + channel + ",\"reminderProgramStart\":\"" + yyyymmdd + " 06:00\",\"reminderProgramId\":0,\"reminderOffset\":" + reminderOffset + "}," +
-                "{\"operation\":\"Delete\",\"reminderChannelNumber\":" + channel + ",\"reminderProgramStart\":\"" + yyyymmdd + " 06:30\",\"reminderProgramId\":0,\"reminderOffset\":" + reminderOffset + "}," +
-                "{\"operation\":\"Delete\",\"reminderChannelNumber\":" + channel + ",\"reminderProgramStart\":\"" + yyyymmdd + " 07:00\",\"reminderProgramId\":0,\"reminderOffset\":" + reminderOffset + "}," +
-                "{\"operation\":\"Delete\",\"reminderChannelNumber\":" + channel + ",\"reminderProgramStart\":\"" + yyyymmdd + " 07:30\",\"reminderProgramId\":0,\"reminderOffset\":" + reminderOffset + "}," +
-                "{\"operation\":\"Delete\",\"reminderChannelNumber\":" + channel + ",\"reminderProgramStart\":\"" + yyyymmdd + " 08:00\",\"reminderProgramId\":0,\"reminderOffset\":" + reminderOffset + "}," +
-                "{\"operation\":\"Delete\",\"reminderChannelNumber\":" + channel + ",\"reminderProgramStart\":\"" + yyyymmdd + " 08:30\",\"reminderProgramId\":0,\"reminderOffset\":" + reminderOffset + "}," +
-                "{\"operation\":\"Delete\",\"reminderChannelNumber\":" + channel + ",\"reminderProgramStart\":\"" + yyyymmdd + " 09:00\",\"reminderProgramId\":0,\"reminderOffset\":" + reminderOffset + "}," +
-                "{\"operation\":\"Delete\",\"reminderChannelNumber\":" + channel + ",\"reminderProgramStart\":\"" + yyyymmdd + " 09:30\",\"reminderProgramId\":0,\"reminderOffset\":" + reminderOffset + "}," +
-                "{\"operation\":\"Delete\",\"reminderChannelNumber\":" + channel + ",\"reminderProgramStart\":\"" + yyyymmdd + " 10:00\",\"reminderProgramId\":0,\"reminderOffset\":" + reminderOffset + "}," +
-                "{\"operation\":\"Delete\",\"reminderChannelNumber\":" + channel + ",\"reminderProgramStart\":\"" + yyyymmdd + " 10:30\",\"reminderProgramId\":0,\"reminderOffset\":" + reminderOffset + "}," +
-                "{\"operation\":\"Delete\",\"reminderChannelNumber\":" + channel + ",\"reminderProgramStart\":\"" + yyyymmdd + " 11:00\",\"reminderProgramId\":0,\"reminderOffset\":" + reminderOffset + "}," +
-                "{\"operation\":\"Delete\",\"reminderChannelNumber\":" + channel + ",\"reminderProgramStart\":\"" + yyyymmdd + " 11:30\",\"reminderProgramId\":0,\"reminderOffset\":" + reminderOffset + "}," +
-                "{\"operation\":\"Delete\",\"reminderChannelNumber\":" + channel + ",\"reminderProgramStart\":\"" + yyyymmdd + " 12:00\",\"reminderProgramId\":0,\"reminderOffset\":" + reminderOffset + "}," +
-                "{\"operation\":\"Delete\",\"reminderChannelNumber\":" + channel + ",\"reminderProgramStart\":\"" + yyyymmdd + " 12:30\",\"reminderProgramId\":0,\"reminderOffset\":" + reminderOffset + "}," +
-                "{\"operation\":\"Delete\",\"reminderChannelNumber\":" + channel + ",\"reminderProgramStart\":\"" + yyyymmdd + " 13:00\",\"reminderProgramId\":0,\"reminderOffset\":" + reminderOffset + "}," +
-                "{\"operation\":\"Delete\",\"reminderChannelNumber\":" + channel + ",\"reminderProgramStart\":\"" + yyyymmdd + " 13:30\",\"reminderProgramId\":0,\"reminderOffset\":" + reminderOffset + "}," +
-                "{\"operation\":\"Delete\",\"reminderChannelNumber\":" + channel + ",\"reminderProgramStart\":\"" + yyyymmdd + " 14:00\",\"reminderProgramId\":0,\"reminderOffset\":" + reminderOffset + "}," +
-                "{\"operation\":\"Delete\",\"reminderChannelNumber\":" + channel + ",\"reminderProgramStart\":\"" + yyyymmdd + " 14:30\",\"reminderProgramId\":0,\"reminderOffset\":" + reminderOffset + "}," +
-                "{\"operation\":\"Delete\",\"reminderChannelNumber\":" + channel + ",\"reminderProgramStart\":\"" + yyyymmdd + " 15:00\",\"reminderProgramId\":0,\"reminderOffset\":" + reminderOffset + "}," +
-                "{\"operation\":\"Delete\",\"reminderChannelNumber\":" + channel + ",\"reminderProgramStart\":\"" + yyyymmdd + " 15:30\",\"reminderProgramId\":0,\"reminderOffset\":" + reminderOffset + "}," +
-                "{\"operation\":\"Delete\",\"reminderChannelNumber\":" + channel + ",\"reminderProgramStart\":\"" + yyyymmdd + " 16:00\",\"reminderProgramId\":0,\"reminderOffset\":" + reminderOffset + "}," +
-                "{\"operation\":\"Delete\",\"reminderChannelNumber\":" + channel + ",\"reminderProgramStart\":\"" + yyyymmdd + " 16:30\",\"reminderProgramId\":0,\"reminderOffset\":" + reminderOffset + "}," +
-                "{\"operation\":\"Delete\",\"reminderChannelNumber\":" + channel + ",\"reminderProgramStart\":\"" + yyyymmdd + " 17:00\",\"reminderProgramId\":0,\"reminderOffset\":" + reminderOffset + "}," +
-                "{\"operation\":\"Delete\",\"reminderChannelNumber\":" + channel + ",\"reminderProgramStart\":\"" + yyyymmdd + " 17:30\",\"reminderProgramId\":0,\"reminderOffset\":" + reminderOffset + "}," +
-                "{\"operation\":\"Delete\",\"reminderChannelNumber\":" + channel + ",\"reminderProgramStart\":\"" + yyyymmdd + " 18:00\",\"reminderProgramId\":0,\"reminderOffset\":" + reminderOffset + "}," +
-                "{\"operation\":\"Delete\",\"reminderChannelNumber\":" + channel + ",\"reminderProgramStart\":\"" + yyyymmdd + " 18:30\",\"reminderProgramId\":0,\"reminderOffset\":" + reminderOffset + "}," +
-                "{\"operation\":\"Delete\",\"reminderChannelNumber\":" + channel + ",\"reminderProgramStart\":\"" + yyyymmdd + " 19:00\",\"reminderProgramId\":0,\"reminderOffset\":" + reminderOffset + "}," +
-                "{\"operation\":\"Delete\",\"reminderChannelNumber\":" + channel + ",\"reminderProgramStart\":\"" + yyyymmdd + " 19:30\",\"reminderProgramId\":0,\"reminderOffset\":" + reminderOffset + "}," +
-                "{\"operation\":\"Delete\",\"reminderChannelNumber\":" + channel + ",\"reminderProgramStart\":\"" + yyyymmdd + " 20:00\",\"reminderProgramId\":0,\"reminderOffset\":" + reminderOffset + "}," +
-                "{\"operation\":\"Delete\",\"reminderChannelNumber\":" + channel + ",\"reminderProgramStart\":\"" + yyyymmdd + " 20:30\",\"reminderProgramId\":0,\"reminderOffset\":" + reminderOffset + "}," +
-                "{\"operation\":\"Delete\",\"reminderChannelNumber\":" + channel + ",\"reminderProgramStart\":\"" + yyyymmdd + " 21:00\",\"reminderProgramId\":0,\"reminderOffset\":" + reminderOffset + "}," +
-                "{\"operation\":\"Delete\",\"reminderChannelNumber\":" + channel + ",\"reminderProgramStart\":\"" + yyyymmdd + " 21:30\",\"reminderProgramId\":0,\"reminderOffset\":" + reminderOffset + "}," +
-                "{\"operation\":\"Delete\",\"reminderChannelNumber\":" + channel + ",\"reminderProgramStart\":\"" + yyyymmdd + " 22:00\",\"reminderProgramId\":0,\"reminderOffset\":" + reminderOffset + "}," +
-                "{\"operation\":\"Delete\",\"reminderChannelNumber\":" + channel + ",\"reminderProgramStart\":\"" + yyyymmdd + " 22:30\",\"reminderProgramId\":0,\"reminderOffset\":" + reminderOffset + "}," +
-                "{\"operation\":\"Delete\",\"reminderChannelNumber\":" + channel + ",\"reminderProgramStart\":\"" + yyyymmdd + " 23:00\",\"reminderProgramId\":0,\"reminderOffset\":" + reminderOffset + "}," +
-                "{\"operation\":\"Delete\",\"reminderChannelNumber\":" + channel + ",\"reminderProgramStart\":\"" + yyyymmdd + " 23:30\",\"reminderProgramId\":0,\"reminderOffset\":" + reminderOffset + " }" +
-                "]}";
-*/
         String url = "http://" + ams_ip + ":" + ams_port + postfix_change;
         HttpClient client = HttpClients.createDefault();
         HttpPost request = new HttpPost(url);
 
-        //StringEntity entity = new StringEntity(json_delete48);
-        StringEntity entity = new StringEntity(Generate_json(rack_date[0], 5, "Delete", 0));
-        //StringEntity entity = new StringEntity(new FileReader("src/main/resources/json_delete48.json").toString());
-        request.setEntity(entity);
-
-        //System.out.println(startmessage);
         for (int c = 1; c <= count_iterations; c++) {
-            for (int j = 0; j <= rack_date.length; j++) {
-                for (int k = 0; k <= rack_channel.length; k++) {
+            for (int j = 0; j < rack_date.length; j++) {
+                for (int k = 0; k < rack_channel.length; k++) {
+
+                    StringEntity entity = new StringEntity(Generate_json(macaddress, rack_date[j], rack_channel[k], count_reminders, "Delete", reminderOffset));
+
+                    request.setEntity(entity);
                     request.setHeader("Accept", "application/json");
                     request.setHeader("Content-type", "application/json");
                     //request.setHeader("Content-type", "text/plain");
-                    //request.setHeader("charset", "UTF-8");
+                    //request.setHeader("User-Agent","curl/7.58.0");
+                    //request.setHeader("Charset", "UTF-8");
 
-                    System.out.println("[DBG] Request string: " + request.toString()
-                            //+ "\n[DBG] Request json string: " + json_delete48
-                            + "\n[DBG] Request entity: " + request.getEntity()
-                            + "\n[DBG] date: Delete rems with reminderOffset=" + reminderOffset + ", iteration=" + c + "/" + count_iterations + ", macaddress=" + macaddress + ", date=" + rack_date[j] + ", channel=" + rack_channel[k]);
+                    System.out.println("[DBG] Request string: " + request
+                            //+ "\n[DBG] Request json string: " + json
+                            //+ "\n[DBG] Request entity: " + request.getEntity());
+                            + "\n[DBG] [date]: iteration=" + c + "/" + count_iterations + ", date=" + rack_date[j] + ", channel=" + rack_channel[k]);
 
                     HttpResponse response = client.execute(request);
-                    System.out.println("\n[DBG] Response getStatusLine: " + response.getStatusLine());
+                    System.out.println("[DBG] Response getStatusLine: " + response.getStatusLine());
                     //+ "[DBG] Response string: " + response.toString());
 
                     BufferedReader reader = new BufferedReader(new InputStreamReader(response.getEntity().getContent(), "UTF-8"));
@@ -400,27 +412,36 @@ class Middle {
                     for (String line = null; (line = reader.readLine()) != null; ) {
                         System.out.println("[DBG] Response body: " + body.append(line).append("\n"));
                     }
+                    Thread.sleep(1000);
                     result = response.getStatusLine().getStatusCode();
+                    if (result != 200) {
+                        break;
+                    }
+                }
+                if (result != 200) {
+                    break;
                 }
             }
         }
         return result;
     }
 
-    int Modify(String macaddress, int count_reminders, int reminderOffset, int reminderOffset_new) throws IOException {
+    int Modify(String macaddress, int count_reminders, int reminderChannelNumber, String reminderProgramStart, int reminderProgramId, int reminderOffset, int reminderScheduleId, int reminderId) throws IOException {
+
         System.out.println("[DBG] [date] start Modify:");
         int result = 500;
 
         return result;
     }
 
-    private String Generate_json(String date, int count_remindres, String operation, int reminderOffset) {
+    private String Generate_json(String macaddress, String date, String reminderChannelNumber, int count_remindres, String operation, int reminderOffset) {
         System.out.println("[DBG] [date] Generate_json: with date=" + date + ", " +
                 "count_reminders=" + count_remindres + ", " +
                 "operation=" + operation + ", " +
                 "reminderOffset=" + reminderOffset);
 
-        int reminderChannelNumber = 2;
+        String json_change = "{\"setting\":{\"groups\":[{\"options\":[],\"id\":\"STB" + macaddress + "\",\"type\":\"device-stb\",\"amsid\":\"" + ams_ip + "\"}]}}";
+
         int reminderProgramId = 0;
 
         //String json1 = "{\"deviceId\":" + macaddress + ",\"reminders\":[{\"operation\":" + operation + ", \"reminderChannelNumber\":" + reminderChannelNumber + ", \"reminderProgramStart\":" + reminderProgramStart + ", \"reminderProgramId\":" + reminderProgramId + ", \"reminderOffset\":" + reminderOffset + "}]}";

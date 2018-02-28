@@ -1,3 +1,4 @@
+@Deprecated
 class Reminders {
     public String operation;
     public int reminderChannelNumber;

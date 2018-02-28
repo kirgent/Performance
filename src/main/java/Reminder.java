@@ -3,6 +3,7 @@ import com.google.gson.annotations.SerializedName;
 import java.util.ArrayList;
 import java.util.List;
 
+@Deprecated
 class Reminder {
     public  String deviceId;
 
@@ -21,7 +22,7 @@ class Reminder {
     //@SerializedName("reminders")
     //public List<Reminders> reminders;
 
-    @SerializedName("reminders")
+    //@SerializedName("reminders")
     public List<Reminders> reminders;
 
     //Reminder(String deviceId, List<String> reminders){
