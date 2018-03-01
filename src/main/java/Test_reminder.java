@@ -1,13 +1,7 @@
 import java.io.IOException;
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.GregorianCalendar;
 
 public class Test_reminder {
-
-    private static int count_iterations = 1;
 
     public static void main(String args[]) throws IOException, InterruptedException, ParseException {
 
@@ -31,20 +25,22 @@ public class Test_reminder {
         int count_reminders = count_reminders_by_default;
 
         int reminderOffset = 0;
+        @Deprecated
         int reminderOffset_new  = 10;
 
         String ams_ip_by_default = "172.30.81.4";
-        String ams_ip = ams_ip_by_default;
+        //String ams_ip = ams_ip_by_default;
 
 
         String charterapi_ = "http://spec.partnerapi.engprod-charter.net/api/pub/networksettingsmiddle/ns/settings";
         String charterapi_b = "http://specb.partnerapi.engprod-charter.net/api/pub/networksettingsmiddle/ns/settings";
         String charterapi_c = "http://specc.partnerapi.engprod-charter.net/api/pub/networksettingsmiddle/ns/settings";
         String charterapi_d = "http://specd.partnerapi.engprod-charter.net/api/pub/networksettingsmiddle/ns/settings";
-        String charterapi = charterapi_b;
+        String charterapi_by_default = charterapi_b;
 
 
-        String macaddress = "";
+        String macaddress_by_default = "6CB56BBA882C";
+        String macaddress = macaddress_by_default;
         String operation = "";
         String param = "";
 
@@ -76,9 +72,9 @@ public class Test_reminder {
                 "\n\tReminders MACADDRESS All [48][288][576] - add + edit + delete reminders (accordingly 48/288/576)" +
                 "\nCURRENT SETTINGS" +
                 "\n\tused AMS: " + ams_ip_by_default +
-                //"\n\tused charterapi: " + charterapi +
+                "\n\tused charterapi: " + charterapi_by_default +
                 "\n\tused count of reminders in one request: " + count_reminders_by_default +
-                "\n\tused count iterations: " + count_iterations +
+                //"\n\tused count iterations: " + count_iterations +
                 "\nSTATUSCODE" +
                 "\n\tcode of the reminder processing result, one of the following:" +
                 "\n\t0 - requested action with the reminder was accomplished successfully" +
@@ -140,27 +136,23 @@ public class Test_reminder {
 */
         //param = args[2];
 
-
-
-        Middle request = new Middle();
+        Middle_old request = new Middle_old();
 
         System.out.println("[DBG] used macaddress=" + macaddress + ", operation=" + operation + ", param="+param);
         switch (operation){
             case "Check":
-            case "check": request.Check_registration(macaddress, charterapi); break;
+            case "check": request.Check_registration(macaddress, charterapi_by_default); break;
             case "Change":
-            case "change": request.Change_registration(macaddress, charterapi, ams_ip); break;
+            case "change": request.Change_registration(macaddress, charterapi_by_default, ams_ip_by_default); break;
             case "Purge":
             case "purge": request.Purge(macaddress); break;
             case "Add":
-            case "add": request.Add(macaddress, count_reminders, reminderOffset); break;
+            case "add": request.Add(macaddress, count_reminders); break;
             case "Delete":
-            case "delete": request.Delete(macaddress, count_reminders, reminderOffset); break;
+            case "delete": request.Delete(macaddress, count_reminders); break;
             case "Edit":
             case "edit": request.Edit(macaddress, count_reminders, reminderOffset, reminderOffset_new); break;
-            case "All":
-            case "all": request.All(macaddress, count_reminders, reminderOffset, reminderOffset_new); break;
-            default: request.Check_registration(macaddress, charterapi);
+            default: request.Check_registration(macaddress, charterapi_by_default);
         }
     }
 }
