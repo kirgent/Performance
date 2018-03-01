@@ -1,12 +1,26 @@
 import org.junit.Test;
+import sun.util.logging.resources.logging;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.logging.FileHandler;
+import java.util.logging.Logger;
 
+import static java.util.logging.FileHandler.*;
 import static org.junit.Assert.assertEquals;
 
 public class testMiddle {
+
+    static Logger log = Logger.getLogger(testMiddle.class.getName());
+    //handlers= FileHandler
+
+    //pattern = application_log.txt
+    //limit = 1000000
+    //count = 5
+    //formatter = java.util.logging.SimpleFormatter
+
     int expected200 = 200;//200 Ok
+    private int expected400 = 400;//400 Bad Request
     private int expected500 = 500;//500 Internal Server Error
 
     //kir 1.1
@@ -45,64 +59,98 @@ public class testMiddle {
 
     Middle_old request = new Middle_old();
 
+    //long timestart(){
+    //    return System.currentTimeMillis();
+    //}
+
     @Test
     public void testAdd_48rems() throws IOException, InterruptedException {
-        System.out.println("[DBG] testAdd_48rems:");
+        //System.out.println("[DBG] testAdd_48rems:");
         long start = System.currentTimeMillis();
         int actual = request.Add(macaddress, 2);
         long finish = System.currentTimeMillis();
-        System.out.println("[DBG] " + (finish-start) + "ms, " + "return code: " + actual);
+        System.out.println("[DBG] " + (finish-start) + "ms test, " + "return code: " + actual);
         assertEquals(expected200, actual);
     }
 
     @Test
     public void testAdd_288rems() throws IOException, InterruptedException {
-        System.out.println("[DBG] testAdd_288rems:");
+        //System.out.println("[DBG] testAdd_288rems:");
         long start = System.currentTimeMillis();
         int actual = request.Add(macaddress, 288);
         long finish = System.currentTimeMillis();
-        System.out.println("[DBG] " + (finish-start) + "ms, " + "return code: " + actual);
+        System.out.println("[DBG] " + (finish-start) + "ms test, " + "return code: " + actual);
         assertEquals(expected200, actual);
     }
 
     @Test
     public void testAdd_720rems() throws IOException, InterruptedException {
-        System.out.println("[DBG] testAdd_720rems:");
+        //System.out.println("[DBG] testAdd_720rems:");
         long start = System.currentTimeMillis();
         int actual = request.Add(macaddress, 720);
         long finish = System.currentTimeMillis();
-        System.out.println("[DBG] " + (finish-start) + "ms, " + "return code: " + actual);
+        System.out.println("[DBG] " + (finish-start) + "ms test, " + "return code: " + actual);
         assertEquals(expected200, actual);
     }
 
     @Test
+    public void testAdd_48rems_without_macaddress() throws IOException, InterruptedException {
+        //System.out.println("[DBG] testAdd_48rems:");
+        long start = System.currentTimeMillis();
+        int actual = request.Add("", count_reminders_by_default);
+        long finish = System.currentTimeMillis();
+        System.out.println("[DBG] " + (finish-start) + "ms test, " + "return code: " + actual);
+        assertEquals(expected400, actual);
+    }
+
+    @Test
+    public void testAdd_48rems_with_empty_macaddress() throws IOException, InterruptedException {
+        //System.out.println("[DBG] testAdd_48rems:");
+        long start = System.currentTimeMillis();
+        int actual = request.Add("", count_reminders_by_default);
+        long finish = System.currentTimeMillis();
+        System.out.println("[DBG] " + (finish-start) + "ms test, " + "return code: " + actual);
+        assertEquals(expected400, actual);
+    }
+
+    @Test
     public void testDelete_48rems() throws IOException, InterruptedException {
-        System.out.println("[DBG] testDelete_48rems:");
+        //System.out.println("[DBG] testDelete_48rems:");
         long start = System.currentTimeMillis();
         int actual = request.Delete(macaddress, 48);
         long finish = System.currentTimeMillis();
-        System.out.println("[DBG] " + (finish-start) + "ms, " + "return code: " + actual);
+        System.out.println("[DBG] " + (finish-start) + "ms test, " + "return code: " + actual);
         assertEquals(expected200, actual);
     }
 
     @Test
     public void testDelete_288rems() throws IOException, InterruptedException {
-        System.out.println("[DBG] testDelete_288rems:");
+        //System.out.println("[DBG] testDelete_288rems:");
         long start = System.currentTimeMillis();
         int actual = request.Delete(macaddress, 288);
         long finish = System.currentTimeMillis();
-        System.out.println("[DBG] " + (finish-start) + "ms, " + "return code: " + actual);
+        System.out.println("[DBG] " + (finish-start) + "ms test, return code: " + actual);
         assertEquals(expected200, actual);
     }
 
     @Test
     public void testDelete_720rems() throws IOException, InterruptedException {
-        System.out.println("[DBG] testDelete_720rems:");
+        //System.out.println("[DBG] testDelete_720rems:");
         long start = System.currentTimeMillis();
         int actual = request.Delete(macaddress, 720);
         long finish = System.currentTimeMillis();
-        System.out.println("[DBG] " + (finish-start) + "ms, " + "return code: " + actual);
+        System.out.println("[DBG] " + (finish-start) + "ms test, return code: " + actual);
         assertEquals(expected200, actual);
+    }
+
+    @Test
+    public void testDelete_48rems_without_macaddress() throws IOException, InterruptedException {
+        //System.out.println("[DBG] testDelete_48rems:");
+        long start = System.currentTimeMillis();
+        int actual = request.Delete("", 48);
+        long finish = System.currentTimeMillis();
+        System.out.println("[DBG] " + (finish-start) + "ms test, return code: " + actual);
+        assertEquals(expected400, actual);
     }
 
     @Test
@@ -118,7 +166,7 @@ public class testMiddle {
         long start = System.currentTimeMillis();
         int actual = request2.Modify(macaddress, 48, reminderChannelNumber_by_default, reminderProgramStart_by_default, reminderProgramId_by_default, reminderOffset_by_default, reminderScheduleId_by_default, reminderId_by_default);
         long finish = System.currentTimeMillis();
-        System.out.println("[DBG] " + (finish-start) + "ms, " + "return code: " + actual);
+        System.out.println("[DBG] " + (finish-start) + "ms test, return code: " + actual);
         assertEquals(expected200, actual);
     }
 
@@ -129,7 +177,7 @@ public class testMiddle {
         long start = System.currentTimeMillis();
         int actual = request2.Modify(macaddress, 48, reminderChannelNumber_by_default, reminderProgramStart_by_default, reminderProgramId_by_default, reminderOffset_by_default, reminderScheduleId_by_default, reminderId_by_default);
         long finish = System.currentTimeMillis();
-        System.out.println("[DBG] " + (finish-start) + "ms, " + "return code: " + actual);
+        System.out.println("[DBG] " + (finish-start) + "ms test, return code: " + actual);
         assertEquals(expected200, actual);
     }
 
@@ -140,7 +188,7 @@ public class testMiddle {
         long start = System.currentTimeMillis();
         int actual = request2.Modify(macaddress, 48, reminderChannelNumber_by_default, reminderProgramStart_by_default, reminderProgramId_by_default, reminderOffset_by_default, reminderScheduleId_by_default, reminderId_by_default);
         long finish = System.currentTimeMillis();
-        System.out.println("[DBG] " + (finish-start) + "ms, " + "return code: " + actual);
+        System.out.println("[DBG] " + (finish-start) + "ms test, return code: " + actual);
         assertEquals(expected200, actual);
     }
 
@@ -151,7 +199,7 @@ public class testMiddle {
         long start = System.currentTimeMillis();
         ArrayList actual = request.Purge(macaddress);
         long finish = System.currentTimeMillis();
-        System.out.println("[DBG] " + (finish-start) + "ms, " + "return code: " + actual);
+        System.out.println("[DBG] " + (finish-start) + "ms test, return code: " + actual);
         assertEquals(expected500, actual.get(0));
         assertEquals("REM-ST-001 Box is not registered", "REM-ST-001 Box is not registered", actual.get(1));
     }
@@ -163,7 +211,7 @@ public class testMiddle {
         long start = System.currentTimeMillis();
         ArrayList actual = request.Purge(macaddress);
         long finish = System.currentTimeMillis();
-        System.out.println("[DBG] " + (finish-start) + "ms, " + "return code: " + actual);
+        System.out.println("[DBG] " + (finish-start) + "ms test, return code: " + actual);
         assertEquals(expected200, actual.get(0));
         assertEquals("SUCCESS", "SUCCESS", actual.get(1));
     }

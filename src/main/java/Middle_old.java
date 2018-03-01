@@ -9,8 +9,11 @@ import org.json.simple.JSONObject;
 
 import java.io.*;
 import java.util.ArrayList;
+import java.util.logging.Logger;
 
 class Middle_old {
+
+    private static Logger log = Logger.getLogger(Middle_old.class.getName());
 
     //new API
     //https://chalk.charter.com/pages/viewpage.action?pageId=115175031
@@ -22,7 +25,8 @@ class Middle_old {
     private static String postfix_change = "/ams/Reminders?req=ChangeReminders";
 
 
-    String ams_ip = "172.30.81.4";
+    //String ams_ip = "172.30.81.4";
+    String ams_ip = "172.30.112.19";
     int ams_port = 8080;
 
 
@@ -67,7 +71,10 @@ class Middle_old {
         System.out.println("[DBG] Request string: " + request);
                 //+ "\n[DBG] Request entity: " + request.getEntity());
 
+        long start = System.currentTimeMillis();
         HttpResponse response = client.execute(request);
+        long finish = System.currentTimeMillis();
+        System.out.println("[DBG] " + (finish-start) + "ms request");
         System.out.println("[DBG] Response getStatusLine: " + response.getStatusLine());
         //+ "[DBG] Response string: " + response.toString());
 
@@ -101,7 +108,8 @@ class Middle_old {
     }
 
     int Check_registration(String macaddress, String charterapi) throws IOException {
-        System.out.println("[DBG] [date] Check_registration:");
+        //System.out.println("[DBG] [date] Check_registration:");
+        //log.fine("testCheck_registration_via_charterapi_:");
 //                + "\n[DBG] used charterapi: " + charterapi);
 
         String postfix = "/amsIp/";
@@ -117,7 +125,10 @@ class Middle_old {
         System.out.println("[DBG] Request string: " + request);
                 //+"\n[DBG] Request getRequestLine: "+request.getRequestLine());
 
+        long start = System.currentTimeMillis();
         HttpResponse response = client.execute(request);
+        long finish = System.currentTimeMillis();
+        System.out.println("[DBG] " + (finish-start) + "ms request");
         System.out.println("[DBG] Response getStatusLine: " + response.getStatusLine());
         //+ "[DBG] Response string: " + response.toString());
 
@@ -157,7 +168,10 @@ class Middle_old {
                 //+ "\n[DBG] Request entity: " + request.getEntity()
                 //+ "\n[DBG] Request headers: " + request.getAllHeaders());
 
+        long start = System.currentTimeMillis();
         HttpResponse response = client.execute(request);
+        long finish = System.currentTimeMillis();
+        System.out.println("[DBG] " + (finish-start) + "ms request");
         System.out.println("[DBG] Response getStatusLine: " + response.getStatusLine());
         //+ "[DBG] Response string: " + response.toString());
 
@@ -191,16 +205,14 @@ class Middle_old {
             rack_time = rack_time720;
         }
         else rack_time = rack_time48;
-        System.out.println(macaddress);
 
         for (int c = 1; c <= count_iterations; c++) {
             for (int j = 0; j < rack_date.length; j++) {
                 for (int k = 0; k < rack_channel.length; k++) {
                     System.out.println("[DBG] [date] Add iteration=" + c + "/" + count_iterations + ", channel=" + rack_channel[k]);
-                    System.out.println(macaddress);
+
                     String json = Generate_json(macaddress, count_reminders, "Add", rack_channel[k], rack_date[j], rack_time, reminderProgramId, reminderOffset);
                     System.out.println(json);
-                    System.out.println(macaddress);
                     StringEntity entity = new StringEntity(json);
                     request.setEntity(entity);
 
@@ -214,7 +226,10 @@ class Middle_old {
                             //+ "\n[DBG] Request entity: " + request.getEntity());
                             + "\n[DBG] [date]: iteration=" + c + "/" + count_iterations + ", date=" + rack_date[j] + ", channel=" + rack_channel[k]);
 
+                    long start = System.currentTimeMillis();
                     HttpResponse response = client.execute(request);
+                    long finish = System.currentTimeMillis();
+                    System.out.println("[DBG] " + (finish-start) + "ms request");
                     System.out.println("[DBG] Response getStatusLine: " + response.getStatusLine());
                             //+ "[DBG] Response string: " + response.toString());
 
@@ -270,7 +285,10 @@ class Middle_old {
                             //+ "\n[DBG] Request entity: " + request.getEntity());
                             + "\n[DBG] [date]: iteration=" + c + "/" + count_iterations + ", date=" + rack_date[j] + ", channel=" + rack_channel[k]);
 
+                    long start = System.currentTimeMillis();
                     HttpResponse response = client.execute(request);
+                    long finish = System.currentTimeMillis();
+                    System.out.println("[DBG] " + (finish-start) + "ms request");
                     System.out.println("[DBG] Response getStatusLine: " + response.getStatusLine());
                     //+ "[DBG] Response string: " + response.toString());
 
@@ -300,7 +318,7 @@ class Middle_old {
                 "count_reminders=" + count_remindres + ", " +
                 "operation=" + operation + ", " +
                 "reminderOffset=" + reminderOffset);
-        System.out.println(macaddress);
+
         String json_change = "{\"setting\":{\"groups\":[{\"options\":[],\"id\":\"STB" + macaddress + "\",\"type\":\"device-stb\",\"amsid\":\"" + ams_ip + "\"}]}}";
 
         //String json1 = "{\"deviceId\":" + macaddress + ",\"reminders\":[{\"operation\":" + operation + ", \"reminderChannelNumber\":" + reminderChannelNumber + ", \"reminderProgramStart\":" + reminderProgramStart + ", \"reminderProgramId\":" + reminderProgramId + ", \"reminderOffset\":" + reminderOffset + "}]}";
@@ -433,7 +451,10 @@ class Middle_old {
                             + "\n[DBG] Request entity: " + request.getEntity()
                             + "\n[DBG] date: Edit(delete48 + add48) reminderOffset=" + reminderOffset + ", reminderOffset_new=" + reminderOffset_new + ", iteration=" + c + "/" + count_iterations + ", macaddress=" + macaddress + ", data=" + rack_date[j] + ", channel=" + rack_channel[k]);
 
+                    long start = System.currentTimeMillis();
                     HttpResponse response = client.execute(request);
+                    long finish = System.currentTimeMillis();
+                    System.out.println("[DBG] " + (finish-start) + "ms request");
                     System.out.println("[DBG] Response getStatusLine: " + response.getStatusLine());
                     //+ "[DBG] Response string: " + response.toString());
 
@@ -471,7 +492,10 @@ class Middle_old {
                             + "\n[DBG] Request entity: " + request.getEntity()
                             + "\n[DBG] date: Edit(delete48 + add48) reminderOffset=" + reminderOffset + ", reminderOffset_new=" + reminderOffset_new + ", iteration=" + c + "/" + count_iterations + ", macaddress=" + macaddress + ", data=" + rack_date[j] + ", channel=" + rack_channel[k]);
 
+                    long start = System.currentTimeMillis();
                     HttpResponse response = client.execute(request);
+                    long finish = System.currentTimeMillis();
+                    System.out.println("[DBG] " + (finish-start) + "ms request");
                     System.out.println("[DBG] Response getStatusLine: " + response.getStatusLine());
                     //+ "[DBG] Response string: " + response.toString());
 

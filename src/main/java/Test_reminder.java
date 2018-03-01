@@ -28,7 +28,8 @@ public class Test_reminder {
         @Deprecated
         int reminderOffset_new  = 10;
 
-        String ams_ip_by_default = "172.30.81.4";
+        //String ams_ip_by_default = "172.30.81.4";
+        String ams_ip_by_default = "172.30.112.19" ;
         //String ams_ip = ams_ip_by_default;
 
 

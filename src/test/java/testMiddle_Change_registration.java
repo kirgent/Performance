@@ -13,7 +13,7 @@ public class testMiddle_Change_registration extends testMiddle {
         long start = System.currentTimeMillis();
         int actual = request.Change_registration(macaddress, charterapi_, ams_ip_by_default);
         long finish = System.currentTimeMillis();
-        System.out.println("[DBG] " + (finish-start) + "ms, " + "return code: " + actual);
+        System.out.println("[DBG] " + (finish-start) + "ms test, return code: " + actual);
         assertEquals(expected200, actual);
     }
 
@@ -23,7 +23,7 @@ public class testMiddle_Change_registration extends testMiddle {
         long start = System.currentTimeMillis();
         int actual = request.Change_registration(macaddress, charterapi_b, ams_ip_by_default);
         long finish = System.currentTimeMillis();
-        System.out.println("[DBG] " + (finish-start) + "ms, " + "return code: " + actual);
+        System.out.println("[DBG] " + (finish-start) + "ms test, return code: " + actual);
         assertEquals(expected200, actual);
     }
 
@@ -33,7 +33,7 @@ public class testMiddle_Change_registration extends testMiddle {
         long start = System.currentTimeMillis();
         int actual = request.Change_registration(macaddress, charterapi_c, ams_ip_by_default);
         long finish = System.currentTimeMillis();
-        System.out.println("[DBG] " + (finish-start) + "ms, " + "return code: " + actual);
+        System.out.println("[DBG] " + (finish-start) + "ms test, return code: " + actual);
         assertEquals(expected200, actual);
     }
 
@@ -43,7 +43,7 @@ public class testMiddle_Change_registration extends testMiddle {
         long start = System.currentTimeMillis();
         int actual = request.Change_registration(macaddress, charterapi_d, ams_ip_by_default);
         long finish = System.currentTimeMillis();
-        System.out.println("[DBG] " + (finish-start) + "ms, " + "return code: " + actual);
+        System.out.println("[DBG] " + (finish-start) + "ms test, return code: " + actual);
         assertEquals(expected200, actual);
     }
 
@@ -54,7 +54,7 @@ public class testMiddle_Change_registration extends testMiddle {
         long start = System.currentTimeMillis();
         int actual = request.Change_registration(macaddress, charterapi_by_default, "127.0.0.1");
         long finish = System.currentTimeMillis();
-        System.out.println("[DBG] " + (finish-start) + "ms, " + "return code: " + actual);
+        System.out.println("[DBG] " + (finish-start) + "ms test, return code: " + actual);
         assertEquals(expected200, actual);
     }
 

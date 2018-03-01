@@ -44,7 +44,10 @@ class Middle_new extends Middle_old {
                             //+ "\n[DBG] Request entity: " + request.getEntity());
                             + "\n[DBG] [date]: iteration=" + c + "/" + count_iterations + ", date=" + rack_date[j] + ", channel=" + rack_channel[k]);
 
+                    long start = System.currentTimeMillis();
                     HttpResponse response = client.execute(request);
+                    long finish = System.currentTimeMillis();
+                    System.out.println("[DBG] " + (finish-start) + "ms request");
                     System.out.println("[DBG] Response getStatusLine: " + response.getStatusLine());
                     //+ "[DBG] Response string: " + response.toString());
 
