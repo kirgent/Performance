@@ -1,9 +1,27 @@
 import java.io.IOException;
 import java.text.ParseException;
+import java.util.logging.FileHandler;
+import java.util.logging.Logger;
 
 public class Test_reminder {
 
+    private static int reminderChannelNumber = 2;
+    private static String reminderProgramStart = "2013-03-08 00:00";
+    private static int reminderProgramId = 1;
+    private static int reminderOffset = 0;
+    private static int reminderScheduleId = 1;
+    private static int reminderId = 1;
+
+    @Deprecated
+    int reminderOffset_new  = 10;
+
     public static void main(String args[]) throws IOException, InterruptedException, ParseException {
+
+        Logger logger = Logger.getLogger("test_reminder.log");
+        FileHandler fh;
+        fh = new FileHandler("test_reminder.log");
+        logger.addHandler(fh);
+        logger.info("My first log");
 
         /*String months[] = {"Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep","Oct", "Nov", "Dec"};
         int year;
@@ -24,9 +42,6 @@ public class Test_reminder {
         int count_reminders_by_default = 2;
         int count_reminders = count_reminders_by_default;
 
-        int reminderOffset = 0;
-        @Deprecated
-        int reminderOffset_new  = 10;
 
         //String ams_ip_by_default = "172.30.81.4";
         String ams_ip_by_default = "172.30.112.19" ;
@@ -137,23 +152,24 @@ public class Test_reminder {
 */
         //param = args[2];
 
-        Middle_old request = new Middle_old();
+        Middle_old old_api = new Middle_old();
+        Middle_new new_api = new Middle_new();
 
         System.out.println("[DBG] used macaddress=" + macaddress + ", operation=" + operation + ", param="+param);
         switch (operation){
             case "Check":
-            case "check": request.Check_registration(macaddress, charterapi_by_default); break;
+            case "check": old_api.Check_registration(macaddress, charterapi_by_default); break;
             case "Change":
-            case "change": request.Change_registration(macaddress, charterapi_by_default, ams_ip_by_default); break;
+            case "change": old_api.Change_registration(macaddress, charterapi_by_default, ams_ip_by_default); break;
             case "Purge":
-            case "purge": request.Purge(macaddress); break;
+            case "purge": old_api.Purge(macaddress); break;
             case "Add":
-            case "add": request.Add(macaddress, count_reminders); break;
+            case "add": old_api.Operation("Add", macaddress, count_reminders); break;
+            case "Modify":
+            case "modify": new_api.Operation("Modify", macaddress, count_reminders, reminderChannelNumber, reminderProgramStart, reminderProgramId, reminderOffset, reminderScheduleId, reminderId); break;
             case "Delete":
-            case "delete": request.Delete(macaddress, count_reminders); break;
-            case "Edit":
-            case "edit": request.Edit(macaddress, count_reminders, reminderOffset, reminderOffset_new); break;
-            default: request.Check_registration(macaddress, charterapi_by_default);
+            case "delete": old_api.Operation("Delete", macaddress, count_reminders); break;
+            default: old_api.Check_registration(macaddress, charterapi_by_default);
         }
     }
 }

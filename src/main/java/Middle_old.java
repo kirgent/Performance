@@ -6,54 +6,75 @@ import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.HttpClients;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
+import org.junit.After;
 
 import java.io.*;
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.Objects;
+import java.util.logging.FileHandler;
+import java.util.logging.Level;
 import java.util.logging.Logger;
 
 class Middle_old {
 
-    private static Logger log = Logger.getLogger(Middle_old.class.getName());
+    final static Logger log = Logger.getLogger(Middle_old.class.getName());
+    //FileHandler txtFile = new FileHandler ("log.log", true);
+    //private FileHandler fh = new FileHandler("test_reminder.log");
 
-    //new API
-    //https://chalk.charter.com/pages/viewpage.action?pageId=115175031
-    static String postfix_add = "/ams/Reminders?req=add";
-    private static String postfix_delete = "/ams/Reminders?req=delete";
-    private static String postfix_modify = "/ams/Reminders?req=modify";
-    private static String postfix_purge = "/ams/Reminders?req=purge";
     @Deprecated
     private static String postfix_change = "/ams/Reminders?req=ChangeReminders";
-
 
     //String ams_ip = "172.30.81.4";
     String ams_ip = "172.30.112.19";
     int ams_port = 8080;
 
+    int result = 0;
+    int count_iterations = 1;
 
-    private static String statuscode = "code of the reminder processing result, one of the following:" +
+    //for Add/Delete/Operation methods in Middle old/new
+    int reminderProgramId = 0;
+    int reminderOffset = 0;
+
+    /*private static String statuscode = "code of the reminder processing result, one of the following:" +
             "\n0 - requested action with the reminder was accomplished successfully" +
             "\n2 - reminder is set for time in the past" +
             "\n3 - reminder is set for unknown channel" +
-            "\n4 - reminder is unknown, applies to reminder deletion attempts";
+            "\n4 - reminder is unknown, applies to reminder deletion attempts";*/
 
-    int result = 0;
+    static String[] statuscode = { "0 - requested action with the reminder was accomplished successfully",
+            "1 - empty, TBD",
+            "2 - reminder is set for time in the past",
+            "3 - reminder is set for unknown channel",
+            "4 - reminder is unknown, applies to reminder deletion attempts" };
 
-    int count_iterations = 1;
-    String[] rack_date = { "2018-03-01", "2018-03-02" };
+    //String[] rack_date = { "2018-03-01", "2018-03-02" };
+    String[] rack_date = { "2018-03-03" };
+
     private String[] rack_time48 = { "00:00", "00:30", "01:00", "01:30", "02:00", "02:30", "03:00", "03:30", "04:00", "04:30", "05:00", "05:30",
             "06:00", "06:30", "07:00", "07:30", "08:00", "08:30", "09:00", "09:30", "10:00", "10:30", "11:00", "11:30",
             "12:00", "12:30", "13:00", "13:30", "14:00", "14:30", "15:00", "15:30", "16:00", "16:30", "17:00", "17:30",
             "18:00", "18:30", "19:00", "19:30", "20:00", "20:30", "21:00", "21:30", "22:00", "22:30", "23:00", "23:30" };
     private String[] rack_time288 = {"00:00", "00:05", "00:10" };
     private String[] rack_time720 = {"00:00", "00:02", "00:04" };
-    String[] rack_time;
-    String[] rack_channel = { "2", "3", "4", "5", "6", "7", "8", "9", "10", "11" };
+    //String[] rack_time = {};
+    //String[] rack_channel = { "2", "3", "4", "5", "6", "7", "8", "9", "10", "11" };
+    String[] rack_channel = { "2" };
 
-    int reminderProgramId = 0;
-    int reminderOffset = 0;
 
+    String[] get_rack_time(int count_reminders) {
+        if (count_reminders == 48) { return rack_time48; }
+        else if (count_reminders == 288){ return rack_time288; }
+        else if(count_reminders == 720){ return rack_time720; }
+        else {
+            return rack_time48;
+        }
+    }
+
+    @Deprecated
     ArrayList Purge(String macaddress) throws IOException {
-        System.out.println("[DBG] [date] Purge: for macaddress=" + macaddress);
+        log.info("Purge for macaddress=" + macaddress);
+
         String url = "http://" + ams_ip + ":" + ams_port + postfix_change;
         HttpClient client = HttpClients.createDefault();
         HttpPost request = new HttpPost(url);
@@ -69,19 +90,19 @@ class Middle_old {
         //request.setHeader("Charset", "UTF-8");
 
         System.out.println("[DBG] Request string: " + request);
-                //+ "\n[DBG] Request entity: " + request.getEntity());
+        //+ "\n[DBG] Request entity: " + request.getEntity());
 
         long start = System.currentTimeMillis();
         HttpResponse response = client.execute(request);
         long finish = System.currentTimeMillis();
-        System.out.println("[DBG] " + (finish-start) + "ms request");
-        System.out.println("[DBG] Response getStatusLine: " + response.getStatusLine());
-        //+ "[DBG] Response string: " + response.toString());
+        System.out.println("[DBG] " + (finish - start) + "ms request, " +
+                "Response getStatusLine: " + response.getStatusLine());
 
         BufferedReader reader = new BufferedReader(new InputStreamReader(response.getEntity().getContent(), "UTF-8"));
         StringBuilder body = new StringBuilder();
         for (String line = null; (line = reader.readLine()) != null; ) {
-            System.out.println("[DBG] Response body: " + body.append(line).append("\n"));
+            body.append(line);
+            //System.out.println("[DBG] Response body: " + body.append(line).append("\n"));
         }
 
    /*     // Считываем json
@@ -107,49 +128,104 @@ class Middle_old {
         return actual;
     }
 
+     /**
+     * @param operation - can be Add / Modify / Delete
+     * @param macaddress - macaddress of the box
+     * @param count_reminders - count of reminders to generate in json {..}
+     * @return
+     * @throws IOException
+     * @throws InterruptedException
+     */
+    @Deprecated
+    int Operation(String operation, String macaddress, int count_reminders) throws IOException, InterruptedException {
+        log.info(operation + " for macaddress=" + macaddress + ", "
+                + "count_reminders=" + count_reminders + ", "
+                + "count_iterations=" + count_iterations + ", "
+                + "reminderOffset=" + reminderOffset + ", "
+                + "data count=" + rack_date.length + ", "
+                + "channel count=" + rack_channel.length);
+
+        String url = "http://" + ams_ip + ":" + ams_port + postfix_change;
+        HttpClient client = HttpClients.createDefault();
+        HttpPost request = new HttpPost(url);
+
+        for (int c = 1; c <= count_iterations; c++) {
+            for (String aRack_date : rack_date) {
+                for (String aRack_channel : rack_channel) {
+                    log.info(operation + " iteration=" + c + "/" + count_iterations + ", date=" + aRack_date + ", channel=" + aRack_channel);
+
+                    StringEntity entity = new StringEntity(Generate_json(macaddress, count_reminders, operation, aRack_channel, aRack_date, get_rack_time(count_reminders), reminderProgramId, reminderOffset));
+                    request.setEntity(entity);
+
+                    request.setHeader("Content-type", "application/json");
+                    //request.setHeader("Accept", "application/json");
+                    //request.setHeader("Content-type", "text/plain");
+                    //request.setHeader("User-Agent","curl/7.58.0");
+                    //request.setHeader("Charset", "UTF-8");
+
+                    System.out.println("[DBG] Request string: " + request);
+                    //+ "\n[DBG] Request entity: " + request.getEntity());
+
+                    long start = System.currentTimeMillis();
+                    HttpResponse response = client.execute(request);
+                    long finish = System.currentTimeMillis();
+                    System.out.println("[DBG] " + (finish - start) + "ms request, " +
+                            "Response getStatusLine: " + response.getStatusLine());
+
+                    BufferedReader reader = new BufferedReader(new InputStreamReader(response.getEntity().getContent(), "UTF-8"));
+                    StringBuilder body = new StringBuilder();
+                    for (String line = null; (line = reader.readLine()) != null; ) {
+                        body.append(line);
+                        //System.out.println("[DBG] Response body: " + body.append(line).append("\n"));
+                    }
+                    result = response.getStatusLine().getStatusCode();
+
+                    if(body.toString().contains("\"statusCode\":2")){ log.warning("one or more statusCode's = "+ statuscode[2]); }
+                    if(body.toString().contains("\"statusCode\":3")){ log.warning("one or more statusCode's = "+ statuscode[3]); }
+                    if(body.toString().contains("\"statusCode\":4")){ log.warning("one or more statusCode's = "+ statuscode[4]); }
+
+                    //Thread.sleep(1000);
+                    if (result != 200) { break; }
+                }
+                if (result != 200) { break; }
+            }
+        }
+        return result;
+    }
+
     int Check_registration(String macaddress, String charterapi) throws IOException {
-        //System.out.println("[DBG] [date] Check_registration:");
-        //log.fine("testCheck_registration_via_charterapi_:");
-//                + "\n[DBG] used charterapi: " + charterapi);
+        log.info("Check_registration via charterapi: " + charterapi);
 
         String postfix = "/amsIp/";
         String url = charterapi + postfix + macaddress;
         HttpClient client = HttpClients.createDefault();
         HttpGet request = new HttpGet(url);
-
+        request.setHeader("Content-type", "application/json");
         //request.setHeader("Content-type", "text/plain");
-        //request.setHeader("Content-type", "application/json");
         //request.setHeader("charset", "utf-8");
         //request.setHeader("User-Agent", "curl/7.58.0");
         //request.setHeader("Charset", "UTF-8");
         System.out.println("[DBG] Request string: " + request);
-                //+"\n[DBG] Request getRequestLine: "+request.getRequestLine());
+        //+"\n[DBG] Request getRequestLine: "+request.getRequestLine());
 
         long start = System.currentTimeMillis();
         HttpResponse response = client.execute(request);
         long finish = System.currentTimeMillis();
-        System.out.println("[DBG] " + (finish-start) + "ms request");
-        System.out.println("[DBG] Response getStatusLine: " + response.getStatusLine());
-        //+ "[DBG] Response string: " + response.toString());
+        System.out.println("[DBG] " + (finish - start) + "ms request, " +
+                "Response getStatusLine: " + response.getStatusLine());
 
         BufferedReader reader = new BufferedReader(new InputStreamReader(response.getEntity().getContent(), "UTF-8"));
         StringBuilder body = new StringBuilder();
         for (String line; (line = reader.readLine()) != null; ) {
             System.out.println("[DBG] Response body: " + body.append(line).append("\n"));
         }
-
-        /*if (response.getStatusLine().getStatusCode() != 200) {
-            //assert(response.getStatusLine().getStatusCode(), equalTo(200));
-            System.out.println("getStatusCode != 200");
-        }*/
+        if(!body.toString().contains("\"message\":\"SUCCESS\"")){ log.warning("no message:SUCCESS in body!"); }
 
         return response.getStatusLine().getStatusCode();
     }
 
     int Change_registration(String macaddress, String charterapi, String ams_ip) throws IOException {
-        System.out.println("[DBG] [date] Change_registration:");
-                //+ "\n[DBG] used charterapi: " + charterapi
-                //+ "\n[DBG] used ams:port " + ams_ip + ":" + ams_port);
+        log.info("Change_registration via charterapi: " + charterapi + ", ams: " + ams_ip);
 
         String postfix = "?requestor=AMS";
         String url = charterapi + postfix;
@@ -157,186 +233,54 @@ class Middle_old {
         HttpPost request = new HttpPost(url);
 
         String json_change_registration = "{\"setting\":{\"groups\":[{\"options\":[],\"id\":\"STB" + macaddress + "\",\"type\":\"device-stb\",\"amsid\":\"" + ams_ip + "\"}]}}";
-        String json_purge = "{\"deviceId\":" + macaddress + ",\"reminders\":[{\"operation\":\"Purge\"}]}";
-
         StringEntity entity = new StringEntity(json_change_registration);
         request.setEntity(entity);
-        request.setHeader("Accept", "application/json");
         request.setHeader("Content-type", "application/json");
+        //request.setHeader("Accept", "application/json");
         System.out.println("[DBG] Request string: " + request
                 + "\n[DBG] Request json string: " + json_change_registration);
-                //+ "\n[DBG] Request entity: " + request.getEntity()
-                //+ "\n[DBG] Request headers: " + request.getAllHeaders());
+        //+ "\n[DBG] Request entity: " + request.getEntity()
+        //+ "\n[DBG] Request headers: " + request.getAllHeaders());
 
         long start = System.currentTimeMillis();
         HttpResponse response = client.execute(request);
         long finish = System.currentTimeMillis();
-        System.out.println("[DBG] " + (finish-start) + "ms request");
-        System.out.println("[DBG] Response getStatusLine: " + response.getStatusLine());
-        //+ "[DBG] Response string: " + response.toString());
+        System.out.println("[DBG] " + (finish - start) + "ms request, " +
+                "Response getStatusLine: " + response.getStatusLine());
 
         BufferedReader reader = new BufferedReader(new InputStreamReader(response.getEntity().getContent(), "UTF-8"));
         StringBuilder body = new StringBuilder();
         for (String line = null; (line = reader.readLine()) != null; ) {
-            System.out.println("[DBG] Response body: " + body.append(line).append("\n"));
+            body.append(line);
+            //System.out.println("[DBG] Response body: " + body.append(line).append("\n"));
         }
+        if(!body.toString().contains("\"message\":\"SUCCESS\"")){ log.warning("no message:SUCCESS in body!"); }
+
         return response.getStatusLine().getStatusCode();
     }
 
-    int Add(String macaddress, int count_reminders) throws IOException, InterruptedException {
-        System.out.println("[DBG] [date] Add: for macaddress=" + macaddress + ", "
-                + "count_reminders=" + count_reminders + ", "
-                + "count_iterations=" + count_iterations + ", "
-                + "reminderOffset=" + reminderOffset + ", "
-                + "data count=" + rack_date.length + ", "
-                + "channel count=" + rack_channel.length);
-
-        String url = "http://" + ams_ip + ":" + ams_port + postfix_change;
-        HttpClient client = HttpClients.createDefault();
-        HttpPost request = new HttpPost(url);
-
-        if (count_reminders == 48) {
-            rack_time = rack_time48;
-        }
-        else if (count_reminders == 288){
-            rack_time = rack_time288;
-        }
-        else if(count_reminders == 720){
-            rack_time = rack_time720;
-        }
-        else rack_time = rack_time48;
-
-        for (int c = 1; c <= count_iterations; c++) {
-            for (int j = 0; j < rack_date.length; j++) {
-                for (int k = 0; k < rack_channel.length; k++) {
-                    System.out.println("[DBG] [date] Add iteration=" + c + "/" + count_iterations + ", channel=" + rack_channel[k]);
-
-                    String json = Generate_json(macaddress, count_reminders, "Add", rack_channel[k], rack_date[j], rack_time, reminderProgramId, reminderOffset);
-                    System.out.println(json);
-                    StringEntity entity = new StringEntity(json);
-                    request.setEntity(entity);
-
-                    //request.setHeader("Accept", "application/json");
-                    //request.setHeader("Content-type", "application/json");
-                    //request.setHeader("Content-type", "text/plain");
-                    //request.setHeader("User-Agent","curl/7.58.0");
-                    //request.setHeader("Charset", "UTF-8");
-
-                    System.out.println("[DBG] Request string: " + request
-                            //+ "\n[DBG] Request entity: " + request.getEntity());
-                            + "\n[DBG] [date]: iteration=" + c + "/" + count_iterations + ", date=" + rack_date[j] + ", channel=" + rack_channel[k]);
-
-                    long start = System.currentTimeMillis();
-                    HttpResponse response = client.execute(request);
-                    long finish = System.currentTimeMillis();
-                    System.out.println("[DBG] " + (finish-start) + "ms request");
-                    System.out.println("[DBG] Response getStatusLine: " + response.getStatusLine());
-                            //+ "[DBG] Response string: " + response.toString());
-
-                    BufferedReader reader = new BufferedReader(new InputStreamReader(response.getEntity().getContent(), "UTF-8"));
-                    StringBuilder body = new StringBuilder();
-                    for (String line = null; (line = reader.readLine()) != null; ) {
-                        System.out.println("[DBG] Response body: " + body.append(line).append("\n"));
-                    }
-                    Thread.sleep(1000);
-                    result = response.getStatusLine().getStatusCode();
-                    if (result != 200) {
-                        break;
-                    }
-                }
-                if (result != 200) {
-                    break;
-                }
-            }
-        }
-        return result;
-    }
-
-
-
-    int Delete(String macaddress, int count_reminders) throws IOException, InterruptedException {
-        System.out.println("[DBG] [date] Edit: for macaddress=" + macaddress + ", "
-                + "count_reminders=" + count_reminders + ", "
-                + "count_iterations=" + count_iterations + ", "
-                + "reminderOffset=" + reminderOffset + ", "
-                + "data count=" + rack_date.length + ", "
-                + "channel count=" + rack_channel.length);
-
-        String url = "http://" + ams_ip + ":" + ams_port + postfix_change;
-        HttpClient client = HttpClients.createDefault();
-        HttpPost request = new HttpPost(url);
-
-        for (int c = 1; c <= count_iterations; c++) {
-            for (int j = 0; j < rack_date.length; j++) {
-                for (int k = 0; k < rack_channel.length; k++) {
-                    System.out.println("[DBG] [date] Delete iteration=" + c + "/" + count_iterations + ", channel=" + rack_channel[k]);
-
-                    StringEntity entity = new StringEntity(Generate_json(macaddress, count_reminders, "Delete", rack_channel[k], rack_date[j], rack_time, reminderProgramId, reminderOffset));
-
-                    request.setEntity(entity);
-                    request.setHeader("Accept", "application/json");
-                    request.setHeader("Content-type", "application/json");
-                    //request.setHeader("Content-type", "text/plain");
-                    //request.setHeader("User-Agent","curl/7.58.0");
-                    //request.setHeader("Charset", "UTF-8");
-
-                    System.out.println("[DBG] Request string: " + request
-                            //+ "\n[DBG] Request json string: " + json
-                            //+ "\n[DBG] Request entity: " + request.getEntity());
-                            + "\n[DBG] [date]: iteration=" + c + "/" + count_iterations + ", date=" + rack_date[j] + ", channel=" + rack_channel[k]);
-
-                    long start = System.currentTimeMillis();
-                    HttpResponse response = client.execute(request);
-                    long finish = System.currentTimeMillis();
-                    System.out.println("[DBG] " + (finish-start) + "ms request");
-                    System.out.println("[DBG] Response getStatusLine: " + response.getStatusLine());
-                    //+ "[DBG] Response string: " + response.toString());
-
-                    BufferedReader reader = new BufferedReader(new InputStreamReader(response.getEntity().getContent(), "UTF-8"));
-                    StringBuilder body = new StringBuilder();
-                    for (String line = null; (line = reader.readLine()) != null; ) {
-                        System.out.println("[DBG] Response body: " + body.append(line).append("\n"));
-                    }
-                    Thread.sleep(1000);
-                    result = response.getStatusLine().getStatusCode();
-                    if (result != 200) {
-                        break;
-                    }
-                }
-                if (result != 200) {
-                    break;
-                }
-            }
-        }
-        return result;
-    }
-
-
-
     String Generate_json(String macaddress, int count_remindres, String operation, String reminderChannelNumber, String date, String rack_time[], int reminderProgramId, int reminderOffset) {
-        System.out.println("[DBG] [date] Generate_json: with date=" + date + ", " +
-                "count_reminders=" + count_remindres + ", " +
+        log.fine("Generate_json: with macaddress=" + macaddress + ", " +
                 "operation=" + operation + ", " +
+                "date=" + date + ", " +
+                "count_reminders=" + count_remindres + ", " +
+                "reminderChannelNumber=" + reminderChannelNumber + ", " +
+                "reminderProgramId=" + reminderProgramId + ", " +
                 "reminderOffset=" + reminderOffset);
 
         String json_change = "{\"setting\":{\"groups\":[{\"options\":[],\"id\":\"STB" + macaddress + "\",\"type\":\"device-stb\",\"amsid\":\"" + ams_ip + "\"}]}}";
-
-        //String json1 = "{\"deviceId\":" + macaddress + ",\"reminders\":[{\"operation\":" + operation + ", \"reminderChannelNumber\":" + reminderChannelNumber + ", \"reminderProgramStart\":" + reminderProgramStart + ", \"reminderProgramId\":" + reminderProgramId + ", \"reminderOffset\":" + reminderOffset + "}]}";
-        //String json2 = "{\"deviceId\":" + macaddress + ",\"reminders\":[{\"operation\": \"Delete\", \"reminderChannelNumber\":" + reminderChannelNumber + ", \"reminderProgramStart\":" + reminderProgramStart + ", \"reminderProgramId\":" + reminderProgramId + ", \"reminderOffset\":" + reminderOffset + "},{\"operation\":" + operation + ", \"reminderChannelNumber\":" + reminderChannelNumber + ", \"reminderProgramStart\":" + reminderProgramStart + ", \"reminderProgramId\":" + reminderProgramId + ", \"reminderOffset\":" + reminderOffset + "}]}";
-
 
 /*        ArrayList<String> date = new ArrayList<>(count_remindres);
         System.out.println("date.size(): " + date.size());
         for (int i = 0; i < date.size(); i++) {
             System.out.println("date.get(i): " + date.get(i));
         }
-*/
-/*        ArrayList<String> channel = new ArrayList<>();
+        ArrayList<String> channel = new ArrayList<>();
         for (int i=0; i<rack_channel.length; i++) {
             channel.add(Arrays.toString(rack_channel));
             System.out.println("date.get(i): " + channel.get(i));
-        }
-*/
+        }*/
+
         JSONObject resultJson = new JSONObject();
         resultJson.put("deviceId", macaddress);
 
@@ -355,7 +299,7 @@ class Middle_old {
         return resultJson.toJSONString();
     }
 
-    String Generate_json2(String date, int count_remindres, String operation, int reminderOffset) {
+    String Generate_json_test(String date, int count_remindres, String operation, int reminderOffset) {
         System.out.println("[DBG] [date] Generate_json: with date=" + date + ", " +
                 "count_reminders=" + count_remindres + ", " +
                 "operation=" + operation + ", " +
@@ -420,100 +364,4 @@ class Middle_old {
     return "";
     }
 
-    @Deprecated
-    int Edit(String macaddress, int count_reminders, int reminderOffset, int reminderOffset_new) throws IOException {
-        System.out.println("[DBG] [date] Edit: for macaddress=" + macaddress + ", "
-                + "count_reminders=" + count_reminders + ", "
-                + "count_iterations=" + count_iterations + ", "
-                + "reminderOffset=" + reminderOffset + ", "
-                + "reminderOffset_new=" + reminderOffset_new + ", "
-                + "date count=" + rack_date.length + ", "
-                + "channel count=" + rack_channel.length);
-
-        String url = "http://" + ams_ip + ":" + ams_port + postfix_change;
-        HttpClient client = HttpClients.createDefault();
-        HttpPost request = new HttpPost(url);
-
-        for (int c = 1; c <= count_iterations; c++) {
-            for (int j = 0; j <= rack_date.length; j++) {
-                for (int k = 0; k <= rack_channel.length; k++) {
-                    System.out.println("[DBG] [date] Edit(Delete) iteration=" + c + "/" + count_iterations + ", channel=" + rack_channel[k]);
-
-                    StringEntity entity = new StringEntity(Generate_json(macaddress, count_reminders, "Delete", rack_channel[k], rack_date[j], rack_time, reminderProgramId, reminderOffset));
-                    request.setEntity(entity);
-                    request.setHeader("Accept", "application/json");
-                    //request.setHeader("Content-type", "application/json");
-                    //request.setHeader("Content-type", "text/plain");
-                    //request.setHeader("charset", "UTF-8");
-
-                    System.out.println("[DBG] Request string: " + request
-                            //+ "\n[DBG] Request json string: " + json_delete48_add48
-                            + "\n[DBG] Request entity: " + request.getEntity()
-                            + "\n[DBG] date: Edit(delete48 + add48) reminderOffset=" + reminderOffset + ", reminderOffset_new=" + reminderOffset_new + ", iteration=" + c + "/" + count_iterations + ", macaddress=" + macaddress + ", data=" + rack_date[j] + ", channel=" + rack_channel[k]);
-
-                    long start = System.currentTimeMillis();
-                    HttpResponse response = client.execute(request);
-                    long finish = System.currentTimeMillis();
-                    System.out.println("[DBG] " + (finish-start) + "ms request");
-                    System.out.println("[DBG] Response getStatusLine: " + response.getStatusLine());
-                    //+ "[DBG] Response string: " + response.toString());
-
-                    BufferedReader reader = new BufferedReader(new InputStreamReader(response.getEntity().getContent(), "UTF-8"));
-                    StringBuilder body = new StringBuilder();
-                    for (String line = null; (line = reader.readLine()) != null; ) {
-                        System.out.println("[DBG] Response body: " + body.append(line).append("\n"));
-                    }
-                    result = response.getStatusLine().getStatusCode();
-                    if (result != 200) {
-                        break;
-                    }
-                }
-                if (result != 200) {
-                    break;
-                }
-            }
-        }
-
-
-        for (int c = 1; c <= count_iterations; c++) {
-            for (int j = 0; j <= rack_date.length; j++) {
-                for (int k = 0; k <= rack_channel.length; k++) {
-                    System.out.println("[DBG] [date] Edit(Add) iteration=" + c + "/" + count_iterations + ", channel=" + rack_channel[k]);
-
-                    StringEntity entity = new StringEntity(Generate_json(macaddress, count_reminders, "Add", rack_channel[k], rack_date[j], rack_time, reminderProgramId, reminderOffset));
-                    request.setEntity(entity);
-                    request.setHeader("Accept", "application/json");
-                    //request.setHeader("Content-type", "application/json");
-                    //request.setHeader("Content-type", "text/plain");
-                    //request.setHeader("charset", "UTF-8");
-
-                    System.out.println("[DBG] Request string: " + request
-                            //+ "\n[DBG] Request json string: " + json_delete48_add48
-                            + "\n[DBG] Request entity: " + request.getEntity()
-                            + "\n[DBG] date: Edit(delete48 + add48) reminderOffset=" + reminderOffset + ", reminderOffset_new=" + reminderOffset_new + ", iteration=" + c + "/" + count_iterations + ", macaddress=" + macaddress + ", data=" + rack_date[j] + ", channel=" + rack_channel[k]);
-
-                    long start = System.currentTimeMillis();
-                    HttpResponse response = client.execute(request);
-                    long finish = System.currentTimeMillis();
-                    System.out.println("[DBG] " + (finish-start) + "ms request");
-                    System.out.println("[DBG] Response getStatusLine: " + response.getStatusLine());
-                    //+ "[DBG] Response string: " + response.toString());
-
-                    BufferedReader reader = new BufferedReader(new InputStreamReader(response.getEntity().getContent(), "UTF-8"));
-                    StringBuilder body = new StringBuilder();
-                    for (String line = null; (line = reader.readLine()) != null; ) {
-                        System.out.println("[DBG] Response body: " + body.append(line).append("\n"));
-                    }
-                    result = response.getStatusLine().getStatusCode();
-                    if (result != 200) {
-                        break;
-                    }
-                }
-                if (result != 200) {
-                    break;
-                }
-            }
-        }
-        return result;
-    }
 }
