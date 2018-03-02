@@ -152,7 +152,7 @@ public class Test_reminder {
 */
         //param = args[2];
 
-        Middle_old old_api = new Middle_old();
+        Middle old_api = new Middle();
         Middle_new new_api = new Middle_new();
 
         System.out.println("[DBG] used macaddress=" + macaddress + ", operation=" + operation + ", param="+param);

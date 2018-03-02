@@ -6,19 +6,14 @@ import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.HttpClients;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
-import org.junit.After;
 
 import java.io.*;
 import java.util.ArrayList;
-import java.util.Date;
-import java.util.Objects;
-import java.util.logging.FileHandler;
-import java.util.logging.Level;
 import java.util.logging.Logger;
 
-class Middle_old {
+class Middle {
 
-    final static Logger log = Logger.getLogger(Middle_old.class.getName());
+    final static Logger log = Logger.getLogger(Middle.class.getName());
     //FileHandler txtFile = new FileHandler ("log.log", true);
     //private FileHandler fh = new FileHandler("test_reminder.log");
 
@@ -27,17 +22,19 @@ class Middle_old {
 
     //String ams_ip = "172.30.81.4";
     String ams_ip = "172.30.112.19";
+    //String ams_ip = "172.30.82.132";
     int ams_port = 8080;
 
     int result = 0;
-    int count_iterations = 1;
+    int count_iterations = 100;
 
     //for Add/Delete/Operation methods in Middle old/new
     int reminderProgramId = 0;
     int reminderOffset = 0;
 
     /*private static String statuscode = "code of the reminder processing result, one of the following:" +
-            "\n0 - requested action with the reminder was accomplished successfully" +
+            "\
+            sted action with the reminder was accomplished successfully" +
             "\n2 - reminder is set for time in the past" +
             "\n3 - reminder is set for unknown channel" +
             "\n4 - reminder is unknown, applies to reminder deletion attempts";*/
@@ -154,6 +151,7 @@ class Middle_old {
                 for (String aRack_channel : rack_channel) {
                     log.info(operation + " iteration=" + c + "/" + count_iterations + ", date=" + aRack_date + ", channel=" + aRack_channel);
 
+
                     StringEntity entity = new StringEntity(Generate_json(macaddress, count_reminders, operation, aRack_channel, aRack_date, get_rack_time(count_reminders), reminderProgramId, reminderOffset));
                     request.setEntity(entity);
 
@@ -189,6 +187,7 @@ class Middle_old {
                 }
                 if (result != 200) { break; }
             }
+            if (result != 200) { break; }
         }
         return result;
     }

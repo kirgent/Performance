@@ -3,7 +3,6 @@ import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.HttpClients;
-import org.junit.After;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -11,7 +10,7 @@ import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.Objects;
 
-class Middle_new extends Middle_old{
+class Middle_new extends Middle {
 
     //new API
     //https://chalk.charter.com/pages/viewpage.action?pageId=115175031
@@ -77,10 +76,10 @@ class Middle_new extends Middle_old{
                     if(body.toString().contains("\"statusCode\":4")){ log.warning("one or more statusCode's = "+ statuscode[4]); }
 
                     if (result != 200) { break; }
-                    //Thread.sleep(1000);
                 }
                 if (result != 200) { break; }
             }
+            if (result != 200) { break; }
         }
         return result;
     }
@@ -136,10 +135,10 @@ class Middle_new extends Middle_old{
                     if(body.toString().contains("\"statusCode\":4")){ log.warning("one or more statusCode's = "+ statuscode[4]); }
 
                     if (result != 200) { break; }
-                    //Thread.sleep(1000);
                 }
                 if (result != 200) { break; }
             }
+            if (result != 200) { break; }
         }
         return result;
     }
@@ -193,11 +192,11 @@ class Middle_new extends Middle_old{
                     if(body.toString().contains("\"statusCode\":3")){ log.warning("one or more statusCode's = "+ statuscode[3]); }
                     if(body.toString().contains("\"statusCode\":4")){ log.warning("one or more statusCode's = "+ statuscode[4]); }
 
-                    //Thread.sleep(1000);
                     if (result != 200) { break; }
                 }
                 if (result != 200) { break; }
             }
+            if (result != 200) { break; }
         }
         return result;
     }
@@ -278,14 +277,7 @@ class Middle_new extends Middle_old{
                 + "data count=" + rack_date.length + ", "
                 + "channel count=" + rack_channel.length);
 
-        String url = "";
-        if (Objects.equals(operation, "Add")){
-            url = "http://" + ams_ip + ":" + ams_port + postfix_add;
-        } else if(Objects.equals(operation, "Modify")){
-            url = "http://" + ams_ip + ":" + ams_port + postfix_modify;
-        } else if(Objects.equals(operation, "Delete")){
-            url = "http://" + ams_ip + ":" + ams_port + postfix_delete;
-        }
+        String url = "http://" + ams_ip + ":" + ams_port + get_postfix(operation);
         HttpClient client = HttpClients.createDefault();
         HttpPost request = new HttpPost(url);
 
@@ -324,12 +316,20 @@ class Middle_new extends Middle_old{
                     if(body.toString().contains("\"statusCode\":3")){ log.warning("one or more statusCode's = "+ statuscode[3]); }
                     if(body.toString().contains("\"statusCode\":4")){ log.warning("one or more statusCode's = "+ statuscode[4]); }
 
-                    //Thread.sleep(1000);
                     if (result != 200) { break; }
                 }
                 if (result != 200) { break; }
             }
+            if (result != 200) { break; }
         }
+        return result;
+    }
+
+    private String get_postfix(String operation) {
+        String result = "";
+        if (Objects.equals(operation, "Add")){ result = postfix_add; }
+        else if(Objects.equals(operation, "Modify")){ result = postfix_modify; }
+        else if(Objects.equals(operation, "Delete")) { result = postfix_delete; }
         return result;
     }
 

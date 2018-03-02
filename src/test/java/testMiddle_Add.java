@@ -1,4 +1,6 @@
+import junit.extensions.RepeatedTest;
 import org.junit.Ignore;
+import org.junit.Rule;
 import org.junit.Test;
 
 import java.io.IOException;
@@ -13,7 +15,7 @@ public class testMiddle_Add extends testMiddle {
     @Test
     public void testAdd_48rems() throws IOException, InterruptedException {
         long start = System.currentTimeMillis();
-        int actual = old_api.Operation("Add", macaddress, 48);
+        int actual = old_api.Operation("Add", macaddress, 1);
         long finish = System.currentTimeMillis();
         System.out.println("[DBG] " + (finish-start) + "ms test, " + "return code: " + actual);
         assertEquals(expected200, actual);
