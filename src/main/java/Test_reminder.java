@@ -39,24 +39,20 @@ public class Test_reminder {
         String newstring = new SimpleDateFormat("yyyy-MM-dd").format(date);
         System.out.println(newstring); // 2011-01-18 */
 
-        int count_reminders_by_default = 2;
-        int count_reminders = count_reminders_by_default;
+        int count_reminders = 2;
+        int count_iterations = 10;
 
-
-        //String ams_ip_by_default = "172.30.81.4";
-        String ams_ip_by_default = "172.30.112.19" ;
-        //String ams_ip = ams_ip_by_default;
+        //String ams_ip_default = "172.30.81.4";
+        String ams_ip_default = "172.30.112.19";
 
 
         String charterapi_ = "http://spec.partnerapi.engprod-charter.net/api/pub/networksettingsmiddle/ns/settings";
         String charterapi_b = "http://specb.partnerapi.engprod-charter.net/api/pub/networksettingsmiddle/ns/settings";
         String charterapi_c = "http://specc.partnerapi.engprod-charter.net/api/pub/networksettingsmiddle/ns/settings";
         String charterapi_d = "http://specd.partnerapi.engprod-charter.net/api/pub/networksettingsmiddle/ns/settings";
-        String charterapi_by_default = charterapi_b;
+        String charterapi = charterapi_b;
 
-
-        String macaddress_by_default = "6CB56BBA882C";
-        String macaddress = macaddress_by_default;
+        String macaddress = "6CB56BBA882C";
         String operation = "";
         String param = "";
 
@@ -87,9 +83,9 @@ public class Test_reminder {
                 "\n\tReminders MACADDRESS Delete [48][288][576]- delete reminders (accordingly 48/288/576)" +
                 "\n\tReminders MACADDRESS All [48][288][576] - add + edit + delete reminders (accordingly 48/288/576)" +
                 "\nCURRENT SETTINGS" +
-                "\n\tused AMS: " + ams_ip_by_default +
-                "\n\tused charterapi: " + charterapi_by_default +
-                "\n\tused count of reminders in one request: " + count_reminders_by_default +
+                "\n\tused AMS: " + ams_ip_default +
+                "\n\tused charterapi: " + charterapi +
+                "\n\tused count of reminders in one request: " + count_reminders +
                 //"\n\tused count iterations: " + count_iterations +
                 "\nSTATUSCODE" +
                 "\n\tcode of the reminder processing result, one of the following:" +
@@ -137,7 +133,7 @@ public class Test_reminder {
                     case "48": count_reminders=48; break;
                     case "288": count_reminders=288; break;
                     case "720": count_reminders=720;break;
-                    default: count_reminders=count_reminders_by_default;
+                    default: count_reminders=48;
                 }
             }
         }
@@ -152,24 +148,23 @@ public class Test_reminder {
 */
         //param = args[2];
 
-        Middle old_api = new Middle();
-        Middle_new new_api = new Middle_new();
+        Middle api = new Middle();
 
         System.out.println("[DBG] used macaddress=" + macaddress + ", operation=" + operation + ", param="+param);
         switch (operation){
             case "Check":
-            case "check": old_api.Check_registration(macaddress, charterapi_by_default); break;
+            case "check": api.Check_registration(macaddress, charterapi); break;
             case "Change":
-            case "change": old_api.Change_registration(macaddress, charterapi_by_default, ams_ip_by_default); break;
+            case "change": api.Change_registration(macaddress, charterapi, ams_ip_default); break;
             case "Purge":
-            case "purge": old_api.Purge(macaddress); break;
-            case "Add":
-            case "add": old_api.Operation("Add", macaddress, count_reminders); break;
+            case "purge": api.Purge(macaddress, ams_ip_default); break;
+            //case "Add":
+            //case "add": api.Operation("Add", macaddress, count_reminders, count_iterations, ams_ip_default); break;
             case "Modify":
-            case "modify": new_api.Operation("Modify", macaddress, count_reminders, reminderChannelNumber, reminderProgramStart, reminderProgramId, reminderOffset, reminderScheduleId, reminderId); break;
-            case "Delete":
-            case "delete": old_api.Operation("Delete", macaddress, count_reminders); break;
-            default: old_api.Check_registration(macaddress, charterapi_by_default);
+            case "modify": api.Operation2("Modify", macaddress, count_reminders, ams_ip_default, reminderChannelNumber, reminderProgramStart, reminderProgramId, reminderOffset, reminderScheduleId, reminderId); break;
+            //case "Delete":
+            //case "delete": api.Operation("Delete", macaddress, count_reminders, count_iterations, ams_ip_default); break;
+            default: api.Check_registration(macaddress, charterapi);
         }
     }
 }
