@@ -1,16 +1,16 @@
-import org.junit.Ignore;
-import org.junit.Test;
+import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
 import java.util.ArrayList;
 
 import static org.junit.Assert.assertEquals;
 
-public class testAMS_Change_registration extends testAMS {
+class testAMS_Change_registration extends testAMS {
 
     //@Test(timeout = 20000)
     @Test
-    public void testChange_registration_via_charterapi_() throws IOException, InterruptedException {
+    void testChange_registration_via_charterapi_() throws IOException, InterruptedException {
         long start = System.currentTimeMillis();
         ArrayList actual = api.Change_registration(macaddress, charterapi_, ams_ip);
         long finish = System.currentTimeMillis();
@@ -21,7 +21,7 @@ public class testAMS_Change_registration extends testAMS {
 
     //@Test(timeout = 20000)
     @Test
-    public void testChange_registration_via_charterapi_b() throws IOException, InterruptedException {
+    void testChange_registration_via_charterapi_b() throws IOException, InterruptedException {
         long start = System.currentTimeMillis();
         ArrayList actual = api.Change_registration(macaddress, charterapi_b, ams_ip);
         long finish = System.currentTimeMillis();
@@ -33,7 +33,7 @@ public class testAMS_Change_registration extends testAMS {
 
     //@Test(timeout = 20000)
     @Test
-    public void testChange_registration_via_charterapi_c() throws IOException, InterruptedException {
+    void testChange_registration_via_charterapi_c() throws IOException, InterruptedException {
         long start = System.currentTimeMillis();
         ArrayList actual = api.Change_registration(macaddress, charterapi_c, ams_ip);
         long finish = System.currentTimeMillis();
@@ -45,7 +45,7 @@ public class testAMS_Change_registration extends testAMS {
 
     //@Test(timeout = 20000)
     @Test
-    public void testChange_registration_via_charterapi_d() throws IOException, InterruptedException {
+    void testChange_registration_via_charterapi_d() throws IOException, InterruptedException {
         long start = System.currentTimeMillis();
         ArrayList actual = api.Change_registration(macaddress, charterapi_d, ams_ip);
         long finish = System.currentTimeMillis();
@@ -55,9 +55,9 @@ public class testAMS_Change_registration extends testAMS {
         assertEquals("SUCCESS", actual.get(2));
     }
 
-    @Ignore
-    @Test(timeout = 20000)
-    public void testChange_registration_to_invalid_ams127_0_0_1() throws IOException, InterruptedException {
+    @Test
+    @Disabled
+    void testChange_registration_to_invalid_ams127_0_0_1() throws IOException, InterruptedException {
         long start = System.currentTimeMillis();
         ArrayList actual = api.Change_registration(macaddress, charterapi_by_default, "127.0.0.1");
         long finish = System.currentTimeMillis();

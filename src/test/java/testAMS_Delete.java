@@ -1,11 +1,11 @@
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
 import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-public class testAMS_Delete extends testAMS {
+class testAMS_Delete extends testAMS {
 
     /*public testAMS_Delete(){
         expected.add(0,"200");
@@ -14,9 +14,9 @@ public class testAMS_Delete extends testAMS {
     }*/
 
     @Test
-    public void testDelete_48() throws IOException, InterruptedException {
+    void testDelete_48() throws IOException, InterruptedException {
         long start = System.currentTimeMillis();
-        ArrayList actual = api.Operation("Delete", macaddress, 48, count_iterations, ams_ip, rack_date);
+        ArrayList actual = api.Operation(ams_ip, macaddress, "Delete", 48, count_iterations, rack_date);
         long finish = System.currentTimeMillis();
         System.out.println("[DBG] " + (finish-start) + "ms test, " + "return code: " + actual);
         assertEquals(expected200, actual.get(0));
@@ -25,9 +25,9 @@ public class testAMS_Delete extends testAMS {
     }
 
     @Test
-    public void testDelete_288() throws IOException, InterruptedException {
+    void testDelete_288() throws IOException, InterruptedException {
         long start = System.currentTimeMillis();
-        ArrayList actual = api.Operation("Delete", macaddress, 288, count_iterations, ams_ip, rack_date);
+        ArrayList actual = api.Operation(ams_ip, macaddress, "Delete", 288, count_iterations, rack_date);
         long finish = System.currentTimeMillis();
         System.out.println("[DBG] " + (finish-start) + "ms test, return code: " + actual);
         assertEquals(expected200, actual.get(0));
@@ -36,10 +36,10 @@ public class testAMS_Delete extends testAMS {
     }
 
     @Test
-    public void testDelete_720() throws IOException, InterruptedException {
+    void testDelete_720() throws IOException, InterruptedException {
         long start = System.currentTimeMillis();
         //ArrayList actual = api.Operation("Delete", macaddress, 720, count_iterations, ams_ip);
-        ArrayList actual = api.Operation("Delete", macaddress, 720, count_iterations, ams_ip, rack_date);
+        ArrayList actual = api.Operation(ams_ip, macaddress, "Delete", 720, count_iterations, rack_date);
         long finish = System.currentTimeMillis();
         System.out.println("[DBG] " + (finish-start) + "ms test, return code: " + actual);
         assertEquals(expected200, actual.get(0));
@@ -48,9 +48,9 @@ public class testAMS_Delete extends testAMS {
     }
 
     @Test
-    public void testDelete_statusCode2() throws IOException, InterruptedException {
+    void testDelete_statusCode2() throws IOException, InterruptedException {
         long start = System.currentTimeMillis();
-        ArrayList actual = api.Operation("Delete", macaddress, count_reminders_by_default, count_iterations, ams_ip, rack_date_statuscode2);
+        ArrayList actual = api.Operation(ams_ip, macaddress, "Delete", count_reminders_by_default, count_iterations, rack_date_for_statuscode2);
         long finish = System.currentTimeMillis();
         System.out.println("[DBG] " + (finish-start) + "ms test, " + "return code: " + actual);
         assertEquals(expected200, actual.get(0));
@@ -63,9 +63,9 @@ public class testAMS_Delete extends testAMS {
      * @throws InterruptedException
      */
     @Test
-    public void testDelete_statusCode3() throws IOException, InterruptedException {
+    void testDelete_statusCode3() throws IOException, InterruptedException {
         long start = System.currentTimeMillis();
-        ArrayList actual = api.Operation("Delete", macaddress, count_reminders_by_default, count_iterations, ams_ip, rack_date);
+        ArrayList actual = api.Operation(ams_ip, macaddress, "Delete", count_reminders_by_default, count_iterations, rack_date);
         long finish = System.currentTimeMillis();
         System.out.println("[DBG] " + (finish-start) + "ms test, " + "return code: " + actual);
         assertEquals(expected200, actual.get(0));
@@ -78,9 +78,9 @@ public class testAMS_Delete extends testAMS {
      * @throws InterruptedException
      */
     @Test
-    public void testDelete_statusCode4() throws IOException, InterruptedException {
+    void testDelete_statusCode4() throws IOException, InterruptedException {
         long start = System.currentTimeMillis();
-        ArrayList actual = api.Operation("Delete", macaddress, count_reminders_by_default, count_iterations, ams_ip, rack_date);
+        ArrayList actual = api.Operation(ams_ip, macaddress, "Delete", count_reminders_by_default, count_iterations, rack_date);
         long finish = System.currentTimeMillis();
         System.out.println("[DBG] " + (finish-start) + "ms test, " + "return code: " + actual);
         assertEquals(expected200, actual.get(0));
@@ -93,9 +93,9 @@ public class testAMS_Delete extends testAMS {
      * @throws InterruptedException
      */
     @Test
-    public void testDelete_statusCode5() throws IOException, InterruptedException {
+    void testDelete_statusCode5() throws IOException, InterruptedException {
         long start = System.currentTimeMillis();
-        ArrayList actual = api.Operation("Delete", macaddress, count_reminders_by_default, count_iterations, ams_ip, rack_date);
+        ArrayList actual = api.Operation(ams_ip, macaddress, "Delete", count_reminders_by_default, count_iterations, rack_date);
         long finish = System.currentTimeMillis();
         System.out.println("[DBG] " + (finish-start) + "ms test, " + "return code: " + actual);
         assertEquals(expected200, actual.get(0));
@@ -104,9 +104,9 @@ public class testAMS_Delete extends testAMS {
     }
 
     @Test
-    public void testDelete_with_empty_macaddress() throws IOException, InterruptedException {
+    void testDelete_with_empty_macaddress() throws IOException, InterruptedException {
         long start = System.currentTimeMillis();
-        ArrayList actual = api.Operation("Delete", "", count_reminders_by_default, count_iterations, ams_ip, rack_date);
+        ArrayList actual = api.Operation(ams_ip, "","Delete", count_reminders_by_default, count_iterations, rack_date);
         long finish = System.currentTimeMillis();
         System.out.println("[DBG] " + (finish-start) + "ms test, return code: " + actual);
         assertEquals("400", actual.get(0));

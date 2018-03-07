@@ -22,25 +22,28 @@ public class testAMS {
     //String notes="kir 1.1"
     //String macaddress = "6CB56BBA882C";
 
-    String Notes = "KirD104";
+    String notes = "WB20 D104";
     String macaddress = "3438B7EB2E34";
 
-    //String Notes = "Kirmoto";
+    //String notes = "WB20 D106";
+    //String macaddress = "3438B7EB2EC4";
+
+    //String notes = "Kirmoto";
     //String macaddress = "0000007F8214";
 
-    //String Notes = "Tanya";
+    //String notes = "Tanya";
     //String macaddress = "000005FE680A";
 
-    //String Notes = "Vitya";
+    //String notes = "Vitya";
     //String macaddress = "A0722CEEC934";
 
-    //String Notes = "Katya_V";
+    //String notes = "Katya_V";
     //String macaddress = "0000048D4EB4";
 
     int count_iterations = 1;
 
     String[] rack_date = { "2018-03-08" };
-    String[] rack_date_statuscode2 = { "2000-01-01" };
+    String[] rack_date_for_statuscode2 = { "2000-01-01" };
 
     String charterapi_ = "http://spec.partnerapi.engprod-charter.net/api/pub/networksettingsmiddle/ns/settings";
     String charterapi_b = "http://specb.partnerapi.engprod-charter.net/api/pub/networksettingsmiddle/ns/settings";
@@ -109,23 +112,25 @@ public class testAMS {
     @Test
     public void testPurge() throws IOException {
         long start = System.currentTimeMillis();
-        ArrayList actual = api.Purge(macaddress, ams_ip);
+        ArrayList actual = api.Purge(ams_ip, macaddress);
         long finish = System.currentTimeMillis();
         System.out.println("[DBG] " + (finish-start) + "ms test, return code: " + actual);
         assertEquals(expected200, actual.get(0));
-        //assertArrayEquals(expected200, actual.get(0), "SUCCESS", actual.get(1));
-        //assertEquals("SUCCESS", "SUCCESS", actual.get(1));
+        assertEquals(expected200t, actual.get(1));
+        assertEquals("", actual.get(2));
+
     }
 
     @Test
     @Ignore
     public void testPurge_REM_ST_01_Box_is_not_registered() throws IOException {
         long start = System.currentTimeMillis();
-        ArrayList actual = api.Purge(macaddress, ams_ip);
+        ArrayList actual = api.Purge(ams_ip, macaddress);
         long finish = System.currentTimeMillis();
         System.out.println("[DBG] " + (finish-start) + "ms test, return code: " + actual);
         assertEquals(expected500, actual.get(0));
-        assertEquals("REM-ST-001 Box is not registered", "REM-ST-001 Box is not registered", actual.get(1));
+        assertEquals(expected500t, actual.get(1));
+        assertEquals("REM-ST-001 Box is not registered", actual.get(2));
     }
 
 }

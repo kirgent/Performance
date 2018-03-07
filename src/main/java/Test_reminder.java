@@ -157,7 +157,7 @@ public class Test_reminder {
             case "Change":
             case "change": api.Change_registration(macaddress, charterapi, ams_ip_default); break;
             case "Purge":
-            case "purge": api.Purge(macaddress, ams_ip_default); break;
+            case "purge": api.Purge(ams_ip_default, macaddress); break;
             //case "Add":
             //case "add": api.Operation("Add", macaddress, count_reminders, count_iterations, ams_ip_default); break;
             case "Modify":
