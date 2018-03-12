@@ -22,14 +22,17 @@ public class testAMS {
     //String notes="kir 1.1"
     //String macaddress = "6CB56BBA882C";
 
-    String notes = "WB20 D102";
-    String macaddress = "3438B7EB2E24";
+    //String notes = "WB20 D102";
+    //String macaddress = "3438B7EB2E24";
 
     //String notes = "WB20 D103";
     //String macaddress = "3438B7EB2E28";
 
-    //String notes = "WB20 D104";
-    //String macaddress = "3438B7EB2E34";
+    String notes = "WB20 D104";
+    String macaddress = "3438B7EB2E34";
+
+    //String notes = "WB20 D105";
+    //String macaddress = "3438B7EB2E30";
 
     //String notes = "WB20 D106";
     //String macaddress = "3438B7EB2EC4";
@@ -52,14 +55,23 @@ public class testAMS {
 
     int count_iterations = 1;
 
-    String[] rack_date = { "2018-03-09" };
+    //DATE
+    String[] rack_date = { "2018-03-13" };
     String[] rack_date_for_statuscode2 = { "2000-01-01" };
 
-    String charterapi_ = "http://spec.partnerapi.engprod-charter.net/api/pub/networksettingsmiddle/ns/settings";
-    String charterapi_b = "http://specb.partnerapi.engprod-charter.net/api/pub/networksettingsmiddle/ns/settings";
-    String charterapi_c = "http://specc.partnerapi.engprod-charter.net/api/pub/networksettingsmiddle/ns/settings";
-    String charterapi_d = "http://specd.partnerapi.engprod-charter.net/api/pub/networksettingsmiddle/ns/settings";
-    String charterapi_by_default = charterapi_b;
+    //CHANNEL
+    Integer[] rack_channel = { 2 };
+    Integer[] rack_channel_all = { 2, 3, 4, 5, 6, 7, 8, 9, 10, 11 };
+    Integer[] rack_channel_for_statuscode3 = { 9999 };
+    //String
+    final private String[] rack_channel_statuscode4 = { "1000" };
+
+
+    final String charterapi_ = "http://spec.partnerapi.engprod-charter.net/api/pub/networksettingsmiddle/ns/settings";
+    final String charterapi_b = "http://specb.partnerapi.engprod-charter.net/api/pub/networksettingsmiddle/ns/settings";
+    final String charterapi_c = "http://specc.partnerapi.engprod-charter.net/api/pub/networksettingsmiddle/ns/settings";
+    final String charterapi_d = "http://specd.partnerapi.engprod-charter.net/api/pub/networksettingsmiddle/ns/settings";
+    final String charterapi_by_default = charterapi_b;
 
     int count_reminders_by_default = 48;
     int reminderChannelNumber_by_default = 2;
@@ -114,7 +126,7 @@ public class testAMS {
     //}
 
     @Test
-    public void testPurge_oldapi() throws IOException {
+    public void testPurge() throws IOException {
         long start = System.currentTimeMillis();
         ArrayList actual = api.Purge(ams_ip, macaddress);
         long finish = System.currentTimeMillis();
@@ -127,7 +139,7 @@ public class testAMS {
 
     @Test
     @Ignore
-    public void testPurge_oldapi_REM_ST_01_Box_is_not_registered() throws IOException {
+    public void testPurge_REM_ST_01_Box_is_not_registered() throws IOException {
         long start = System.currentTimeMillis();
         ArrayList actual = api.Purge(ams_ip, macaddress);
         long finish = System.currentTimeMillis();
@@ -138,7 +150,7 @@ public class testAMS {
     }
 
     @Test
-    public void testPurge_newapi() throws IOException {
+    public void testPurge2() throws IOException {
         long start = System.currentTimeMillis();
         ArrayList actual = api.Purge2(ams_ip, macaddress);
         long finish = System.currentTimeMillis();

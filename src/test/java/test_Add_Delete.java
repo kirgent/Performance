@@ -13,7 +13,7 @@ class test_Add_Delete extends testAMS{
     @Test
     void test48Add() throws IOException, InterruptedException {
         long start = System.currentTimeMillis();
-        ArrayList actual = api.Operation(ams_ip, macaddress,"Add", count_reminders_by_default, count_iterations, rack_date);
+        ArrayList actual = api.Operation(ams_ip, macaddress,"Add", count_reminders_by_default, count_iterations, rack_date, rack_channel);
         long finish = System.currentTimeMillis();
         System.out.println("[DBG] " + (finish-start) + "ms test, " + "return code: " + actual);
         assertEquals(expected200, actual.get(0));
@@ -25,7 +25,7 @@ class test_Add_Delete extends testAMS{
     @Test
     void test48Delete() throws IOException, InterruptedException {
         long start = System.currentTimeMillis();
-        ArrayList actual = api.Operation(ams_ip, macaddress, "Delete", count_reminders_by_default, count_iterations, rack_date);
+        ArrayList actual = api.Operation(ams_ip, macaddress, "Delete", count_reminders_by_default, count_iterations, rack_date, rack_channel);
         long finish = System.currentTimeMillis();
         System.out.println("[DBG] " + (finish-start) + "ms test, " + "return code: " + actual);
         assertEquals(expected200, actual.get(0));
@@ -38,7 +38,7 @@ class test_Add_Delete extends testAMS{
     @Test
     void test288Add() throws IOException, InterruptedException {
         long start = System.currentTimeMillis();
-        ArrayList actual = api.Operation(ams_ip, macaddress,"Add", 288, count_iterations, rack_date);
+        ArrayList actual = api.Operation(ams_ip, macaddress,"Add", 288, count_iterations, rack_date, rack_channel);
         long finish = System.currentTimeMillis();
         System.out.println("[DBG] " + (finish-start) + "ms test, " + "return code: " + actual);
         assertEquals(expected200, actual.get(0));
@@ -51,7 +51,7 @@ class test_Add_Delete extends testAMS{
     @Test
     void test288Delete() throws IOException, InterruptedException {
         long start = System.currentTimeMillis();
-        ArrayList actual = api.Operation(ams_ip, macaddress, "Delete", 288, count_iterations, rack_date);
+        ArrayList actual = api.Operation(ams_ip, macaddress, "Delete", 288, count_iterations, rack_date, rack_channel);
         long finish = System.currentTimeMillis();
         System.out.println("[DBG] " + (finish-start) + "ms test, " + "return code: " + actual);
         assertEquals(expected200, actual.get(0));

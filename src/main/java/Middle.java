@@ -24,16 +24,21 @@ class Middle {
     //private FileHandler fh = new FileHandler("test_reminder.log");
 
     @Deprecated
-    private static String postfix_change = "/ams/Reminders?req=ChangeReminders";
+    final private static String postfix_change = "/ams/Reminders?req=ChangeReminders";
 
-    private int ams_port = 8080;
+    final private int ams_port = 8080;
 
     //private int result = 0;
     private int count_iterations = 3;
 
-    //for Add/Delete/Operation methods in Middle old/new
+    //for Modify/Add/Delete
     private int reminderProgramId = 0;
+    private int reminderProgramId_negative = -1;
+    private int reminderProgramId_wrong = 9999;
+
     private int reminderOffset = 0;
+    private int reminderOffset_negative = -1;
+    private int reminderOffset_wrong = 9999;
 
     /*private static String statuscode = "code of the reminder processing result, one of the following:" +
             "\
@@ -50,13 +55,15 @@ class Middle {
             "4 - reminder is unknown, applies to reminder deletion attempts",
             "5 - reminder with provided pair of identifiers (reminderScheduleId and reminderId) is already set (for Add Reminder request)" };
 
+    //DATE
     private String[] rack_date = { "2018-03-08" };
 
-    private String[] rack_time48 = { "00:00", "00:30", "01:00", "01:30", "02:00", "02:30", "03:00", "03:30", "04:00", "04:30", "05:00", "05:30",
+    //TIME
+    final private String[] rack_time48 = { "00:00", "00:30", "01:00", "01:30", "02:00", "02:30", "03:00", "03:30", "04:00", "04:30", "05:00", "05:30",
             "06:00", "06:30", "07:00", "07:30", "08:00", "08:30", "09:00", "09:30", "10:00", "10:30", "11:00", "11:30",
             "12:00", "12:30", "13:00", "13:30", "14:00", "14:30", "15:00", "15:30", "16:00", "16:30", "17:00", "17:30",
             "18:00", "18:30", "19:00", "19:30", "20:00", "20:30", "21:00", "21:30", "22:00", "22:30", "23:00", "23:30" };
-    private String[] rack_time288 = { "00:00", "00:05", "00:10", "00:15", "00:20", "00:25", "00:30",  "00:35", "00:40", "00:45", "00:50", "00:55",
+    final private String[] rack_time288 = { "00:00", "00:05", "00:10", "00:15", "00:20", "00:25", "00:30",  "00:35", "00:40", "00:45", "00:50", "00:55",
             "01:00", "01:05", "01:10", "01:15", "01:20", "01:25", "01:30", "01:35", "01:40", "01:45", "01:50", "01:55",
             "02:00", "02:05", "02:10", "02:15", "02:20", "02:25", "02:30", "02:35", "02:40", "02:45", "02:50", "02:55",
             "03:00", "03:05", "03:10", "03:15", "03:20", "03:25", "03:30", "03:35", "03:40", "03:45", "03:50", "03:55",
@@ -80,7 +87,7 @@ class Middle {
             "21:00", "21:05", "21:10", "21:15", "21:20", "21:25", "21:30", "21:35", "21:40", "21:45", "21:50", "21:55",
             "22:00", "22:05", "22:10", "22:15", "22:20", "22:25", "22:30", "22:35", "22:40", "22:45", "22:50", "22:55",
             "23:00", "23:05", "23:10", "23:15", "23:20", "23:25", "23:30", "23:35", "23:40", "23:45", "23:50", "23:55" };
-    private String[] rack_time720 = { "00:00", "00:02", "00:04", "00:06", "00:08", "00:10", "00:12", "00:14", "00:16", "00:18", "00:20", "00:22", "00:24", "00:26", "00:28", "00:30", "00:32", "00:34", "00:36", "00:38", "00:40", "00:42", "00:44", "00:46", "00:48", "00:50", "00:52", "00:54", "00:56", "00:58",
+    final private String[] rack_time720 = { "00:00", "00:02", "00:04", "00:06", "00:08", "00:10", "00:12", "00:14", "00:16", "00:18", "00:20", "00:22", "00:24", "00:26", "00:28", "00:30", "00:32", "00:34", "00:36", "00:38", "00:40", "00:42", "00:44", "00:46", "00:48", "00:50", "00:52", "00:54", "00:56", "00:58",
             "01:00", "01:02", "01:04", "01:06", "01:08", "01:10", "01:12", "01:14", "01:16", "01:18", "01:20", "01:22", "01:24", "01:26", "01:28", "01:30", "01:32", "01:34", "01:36", "01:38", "01:40", "01:42", "01:44", "01:46", "01:48", "01:50", "01:52", "01:54", "01:56", "01:58",
             "02:00", "02:02", "02:04", "02:06", "02:08", "02:10", "02:12", "02:14", "02:16", "02:18", "02:20", "02:22", "02:24", "02:26", "02:28", "02:30", "02:32", "02:34", "02:36", "02:38", "02:40", "02:42", "02:44", "02:46", "02:48", "02:50", "02:52", "02:54", "02:56", "02:58",
             "03:00", "03:02", "03:04", "03:06", "03:08", "03:10", "03:12", "03:14", "03:16", "03:18", "03:20", "03:22", "03:24", "03:26", "03:28", "03:30", "03:32", "03:34", "03:36", "03:38", "03:40", "03:42", "03:44", "03:46", "03:48", "03:50", "03:52", "03:54", "03:56", "03:58",
@@ -105,10 +112,12 @@ class Middle {
             "22:00", "22:02", "22:04", "22:06", "22:08", "22:10", "22:12", "22:14", "22:16", "22:18", "22:20", "22:22", "22:24", "22:26", "22:28", "22:30", "22:32", "22:34", "22:36", "22:38", "22:40", "22:42", "22:44", "22:46", "22:48", "22:50", "22:52", "22:54", "22:56", "22:58",
             "23:00", "23:02", "23:04", "23:06", "23:08", "23:10", "23:12", "23:14", "23:16", "23:18", "23:20", "23:22", "23:24", "23:26", "23:28", "23:30", "23:32", "23:34", "23:36", "23:38", "23:40", "23:42", "23:44", "23:46", "23:48", "23:50", "23:52", "23:54", "23:56", "23:58" };
 
-    //String[] rack_channel = { "2", "3", "4", "5", "6", "7", "8", "9", "10", "11" };
-    private String[] rack_channel = { "2" };
-    //todo
-    //private int rack_channel = 2;
+    //CHANNEL
+    private Integer[] rack_channel = { 2 };
+    private Integer[] rack_channel10 = { 2, 3, 4, 5, 6, 7, 8, 9, 12, 13 };
+    /*private Integer[] rack_channel30 = { 2, 3, 4, 5, 6, 7, 8, 9, 12, 13,
+            14, 16, 18, 19, 22, 23, 25, 28, 30, 31,
+            32, 33, 37, 38, 41, 44, 46, 48, 49, 50 };*/
 
     private String[] get_rack_time(int count_reminders) {
         if (count_reminders == 48) { return rack_time48; }
@@ -128,7 +137,7 @@ class Middle {
      * @throws InterruptedException
      */
     @Deprecated
-    ArrayList Operation(String ams_ip, String macaddress, String operation, int count_reminders, int count_iterations, String[] rack_date) throws IOException, InterruptedException {
+    ArrayList Operation(String ams_ip, String macaddress, String operation, int count_reminders, int count_iterations, String[] rack_date, Integer[] rack_channel) throws IOException, InterruptedException {
         System.out.println(operation + " for macaddress=" + macaddress + ", "
                 + "count_reminders=" + count_reminders + ", "
                 + "count_iterations=" + count_iterations + ", "
@@ -149,7 +158,7 @@ class Middle {
         ArrayList arrayList = new ArrayList();
         for (int c = 1; c <= count_iterations; c++) {
             for (String aRack_date : rack_date) {
-                for (String aRack_channel : rack_channel) {
+                for (Integer aRack_channel : rack_channel) {
                     //log.info(operation + " iteration=" + c + "/" + count_iterations + ", date=" + aRack_date + ", channel=" + aRack_channel);
 
                     StringEntity entity = new StringEntity(Generate_json(macaddress, count_reminders, operation, aRack_channel, aRack_date, get_rack_time(count_reminders), reminderProgramId, reminderOffset));
@@ -191,7 +200,7 @@ class Middle {
         return arrayList;
     }
 
-    int Check_registration(String macaddress, String charterapi) throws IOException {
+    ArrayList Check_registration(String macaddress, String charterapi) throws IOException {
         System.out.println("Check_registration "+ macaddress +" via charterapi: " + charterapi);
         //log.info("Check_registration "+ macaddress +" via charterapi: " + charterapi);
 
@@ -217,11 +226,15 @@ class Middle {
         BufferedReader reader = new BufferedReader(new InputStreamReader(response.getEntity().getContent(), "UTF-8"));
         StringBuilder body = new StringBuilder();
         for (String line; (line = reader.readLine()) != null; ) {
-            body.append(line);
-            //System.out.println("[DBG] Response body: " + body.append(line).append("\n"));
+            System.out.println("[DBG] Response body: " + body.append(line).append("\n"));
         }
         client.close();
-        return response.getStatusLine().getStatusCode();
+
+        ArrayList arrayList = new ArrayList();
+        arrayList.add(0, response.getStatusLine().getStatusCode());
+        arrayList.add(1, response.getStatusLine().getReasonPhrase());
+        arrayList.add(2, check_body_for_statuscode(body.toString()));
+        return arrayList;
     }
 
     ArrayList Change_registration(String macaddress, String charterapi, String ams_ip) throws IOException {
@@ -252,19 +265,19 @@ class Middle {
         BufferedReader reader = new BufferedReader(new InputStreamReader(response.getEntity().getContent(), "UTF-8"));
         StringBuilder body = new StringBuilder();
         for (String line = null; (line = reader.readLine()) != null; ) {
-            body.append(line);
-            //System.out.println("[DBG] Response body: " + body.append(line).append("\n"));
+            //body.append(line);
+            System.out.println("[DBG] Response body: " + body.append(line).append("\n"));
         }
+        client.close();
 
         ArrayList arrayList = new ArrayList();
         arrayList.add(0, response.getStatusLine().getStatusCode());
         arrayList.add(1, response.getStatusLine().getReasonPhrase());
         arrayList.add(2, check_body_for_statuscode(body.toString()));
-        client.close();
         return arrayList;
     }
 
-    private String Generate_json(String macaddress, int count_remindres, String operation, String reminderChannelNumber, String date, String rack_time[], int reminderProgramId, int reminderOffset) {
+    private String Generate_json(String macaddress, int count_remindres, String operation, int reminderChannelNumber, String date, String rack_time[], int reminderProgramId, int reminderOffset) {
         /*System.out.println("generate_json with macaddress=" + macaddress + ", " +
                 "operation=" + operation + ", " +
                 "date=" + date + ", " +
@@ -298,14 +311,13 @@ class Middle {
         for (int i = 0; i < count_remindres; i++) {
             JSONObject object = new JSONObject();
             object.put("operation", operation);
-            //todo change reminderChannelNumber type string to int
             object.put("reminderChannelNumber", reminderChannelNumber);
             object.put("reminderProgramId", reminderProgramId);
-            object.put("reminderOffset", reminderOffset);
             object.put("reminderProgramStart", date + " " + rack_time[i]);
+            object.put("reminderOffset", reminderOffset);
             array.add(object);
         }
-        System.out.println("generated json: " + resultJson.toJSONString());
+        //System.out.println("generated json: " + resultJson.toJSONString());
         return resultJson.toJSONString();
     }
 
@@ -399,23 +411,23 @@ class Middle {
         //ArrayList result = new ArrayList();
         String result = "";
 
-        if(body.contains("\"statusCode\":1")){ log.warning("one or more statusCode's = "+ statuscode[1]);
+        if(body.contains("\"statusCode\":1")){ log.warning("one or more statusCode's = " + statuscode[1]);
             //result.add(1);
             result += "1";
         }
-        if(body.contains("\"statusCode\":2")){ log.warning("one or more statusCode's = "+ statuscode[2]);
+        if(body.contains("\"statusCode\":2")){ log.warning("one or more statusCode's = " + statuscode[2]);
             //result.add(2);
             result += "2";
         }
-        if(body.contains("\"statusCode\":3")){ log.warning("one or more statusCode's = "+ statuscode[3]);
+        if(body.contains("\"statusCode\":3")){ log.warning("one or more statusCode's = " + statuscode[3]);
             //result.add(3);
             result += "3";
         }
-        if(body.contains("\"statusCode\":4")){ log.warning("one or more statusCode's = "+ statuscode[4]);
+        if(body.contains("\"statusCode\":4")){ log.warning("one or more statusCode's = " + statuscode[4]);
             //result.add(4);
             result += "4";
         }
-        if(body.contains("\"statusCode\":5")){ log.warning("one or more statusCode's = "+ statuscode[5]);
+        if(body.contains("\"statusCode\":5")){ log.warning("one or more statusCode's = " + statuscode[5]);
             //result.add(5);
             result += "5";
         }
@@ -424,6 +436,9 @@ class Middle {
         }
         if(body.contains("\"errorMessage\":\"REM-ST-001 Box is not registered\"")){
             result += "REM-ST-001 Box is not registered";
+        }
+        if(body.contains("Failed to getAmsIpByMacAddress for :") && body.contains("No amsIp found for macAddress:")){
+            result += "No amsIp found for macAddress";
         }
 
         //System.out.println("[DBG] result: " + result);
@@ -459,7 +474,7 @@ class Middle {
         ArrayList arrayList = new ArrayList();
         for (int c = 1; c <= count_iterations; c++) {
             for (String aRack_date : rack_date) {
-                for (String aRack_channel : rack_channel) {
+                for (int aRack_channel : rack_channel) {
                     System.out.println("operation= " + operation +", date=" + aRack_date + ", channel=" + aRack_channel);
                     //log.info("operation= " + operation +", date=" + aRack_date + ", channel=" + aRack_channel);
 
@@ -571,7 +586,7 @@ class Middle {
         CloseableHttpClient client = HttpClients.createDefault();
         HttpPost request = new HttpPost(url);
 
-        request.setEntity(new StringEntity(Generate_json_purge(macaddress, "newapi")));
+        request.setEntity(new StringEntity(Generate_json_purge(macaddress, "")));
 
         request.setHeader("Accept", "application/json");
         request.setHeader("Content-type", "application/json");
