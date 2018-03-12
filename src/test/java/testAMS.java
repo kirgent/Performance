@@ -22,8 +22,14 @@ public class testAMS {
     //String notes="kir 1.1"
     //String macaddress = "6CB56BBA882C";
 
-    String notes = "WB20 D104";
-    String macaddress = "3438B7EB2E34";
+    String notes = "WB20 D102";
+    String macaddress = "3438B7EB2E24";
+
+    //String notes = "WB20 D103";
+    //String macaddress = "3438B7EB2E28";
+
+    //String notes = "WB20 D104";
+    //String macaddress = "3438B7EB2E34";
 
     //String notes = "WB20 D106";
     //String macaddress = "3438B7EB2EC4";
@@ -40,9 +46,13 @@ public class testAMS {
     //String notes = "Katya_V";
     //String macaddress = "0000048D4EB4";
 
+    //String ams_ip = "172.30.81.4";
+    String ams_ip = "172.30.82.132";
+    //String ams_ip = "172.30.112.19";
+
     int count_iterations = 1;
 
-    String[] rack_date = { "2018-03-08" };
+    String[] rack_date = { "2018-03-09" };
     String[] rack_date_for_statuscode2 = { "2000-01-01" };
 
     String charterapi_ = "http://spec.partnerapi.engprod-charter.net/api/pub/networksettingsmiddle/ns/settings";
@@ -50,10 +60,6 @@ public class testAMS {
     String charterapi_c = "http://specc.partnerapi.engprod-charter.net/api/pub/networksettingsmiddle/ns/settings";
     String charterapi_d = "http://specd.partnerapi.engprod-charter.net/api/pub/networksettingsmiddle/ns/settings";
     String charterapi_by_default = charterapi_b;
-
-    String ams_ip = "172.30.81.4";
-    //String ams_ip = "172.30.82.132";
-    //String ams_ip = "172.30.112.19";
 
     int count_reminders_by_default = 48;
     int reminderChannelNumber_by_default = 2;
@@ -72,8 +78,6 @@ public class testAMS {
     //"reminderChannelNumber": 27
 
     Middle api = new Middle();
-
-    //ArrayList expected = new ArrayList();
 
     @Test
     @Ignore
@@ -110,7 +114,7 @@ public class testAMS {
     //}
 
     @Test
-    public void testPurge() throws IOException {
+    public void testPurge_oldapi() throws IOException {
         long start = System.currentTimeMillis();
         ArrayList actual = api.Purge(ams_ip, macaddress);
         long finish = System.currentTimeMillis();
@@ -123,7 +127,7 @@ public class testAMS {
 
     @Test
     @Ignore
-    public void testPurge_REM_ST_01_Box_is_not_registered() throws IOException {
+    public void testPurge_oldapi_REM_ST_01_Box_is_not_registered() throws IOException {
         long start = System.currentTimeMillis();
         ArrayList actual = api.Purge(ams_ip, macaddress);
         long finish = System.currentTimeMillis();
@@ -131,6 +135,18 @@ public class testAMS {
         assertEquals(expected500, actual.get(0));
         assertEquals(expected500t, actual.get(1));
         assertEquals("REM-ST-001 Box is not registered", actual.get(2));
+    }
+
+    @Test
+    public void testPurge_newapi() throws IOException {
+        long start = System.currentTimeMillis();
+        ArrayList actual = api.Purge2(ams_ip, macaddress);
+        long finish = System.currentTimeMillis();
+        System.out.println("[DBG] " + (finish-start) + "ms test, return code: " + actual);
+        assertEquals(expected200, actual.get(0));
+        assertEquals(expected200t, actual.get(1));
+        assertEquals("", actual.get(2));
+
     }
 
 }

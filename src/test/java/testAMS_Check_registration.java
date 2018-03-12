@@ -14,6 +14,7 @@ class testAMS_Check_registration extends testAMS {
         long finish = System.currentTimeMillis();
         System.out.println("[DBG] " + (finish-start) + "ms test, return code: " + actual);
         assertEquals(expected200, actual);
+
     }
 
     //@Test(timeout = 20000)

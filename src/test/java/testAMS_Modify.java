@@ -80,7 +80,7 @@ class testAMS_Modify extends testAMS {
     }
 
     @Test
-    void testModify_reminderOffset() throws IOException, InterruptedException {
+    void testModify_wrong_reminderOffset() throws IOException, InterruptedException {
         long start = System.currentTimeMillis();
         ArrayList actual = api.Operation2("Modify", macaddress, 48, ams_ip, reminderChannelNumber_by_default, reminderProgramStart_by_default, reminderProgramId_by_default, -1, reminderScheduleId_by_default, reminderId_by_default);
         long finish = System.currentTimeMillis();
@@ -102,7 +102,7 @@ class testAMS_Modify extends testAMS {
     }
 
     @Test
-    void testModify_reminderId() throws IOException, InterruptedException {
+    void testModify_wrong_reminderId() throws IOException, InterruptedException {
         long start = System.currentTimeMillis();
         ArrayList actual = api.Operation2("Modify", macaddress, 48, ams_ip, reminderChannelNumber_by_default, reminderProgramStart_by_default, reminderProgramId_by_default,reminderOffset_by_default, reminderScheduleId_by_default, -1);
         long finish = System.currentTimeMillis();

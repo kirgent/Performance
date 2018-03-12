@@ -19,17 +19,6 @@ class testAMS_Add extends testAMS {
         assertEquals("", actual.get(2));
     }
 
-    @RepeatedTest(1)
-    void testAdd_48rems_new() throws IOException, InterruptedException {
-        long start = System.currentTimeMillis();
-        ArrayList actual = api.Operation(ams_ip, macaddress,"Add", 48, count_iterations, rack_date);
-        long finish = System.currentTimeMillis();
-        System.out.println("[DBG] " + (finish-start) + "ms test, " + "return code: " + actual);
-        assertEquals(expected200, actual.get(0));
-        assertEquals(expected200t, actual.get(1));
-        assertEquals("", actual.get(2));
-    }
-
     @Test
     void testAdd_288() throws IOException, InterruptedException {
         long start = System.currentTimeMillis();

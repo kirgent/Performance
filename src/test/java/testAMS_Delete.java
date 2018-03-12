@@ -106,11 +106,11 @@ class testAMS_Delete extends testAMS {
     @Test
     void testDelete_with_empty_macaddress() throws IOException, InterruptedException {
         long start = System.currentTimeMillis();
-        ArrayList actual = api.Operation(ams_ip, "","Delete", count_reminders_by_default, count_iterations, rack_date);
+        ArrayList actual = api.Operation(ams_ip, "","Delete", 48, count_iterations, rack_date);
         long finish = System.currentTimeMillis();
         System.out.println("[DBG] " + (finish-start) + "ms test, return code: " + actual);
-        assertEquals("400", actual.get(0));
-        assertEquals("Bad Request", actual.get(1));
+        assertEquals(expected400, actual.get(0));
+        assertEquals(expected400t, actual.get(1));
         assertEquals("", actual.get(2));
     }
 

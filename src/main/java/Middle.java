@@ -1,5 +1,4 @@
 import org.apache.http.HttpResponse;
-import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.entity.StringEntity;
@@ -108,6 +107,8 @@ class Middle {
 
     //String[] rack_channel = { "2", "3", "4", "5", "6", "7", "8", "9", "10", "11" };
     private String[] rack_channel = { "2" };
+    //todo
+    //private int rack_channel = 2;
 
     private String[] get_rack_time(int count_reminders) {
         if (count_reminders == 48) { return rack_time48; }
@@ -264,13 +265,20 @@ class Middle {
     }
 
     private String Generate_json(String macaddress, int count_remindres, String operation, String reminderChannelNumber, String date, String rack_time[], int reminderProgramId, int reminderOffset) {
-        log.fine("Generate_json: with macaddress=" + macaddress + ", " +
+        /*System.out.println("generate_json with macaddress=" + macaddress + ", " +
                 "operation=" + operation + ", " +
                 "date=" + date + ", " +
                 "count_reminders=" + count_remindres + ", " +
                 "reminderChannelNumber=" + reminderChannelNumber + ", " +
                 "reminderProgramId=" + reminderProgramId + ", " +
-                "reminderOffset=" + reminderOffset);
+                "reminderOffset=" + reminderOffset);*/
+        /*log.fine("Generate_json: with macaddress=" + macaddress + ", " +
+                "operation=" + operation + ", " +
+                "date=" + date + ", " +
+                "count_reminders=" + count_remindres + ", " +
+                "reminderChannelNumber=" + reminderChannelNumber + ", " +
+                "reminderProgramId=" + reminderProgramId + ", " +
+                "reminderOffset=" + reminderOffset);*/
 
 /*        ArrayList<String> date = new ArrayList<>(count_remindres);
         System.out.println("date.size(): " + date.size());
@@ -285,19 +293,39 @@ class Middle {
 
         JSONObject resultJson = new JSONObject();
         resultJson.put("deviceId", macaddress);
-
         JSONArray array = new JSONArray();
         resultJson.put("reminders", array);
-
         for (int i = 0; i < count_remindres; i++) {
             JSONObject object = new JSONObject();
             object.put("operation", operation);
+            //todo change reminderChannelNumber type string to int
             object.put("reminderChannelNumber", reminderChannelNumber);
             object.put("reminderProgramId", reminderProgramId);
             object.put("reminderOffset", reminderOffset);
             object.put("reminderProgramStart", date + " " + rack_time[i]);
             array.add(object);
         }
+        System.out.println("generated json: " + resultJson.toJSONString());
+        return resultJson.toJSONString();
+    }
+
+    private String Generate_json_purge(String macaddress, String api) {
+        //System.out.println("Generate_json: with macaddress=" + macaddress);
+
+        //String json_purge = "{\"deviceId\":" + macaddress + ",\"reminders\":[]}";
+        JSONObject resultJson = new JSONObject();
+        resultJson.put("deviceId", macaddress);
+        JSONArray array = new JSONArray();
+        resultJson.put("reminders", array);
+
+        if (Objects.equals(api, "oldapi")){
+            //String json_purge = "{\"deviceId\":" + macaddress + ",\"reminders\":[{\"operation\":\"Purge\"}]}";
+            JSONObject object = new JSONObject();
+            object.put("operation", "Purge");
+            array.add(object);
+
+        }
+        System.out.println("generated json: " + resultJson.toJSONString());
         return resultJson.toJSONString();
     }
 
@@ -424,7 +452,7 @@ class Middle {
                 + "data count=" + rack_date.length + ", "
                 + "channel count=" + rack_channel.length);*/
 
-        String url = "http://" + ams_ip + ":" + ams_port + get_postfix(operation);
+        String url = "http://" + ams_ip + ":" + ams_port + Get_postfix(operation);
         CloseableHttpClient client = HttpClients.createDefault();
         HttpPost request = new HttpPost(url);
 
@@ -483,15 +511,9 @@ class Middle {
         CloseableHttpClient client = HttpClients.createDefault();
         HttpPost request = new HttpPost(url);
 
-        String json_purge = "{\"deviceId\":" + macaddress + ",\"reminders\":[{\"operation\":\"Purge\"}]}";
-        StringEntity entity = new StringEntity(json_purge);
-        request.setEntity(entity);
-
+        request.setEntity(new StringEntity(Generate_json_purge(macaddress, "oldapi")));
         request.setHeader("Accept", "application/json");
         request.setHeader("Content-type", "application/json");
-        //request.setHeader("Content-type", "text/plain");
-        //request.setHeader("User-Agent","curl/7.58.0");
-        //request.setHeader("Charset", "UTF-8");
 
         System.out.println("[DBG] Request string: " + request);
         //+ "\n[DBG] Request entity: " + request.getEntity());
@@ -526,6 +548,7 @@ class Middle {
             JSONObject test = (JSONObject) phonesItr.next();
             System.out.println("- type: " + test.get("type") + ", phone: " + test.get("number"));
         }*/
+
         ArrayList arrayList = new ArrayList();
         arrayList.add(0, response.getStatusLine().getStatusCode());
         arrayList.add(1, response.getStatusLine().getReasonPhrase());
@@ -545,18 +568,13 @@ class Middle {
 
         String postfix_purge = "/ams/Reminders?req=purge";
         String url = "http://" + ams_ip + ":" + ams_port + postfix_purge;
-        HttpClient client = HttpClients.createDefault();
+        CloseableHttpClient client = HttpClients.createDefault();
         HttpPost request = new HttpPost(url);
 
-        String json_purge = "{\"deviceId\":" + macaddress + ",\"reminders\":[{\"operation\":\"Purge\"}]}";
-        StringEntity entity = new StringEntity(json_purge);
-        request.setEntity(entity);
+        request.setEntity(new StringEntity(Generate_json_purge(macaddress, "newapi")));
 
         request.setHeader("Accept", "application/json");
         request.setHeader("Content-type", "application/json");
-        //request.setHeader("Content-type", "text/plain");
-        //request.setHeader("User-Agent","curl/7.58.0");
-        //request.setHeader("Charset", "UTF-8");
 
         System.out.println("[DBG] Request string: " + request);
         //+ "\n[DBG] Request entity: " + request.getEntity());
@@ -574,30 +592,15 @@ class Middle {
             //System.out.println("[DBG] Response body: " + body.append(line).append("\n"));
         }
 
-   /*     // Считываем json
-        Object obj = new JSONParser().parse(json_purge); // Object obj = new JSONParser().parse(new FileReader("JSONExample.json"));
-        // Кастим obj в JSONObject
-        JSONObject jo = (JSONObject) obj;
-        // Достаём firstName and lastName
-        String firstName = (String) jo.get("firstName");
-        String lastName = (String) jo.get("lastName");
-        System.out.println("fio: " + firstName + " " + lastName);
-        // Достаем массив номеров
-        JSONArray phoneNumbersArr = (JSONArray) jo.get("phoneNumbers");
-        Iterator phonesItr = phoneNumbersArr.iterator();
-        System.out.println("phoneNumbers:");
-        // Выводим в цикле данные массива
-        while (phonesItr.hasNext()) {
-            JSONObject test = (JSONObject) phonesItr.next();
-            System.out.println("- type: " + test.get("type") + ", phone: " + test.get("number"));
-        }*/
-        ArrayList actual = new ArrayList();
-        actual.add(response.getStatusLine().getStatusCode());
-        actual.add(response.getStatusLine().getReasonPhrase());
-        return actual;
+        ArrayList arrayList = new ArrayList();
+        arrayList.add(0, response.getStatusLine().getStatusCode());
+        arrayList.add(1, response.getStatusLine().getReasonPhrase());
+        arrayList.add(2, check_body_for_statuscode(body.toString()));
+        client.close();
+        return arrayList;
     }
 
-    private String get_postfix(String operation) {
+    private String Get_postfix(String operation) {
         String result = "";
         if (Objects.equals(operation, "Add")){
             result = "/ams/Reminders?req=add"; }
