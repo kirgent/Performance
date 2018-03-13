@@ -3,7 +3,7 @@ import java.text.ParseException;
 
 public class Test_reminder {
 
-    private static int reminderChannelNumber = 2;
+    private static Integer[] reminderChannelNumber = {2};
     private static String reminderProgramStart = "2013-03-08 00:00";
     private static String reminderProgramId = "EP0";
     private static int reminderOffset = 0;
@@ -14,11 +14,10 @@ public class Test_reminder {
     int reminderOffset_new  = 10;
 
     private static String macaddress_by_default = "3438B7EB2E30";
-    static String operation_by_default = "Check";
+    private static String operation_by_default = "Check";
 
     private static int count_reminders;
     private static int count_reminders_by_default = 48;
-    int count_iterations_by_default = 1;
 
     private String ams_ip_by_default = "172.30.81.4";
     //String ams_ip_default = "172.30.112.19";
@@ -92,9 +91,6 @@ public class Test_reminder {
         System.out.println(newstring); // 2011-01-18 */
 
 
-
-
-
 /*        if (args[0].isEmpty()){
             System.out.println("No macaddress specified!" + synopsys);
             return;
@@ -133,7 +129,27 @@ public class Test_reminder {
 
         if (args.length >= 3) {
             param = args[2];
-            if (operation == "Change" ) { ams_ip = param; }
+            if (operation.equalsIgnoreCase("Change")) {
+                ams_ip = param;
+            }
+        }
+
+        if (operation.equalsIgnoreCase("all")
+                || operation.equalsIgnoreCase("add")
+                || operation.equalsIgnoreCase("delete")) {
+            switch (param) {
+                case "48":
+                    count_reminders = 48;
+                    break;
+                case "288":
+                    count_reminders = 288;
+                    break;
+                case "720":
+                    count_reminders = 720;
+                    break;
+                default:
+                    count_reminders = count_reminders_by_default;
+            }
         }
 
 
@@ -155,27 +171,6 @@ public class Test_reminder {
             }
         }*/
 
-
-
-/*        if (args[1].equalsIgnoreCase("change")){
-            if (!args[2].isEmpty()){
-                    param = args[2];
-            }
-        }*/
-/*            else if (args[1].equalsIgnoreCase("all")
-                    ||args[1].equalsIgnoreCase("add")
-                    ||args[1].equalsIgnoreCase("edit")
-                    ||args[1].equalsIgnoreCase("delete")
-                    ||args[1].equalsIgnoreCase("test")) {
-                switch (args[2]){
-                    case "48": count_reminders=48; break;
-                    case "288": count_reminders=288; break;
-                    case "720": count_reminders=720;break;
-                    default: count_reminders=48;
-                }
-            }
-        }*/
-
         System.out.println("[DBG] used macaddress=" + macaddress + ", operation=" + operation + ", param="+param);
 
         Middle api = new Middle();
@@ -186,11 +181,19 @@ public class Test_reminder {
             case "Change":
             case "change": api.Change_registration(macaddress, charterapi_by_default, ams_ip_by_default); break;
             case "Purge":
-            case "purge": api.Purge(ams_ip_by_default, macaddress); break;
+            case "purge":
+                api.Operation(ams_ip_by_default, macaddress, "Purge", "oldapi");
+                break;
+            case "Purge2":
+            case "purge2":
+                api.Operation(ams_ip_by_default, macaddress, "Purge", "newapi");
+                break;
             //case "Add":
             //case "add": api.Operation("Add", macaddress, count_reminders, count_iterations, ams_ip_default); break;
             case "Modify":
-            case "modify": api.Operation2("Modify", macaddress, count_reminders_by_default, ams_ip_by_default, reminderChannelNumber, reminderProgramStart, reminderProgramId, reminderOffset, reminderScheduleId, reminderId); break;
+            case "modify":
+                api.Operation(ams_ip_by_default, macaddress, "Modify", count_reminders_by_default, reminderChannelNumber, reminderProgramStart, reminderProgramId, reminderOffset, reminderScheduleId, reminderId);
+                break;
             //case "Delete":
             //case "delete": api.Operation("Delete", macaddress, count_reminders, count_iterations, ams_ip_default); break;
             default: api.Check_registration(macaddress, charterapi_by_default);

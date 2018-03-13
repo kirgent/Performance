@@ -1,16 +1,14 @@
-import org.junit.Ignore;
-import org.junit.Test;
+import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.Test;
 
-import java.io.IOException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.TimeZone;
 
 import static org.junit.Assert.assertEquals;
 
-public class testAMS {
+class testAMS {
 
     //static Logger log = Logger.getLogger(testAMS.class.getName());
 
@@ -49,18 +47,17 @@ public class testAMS {
     //String notes = "Katya_V";
     //String macaddress = "0000048D4EB4";
 
-    public String ams_ip = "172.30.81.4";
+    String ams_ip = "172.30.81.4";
     //String ams_ip = "172.30.82.132";
     //String ams_ip = "172.30.112.19";
 
-    int count_iterations = 1;
-
     //DATE
-    public String[] rack_date = { "2018-03-13" };
+    String[] rack_date = {"2018-03-13"};
     String[] rack_date_for_statuscode2 = { "2000-01-01" };
 
     //CHANNEL
-    public Integer[] rack_channel = { 2 };
+    Integer[] rack_channel = {2};
+    Integer[] rack_channel_negative = {-1};
     Integer[] rack_channel_all = { 2, 3, 4, 5, 6, 7, 8, 9, 10, 11 };
     Integer[] rack_channel_for_statuscode3 = { 9999 };
     //String
@@ -74,10 +71,10 @@ public class testAMS {
     final String charterapi_by_default = charterapi_b;
 
     //DEFAULTS
-    public int count_reminders_by_default = 48;
-    int reminderChannelNumber_by_default = 2;
-    String reminderProgramStart_by_default = "2013-03-08 00:00";
-    String reminderProgramId_by_default = "EP002960010113";
+    int count_reminders_by_default = 48;
+    String reminderProgramStart_by_default = "2013-03-15 00:00";
+    //String reminderProgramId_by_default = "EP002960010113";
+    String reminderProgramId_by_default = "0";
     int reminderOffset_by_default = 0;
     int reminderScheduleId_by_default = 1;
     int reminderId_by_default = 1;
@@ -92,8 +89,8 @@ public class testAMS {
     Middle api = new Middle();
 
     @Test
-    @Ignore
-    public void testSunday() throws Exception {
+    @Disabled
+    void testSunday() throws Exception {
         Calendar calendar = Calendar.getInstance();
         calendar.setTimeZone(TimeZone.getTimeZone("UTC"));
         //calendar.set(2018, Calendar.MONTH, 2, 11, 30, 0);
@@ -103,8 +100,8 @@ public class testAMS {
     }
 
     @Test
-    @Ignore
-    public void testFormat() throws Exception {
+    @Disabled
+    void testFormat() throws Exception {
         Calendar calendar = Calendar.getInstance();
         calendar.setTimeZone(TimeZone.getTimeZone("UTC"));
         //calendar.set(2018, Calendar.MONTH, 2, 11, 30, 0);
@@ -125,40 +122,6 @@ public class testAMS {
 
     //}
 
-    @Test
-    public void testPurge() throws IOException {
-        long start = System.currentTimeMillis();
-        ArrayList actual = api.Purge(ams_ip, macaddress);
-        long finish = System.currentTimeMillis();
-        System.out.println("[DBG] " + (finish-start) + "ms test, return code: " + actual);
-        assertEquals(expected200, actual.get(0));
-        assertEquals(expected200t, actual.get(1));
-        assertEquals("", actual.get(2));
 
-    }
-
-    @Test
-    @Ignore
-    public void testPurge_REM_ST_01_Box_is_not_registered() throws IOException {
-        long start = System.currentTimeMillis();
-        ArrayList actual = api.Purge(ams_ip, macaddress);
-        long finish = System.currentTimeMillis();
-        System.out.println("[DBG] " + (finish-start) + "ms test, return code: " + actual);
-        assertEquals(expected500, actual.get(0));
-        assertEquals(expected500t, actual.get(1));
-        assertEquals("REM-ST-001 Box is not registered", actual.get(2));
-    }
-
-    @Test
-    public void testPurge2() throws IOException {
-        long start = System.currentTimeMillis();
-        ArrayList actual = api.Purge2(ams_ip, macaddress);
-        long finish = System.currentTimeMillis();
-        System.out.println("[DBG] " + (finish-start) + "ms test, return code: " + actual);
-        assertEquals(expected200, actual.get(0));
-        assertEquals(expected200t, actual.get(1));
-        assertEquals("", actual.get(2));
-
-    }
 
 }
