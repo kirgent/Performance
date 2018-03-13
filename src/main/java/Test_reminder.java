@@ -7,7 +7,7 @@ public class Test_reminder {
 
     private static int reminderChannelNumber = 2;
     private static String reminderProgramStart = "2013-03-08 00:00";
-    private static int reminderProgramId = 1;
+    private static String reminderProgramId = "EP0";
     private static int reminderOffset = 0;
     private static int reminderScheduleId = 1;
     private static int reminderId = 1;

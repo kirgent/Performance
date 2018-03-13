@@ -82,7 +82,7 @@ class testAMS_Modify extends testAMS {
     void testModify_wrong_reminderProgramId() throws IOException, InterruptedException {
         long start = System.currentTimeMillis();
         ArrayList actual = api.Operation2("Modify", macaddress, count_reminders_by_default, ams_ip,
-                reminderChannelNumber_by_default, reminderProgramStart_by_default, -1,
+                reminderChannelNumber_by_default, reminderProgramStart_by_default, "-1",
                 reminderOffset_by_default, reminderScheduleId_by_default, reminderId_by_default);
         long finish = System.currentTimeMillis();
         System.out.println("[DBG] " + (finish-start) + "ms test, return code: " + actual);

@@ -32,7 +32,7 @@ class Middle {
     private int count_iterations = 3;
 
     //for Modify/Add/Delete
-    private int reminderProgramId = 0;
+    private String reminderProgramId = "EP0";
     private int reminderProgramId_negative = -1;
     private int reminderProgramId_wrong = 9999;
 
@@ -277,7 +277,7 @@ class Middle {
         return arrayList;
     }
 
-    private String Generate_json(String macaddress, int count_remindres, String operation, int reminderChannelNumber, String date, String rack_time[], int reminderProgramId, int reminderOffset) {
+    private String Generate_json(String macaddress, int count_remindres, String operation, int reminderChannelNumber, String date, String rack_time[], String reminderProgramId, int reminderOffset) {
         /*System.out.println("generate_json with macaddress=" + macaddress + ", " +
                 "operation=" + operation + ", " +
                 "date=" + date + ", " +
@@ -453,7 +453,7 @@ class Middle {
      * @throws IOException
      * @throws InterruptedException
      */
-    ArrayList Operation2(String operation, String macaddress, int count_reminders, String ams_ip, int reminderChannelNumber, String reminderProgramStart, int reminderProgramId, int reminderOffset, int reminderScheduleId, int reminderId) throws IOException, InterruptedException {
+    ArrayList Operation2(String operation, String macaddress, int count_reminders, String ams_ip, int reminderChannelNumber, String reminderProgramStart, String reminderProgramId, int reminderOffset, int reminderScheduleId, int reminderId) throws IOException, InterruptedException {
         System.out.println(operation + " for macaddress=" + macaddress + ", "
                 + "count_reminders=" + count_reminders + ", "
                 //+ "count_iterations=" + count_iterations + ", "

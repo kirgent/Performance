@@ -28,11 +28,11 @@ public class testAMS {
     //String notes = "WB20 D103";
     //String macaddress = "3438B7EB2E28";
 
-    String notes = "WB20 D104";
-    String macaddress = "3438B7EB2E34";
+    //String notes = "WB20 D104";
+    //String macaddress = "3438B7EB2E34";
 
-    //String notes = "WB20 D105";
-    //String macaddress = "3438B7EB2E30";
+    String notes = "WB20 D105";
+    String macaddress = "3438B7EB2E30";
 
     //String notes = "WB20 D106";
     //String macaddress = "3438B7EB2EC4";
@@ -73,12 +73,12 @@ public class testAMS {
     final String charterapi_d = "http://specd.partnerapi.engprod-charter.net/api/pub/networksettingsmiddle/ns/settings";
     final String charterapi_by_default = charterapi_b;
 
+    //DEFAULTS
     int count_reminders_by_default = 48;
     int reminderChannelNumber_by_default = 2;
     String reminderProgramStart_by_default = "2013-03-08 00:00";
-    int reminderProgramId_by_default = 1;
+    String reminderProgramId_by_default = "EP002960010113";
     int reminderOffset_by_default = 0;
-    private int reminderOffset_new_by_default = 10;
     int reminderScheduleId_by_default = 1;
     int reminderId_by_default = 1;
 
