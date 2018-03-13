@@ -17,7 +17,7 @@ import java.util.logging.Logger;
 
 import static java.lang.System.currentTimeMillis;
 
-class Middle {
+public class Middle {
 
     private final static Logger log = Logger.getLogger(Middle.class.getName());
     //FileHandler txtFile = new FileHandler ("log.log", true);
@@ -137,7 +137,7 @@ class Middle {
      * @throws InterruptedException
      */
     @Deprecated
-    ArrayList Operation(String ams_ip, String macaddress, String operation, int count_reminders, int count_iterations, String[] rack_date, Integer[] rack_channel) throws IOException, InterruptedException {
+    public ArrayList Operation(String ams_ip, String macaddress, String operation, int count_reminders, int count_iterations, String[] rack_date, Integer[] rack_channel) throws IOException, InterruptedException {
         System.out.println(operation + " for macaddress=" + macaddress + ", "
                 + "count_reminders=" + count_reminders + ", "
                 + "count_iterations=" + count_iterations + ", "
@@ -251,9 +251,9 @@ class Middle {
         request.setEntity(new StringEntity(json_change_registration));
         request.setHeader("Content-type", "application/json");
         //request.setHeader("Accept", "application/json");
-        System.out.println("[DBG] Request string: " + request);
+        System.out.println("[DBG] Request string: " + request
                 //+ "\n[DBG] Request json string: " + json_change_registration);
-        //+ "\n[DBG] Request entity: " + request.getEntity()
+        + "\n[DBG] Request entity: " + request.getEntity());
         //+ "\n[DBG] Request headers: " + request.getAllHeaders());
 
         long start = currentTimeMillis();

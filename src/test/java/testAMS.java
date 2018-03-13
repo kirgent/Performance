@@ -28,11 +28,11 @@ public class testAMS {
     //String notes = "WB20 D103";
     //String macaddress = "3438B7EB2E28";
 
-    //String notes = "WB20 D104";
-    //String macaddress = "3438B7EB2E34";
+    String notes = "WB20 D104";
+    String macaddress = "3438B7EB2E34";
 
-    String notes = "WB20 D105";
-    String macaddress = "3438B7EB2E30";
+    //String notes = "WB20 D105";
+    //String macaddress = "3438B7EB2E30";
 
     //String notes = "WB20 D106";
     //String macaddress = "3438B7EB2EC4";
@@ -49,18 +49,18 @@ public class testAMS {
     //String notes = "Katya_V";
     //String macaddress = "0000048D4EB4";
 
-    //String ams_ip = "172.30.81.4";
-    String ams_ip = "172.30.82.132";
+    public String ams_ip = "172.30.81.4";
+    //String ams_ip = "172.30.82.132";
     //String ams_ip = "172.30.112.19";
 
     int count_iterations = 1;
 
     //DATE
-    String[] rack_date = { "2018-03-13" };
+    public String[] rack_date = { "2018-03-13" };
     String[] rack_date_for_statuscode2 = { "2000-01-01" };
 
     //CHANNEL
-    Integer[] rack_channel = { 2 };
+    public Integer[] rack_channel = { 2 };
     Integer[] rack_channel_all = { 2, 3, 4, 5, 6, 7, 8, 9, 10, 11 };
     Integer[] rack_channel_for_statuscode3 = { 9999 };
     //String
@@ -74,7 +74,7 @@ public class testAMS {
     final String charterapi_by_default = charterapi_b;
 
     //DEFAULTS
-    int count_reminders_by_default = 48;
+    public int count_reminders_by_default = 48;
     int reminderChannelNumber_by_default = 2;
     String reminderProgramStart_by_default = "2013-03-08 00:00";
     String reminderProgramId_by_default = "EP002960010113";
