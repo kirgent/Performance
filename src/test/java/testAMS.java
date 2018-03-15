@@ -1,6 +1,8 @@
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.TimeZone;
@@ -11,11 +13,19 @@ class testAMS {
 
     //static Logger log = Logger.getLogger(testAMS.class.getName());
 
-    int expected200 = 200;    String expected200t = "OK";
-    int expected400 = 400;    String expected400t = "Bad Request";
-    int expected405 = 405;    String expected405t = "Method Not Allowed";
-    int expected500 = 500;    String expected500t = "Internal Server Error";
+    //ArrayList expected2000 = new ArrayList() { 200, "OK" };
 
+    int expected200 = 200;
+    String expected200t = "OK";
+
+    int expected400 = 400;
+    String expected400t = "Bad Request";
+
+    int expected405 = 405;
+    String expected405t = "Method Not Allowed";
+
+    int expected500 = 500;
+    String expected500t = "Internal Server Error";
 
     String[] boxD101 = {"A0722CEEC970", "WB20 D101 ???"};
 
@@ -49,12 +59,18 @@ class testAMS {
 
     //CHANNEL
     Integer[] rack_channel = {2};
+    Integer[] reminderChannelNumber = {2};
     Integer[] rack_channel_negative = {-1};
     Integer[] rack_channel_all = { 2, 3, 4, 5, 6, 7, 8, 9, 10, 11 };
     Integer[] rack_channel_for_statuscode3 = { 9999 };
     //String
     final private String[] rack_channel_statuscode4 = { "1000" };
 
+
+    static String reminderProgramId = "EP0";
+    static int reminderOffset = 0;
+    static int reminderScheduleId = 1;
+    static int reminderId = 1;
 
     final String charterapi_ = "http://spec.partnerapi.engprod-charter.net/api/pub/networksettingsmiddle/ns/settings";
     final String charterapi_b = "http://specb.partnerapi.engprod-charter.net/api/pub/networksettingsmiddle/ns/settings";
@@ -78,6 +94,14 @@ class testAMS {
 
     Middle api = new Middle();
 
+    @BeforeEach
+    void setUp() {
+        //expected2000.add(0, 200);
+        //expected2000.add(1, "OK");
+
+
+    }
+
     @Test
     void testDate() {
         assertEquals("2018-03-16", get_date(1, false));
@@ -88,7 +112,7 @@ class testAMS {
 
     @Test
     void testTime() {
-        assertEquals("02:30", get_time(140, false));
+        assertEquals("02:30", get_time(150, false));
     }
 
     private String get_date(int count, Boolean several) {
@@ -129,7 +153,6 @@ class testAMS {
         System.out.println("generated times: " + result);
         return result;
     }
-
 
     //public void testMiddle_Request(){
         //curl -vk -X POST -H "Content-Type: application/json"

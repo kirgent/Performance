@@ -4,7 +4,7 @@ import java.text.ParseException;
 public class Test_reminder {
 
     private static Integer[] reminderChannelNumber = {2};
-    private static String reminderProgramStart = "2013-03-08 00:00";
+    private static String[] reminderProgramStart = { "2013-03-08 00:00" };
     private static String reminderProgramId = "EP0";
     private static int reminderOffset = 0;
     private static int reminderScheduleId = 1;
@@ -182,17 +182,17 @@ public class Test_reminder {
             case "change": api.Change_registration(macaddress, charterapi_by_default, ams_ip_by_default); break;
             case "Purge":
             case "purge":
-                api.Operation(ams_ip_by_default, macaddress, "Purge", "oldapi");
+                api.Operation(ams_ip_by_default, macaddress, "Purge", false);
                 break;
             case "Purge2":
             case "purge2":
-                api.Operation(ams_ip_by_default, macaddress, "Purge", "newapi");
+                api.Operation(ams_ip_by_default, macaddress, "Purge", false);
                 break;
             //case "Add":
             //case "add": api.Operation("Add", macaddress, count_reminders, count_iterations, ams_ip_default); break;
             case "Modify":
             case "modify":
-                api.Operation(ams_ip_by_default, macaddress, "Modify", count_reminders_by_default, reminderChannelNumber, reminderProgramStart, reminderProgramId, reminderOffset, reminderScheduleId, reminderId);
+                api.Operation(ams_ip_by_default, macaddress, "Modify", true, count_reminders_by_default, reminderProgramStart, reminderChannelNumber, reminderProgramId, reminderOffset, reminderScheduleId, reminderId);
                 break;
             //case "Delete":
             //case "delete": api.Operation("Delete", macaddress, count_reminders, count_iterations, ams_ip_default); break;
