@@ -10,7 +10,7 @@ class testAMS_Delete extends testAMS {
     @Test
     void testDelete_48() throws IOException, InterruptedException {
         long start = System.currentTimeMillis();
-        ArrayList actual = api.Operation(ams_ip, macaddress, "Delete", 48,
+        ArrayList actual = api.Operation(ams_ip, macaddress[0], "Delete", 48,
                 rack_date, rack_channel);
         long finish = System.currentTimeMillis();
         System.out.println("[DBG] " + (finish-start) + "ms test, " + "return code: " + actual);
@@ -22,7 +22,7 @@ class testAMS_Delete extends testAMS {
     @Test
     void testDelete_288() throws IOException, InterruptedException {
         long start = System.currentTimeMillis();
-        ArrayList actual = api.Operation(ams_ip, macaddress, "Delete", 288,
+        ArrayList actual = api.Operation(ams_ip, macaddress[0], "Delete", 288,
                 rack_date, rack_channel);
         long finish = System.currentTimeMillis();
         System.out.println("[DBG] " + (finish-start) + "ms test, return code: " + actual);
@@ -34,8 +34,8 @@ class testAMS_Delete extends testAMS {
     @Test
     void testDelete_720() throws IOException, InterruptedException {
         long start = System.currentTimeMillis();
-        //ArrayList actual = api.Operation("Delete", macaddress, 720, count_iterations, ams_ip);
-        ArrayList actual = api.Operation(ams_ip, macaddress, "Delete", 720,
+        //ArrayList actual = api.Operation("Delete", macaddress[0], 720, count_iterations, ams_ip);
+        ArrayList actual = api.Operation(ams_ip, macaddress[0], "Delete", 720,
                 rack_date, rack_channel);
         long finish = System.currentTimeMillis();
         System.out.println("[DBG] " + (finish-start) + "ms test, return code: " + actual);
@@ -51,7 +51,7 @@ class testAMS_Delete extends testAMS {
     @Test
     void testDelete_statusCode2() throws IOException, InterruptedException {
         long start = System.currentTimeMillis();
-        ArrayList actual = api.Operation(ams_ip, macaddress, "Delete", count_reminders_by_default,
+        ArrayList actual = api.Operation(ams_ip, macaddress[0], "Delete", count_reminders_by_default,
                 rack_date_for_statuscode2, rack_channel);
         long finish = System.currentTimeMillis();
         System.out.println("[DBG] " + (finish-start) + "ms test, " + "return code: " + actual);
@@ -67,7 +67,7 @@ class testAMS_Delete extends testAMS {
     @Test
     void testDelete_statusCode3() throws IOException, InterruptedException {
         long start = System.currentTimeMillis();
-        ArrayList actual = api.Operation(ams_ip, macaddress, "Delete", count_reminders_by_default,
+        ArrayList actual = api.Operation(ams_ip, macaddress[0], "Delete", count_reminders_by_default,
                 rack_date, rack_channel_for_statuscode3);
         long finish = System.currentTimeMillis();
         System.out.println("[DBG] " + (finish-start) + "ms test, " + "return code: " + actual);
@@ -83,7 +83,7 @@ class testAMS_Delete extends testAMS {
     @Test
     void testDelete_statusCode4() throws IOException, InterruptedException {
         long start = System.currentTimeMillis();
-        ArrayList actual = api.Operation(ams_ip, macaddress, "Delete", count_reminders_by_default,
+        ArrayList actual = api.Operation(ams_ip, macaddress[0], "Delete", count_reminders_by_default,
                 rack_date, rack_channel);
         long finish = System.currentTimeMillis();
         System.out.println("[DBG] " + (finish-start) + "ms test, " + "return code: " + actual);
@@ -99,7 +99,7 @@ class testAMS_Delete extends testAMS {
     @Test
     void testDelete_statusCode5() throws IOException, InterruptedException {
         long start = System.currentTimeMillis();
-        ArrayList actual = api.Operation(ams_ip, macaddress, "Delete", count_reminders_by_default,
+        ArrayList actual = api.Operation(ams_ip, macaddress[0], "Delete", count_reminders_by_default,
                 rack_date, rack_channel);
         long finish = System.currentTimeMillis();
         System.out.println("[DBG] " + (finish-start) + "ms test, " + "return code: " + actual);
@@ -123,7 +123,7 @@ class testAMS_Delete extends testAMS {
     @Test
     void testDelete_negative_REM_ST_001_Box_is_not_registered() throws IOException, InterruptedException {
         long start = System.currentTimeMillis();
-        ArrayList actual = api.Operation("172.30.81.0", macaddress,"Delete", count_reminders_by_default,
+        ArrayList actual = api.Operation("172.30.81.0", macaddress[0], "Delete", count_reminders_by_default,
                 rack_date, rack_channel);
         long finish = System.currentTimeMillis();
         System.out.println("[DBG] " + (finish-start) + "ms test, " + "return code: " + actual);

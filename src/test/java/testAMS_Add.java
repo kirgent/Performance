@@ -1,28 +1,43 @@
-import org.junit.jupiter.api.RepeatedTest;
 import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
 import java.util.ArrayList;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static java.time.Duration.ofSeconds;
+import static org.junit.jupiter.api.Assertions.*;
 
 class testAMS_Add extends testAMS {
 
-    @RepeatedTest(1)
+    //@RepeatedTest(1)
+    @Test
     void testAdd_48() throws IOException, InterruptedException {
-        long start = System.currentTimeMillis();
-        ArrayList actual = api.Operation(ams_ip, macaddress, "Add", 48, rack_date, rack_channel);
-        long finish = System.currentTimeMillis();
-        System.out.println("[DBG] " + (finish-start) + "ms test, " + "return code: " + actual);
-        assertEquals(expected200, actual.get(0));
-        assertEquals(expected200t, actual.get(1));
-        assertEquals("", actual.get(2));
+        //long start = System.currentTimeMillis();
+        //ArrayList actual = api.Operation(ams_ip, macaddress[0], "Add", 48, rack_date, rack_channel);
+
+        //ArrayList actual = new ArrayList();
+        assertTimeout(ofSeconds(5), () -> {
+            long start = System.currentTimeMillis();
+            ArrayList actual = api.Operation(ams_ip, macaddress[0], "Add", 48, rack_date, rack_channel);
+            long finish = System.currentTimeMillis();
+            assertAll(() -> assertEquals(expected200, actual.get(0)),
+                    () -> assertEquals(expected200t, actual.get(1)),
+                    () -> assertEquals("", actual.get(2)));
+
+            System.out.println("[DBG] " + (finish - start) + "ms test, " + "return code: " + actual);
+        });
+
+
+        //System.out.println("[DBG] " + (finish-start) + "ms test, " + "return code: " + actual[0]);
+        //assertEquals(expected200, actual.get(0));
+        //assertEquals(expected200t, actual.get(1));
+        //assertEquals("", actual.get(2));
+
     }
 
     @Test
     void testAdd_288() throws IOException, InterruptedException {
         long start = System.currentTimeMillis();
-        ArrayList actual = api.Operation(ams_ip, macaddress, "Add", 288, rack_date, rack_channel);
+        ArrayList actual = api.Operation(ams_ip, macaddress[0], "Add", 288, rack_date, rack_channel);
         long finish = System.currentTimeMillis();
         System.out.println("[DBG] " + (finish-start) + "ms test, " + "return code: " + actual);
         assertEquals(expected200, actual.get(0));
@@ -33,7 +48,7 @@ class testAMS_Add extends testAMS {
     @Test
     void testAdd_720() throws IOException, InterruptedException {
         long start = System.currentTimeMillis();
-        ArrayList actual = api.Operation(ams_ip, macaddress,"Add", 720,
+        ArrayList actual = api.Operation(ams_ip, macaddress[0], "Add", 720,
                 rack_date, rack_channel);
         long finish = System.currentTimeMillis();
         System.out.println("[DBG] " + (finish-start) + "ms test, " + "return code: " + actual);
@@ -49,7 +64,7 @@ class testAMS_Add extends testAMS {
     @Test
     void testAdd_statusCode2() throws IOException, InterruptedException {
         long start = System.currentTimeMillis();
-        ArrayList actual = api.Operation(ams_ip, macaddress, "Add", count_reminders_by_default,
+        ArrayList actual = api.Operation(ams_ip, macaddress[0], "Add", count_reminders_by_default,
                 rack_date_for_statuscode2, rack_channel);
         long finish = System.currentTimeMillis();
         System.out.println("[DBG] " + (finish-start) + "ms test, " + "return code: " + actual);
@@ -65,7 +80,7 @@ class testAMS_Add extends testAMS {
     @Test
     void testAdd_statusCode3() throws IOException, InterruptedException {
         long start = System.currentTimeMillis();
-        ArrayList actual = api.Operation(ams_ip, macaddress,"Add", count_reminders_by_default,
+        ArrayList actual = api.Operation(ams_ip, macaddress[0], "Add", count_reminders_by_default,
                 rack_date, rack_channel_for_statuscode3);
         long finish = System.currentTimeMillis();
         System.out.println("[DBG] " + (finish-start) + "ms test, " + "return code: " + actual);
@@ -81,7 +96,7 @@ class testAMS_Add extends testAMS {
     @Test
     void testAdd_statusCode4() throws IOException, InterruptedException {
         long start = System.currentTimeMillis();
-        ArrayList actual = api.Operation(ams_ip, macaddress,"Add", count_reminders_by_default,
+        ArrayList actual = api.Operation(ams_ip, macaddress[0], "Add", count_reminders_by_default,
                 rack_date, rack_channel);
         long finish = System.currentTimeMillis();
         System.out.println("[DBG] " + (finish-start) + "ms test, " + "return code: " + actual);
@@ -97,7 +112,7 @@ class testAMS_Add extends testAMS {
     @Test
     void testAdd_statusCode5() throws IOException, InterruptedException {
         long start = System.currentTimeMillis();
-        ArrayList actual = api.Operation(ams_ip, macaddress,"Add", count_reminders_by_default,
+        ArrayList actual = api.Operation(ams_ip, macaddress[0], "Add", count_reminders_by_default,
                 rack_date, rack_channel);
         long finish = System.currentTimeMillis();
         System.out.println("[DBG] " + (finish-start) + "ms test, " + "return code: " + actual);
@@ -121,7 +136,7 @@ class testAMS_Add extends testAMS {
     @Test
     void testAdd_negative_REM_ST_001_Box_is_not_registered() throws IOException, InterruptedException {
         long start = System.currentTimeMillis();
-        ArrayList actual = api.Operation("172.30.81.0", macaddress,"Add", count_reminders_by_default,
+        ArrayList actual = api.Operation("172.30.81.0", macaddress[0], "Add", count_reminders_by_default,
                 rack_date, rack_channel);
         long finish = System.currentTimeMillis();
         System.out.println("[DBG] " + (finish-start) + "ms test, " + "return code: " + actual);

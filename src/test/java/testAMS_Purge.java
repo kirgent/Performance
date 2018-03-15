@@ -10,7 +10,7 @@ class testAMS_Purge extends testAMS {
     @Test
     void testPurge2() throws IOException, InterruptedException {
         long start = System.currentTimeMillis();
-        ArrayList actual = api.Operation(ams_ip, macaddress, "Purge", "newapi");
+        ArrayList actual = api.Operation(ams_ip, macaddress[0], "Purge", "newapi");
         long finish = System.currentTimeMillis();
         System.out.println("[DBG] " + (finish - start) + "ms test, return code: " + actual);
         assertEquals(expected200, actual.get(0));
@@ -32,7 +32,7 @@ class testAMS_Purge extends testAMS {
     @Test
     void testPurge2_negative_REM_ST_01_Box_is_not_registered() throws IOException, InterruptedException {
         long start = System.currentTimeMillis();
-        ArrayList actual = api.Operation("172.30.81.0", macaddress, "Purge", "newapi");
+        ArrayList actual = api.Operation("172.30.81.0", macaddress[0], "Purge", "newapi");
         long finish = System.currentTimeMillis();
         System.out.println("[DBG] " + (finish - start) + "ms test, return code: " + actual);
         assertEquals(expected500, actual.get(0));
@@ -43,7 +43,7 @@ class testAMS_Purge extends testAMS {
     @Test
     void testPurge2_negative_400_Bad_Request() throws IOException, InterruptedException {
         long start = System.currentTimeMillis();
-        ArrayList actual = api.Operation(ams_ip, macaddress, "blablabla", "newapi");
+        ArrayList actual = api.Operation(ams_ip, macaddress[0], "blablabla", "newapi");
         long finish = System.currentTimeMillis();
         System.out.println("[DBG] " + (finish - start) + "ms test, return code: " + actual);
         assertEquals(expected400, actual.get(0));
@@ -54,7 +54,7 @@ class testAMS_Purge extends testAMS {
     @Test
     void testPurge() throws IOException, InterruptedException {
         long start = System.currentTimeMillis();
-        ArrayList actual = api.Operation(ams_ip, macaddress, "Purge", "oldapi");
+        ArrayList actual = api.Operation(ams_ip, macaddress[0], "Purge", "oldapi");
         long finish = System.currentTimeMillis();
         System.out.println("[DBG] " + (finish - start) + "ms test, return code: " + actual);
         assertEquals(expected200, actual.get(0));
@@ -77,7 +77,7 @@ class testAMS_Purge extends testAMS {
     @Test
     void testPurge_negative_REM_ST_01_Box_is_not_registered() throws IOException, InterruptedException {
         long start = System.currentTimeMillis();
-        ArrayList actual = api.Operation("172.30.81.0", macaddress, "Purge", "oldapi");
+        ArrayList actual = api.Operation("172.30.81.0", macaddress[0], "Purge", "oldapi");
         long finish = System.currentTimeMillis();
         System.out.println("[DBG] " + (finish - start) + "ms test, return code: " + actual);
         assertEquals(expected500, actual.get(0));
@@ -88,7 +88,7 @@ class testAMS_Purge extends testAMS {
     @Test
     void testPurge_negative_400_Bad_Request() throws IOException, InterruptedException {
         long start = System.currentTimeMillis();
-        ArrayList actual = api.Operation(ams_ip, macaddress, "blablabla", "oldapi");
+        ArrayList actual = api.Operation(ams_ip, macaddress[0], "blablabla", "oldapi");
         long finish = System.currentTimeMillis();
         System.out.println("[DBG] " + (finish - start) + "ms test, return code: " + actual);
         assertEquals(expected400, actual.get(0));

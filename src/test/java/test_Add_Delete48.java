@@ -12,7 +12,7 @@ class test_Add_Delete48 extends testAMS {
     @Test
     void test48Add() throws IOException, InterruptedException {
         long start = System.currentTimeMillis();
-        ArrayList actual = api.Operation(ams_ip, macaddress, "Add", count_reminders_by_default, rack_date, rack_channel);
+        ArrayList actual = api.Operation(ams_ip, macaddress[0], "Add", count_reminders_by_default, rack_date, rack_channel);
         long finish = System.currentTimeMillis();
         System.out.println("[DBG] " + (finish-start) + "ms test, " + "return code: " + actual);
         assertEquals(expected200, actual.get(0));
@@ -24,7 +24,7 @@ class test_Add_Delete48 extends testAMS {
     @Test
     void test48Delete() throws IOException, InterruptedException {
         long start = System.currentTimeMillis();
-        ArrayList actual = api.Operation(ams_ip, macaddress, "Delete", count_reminders_by_default, rack_date, rack_channel);
+        ArrayList actual = api.Operation(ams_ip, macaddress[0], "Delete", count_reminders_by_default, rack_date, rack_channel);
         long finish = System.currentTimeMillis();
         System.out.println("[DBG] " + (finish-start) + "ms test, " + "return code: " + actual);
         assertEquals(expected200, actual.get(0));
