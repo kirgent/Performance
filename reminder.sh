@@ -1,2 +1,2 @@
 #!/bin/bash
-java -cp target/classes/ Test_reminder
+java -cp target/classes/ Remainder

@@ -3,16 +3,17 @@ import org.junit.jupiter.api.Test;
 import java.io.IOException;
 import java.util.ArrayList;
 
-import static java.time.Duration.ofSeconds;
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
-class testAMS_Add extends testAMS {
+class testReminder_Add extends testAPI {
 
     //@RepeatedTest(1)
     @Test
     void testAdd_48() throws IOException, InterruptedException {
         long start = System.currentTimeMillis();
-        ArrayList actual = api.Operation(ams_ip, macaddress[0], "Add", false, 48, rack_date, rack_channel, reminderProgramId, reminderOffset, reminderScheduleId, reminderId);
+        ArrayList actual = api.Operation(ams_ip, macaddress[0], "Add", false, 48,
+                reminderProgramStart_by_default, reminderChannelNumber_by_default, reminderProgramId_by_default,
+                reminderOffset_by_default, reminderScheduleId_by_default, reminderId_by_default);
         long finish = System.currentTimeMillis();
         System.out.println("[DBG] " + (finish - start) + "ms test, " + "return code: " + actual);
         assertEquals(expected200, actual.get(0));
@@ -23,7 +24,9 @@ class testAMS_Add extends testAMS {
     @Test
     void testAdd_288() throws IOException, InterruptedException {
         long start = System.currentTimeMillis();
-        ArrayList actual = api.Operation(ams_ip, macaddress[0], "Add", false, 288, rack_date, rack_channel, reminderProgramId, reminderOffset, reminderScheduleId, reminderId);
+        ArrayList actual = api.Operation(ams_ip, macaddress[0], "Add", false, 288,
+                reminderProgramStart_by_default, reminderChannelNumber_by_default, reminderProgramId_by_default,
+                reminderOffset_by_default, reminderScheduleId_by_default, reminderId_by_default);
         long finish = System.currentTimeMillis();
         System.out.println("[DBG] " + (finish-start) + "ms test, " + "return code: " + actual);
         assertEquals(expected200, actual.get(0));
@@ -34,8 +37,9 @@ class testAMS_Add extends testAMS {
     @Test
     void testAdd_720() throws IOException, InterruptedException {
         long start = System.currentTimeMillis();
-        ArrayList actual = api.Operation(ams_ip, macaddress[0], "Add", 720,
-                rack_date, rack_channel);
+        ArrayList actual = api.Operation(ams_ip, macaddress[0], "Add", false, 720,
+                reminderProgramStart_by_default, reminderChannelNumber_by_default, reminderProgramId_by_default,
+                reminderOffset_by_default, reminderScheduleId_by_default, reminderId_by_default);
         long finish = System.currentTimeMillis();
         System.out.println("[DBG] " + (finish-start) + "ms test, " + "return code: " + actual);
         assertEquals(expected200, actual.get(0));
@@ -50,8 +54,9 @@ class testAMS_Add extends testAMS {
     @Test
     void testAdd_statusCode2() throws IOException, InterruptedException {
         long start = System.currentTimeMillis();
-        ArrayList actual = api.Operation(ams_ip, macaddress[0], "Add", count_reminders_by_default,
-                rack_date_for_statuscode2, rack_channel, reminderChannelNumber, reminderProgramStart, reminderProgramId, reminderOffset, reminderScheduleId, reminderId);
+        ArrayList actual = api.Operation(ams_ip, macaddress[0], "Add", false, count_reminders_by_default,
+                reminderProgramStart_for_statuscode2, reminderChannelNumber_by_default, reminderProgramId_by_default,
+                reminderOffset_by_default, reminderScheduleId_by_default, reminderId_by_default);
         long finish = System.currentTimeMillis();
         System.out.println("[DBG] " + (finish-start) + "ms test, " + "return code: " + actual);
         assertEquals(expected200, actual.get(0));
@@ -66,8 +71,9 @@ class testAMS_Add extends testAMS {
     @Test
     void testAdd_statusCode3() throws IOException, InterruptedException {
         long start = System.currentTimeMillis();
-        ArrayList actual = api.Operation(ams_ip, macaddress[0], "Add", count_reminders_by_default,
-                rack_date, rack_channel_for_statuscode3);
+        ArrayList actual = api.Operation(ams_ip, macaddress[0], "Add", false, count_reminders_by_default,
+                reminderProgramStart_by_default, reminderChannelNumber_for_statuscode3, reminderProgramId_by_default,
+                reminderOffset_by_default, reminderScheduleId_by_default, reminderId_by_default);
         long finish = System.currentTimeMillis();
         System.out.println("[DBG] " + (finish-start) + "ms test, " + "return code: " + actual);
         assertEquals(expected200, actual.get(0));
@@ -82,8 +88,9 @@ class testAMS_Add extends testAMS {
     @Test
     void testAdd_statusCode4() throws IOException, InterruptedException {
         long start = System.currentTimeMillis();
-        ArrayList actual = api.Operation(ams_ip, macaddress[0], "Add", count_reminders_by_default,
-                rack_date, rack_channel);
+        ArrayList actual = api.Operation(ams_ip, macaddress[0], "Add", false, count_reminders_by_default,
+                reminderProgramStart_by_default, reminderChannelNumber_by_default, reminderProgramId_by_default,
+                reminderOffset_by_default, reminderScheduleId_by_default, reminderId_by_default);
         long finish = System.currentTimeMillis();
         System.out.println("[DBG] " + (finish-start) + "ms test, " + "return code: " + actual);
         assertEquals(expected200, actual.get(0));
@@ -98,8 +105,9 @@ class testAMS_Add extends testAMS {
     @Test
     void testAdd_statusCode5() throws IOException, InterruptedException {
         long start = System.currentTimeMillis();
-        ArrayList actual = api.Operation(ams_ip, macaddress[0], "Add", count_reminders_by_default,
-                rack_date, rack_channel);
+        ArrayList actual = api.Operation(ams_ip, macaddress[0], "Add", false, count_reminders_by_default,
+                reminderProgramStart_by_default, reminderChannelNumber_by_default, reminderProgramId_by_default,
+                reminderOffset_by_default, reminderScheduleId_by_default, reminderId_by_default);
         long finish = System.currentTimeMillis();
         System.out.println("[DBG] " + (finish-start) + "ms test, " + "return code: " + actual);
         assertEquals(expected200, actual.get(0));
@@ -110,8 +118,9 @@ class testAMS_Add extends testAMS {
     @Test
     void testAdd_negative_with_empty_macaddress() throws IOException, InterruptedException {
         long start = System.currentTimeMillis();
-        ArrayList actual = api.Operation(ams_ip, "","Add", count_reminders_by_default,
-                rack_date, rack_channel);
+        ArrayList actual = api.Operation(ams_ip, "", "Add", false, count_reminders_by_default,
+                reminderProgramStart_by_default, reminderChannelNumber_by_default, reminderProgramId_by_default,
+                reminderOffset_by_default, reminderScheduleId_by_default, reminderId_by_default);
         long finish = System.currentTimeMillis();
         System.out.println("[DBG] " + (finish-start) + "ms test, " + "return code: " + actual);
         assertEquals(expected400, actual.get(0));
@@ -122,8 +131,9 @@ class testAMS_Add extends testAMS {
     @Test
     void testAdd_negative_REM_ST_001_Box_is_not_registered() throws IOException, InterruptedException {
         long start = System.currentTimeMillis();
-        ArrayList actual = api.Operation("172.30.81.0", macaddress[0], "Add", count_reminders_by_default,
-                rack_date, rack_channel);
+        ArrayList actual = api.Operation("172.30.81.0", macaddress[0], "Add", false, count_reminders_by_default,
+                reminderProgramStart_by_default, reminderChannelNumber_by_default, reminderProgramId_by_default,
+                reminderOffset_by_default, reminderScheduleId_by_default, reminderId_by_default);
         long finish = System.currentTimeMillis();
         System.out.println("[DBG] " + (finish-start) + "ms test, " + "return code: " + actual);
         assertEquals(expected500, actual.get(0));

@@ -1,7 +1,7 @@
 import java.io.IOException;
 import java.text.ParseException;
 
-public class Test_reminder {
+public class Remainder {
 
     private static Integer[] reminderChannelNumber = {2};
     private static String[] reminderProgramStart = { "2013-03-08 00:00" };
@@ -30,7 +30,7 @@ public class Test_reminder {
     String charterapi_d = "http://specd.partnerapi.engprod-charter.net/api/pub/networksettingsmiddle/ns/settings";
     private static String charterapi_by_default = charterapi_b;
 
-    static String macaddress;
+    String[] macaddress;
     private static String operation;
     private static String param;
 
@@ -112,10 +112,10 @@ public class Test_reminder {
 
         //if (args[0].isEmpty())
         if (args.length >= 1) {
-            macaddress = args[0];
+            macaddress[0] = args[0];
         }
         else {
-            macaddress = macaddress_by_default;
+            macaddress[0] = macaddress_by_default;
         }
 
 
@@ -171,32 +171,37 @@ public class Test_reminder {
             }
         }*/
 
-        System.out.println("[DBG] used macaddress=" + macaddress + ", operation=" + operation + ", param="+param);
+        System.out.println("[DBG] used macaddress=" + macaddress[0] + ", operation=" + operation + ", param=" + param);
 
         Middle api = new Middle();
 
         switch (operation){
             case "Check":
-            case "check": api.Check_registration(macaddress, charterapi_by_default); break;
+            case "check":
+                api.Check_registration(macaddress[0], charterapi_by_default);
+                break;
             case "Change":
-            case "change": api.Change_registration(macaddress, charterapi_by_default, ams_ip_by_default); break;
+            case "change":
+                api.Change_registration(macaddress[0], charterapi_by_default, ams_ip_by_default);
+                break;
             case "Purge":
             case "purge":
-                api.Operation(ams_ip_by_default, macaddress, "Purge", false);
+                //api.Operation(ams_ip_by_default, macaddress[0], "Purge", false);
                 break;
             case "Purge2":
             case "purge2":
-                api.Operation(ams_ip_by_default, macaddress, "Purge", false);
+                //api.Operation(ams_ip_by_default, macaddress[0], "Purge", false);
                 break;
             //case "Add":
             //case "add": api.Operation("Add", macaddress, count_reminders, count_iterations, ams_ip_default); break;
             case "Modify":
             case "modify":
-                api.Operation(ams_ip_by_default, macaddress, "Modify", true, count_reminders_by_default, reminderProgramStart, reminderChannelNumber, reminderProgramId, reminderOffset, reminderScheduleId, reminderId);
+                //api.Operation(ams_ip_by_default, macaddress[0], "Modify", true, count_reminders_by_default, reminderProgramStart, reminderChannelNumber, reminderProgramId, reminderOffset, reminderScheduleId, reminderId);
                 break;
             //case "Delete":
             //case "delete": api.Operation("Delete", macaddress, count_reminders, count_iterations, ams_ip_default); break;
-            default: api.Check_registration(macaddress, charterapi_by_default);
+            default:
+                api.Check_registration(macaddress[0], charterapi_by_default);
         }
     }
 }

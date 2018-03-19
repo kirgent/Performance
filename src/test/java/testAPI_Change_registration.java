@@ -7,7 +7,7 @@ import static java.time.Duration.ofMillis;
 import static org.junit.Assert.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTimeout;
 
-class testAMS_Change_registration extends testAMS {
+class testAPI_Change_registration extends testAPI {
 
     //@Test(timeout = 20000)
     @Test

@@ -1,4 +1,4 @@
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -7,9 +7,9 @@ import static java.time.Duration.ofSeconds;
 import static org.junit.Assert.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTimeout;
 
-class testAMS_Check_registration extends testAMS {
+class testAPI_Check_registration extends testAPI {
 
-    @Test
+    @Test(timeout = 5000)
     void testCheck_registration_via_charterapi_() {
         assertTimeout(ofSeconds(5), () -> {
             long start = System.currentTimeMillis();
