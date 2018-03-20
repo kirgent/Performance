@@ -173,7 +173,7 @@ public class Remainder {
 
         System.out.println("[DBG] used macaddress=" + macaddress[0] + ", operation=" + operation + ", param=" + param);
 
-        Middle api = new Middle();
+        API api = new API();
 
         switch (operation){
             case "Check":

@@ -6,7 +6,7 @@ import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-class testSettings_Audio extends testAPI {
+class testSettings_Audio extends API {
 
     @Test
     @Disabled

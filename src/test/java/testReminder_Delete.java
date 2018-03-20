@@ -5,43 +5,16 @@ import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-class testReminder_Delete extends testAPI {
+class testReminder_Delete extends API {
 
     @Test
-    void testDelete_48() throws IOException, InterruptedException {
+    void testDelete() throws IOException, InterruptedException {
         long start = System.currentTimeMillis();
         ArrayList actual = api.Operation(ams_ip, macaddress[0], "Delete", false, 48,
-                rack_date, rack_channel, reminderProgramId_by_default, reminderOffset_by_default,
-                reminderScheduleId_by_default, reminderId_by_default);
+                reminderProgramStart, reminderChannelNumber,
+                reminderProgramId, reminderOffset, reminderScheduleId, reminderId);
         long finish = System.currentTimeMillis();
         System.out.println("[DBG] " + (finish-start) + "ms test, " + "return code: " + actual);
-        assertEquals(expected200, actual.get(0));
-        assertEquals(expected200t, actual.get(1));
-        assertEquals("", actual.get(2));
-    }
-
-    @Test
-    void testDelete_288() throws IOException, InterruptedException {
-        long start = System.currentTimeMillis();
-        ArrayList actual = api.Operation(ams_ip, macaddress[0], "Delete", false, 288,
-                rack_date, rack_channel, reminderProgramId_by_default, reminderOffset_by_default,
-                reminderScheduleId_by_default, reminderId_by_default);
-        long finish = System.currentTimeMillis();
-        System.out.println("[DBG] " + (finish-start) + "ms test, return code: " + actual);
-        assertEquals(expected200, actual.get(0));
-        assertEquals(expected200t, actual.get(1));
-        assertEquals("", actual.get(2));
-    }
-
-    @Test
-    void testDelete_720() throws IOException, InterruptedException {
-        long start = System.currentTimeMillis();
-        //ArrayList actual = api.Operation("Delete", macaddress[0], 720, count_iterations, ams_ip);
-        ArrayList actual = api.Operation(ams_ip, macaddress[0], "Delete", false, 720,
-                rack_date, rack_channel, reminderProgramId_by_default, reminderOffset_by_default,
-                reminderScheduleId_by_default, reminderId_by_default);
-        long finish = System.currentTimeMillis();
-        System.out.println("[DBG] " + (finish-start) + "ms test, return code: " + actual);
         assertEquals(expected200, actual.get(0));
         assertEquals(expected200t, actual.get(1));
         assertEquals("", actual.get(2));
@@ -54,9 +27,9 @@ class testReminder_Delete extends testAPI {
     @Test
     void testDelete_statusCode2() throws IOException, InterruptedException {
         long start = System.currentTimeMillis();
-        ArrayList actual = api.Operation(ams_ip, macaddress[0], "Delete", false, count_reminders_by_default,
-                reminderProgramStart_for_statuscode2, reminderChannelNumber_by_default, reminderProgramId_by_default,
-                reminderOffset_by_default, reminderScheduleId_by_default, reminderId_by_default);
+        ArrayList actual = api.Operation(ams_ip, macaddress[0], "Delete", false, count_reminders,
+                reminderProgramStart_for_statuscode2, reminderChannelNumber,
+                reminderProgramId, reminderOffset, reminderScheduleId, reminderId);
         long finish = System.currentTimeMillis();
         System.out.println("[DBG] " + (finish-start) + "ms test, " + "return code: " + actual);
         assertEquals(expected200, actual.get(0));
@@ -71,9 +44,9 @@ class testReminder_Delete extends testAPI {
     @Test
     void testDelete_statusCode3() throws IOException, InterruptedException {
         long start = System.currentTimeMillis();
-        ArrayList actual = api.Operation(ams_ip, macaddress[0], "Delete", false, count_reminders_by_default,
-                reminderProgramStart_for_statuscode2, reminderChannelNumber_for_statuscode3, reminderProgramId_by_default,
-                reminderOffset_by_default, reminderScheduleId_by_default, reminderId_by_default);
+        ArrayList actual = api.Operation(ams_ip, macaddress[0], "Delete", false, count_reminders,
+                reminderProgramStart_for_statuscode2, reminderChannelNumber_for_statuscode3,
+                reminderProgramId, reminderOffset, reminderScheduleId, reminderId);
         long finish = System.currentTimeMillis();
         System.out.println("[DBG] " + (finish-start) + "ms test, " + "return code: " + actual);
         assertEquals(expected200, actual.get(0));
@@ -88,9 +61,9 @@ class testReminder_Delete extends testAPI {
     @Test
     void testDelete_statusCode4() throws IOException, InterruptedException {
         long start = System.currentTimeMillis();
-        ArrayList actual = api.Operation(ams_ip, macaddress[0], "Delete", false, count_reminders_by_default,
-                rack_date, rack_channel, reminderProgramId_by_default,
-                reminderOffset_by_default, reminderScheduleId_by_default, reminderId_by_default);
+        ArrayList actual = api.Operation(ams_ip, macaddress[0], "Delete", false, count_reminders,
+                reminderProgramStart, reminderChannelNumber,
+                reminderProgramId, reminderOffset, reminderScheduleId, reminderId);
         long finish = System.currentTimeMillis();
         System.out.println("[DBG] " + (finish-start) + "ms test, " + "return code: " + actual);
         assertEquals(expected200, actual.get(0));
@@ -105,9 +78,9 @@ class testReminder_Delete extends testAPI {
     @Test
     void testDelete_statusCode5() throws IOException, InterruptedException {
         long start = System.currentTimeMillis();
-        ArrayList actual = api.Operation(ams_ip, macaddress[0], "Delete", false, count_reminders_by_default,
-                rack_date, rack_channel, reminderProgramId_by_default,
-                reminderOffset_by_default, reminderScheduleId_by_default, reminderId_by_default);
+        ArrayList actual = api.Operation(ams_ip, macaddress[0], "Delete", false, count_reminders,
+                rack_date, rack_channel, reminderProgramId,
+                reminderOffset, reminderScheduleId, reminderId);
         long finish = System.currentTimeMillis();
         System.out.println("[DBG] " + (finish-start) + "ms test, " + "return code: " + actual);
         assertEquals(expected200, actual.get(0));
@@ -118,27 +91,14 @@ class testReminder_Delete extends testAPI {
     @Test
     void testDelete_negative_with_empty_macaddress() throws IOException, InterruptedException {
         long start = System.currentTimeMillis();
-        ArrayList actual = api.Operation(ams_ip, "", "Delete", false, count_reminders_by_default,
-                rack_date, rack_channel, reminderProgramId_by_default,
-                reminderOffset_by_default, reminderScheduleId_by_default, reminderId_by_default);
+        ArrayList actual = api.Operation(ams_ip, "", "Delete", false, count_reminders,
+                rack_date, rack_channel, reminderProgramId,
+                reminderOffset, reminderScheduleId, reminderId);
         long finish = System.currentTimeMillis();
         System.out.println("[DBG] " + (finish-start) + "ms test, return code: " + actual);
         assertEquals(expected400, actual.get(0));
         assertEquals(expected400t, actual.get(1));
         assertEquals("", actual.get(2));
-    }
-
-    @Test
-    void testDelete_negative_REM_ST_001_Box_is_not_registered() throws IOException, InterruptedException {
-        long start = System.currentTimeMillis();
-        ArrayList actual = api.Operation("172.30.81.0", macaddress[0], "Delete", false, count_reminders_by_default,
-                rack_date, rack_channel, reminderProgramId_by_default,
-                reminderOffset_by_default, reminderScheduleId_by_default, reminderId_by_default);
-        long finish = System.currentTimeMillis();
-        System.out.println("[DBG] " + (finish-start) + "ms test, " + "return code: " + actual);
-        assertEquals(expected500, actual.get(0));
-        assertEquals(expected500t, actual.get(1));
-        assertEquals("REM-ST-001 Box is not registered", actual.get(2));
     }
 
 }

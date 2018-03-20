@@ -3,7 +3,6 @@ import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.entity.StringEntity;
-import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
@@ -11,6 +10,7 @@ import org.json.simple.JSONObject;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Objects;
@@ -18,9 +18,80 @@ import java.util.logging.Logger;
 
 import static java.lang.System.currentTimeMillis;
 
-class Middle {
+public class API {
 
-    private final static Logger log = Logger.getLogger(Middle.class.getName());
+    private final static Logger log = Logger.getLogger(API.class.getName());
+
+    //static Logger log = Logger.getLogger(testAMS.class.getName());
+
+    //ArrayList expected2000 = new ArrayList() { 200, "OK" };
+
+    //@BeforeEach
+    //void setUp() {
+    //expected2000.add(0, 200);
+    //expected2000.add(1, "OK");
+    //}
+
+    //@ParameterizedTest
+    //@ValueSource(strings = { "Hello", "World" })
+    //void testWithStringParameter(String argument) {
+    //    assertNotNull(argument);
+    //}
+
+    //public void testMiddle_Request(){
+    //curl -vk -X POST -H "Content-Type: application/json"
+    //String charterapiX = "http://specd.partnerapi.engprod-charter.net/api/pub/remindersmiddle/v1/reminders" +
+    //"?deviceId=000007444C77&lineupId=CA11-1"
+    //-d '{"reminderType":"Individual","deliveryId":"49767-MV000209150000-1488390180000","channelId":"49767","programId":"MV000209150000","channelNumber":662,"startTime":1488390180000,"reminderPresetTime":0}'
+
+    //}
+    static API api = new API();
+    final String charterapi_ = "http://spec.partnerapi.engprod-charter.net/api/pub/networksettingsmiddle/ns/settings";
+    final String charterapi_b = "http://specb.partnerapi.engprod-charter.net/api/pub/networksettingsmiddle/ns/settings";
+    final String charterapi_c = "http://specc.partnerapi.engprod-charter.net/api/pub/networksettingsmiddle/ns/settings";
+    final String charterapi_d = "http://specd.partnerapi.engprod-charter.net/api/pub/networksettingsmiddle/ns/settings";
+    final String charterapi = charterapi_b;
+    int expected200 = 200;
+    String expected200t = "OK";
+    int expected400 = 400;
+    String expected400t = "Bad Request";
+    int expected404 = 404;
+    String expected404t = "Not Found";
+    int expected405 = 405;
+    String expected405t = "Method Not Allowed";
+    int expected500 = 500;
+    String expected500t = "Internal Server Error";
+    int expected504 = 504;
+    String expected504t = "Server data timeout";
+    String[] boxD101 = {"A0722CEEC970", "WB20 D101 ???"};
+    String[] boxD102 = {"3438B7EB2E24", "WB20 D102"};
+    String[] boxD103 = {"3438B7EB2E28", "WB20 D103"};
+    String[] boxD104 = {"3438B7EB2E34", "WB20 D104"};
+    String[] boxD105 = {"3438B7EB2E30", "WB20 D105"};
+    String[] boxD106 = {"3438B7EB2EC4", "WB20 D106"};
+    String[] box_Kirmoto = {"0000007F8214", "Kirmoto"};
+    String[] box_Tanya = {"000005FE680A", "Tanya"};
+    String[] box_Vitya = {"A0722CEEC934", "Vitya"};
+    String[] box_Katya_V = {"0000048D4EB4", "Katya_V"};
+    String[] macaddress = {boxD105[0], boxD105[1]};
+    //DATES
+    String[] rack_date = {"2018-03-15"};
+    String reminderProgramStart = "2018-03-21";
+    String reminderProgramStart_for_statuscode2 = "2000-01-01 00:00";
+    //CHANNELS
+    int reminderChannelNumber = 2;
+    int reminderChannelNumber_for_statuscode3 = 9999;
+    int reminderChannelNumber_for_statuscode4 = 1000;
+    int reminderChannelNumber_negative = -1;
+    /*private Integer[] rack_channel30 = { 2, 3, 4, 5, 6, 7, 8, 9, 12, 13,
+            14, 16, 18, 19, 22, 23, 25, 28, 30, 31,
+            32, 33, 37, 38, 41, 44, 46, 48, 49, 50 };*/
+    Integer[] rack_channel = {2, 3, 4, 5, 6, 7, 8, 9, 10, 11};
+    String reminderProgramId = "EP0"; //"reminderProgramId": "EP002960010113"
+    int reminderOffset = 0;
+    int reminderScheduleId = 1;
+    int reminderId = 1;
+    int count_reminders = 48;
     //FileHandler txtFile = new FileHandler ("log.log", true);
     //private FileHandler fh = new FileHandler("test_reminder.log");
 
@@ -28,8 +99,6 @@ class Middle {
     final private static String postfix_change = "/ams/Reminders?req=ChangeReminders";
 
     //"reminderId": "5"
-    //"reminderChannelNumber": 27
-    static String reminderProgramId = "EP0";
 
     //private int result = 0;
     //private int count_iterations = 3;
@@ -46,14 +115,15 @@ class Middle {
     int reminderScheduleId_by_default = 1;
     //"reminderScheduleId": "2"
     int reminderId_by_default = 1;
-    private int ams_port = 8080;
+    String ams_ip = "172.30.81.4";
     //for Modify/Add/Delete
     //private String reminderProgramId = "EP0";
-    private int reminderProgramId_negative = -1;
+    int reminderProgramId_negative = -1;
     //private int reminderOffset = 0;
-    private int reminderOffset_negative = -1;
-
-
+    int reminderOffset_negative = -1;
+    //String ams_ip = "172.30.82.132";
+    //String ams_ip = "172.30.112.19";
+    private int ams_port = 8080;
 
 
     /*private static String statuscode = "code of the reminder processing result, one of the following:" +
@@ -71,8 +141,6 @@ class Middle {
             "4 - reminder is unknown, applies to reminder deletion attempts",
             "5 - reminder with provided pair of identifiers (reminderScheduleId and reminderId) is already set (for Add Reminder request)" };
 
-    //DATE
-    private String[] rack_date = { "2018-03-08" };
 
     //TIME
     final private String[] rack_time48 = { "00:00", "00:30", "01:00", "01:30", "02:00", "02:30", "03:00", "03:30", "04:00", "04:30", "05:00", "05:30",
@@ -130,12 +198,7 @@ class Middle {
             "22:00", "22:02", "22:04", "22:06", "22:08", "22:10", "22:12", "22:14", "22:16", "22:18", "22:20", "22:22", "22:24", "22:26", "22:28", "22:30", "22:32", "22:34", "22:36", "22:38", "22:40", "22:42", "22:44", "22:46", "22:48", "22:50", "22:52", "22:54", "22:56", "22:58",
             "23:00", "23:02", "23:04", "23:06", "23:08", "23:10", "23:12", "23:14", "23:16", "23:18", "23:20", "23:22", "23:24", "23:26", "23:28", "23:30", "23:32", "23:34", "23:36", "23:38", "23:40", "23:42", "23:44", "23:46", "23:48", "23:50", "23:52", "23:54", "23:56", "23:58" };
 
-    //CHANNEL
-    private Integer[] rack_channel = { 2 };
-    private Integer[] rack_channel10 = { 2, 3, 4, 5, 6, 7, 8, 9, 12, 13 };
-    /*private Integer[] rack_channel30 = { 2, 3, 4, 5, 6, 7, 8, 9, 12, 13,
-            14, 16, 18, 19, 22, 23, 25, 28, 30, 31,
-            32, 33, 37, 38, 41, 44, 46, 48, 49, 50 };*/
+
 
     private String[] get_rack_time(int count_reminders) {
         if (count_reminders == 48) { return rack_time48; }
@@ -147,6 +210,7 @@ class Middle {
     }
 
     /** 1operation method for Add/Modify/Delete/Purge
+     * String reminderProgramStart + Integer reminderChannelNumber
      * @param operation       - can be Add / Modify / Delete / Purge
      * @param macaddress      - macaddress of the box
      * @param count_reminders - count of reminders to generate in json {..}
@@ -158,23 +222,16 @@ class Middle {
                         String reminderProgramStart, Integer reminderChannelNumber, String reminderProgramId,
                         int reminderOffset, int reminderScheduleId, int reminderId) throws IOException {
         if (Objects.equals(operation, "Purge")) {
-            System.out.println("Purge for ams_ip=" + ams_ip + " and macaddress=" + macaddress);
-            //log.info("Purge for ams_ip=" + ams_ip + " and macaddress=" + macaddress);
+            System.out.println(operation + " newapi=" + newapi + " for macaddress=" + macaddress + ", ams_ip=" + ams_ip);
         } else {
             System.out.println(operation + " for macaddress=" + macaddress + ", "
-                    + "count_reminders=" + count_reminders + ", "
+                    + "ams_ip=" + ams_ip + ", "
+                    + "reminderProgramStart=" + reminderProgramStart + ", "
+                    + "reminderChannelNumber=" + reminderChannelNumber + ", "
+                    + "reminderProgramId=" + reminderProgramId + ", "
                     + "reminderOffset=" + reminderOffset + ", "
-                    + "data count=" + rack_date.length + ", "
-                    + "channel count=" + rack_channel.length + ", "
-                    + "data=" + Arrays.asList(rack_date) + ", "
-                    + "channel=" + Arrays.asList(rack_channel));
-        /*log.info(operation + " for macaddress=" + macaddress + ", "
-                + "count_reminders=" + count_reminders + ", "
-                + "reminderOffset=" + reminderOffset + ", "
-                + "data count=" + rack_date.length + ", "
-                + "channel count=" + rack_channel.length + ", "
-                + "data=" + Arrays.asList(rack_date) + ", "
-                + "channel=" + Arrays.asList(rack_channel));*/
+                    + "reminderScheduleId=" + reminderScheduleId + ", "
+                    + "reminderId=" + reminderId);
         }
 
         String url;
@@ -204,58 +261,48 @@ class Middle {
             BufferedReader reader = new BufferedReader(new InputStreamReader(response.getEntity().getContent(), "UTF-8"));
             StringBuilder body = new StringBuilder();
             for (String line = null; (line = reader.readLine()) != null; ) {
-                body.append(line);
-                //System.out.println("[DBG] Response body: " + body.append(line).append("\n"));
+                //body.append(line);
+                System.out.println("[DBG] Response body: " + body.append(line).append("\n"));
             }
 
             arrayList.add(0, response.getStatusLine().getStatusCode());
             arrayList.add(1, response.getStatusLine().getReasonPhrase());
-            arrayList.add(2, check_body_for_statuscode(body.toString()), "");
+            arrayList.add(2, check_body_for_statuscode(body.toString(), macaddress));
         } else {
-            for (String aRack_date : rack_date) {
-                for (int aRack_channel : rack_channel) {
-                    System.out.println("operation= " + operation + ", date=" + aRack_date + ", channel=" + aRack_channel);
-                    //log.info("operation= " + operation +", date=" + aRack_date + ", channel=" + aRack_channel);
+            //System.out.println("operation= " + operation + ", reminderProgramStart=" + reminderProgramStart + ", reminderChannelNumber=" + reminderChannelNumber);
+            //log.info("operation= " + operation +", reminderProgramStart=" + reminderProgramStart + ", reminderChannelNumber=" + reminderChannelNumber);
 
-                    StringEntity entity = new StringEntity(generate_json_reminder(macaddress, newapi, count_reminders, operation, aRack_channel, aRack_date, get_rack_time(count_reminders), reminderProgramId, reminderOffset, reminderScheduleId, reminderId));
-                    request.setEntity(entity);
-                    request.setHeader("Content-type", "application/json");
-                    //request.setHeader("Accept", "application/json");
-                    //request.setHeader("Content-type", "text/plain");
-                    //request.setHeader("Charset", "UTF-8");
-                    System.out.println("[DBG] Request string: " + request);
-                    //+ "\n[DBG] Request entity: " + request.getEntity());
+            StringEntity entity = new StringEntity(generate_json_reminder(macaddress, newapi, count_reminders, operation, reminderProgramStart, get_rack_time(count_reminders), reminderChannelNumber, reminderProgramId, reminderOffset, reminderScheduleId, reminderId));
+            request.setEntity(entity);
+            request.setHeader("Content-type", "application/json");
+            request.setHeader("Accept", "application/json");
+            //request.setHeader("Content-type", "text/plain");
+            //request.setHeader("Charset", "UTF-8");
+            System.out.println("[DBG] Request string: " + request);
+            //+ "\n[DBG] Request entity: " + request.getEntity());
 
-                    long start = currentTimeMillis();
-                    HttpResponse response = client.execute(request);
-                    long finish = currentTimeMillis();
-                    System.out.println("[DBG] " + (finish - start) + "ms request, " +
-                            "Response getStatusLine: " + response.getStatusLine());
+            long start = currentTimeMillis();
+            HttpResponse response = client.execute(request);
+            long finish = currentTimeMillis();
+            System.out.println("[DBG] " + (finish - start) + "ms request, " +
+                    "Response getStatusLine: " + response.getStatusLine());
 
-                    BufferedReader reader = new BufferedReader(new InputStreamReader(response.getEntity().getContent(), "UTF-8"));
-                    StringBuilder body = new StringBuilder();
-                    for (String line = null; (line = reader.readLine()) != null; ) {
-                        //body.append(line);
-                        System.out.println("[DBG] Response body: " + body.append(line).append("\n"));
-                    }
-
-                    arrayList.add(0, response.getStatusLine().getStatusCode());
-                    arrayList.add(1, response.getStatusLine().getReasonPhrase());
-                    arrayList.add(2, check_body_for_statuscode(body.toString()));
-
-                    if (arrayList.get(0).equals(200)) {
-                        break;
-                    }
-                }
-                if (arrayList.get(0).equals(200)) {
-                    break;
-                }
+            BufferedReader reader = new BufferedReader(new InputStreamReader(response.getEntity().getContent(), "UTF-8"));
+            StringBuilder body = new StringBuilder();
+            for (String line = null; (line = reader.readLine()) != null; ) {
+                //body.append(line);
+                System.out.println("[DBG] Response body: " + body.append(line).append("\n"));
             }
+
+            arrayList.add(0, response.getStatusLine().getStatusCode());
+            arrayList.add(1, response.getStatusLine().getReasonPhrase());
+            arrayList.add(2, check_body_for_statuscode(body.toString(), macaddress));
         }
         return arrayList;
     }
 
     /** 2operation method for Add/Modify/Delete/Purge
+     * String[] rack_date + Integer[] rack_channel,
      * @param operation       - can be Add / Modify / Delete / Purge
      * @param macaddress      - macaddress of the box
      * @param count_reminders - count of reminders to generate in json {..}
@@ -273,9 +320,9 @@ class Middle {
             System.out.println(operation + " for macaddress=" + macaddress + ", "
                     + "count_reminders=" + count_reminders + ", "
                     + "reminderOffset=" + reminderOffset + ", "
-                    + "data count=" + rack_date.length + ", "
-                    + "channel count=" + rack_channel.length + ", "
+                    //+ "rack_data.length=" + rack_date.length + ", "
                     + "data=" + Arrays.asList(rack_date) + ", "
+                    //+ "rack_channel.length=" + rack_channel.length + ", "
                     + "channel=" + Arrays.asList(rack_channel));
         /*log.info(operation + " for macaddress=" + macaddress + ", "
                 + "count_reminders=" + count_reminders + ", "
@@ -319,14 +366,14 @@ class Middle {
 
             arrayList.add(0, response.getStatusLine().getStatusCode());
             arrayList.add(1, response.getStatusLine().getReasonPhrase());
-            arrayList.add(2, check_body_for_statuscode(body.toString()));
+            arrayList.add(2, check_body_for_statuscode(body.toString(), macaddress));
         } else {
             for (String aRack_date : rack_date) {
                 for (int aRack_channel : rack_channel) {
                     System.out.println("operation= " + operation + ", date=" + aRack_date + ", channel=" + aRack_channel);
                     //log.info("operation= " + operation +", date=" + aRack_date + ", channel=" + aRack_channel);
 
-                    StringEntity entity = new StringEntity(generate_json_reminder(macaddress, newapi, count_reminders, operation, aRack_channel, aRack_date, get_rack_time(count_reminders), reminderProgramId, reminderOffset, reminderScheduleId, reminderId));
+                    StringEntity entity = new StringEntity(generate_json_reminder(macaddress, newapi, count_reminders, operation, aRack_date, get_rack_time(count_reminders), aRack_channel, reminderProgramId, reminderOffset, reminderScheduleId, reminderId));
                     request.setEntity(entity);
                     request.setHeader("Content-type", "application/json");
                     //request.setHeader("Accept", "application/json");
@@ -350,7 +397,7 @@ class Middle {
 
                     arrayList.add(0, response.getStatusLine().getStatusCode());
                     arrayList.add(1, response.getStatusLine().getReasonPhrase());
-                    arrayList.add(2, check_body_for_statuscode(body.toString()));
+                    arrayList.add(2, check_body_for_statuscode(body.toString(), macaddress));
 
                     if (arrayList.get(0).equals(200)) {
                         break;
@@ -365,7 +412,7 @@ class Middle {
     }
 
     ArrayList Change_settings(String ams_ip, String macaddress, String option, String value) throws IOException {
-        System.out.println("Change settings for ams_ip=" + ams_ip + " option=" + option + " value=" + value);
+        System.out.println("Change settings for macaddress=" + macaddress + ", ams_ip=" + ams_ip + " option=" + option + ", value=" + value);
         //log.info("Change settings for ams_ip=" + ams_ip + " option=" + option + " new_value=" + new_value);
 
         String url = "http://" + ams_ip + ":" + ams_port + "/ams/settings";
@@ -375,7 +422,7 @@ class Middle {
         ArrayList arrayList = new ArrayList();
         request.setEntity(new StringEntity(generate_json_setting(macaddress, option, value)));
 
-        //request.setHeader("Accept", "application/json");
+        request.setHeader("Accept", "application/json");
         request.setHeader("Content-type", "application/json");
         System.out.println("[DBG] Request string: " + request);
         //+ "\n[DBG] Request entity: " + request.getEntity());
@@ -394,7 +441,7 @@ class Middle {
 
         arrayList.add(0, response.getStatusLine().getStatusCode());
         arrayList.add(1, response.getStatusLine().getReasonPhrase());
-        arrayList.add(2, check_body_for_statuscode(body.toString()), "");
+        arrayList.add(2, check_body_for_statuscode(body.toString(), macaddress));
         return arrayList;
     }
 
@@ -402,8 +449,7 @@ class Middle {
         System.out.println("Check_registration "+ macaddress +" via charterapi: " + charterapi);
         //log.info("Check_registration "+ macaddress +" via charterapi: " + charterapi);
 
-        //HttpClient client = HttpClients.createDefault();
-        CloseableHttpClient client = HttpClients.createDefault();
+        HttpClient client = HttpClients.createDefault();
         HttpGet request = new HttpGet(charterapi + "/amsIp/" + macaddress);
 
         request.setHeader("Accept", "*/*");
@@ -424,12 +470,11 @@ class Middle {
         for (String line; (line = reader.readLine()) != null; ) {
             System.out.println("[DBG] Response body: " + body.append(line).append("\n"));
         }
-        client.close();
 
         ArrayList arrayList = new ArrayList();
         arrayList.add(0, response.getStatusLine().getStatusCode());
         arrayList.add(1, response.getStatusLine().getReasonPhrase());
-        arrayList.add(2, check_body_for_statuscode(body.toString()));
+        arrayList.add(2, check_body_for_statuscode(body.toString(), macaddress));
         return arrayList;
     }
 
@@ -437,20 +482,14 @@ class Middle {
         System.out.println("Change_registration "+ macaddress +" to ams " + ams_ip + " via charterapi: " + charterapi);
         //log.info("Change_registration "+ macaddress +" to ams " + ams_ip + " via charterapi: " + charterapi);
 
-        String postfix = "?requestor=AMS";
-        String url = charterapi + postfix;
-        CloseableHttpClient client = HttpClients.createDefault();
-        HttpPost request = new HttpPost(url);
+        HttpClient client = HttpClients.createDefault();
+        HttpPost request = new HttpPost(charterapi + "?requestor=AMS");
 
-        String json_change_registration = "{\"setting\":{\"groups\":[{\"options\":[],\"id\":\"STB" + macaddress + "\",\"type\":\"device-stb\",\"amsid\":\"" + ams_ip + "\"}]}}";
-
-        request.setEntity(new StringEntity(json_change_registration));
+        request.setEntity(new StringEntity(generate_json_change_reg(macaddress, ams_ip)));
         request.setHeader("Content-type", "application/json");
-        //request.setHeader("Accept", "application/json");
-        System.out.println("[DBG] Request string: " + request
-                + "\n[DBG] Request json string: " + json_change_registration);
-        //+ "\n[DBG] Request entity: " + request.getEntity());
-        //+ "\n[DBG] Request headers: " + request.getAllHeaders());
+        request.setHeader("Accept", "application/json");
+        System.out.println("[DBG] Request string: " + request);
+        //+ "\n[DBG] Request json string: " + json_change_registration);
 
         long start = currentTimeMillis();
         HttpResponse response = client.execute(request);
@@ -461,16 +500,37 @@ class Middle {
         BufferedReader reader = new BufferedReader(new InputStreamReader(response.getEntity().getContent(), "UTF-8"));
         StringBuilder body = new StringBuilder();
         for (String line = null; (line = reader.readLine()) != null; ) {
-            //body.append(line);
-            System.out.println("[DBG] Response body: " + body.append(line).append("\n"));
+            body.append(line);
+            //System.out.println("[DBG] Response body: " + body.append(line).append("\n"));
         }
-        client.close();
 
         ArrayList arrayList = new ArrayList();
         arrayList.add(0, response.getStatusLine().getStatusCode());
         arrayList.add(1, response.getStatusLine().getReasonPhrase());
-        arrayList.add(2, check_body_for_statuscode(body.toString()), "");
+        arrayList.add(2, check_body_for_statuscode(body.toString(), macaddress));
         return arrayList;
+    }
+
+    private String generate_json_change_reg(String macaddress, String ams_ip) {
+        //String json_change_registration = "{\"setting\":{\"groups\":[{\"options\":[],\"id\":\"STB" + macaddress + "\",\"type\":\"device-stb\",\"amsid\":\"" + ams_ip + "\"}]}}";
+
+        JSONObject resultJson = new JSONObject();
+        JSONObject object_in_settings = new JSONObject();
+        JSONArray array_groups = new JSONArray();
+        JSONArray array_options = new JSONArray();
+
+        resultJson.put("settings", object_in_settings);
+        object_in_settings.put("groups", array_groups);
+
+        JSONObject object_in_groups = new JSONObject();
+        array_groups.add(object_in_groups);
+        object_in_groups.put("id", "STB" + macaddress);
+        object_in_groups.put("type", "device-stb");
+        object_in_groups.put("amsid", ams_ip);
+        object_in_groups.put("options", array_options);
+
+        System.out.println("generated json: " + resultJson.toJSONString());
+        return resultJson.toJSONString();
     }
 
     /**
@@ -488,23 +548,24 @@ class Middle {
      * @return
      */
     private String generate_json_reminder(String macaddress, Boolean newapi,
-                                          int count_remindres, String operation, int reminderChannelNumber,
-                                          String date, String rack_time[], String reminderProgramId,
-                                          int reminderOffset, int reminderScheduleId, int reminderId) {
+                                          int count_remindres, String operation, String date, String rack_time[], int reminderChannelNumber,
+                                          String reminderProgramId, int reminderOffset, int reminderScheduleId, int reminderId) {
         JSONObject resultJson = new JSONObject();
         resultJson.put("deviceId", macaddress);
         JSONArray array_reminders = new JSONArray();
         resultJson.put("reminders", array_reminders);
         for (int i = 0; i < count_remindres; i++) {
-            JSONObject object = new JSONObject();
-            if(!newapi){ object.put("operation", operation); }
-            object.put("reminderChannelNumber", reminderChannelNumber);
-            object.put("reminderProgramStart", date + " " + rack_time[i]);
-            object.put("reminderProgramId", reminderProgramId);
-            object.put("reminderOffset", reminderOffset);
-            object.put("reminderScheduleId", reminderScheduleId);
-            object.put("reminderId", reminderId);
-            array_reminders.add(object);
+            JSONObject object_in_reminders = new JSONObject();
+            if (!newapi) {
+                object_in_reminders.put("operation", operation);
+            }
+            object_in_reminders.put("reminderProgramStart", date + " " + rack_time[i]);
+            object_in_reminders.put("reminderChannelNumber", reminderChannelNumber);
+            object_in_reminders.put("reminderProgramId", reminderProgramId);
+            object_in_reminders.put("reminderOffset", reminderOffset);
+            object_in_reminders.put("reminderScheduleId", reminderScheduleId);
+            object_in_reminders.put("reminderId", reminderId);
+            array_reminders.add(object_in_reminders);
         }
         String result = resultJson.toJSONString();
         System.out.println("generated json: " + result);
@@ -528,9 +589,9 @@ class Middle {
         if (!newapi){
             //OLDAPI Purge
             //String json_purge = "{\"deviceId\":" + macaddress + ",\"reminders\":[{\"operation\":\"Purge\"}]}";
-            JSONObject object = new JSONObject();
-            object.put("operation", "Purge");
-            array_reminders.add(object);
+            JSONObject object_in_reminders = new JSONObject();
+            object_in_reminders.put("operation", "Purge");
+            array_reminders.add(object_in_reminders);
         }
 
         System.out.println("generated json: " + resultJson.toJSONString());
@@ -629,10 +690,8 @@ class Middle {
     return "";
     }
 
-    private String check_body_for_statuscode(String body, String postfix) {
-        //ArrayList result = new ArrayList();
+    private String check_body_for_statuscode(String body, String macaddress) {
         String result = "";
-
         if(body.contains("\"statusCode\":1")){ log.warning("one or more statusCode's = " + statuscode[1]);
             //result.add(1);
             result += "1";
@@ -653,26 +712,29 @@ class Middle {
             //result.add(5);
             result += "5";
         }
-        if(body.contains("\"message\":\"SUCCESS\"")){
-            result += "SUCCESS";
-        }
-        if(body.contains("\"errorMessage\":\"REM-ST-001 Box is not registered\"")){
+        //if(body.contains("\"message\":\"SUCCESS\"")){
+        //    result += "SUCCESS";
+        //}
+        if (body.contains("\"status\":\"Failed\"") && body.contains("\"errorMessage\":\"REM-ST-001 Box is not registered\"")) {
             result += "REM-ST-001 Box is not registered";
+        }
+        if (body.contains("\"status\":\"Failed\"") && body.contains("\"errorMessage\":\"REM-002 Reminders Service error: REM-112\"")) {
+            result += "REM-002 Reminders Service error: REM-012 [" + macaddress + "] Request not accomplished";
         }
         if(body.contains("Failed to getAmsIpByMacAddress for :") && body.contains("No amsIp found for macAddress:")){
             result += "No amsIp found for macAddress";
         }
-        if (body.contains("STB MAC not found:")) {
-            result += "STB MAC not found";
+        if (body.contains("STB MAC not found: " + macaddress)) {
+            result += "STB MAC not found: " + macaddress;
         }
         if (body.contains("incorrect value")) {
             result += "incorrect value";
         }
-        if (body.contains("\"success\"")) {
-            result += "success";
-        }
+        //if (!body.contains("\"success\"")) {
+        //    result += "not success in body";
+        //}
         if (body.contains("SET-025 Unsupported data type: Not a JSON Object:")) {
-            result += "SET-025 Unsupported data type: Not a JSON Object:";
+            result += "SET-025 Unsupported data type: Not a JSON Object";
         }
 
         //System.out.println("[DBG] result: " + result);
@@ -737,10 +799,11 @@ class Middle {
 
     private String get_postfix(String operation) {
         String result = "";
-        if (Objects.equals(operation, "Add")){
-            result = "/ams/Reminders?req=add"; }
-        else if(Objects.equals(operation, "Modify")){
-            result = "/ams/Reminders?req=modify"; } else if(Objects.equals(operation, "Delete")) {
+        if (Objects.equals(operation, "Add")) {
+            result = "/ams/Reminders?req=add";
+        } else if (Objects.equals(operation, "Modify")) {
+            result = "/ams/Reminders?req=modify";
+        } else if (Objects.equals(operation, "Delete")) {
             result = "/ams/Reminders?req=delete";
         } else if (Objects.equals(operation, "Purge")) {
             result = "/ams/Reminders?req=purge";
@@ -748,5 +811,36 @@ class Middle {
         return result;
     }
 
+    //ArrayList Query_database(String macaddress) throws ClassNotFoundException, SQLException {
+    ResultSet QueryDB(String macaddress) throws ClassNotFoundException, SQLException {
+        System.out.println("QueryDB for macaddress=" + macaddress);
+
+        String url = "jdbc:oracle:thin:@//ams-db01.enwd.co.sa.charterlab.com:1521/zdev02";
+        String username = "ams_ipv6_e591";
+        String password = "ams_ipv6_e591";
+
+        Class.forName("oracle.jdbc.driver.OracleDriver");
+        Connection connection = DriverManager.getConnection(url, username, password);
+
+        Statement statement = connection.createStatement();
+
+        ResultSet result = statement.executeQuery("select * from MAC_IP where MAC_STR = '" + macaddress + "\'");
+        ArrayList arrayresult = new ArrayList();
+        while (result.next()) {
+ /*           arrayresult.add(result.getLong(1));
+            arrayresult.add(result.getLong(2));
+            arrayresult.add(result.getLong(3));
+            arrayresult.add(result.getLong(4));
+            arrayresult.add(result.getLong(5));*/
+            System.out.println(result.getLong(1) + "  "
+                    + result.getString(2) + "  "
+                    + result.getString(3) + "  "
+                    + result.getString(4) + "  "
+                    + result.getString(5));
+        }
+        connection.close();
+
+        return result;
+    }
 
 }
