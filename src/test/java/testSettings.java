@@ -6,11 +6,11 @@ import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-class testSettings_Audio extends API {
+class testSettings extends API {
 
     @Test
     @Disabled
-    void testChangeSettings_Channel_Filters() throws IOException {
+    void testSettings_Channel_Filters() throws IOException {
         //String json = "{"settings":{"groups":
         // [{"id":"STB000005FE680A",
         // "type":"device-stb",
@@ -27,7 +27,7 @@ class testSettings_Audio extends API {
     }
 
     @Test
-    void testChangeSettings_Audio_Output_to_Other() throws IOException {
+    void testSettings_Audio_Output_to_Other() throws IOException {
         long start = System.currentTimeMillis();
         ArrayList actual = api.Change_settings(ams_ip, macaddress[0], "Audio Output", "Other");
         long finish = System.currentTimeMillis();
@@ -38,7 +38,7 @@ class testSettings_Audio extends API {
     }
 
     @Test
-    void testChangeSettings_Audio_Output_to_Dolby_Digital() throws IOException {
+    void testSettings_Audio_Output_to_Dolby_Digital() throws IOException {
         long start = System.currentTimeMillis();
         ArrayList actual = api.Change_settings(ams_ip, macaddress[0], "Audio Output", "Dolby Digital");
         long finish = System.currentTimeMillis();
@@ -49,7 +49,7 @@ class testSettings_Audio extends API {
     }
 
     @Test
-    void testChangeSettings_Audio_Output_to_HDMI() throws IOException {
+    void testSettings_Audio_Output_to_HDMI() throws IOException {
         long start = System.currentTimeMillis();
         ArrayList actual = api.Change_settings(ams_ip, macaddress[0], "Audio Output", "HDMI");
         long finish = System.currentTimeMillis();
@@ -60,7 +60,7 @@ class testSettings_Audio extends API {
     }
 
     @Test
-    void testChangeSettings_STB_MAC_not_found() throws IOException {
+    void testSettings_negative_STB_MAC_not_found() throws IOException {
         long start = System.currentTimeMillis();
         ArrayList actual = api.Change_settings(ams_ip, "001122334455", "Audio Output", "HDMI");
         long finish = System.currentTimeMillis();
@@ -71,7 +71,7 @@ class testSettings_Audio extends API {
     }
 
     @Test
-    void testChangeSettings_incorrect_value() throws IOException {
+    void testSettings_negative_incorrect_value() throws IOException {
         long start = System.currentTimeMillis();
         ArrayList actual = api.Change_settings(ams_ip, "001122334455", "Audio Output", "");
         long finish = System.currentTimeMillis();
@@ -82,7 +82,7 @@ class testSettings_Audio extends API {
     }
 
     @Test
-    void testChangeSettings_SET_025_Unsupported_data_type_Not_a_JSON_Object() throws IOException {
+    void testSettings_negative_SET_025_Unsupported_data_type_Not_a_JSON_Object() throws IOException {
         long start = System.currentTimeMillis();
         ArrayList actual = api.Change_settings(ams_ip, macaddress[0], "Audio Output", "");
         long finish = System.currentTimeMillis();
@@ -93,7 +93,7 @@ class testSettings_Audio extends API {
     }
 
     @Test
-    void testChangeSettings_Turn_Off_Reminders() throws IOException {
+    void testSettings_Turn_Off_Reminders() throws IOException {
         long start = System.currentTimeMillis();
         ArrayList actual = api.Change_settings(ams_ip, macaddress[0], "Turn On/Off Reminders", "Off");
         long finish = System.currentTimeMillis();
@@ -104,7 +104,7 @@ class testSettings_Audio extends API {
     }
 
     @Test
-    void testChangeSettings_Turn_On_Reminders() throws IOException {
+    void testSettings_Turn_On_Reminders() throws IOException {
         long start = System.currentTimeMillis();
         ArrayList actual = api.Change_settings(ams_ip, macaddress[0], "Turn On/Off Reminders", "On");
         long finish = System.currentTimeMillis();

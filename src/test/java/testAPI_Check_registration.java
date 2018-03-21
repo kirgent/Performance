@@ -1,6 +1,4 @@
-import org.junit.Rule;
 import org.junit.Test;
-import org.junit.rules.Timeout;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -8,9 +6,6 @@ import java.util.ArrayList;
 import static org.junit.Assert.assertEquals;
 
 public class testAPI_Check_registration extends API {
-
-    @Rule
-    public Timeout globalTimeout = Timeout.seconds(20);
 
     @Test
     public void testCheck_registration_via_charterapi_() throws IOException {

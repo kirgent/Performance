@@ -1,17 +1,17 @@
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
 
 import java.io.IOException;
 import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-class testReminder_Add extends API {
+public class testReminder_Add extends API {
 
-    //@RepeatedTest(1)
+    //@RepeatedTest(3)
     @Test
-    void testAdd() throws IOException, InterruptedException {
+    public void testAdd() throws IOException, InterruptedException {
         long start = System.currentTimeMillis();
-        ArrayList actual = api.Operation(ams_ip, macaddress[0], "Add", true, 1,
+        ArrayList actual = api.Operation(ams_ip, macaddress[0], "Add", false, 1,
                 reminderProgramStart, reminderChannelNumber, reminderProgramId,
                 reminderOffset, reminderScheduleId, reminderId);
         long finish = System.currentTimeMillis();
@@ -26,9 +26,9 @@ class testReminder_Add extends API {
      * @throws InterruptedException
      */
     @Test
-    void testAdd_statusCode2() throws IOException, InterruptedException {
+    public void testAdd_statusCode2() throws IOException, InterruptedException {
         long start = System.currentTimeMillis();
-        ArrayList actual = api.Operation(ams_ip, macaddress[0], "Add", false, count_reminders,
+        ArrayList actual = api.Operation(ams_ip, macaddress[0], "Add", false, 1,
                 reminderProgramStart_for_statuscode2, reminderChannelNumber, reminderProgramId,
                 reminderOffset, reminderScheduleId, reminderId);
         long finish = System.currentTimeMillis();
@@ -43,9 +43,9 @@ class testReminder_Add extends API {
      * @throws InterruptedException
      */
     @Test
-    void testAdd_statusCode3() throws IOException, InterruptedException {
+    public void testAdd_statusCode3() throws IOException, InterruptedException {
         long start = System.currentTimeMillis();
-        ArrayList actual = api.Operation(ams_ip, macaddress[0], "Add", false, count_reminders,
+        ArrayList actual = api.Operation(ams_ip, macaddress[0], "Add", false, 1,
                 reminderProgramStart, reminderChannelNumber_for_statuscode3, reminderProgramId,
                 reminderOffset, reminderScheduleId, reminderId);
         long finish = System.currentTimeMillis();
@@ -60,9 +60,9 @@ class testReminder_Add extends API {
      * @throws InterruptedException
      */
     @Test
-    void testAdd_statusCode4() throws IOException, InterruptedException {
+    public void testAdd_statusCode4() throws IOException, InterruptedException {
         long start = System.currentTimeMillis();
-        ArrayList actual = api.Operation(ams_ip, macaddress[0], "Add", false, count_reminders,
+        ArrayList actual = api.Operation(ams_ip, macaddress[0], "Add", false, 1,
                 reminderProgramStart, reminderChannelNumber, reminderProgramId,
                 reminderOffset, reminderScheduleId, reminderId);
         long finish = System.currentTimeMillis();
@@ -77,9 +77,9 @@ class testReminder_Add extends API {
      * @throws InterruptedException
      */
     @Test
-    void testAdd_statusCode5() throws IOException, InterruptedException {
+    public void testAdd_statusCode5() throws IOException, InterruptedException {
         long start = System.currentTimeMillis();
-        ArrayList actual = api.Operation(ams_ip, macaddress[0], "Add", false, count_reminders,
+        ArrayList actual = api.Operation(ams_ip, macaddress[0], "Add", false, 1,
                 reminderProgramStart, reminderChannelNumber, reminderProgramId,
                 reminderOffset, reminderScheduleId, reminderId);
         long finish = System.currentTimeMillis();
@@ -90,9 +90,9 @@ class testReminder_Add extends API {
     }
 
     @Test
-    void testAdd_negative_with_empty_macaddress() throws IOException, InterruptedException {
+    public void testAdd_negative_with_empty_macaddress() throws IOException, InterruptedException {
         long start = System.currentTimeMillis();
-        ArrayList actual = api.Operation(ams_ip, "", "Add", false, count_reminders,
+        ArrayList actual = api.Operation(ams_ip, "", "Add", false, 1,
                 reminderProgramStart, reminderChannelNumber, reminderProgramId,
                 reminderOffset, reminderScheduleId, reminderId);
         long finish = System.currentTimeMillis();

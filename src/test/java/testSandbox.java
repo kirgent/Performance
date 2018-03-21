@@ -3,7 +3,6 @@ import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
-import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -12,6 +11,7 @@ import java.util.Date;
 import java.util.TimeZone;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
 class testSandbox extends API {
 
@@ -31,7 +31,7 @@ class testSandbox extends API {
         assertEquals("02:30", get_time(150, false));
     }
 
-    private String get_date(int count, Boolean several) {
+    String get_date(int count, Boolean several) {
         Calendar calendar = Calendar.getInstance();
         calendar.setTimeZone(TimeZone.getTimeZone("UTC"));
         SimpleDateFormat pattern = new SimpleDateFormat("yyyy-MM-dd");
@@ -58,7 +58,7 @@ class testSandbox extends API {
         return result;
     }
 
-    private String get_time(int count, Boolean several) {
+    String get_time(int count, Boolean several) {
         Calendar calendar = Calendar.getInstance();
         calendar.setTimeZone(TimeZone.getTimeZone("UTC"));
         SimpleDateFormat pattern = new SimpleDateFormat("HH:mm");
@@ -93,14 +93,21 @@ class testSandbox extends API {
     }
 
     @Test
-    void testOracleDB_Query() throws ClassNotFoundException, SQLException {
-        //ArrayList result = api.Query_database(macaddress[0]);
-        ResultSet result = api.QueryDB(macaddress[0]);
-        //assertNotEquals(0, result.getString(1));
-        //assertNotEquals(0, result.getString(2));
-        //assertNotEquals(0, result.getString(3));
-        //assertNotEquals(0, result.getString(4));
-        //assertNotEquals(0, result.getString(5));
+    void testOracleDB_Query() throws SQLException, ClassNotFoundException {
+        long start = System.currentTimeMillis();
+        ArrayList result = api.QueryDB("172.30.81.4", macaddress[0]);
+        long finish = System.currentTimeMillis();
+        System.out.println("[DBG] " + (finish - start) + "ms test, return result: "
+                + result.get(0) + "  "
+                + result.get(1) + "  "
+                + result.get(2) + "  "
+                + result.get(3) + "  "
+                + result.get(4));
+        assertNotEquals(0, result.get(0));
+        assertNotEquals(0, result.get(1));
+        assertNotEquals(0, result.get(2));
+        assertNotEquals(0, result.get(3));
+        assertNotEquals(0, result.get(4));
     }
 
     @Test
