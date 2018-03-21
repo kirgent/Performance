@@ -16,7 +16,6 @@ public class testAPI_Change_registration extends API {
         assertEquals(expected200, actual.get(0));
         assertEquals(expected200t, actual.get(1));
         assertEquals("", actual.get(2));
-
     }
 
     @Test

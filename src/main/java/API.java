@@ -442,9 +442,9 @@ public class API {
     private String generate_json_reminder(String macaddress, Boolean newapi,
                                           int count_remindres, String operation, String date, String rack_time[], int reminderChannelNumber,
                                           String reminderProgramId, int reminderOffset, int reminderScheduleId, int reminderId) {
-        if(count_remindres<=0){
+        if(count_remindres <= 0){
             count_remindres = 1;
-        };
+        }
 
         JSONObject resultJson = new JSONObject();
         resultJson.put("deviceId", macaddress);
@@ -468,22 +468,14 @@ public class API {
         return result;
     }
 
-    /**
-     * NEW function only for Purge
-     *
-     * @param macaddress
-     * @return
-     */
     private String generate_json_reminder_purge(String macaddress, Boolean newapi) {
-        //NEWAPI Purge
-        //String json_purge = "{\"deviceId\":" + macaddress + ",\"reminders\":[]}";
+        //String json = "{\"deviceId\":" + macaddress + ",\"reminders\":[]}";
         JSONObject resultJson = new JSONObject();
         resultJson.put("deviceId", macaddress);
         JSONArray array_reminders = new JSONArray();
         resultJson.put("reminders", array_reminders);
 
         if (!newapi){
-            //OLDAPI Purge
             //String json_purge = "{\"deviceId\":" + macaddress + ",\"reminders\":[{\"operation\":\"Purge\"}]}";
             JSONObject object_in_reminders = new JSONObject();
             object_in_reminders.put("operation", "Purge");
@@ -710,8 +702,7 @@ public class API {
     }*/
 
     private String prepare_url(String operation, Boolean newapi) {
-        String url;
-        String postfix;
+        String url, postfix;
         if (newapi) {
             if (Objects.equals(operation, "Add")) {
                 postfix = "/ams/Reminders?req=add";
