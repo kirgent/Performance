@@ -5,10 +5,10 @@ import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-class testReminder_Delete extends API {
+public class testReminder_Delete extends API {
 
     @Test
-    void testDelete() throws IOException, InterruptedException {
+    public void testDelete() throws IOException, InterruptedException {
         long start = System.currentTimeMillis();
         ArrayList actual = api.Operation(ams_ip, macaddress[0], "Delete", false, 1,
                 reminderProgramStart, reminderChannelNumber,
@@ -25,7 +25,7 @@ class testReminder_Delete extends API {
      * @throws InterruptedException
      */
     @Test
-    void testDelete_statusCode2() throws IOException, InterruptedException {
+    public void testDelete_statusCode2() throws IOException, InterruptedException {
         long start = System.currentTimeMillis();
         ArrayList actual = api.Operation(ams_ip, macaddress[0], "Delete", false, 1,
                 reminderProgramStart_for_statuscode2, reminderChannelNumber,
@@ -42,7 +42,7 @@ class testReminder_Delete extends API {
      * @throws InterruptedException
      */
     @Test
-    void testDelete_statusCode3() throws IOException, InterruptedException {
+    public void testDelete_statusCode3() throws IOException, InterruptedException {
         long start = System.currentTimeMillis();
         ArrayList actual = api.Operation(ams_ip, macaddress[0], "Delete", false, 1,
                 reminderProgramStart_for_statuscode2, reminderChannelNumber_for_statuscode3,
@@ -59,7 +59,7 @@ class testReminder_Delete extends API {
      * @throws InterruptedException
      */
     @Test
-    void testDelete_statusCode4() throws IOException, InterruptedException {
+    public void testDelete_statusCode4() throws IOException, InterruptedException {
         long start = System.currentTimeMillis();
         ArrayList actual = api.Operation(ams_ip, macaddress[0], "Delete", false, 1,
                 reminderProgramStart, reminderChannelNumber,
@@ -76,10 +76,10 @@ class testReminder_Delete extends API {
      * @throws InterruptedException
      */
     @Test
-    void testDelete_statusCode5() throws IOException, InterruptedException {
+    public void testDelete_statusCode5() throws IOException, InterruptedException {
         long start = System.currentTimeMillis();
         ArrayList actual = api.Operation(ams_ip, macaddress[0], "Delete", false, 1,
-                rack_date, rack_channel, reminderProgramId,
+                reminderProgramStart, reminderChannelNumber, reminderProgramId,
                 reminderOffset, reminderScheduleId, reminderId);
         long finish = System.currentTimeMillis();
         System.out.println("[DBG] " + (finish-start) + "ms test, " + "return code: " + actual);
@@ -88,11 +88,11 @@ class testReminder_Delete extends API {
         assertEquals("5", actual.get(2));
     }
 
-    @org.junit.Test
-    void testDelete_negative_with_empty_macaddress() throws IOException, InterruptedException {
+    @Test
+    public void testDelete_negative_with_empty_macaddress() throws IOException, InterruptedException {
         long start = System.currentTimeMillis();
         ArrayList actual = api.Operation(ams_ip, "", "Delete", false, 1,
-                rack_date, rack_channel, reminderProgramId,
+                reminderProgramStart, reminderChannelNumber, reminderProgramId,
                 reminderOffset, reminderScheduleId, reminderId);
         long finish = System.currentTimeMillis();
         System.out.println("[DBG] " + (finish-start) + "ms test, return code: " + actual);

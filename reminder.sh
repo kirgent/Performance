@@ -1,2 +1,2 @@
 #!/bin/bash
-java -cp target/classes/ Remainder
+java -cp target/classes/ Main

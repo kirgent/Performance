@@ -195,7 +195,7 @@ class testSandbox extends API {
     @Test
     void test_NewAPI_Modify_negative_REM_ST_001_Box_is_not_registered() throws IOException, InterruptedException {
         long start = System.currentTimeMillis();
-        ArrayList actual = api.Operation(ams_ip, macaddress[0], "Modify", true, count_reminders,
+        ArrayList actual = api.Operation(ams_ip, macaddress[0], "Modify", true, 1,
                 reminderProgramStart, reminderChannelNumber, reminderProgramId,
                 reminderOffset, reminderScheduleId, reminderId);
         long finish = System.currentTimeMillis();

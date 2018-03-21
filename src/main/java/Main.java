@@ -1,7 +1,7 @@
 import java.io.IOException;
 import java.text.ParseException;
 
-public class Remainder {
+public class Main {
 
     private static Integer[] reminderChannelNumber = {2};
     private static String[] reminderProgramStart = { "2013-03-08 00:00" };
