@@ -71,9 +71,9 @@ class testSandbox extends API {
     }
 
     @Test
-    void testOldAPI_negative_Blablabla_400_Bad_Request() throws IOException, InterruptedException {
+    void testOperation_OldAPI_400_Bad_Request() throws IOException, InterruptedException {
         long start = System.currentTimeMillis();
-        ArrayList actual = api.Operation(ams_ip, macaddress[0], "Blablabla", false, 0, "", 0, "", 0, 0, 0);
+        ArrayList actual = api.Operation(ams_ip, macaddress[0], "Blablabla", false, 1, reminderProgramStart, reminderChannelNumber, reminderProgramId, reminderOffset, reminderScheduleId, reminderId);
         long finish = System.currentTimeMillis();
         System.out.println("[DBG] " + (finish - start) + "ms test, return code: " + actual);
         assertEquals(expected400, actual.get(0));
@@ -82,9 +82,9 @@ class testSandbox extends API {
     }
 
     @Test
-    void testNewAPI_negative_Blablabla_400_Bad_Request() throws IOException, InterruptedException {
+    void testOperation_NewAPI_400_Bad_Request() throws IOException, InterruptedException {
         long start = System.currentTimeMillis();
-        ArrayList actual = api.Operation(ams_ip, macaddress[0], "Blablabla", true, 0, "", 0, "", 0, 0, 0);
+        ArrayList actual = api.Operation(ams_ip, macaddress[0], "Blablabla", true, 1, reminderProgramStart, reminderChannelNumber, reminderProgramId, reminderOffset, reminderScheduleId, reminderId);
         long finish = System.currentTimeMillis();
         System.out.println("[DBG] " + (finish - start) + "ms test, return code: " + actual);
         assertEquals(expected400, actual.get(0));
@@ -114,7 +114,7 @@ class testSandbox extends API {
     @Disabled
     void testCheck_registration_No_amsIp_found_for_macAddress() throws IOException {
         long start = System.currentTimeMillis();
-        ArrayList actual = api.Check_registration("343834383438", charterapi_);
+        ArrayList actual = api.Check_registration("123456789012", charterapi_);
         long finish = System.currentTimeMillis();
         System.out.println("[DBG] " + (finish - start) + "ms test, return code: " + actual);
         Assert.assertEquals(expected500, actual.get(0));
@@ -122,10 +122,10 @@ class testSandbox extends API {
         Assert.assertEquals("No amsIp found for macAddress", actual.get(2));
     }
 
-    @org.junit.Test(timeout = 20000)
+    @Test
     void testCheck_registration_b_No_amsIp_found_for_macAddress() throws IOException {
         long start = System.currentTimeMillis();
-        ArrayList actual = api.Check_registration("343834383438", charterapi_b);
+        ArrayList actual = api.Check_registration("123456789012", charterapi_b);
         long finish = System.currentTimeMillis();
         System.out.println("[DBG] " + (finish - start) + "ms test, return code: " + actual);
         Assert.assertEquals(expected500, actual.get(0));
@@ -147,7 +147,7 @@ class testSandbox extends API {
     @Test
     void testCheck_registration_d_No_amsIp_found_for_macAddress() throws IOException {
         long start = System.currentTimeMillis();
-        ArrayList actual = api.Check_registration("343834383438", charterapi_d);
+        ArrayList actual = api.Check_registration("123456789012", charterapi_d);
         long finish = System.currentTimeMillis();
         System.out.println("[DBG] " + (finish - start) + "ms test, return code: " + actual);
         Assert.assertEquals(expected500, actual.get(0));
@@ -155,8 +155,8 @@ class testSandbox extends API {
         Assert.assertEquals("No amsIp found for macAddress", actual.get(2));
     }
 
-    @org.junit.Test(timeout = 20000)
-    public void testChange_registration_to_invalid_ams127_0_0_1() throws IOException, InterruptedException {
+    @Test
+    void testChange_registration_to_invalid_ams127_0_0_1() throws IOException, InterruptedException {
         long start = System.currentTimeMillis();
         ArrayList actual = api.Change_registration(macaddress[0], charterapi, "127.0.0.1");
         long finish = System.currentTimeMillis();

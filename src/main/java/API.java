@@ -182,7 +182,7 @@ public class API {
         }
     }
 
-    /** 1st variant of operation method for Add/Modify/Delete/Purge
+    /** 1st variant of operation method for Add/Modify/Delete
      * with String reminderProgramStart + Integer reminderChannelNumber
      * @param operation       - can be Add / Modify / Delete / Purge
      * @param macaddress      - macaddress of the box
@@ -193,30 +193,62 @@ public class API {
     ArrayList Operation(String ams_ip, String macaddress, String operation, Boolean newapi, int count_reminders,
                         String reminderProgramStart, Integer reminderChannelNumber, String reminderProgramId,
                         int reminderOffset, int reminderScheduleId, int reminderId) throws IOException {
-        if (Objects.equals(operation, "Purge")) {
-            System.out.println(operation + " newapi=" + newapi + " for macaddress=" + macaddress + ", ams_ip=" + ams_ip);
-        } else {
-            System.out.println(operation + " newapi=" + newapi + " for macaddress=" + macaddress + ", ams_ip=" + ams_ip + ", "
-                    + "reminderProgramStart=" + reminderProgramStart + ", "
-                    + "reminderChannelNumber=" + reminderChannelNumber + ", "
-                    + "reminderProgramId=" + reminderProgramId + ", "
-                    + "reminderOffset=" + reminderOffset + ", "
-                    + "reminderScheduleId=" + reminderScheduleId + ", "
-                    + "reminderId=" + reminderId);
-        }
+        System.out.println(operation + " newapi=" + newapi + " for macaddress=" + macaddress + ", ams_ip=" + ams_ip + ", "
+                + "reminderProgramStart=" + reminderProgramStart + ", "
+                + "reminderChannelNumber=" + reminderChannelNumber + ", "
+                + "reminderProgramId=" + reminderProgramId + ", "
+                + "reminderOffset=" + reminderOffset + ", "
+                + "reminderScheduleId=" + reminderScheduleId + ", "
+                + "reminderId=" + reminderId);
 
         HttpClient client = HttpClients.createDefault();
-        HttpPost request = new HttpPost(prepare_url(operation, newapi));
+        HttpPost request = new HttpPost(prepare_url(ams_ip, operation, newapi));
         request.setHeader("Accept", "application/json");
         request.setHeader("Content-type", "application/json");
         //request.setHeader("Charset", "UTF-8");
         System.out.println("[DBG] Request string: " + request);
 
-        if (Objects.equals(operation, "Purge")) {
-            request.setEntity(new StringEntity(generate_json_reminder_purge(macaddress, newapi)));
-        } else {
-            request.setEntity(new StringEntity(generate_json_reminder(macaddress, newapi, count_reminders, operation, reminderProgramStart, get_rack_time(count_reminders), reminderChannelNumber, reminderProgramId, reminderOffset, reminderScheduleId, reminderId)));
+        request.setEntity(new StringEntity(generate_json_reminder(macaddress, newapi, count_reminders, operation, reminderProgramStart, get_rack_time(count_reminders), reminderChannelNumber, reminderProgramId, reminderOffset, reminderScheduleId, reminderId)));
+
+        long start = currentTimeMillis();
+        HttpResponse response = client.execute(request);
+        long finish = currentTimeMillis();
+        System.out.println("[DBG] " + (finish - start) + "ms request");
+        //"[DBG] Response getStatusLine: " + response.getStatusLine());
+
+        BufferedReader reader = new BufferedReader(new InputStreamReader(response.getEntity().getContent(), "UTF-8"));
+        StringBuilder body = new StringBuilder();
+        for (String line = null; (line = reader.readLine()) != null; ) {
+            //body.append(line);
+            System.out.println("[DBG] Response body: " + body.append(line).append("\n"));
         }
+
+        ArrayList arrayList = new ArrayList();
+        arrayList.add(0, response.getStatusLine().getStatusCode());
+        arrayList.add(1, response.getStatusLine().getReasonPhrase());
+        arrayList.add(2, check_body_for_statuscode(body.toString(), macaddress));
+        return arrayList;
+    }
+
+    /** variant of operation method for Purge
+     * @param ams_ip
+     * @param macaddress
+     * @param operation
+     * @param newapi
+     * @return
+     * @throws IOException
+     */
+    ArrayList Operation(String ams_ip, String macaddress, String operation, Boolean newapi) throws IOException {
+        System.out.println(operation + " newapi=" + newapi + " for macaddress=" + macaddress + ", ams_ip=" + ams_ip);
+
+        HttpClient client = HttpClients.createDefault();
+        HttpPost request = new HttpPost(prepare_url(ams_ip, operation, newapi));
+        request.setHeader("Accept", "application/json");
+        request.setHeader("Content-type", "application/json");
+        //request.setHeader("Charset", "UTF-8");
+        System.out.println("[DBG] Request string: " + request);
+
+        request.setEntity(new StringEntity(generate_json_reminder_purge(macaddress, newapi)));
 
         long start = currentTimeMillis();
         HttpResponse response = client.execute(request);
@@ -264,7 +296,7 @@ public class API {
         }
 
         HttpClient client = HttpClients.createDefault();
-        HttpPost request = new HttpPost(prepare_url(operation, newapi));
+        HttpPost request = new HttpPost(prepare_url(ams_ip, operation, newapi));
         request.setHeader("Accept", "application/json");
         request.setHeader("Content-type", "application/json");
         System.out.println("[DBG] Request string: " + request);
@@ -701,7 +733,7 @@ public class API {
         return arrayList;
     }*/
 
-    private String prepare_url(String operation, Boolean newapi) {
+    private String prepare_url(String ams_ip, String operation, Boolean newapi) {
         String url, postfix;
         if (newapi) {
             if (Objects.equals(operation, "Add")) {
