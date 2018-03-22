@@ -29,6 +29,8 @@ public class API {
 
     private final static Logger log = Logger.getLogger(API.class.getName());
 
+    enum Operation { add, modify, delete, purge, blablabla }
+
     //static Logger log = Logger.getLogger(testAMS.class.getName());
     //FileHandler txtFile = new FileHandler ("log.log", true);
     //private FileHandler fh = new FileHandler("test_reminder.log");
@@ -63,25 +65,25 @@ public class API {
     int expected504 = 504;
     String expected504t = "Server data timeout";
 
-    String[] boxD101 = {"A0722CEEC970", "WB20 D101 ???"};
-    String[] boxD102 = {"3438B7EB2E24", "WB20 D102"};
-    String[] boxD103 = {"3438B7EB2E28", "WB20 D103"};
-    String[] boxD104 = {"3438B7EB2E34", "WB20 D104"};
-    String[] boxD105 = {"3438B7EB2E30", "WB20 D105"};
-    String[] boxD106 = {"3438B7EB2EC4", "WB20 D106"};
-    String[] box_Kirmoto = {"0000007F8214", "Kirmoto"};
-    String[] box_Tanya = {"000005FE680A", "Tanya"};
-    String[] box_Vitya = {"A0722CEEC934", "Vitya"};
-    String[] box_Katya_V = {"0000048D4EB4", "Katya_V"};
-    String[] macaddress = {boxD101[0], boxD101[1]};
+    String boxD101 = "A0722CEEC970"; //WB20 D101 ???
+    String boxD102 = "3438B7EB2E24"; //WB20 D102
+    String boxD103 = "3438B7EB2E28"; //WB20 D103
+    String boxD104 = "3438B7EB2E34"; //WB20 D104
+    String boxD105 = "3438B7EB2E30"; //WB20 D105
+    String boxD106 = "3438B7EB2EC4"; //WB20 D106
+    String box_Kirmoto = "0000007F8214"; //Kirmoto
+    String box_Tanya = "000005FE680A"; //Tanya
+    String box_Vitya = "A0722CEEC934"; //Vitya
+    String box_Katya_V = "0000048D4EB4"; //Katya_V
+    String macaddress = boxD105;
 
     //DATES
-    String reminderProgramStart = "2018-03-22";
+    String reminderProgramStart = "2018-03-23";
     String reminderProgramStart_for_statuscode2 = "2000-01-01 00:00";
     String[] rack_date = {"2018-03-15"};
 
     //CHANNELS
-    int reminderChannelNumber = 2;
+    int reminderChannelNumber = 3;
     int reminderChannelNumber_empty;
     int reminderChannelNumber_for_statuscode3 = 9999;
     int reminderChannelNumber_for_statuscode4 = 1000;
@@ -91,8 +93,8 @@ public class API {
     Integer[] rack_channel = {2, 3, 4, 5, 6, 7, 8, 9, 10, 11};
 
     //String reminderProgramId = "EP0"; //"reminderProgramId": "EP002960010113"
-    String reminderProgramId = "EP002960010113";
-    String reminderProgramId_wrong = "-1";
+    //String reminderProgramId = "EP002960010113";
+    String reminderProgramId = "0";
 
     int reminderOffset = 0;
     int reminderOffset_empty;
@@ -101,7 +103,8 @@ public class API {
     int reminderId = 1;
     int reminderId_empty;
 
-    //int count_iterations = 3;
+    int count_iterations = 3;
+    int count_reminders = 1;
 
     private static String[] statuscode = {
             "0 - requested action with the reminder was accomplished successfully",
@@ -111,18 +114,20 @@ public class API {
             "4 - reminder is unknown, applies to reminder deletion attempts",
             "5 - reminder with provided pair of identifiers (reminderScheduleId and reminderId) is already set (for Add Reminder request)" };
 
-    String ams_ip = "172.30.81.4";
-    //String ams_ip = "172.30.82.132";
+    //String ams_ip = "172.30.81.4";
+    String ams_ip = "172.30.82.132";
     //String ams_ip = "172.30.112.19";
     private int ams_port = 8080;
 
 
     //String[] rack_time48_ = get_rack_time();
     //TIMES
-    final private String[] rack_time48 = {"00:00", "00:30", "01:00", "01:30", "02:00", "02:30", "03:00", "03:30", "04:00", "04:30", "05:00", "05:30",
+    @Deprecated
+    final private String[] rack_time48 = { "00:00", "00:30", "01:00", "01:30", "02:00", "02:30", "03:00", "03:30", "04:00", "04:30", "05:00", "05:30",
             "06:00", "06:30", "07:00", "07:30", "08:00", "08:30", "09:00", "09:30", "10:00", "10:30", "11:00", "11:30",
             "12:00", "12:30", "13:00", "13:30", "14:00", "14:30", "15:00", "15:30", "16:00", "16:30", "17:00", "17:30",
-            "18:00", "18:30", "19:00", "19:30", "20:00", "20:30", "21:00", "21:30", "22:00", "22:30", "23:00", "23:30"};
+            "18:00", "18:30", "19:00", "19:30", "20:00", "20:30", "21:00", "21:30", "22:00", "22:30", "23:00", "23:30" };
+    @Deprecated
     final private String[] rack_time288 = { "00:00", "00:05", "00:10", "00:15", "00:20", "00:25", "00:30",  "00:35", "00:40", "00:45", "00:50", "00:55",
             "01:00", "01:05", "01:10", "01:15", "01:20", "01:25", "01:30", "01:35", "01:40", "01:45", "01:50", "01:55",
             "02:00", "02:05", "02:10", "02:15", "02:20", "02:25", "02:30", "02:35", "02:40", "02:45", "02:50", "02:55",
@@ -173,6 +178,7 @@ public class API {
             "23:00", "23:02", "23:04", "23:06", "23:08", "23:10", "23:12", "23:14", "23:16", "23:18", "23:20", "23:22", "23:24", "23:26", "23:28", "23:30", "23:32", "23:34", "23:36", "23:38", "23:40", "23:42", "23:44", "23:46", "23:48", "23:50", "23:52", "23:54", "23:56", "23:58" };
 
 
+    @Deprecated
     private String[] get_rack_time(int count_reminders) {
         if (count_reminders == 48) { return rack_time48; }
         else if (count_reminders == 288){ return rack_time288; }
@@ -190,10 +196,10 @@ public class API {
      * @return
      * @throws IOException
      */
-    ArrayList Operation(String ams_ip, String macaddress, String operation, Boolean newapi, int count_reminders,
+    ArrayList Operation(String ams_ip, String macaddress, Enum<Operation> operation, Boolean newapi, int count_reminders,
                         String reminderProgramStart, Integer reminderChannelNumber, String reminderProgramId,
                         int reminderOffset, int reminderScheduleId, int reminderId) throws IOException {
-        System.out.println(operation + " newapi=" + newapi + " for macaddress=" + macaddress + ", ams_ip=" + ams_ip + ", "
+        System.out.println(operation + " (newapi=" + newapi + ") for macaddress=" + macaddress + ", ams_ip=" + ams_ip + ", "
                 + "reminderProgramStart=" + reminderProgramStart + ", "
                 + "reminderChannelNumber=" + reminderChannelNumber + ", "
                 + "reminderProgramId=" + reminderProgramId + ", "
@@ -213,14 +219,14 @@ public class API {
         long start = currentTimeMillis();
         HttpResponse response = client.execute(request);
         long finish = currentTimeMillis();
-        System.out.println("[DBG] " + (finish - start) + "ms request");
+        System.out.print("[DBG] " + (finish - start) + "ms request, ");
         //"[DBG] Response getStatusLine: " + response.getStatusLine());
 
         BufferedReader reader = new BufferedReader(new InputStreamReader(response.getEntity().getContent(), "UTF-8"));
         StringBuilder body = new StringBuilder();
         for (String line = null; (line = reader.readLine()) != null; ) {
             //body.append(line);
-            System.out.println("[DBG] Response body: " + body.append(line).append("\n"));
+            System.out.println("response body: " + body.append(line).append("\n"));
         }
 
         ArrayList arrayList = new ArrayList();
@@ -238,8 +244,8 @@ public class API {
      * @return
      * @throws IOException
      */
-    ArrayList Operation(String ams_ip, String macaddress, String operation, Boolean newapi) throws IOException {
-        System.out.println(operation + " newapi=" + newapi + " for macaddress=" + macaddress + ", ams_ip=" + ams_ip);
+    ArrayList Operation(String ams_ip, String macaddress, Enum<Operation> operation, Boolean newapi) throws IOException {
+        System.out.println(operation + " (newapi=" + newapi + ") for macaddress=" + macaddress + ", ams_ip=" + ams_ip);
 
         HttpClient client = HttpClients.createDefault();
         HttpPost request = new HttpPost(prepare_url(ams_ip, operation, newapi));
@@ -280,7 +286,7 @@ public class API {
      * @throws IOException
      * @throws InterruptedException
      */
-    ArrayList Operation(String ams_ip, String macaddress, String operation, Boolean newapi, int count_reminders,
+    ArrayList Operation(String ams_ip, String macaddress, Enum<Operation> operation, Boolean newapi, int count_reminders,
                         String[] rack_date, Integer[] rack_channel, String reminderProgramId,
                         int reminderOffset, int reminderScheduleId, int reminderId) throws IOException {
         if (Objects.equals(operation, "Purge")) {
@@ -360,11 +366,9 @@ public class API {
 
     ArrayList Change_settings(String ams_ip, String macaddress, String option, String value) throws IOException {
         System.out.println("Change settings for macaddress=" + macaddress + ", ams_ip=" + ams_ip + " option=" + option + ", value=" + value);
-        //log.info("Change settings for ams_ip=" + ams_ip + " option=" + option + " new_value=" + new_value);
 
-        String url = "http://" + ams_ip + ":" + ams_port + "/ams/settings";
         HttpClient client = HttpClients.createDefault();
-        HttpPost request = new HttpPost(url);
+        HttpPost request = new HttpPost("http://" + ams_ip + ":" + ams_port + "/ams/settings");
 
         ArrayList arrayList = new ArrayList();
         //request.setEntity(new StringEntity(generate_json_change_registration(macaddress, ams_ip, "Change_settings")));
@@ -409,12 +413,12 @@ public class API {
         long start = currentTimeMillis();
         HttpResponse response = client.execute(request);
         long finish = currentTimeMillis();
-        System.out.println("[DBG] " + (finish - start) + "ms request");
+        System.out.print("[DBG] " + (finish - start) + "ms request, ");
 
         BufferedReader reader = new BufferedReader(new InputStreamReader(response.getEntity().getContent(), "UTF-8"));
         StringBuilder body = new StringBuilder();
         for (String line; (line = reader.readLine()) != null; ) {
-            System.out.println("[DBG] Response body: " + body.append(line).append("\n"));
+            System.out.println("response body: " + body.append(line).append("\n"));
         }
 
         ArrayList arrayList = new ArrayList();
@@ -472,10 +476,22 @@ public class API {
      * @return
      */
     private String generate_json_reminder(String macaddress, Boolean newapi,
-                                          int count_remindres, String operation, String date, String rack_time[], int reminderChannelNumber,
+                                          int count_remindres, Enum<Operation> enum_operation, String date, String rack_time[], int reminderChannelNumber,
                                           String reminderProgramId, int reminderOffset, int reminderScheduleId, int reminderId) {
+        String operation = "";
         if(count_remindres <= 0){
             count_remindres = 1;
+        }
+
+        if (!newapi) {
+            switch (enum_operation.name()) {
+                case "add":
+                    operation = "Add"; break;
+                case "delete":
+                    operation = "Delete"; break;
+                case "purge":
+                    operation = "Purge"; break;
+            }
         }
 
         JSONObject resultJson = new JSONObject();
@@ -633,19 +649,29 @@ public class API {
 
     private String check_body_for_statuscode(String body, String macaddress) {
         String result = "";
-        if(body.contains("\"statusCode\":1")){ log.warning("one or more statusCode's = " + statuscode[1]);
+        if(body.contains("\"statusCode\":1")){
+            //log.warning("one or more statusCode's = " + statuscode[1]);
+            System.out.println("one or more statusCode's = " + statuscode[1]);
             result += "1";
         }
-        if(body.contains("\"statusCode\":2")){ log.warning("one or more statusCode's = " + statuscode[2]);
+        if(body.contains("\"statusCode\":2")){
+            //log.warning("one or more statusCode's = " + statuscode[2]);
+            System.out.println("one or more statusCode's = " + statuscode[2]);
             result += "2";
         }
-        if(body.contains("\"statusCode\":3")){ log.warning("one or more statusCode's = " + statuscode[3]);
+        if(body.contains("\"statusCode\":3")){
+            //log.warning("one or more statusCode's = " + statuscode[3]);
+            System.out.println("one or more statusCode's = " + statuscode[3]);
             result += "3";
         }
-        if(body.contains("\"statusCode\":4")){ log.warning("one or more statusCode's = " + statuscode[4]);
+        if(body.contains("\"statusCode\":4")){
+            //log.warning("one or more statusCode's = " + statuscode[4]);
+            System.out.println("one or more statusCode's = " + statuscode[4]);
             result += "4";
         }
-        if(body.contains("\"statusCode\":5")){ log.warning("one or more statusCode's = " + statuscode[5]);
+        if(body.contains("\"statusCode\":5")){
+            //log.warning("one or more statusCode's = " + statuscode[5]);
+            System.out.println("one or more statusCode's = " + statuscode[5]);
             result += "5";
         }
         if (body.contains("\"status\":\"Failed\"") && body.contains("\"errorMessage\":\"REM-ST-001 Box is not registered\"")) {
@@ -660,7 +686,10 @@ public class API {
         if(body.contains("REM-002 Reminders Service error: Can not connect to STB with stbId=" + macaddress)) {
             result += "REM-002 Reminders Service error: Can not connect to STB with stbId=" + macaddress;
         }
-        if(body.contains("Failed to getAmsIpByMacAddress for :") && body.contains("No amsIp found for macAddress:")){
+        if(body.contains("REM-008 Reminders parsing error: wrong operation")) {
+            result += "REM-008 Reminders parsing error: wrong operation";
+        }
+        if(body.contains("Failed to getAmsIpByMacAddress for : " + macaddress + ", with error: No amsIp found for macAddress: STB" +macaddress)){
             result += "No amsIp found for macAddress";
         }
         if (body.contains("STB MAC not found: " + macaddress)) {
@@ -673,7 +702,7 @@ public class API {
             result += "SET-025 Unsupported data type: Not a JSON Object";
         }
 
-        System.out.println("[DBG] check_body_for_statuscode: result: " + result);
+        //System.out.println("[DBG] check_body_for_statuscode: result: " + result);
         return result;
     }
 
@@ -733,20 +762,10 @@ public class API {
         return arrayList;
     }*/
 
-    private String prepare_url(String ams_ip, String operation, Boolean newapi) {
-        String url, postfix;
+    private String prepare_url(String ams_ip, Enum<Operation> operation, Boolean newapi) {
+        String url;
         if (newapi) {
-            if (Objects.equals(operation, "Add")) {
-                postfix = "/ams/Reminders?req=add";
-            } else if (Objects.equals(operation, "Modify")) {
-                postfix = "/ams/Reminders?req=modify";
-            } else if (Objects.equals(operation, "Delete")) {
-                postfix = "/ams/Reminders?req=delete";
-            } else if (Objects.equals(operation, "Purge")) {
-                postfix = "/ams/Reminders?req=purge";
-            } else postfix = "/ams/Reminders?req=" + operation;
-
-            url = "http://" + ams_ip + ":" + ams_port + postfix;
+            url = "http://" + ams_ip + ":" + ams_port + "/ams/Reminders?req=" + operation;
         } else {
             url = "http://" + ams_ip + ":" + ams_port + "/ams/Reminders?req=ChangeReminders";
         }

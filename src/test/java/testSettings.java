@@ -18,7 +18,7 @@ class testSettings extends API {
         // }]
         // }}"
         long start = System.currentTimeMillis();
-        ArrayList actual = api.Change_settings(ams_ip, macaddress[0], "Channel Filters", "Premiums");
+        ArrayList actual = api.Change_settings(ams_ip, macaddress, "Channel Filters", "Premiums");
         long finish = System.currentTimeMillis();
         System.out.println("[DBG] " + (finish - start) + "ms test, return code: " + actual);
         assertEquals(expected200, actual.get(0));
@@ -29,7 +29,7 @@ class testSettings extends API {
     @Test
     void testSettings_Audio_Output_to_Other() throws IOException {
         long start = System.currentTimeMillis();
-        ArrayList actual = api.Change_settings(ams_ip, macaddress[0], "Audio Output", "Other");
+        ArrayList actual = api.Change_settings(ams_ip, macaddress, "Audio Output", "Other");
         long finish = System.currentTimeMillis();
         System.out.println("[DBG] " + (finish - start) + "ms test, return code: " + actual);
         assertEquals(expected200, actual.get(0));
@@ -40,7 +40,7 @@ class testSettings extends API {
     @Test
     void testSettings_Audio_Output_to_Dolby_Digital() throws IOException {
         long start = System.currentTimeMillis();
-        ArrayList actual = api.Change_settings(ams_ip, macaddress[0], "Audio Output", "Dolby Digital");
+        ArrayList actual = api.Change_settings(ams_ip, macaddress, "Audio Output", "Dolby Digital");
         long finish = System.currentTimeMillis();
         System.out.println("[DBG] " + (finish - start) + "ms test, return code: " + actual);
         assertEquals(expected200, actual.get(0));
@@ -51,7 +51,7 @@ class testSettings extends API {
     @Test
     void testSettings_Audio_Output_to_HDMI() throws IOException {
         long start = System.currentTimeMillis();
-        ArrayList actual = api.Change_settings(ams_ip, macaddress[0], "Audio Output", "HDMI");
+        ArrayList actual = api.Change_settings(ams_ip, macaddress, "Audio Output", "HDMI");
         long finish = System.currentTimeMillis();
         System.out.println("[DBG] " + (finish - start) + "ms test, return code: " + actual);
         assertEquals(expected200, actual.get(0));
@@ -84,7 +84,7 @@ class testSettings extends API {
     @Test
     void testSettings_negative_SET_025_Unsupported_data_type_Not_a_JSON_Object() throws IOException {
         long start = System.currentTimeMillis();
-        ArrayList actual = api.Change_settings(ams_ip, macaddress[0], "Audio Output", "");
+        ArrayList actual = api.Change_settings(ams_ip, macaddress, "Audio Output", "");
         long finish = System.currentTimeMillis();
         System.out.println("[DBG] " + (finish - start) + "ms test, return code: " + actual);
         assertEquals(expected500, actual.get(0));
@@ -95,7 +95,7 @@ class testSettings extends API {
     @Test
     void testSettings_Turn_Off_Reminders() throws IOException {
         long start = System.currentTimeMillis();
-        ArrayList actual = api.Change_settings(ams_ip, macaddress[0], "Turn On/Off Reminders", "Off");
+        ArrayList actual = api.Change_settings(ams_ip, macaddress, "Turn On/Off Reminders", "Off");
         long finish = System.currentTimeMillis();
         System.out.println("[DBG] " + (finish - start) + "ms test, return code: " + actual);
         assertEquals(expected200, actual.get(0));
@@ -106,7 +106,7 @@ class testSettings extends API {
     @Test
     void testSettings_Turn_On_Reminders() throws IOException {
         long start = System.currentTimeMillis();
-        ArrayList actual = api.Change_settings(ams_ip, macaddress[0], "Turn On/Off Reminders", "On");
+        ArrayList actual = api.Change_settings(ams_ip, macaddress, "Turn On/Off Reminders", "On");
         long finish = System.currentTimeMillis();
         System.out.println("[DBG] " + (finish - start) + "ms test, return code: " + actual);
         assertEquals(expected200, actual.get(0));
