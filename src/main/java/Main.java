@@ -1,38 +1,13 @@
 import java.io.IOException;
 import java.text.ParseException;
 
-public class Main {
+public class Main extends API {
 
-    private static Integer[] reminderChannelNumber = {2};
-    private static String[] reminderProgramStart = { "2013-03-08 00:00" };
-    private static String reminderProgramId = "EP0";
-    private static int reminderOffset = 0;
-    private static int reminderScheduleId = 1;
-    private static int reminderId = 1;
-
-    @Deprecated
-    int reminderOffset_new  = 10;
-
-    private static String macaddress_by_default = "3438B7EB2E30";
-    private static String operation_by_default = "Check";
-
-    private static int count_reminders;
-    private static int count_reminders_by_default = 48;
-
-    private String ams_ip_by_default = "172.30.81.4";
-    //String ams_ip_default = "172.30.112.19";
-    private String ams_ip;
-
-
-    String charterapi_ = "http://spec.partnerapi.engprod-charter.net/api/pub/networksettingsmiddle/ns/settings";
-    private static String charterapi_b = "http://specb.partnerapi.engprod-charter.net/api/pub/networksettingsmiddle/ns/settings";
-    String charterapi_c = "http://specc.partnerapi.engprod-charter.net/api/pub/networksettingsmiddle/ns/settings";
-    String charterapi_d = "http://specd.partnerapi.engprod-charter.net/api/pub/networksettingsmiddle/ns/settings";
-    private static String charterapi_by_default = charterapi_b;
-
-    String[] macaddress;
     private static String operation;
     private static String param;
+
+    String macaddress_by_default = "172.30.81.4";
+    String operation_by_default = "Check";
 
     String synopsys="\nNAME" +
             "\n\tReminders - java app for Add/Edit/Delete/Purge reminders and Check AMS/Change AMS registration on MACADDRESS." +
@@ -53,9 +28,9 @@ public class Main {
             "\n\tReminders MACADDRESS Delete [48][288][576]- delete reminders (accordingly 48/288/576)" +
             "\n\tReminders MACADDRESS All [48][288][576] - add + edit + delete reminders (accordingly 48/288/576)" +
             "\nCURRENT SETTINGS" +
-            "\n\tused AMS: " + ams_ip_by_default +
-            "\n\tused charterapi: " + charterapi_by_default +
-            "\n\tused count of reminders in one request: " + count_reminders_by_default +
+            "\n\tused AMS: " + ams_ip +
+            "\n\tused charterapi: " + charterapi +
+            "\n\tused count of reminders in one request: " + count_reminders +
             //"\n\tused count iterations: " + count_iterations +
             "\nSTATUSCODE" +
             "\n\tcode of the reminder processing result, one of the following:" +
@@ -112,10 +87,10 @@ public class Main {
 
         //if (args[0].isEmpty())
         if (args.length >= 1) {
-            macaddress[0] = args[0];
+            macaddress = args[0];
         }
         else {
-            macaddress[0] = macaddress_by_default;
+            macaddress = macaddress_by_default;
         }
 
 
@@ -148,7 +123,7 @@ public class Main {
                     count_reminders = 720;
                     break;
                 default:
-                    count_reminders = count_reminders_by_default;
+                    count_reminders = 720;
             }
         }
 
@@ -171,18 +146,18 @@ public class Main {
             }
         }*/
 
-        System.out.println("[DBG] used macaddress=" + macaddress[0] + ", operation=" + operation + ", param=" + param);
+        System.out.println("[DBG] used macaddress=" + macaddress + ", operation=" + operation + ", param=" + param);
 
         API api = new API();
 
         switch (operation){
             case "Check":
             case "check":
-                api.Check_registration(macaddress[0], charterapi_by_default);
+                api.Check_registration(macaddress, charterapi);
                 break;
             case "Change":
             case "change":
-                api.Change_registration(macaddress[0], charterapi_by_default, ams_ip_by_default);
+                api.Change_registration(macaddress, charterapi, ams_ip);
                 break;
             case "Purge":
             case "purge":
@@ -201,7 +176,7 @@ public class Main {
             //case "Delete":
             //case "delete": api.Operation("Delete", macaddress, count_reminders, count_iterations, ams_ip_default); break;
             default:
-                api.Check_registration(macaddress[0], charterapi_by_default);
+                api.Check_registration(macaddress, charterapi);
         }
     }
 }

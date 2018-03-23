@@ -62,18 +62,29 @@ class testSettings extends API {
     @Test
     void testSettings_negative_STB_MAC_not_found() throws IOException {
         long start = System.currentTimeMillis();
-        ArrayList actual = api.Change_settings(ams_ip, "001122334455", "Audio Output", "HDMI");
+        ArrayList actual = api.Change_settings(ams_ip, macaddress_wrong, "Audio Output", "HDMI");
         long finish = System.currentTimeMillis();
         System.out.println("[DBG] " + (finish - start) + "ms test, return code: " + actual);
         assertEquals(expected404, actual.get(0));
         assertEquals(expected404t, actual.get(1));
-        assertEquals("STB MAC not found", actual.get(2));
+        assertEquals("STB MAC not found: " + macaddress_wrong, actual.get(2));
     }
 
     @Test
-    void testSettings_negative_incorrect_value() throws IOException {
+    void testSettings_Audio_Output_to_value_empty() throws IOException {
         long start = System.currentTimeMillis();
-        ArrayList actual = api.Change_settings(ams_ip, "001122334455", "Audio Output", "");
+        ArrayList actual = api.Change_settings(ams_ip, macaddress, "Audio Output", "");
+        long finish = System.currentTimeMillis();
+        System.out.println("[DBG] " + (finish - start) + "ms test, return code: " + actual);
+        assertEquals(expected200, actual.get(0));
+        assertEquals(expected200t, actual.get(1));
+        assertEquals("incorrect value", actual.get(2));
+    }
+
+    @Test
+    void testSettings_Audio_Output_to_value_wrong() throws IOException {
+        long start = System.currentTimeMillis();
+        ArrayList actual = api.Change_settings(ams_ip, macaddress, "Audio Output", "blablabla");
         long finish = System.currentTimeMillis();
         System.out.println("[DBG] " + (finish - start) + "ms test, return code: " + actual);
         assertEquals(expected200, actual.get(0));
@@ -93,7 +104,7 @@ class testSettings extends API {
     }
 
     @Test
-    void testSettings_Turn_Off_Reminders() throws IOException {
+    void testSettings_Turn_Reminders_to_Off() throws IOException {
         long start = System.currentTimeMillis();
         ArrayList actual = api.Change_settings(ams_ip, macaddress, "Turn On/Off Reminders", "Off");
         long finish = System.currentTimeMillis();
@@ -104,7 +115,7 @@ class testSettings extends API {
     }
 
     @Test
-    void testSettings_Turn_On_Reminders() throws IOException {
+    void testSettings_Turn_Reminders_to_On() throws IOException {
         long start = System.currentTimeMillis();
         ArrayList actual = api.Change_settings(ams_ip, macaddress, "Turn On/Off Reminders", "On");
         long finish = System.currentTimeMillis();
@@ -112,6 +123,17 @@ class testSettings extends API {
         assertEquals(expected200, actual.get(0));
         assertEquals(expected200t, actual.get(1));
         assertEquals("", actual.get(2));
+    }
+
+    @Test
+    void testSettings_Turn_Reminders_to_empty_value() throws IOException {
+        long start = System.currentTimeMillis();
+        ArrayList actual = api.Change_settings(ams_ip, macaddress, "Turn On/Off Reminders", "");
+        long finish = System.currentTimeMillis();
+        System.out.println("[DBG] " + (finish - start) + "ms test, return code: " + actual);
+        assertEquals(expected200, actual.get(0));
+        assertEquals(expected200t, actual.get(1));
+        assertEquals("incorrect value", actual.get(2));
     }
 
 }

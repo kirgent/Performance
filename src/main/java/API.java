@@ -13,9 +13,8 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.sql.*;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Objects;
+import java.text.SimpleDateFormat;
+import java.util.*;
 import java.util.logging.Logger;
 
 import static java.lang.System.currentTimeMillis;
@@ -29,7 +28,7 @@ public class API {
 
     private final static Logger log = Logger.getLogger(API.class.getName());
 
-    enum Operation { add, modify, delete, purge, blablabla }
+    enum Operation { add, modify, delete, purge, blablabla, sdfsfsdfsfsdfsfsdfsfsdfsfsdfsfsdfsfsdfsfsdfsfsdfsfsdfsfsdfsfsdfsf }
 
     //static Logger log = Logger.getLogger(testAMS.class.getName());
     //FileHandler txtFile = new FileHandler ("log.log", true);
@@ -75,15 +74,17 @@ public class API {
     String box_Tanya = "000005FE680A"; //Tanya
     String box_Vitya = "A0722CEEC934"; //Vitya
     String box_Katya_V = "0000048D4EB4"; //Katya_V
-    String macaddress = boxD105;
+    String macaddress = boxD101;
+    String macaddress_wrong = "123456789012";
 
     //DATES
-    String reminderProgramStart = "2018-03-23";
-    String reminderProgramStart_for_statuscode2 = "2000-01-01 00:00";
+    //String reminderProgramStart = "2018-03-24";
+
+    String reminderProgramStart_for_statuscode2 = "2000-01-01";
     String[] rack_date = {"2018-03-15"};
 
     //CHANNELS
-    int reminderChannelNumber = 3;
+    int reminderChannelNumber = 6;
     int reminderChannelNumber_empty;
     int reminderChannelNumber_for_statuscode3 = 9999;
     int reminderChannelNumber_for_statuscode4 = 1000;
@@ -92,9 +93,9 @@ public class API {
             32, 33, 37, 38, 41, 44, 46, 48, 49, 50 };*/
     Integer[] rack_channel = {2, 3, 4, 5, 6, 7, 8, 9, 10, 11};
 
-    //String reminderProgramId = "EP0"; //"reminderProgramId": "EP002960010113"
+    String reminderProgramId = "EP0"; //"reminderProgramId": "EP002960010113"
     //String reminderProgramId = "EP002960010113";
-    String reminderProgramId = "0";
+    //String reminderProgramId = "0";
 
     int reminderOffset = 0;
     int reminderOffset_empty;
@@ -180,32 +181,45 @@ public class API {
 
     @Deprecated
     private String[] get_rack_time(int count_reminders) {
-        if (count_reminders == 48) { return rack_time48; }
-        else if (count_reminders == 288){ return rack_time288; }
-        else if(count_reminders == 720){ return rack_time720; }
-        else {
-            return rack_time720;
-        }
+        String[] result = {};
+        if (count_reminders <= 48) {
+            result = rack_time48;
+        } else if (count_reminders <= 288) {
+            result = rack_time288;
+        } else if (count_reminders <= 720) {
+            result = rack_time720;
+        } else result = rack_time720;
+        return result;
     }
 
-    /** 1st variant of operation method for Add/Modify/Delete
+    /** 1st Operation method for Add/Modify/Delete
+     * 6 MANDATORY parameters!
      * with String reminderProgramStart + Integer reminderChannelNumber
      * @param operation       - can be Add / Modify / Delete / Purge
      * @param macaddress      - macaddress of the box
      * @param count_reminders - count of reminders to generate in json {..}
-     * @return
-     * @throws IOException
+     * @return arrayList
+     * @throws IOException -TBD
      */
     ArrayList Operation(String ams_ip, String macaddress, Enum<Operation> operation, Boolean newapi, int count_reminders,
                         String reminderProgramStart, Integer reminderChannelNumber, String reminderProgramId,
                         int reminderOffset, int reminderScheduleId, int reminderId) throws IOException {
-        System.out.println(operation + " (newapi=" + newapi + ") for macaddress=" + macaddress + ", ams_ip=" + ams_ip + ", "
-                + "reminderProgramStart=" + reminderProgramStart + ", "
-                + "reminderChannelNumber=" + reminderChannelNumber + ", "
-                + "reminderProgramId=" + reminderProgramId + ", "
-                + "reminderOffset=" + reminderOffset + ", "
-                + "reminderScheduleId=" + reminderScheduleId + ", "
-                + "reminderId=" + reminderId);
+        if(newapi){
+            System.out.println(operation + " (newapi=" + newapi + ") for macaddress=" + macaddress + ", ams_ip=" + ams_ip + ", "
+                    + "count_reminders=" + count_reminders + ", "
+                    + "reminderProgramStart=" + reminderProgramStart + ", "
+                    + "reminderChannelNumber=" + reminderChannelNumber + ", "
+                    + "reminderProgramId=" + reminderProgramId + ", "
+                    + "reminderOffset=" + reminderOffset + ", "
+                    + "reminderScheduleId=" + reminderScheduleId + ", "
+                    + "reminderId=" + reminderId);
+        } else {
+            System.out.println(operation + " (newapi=" + newapi + ") for macaddress=" + macaddress + ", ams_ip=" + ams_ip + ", "
+                    + "count_reminders=" + count_reminders + ", "
+                    + "reminderProgramStart=" + reminderProgramStart + ", "
+                    + "reminderChannelNumber=" + reminderChannelNumber + ", "
+                    + "reminderOffset=" + reminderOffset);
+        }
 
         HttpClient client = HttpClients.createDefault();
         HttpPost request = new HttpPost(prepare_url(ams_ip, operation, newapi));
@@ -214,7 +228,7 @@ public class API {
         //request.setHeader("Charset", "UTF-8");
         System.out.println("[DBG] Request string: " + request);
 
-        request.setEntity(new StringEntity(generate_json_reminder(macaddress, newapi, count_reminders, operation, reminderProgramStart, get_rack_time(count_reminders), reminderChannelNumber, reminderProgramId, reminderOffset, reminderScheduleId, reminderId)));
+        request.setEntity(new StringEntity(generate_json_reminder(macaddress, newapi, count_reminders, operation, reminderProgramStart, reminderChannelNumber, reminderProgramId, reminderOffset, reminderScheduleId, reminderId)));
 
         long start = currentTimeMillis();
         HttpResponse response = client.execute(request);
@@ -232,17 +246,69 @@ public class API {
         ArrayList arrayList = new ArrayList();
         arrayList.add(0, response.getStatusLine().getStatusCode());
         arrayList.add(1, response.getStatusLine().getReasonPhrase());
-        arrayList.add(2, check_body_for_statuscode(body.toString(), macaddress));
+        arrayList.add(2, check_body_response(body.toString(), macaddress));
         return arrayList;
     }
 
-    /** variant of operation method for Purge
+    /** OLD_API Operation method for Add/Delete
+     * 3 MANDATORY parameters!
+     * String reminderProgramStart + Integer reminderChannelNumber
+     * @param ams_ip - TBD
+     * @param macaddress - TBD
+     * @param operation - TBD
+     * @param newapi - TBD
+     * @param count_reminders - TBD
+     * @param reminderProgramStart - TBD
+     * @param reminderChannelNumber - TBD
+     * @param reminderOffset - TBD
+     * @return arraylist
+     * @throws IOException - TBD
+     */
+    ArrayList Operation(String ams_ip, String macaddress, Enum<Operation> operation, Boolean newapi, int count_reminders,
+                        String reminderProgramStart, Integer reminderChannelNumber,
+                        int reminderOffset) throws IOException {
+        System.out.println(operation + " (newapi=" + newapi + ") for macaddress=" + macaddress + ", ams_ip=" + ams_ip + ", "
+                + "count_reminders=" + count_reminders + ", "
+                + "reminderProgramStart=" + reminderProgramStart + ", "
+                + "reminderChannelNumber=" + reminderChannelNumber + ", "
+                + "reminderOffset=" + reminderOffset);
+
+        HttpClient client = HttpClients.createDefault();
+        HttpPost request = new HttpPost(prepare_url(ams_ip, operation, newapi));
+        request.setHeader("Accept", "application/json");
+        request.setHeader("Content-type", "application/json");
+        //request.setHeader("Charset", "UTF-8");
+        System.out.println("[DBG] Request string: " + request);
+
+        request.setEntity(new StringEntity(generate_json_reminder(macaddress, newapi, count_reminders, operation, reminderProgramStart, reminderChannelNumber, reminderProgramId, reminderOffset, reminderScheduleId, reminderId)));
+
+        long start = currentTimeMillis();
+        HttpResponse response = client.execute(request);
+        long finish = currentTimeMillis();
+        System.out.print("[DBG] " + (finish - start) + "ms request, ");
+        //"[DBG] Response getStatusLine: " + response.getStatusLine());
+
+        BufferedReader reader = new BufferedReader(new InputStreamReader(response.getEntity().getContent(), "UTF-8"));
+        StringBuilder body = new StringBuilder();
+        for (String line = null; (line = reader.readLine()) != null; ) {
+            //body.append(line);
+            System.out.println("response body: " + body.append(line).append("\n"));
+        }
+
+        ArrayList arrayList = new ArrayList();
+        arrayList.add(0, response.getStatusLine().getStatusCode());
+        arrayList.add(1, response.getStatusLine().getReasonPhrase());
+        arrayList.add(2, check_body_response(body.toString(), macaddress));
+        return arrayList;
+    }
+
+    /** Operation method for Purge
      * @param ams_ip
      * @param macaddress
      * @param operation
      * @param newapi
-     * @return
-     * @throws IOException
+     * @return arrayList
+     * @throws IOException - TBD
      */
     ArrayList Operation(String ams_ip, String macaddress, Enum<Operation> operation, Boolean newapi) throws IOException {
         System.out.println(operation + " (newapi=" + newapi + ") for macaddress=" + macaddress + ", ams_ip=" + ams_ip);
@@ -259,33 +325,34 @@ public class API {
         long start = currentTimeMillis();
         HttpResponse response = client.execute(request);
         long finish = currentTimeMillis();
-        System.out.println("[DBG] " + (finish - start) + "ms request");
+        System.out.print("[DBG] " + (finish - start) + "ms request, ");
         //"[DBG] Response getStatusLine: " + response.getStatusLine());
 
         BufferedReader reader = new BufferedReader(new InputStreamReader(response.getEntity().getContent(), "UTF-8"));
         StringBuilder body = new StringBuilder();
         for (String line = null; (line = reader.readLine()) != null; ) {
             //body.append(line);
-            System.out.println("[DBG] Response body: " + body.append(line).append("\n"));
+            System.out.println("Response body: " + body.append(line).append("\n"));
         }
 
         ArrayList arrayList = new ArrayList();
         arrayList.add(0, response.getStatusLine().getStatusCode());
         arrayList.add(1, response.getStatusLine().getReasonPhrase());
-        arrayList.add(2, check_body_for_statuscode(body.toString(), macaddress));
+        arrayList.add(2, check_body_response(body.toString(), macaddress));
         return arrayList;
     }
 
 
-    /** 2operation method for Add/Modify/Delete/Purge
-     * String[] rack_date + Integer[] rack_channel,
-     * @param operation       - can be Add / Modify / Delete / Purge
+    /** 2nd Operation method for Add/Modify/Delete
+     * RACK : String[] rack_date
+     * RACK : Integer[] rack_channel
+     * @param operation       - can be Add / Modify / Delete
      * @param macaddress      - macaddress of the box
      * @param count_reminders - count of reminders to generate in json {..}
-     * @return
-     * @throws IOException
-     * @throws InterruptedException
+     * @return arrayList
+     * @throws IOException - TBD
      */
+    @Deprecated
     ArrayList Operation(String ams_ip, String macaddress, Enum<Operation> operation, Boolean newapi, int count_reminders,
                         String[] rack_date, Integer[] rack_channel, String reminderProgramId,
                         int reminderOffset, int reminderScheduleId, int reminderId) throws IOException {
@@ -327,13 +394,13 @@ public class API {
 
             arrayList.add(0, response.getStatusLine().getStatusCode());
             arrayList.add(1, response.getStatusLine().getReasonPhrase());
-            arrayList.add(2, check_body_for_statuscode(body.toString(), macaddress));
+            arrayList.add(2, check_body_response(body.toString(), macaddress));
         } else {
             for (String aRack_date : rack_date) {
                 for (int aRack_channel : rack_channel) {
                     System.out.println("operation= " + operation + ", date=" + aRack_date + ", channel=" + aRack_channel);
 
-                    request.setEntity(new StringEntity(generate_json_reminder(macaddress, newapi, count_reminders, operation, aRack_date, get_rack_time(count_reminders), aRack_channel, reminderProgramId, reminderOffset, reminderScheduleId, reminderId)));
+                    request.setEntity(new StringEntity(generate_json_reminder(macaddress, newapi, count_reminders, operation, aRack_date, aRack_channel, reminderProgramId, reminderOffset, reminderScheduleId, reminderId)));
 
                     long start = currentTimeMillis();
                     HttpResponse response = client.execute(request);
@@ -350,7 +417,7 @@ public class API {
 
                     arrayList.add(0, response.getStatusLine().getStatusCode());
                     arrayList.add(1, response.getStatusLine().getReasonPhrase());
-                    arrayList.add(2, check_body_for_statuscode(body.toString(), macaddress));
+                    arrayList.add(2, check_body_response(body.toString(), macaddress));
 
                     if (arrayList.get(0).equals(200)) {
                         break;
@@ -393,7 +460,7 @@ public class API {
 
         arrayList.add(0, response.getStatusLine().getStatusCode());
         arrayList.add(1, response.getStatusLine().getReasonPhrase());
-        arrayList.add(2, check_body_for_statuscode(body.toString(), macaddress));
+        arrayList.add(2, check_body_response(body.toString(), macaddress));
         return arrayList;
     }
 
@@ -424,7 +491,7 @@ public class API {
         ArrayList arrayList = new ArrayList();
         arrayList.add(0, response.getStatusLine().getStatusCode());
         arrayList.add(1, response.getStatusLine().getReasonPhrase());
-        arrayList.add(2, check_body_for_statuscode(body.toString(), macaddress));
+        arrayList.add(2, check_body_response(body.toString(), macaddress));
         return arrayList;
     }
 
@@ -457,32 +524,19 @@ public class API {
         ArrayList arrayList = new ArrayList();
         arrayList.add(0, response.getStatusLine().getStatusCode());
         arrayList.add(1, response.getStatusLine().getReasonPhrase());
-        arrayList.add(2, check_body_for_statuscode(body.toString(), macaddress));
+        arrayList.add(2, check_body_response(body.toString(), macaddress));
         return arrayList;
     }
 
-    /**
-     * NEW generate_json method
-     *
-     * @param macaddress
-     * @param count_remindres
-     * @param reminderChannelNumber
-     * @param date
-     * @param rack_time
-     * @param reminderProgramId
-     * @param reminderOffset
-     * @param reminderScheduleId
-     * @param reminderId
-     * @return
-     */
     private String generate_json_reminder(String macaddress, Boolean newapi,
-                                          int count_remindres, Enum<Operation> enum_operation, String date, String rack_time[], int reminderChannelNumber,
+                                          int count_reminders, Enum<Operation> enum_operation, String date, int reminderChannelNumber,
                                           String reminderProgramId, int reminderOffset, int reminderScheduleId, int reminderId) {
-        String operation = "";
-        if(count_remindres <= 0){
-            count_remindres = 1;
-        }
 
+        if(count_reminders <= 0){ count_reminders = 1; }
+
+        if(count_reminders > 720){ count_reminders = 720; }
+
+        String operation = "";
         if (!newapi) {
             switch (enum_operation.name()) {
                 case "add":
@@ -491,24 +545,32 @@ public class API {
                     operation = "Delete"; break;
                 case "purge":
                     operation = "Purge"; break;
+                case "blablabla":
+                    operation = "blablabla"; break;
+                default:
+                    break;
             }
         }
+
+        String[] rack_time = get_rack_time(count_reminders);
 
         JSONObject resultJson = new JSONObject();
         resultJson.put("deviceId", macaddress);
         JSONArray array_reminders = new JSONArray();
         resultJson.put("reminders", array_reminders);
-        for (int i = 0; i < count_remindres; i++) {
+        for (int i = 0; i < count_reminders; i++) {
             JSONObject object_in_reminders = new JSONObject();
-            if (!newapi) {
+            if(!newapi){
                 object_in_reminders.put("operation", operation);
             }
             object_in_reminders.put("reminderProgramStart", date + " " + rack_time[i]);
             object_in_reminders.put("reminderChannelNumber", reminderChannelNumber);
-            object_in_reminders.put("reminderProgramId", reminderProgramId);
             object_in_reminders.put("reminderOffset", reminderOffset);
-            object_in_reminders.put("reminderScheduleId", reminderScheduleId);
-            object_in_reminders.put("reminderId", reminderId);
+            if(newapi) {
+                object_in_reminders.put("reminderProgramId", reminderProgramId);
+                object_in_reminders.put("reminderScheduleId", reminderScheduleId);
+                object_in_reminders.put("reminderId", reminderId);
+            }
             array_reminders.add(object_in_reminders);
         }
         String result = resultJson.toJSONString();
@@ -647,58 +709,64 @@ public class API {
     return "";
     }
 
-    private String check_body_for_statuscode(String body, String macaddress) {
+    private String check_body_response(String body, String macaddress) {
         String result = "";
         if(body.contains("\"statusCode\":1")){
             //log.warning("one or more statusCode's = " + statuscode[1]);
-            System.out.println("one or more statusCode's = " + statuscode[1]);
+            System.out.println("!!! one or more statusCode's = " + statuscode[1]);
             result += "1";
         }
         if(body.contains("\"statusCode\":2")){
             //log.warning("one or more statusCode's = " + statuscode[2]);
-            System.out.println("one or more statusCode's = " + statuscode[2]);
+            System.out.println("!!! one or more statusCode's = " + statuscode[2]);
             result += "2";
         }
         if(body.contains("\"statusCode\":3")){
             //log.warning("one or more statusCode's = " + statuscode[3]);
-            System.out.println("one or more statusCode's = " + statuscode[3]);
+            System.out.println("!!! one or more statusCode's = " + statuscode[3]);
             result += "3";
         }
         if(body.contains("\"statusCode\":4")){
             //log.warning("one or more statusCode's = " + statuscode[4]);
-            System.out.println("one or more statusCode's = " + statuscode[4]);
+            System.out.println("!!! one or more statusCode's = " + statuscode[4]);
             result += "4";
         }
         if(body.contains("\"statusCode\":5")){
             //log.warning("one or more statusCode's = " + statuscode[5]);
-            System.out.println("one or more statusCode's = " + statuscode[5]);
+            System.out.println("!!! one or more statusCode's = " + statuscode[5]);
             result += "5";
         }
-        if (body.contains("\"status\":\"Failed\"") && body.contains("\"errorMessage\":\"REM-ST-001 Box is not registered\"")) {
+        if (body.contains("\"status\":\"Failed\"") && body.contains("\"errorMessage\":\"REM-ST-001 Box is not registered\"")){
             result += "REM-ST-001 Box is not registered";
         }
-        if (body.contains("\"status\":\"Failed\"") && body.contains("\"errorMessage\":\"REM-002 Reminders Service error: REM-112\"")) {
+        if (body.contains("\"status\":\"Failed\"") && body.contains("\"errorMessage\":\"REM-002 Reminders Service error: REM-112\"")){
             result += "REM-002 Reminders Service error: REM-012 [" + macaddress + "] Request not accomplished";
         }
         if (body.contains("\"status\":\"Failed\"") && body.contains("\"errorMessage\":\"REM-002 Reminders Service error: Timeout detected by BoxResponseTracker\"")) {
             result += "REM-002 Reminders Service error: Timeout detected by BoxResponseTracker";
         }
-        if(body.contains("REM-002 Reminders Service error: Can not connect to STB with stbId=" + macaddress)) {
+        if(body.contains("REM-002 Reminders Service error: Can not connect to STB with stbId=" + macaddress)){
             result += "REM-002 Reminders Service error: Can not connect to STB with stbId=" + macaddress;
         }
-        if(body.contains("REM-008 Reminders parsing error: wrong operation")) {
+        if(body.contains("REM-008 Reminders parsing error: wrong deviceId")){
+            result += "REM-008 Reminders parsing error: wrong deviceId";
+        }
+        if(body.contains("REM-008 Reminders parsing error: wrong operation")){
             result += "REM-008 Reminders parsing error: wrong operation";
+        }
+        if(body.contains("REM-008 Reminders parsing error: incorrect message format")){
+            result += "REM-008 Reminders parsing error: incorrect message format";
         }
         if(body.contains("Failed to getAmsIpByMacAddress for : " + macaddress + ", with error: No amsIp found for macAddress: STB" +macaddress)){
             result += "No amsIp found for macAddress";
         }
-        if (body.contains("STB MAC not found: " + macaddress)) {
+        if (body.contains("STB MAC not found: " + macaddress)){
             result += "STB MAC not found: " + macaddress;
         }
-        if (body.contains("incorrect value")) {
+        if (body.contains("incorrect value")){
             result += "incorrect value";
         }
-        if (body.contains("SET-025 Unsupported data type: Not a JSON Object:")) {
+        if (body.contains("SET-025 Unsupported data type: Not a JSON Object:")){
             result += "SET-025 Unsupported data type: Not a JSON Object";
         }
 
@@ -798,6 +866,55 @@ public class API {
         connection.close();
 
         return arrayresult;
+    }
+
+    String get_date() {
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTimeZone(TimeZone.getTimeZone("UTC"));
+        SimpleDateFormat pattern = new SimpleDateFormat("yyyy-MM-dd");
+
+        calendar.add(Calendar.DAY_OF_YEAR, +1);
+        String result = pattern.format(calendar.getTime());
+        return result;
+    }
+
+    String get_date(int count, Boolean several) {
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTimeZone(TimeZone.getTimeZone("UTC"));
+        SimpleDateFormat pattern = new SimpleDateFormat("yyyy-MM-dd");
+
+        String result = "";
+        String[] result2 = new String[count];
+
+        if (several) {
+            for (int i = 1; i <= count; i++) {
+                calendar.add(Calendar.DAY_OF_YEAR, +1);
+                //result += pattern.format(calendar.getTime());
+                //rack_date = pattern.format(calendar.getTime());
+                //System.out.println(rack_date[i]);
+                result += pattern.format(calendar.getTime());
+                if (i != count) {
+                    result += " ";
+                }
+            }
+        } else {
+            calendar.add(Calendar.DAY_OF_YEAR, +count);
+            result = pattern.format(calendar.getTime());
+        }
+        System.out.println("generated result: " + result);
+        return result;
+    }
+
+    String get_time(int count, Boolean several) {
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTimeZone(TimeZone.getTimeZone("UTC"));
+        SimpleDateFormat pattern = new SimpleDateFormat("HH:mm");
+        calendar.setTime(new java.util.Date(0, 0, 0, 0, 0));
+
+        calendar.add(Calendar.MINUTE, count);
+        String result = pattern.format(calendar.getTime());
+        System.out.println("generated times: " + result);
+        return result;
     }
 
 }
