@@ -121,6 +121,9 @@ public class API {
     private int ams_port = 8080;
 
 
+    long finish;
+    long start;
+
     //String[] rack_time48_ = get_rack_time();
     //TIMES
     @Deprecated
@@ -201,7 +204,7 @@ public class API {
      * @return arrayList
      * @throws IOException -TBD
      */
-    ArrayList Operation(String ams_ip, String macaddress, Enum<Operation> operation, Boolean newapi, int count_reminders,
+    ArrayList Request(String ams_ip, String macaddress, Enum<Operation> operation, Boolean newapi, int count_reminders,
                         String reminderProgramStart, Integer reminderChannelNumber, String reminderProgramId,
                         int reminderOffset, int reminderScheduleId, int reminderId) throws IOException {
         if(newapi){
@@ -264,7 +267,7 @@ public class API {
      * @return arraylist
      * @throws IOException - TBD
      */
-    ArrayList Operation(String ams_ip, String macaddress, Enum<Operation> operation, Boolean newapi, int count_reminders,
+    ArrayList Request(String ams_ip, String macaddress, Enum<Operation> operation, Boolean newapi, int count_reminders,
                         String reminderProgramStart, Integer reminderChannelNumber,
                         int reminderOffset) throws IOException {
         System.out.println(operation + " (newapi=" + newapi + ") for macaddress=" + macaddress + ", ams_ip=" + ams_ip + ", "
@@ -310,7 +313,7 @@ public class API {
      * @return arrayList
      * @throws IOException - TBD
      */
-    ArrayList Operation(String ams_ip, String macaddress, Enum<Operation> operation, Boolean newapi) throws IOException {
+    ArrayList Request(String ams_ip, String macaddress, Enum<Operation> operation, Boolean newapi) throws IOException {
         System.out.println(operation + " (newapi=" + newapi + ") for macaddress=" + macaddress + ", ams_ip=" + ams_ip);
 
         HttpClient client = HttpClients.createDefault();
@@ -353,7 +356,7 @@ public class API {
      * @throws IOException - TBD
      */
     @Deprecated
-    ArrayList Operation(String ams_ip, String macaddress, Enum<Operation> operation, Boolean newapi, int count_reminders,
+    ArrayList Request(String ams_ip, String macaddress, Enum<Operation> operation, Boolean newapi, int count_reminders,
                         String[] rack_date, Integer[] rack_channel, String reminderProgramId,
                         int reminderOffset, int reminderScheduleId, int reminderId) throws IOException {
         if (Objects.equals(operation, "Purge")) {
@@ -915,6 +918,14 @@ public class API {
         String result = pattern.format(calendar.getTime());
         System.out.println("generated times: " + result);
         return result;
+    }
+
+    void starttime() {
+        start = System.currentTimeMillis();
+    }
+
+    void finishtime() {
+        finish = System.currentTimeMillis();
     }
 
 }

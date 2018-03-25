@@ -33,11 +33,11 @@ class testSandbox extends API {
 
     @Test
     void testOperation_NewAPI_400_Bad_Request() throws IOException, InterruptedException {
-        long start = System.currentTimeMillis();
-        ArrayList actual = api.Operation(ams_ip, macaddress, Operation.blablabla, true, count_reminders,
+        starttime();
+        ArrayList actual = api.Request(ams_ip, macaddress, Operation.blablabla, true, count_reminders,
                 get_date(), reminderChannelNumber, reminderProgramId,
                 reminderOffset, reminderScheduleId, reminderId);
-        long finish = System.currentTimeMillis();
+        finishtime();
         System.out.println("[DBG] " + (finish - start) + "ms test, return code: " + actual);
         assertEquals(expected400, actual.get(0));
         assertEquals(expected400t, actual.get(1));
@@ -46,9 +46,9 @@ class testSandbox extends API {
 
     @Test
     void testOracleDB_Query() throws SQLException, ClassNotFoundException {
-        long start = System.currentTimeMillis();
+        starttime();
         ArrayList result = api.QueryDB(ams_ip, macaddress);
-        long finish = System.currentTimeMillis();
+        finishtime();
 
         assertFalse(result.isEmpty());
             System.out.println("[DBG] " + (finish - start) + "ms test, return result: "
@@ -68,9 +68,9 @@ class testSandbox extends API {
     @Test
     @Disabled
     void testCheck_registration_No_amsIp_found_for_macAddress() throws IOException {
-        long start = System.currentTimeMillis();
+        starttime();
         ArrayList actual = api.Check_registration("123456789012", charterapi_);
-        long finish = System.currentTimeMillis();
+        finishtime();
         System.out.println("[DBG] " + (finish - start) + "ms test, return code: " + actual);
         assertEquals(expected500, actual.get(0));
         assertEquals(expected500t, actual.get(1));
@@ -79,9 +79,9 @@ class testSandbox extends API {
 
     @Test
     void testCheck_registration_b_No_amsIp_found_for_macAddress() throws IOException {
-        long start = System.currentTimeMillis();
+        starttime();
         ArrayList actual = api.Check_registration("123456789012", charterapi_b);
-        long finish = System.currentTimeMillis();
+        finishtime();
         System.out.println("[DBG] " + (finish - start) + "ms test, return code: " + actual);
         assertEquals(expected500, actual.get(0));
         assertEquals(expected500t, actual.get(1));
@@ -90,9 +90,9 @@ class testSandbox extends API {
 
     @Test
     void testCheck_registration_c_No_amsIp_found_for_macAddress() throws IOException {
-        long start = System.currentTimeMillis();
+        starttime();
         ArrayList actual = api.Check_registration("123456789012", charterapi_c);
-        long finish = System.currentTimeMillis();
+        finishtime();
         System.out.println("[DBG] " + (finish - start) + "ms test, return code: " + actual);
         assertEquals(expected500, actual.get(0));
         assertEquals(expected500t, actual.get(1));
@@ -101,9 +101,9 @@ class testSandbox extends API {
 
     @Test
     void testCheck_registration_d_No_amsIp_found_for_macAddress() throws IOException {
-        long start = System.currentTimeMillis();
+        starttime();
         ArrayList actual = api.Check_registration("123456789012", charterapi_d);
-        long finish = System.currentTimeMillis();
+        finishtime();
         System.out.println("[DBG] " + (finish - start) + "ms test, return code: " + actual);
         assertEquals(expected500, actual.get(0));
         assertEquals(expected500t, actual.get(1));
