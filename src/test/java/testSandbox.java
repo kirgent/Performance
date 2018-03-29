@@ -24,7 +24,7 @@ class testSandbox extends API {
     @Test
     @Disabled
     void testTime() {
-        assertEquals("02:30", get_time(150, false));
+        assertEquals("00:00 00:30", get_time(2));
     }
 
 

@@ -294,11 +294,12 @@ public class testReminder_Delete extends API {
     }
 
 
-    /** 2 - reminder is set for time in the past
+    /** 2 - reminder is set for time in the past. Applies to "Reminders Add" request (Request ID=0)
      * @throws IOException - TBD
      * @throws InterruptedException - TBD
      */
     @Test
+    @Deprecated
     public void testDelete_statusCode2() throws IOException, InterruptedException {
         starttime();
         ArrayList actual = api.Request(ams_ip, macaddress, Operation.delete, true, count_reminders,
@@ -311,11 +312,12 @@ public class testReminder_Delete extends API {
         assertEquals("2", actual.get(2));
     }
 
-    /** 3 - reminder is set for unknown channel
+    /** 3 - reminder is set for unknown channel. "Reminders Add" request (Request ID=0)
      * @throws IOException - TBD
      * @throws InterruptedException - TBD
      */
     @Test
+    @Deprecated
     public void testDelete_statusCode3() throws IOException, InterruptedException {
         starttime();
         ArrayList actual = api.Request(ams_ip, macaddress, Operation.delete, true, count_reminders,
@@ -328,7 +330,7 @@ public class testReminder_Delete extends API {
         assertEquals("3", actual.get(2));
     }
 
-    /** 4 - reminder is unknown, applies to reminder deletion attempts
+    /** 4 - reminder is unknown. Applies to "Reminders Delete" request (Request ID=1) and "Reminders Modify" request (Request ID=2)
      * @throws IOException - TBD
      * @throws InterruptedException - TBD
      */
@@ -350,6 +352,7 @@ public class testReminder_Delete extends API {
      * @throws InterruptedException - TBD
      */
     @Test
+    @Deprecated
     public void testDelete_statusCode5() throws IOException, InterruptedException {
         starttime();
         ArrayList actual = api.Request(ams_ip, macaddress, Operation.delete, true, count_reminders,

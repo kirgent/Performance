@@ -5,6 +5,7 @@ import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+@Deprecated
 public class testReminder_OldAPI extends API {
 
     //@RepeatedTest(1)

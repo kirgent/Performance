@@ -59,7 +59,7 @@ public class testReminder_Purge extends API {
         System.out.println("[DBG] " + (finish - start) + "ms test, return code: " + actual);
         assertEquals(expected400, actual.get(0));
         assertEquals(expected400t, actual.get(1));
-        assertEquals("", actual.get(2));
+        assertEquals("Incorrect request", actual.get(2));
     }
 
     @Test

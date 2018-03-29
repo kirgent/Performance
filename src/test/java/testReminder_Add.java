@@ -294,7 +294,7 @@ public class testReminder_Add extends API {
         assertEquals("", actual.get(2));
     }
 
-    /**2 - reminder is set for time in the past
+    /** 2 - reminder is set for time in the past. Applies to "Reminders Add" request (Request ID=0)
      * @throws IOException - TBD
      * @throws InterruptedException - TBD
      */
@@ -311,7 +311,7 @@ public class testReminder_Add extends API {
         assertEquals("2", actual.get(2));
     }
 
-    /**3 - reminder is set for unknown channel
+    /** 3 - reminder is set for unknown channel. "Reminders Add" request (Request ID=0)
      * @throws IOException - TBD
      * @throws InterruptedException - TBD
      */
@@ -326,23 +326,6 @@ public class testReminder_Add extends API {
         assertEquals(expected200, actual.get(0));
         assertEquals(expected200t, actual.get(1));
         assertEquals("3", actual.get(2));
-    }
-
-    /**4 - reminder is unknown, applies to reminder deletion attempts
-     * @throws IOException - TBD
-     * @throws InterruptedException - TBD
-     */
-    @Test
-    public void testAdd_statusCode4() throws IOException, InterruptedException {
-        starttime();
-        ArrayList actual = api.Request(ams_ip, macaddress, Operation.add, true, count_reminders,
-                get_date(), reminderChannelNumber, reminderProgramId,
-                reminderOffset, reminderScheduleId, reminderId);
-        finishtime();
-        System.out.println("[DBG] " + (finish-start) + "ms test, " + "return code: " + actual);
-        assertEquals(expected200, actual.get(0));
-        assertEquals(expected200t, actual.get(1));
-        assertEquals("4", actual.get(2));
     }
 
     /**5 - reminder with provided pair of identifiers (reminderScheduleId and reminderId) is already set (for Add Reminder request)

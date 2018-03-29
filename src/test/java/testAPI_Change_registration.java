@@ -1,3 +1,4 @@
+import org.junit.Ignore;
 import org.junit.Test;
 
 import java.io.IOException;
@@ -52,6 +53,7 @@ public class testAPI_Change_registration extends API {
     }
 
     @Test
+    @Ignore
     public void testChange_registration_to_invalid_ams127_0_0_1() throws IOException, InterruptedException {
         starttime();
         ArrayList actual = api.Change_registration(macaddress, charterapi, "127.0.0.1");
