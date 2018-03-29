@@ -6,8 +6,8 @@ public class Main extends API {
     private static String operation;
     private static String param;
 
-    String macaddress_by_default = "172.30.81.4";
-    String operation_by_default = "Check";
+    private String macaddress_by_default = "172.30.81.4";
+    private String operation_by_default = "Check";
 
     String synopsys="\nNAME" +
             "\n\tReminders - java app for Add/Edit/Delete/Purge reminders and Check AMS/Change AMS registration on MACADDRESS." +

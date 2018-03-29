@@ -12,19 +12,16 @@ class testSandbox extends API {
     @Test
     @Disabled
     void testDate() {
-        //String[] xxx = {};
-        assertEquals ("2018-03-16", get_date());
-
-        assertEquals("2018-03-16", get_date(1, false));
-        assertEquals("2018-03-16 2018-03-17", get_date(2, true));
-        assertEquals("2018-03-17", get_date(2, false));
-        assertEquals("2018-03-16 2018-03-17", get_date(2, true));
+        assertEquals("2018-03-31", get_date());
+        assertEquals("2018-03-31", get_date(1, false));
+        assertEquals("2018-03-31 2018-04-01", get_date(2, true));
+        assertEquals("2018-04-01", get_date(2, false));
     }
 
     @Test
     @Disabled
     void testTime() {
-        assertEquals("00:00 00:30", get_time(2));
+        assertEquals("00:30", get_time(1, 2));
     }
 
 
@@ -34,7 +31,7 @@ class testSandbox extends API {
     @Test
     void testOperation_NewAPI_400_Bad_Request() throws IOException, InterruptedException {
         starttime();
-        ArrayList actual = api.Request(ams_ip, macaddress, Operation.blablabla, true, count_reminders,
+        ArrayList actual = api.Request(ams_ip, macaddress, Operation.blablabla, count_reminders,
                 get_date(), reminderChannelNumber, reminderProgramId,
                 reminderOffset, reminderScheduleId, reminderId);
         finishtime();
