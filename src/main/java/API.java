@@ -32,7 +32,7 @@ public class API {
 
     private final static Logger log = Logger.getLogger(API.class.getName());
 
-    enum Operation { add, modify, delete, purge, blablabla, sdfsfsdfsfsdfsfsdfsfsdfsfsdfsfsdfsfsdfsfsdfsfsdfsfsdfsfsdfsfsdfsf }
+    enum Operation { add, modify, delete, purge, blablabla, blablablablablablablablablablablablablablabla }
 
     //static Logger log = Logger.getLogger(testAMS.class.getName());
     //FileHandler txtFile = new FileHandler ("log.log", true);
@@ -79,7 +79,7 @@ public class API {
     final String box_Tanya = "000005FE680A"; //Tanya
     final String box_Vitya = "A0722CEEC934"; //Vitya
     final String box_Katya_V = "0000048D4EB4"; //Katya_V
-    String macaddress = boxD103;
+    String macaddress = boxD102;
 
 
     //DATES
@@ -149,7 +149,7 @@ public class API {
     ArrayList Request(String ams_ip, String macaddress, Enum<Operation> operation, int count_reminders,
                         String reminderProgramStart, Integer reminderChannelNumber, String reminderProgramId,
                         int reminderOffset, int reminderScheduleId, int reminderId) throws IOException {
-        System.out.println(operation + " (newapi=true) for macaddress=" + macaddress + ", ams_ip=" + ams_ip + ", "
+        System.out.println(operation + "(newapi=true) for macaddress=" + macaddress + ", ams_ip=" + ams_ip + ", "
                 + "count_reminders=" + count_reminders + ", "
                 + "reminderProgramStart=" + reminderProgramStart + ", "
                 + "reminderChannelNumber=" + reminderChannelNumber + ", "
@@ -166,8 +166,7 @@ public class API {
         System.out.println("[DBG] Request string: " + request);
 
         request.setEntity(new StringEntity(generate_json_reminder(macaddress, true, count_reminders, operation,
-                reminderProgramStart, reminderChannelNumber,
-                reminderProgramId, reminderOffset, reminderScheduleId, reminderId)));
+                reminderProgramStart, reminderChannelNumber, reminderProgramId, reminderOffset, reminderScheduleId, reminderId)));
 
         long start = currentTimeMillis();
         HttpResponse response = client.execute(request);
@@ -473,8 +472,8 @@ public class API {
         return arrayList;
     }
 
-    private String generate_json_reminder(String macaddress, Boolean newapi,
-                                          int count_reminders, Enum<Operation> enum_operation, String reminderProgramStart, int reminderChannelNumber,
+    private String generate_json_reminder(String macaddress, Boolean newapi, int count_reminders, Enum<Operation> enum_operation,
+                                          String reminderProgramStart, int reminderChannelNumber,
                                           String reminderProgramId, int reminderOffset, int reminderScheduleId, int reminderId) {
 
         //if(count_reminders <= 0){ count_reminders = 1; }
@@ -817,7 +816,7 @@ public class API {
     /** generating String with one date(always tomorrow)
      * @return String with one date(always tomorrow)
      */
-    String get_date() {
+    String reminderProgramStart() {
         Calendar calendar = Calendar.getInstance();
         calendar.setTimeZone(TimeZone.getTimeZone("UTC"));
         SimpleDateFormat pattern = new SimpleDateFormat("yyyy-MM-dd");
@@ -886,10 +885,9 @@ public class API {
         if (number < 1) { number = 1; }
 
         Calendar calendar = Calendar.getInstance();
-        calendar.setTimeZone(TimeZone.getTimeZone("UTC"));
         SimpleDateFormat pattern = new SimpleDateFormat("HH:mm");
+        calendar.setTimeZone(TimeZone.getTimeZone("UTC"));
         calendar.setTime(new java.util.Date(0, 0, 0, 0, 0));
-
         calendar.add(Calendar.MINUTE, interval_in_minutes*(number-1));
         return pattern.format(calendar.getTime());
     }

@@ -12,7 +12,7 @@ class testSandbox extends API {
     @Test
     @Disabled
     void testDate() {
-        assertEquals("2018-03-31", get_date());
+        assertEquals("2018-03-31", reminderProgramStart());
         assertEquals("2018-03-31", get_date(1, false));
         assertEquals("2018-03-31 2018-04-01", get_date(2, true));
         assertEquals("2018-04-01", get_date(2, false));
@@ -32,7 +32,7 @@ class testSandbox extends API {
     void testOperation_NewAPI_400_Bad_Request() throws IOException, InterruptedException {
         starttime();
         ArrayList actual = api.Request(ams_ip, macaddress, Operation.blablabla, count_reminders,
-                get_date(), reminderChannelNumber, reminderProgramId,
+                reminderProgramStart(), reminderChannelNumber, reminderProgramId,
                 reminderOffset, reminderScheduleId, reminderId);
         finishtime();
         System.out.println("[DBG] " + (finish - start) + "ms test, return code: " + actual);

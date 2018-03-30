@@ -17,8 +17,64 @@ public class testReminder_Modify extends API {
         //"reminderId": "<episode or Individual program reminder reference ID of a particular schedule>",
         starttime();
         ArrayList actual = api.Request(ams_ip, macaddress, Operation.modify, count_reminders,
-                get_date(), reminderChannelNumber, reminderProgramId,
+                reminderProgramStart(), reminderChannelNumber, reminderProgramId,
                 reminderOffset, reminderScheduleId, reminderId);
+        finishtime();
+        System.out.println("[DBG] " + (finish-start) + "ms test, " + "return code: " + actual);
+        assertEquals(expected200, actual.get(0));
+        assertEquals(expected200t, actual.get(1));
+        assertEquals("", actual.get(2));
+    }
+
+    @Test
+    @Deprecated
+    public void testModify_increase_reminderChannelNumber() throws IOException, InterruptedException {
+        starttime();
+        ArrayList actual = api.Request(ams_ip, macaddress, Operation.modify, count_reminders,
+                reminderProgramStart(), reminderChannelNumber+1, reminderProgramId,
+                reminderOffset, reminderScheduleId, reminderId);
+        finishtime();
+        System.out.println("[DBG] " + (finish-start) + "ms test, " + "return code: " + actual);
+        assertEquals(expected200, actual.get(0));
+        assertEquals(expected200t, actual.get(1));
+        assertEquals("", actual.get(2));
+    }
+
+    @Test
+    @Deprecated
+    public void testModify_increase_reminderOffset() throws IOException, InterruptedException {
+        starttime();
+        ArrayList actual = api.Request(ams_ip, macaddress, Operation.modify, count_reminders,
+                reminderProgramStart(), reminderChannelNumber, reminderProgramId,
+                reminderOffset+5, reminderScheduleId, reminderId);
+        finishtime();
+        System.out.println("[DBG] " + (finish-start) + "ms test, " + "return code: " + actual);
+        assertEquals(expected200, actual.get(0));
+        assertEquals(expected200t, actual.get(1));
+        assertEquals("", actual.get(2));
+    }
+
+    @Test
+    @Deprecated
+    public void testModify_increase_reminderScheduleId() throws IOException, InterruptedException {
+        starttime();
+        ArrayList actual = api.Request(ams_ip, macaddress, Operation.modify, count_reminders,
+                reminderProgramStart(), reminderChannelNumber, reminderProgramId,
+                reminderOffset, reminderScheduleId+5, reminderId);
+        finishtime();
+        System.out.println("[DBG] " + (finish-start) + "ms test, " + "return code: " + actual);
+        assertEquals(expected200, actual.get(0));
+        assertEquals(expected200t, actual.get(1));
+        assertEquals("", actual.get(2));
+    }
+
+    @Test
+    @Deprecated
+    public void testModify_increase_reminderId() throws IOException, InterruptedException {
+        starttime();
+        ArrayList actual = api.Request(ams_ip, macaddress, Operation.modify, count_reminders,
+                reminderProgramStart(), reminderChannelNumber, reminderProgramId,
+                reminderOffset, reminderScheduleId, reminderId+5);
         finishtime();
         System.out.println("[DBG] " + (finish-start) + "ms test, " + "return code: " + actual);
         assertEquals(expected200, actual.get(0));
@@ -30,7 +86,7 @@ public class testReminder_Modify extends API {
     public void testModify_reminderChannelNumber_empty() throws IOException, InterruptedException {
         starttime();
         ArrayList actual = api.Request(ams_ip, macaddress, Operation.modify, count_reminders,
-                get_date(), reminderChannelNumber_empty, reminderProgramId,
+                reminderProgramStart(), reminderChannelNumber_empty, reminderProgramId,
                 reminderOffset, reminderScheduleId, reminderId);
         finishtime();
         System.out.println("[DBG] " + (finish - start) + "ms test, " + "return code: " + actual);
@@ -43,7 +99,7 @@ public class testReminder_Modify extends API {
     public void testModify_reminderChannelNumber_negative() throws IOException, InterruptedException {
         starttime();
         ArrayList actual = api.Request(ams_ip, macaddress, Operation.modify, count_reminders,
-                get_date(), -1, reminderProgramId,
+                reminderProgramStart(), -1, reminderProgramId,
                 reminderOffset, reminderScheduleId, reminderId);
         finishtime();
         System.out.println("[DBG] " + (finish - start) + "ms test, " + "return code: " + actual);
@@ -56,7 +112,7 @@ public class testReminder_Modify extends API {
     public void testModify_reminderChannelNumber_MAX_VALUE() throws IOException, InterruptedException {
         starttime();
         ArrayList actual = api.Request(ams_ip, macaddress, Operation.modify, count_reminders,
-                get_date(), Integer.MAX_VALUE, reminderProgramId,
+                reminderProgramStart(), Integer.MAX_VALUE, reminderProgramId,
                 reminderOffset, reminderScheduleId, reminderId);
         finishtime();
         System.out.println("[DBG] " + (finish - start) + "ms test, " + "return code: " + actual);
@@ -69,7 +125,7 @@ public class testReminder_Modify extends API {
     public void testModify_reminderChannelNumber_MIN_VALUE() throws IOException, InterruptedException {
         starttime();
         ArrayList actual = api.Request(ams_ip, macaddress, Operation.modify, count_reminders,
-                get_date(), Integer.MIN_VALUE, reminderProgramId,
+                reminderProgramStart(), Integer.MIN_VALUE, reminderProgramId,
                 reminderOffset, reminderScheduleId, reminderId);
         finishtime();
         System.out.println("[DBG] " + (finish - start) + "ms test, " + "return code: " + actual);
@@ -121,7 +177,7 @@ public class testReminder_Modify extends API {
     public void testModify_reminderProgramId_empty() throws IOException, InterruptedException {
         starttime();
         ArrayList actual = api.Request(ams_ip, macaddress, Operation.modify, count_reminders,
-                get_date(), reminderChannelNumber, "",
+                reminderProgramStart(), reminderChannelNumber, "",
                 reminderOffset, reminderScheduleId, reminderId);
         finishtime();
         System.out.println("[DBG] " + (finish - start) + "ms test, " + "return code: " + actual);
@@ -134,7 +190,7 @@ public class testReminder_Modify extends API {
     public void testModify_reminderProgramId_wrong() throws IOException, InterruptedException {
         starttime();
         ArrayList actual = api.Request(ams_ip, macaddress, Operation.modify, count_reminders,
-                get_date(), reminderChannelNumber, "EP#@$%#$%@#$^$#%^#$%^",
+                reminderProgramStart(), reminderChannelNumber, "EP#@$%#$%@#$^$#%^#$%^",
                 reminderOffset, reminderScheduleId, reminderId);
         finishtime();
         System.out.println("[DBG] " + (finish - start) + "ms test, " + "return code: " + actual);
@@ -147,7 +203,7 @@ public class testReminder_Modify extends API {
     public void testModify_reminderOffset_empty() throws IOException, InterruptedException {
         starttime();
         ArrayList actual = api.Request(ams_ip, macaddress, Operation.modify, count_reminders,
-                get_date(), reminderChannelNumber, reminderProgramId,
+                reminderProgramStart(), reminderChannelNumber, reminderProgramId,
                 reminderOffset_empty, reminderScheduleId, reminderId);
         finishtime();
         System.out.println("[DBG] " + (finish - start) + "ms test, " + "return code: " + actual);
@@ -160,7 +216,7 @@ public class testReminder_Modify extends API {
     public void testModify_reminderOffset_MAX_VALUE() throws IOException, InterruptedException {
         starttime();
         ArrayList actual = api.Request(ams_ip, macaddress, Operation.modify, count_reminders,
-                get_date(), reminderChannelNumber, reminderProgramId,
+                reminderProgramStart(), reminderChannelNumber, reminderProgramId,
                 Integer.MAX_VALUE, reminderScheduleId, reminderId);
         finishtime();
         System.out.println("[DBG] " + (finish - start) + "ms test, " + "return code: " + actual);
@@ -173,7 +229,7 @@ public class testReminder_Modify extends API {
     public void testModify_reminderOffset_MIN_VALUE() throws IOException, InterruptedException {
         starttime();
         ArrayList actual = api.Request(ams_ip, macaddress, Operation.modify, count_reminders,
-                get_date(), reminderChannelNumber, reminderProgramId,
+                reminderProgramStart(), reminderChannelNumber, reminderProgramId,
                 Integer.MIN_VALUE, reminderScheduleId, reminderId);
         finishtime();
         System.out.println("[DBG] " + (finish - start) + "ms test, " + "return code: " + actual);
@@ -186,7 +242,7 @@ public class testReminder_Modify extends API {
     public void testModify_reminderOffset_negative() throws IOException, InterruptedException {
         starttime();
         ArrayList actual = api.Request(ams_ip, macaddress, Operation.modify, count_reminders,
-                get_date(), reminderChannelNumber, reminderProgramId,
+                reminderProgramStart(), reminderChannelNumber, reminderProgramId,
                 -1, reminderScheduleId, reminderId);
         finishtime();
         System.out.println("[DBG] " + (finish - start) + "ms test, " + "return code: " + actual);
@@ -199,7 +255,7 @@ public class testReminder_Modify extends API {
     public void testModify_reminderScheduleId_empty() throws IOException, InterruptedException {
         starttime();
         ArrayList actual = api.Request(ams_ip, macaddress, Operation.modify, count_reminders,
-                get_date(), reminderChannelNumber, reminderProgramId,
+                reminderProgramStart(), reminderChannelNumber, reminderProgramId,
                 reminderOffset, reminderScheduleId_empty, reminderId);
         finishtime();
         System.out.println("[DBG] " + (finish - start) + "ms test, " + "return code: " + actual);
@@ -212,7 +268,7 @@ public class testReminder_Modify extends API {
     public void testModify_reminderScheduleId_MAX_VALUE() throws IOException, InterruptedException {
         starttime();
         ArrayList actual = api.Request(ams_ip, macaddress, Operation.modify, count_reminders,
-                get_date(), reminderChannelNumber, reminderProgramId,
+                reminderProgramStart(), reminderChannelNumber, reminderProgramId,
                 reminderOffset, Integer.MAX_VALUE, reminderId);
         finishtime();
         System.out.println("[DBG] " + (finish - start) + "ms test, " + "return code: " + actual);
@@ -225,7 +281,7 @@ public class testReminder_Modify extends API {
     public void testModify_reminderScheduleId_MIN_VALUE() throws IOException, InterruptedException {
         starttime();
         ArrayList actual = api.Request(ams_ip, macaddress, Operation.modify, count_reminders,
-                get_date(), reminderChannelNumber, reminderProgramId,
+                reminderProgramStart(), reminderChannelNumber, reminderProgramId,
                 reminderOffset, Integer.MIN_VALUE, reminderId);
         finishtime();
         System.out.println("[DBG] " + (finish - start) + "ms test, " + "return code: " + actual);
@@ -238,7 +294,7 @@ public class testReminder_Modify extends API {
     public void testModify_reminderScheduleId_negative() throws IOException, InterruptedException {
         starttime();
         ArrayList actual = api.Request(ams_ip, macaddress, Operation.modify, count_reminders,
-                get_date(), reminderChannelNumber, reminderProgramId,
+                reminderProgramStart(), reminderChannelNumber, reminderProgramId,
                 reminderOffset, -1, reminderId);
         finishtime();
         System.out.println("[DBG] " + (finish - start) + "ms test, " + "return code: " + actual);
@@ -251,7 +307,7 @@ public class testReminder_Modify extends API {
     public void testModify_reminderId_empty() throws IOException, InterruptedException {
         starttime();
         ArrayList actual = api.Request(ams_ip, macaddress, Operation.modify, count_reminders,
-                get_date(), reminderChannelNumber, reminderProgramId,
+                reminderProgramStart(), reminderChannelNumber, reminderProgramId,
                 reminderOffset, reminderScheduleId, reminderId_empty);
         finishtime();
         System.out.println("[DBG] " + (finish - start) + "ms test, " + "return code: " + actual);
@@ -264,7 +320,7 @@ public class testReminder_Modify extends API {
     public void testModify_reminderId_MAX_VALUE() throws IOException, InterruptedException {
         starttime();
         ArrayList actual = api.Request(ams_ip, macaddress, Operation.modify, count_reminders,
-                get_date(), reminderChannelNumber, reminderProgramId,
+                reminderProgramStart(), reminderChannelNumber, reminderProgramId,
                 reminderOffset, reminderScheduleId, Integer.MAX_VALUE);
         finishtime();
         System.out.println("[DBG] " + (finish - start) + "ms test, " + "return code: " + actual);
@@ -277,7 +333,7 @@ public class testReminder_Modify extends API {
     public void testModify_reminderId_MIN_VALUE() throws IOException, InterruptedException {
         starttime();
         ArrayList actual = api.Request(ams_ip, macaddress, Operation.modify, count_reminders,
-                get_date(), reminderChannelNumber, reminderProgramId,
+                reminderProgramStart(), reminderChannelNumber, reminderProgramId,
                 reminderOffset, reminderScheduleId, Integer.MIN_VALUE);
         finishtime();
         System.out.println("[DBG] " + (finish - start) + "ms test, " + "return code: " + actual);
@@ -290,49 +346,13 @@ public class testReminder_Modify extends API {
     public void testModify_reminderId_negative() throws IOException, InterruptedException {
         starttime();
         ArrayList actual = api.Request(ams_ip, macaddress, Operation.modify, count_reminders,
-                get_date(), reminderChannelNumber, reminderProgramId,
+                reminderProgramStart(), reminderChannelNumber, reminderProgramId,
                 reminderOffset, reminderScheduleId, -1);
         finishtime();
         System.out.println("[DBG] " + (finish - start) + "ms test, " + "return code: " + actual);
         assertEquals(expected400, actual.get(0));
         assertEquals(expected400t, actual.get(1));
         assertEquals("", actual.get(2));
-    }
-
-    /** 2 - reminder is set for time in the past. Applies to "Reminders Add" request (Request ID=0)
-     * @throws IOException - TBD
-     * @throws InterruptedException - TBD
-     */
-    @Test
-    @Deprecated
-    public void testModify_statusCode2() throws IOException, InterruptedException {
-        starttime();
-        ArrayList actual = api.Request(ams_ip, macaddress, Operation.modify, count_reminders,
-                reminderProgramStart_for_statuscode2, reminderChannelNumber,
-                reminderProgramId, reminderOffset, reminderScheduleId, reminderId);
-        finishtime();
-        System.out.println("[DBG] " + (finish-start) + "ms test, " + "return code: " + actual);
-        assertEquals(expected400, actual.get(0));
-        assertEquals(expected400t, actual.get(1));
-        assertEquals("2", actual.get(2));
-    }
-
-    /** 3 - reminder is set for unknown channel. "Reminders Add" request (Request ID=0)
-     * @throws IOException - TBD
-     * @throws InterruptedException - TBD
-     */
-    @Test
-    @Deprecated
-    public void testModify_statusCode3() throws IOException, InterruptedException {
-        starttime();
-        ArrayList actual = api.Request(ams_ip, macaddress, Operation.modify, count_reminders,
-                reminderProgramStart_for_statuscode2, reminderChannelNumber_for_statuscode3,
-                reminderProgramId, reminderOffset, reminderScheduleId, reminderId);
-        finishtime();
-        System.out.println("[DBG] " + (finish-start) + "ms test, " + "return code: " + actual);
-        assertEquals(expected400, actual.get(0));
-        assertEquals(expected400t, actual.get(1));
-        assertEquals("3", actual.get(2));
     }
 
     /** 4 - reminder is unknown. Applies to "Reminders Delete" request (Request ID=1) and "Reminders Modify" request (Request ID=2)
@@ -343,7 +363,7 @@ public class testReminder_Modify extends API {
     public void testModify_statusCode4() throws IOException, InterruptedException {
         starttime();
         ArrayList actual = api.Request(ams_ip, macaddress, Operation.modify, count_reminders,
-                get_date(), reminderChannelNumber,
+                reminderProgramStart(), reminderChannelNumber,
                 reminderProgramId, reminderOffset, reminderScheduleId, reminderId);
         finishtime();
         System.out.println("[DBG] " + (finish-start) + "ms test, " + "return code: " + actual);
@@ -352,42 +372,24 @@ public class testReminder_Modify extends API {
         assertEquals("4", actual.get(2));
     }
 
-    /** 5 - reminder with provided pair of identifiers (reminderScheduleId and reminderId) is already set (for Add Reminder request)
-     * @throws IOException - TBD
-     * @throws InterruptedException - TBD
-     */
-    @Test
-    @Deprecated
-    public void testModify_statusCode5() throws IOException, InterruptedException {
-        starttime();
-        ArrayList actual = api.Request(ams_ip, macaddress, Operation.modify, count_reminders,
-                get_date(), reminderChannelNumber, reminderProgramId,
-                reminderOffset, reminderScheduleId, reminderId);
-        finishtime();
-        System.out.println("[DBG] " + (finish-start) + "ms test, " + "return code: " + actual);
-        assertEquals(expected400, actual.get(0));
-        assertEquals(expected400t, actual.get(1));
-        assertEquals("5", actual.get(2));
-    }
-
     @Test
     public void testModify_macaddress_empty() throws IOException, InterruptedException {
         starttime();
         ArrayList actual = api.Request(ams_ip, "", Operation.modify, count_reminders,
-                get_date(), reminderChannelNumber, reminderProgramId,
+                reminderProgramStart(), reminderChannelNumber, reminderProgramId,
                 reminderOffset, reminderScheduleId, reminderId);
         finishtime();
         System.out.println("[DBG] " + (finish-start) + "ms test, return code: " + actual);
         assertEquals(expected400, actual.get(0));
         assertEquals(expected400t, actual.get(1));
-        assertEquals("", actual.get(2));
+        assertEquals("REM-008 Reminders parsing error: wrong deviceId", actual.get(2));
     }
 
     @Test
     public void testModify_macaddress_wrong() throws IOException, InterruptedException {
         starttime();
         ArrayList actual = api.Request(ams_ip, macaddress_wrong, Operation.modify, count_reminders,
-                get_date(), reminderChannelNumber, reminderProgramId,
+                reminderProgramStart(), reminderChannelNumber, reminderProgramId,
                 reminderOffset, reminderScheduleId, reminderId);
         finishtime();
         System.out.println("[DBG] " + (finish-start) + "ms test, return code: " + actual);
@@ -400,7 +402,7 @@ public class testReminder_Modify extends API {
     public void testModify_REM_ST_001_Box_is_not_registered() throws IOException, InterruptedException {
         starttime();
         ArrayList actual = api.Request(ams_ip, macaddress, Operation.modify, count_reminders,
-                get_date(), reminderChannelNumber, reminderProgramId,
+                reminderProgramStart(), reminderChannelNumber, reminderProgramId,
                 reminderOffset, reminderScheduleId, reminderId);
         finishtime();
         System.out.println("[DBG] " + (finish - start) + "ms test, " + "return code: " + actual);
@@ -409,4 +411,43 @@ public class testReminder_Modify extends API {
         assertEquals("REM-ST-001 Box is not registered", actual.get(2));
     }
 
+    @Test
+    public void testModify_reminderChannelNumber_reminderProgramStart_empty() throws IOException, InterruptedException {
+        starttime();
+        ArrayList actual = api.Request(ams_ip, macaddress, Operation.modify, count_reminders,
+                "", reminderChannelNumber_empty, reminderProgramId,
+                reminderOffset, reminderScheduleId, reminderId);
+        finishtime();
+        System.out.println("[DBG] " + (finish - start) + "ms test, " + "return code: " + actual);
+        assertEquals(expected400, actual.get(0));
+        assertEquals(expected400t, actual.get(1));
+        assertEquals("", actual.get(2));
+    }
+
+    @Test
+    public void testModify_reminderProgramId_reminderOffset_empty() throws IOException, InterruptedException {
+        starttime();
+        ArrayList actual = api.Request(ams_ip, macaddress, Operation.modify, count_reminders,
+                reminderProgramStart(), reminderChannelNumber, "",
+                reminderOffset_empty, reminderScheduleId, reminderId);
+        finishtime();
+        System.out.println("[DBG] " + (finish - start) + "ms test, " + "return code: " + actual);
+        assertEquals(expected400, actual.get(0));
+        assertEquals(expected400t, actual.get(1));
+        assertEquals("", actual.get(2));
+    }
+
+    @Test
+    public void testModify_reminderScheduleId_reminderId_empty() throws IOException, InterruptedException {
+        starttime();
+        ArrayList actual = api.Request(ams_ip, macaddress, Operation.modify, count_reminders,
+                reminderProgramStart(), reminderChannelNumber, reminderProgramId,
+                reminderOffset, reminderScheduleId_empty, reminderId_empty);
+        finishtime();
+        System.out.println("[DBG] " + (finish - start) + "ms test, " + "return code: " + actual);
+        assertEquals(expected400, actual.get(0));
+        assertEquals(expected400t, actual.get(1));
+        assertEquals("", actual.get(2));
+    }
+    
 }

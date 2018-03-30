@@ -2,10 +2,12 @@
   <dictionary name="kirill.grushin">
     <words>
       <w>charterapi</w>
+      <w>finishtime</w>
       <w>macaddress</w>
       <w>newapi</w>
       <w>remindres</w>
       <w>requestor</w>
+      <w>starttime</w>
       <w>statuscode</w>
     </words>
   </dictionary>

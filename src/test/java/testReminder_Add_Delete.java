@@ -12,7 +12,7 @@ class testReminder_Add_Delete extends API {
     void testAdd_Delete() throws IOException, InterruptedException {
         starttime();
         ArrayList actual = api.Request(ams_ip, macaddress, Operation.add, 10,
-                get_date(), reminderChannelNumber, reminderProgramId,
+                reminderProgramStart(), reminderChannelNumber, reminderProgramId,
                 reminderOffset, reminderScheduleId, reminderId);
         System.out.println("[DBG] return code: " + actual);
         assertEquals(expected200, actual.get(0));
@@ -20,7 +20,7 @@ class testReminder_Add_Delete extends API {
         assertEquals("", actual.get(2));
 
         actual = api.Request(ams_ip, macaddress, Operation.delete, 10,
-                get_date(), reminderChannelNumber, reminderProgramId,
+                reminderProgramStart(), reminderChannelNumber, reminderProgramId,
                 reminderOffset, reminderScheduleId, reminderId);
         finishtime();
         System.out.println("[DBG] " + (finish - start) + "ms test, " + "return code: " + actual);
@@ -33,7 +33,7 @@ class testReminder_Add_Delete extends API {
     void testAdd_Delete48() throws IOException, InterruptedException {
         starttime();
         ArrayList actual = api.Request(ams_ip, macaddress, Operation.add, 48,
-                get_date(), reminderChannelNumber, reminderProgramId,
+                reminderProgramStart(), reminderChannelNumber, reminderProgramId,
                 reminderOffset, reminderScheduleId, reminderId);
         System.out.println("[DBG] return code: " + actual);
         assertEquals(expected200, actual.get(0));
@@ -41,7 +41,7 @@ class testReminder_Add_Delete extends API {
         assertEquals("", actual.get(2));
 
         actual = api.Request(ams_ip, macaddress, Operation.delete, 48,
-                get_date(), reminderChannelNumber, reminderProgramId,
+                reminderProgramStart(), reminderChannelNumber, reminderProgramId,
                 reminderOffset, reminderScheduleId, reminderId);
         finishtime();
         System.out.println("[DBG] " + (finish - start) + "ms test, " + "return code: " + actual);
@@ -54,7 +54,7 @@ class testReminder_Add_Delete extends API {
     void testAdd_Delete288() throws IOException, InterruptedException {
         starttime();
         ArrayList actual = api.Request(ams_ip, macaddress, Operation.add, 288,
-                get_date(), reminderChannelNumber, reminderProgramId,
+                reminderProgramStart(), reminderChannelNumber, reminderProgramId,
                 reminderOffset, reminderScheduleId, reminderId);
         System.out.println("[DBG] return code: " + actual);
         assertEquals(expected200, actual.get(0));
@@ -62,7 +62,7 @@ class testReminder_Add_Delete extends API {
         assertEquals("", actual.get(2));
 
         actual = api.Request(ams_ip, macaddress, Operation.delete, 288,
-                get_date(), reminderChannelNumber, reminderProgramId,
+                reminderProgramStart(), reminderChannelNumber, reminderProgramId,
                 reminderOffset, reminderScheduleId, reminderId);
         finishtime();
         System.out.println("[DBG] " + (finish - start) + "ms test, " + "return code: " + actual);
@@ -75,7 +75,7 @@ class testReminder_Add_Delete extends API {
     void testAdd_Delete720() throws IOException, InterruptedException {
         starttime();
         ArrayList actual = api.Request(ams_ip, macaddress, Operation.add, 720,
-                get_date(), reminderChannelNumber, reminderProgramId,
+                reminderProgramStart(), reminderChannelNumber, reminderProgramId,
                 reminderOffset, reminderScheduleId, reminderId);
         System.out.println("[DBG] return code: " + actual);
         assertEquals(expected200, actual.get(0));
@@ -83,7 +83,7 @@ class testReminder_Add_Delete extends API {
         assertEquals("", actual.get(2));
 
         actual = api.Request(ams_ip, macaddress, Operation.delete, 720,
-                get_date(), reminderChannelNumber, reminderProgramId,
+                reminderProgramStart(), reminderChannelNumber, reminderProgramId,
                 reminderOffset, reminderScheduleId, reminderId);
         finishtime();
         System.out.println("[DBG] " + (finish - start) + "ms test, " + "return code: " + actual);
