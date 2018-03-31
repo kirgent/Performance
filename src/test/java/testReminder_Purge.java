@@ -8,7 +8,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 public class testReminder_Purge extends API {
 
     @Test
-    public void testPurge() throws IOException, InterruptedException {
+    public void testPurge() throws IOException {
         starttime();
         ArrayList actual = api.Request(ams_ip, macaddress, Operation.purge, true);
         finishtime();
@@ -19,7 +19,7 @@ public class testReminder_Purge extends API {
     }
 
     @Test
-    public void testPurge_macaddress_empty() throws IOException, InterruptedException {
+    public void testPurge_macaddress_empty() throws IOException {
         starttime();
         ArrayList actual = api.Request(ams_ip, "", Operation.purge, true);
         finishtime();
@@ -30,7 +30,7 @@ public class testReminder_Purge extends API {
     }
 
     @Test
-    public void testPurge_macaddress_wrong() throws IOException, InterruptedException {
+    public void testPurge_macaddress_wrong() throws IOException {
         starttime();
         ArrayList actual = api.Request(ams_ip, macaddress_wrong, Operation.purge, true);
         finishtime();
@@ -41,7 +41,7 @@ public class testReminder_Purge extends API {
     }
 
     @Test
-    public void testPurge_REM_ST_01_Box_is_not_registered() throws IOException, InterruptedException {
+    public void testPurge_REM_ST_01_Box_is_not_registered() throws IOException {
         starttime();
         ArrayList actual = api.Request("172.30.81.0", macaddress, Operation.purge, true);
         finishtime();
@@ -52,7 +52,7 @@ public class testReminder_Purge extends API {
     }
 
     @Test
-    public void testPurge_400_Bad_Request() throws IOException, InterruptedException {
+    public void testPurge_400_Bad_Request() throws IOException {
         starttime();
         ArrayList actual = api.Request(ams_ip, macaddress, Operation.blablabla, true);
         finishtime();
@@ -64,7 +64,7 @@ public class testReminder_Purge extends API {
 
     @Test
     @Deprecated
-    public void testPurge_500_Internal_Server_Error() throws IOException, InterruptedException {
+    public void testPurge_500_Internal_Server_Error() throws IOException {
         starttime();
         ArrayList actual = api.Request(ams_ip, macaddress, Operation.purge, true);
         finishtime();
@@ -76,7 +76,7 @@ public class testReminder_Purge extends API {
 
     @Test
     @Deprecated
-    public void testPurge_504_Server_data_timeout() throws IOException, InterruptedException {
+    public void testPurge_504_Server_data_timeout() throws IOException {
         starttime();
         ArrayList actual = api.Request(ams_ip, macaddress, Operation.purge, true);
         finishtime();

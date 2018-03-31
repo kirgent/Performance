@@ -9,9 +9,9 @@ public class testReminder_Add extends API {
 
     //@RepeatedTest(3)
     @Test
-    public void testAdd() throws IOException, InterruptedException {
+    public void testAdd() throws IOException {
         starttime();
-        ArrayList actual = api.Request(ams_ip, macaddress, Operation.add, 1,
+        ArrayList actual = api.Request(ams_ip, macaddress, Operation.add, 10,
                 reminderProgramStart(), reminderChannelNumber, reminderProgramId,
                 reminderOffset, reminderScheduleId, reminderId);
         finishtime();
@@ -22,7 +22,7 @@ public class testReminder_Add extends API {
     }
 
     @Test
-    public void testAdd_reminderChannelNumber_empty() throws IOException, InterruptedException {
+    public void testAdd_reminderChannelNumber_empty() throws IOException {
         starttime();
         ArrayList actual = api.Request(ams_ip, macaddress, Operation.add, count_reminders,
                 reminderProgramStart(), reminderChannelNumber_empty, reminderProgramId,
@@ -35,7 +35,7 @@ public class testReminder_Add extends API {
     }
 
     @Test
-    public void testAdd_reminderChannelNumber_negative() throws IOException, InterruptedException {
+    public void testAdd_reminderChannelNumber_negative() throws IOException {
         starttime();
         ArrayList actual = api.Request(ams_ip, macaddress, Operation.add, count_reminders,
                 reminderProgramStart(), -1, reminderProgramId,
@@ -48,7 +48,7 @@ public class testReminder_Add extends API {
     }
 
     @Test
-    public void testAdd_reminderChannelNumber_MAX_VALUE() throws IOException, InterruptedException {
+    public void testAdd_reminderChannelNumber_MAX_VALUE() throws IOException {
         starttime();
         ArrayList actual = api.Request(ams_ip, macaddress, Operation.add, count_reminders,
                 reminderProgramStart(), Integer.MAX_VALUE, reminderProgramId,
@@ -61,7 +61,7 @@ public class testReminder_Add extends API {
     }
 
     @Test
-    public void testAdd_reminderChannelNumber_MIN_VALUE() throws IOException, InterruptedException {
+    public void testAdd_reminderChannelNumber_MIN_VALUE() throws IOException {
         starttime();
         ArrayList actual = api.Request(ams_ip, macaddress, Operation.add, count_reminders,
                 reminderProgramStart(), Integer.MIN_VALUE, reminderProgramId,
@@ -74,7 +74,7 @@ public class testReminder_Add extends API {
     }
 
     @Test
-    public void testAdd_reminderProgramStart_PAST() throws IOException, InterruptedException {
+    public void testAdd_reminderProgramStart_PAST() throws IOException {
         starttime();
         ArrayList actual = api.Request(ams_ip, macaddress, Operation.add, count_reminders,
                 "0000-00-00", reminderChannelNumber, reminderProgramId,
@@ -87,7 +87,7 @@ public class testReminder_Add extends API {
     }
 
     @Test
-    public void testAdd_reminderProgramStart_empty() throws IOException, InterruptedException {
+    public void testAdd_reminderProgramStart_empty() throws IOException {
         starttime();
         ArrayList actual = api.Request(ams_ip, macaddress, Operation.add, count_reminders,
                 "", reminderChannelNumber, reminderProgramId,
@@ -100,7 +100,7 @@ public class testReminder_Add extends API {
     }
 
     @Test
-    public void testAdd_reminderProgramStart_wrong() throws IOException, InterruptedException {
+    public void testAdd_reminderProgramStart_wrong() throws IOException {
         starttime();
         ArrayList actual = api.Request(ams_ip, macaddress, Operation.add, count_reminders,
                 "YYYY-mm-dd", reminderChannelNumber, reminderProgramId,
@@ -113,7 +113,7 @@ public class testReminder_Add extends API {
     }
 
     @Test
-    public void testAdd_reminderProgramId_empty() throws IOException, InterruptedException {
+    public void testAdd_reminderProgramId_empty() throws IOException {
         starttime();
         ArrayList actual = api.Request(ams_ip, macaddress, Operation.add, count_reminders,
                 reminderProgramStart(), reminderChannelNumber, "",
@@ -126,7 +126,7 @@ public class testReminder_Add extends API {
     }
 
     @Test
-    public void testAdd_reminderProgramId_wrong() throws IOException, InterruptedException {
+    public void testAdd_reminderProgramId_wrong() throws IOException {
         starttime();
         ArrayList actual = api.Request(ams_ip, macaddress, Operation.add, count_reminders,
                 reminderProgramStart(), reminderChannelNumber, "EP#@$%#$%@#$^$#%^#$%^",
@@ -139,7 +139,7 @@ public class testReminder_Add extends API {
     }
 
     @Test
-    public void testAdd_reminderOffset_empty() throws IOException, InterruptedException {
+    public void testAdd_reminderOffset_empty() throws IOException {
         starttime();
         ArrayList actual = api.Request(ams_ip, macaddress, Operation.add, count_reminders,
                 reminderProgramStart(), reminderChannelNumber, reminderProgramId,
@@ -152,7 +152,7 @@ public class testReminder_Add extends API {
     }
 
     @Test
-    public void testAdd_reminderOffset_MAX_VALUE() throws IOException, InterruptedException {
+    public void testAdd_reminderOffset_MAX_VALUE() throws IOException {
         starttime();
         ArrayList actual = api.Request(ams_ip, macaddress, Operation.add, count_reminders,
                 reminderProgramStart(), reminderChannelNumber, reminderProgramId,
@@ -165,7 +165,7 @@ public class testReminder_Add extends API {
     }
 
     @Test
-    public void testAdd_reminderOffset_MIN_VALUE() throws IOException, InterruptedException {
+    public void testAdd_reminderOffset_MIN_VALUE() throws IOException {
         starttime();
         ArrayList actual = api.Request(ams_ip, macaddress, Operation.add, count_reminders,
                 reminderProgramStart(), reminderChannelNumber, reminderProgramId,
@@ -178,7 +178,7 @@ public class testReminder_Add extends API {
     }
 
     @Test
-    public void testAdd_reminderOffset_negative() throws IOException, InterruptedException {
+    public void testAdd_reminderOffset_negative() throws IOException {
         starttime();
         ArrayList actual = api.Request(ams_ip, macaddress, Operation.add, count_reminders,
                 reminderProgramStart(), reminderChannelNumber, reminderProgramId,
@@ -191,7 +191,7 @@ public class testReminder_Add extends API {
     }
 
     @Test
-    public void testAdd_reminderScheduleId_empty() throws IOException, InterruptedException {
+    public void testAdd_reminderScheduleId_empty() throws IOException {
         starttime();
         ArrayList actual = api.Request(ams_ip, macaddress, Operation.add, count_reminders,
                 reminderProgramStart(), reminderChannelNumber, reminderProgramId,
@@ -204,7 +204,7 @@ public class testReminder_Add extends API {
     }
 
     @Test
-    public void testAdd_reminderScheduleId_MAX_VALUE() throws IOException, InterruptedException {
+    public void testAdd_reminderScheduleId_MAX_VALUE() throws IOException {
         starttime();
         ArrayList actual = api.Request(ams_ip, macaddress, Operation.add, count_reminders,
                 reminderProgramStart(), reminderChannelNumber, reminderProgramId,
@@ -217,7 +217,7 @@ public class testReminder_Add extends API {
     }
 
     @Test
-    public void testAdd_reminderScheduleId_MIN_VALUE() throws IOException, InterruptedException {
+    public void testAdd_reminderScheduleId_MIN_VALUE() throws IOException {
         starttime();
         ArrayList actual = api.Request(ams_ip, macaddress, Operation.add, count_reminders,
                 reminderProgramStart(), reminderChannelNumber, reminderProgramId,
@@ -230,7 +230,7 @@ public class testReminder_Add extends API {
     }
 
     @Test
-    public void testAdd_reminderScheduleId_negative() throws IOException, InterruptedException {
+    public void testAdd_reminderScheduleId_negative() throws IOException {
         starttime();
         ArrayList actual = api.Request(ams_ip, macaddress, Operation.add, count_reminders,
                 reminderProgramStart(), reminderChannelNumber, reminderProgramId,
@@ -243,7 +243,7 @@ public class testReminder_Add extends API {
     }
 
     @Test
-    public void testAdd_reminderId_empty() throws IOException, InterruptedException {
+    public void testAdd_reminderId_empty() throws IOException {
         starttime();
         ArrayList actual = api.Request(ams_ip, macaddress, Operation.add, count_reminders,
                 reminderProgramStart(), reminderChannelNumber, reminderProgramId,
@@ -256,7 +256,7 @@ public class testReminder_Add extends API {
     }
 
     @Test
-    public void testAdd_reminderId_MAX_VALUE() throws IOException, InterruptedException {
+    public void testAdd_reminderId_MAX_VALUE() throws IOException {
         starttime();
         ArrayList actual = api.Request(ams_ip, macaddress, Operation.add, count_reminders,
                 reminderProgramStart(), reminderChannelNumber, reminderProgramId,
@@ -269,7 +269,7 @@ public class testReminder_Add extends API {
     }
 
     @Test
-    public void testAdd_reminderId_MIN_VALUE() throws IOException, InterruptedException {
+    public void testAdd_reminderId_MIN_VALUE() throws IOException {
         starttime();
         ArrayList actual = api.Request(ams_ip, macaddress, Operation.add, count_reminders,
                 reminderProgramStart(), reminderChannelNumber, reminderProgramId,
@@ -282,7 +282,7 @@ public class testReminder_Add extends API {
     }
 
     @Test
-    public void testAdd_reminderId_negative() throws IOException, InterruptedException {
+    public void testAdd_reminderId_negative() throws IOException {
         starttime();
         ArrayList actual = api.Request(ams_ip, macaddress, Operation.add, count_reminders,
                 reminderProgramStart(), reminderChannelNumber, reminderProgramId,
@@ -296,10 +296,9 @@ public class testReminder_Add extends API {
 
     /** 2 - reminder is set for time in the past. Applies to "Reminders Add" request (Request ID=0)
      * @throws IOException - TBD
-     * @throws InterruptedException - TBD
      */
     @Test
-    public void testAdd_statusCode2() throws IOException, InterruptedException {
+    public void testAdd_statusCode2() throws IOException {
         starttime();
         ArrayList actual = api.Request(ams_ip, macaddress, Operation.add, count_reminders,
                 reminderProgramStart_for_statuscode2, reminderChannelNumber, reminderProgramId,
@@ -313,10 +312,9 @@ public class testReminder_Add extends API {
 
     /** 3 - reminder is set for unknown channel. "Reminders Add" request (Request ID=0)
      * @throws IOException - TBD
-     * @throws InterruptedException - TBD
      */
     @Test
-    public void testAdd_statusCode3() throws IOException, InterruptedException {
+    public void testAdd_statusCode3() throws IOException {
         starttime();
         ArrayList actual = api.Request(ams_ip, macaddress, Operation.add, count_reminders,
                 reminderProgramStart(), reminderChannelNumber_for_statuscode3, reminderProgramId,
@@ -330,10 +328,9 @@ public class testReminder_Add extends API {
 
     /**5 - reminder with provided pair of identifiers (reminderScheduleId and reminderId) is already set (for Add Reminder request)
      * @throws IOException - TBD
-     * @throws InterruptedException - TBD
      */
     @Test
-    public void testAdd_statusCode5() throws IOException, InterruptedException {
+    public void testAdd_statusCode5() throws IOException {
         starttime();
         ArrayList actual = api.Request(ams_ip, macaddress, Operation.add, count_reminders,
                 reminderProgramStart(), reminderChannelNumber, reminderProgramId,
@@ -346,7 +343,7 @@ public class testReminder_Add extends API {
     }
 
     @Test
-    public void testAdd_REM_ST_001_Box_is_not_registered() throws IOException, InterruptedException {
+    public void testAdd_REM_ST_001_Box_is_not_registered() throws IOException {
         starttime();
         ArrayList actual = api.Request("172.30.81.0", macaddress, Operation.add, count_reminders,
                 reminderProgramStart(), reminderChannelNumber, reminderProgramId,

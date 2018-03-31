@@ -10,7 +10,7 @@ public class testReminder_OldAPI extends API {
 
     //@RepeatedTest(1)
     @Test
-    public void testAdd_Delete() throws IOException, InterruptedException {
+    public void testAdd_Delete() throws IOException {
         starttime();
         int count_reminders = 1;
         ArrayList actual = api.Request(ams_ip, macaddress, Operation.add, count_reminders,
@@ -31,7 +31,7 @@ public class testReminder_OldAPI extends API {
 
     //@RepeatedTest(3)
     @Test
-    public void testAdd() throws IOException, InterruptedException {
+    public void testAdd() throws IOException {
         starttime();
         ArrayList actual = api.Request(ams_ip, macaddress, Operation.add, count_reminders,
                 reminderProgramStart(), reminderChannelNumber, reminderOffset);
@@ -43,7 +43,7 @@ public class testReminder_OldAPI extends API {
     }
 
     @Test
-    public void testAdd_400_Bad_Request() throws IOException, InterruptedException {
+    public void testAdd_400_Bad_Request() throws IOException {
         starttime();
         ArrayList actual = api.Request(ams_ip, macaddress, Operation.add, count_reminders,
                 "YYYY-MM-DD", reminderChannelNumber, reminderOffset);
@@ -55,7 +55,7 @@ public class testReminder_OldAPI extends API {
     }
 
     @Test
-    public void testAdd_REM_ST_001_Box_is_not_registered() throws IOException, InterruptedException {
+    public void testAdd_REM_ST_001_Box_is_not_registered() throws IOException {
         starttime();
         ArrayList actual = api.Request("172.30.81.0", macaddress, Operation.add, count_reminders,
                 reminderProgramStart(), reminderChannelNumber, reminderOffset);
@@ -68,10 +68,9 @@ public class testReminder_OldAPI extends API {
 
     /** 2 - reminder is set for time in the past
      * @throws IOException - TBD
-     * @throws InterruptedException - TBD
      */
     @Test
-    public void testAdd_statusCode2() throws IOException, InterruptedException {
+    public void testAdd_statusCode2() throws IOException {
         starttime();
         ArrayList actual = api.Request(ams_ip, macaddress, Operation.add, count_reminders,
                 reminderProgramStart_for_statuscode2, reminderChannelNumber, reminderOffset);
@@ -84,10 +83,9 @@ public class testReminder_OldAPI extends API {
 
     /** 3 - reminder is set for unknown channel
      * @throws IOException - TBD
-     * @throws InterruptedException - TBD
      */
     @Test
-    public void testAdd_statusCode3() throws IOException, InterruptedException {
+    public void testAdd_statusCode3() throws IOException {
         starttime();
         ArrayList actual = api.Request(ams_ip, macaddress, Operation.add, count_reminders,
                 reminderProgramStart(), reminderChannelNumber_for_statuscode3, reminderOffset);
@@ -100,10 +98,9 @@ public class testReminder_OldAPI extends API {
 
     /** 4 - reminder is unknown, applies to reminder deletion attempts
      * @throws IOException - TBD
-     * @throws InterruptedException - TBD
      */
     @Test
-    public void testAdd_statusCode4() throws IOException, InterruptedException {
+    public void testAdd_statusCode4() throws IOException {
         starttime();
         ArrayList actual = api.Request(ams_ip, macaddress, Operation.add, count_reminders,
                 reminderProgramStart(), reminderChannelNumber, reminderOffset);
@@ -115,7 +112,7 @@ public class testReminder_OldAPI extends API {
     }
 
     @Test
-    public void testDelete() throws IOException, InterruptedException {
+    public void testDelete() throws IOException {
         starttime();
         ArrayList actual = api.Request(ams_ip, macaddress, Operation.delete, count_reminders,
                 reminderProgramStart(), reminderChannelNumber, reminderOffset);
@@ -127,7 +124,7 @@ public class testReminder_OldAPI extends API {
     }
 
     @Test
-    public void testDelete_400_Bad_Request() throws IOException, InterruptedException {
+    public void testDelete_400_Bad_Request() throws IOException {
         starttime();
         ArrayList actual = api.Request(ams_ip, macaddress, Operation.delete, count_reminders,
                 "YYYY-MM-DD", reminderChannelNumber, reminderOffset);
@@ -139,7 +136,7 @@ public class testReminder_OldAPI extends API {
     }
 
     @Test
-    public void testDelete_REM_ST_001_Box_is_not_registered() throws IOException, InterruptedException {
+    public void testDelete_REM_ST_001_Box_is_not_registered() throws IOException {
         starttime();
         ArrayList actual = api.Request("172.30.81.0", macaddress, Operation.delete, count_reminders,
                 reminderProgramStart(), reminderChannelNumber, reminderOffset);
@@ -151,7 +148,7 @@ public class testReminder_OldAPI extends API {
     }
 
     @Test
-    public void testPurge() throws IOException, InterruptedException {
+    public void testPurge() throws IOException {
         starttime();
         ArrayList actual = api.Request(ams_ip, macaddress, Operation.purge, false);
         finishtime();
@@ -163,7 +160,7 @@ public class testReminder_OldAPI extends API {
     }
 
     @Test
-    public void testPurge_macaddress_empty() throws IOException, InterruptedException {
+    public void testPurge_macaddress_empty() throws IOException {
         starttime();
         ArrayList actual = api.Request(ams_ip, "", Operation.purge, false);
         finishtime();
@@ -174,7 +171,7 @@ public class testReminder_OldAPI extends API {
     }
 
     @Test
-    public void testPurge_macaddress_wrong() throws IOException, InterruptedException {
+    public void testPurge_macaddress_wrong() throws IOException {
         starttime();
         ArrayList actual = api.Request(ams_ip, macaddress_wrong, Operation.purge, false);
         finishtime();
@@ -185,7 +182,7 @@ public class testReminder_OldAPI extends API {
     }
 
     @Test
-    public void testPurge_REM_ST_01_Box_is_not_registered() throws IOException, InterruptedException {
+    public void testPurge_REM_ST_01_Box_is_not_registered() throws IOException {
         starttime();
         ArrayList actual = api.Request("172.30.81.0", macaddress, Operation.purge, false);
         finishtime();
@@ -197,7 +194,7 @@ public class testReminder_OldAPI extends API {
 
     @Test
     @Deprecated
-    public void testPurge_500_Internal_Server_Error() throws IOException, InterruptedException {
+    public void testPurge_500_Internal_Server_Error() throws IOException {
         starttime();
         ArrayList actual = api.Request(ams_ip, macaddress, Operation.purge, false);
         finishtime();
@@ -209,7 +206,7 @@ public class testReminder_OldAPI extends API {
 
     @Test
     @Deprecated
-    public void testPurge_504_Server_data_timeout() throws IOException, InterruptedException {
+    public void testPurge_504_Server_data_timeout() throws IOException {
         starttime();
         ArrayList actual = api.Request(ams_ip, macaddress, Operation.purge, false);
         finishtime();
@@ -221,10 +218,9 @@ public class testReminder_OldAPI extends API {
 
     /** 2 - reminder is set for time in the past
      * @throws IOException - TBD
-     * @throws InterruptedException - TBD
      */
     @Test
-    public void testDelete_statusCode2() throws IOException, InterruptedException {
+    public void testDelete_statusCode2() throws IOException {
         starttime();
         ArrayList actual = api.Request(ams_ip, macaddress, Operation.delete, count_reminders,
                 reminderProgramStart_for_statuscode2, reminderChannelNumber, reminderOffset);
@@ -237,10 +233,9 @@ public class testReminder_OldAPI extends API {
 
     /** 3 - reminder is set for unknown channel
      * @throws IOException - TBD
-     * @throws InterruptedException - TBD
      */
     @Test
-    public void testDelete_statusCode3() throws IOException, InterruptedException {
+    public void testDelete_statusCode3() throws IOException {
         starttime();
         ArrayList actual = api.Request(ams_ip, macaddress, Operation.delete, count_reminders,
                 reminderProgramStart(), reminderChannelNumber_for_statuscode3, reminderOffset);
@@ -253,10 +248,9 @@ public class testReminder_OldAPI extends API {
 
     /** 4 - reminder is unknown, applies to reminder deletion attempts
      * @throws IOException - TBD
-     * @throws InterruptedException - TBD
      */
     @Test
-    public void testDelete_statusCode4() throws IOException, InterruptedException {
+    public void testDelete_statusCode4() throws IOException {
         starttime();
         ArrayList actual = api.Request(ams_ip, macaddress, Operation.delete, count_reminders,
                 reminderProgramStart(), reminderChannelNumber, reminderOffset);
@@ -268,7 +262,7 @@ public class testReminder_OldAPI extends API {
     }
 
     @Test
-    public void testOperation_wrong_400_Bad_Request() throws IOException, InterruptedException {
+    public void testOperation_wrong_400_Bad_Request() throws IOException {
         starttime();
         ArrayList actual = api.Request(ams_ip, macaddress, Operation.blablabla, count_reminders,
                 reminderProgramStart(), reminderChannelNumber, reminderOffset);

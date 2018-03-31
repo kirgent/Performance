@@ -9,7 +9,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 class testReminder_Add_Delete extends API {
 
     @RepeatedTest(1)
-    void testAdd_Delete() throws IOException, InterruptedException {
+    void testAdd_Delete() throws IOException {
         starttime();
         ArrayList actual = api.Request(ams_ip, macaddress, Operation.add, 10,
                 reminderProgramStart(), reminderChannelNumber, reminderProgramId,
@@ -30,7 +30,7 @@ class testReminder_Add_Delete extends API {
     }
 
     @RepeatedTest(10)
-    void testAdd_Delete48() throws IOException, InterruptedException {
+    void testAdd_Delete48() throws IOException {
         starttime();
         ArrayList actual = api.Request(ams_ip, macaddress, Operation.add, 48,
                 reminderProgramStart(), reminderChannelNumber, reminderProgramId,
@@ -51,7 +51,7 @@ class testReminder_Add_Delete extends API {
     }
 
     @RepeatedTest(10)
-    void testAdd_Delete288() throws IOException, InterruptedException {
+    void testAdd_Delete288() throws IOException {
         starttime();
         ArrayList actual = api.Request(ams_ip, macaddress, Operation.add, 288,
                 reminderProgramStart(), reminderChannelNumber, reminderProgramId,
@@ -72,7 +72,7 @@ class testReminder_Add_Delete extends API {
     }
 
     @RepeatedTest(10)
-    void testAdd_Delete720() throws IOException, InterruptedException {
+    void testAdd_Delete720() throws IOException {
         starttime();
         ArrayList actual = api.Request(ams_ip, macaddress, Operation.add, 720,
                 reminderProgramStart(), reminderChannelNumber, reminderProgramId,

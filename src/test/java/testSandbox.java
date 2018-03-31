@@ -24,12 +24,8 @@ class testSandbox extends API {
         assertEquals("00:30", get_time(1, 2));
     }
 
-
-
-
-
     @Test
-    void testOperation_NewAPI_400_Bad_Request() throws IOException, InterruptedException {
+    void testOperation_NewAPI_400_Bad_Request() throws IOException {
         starttime();
         ArrayList actual = api.Request(ams_ip, macaddress, Operation.blablabla, count_reminders,
                 reminderProgramStart(), reminderChannelNumber, reminderProgramId,

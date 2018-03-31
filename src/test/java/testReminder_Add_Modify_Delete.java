@@ -8,7 +8,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 class testReminder_Add_Modify_Delete extends API {
 
     @RepeatedTest(1)
-    void testAdd_Modify_Delete48() throws IOException, InterruptedException {
+    void testAdd_Modify_Delete48() throws IOException {
         starttime();
         ArrayList actual = api.Request(ams_ip, macaddress, Operation.add, 48,
                 reminderProgramStart(), reminderChannelNumber,
