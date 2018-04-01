@@ -10,7 +10,7 @@ public class testReminder_Purge extends API {
     @Test
     public void testPurge() throws IOException {
         starttime();
-        ArrayList actual = api.Request(ams_ip, macaddress, Operation.purge, true);
+        ArrayList actual = AMS.Request(ams_ip, macaddress, Operation.purge, true);
         finishtime();
         System.out.println("[DBG] " + (finish - start) + "ms test, return code: " + actual);
         assertEquals(expected200, actual.get(0));
@@ -21,7 +21,7 @@ public class testReminder_Purge extends API {
     @Test
     public void testPurge_macaddress_empty() throws IOException {
         starttime();
-        ArrayList actual = api.Request(ams_ip, "", Operation.purge, true);
+        ArrayList actual = AMS.Request(ams_ip, "", Operation.purge, true);
         finishtime();
         System.out.println("[DBG] " + (finish - start) + "ms test, return code: " + actual);
         assertEquals(expected400, actual.get(0));
@@ -32,7 +32,7 @@ public class testReminder_Purge extends API {
     @Test
     public void testPurge_macaddress_wrong() throws IOException {
         starttime();
-        ArrayList actual = api.Request(ams_ip, macaddress_wrong, Operation.purge, true);
+        ArrayList actual = AMS.Request(ams_ip, macaddress_wrong, Operation.purge, true);
         finishtime();
         System.out.println("[DBG] " + (finish - start) + "ms test, return code: " + actual);
         assertEquals(expected400, actual.get(0));
@@ -43,7 +43,7 @@ public class testReminder_Purge extends API {
     @Test
     public void testPurge_REM_ST_01_Box_is_not_registered() throws IOException {
         starttime();
-        ArrayList actual = api.Request("172.30.81.0", macaddress, Operation.purge, true);
+        ArrayList actual = AMS.Request("172.30.81.0", macaddress, Operation.purge, true);
         finishtime();
         System.out.println("[DBG] " + (finish - start) + "ms test, return code: " + actual);
         assertEquals(expected500, actual.get(0));
@@ -54,7 +54,7 @@ public class testReminder_Purge extends API {
     @Test
     public void testPurge_400_Bad_Request() throws IOException {
         starttime();
-        ArrayList actual = api.Request(ams_ip, macaddress, Operation.blablabla, true);
+        ArrayList actual = AMS.Request(ams_ip, macaddress, Operation.blablabla, true);
         finishtime();
         System.out.println("[DBG] " + (finish - start) + "ms test, return code: " + actual);
         assertEquals(expected400, actual.get(0));
@@ -66,7 +66,7 @@ public class testReminder_Purge extends API {
     @Deprecated
     public void testPurge_500_Internal_Server_Error() throws IOException {
         starttime();
-        ArrayList actual = api.Request(ams_ip, macaddress, Operation.purge, true);
+        ArrayList actual = AMS.Request(ams_ip, macaddress, Operation.purge, true);
         finishtime();
         System.out.println("[DBG] " + (finish - start) + "ms test, return code: " + actual);
         assertEquals(expected500, actual.get(0));
@@ -78,7 +78,7 @@ public class testReminder_Purge extends API {
     @Deprecated
     public void testPurge_504_Server_data_timeout() throws IOException {
         starttime();
-        ArrayList actual = api.Request(ams_ip, macaddress, Operation.purge, true);
+        ArrayList actual = AMS.Request(ams_ip, macaddress, Operation.purge, true);
         finishtime();
         System.out.println("[DBG] " + (finish - start) + "ms test, return code: " + actual);
         assertEquals(expected504, actual.get(0));

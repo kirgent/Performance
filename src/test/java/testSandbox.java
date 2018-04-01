@@ -9,6 +9,8 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class testSandbox extends API {
 
+    private API_Middle Middle = new API_Middle();
+
     @Test
     @Disabled
     void testDate() {
@@ -27,7 +29,7 @@ class testSandbox extends API {
     @Test
     void testOperation_NewAPI_400_Bad_Request() throws IOException {
         starttime();
-        ArrayList actual = api.Request(ams_ip, macaddress, Operation.blablabla, count_reminders,
+        ArrayList actual = AMS.Request(ams_ip, macaddress, Operation.blablabla, count_reminders,
                 reminderProgramStart(), reminderChannelNumber, reminderProgramId,
                 reminderOffset, reminderScheduleId, reminderId);
         finishtime();
@@ -40,7 +42,7 @@ class testSandbox extends API {
     @Test
     void testOracleDB_Query() throws SQLException, ClassNotFoundException {
         starttime();
-        ArrayList result = api.QueryDB(ams_ip, macaddress);
+        ArrayList result = AMS.QueryDB(ams_ip, macaddress);
         finishtime();
 
         assertFalse(result.isEmpty());
@@ -62,7 +64,7 @@ class testSandbox extends API {
     @Disabled
     void testCheck_registration_No_amsIp_found_for_macAddress() throws IOException {
         starttime();
-        ArrayList actual = api.Check_registration("123456789012", charterapi_);
+        ArrayList actual = Middle.Check_registration("123456789012", charterapi);
         finishtime();
         System.out.println("[DBG] " + (finish - start) + "ms test, return code: " + actual);
         assertEquals(expected500, actual.get(0));
@@ -73,7 +75,7 @@ class testSandbox extends API {
     @Test
     void testCheck_registration_b_No_amsIp_found_for_macAddress() throws IOException {
         starttime();
-        ArrayList actual = api.Check_registration("123456789012", charterapi_b);
+        ArrayList actual = Middle.Check_registration("123456789012", charterapi_b);
         finishtime();
         System.out.println("[DBG] " + (finish - start) + "ms test, return code: " + actual);
         assertEquals(expected500, actual.get(0));
@@ -84,7 +86,7 @@ class testSandbox extends API {
     @Test
     void testCheck_registration_c_No_amsIp_found_for_macAddress() throws IOException {
         starttime();
-        ArrayList actual = api.Check_registration("123456789012", charterapi_c);
+        ArrayList actual = Middle.Check_registration("123456789012", charterapi_c);
         finishtime();
         System.out.println("[DBG] " + (finish - start) + "ms test, return code: " + actual);
         assertEquals(expected500, actual.get(0));
@@ -95,12 +97,25 @@ class testSandbox extends API {
     @Test
     void testCheck_registration_d_No_amsIp_found_for_macAddress() throws IOException {
         starttime();
-        ArrayList actual = api.Check_registration("123456789012", charterapi_d);
+        ArrayList actual = Middle.Check_registration("123456789012", charterapi_d);
         finishtime();
         System.out.println("[DBG] " + (finish - start) + "ms test, return code: " + actual);
         assertEquals(expected500, actual.get(0));
         assertEquals(expected500t, actual.get(1));
         assertEquals("No amsIp found for macAddress", actual.get(2));
+    }
+
+    @Test
+    void testCheck_Delete() throws IOException {
+        starttime();
+        ArrayList actual = AMS.Request(ams_ip, macaddress, Operation.delete, count_reminders,
+                reminderProgramStart(), reminderChannelNumber,
+                reminderProgramId, reminderOffset, reminderScheduleId, reminderId);
+        finishtime();
+        System.out.println("[DBG] " + (finish - start) + "ms test, " + "return code: " + actual);
+        assertEquals(expected200, actual.get(0));
+        assertEquals(expected200t, actual.get(1));
+        assertEquals("", actual.get(2));
     }
 
 }

@@ -18,7 +18,7 @@ class testSettings extends API {
         // }]
         // }}"
         starttime();
-        ArrayList actual = api.Change_settings(ams_ip, macaddress, "Channel Filters", "Premiums");
+        ArrayList actual = AMS.Change_settings(ams_ip, macaddress, "Channel Filters", "Premiums");
         finishtime();
         System.out.println("[DBG] " + (finish - start) + "ms test, return code: " + actual);
         assertEquals(expected200, actual.get(0));
@@ -29,7 +29,7 @@ class testSettings extends API {
     @Test
     void testSettings_Audio_Output_to_Other() throws IOException {
         starttime();
-        ArrayList actual = api.Change_settings(ams_ip, macaddress, "Audio Output", "Other");
+        ArrayList actual = AMS.Change_settings(ams_ip, macaddress, "Audio Output", "Other");
         finishtime();
         System.out.println("[DBG] " + (finish - start) + "ms test, return code: " + actual);
         assertEquals(expected200, actual.get(0));
@@ -40,7 +40,7 @@ class testSettings extends API {
     @Test
     void testSettings_Audio_Output_to_Dolby_Digital() throws IOException {
         starttime();
-        ArrayList actual = api.Change_settings(ams_ip, macaddress, "Audio Output", "Dolby Digital");
+        ArrayList actual = AMS.Change_settings(ams_ip, macaddress, "Audio Output", "Dolby Digital");
         finishtime();
         System.out.println("[DBG] " + (finish - start) + "ms test, return code: " + actual);
         assertEquals(expected200, actual.get(0));
@@ -51,7 +51,7 @@ class testSettings extends API {
     @Test
     void testSettings_Audio_Output_to_HDMI() throws IOException {
         starttime();
-        ArrayList actual = api.Change_settings(ams_ip, macaddress, "Audio Output", "HDMI");
+        ArrayList actual = AMS.Change_settings(ams_ip, macaddress, "Audio Output", "HDMI");
         finishtime();
         System.out.println("[DBG] " + (finish - start) + "ms test, return code: " + actual);
         assertEquals(expected200, actual.get(0));
@@ -62,7 +62,7 @@ class testSettings extends API {
     @Test
     void testSettings_negative_STB_MAC_not_found() throws IOException {
         starttime();
-        ArrayList actual = api.Change_settings(ams_ip, macaddress_wrong, "Audio Output", "HDMI");
+        ArrayList actual = AMS.Change_settings(ams_ip, macaddress_wrong, "Audio Output", "HDMI");
         finishtime();
         System.out.println("[DBG] " + (finish - start) + "ms test, return code: " + actual);
         assertEquals(expected404, actual.get(0));
@@ -73,7 +73,7 @@ class testSettings extends API {
     @Test
     void testSettings_Audio_Output_to_value_empty() throws IOException {
         starttime();
-        ArrayList actual = api.Change_settings(ams_ip, macaddress, "Audio Output", "");
+        ArrayList actual = AMS.Change_settings(ams_ip, macaddress, "Audio Output", "");
         finishtime();
         System.out.println("[DBG] " + (finish - start) + "ms test, return code: " + actual);
         assertEquals(expected200, actual.get(0));
@@ -84,7 +84,7 @@ class testSettings extends API {
     @Test
     void testSettings_Audio_Output_to_value_wrong() throws IOException {
         starttime();
-        ArrayList actual = api.Change_settings(ams_ip, macaddress, "Audio Output", "blablabla");
+        ArrayList actual = AMS.Change_settings(ams_ip, macaddress, "Audio Output", "blablabla");
         finishtime();
         System.out.println("[DBG] " + (finish - start) + "ms test, return code: " + actual);
         assertEquals(expected200, actual.get(0));
@@ -95,7 +95,7 @@ class testSettings extends API {
     @Test
     void testSettings_negative_SET_025_Unsupported_data_type_Not_a_JSON_Object() throws IOException {
         starttime();
-        ArrayList actual = api.Change_settings(ams_ip, macaddress, "Audio Output", "");
+        ArrayList actual = AMS.Change_settings(ams_ip, macaddress, "Audio Output", "");
         finishtime();
         System.out.println("[DBG] " + (finish - start) + "ms test, return code: " + actual);
         assertEquals(expected500, actual.get(0));
@@ -106,7 +106,7 @@ class testSettings extends API {
     @Test
     void testSettings_Turn_Reminders_to_Off() throws IOException {
         starttime();
-        ArrayList actual = api.Change_settings(ams_ip, macaddress, "Turn On/Off Reminders", "Off");
+        ArrayList actual = AMS.Change_settings(ams_ip, macaddress, "Turn On/Off Reminders", "Off");
         finishtime();
         System.out.println("[DBG] " + (finish - start) + "ms test, return code: " + actual);
         assertEquals(expected200, actual.get(0));
@@ -117,7 +117,7 @@ class testSettings extends API {
     @Test
     void testSettings_Turn_Reminders_to_On() throws IOException {
         starttime();
-        ArrayList actual = api.Change_settings(ams_ip, macaddress, "Turn On/Off Reminders", "On");
+        ArrayList actual = AMS.Change_settings(ams_ip, macaddress, "Turn On/Off Reminders", "On");
         finishtime();
         System.out.println("[DBG] " + (finish - start) + "ms test, return code: " + actual);
         assertEquals(expected200, actual.get(0));
@@ -128,7 +128,7 @@ class testSettings extends API {
     @Test
     void testSettings_Turn_Reminders_to_empty_value() throws IOException {
         starttime();
-        ArrayList actual = api.Change_settings(ams_ip, macaddress, "Turn On/Off Reminders", "");
+        ArrayList actual = AMS.Change_settings(ams_ip, macaddress, "Turn On/Off Reminders", "");
         finishtime();
         System.out.println("[DBG] " + (finish - start) + "ms test, return code: " + actual);
         assertEquals(expected200, actual.get(0));

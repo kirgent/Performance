@@ -148,16 +148,16 @@ public class Main extends API {
 
         System.out.println("[DBG] used macaddress=" + macaddress + ", operation=" + operation + ", param=" + param);
 
-        API api = new API();
+        API_Middle Middle = new API_Middle();
 
         switch (operation){
             case "Check":
             case "check":
-                api.Check_registration(macaddress, charterapi);
+                Middle.Check_registration(macaddress, charterapi);
                 break;
             case "Change":
             case "change":
-                api.Change_registration(macaddress, charterapi, ams_ip);
+                Middle.Change_registration(macaddress, charterapi, ams_ip);
                 break;
             case "Purge":
             case "purge":
@@ -176,7 +176,7 @@ public class Main extends API {
             //case "Delete":
             //case "delete": api.Operation("Delete", macaddress, count_reminders, count_iterations, ams_ip_default); break;
             default:
-                api.Check_registration(macaddress, charterapi);
+                Middle.Check_registration(macaddress, charterapi);
         }
     }
 }

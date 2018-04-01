@@ -5,12 +5,14 @@ import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-public class testAPI_Check_registration extends API {
+public class testCheck_registration extends API {
+
+    private API_Middle Middle = new API_Middle();
 
     @Test
     public void testCheck_registration_via_charterapi_() throws IOException {
         starttime();
-        ArrayList actual = api.Check_registration(macaddress, charterapi_);
+        ArrayList actual = Middle.Check_registration(macaddress, charterapi);
         finishtime();
         System.out.println("[DBG] " + (finish - start) + "ms test, return code: " + actual);
         
@@ -22,7 +24,7 @@ public class testAPI_Check_registration extends API {
     @Test
     public void testCheck_registration_via_charterapi_b() throws IOException {
         starttime();
-        ArrayList actual = api.Check_registration(macaddress, charterapi_b);
+        ArrayList actual = Middle.Check_registration(macaddress, charterapi_b);
         finishtime();
         System.out.println("[DBG] " + (finish-start) + "ms test, return code: " + actual);
         
@@ -34,7 +36,7 @@ public class testAPI_Check_registration extends API {
     @Test
     public void testCheck_registration_via_charterapi_c() throws IOException {
         starttime();
-        ArrayList actual = api.Check_registration(macaddress, charterapi_c);
+        ArrayList actual = Middle.Check_registration(macaddress, charterapi_c);
         finishtime();
         System.out.println("[DBG] " + (finish-start) + "ms test, return code: " + actual);
         
@@ -46,7 +48,7 @@ public class testAPI_Check_registration extends API {
     @Test
     public void testCheck_registration_via_charterapi_d() throws IOException {
         starttime();
-        ArrayList actual = api.Check_registration(macaddress, charterapi_d);
+        ArrayList actual = Middle.Check_registration(macaddress, charterapi_d);
         finishtime();
         System.out.println("[DBG] " + (finish-start) + "ms test, return code: " + actual);
         

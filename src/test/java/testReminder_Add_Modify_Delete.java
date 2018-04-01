@@ -10,7 +10,7 @@ class testReminder_Add_Modify_Delete extends API {
     @RepeatedTest(1)
     void testAdd_Modify_Delete48() throws IOException {
         starttime();
-        ArrayList actual = api.Request(ams_ip, macaddress, Operation.add, 48,
+        ArrayList actual = AMS.Request(ams_ip, macaddress, Operation.add, 48,
                 reminderProgramStart(), reminderChannelNumber,
                 reminderProgramId, reminderOffset, reminderScheduleId, reminderId);
         System.out.println("[DBG] return code: " + actual);
@@ -18,7 +18,7 @@ class testReminder_Add_Modify_Delete extends API {
         assertEquals(expected200t, actual.get(1));
         assertEquals("", actual.get(2));
 
-        actual = api.Request(ams_ip, macaddress, Operation.modify, 48,
+        actual = AMS.Request(ams_ip, macaddress, Operation.modify, 48,
                 reminderProgramStart(), reminderChannelNumber,
                 reminderProgramId, reminderOffset, reminderScheduleId, reminderId);
         System.out.println("[DBG] return code: " + actual);
@@ -26,7 +26,7 @@ class testReminder_Add_Modify_Delete extends API {
         assertEquals(expected200t, actual.get(1));
         assertEquals("", actual.get(2));
 
-        actual = api.Request(ams_ip, macaddress, Operation.delete, 48,
+        actual = AMS.Request(ams_ip, macaddress, Operation.delete, 48,
                 reminderProgramStart(), reminderChannelNumber,
                 reminderProgramId, reminderOffset, reminderScheduleId, reminderId);
         finishtime();
