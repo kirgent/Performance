@@ -49,13 +49,24 @@ public class testMiddle_Reminders_edge_middle_API extends API_AMS{
     }
 
     @Test
-    public void testDelete_multiple_reminders () throws IOException {
+    public void testDelete_multiple_reminders() throws IOException {
         starttime();
-        ArrayList actual = Middle.Delete_multiple_reminders(macaddress, charterapi_c,1, 2);
+        ArrayList actual = Middle.Delete_multiple_reminders(macaddress, charterapi_c,12345, 12345);
         finishtime();
         System.out.println("[DBG] " + (finish - start) + "ms test, return code: " + actual);
         assertEquals(expected200, actual.get(0));
         assertEquals(expected200t, actual.get(1));
+        assertEquals("", actual.get(2));
+    }
+
+    @Test
+    public void testDelete_multiple_reminders__Not_Found() throws IOException {
+        starttime();
+        ArrayList actual = Middle.Delete_multiple_reminders(macaddress, charterapi_c,0, 0);
+        finishtime();
+        System.out.println("[DBG] " + (finish - start) + "ms test, return code: " + actual);
+        assertEquals(expected404, actual.get(0));
+        assertEquals(expected404t, actual.get(1));
         assertEquals("", actual.get(2));
     }
 

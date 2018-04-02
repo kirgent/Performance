@@ -92,7 +92,7 @@ class API_Middle extends API {
         // {"reminderScheduleId":1223,"reminderId":34841},
         // {"reminderScheduleId":1224,"reminderId":34842}
         // ]}'
-        request.setEntity(new StringEntity(generate_json_reminder_delete_multiple(macaddress, reminderScheduleId, reminderId)));
+        request.setEntity(new StringEntity(generate_json_reminder_delete_multiple2(macaddress, reminderScheduleId, reminderId)));
 
         starttime();
         HttpResponse response = client.execute(request);
@@ -215,11 +215,30 @@ class API_Middle extends API {
         return arrayList;
     }
 
+    //todo
     private String generate_json_reminder_delete_multiple(String macaddress, int reminderScheduleId, int reminderId) {
         JSONObject json = new JSONObject();
         json.put("macAddress", macaddress);
         JSONArray array = new JSONArray();
-        json.put("", array);
+        //todo
+        json.put("",array);
+        //for (int i = 1; i <= count_reminders; i++) {
+        JSONObject object_in_array = new JSONObject();
+        array.add(object_in_array);
+        object_in_array.put("reminderScheduleId", reminderScheduleId);
+        object_in_array.put("reminderId", reminderId);
+        //}
+        String result = json.toJSONString();
+        System.out.println("generated json: " + result);
+        return result;
+    }
+
+    //todo
+    private String generate_json_reminder_delete_multiple2(String macaddress, int reminderScheduleId, int reminderId) {
+        JSONObject json = new JSONObject();
+        json.put("macAddress", "STB" + macaddress);
+        JSONArray array = new JSONArray();
+        json.put("reminderIdentifiers",array);
         //for (int i = 1; i <= count_reminders; i++) {
         JSONObject object_in_array = new JSONObject();
         array.add(object_in_array);

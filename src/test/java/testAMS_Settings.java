@@ -1,18 +1,18 @@
-import org.junit.jupiter.api.Disabled;
-import org.junit.jupiter.api.Test;
+import org.junit.Ignore;
+import org.junit.Test;
 
 import java.io.IOException;
 import java.util.ArrayList;
 
 import static org.junit.Assert.assertEquals;
 
-class testAMS_Settings extends API {
+public class testAMS_Settings extends API {
 
     private API_AMS AMS = new API_AMS();
 
     @Test
-    @Disabled
-    void testSettings_Channel_Filters() throws IOException {
+    @Ignore
+    public void testSettings_Channel_Filters() throws IOException {
         //String json = "{"settings":{"groups":
         // [{"id":"STB000005FE680A",
         // "type":"device-stb",
@@ -29,7 +29,7 @@ class testAMS_Settings extends API {
     }
 
     @Test
-    void testSettings_Audio_Output_to_Other() throws IOException {
+    public void testSettings_Audio_Output_to_Other() throws IOException {
         starttime();
         ArrayList actual = AMS.Change_settings(ams_ip, macaddress, "Audio Output", "Other");
         finishtime();
@@ -40,7 +40,7 @@ class testAMS_Settings extends API {
     }
 
     @Test
-    void testSettings_Audio_Output_to_Dolby_Digital() throws IOException {
+    public void testSettings_Audio_Output_to_Dolby_Digital() throws IOException {
         starttime();
         ArrayList actual = AMS.Change_settings(ams_ip, macaddress, "Audio Output", "Dolby Digital");
         finishtime();
@@ -51,7 +51,7 @@ class testAMS_Settings extends API {
     }
 
     @Test
-    void testSettings_Audio_Output_to_HDMI() throws IOException {
+    public void testSettings_Audio_Output_to_HDMI() throws IOException {
         starttime();
         ArrayList actual = AMS.Change_settings(ams_ip, macaddress, "Audio Output", "HDMI");
         finishtime();
@@ -62,7 +62,7 @@ class testAMS_Settings extends API {
     }
 
     @Test
-    void testSettings_negative_STB_MAC_not_found() throws IOException {
+    public void testSettings_negative_STB_MAC_not_found() throws IOException {
         starttime();
         ArrayList actual = AMS.Change_settings(ams_ip, macaddress_wrong, "Audio Output", "HDMI");
         finishtime();
@@ -73,7 +73,7 @@ class testAMS_Settings extends API {
     }
 
     @Test
-    void testSettings_Audio_Output_to_value_empty() throws IOException {
+    public void testSettings_Audio_Output_to_value_empty() throws IOException {
         starttime();
         ArrayList actual = AMS.Change_settings(ams_ip, macaddress, "Audio Output", "");
         finishtime();
@@ -84,7 +84,7 @@ class testAMS_Settings extends API {
     }
 
     @Test
-    void testSettings_Audio_Output_to_value_wrong() throws IOException {
+    public void testSettings_Audio_Output_to_value_wrong() throws IOException {
         starttime();
         ArrayList actual = AMS.Change_settings(ams_ip, macaddress, "Audio Output", "blablabla");
         finishtime();
@@ -95,7 +95,7 @@ class testAMS_Settings extends API {
     }
 
     @Test
-    void testSettings_negative_SET_025_Unsupported_data_type_Not_a_JSON_Object() throws IOException {
+    public void testSettings_negative_SET_025_Unsupported_data_type_Not_a_JSON_Object() throws IOException {
         starttime();
         ArrayList actual = AMS.Change_settings(ams_ip, macaddress, "Audio Output", "");
         finishtime();
@@ -106,7 +106,7 @@ class testAMS_Settings extends API {
     }
 
     @Test
-    void testSettings_Turn_Reminders_to_Off() throws IOException {
+    public void testSettings_Turn_Reminders_to_Off() throws IOException {
         starttime();
         ArrayList actual = AMS.Change_settings(ams_ip, macaddress, "Turn On/Off Reminders", "Off");
         finishtime();
@@ -117,7 +117,7 @@ class testAMS_Settings extends API {
     }
 
     @Test
-    void testSettings_Turn_Reminders_to_On() throws IOException {
+    public void testSettings_Turn_Reminders_to_On() throws IOException {
         starttime();
         ArrayList actual = AMS.Change_settings(ams_ip, macaddress, "Turn On/Off Reminders", "On");
         finishtime();
@@ -128,7 +128,7 @@ class testAMS_Settings extends API {
     }
 
     @Test
-    void testSettings_Turn_Reminders_to_empty_value() throws IOException {
+    public void testSettings_Turn_Reminders_to_empty_value() throws IOException {
         starttime();
         ArrayList actual = AMS.Change_settings(ams_ip, macaddress, "Turn On/Off Reminders", "");
         finishtime();
@@ -136,6 +136,50 @@ class testAMS_Settings extends API {
         assertEquals(expected200, actual.get(0));
         assertEquals(expected200t, actual.get(1));
         assertEquals("incorrect value", actual.get(2));
+    }
+
+    @Test
+    public void testSettings_Guide_Narration_to_On() throws IOException {
+        starttime();
+        ArrayList actual = AMS.Change_settings(ams_ip, macaddress, "Guide Narration", "On");
+        finishtime();
+        System.out.println("[DBG] " + (finish - start) + "ms test, return code: " + actual);
+        assertEquals(expected200, actual.get(0));
+        assertEquals(expected200t, actual.get(1));
+        assertEquals("", actual.get(2));
+    }
+
+    @Test
+    public void testSettings_Guide_Narration_to_Off() throws IOException {
+        starttime();
+        ArrayList actual = AMS.Change_settings(ams_ip, macaddress, "Guide Narration", "Off");
+        finishtime();
+        System.out.println("[DBG] " + (finish - start) + "ms test, return code: " + actual);
+        assertEquals(expected200, actual.get(0));
+        assertEquals(expected200t, actual.get(1));
+        assertEquals("", actual.get(2));
+    }
+
+    @Test
+    public void testSettings_PC_to_On() throws IOException {
+        starttime();
+        ArrayList actual = AMS.Change_settings(ams_ip, macaddress, "Enable/Disable Parental Controls", "On");
+        finishtime();
+        System.out.println("[DBG] " + (finish - start) + "ms test, return code: " + actual);
+        assertEquals(expected200, actual.get(0));
+        assertEquals(expected200t, actual.get(1));
+        assertEquals("", actual.get(2));
+    }
+
+    @Test
+    public void testSettings_PC_to_Off() throws IOException {
+        starttime();
+        ArrayList actual = AMS.Change_settings(ams_ip, macaddress, "Enable/Disable Parental Controls", "Off");
+        finishtime();
+        System.out.println("[DBG] " + (finish - start) + "ms test, return code: " + actual);
+        assertEquals(expected200, actual.get(0));
+        assertEquals(expected200t, actual.get(1));
+        assertEquals("", actual.get(2));
     }
 
 }

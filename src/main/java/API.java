@@ -66,6 +66,8 @@ public class API {
     final String box_Tanya = "000005FE680A"; //Tanya
     final String box_Vitya = "A0722CEEC934"; //Vitya
     final String box_Katya_V = "0000048D4EB4"; //Katya_V
+    final String boxD111 = "2c7e81ee2530";
+    final String boxX = "1";
     String macaddress = boxD102;
 
 
