@@ -3,10 +3,12 @@ import org.junit.Test;
 import java.io.IOException;
 import java.util.ArrayList;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.Assert.assertEquals;
 
 @Deprecated
-public class testReminder_OldAPI extends API {
+public class testAMS_Reminder_OldAPI extends API {
+
+    private API_AMS AMS = new API_AMS();
 
     //@RepeatedTest(1)
     @Test
@@ -150,7 +152,7 @@ public class testReminder_OldAPI extends API {
     @Test
     public void testPurge() throws IOException {
         starttime();
-        ArrayList actual = AMS.Request(ams_ip, macaddress, Operation.purge, false);
+        ArrayList actual = AMS.Request_purge(ams_ip, macaddress, Operation.purge, false);
         finishtime();
         System.out.println("[DBG] " + (finish - start) + "ms test, return code: " + actual);
         assertEquals(expected200, actual.get(0));
@@ -162,7 +164,7 @@ public class testReminder_OldAPI extends API {
     @Test
     public void testPurge_macaddress_empty() throws IOException {
         starttime();
-        ArrayList actual = AMS.Request(ams_ip, "", Operation.purge, false);
+        ArrayList actual = AMS.Request_purge(ams_ip, "", Operation.purge, false);
         finishtime();
         System.out.println("[DBG] " + (finish - start) + "ms test, return code: " + actual);
         assertEquals(expected400, actual.get(0));
@@ -173,7 +175,7 @@ public class testReminder_OldAPI extends API {
     @Test
     public void testPurge_macaddress_wrong() throws IOException {
         starttime();
-        ArrayList actual = AMS.Request(ams_ip, macaddress_wrong, Operation.purge, false);
+        ArrayList actual = AMS.Request_purge(ams_ip, macaddress_wrong, Operation.purge, false);
         finishtime();
         System.out.println("[DBG] " + (finish - start) + "ms test, return code: " + actual);
         assertEquals(expected500, actual.get(0));
@@ -184,7 +186,7 @@ public class testReminder_OldAPI extends API {
     @Test
     public void testPurge_REM_ST_01_Box_is_not_registered() throws IOException {
         starttime();
-        ArrayList actual = AMS.Request("172.30.81.0", macaddress, Operation.purge, false);
+        ArrayList actual = AMS.Request_purge("172.30.81.0", macaddress, Operation.purge, false);
         finishtime();
         System.out.println("[DBG] " + (finish - start) + "ms test, return code: " + actual);
         assertEquals(expected500, actual.get(0));
@@ -196,7 +198,7 @@ public class testReminder_OldAPI extends API {
     @Deprecated
     public void testPurge_500_Internal_Server_Error() throws IOException {
         starttime();
-        ArrayList actual = AMS.Request(ams_ip, macaddress, Operation.purge, false);
+        ArrayList actual = AMS.Request_purge(ams_ip, macaddress, Operation.purge, false);
         finishtime();
         System.out.println("[DBG] " + (finish - start) + "ms test, return code: " + actual);
         assertEquals(expected500, actual.get(0));
@@ -208,7 +210,7 @@ public class testReminder_OldAPI extends API {
     @Deprecated
     public void testPurge_504_Server_data_timeout() throws IOException {
         starttime();
-        ArrayList actual = AMS.Request(ams_ip, macaddress, Operation.purge, false);
+        ArrayList actual = AMS.Request_purge(ams_ip, macaddress, Operation.purge, false);
         finishtime();
         System.out.println("[DBG] " + (finish - start) + "ms test, return code: " + actual);
         assertEquals(expected504, actual.get(0));

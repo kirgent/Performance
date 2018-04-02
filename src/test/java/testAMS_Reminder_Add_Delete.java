@@ -3,10 +3,12 @@ import org.junit.jupiter.api.RepeatedTest;
 import java.io.IOException;
 import java.util.ArrayList;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.Assert.assertEquals;
 
 //@FixMethodOrder(MethodSorters.NAME_ASCENDING)
-class testReminder_Add_Delete extends API {
+class testAMS_Reminder_Add_Delete extends API {
+
+    private API_AMS AMS = new API_AMS();
 
     @RepeatedTest(1)
     void testAdd_Delete() throws IOException {

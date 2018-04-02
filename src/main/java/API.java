@@ -1,23 +1,11 @@
-import org.apache.http.HttpResponse;
-import org.apache.http.client.HttpClient;
-import org.apache.http.client.methods.HttpGet;
-import org.apache.http.client.methods.HttpPost;
-import org.apache.http.entity.StringEntity;
-import org.apache.http.impl.client.HttpClients;
-import org.json.simple.JSONArray;
-import org.json.simple.JSONObject;
 import org.junit.Rule;
 import org.junit.rules.Timeout;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
 import java.sql.*;
 import java.text.SimpleDateFormat;
-import java.util.*;
-import java.util.logging.Logger;
-
-import static java.lang.System.currentTimeMillis;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.TimeZone;
 
 /**
  * we are as Middle: send requests to AMS and got responses
@@ -25,12 +13,10 @@ import static java.lang.System.currentTimeMillis;
  */
 public class API {
 
-    static API_AMS AMS = new API_AMS();
-
     @Rule
     final public Timeout globalTimeout = Timeout.seconds(20);
 
-    private final static Logger log = Logger.getLogger(API.class.getName());
+    //private final static Logger log = Logger.getLogger(API.class.getName());
 
     enum Operation { add, modify, delete, purge, blablabla, blablablablablablablablablablablablablablabla }
 
@@ -44,11 +30,12 @@ public class API {
     //"?deviceId=000007444C77&lineupId=CA11-1"
     //-d '{"reminderType":"Individual","deliveryId":"49767-MV000209150000-1488390180000","channelId":"49767","programId":"MV000209150000","channelNumber":662,"startTime":1488390180000,"reminderPresetTime":0}'
 
-    final String charterapi = "http://spec.partnerapi.engprod-charter.net/api/pub/networksettingsmiddle/ns/settings";
-    final String charterapi_b = "http://specb.partnerapi.engprod-charter.net/api/pub/networksettingsmiddle/ns/settings";
-    final String charterapi_c = "http://specc.partnerapi.engprod-charter.net/api/pub/networksettingsmiddle/ns/settings";
-    final String charterapi_d = "http://specd.partnerapi.engprod-charter.net/api/pub/networksettingsmiddle/ns/settings";
-    final String api = charterapi_b;
+    final String charterapi_a = "http://spec.partnerapi.engprod-charter.net/api/pub";
+    final String charterapi_b = "http://specb.partnerapi.engprod-charter.net/api/pub";
+    final String charterapi_c = "http://specc.partnerapi.engprod-charter.net/api/pub";
+    final String charterapi_d = "http://specd.partnerapi.engprod-charter.net/api/pub";
+    final String settings_postfix = "/networksettingsmiddle/ns/settings";
+    final String charterapi_default = charterapi_b;
 
     final int expected200 = 200;
     final String expected200t = "OK";
@@ -100,17 +87,18 @@ public class API {
     String reminderProgramId = "EP0"; //"reminderProgramId": "EP002960010113"
     //String reminderProgramId = "EP002960010113";
     //String reminderProgramId = "0";
+    String reminderProgramId_empty;
 
     int reminderOffset = 0;
-    int reminderOffset_empty;
+    int reminderOffset_null;
     int reminderOffset_wrong = -1;
 
     int reminderScheduleId = 1;
-    int reminderScheduleId_empty;
+    int reminderScheduleId_null;
     int reminderScheduleId_wrong = -1;
 
     int reminderId = 1;
-    int reminderId_empty;
+    int reminderId_null;
     int reminderId_wrong = -1;
 
     int count_reminders = 1;
@@ -124,127 +112,12 @@ public class API {
             "5 - reminder with provided pair of identifiers (reminderScheduleId and reminderId) is already set \"Reminders Add\" request (Request ID=0)" };
 
     String ams_ip = "172.30.81.4";
-    //String ams_ip = "172.30.82.132";
     //String ams_ip = "172.30.112.19";
+    //String ams_ip = "172.30.82.132";
     int ams_port = 8080;
 
     long finish;
     long start;
-
-
-
-    String generate_json_reminder(String macaddress, Boolean newapi, int count_reminders, Enum<Operation> enum_operation,
-                                  String reminderProgramStart, int reminderChannelNumber,
-                                  String reminderProgramId, int reminderOffset, int reminderScheduleId, int reminderId) {
-
-        //if(count_reminders <= 0){ count_reminders = 1; }
-
-        if(count_reminders > 1440){ count_reminders = 1440; }
-
-        String operation = "";
-        if (!newapi) {
-            switch (enum_operation.name()) {
-                case "add":
-                    operation = "Add"; break;
-                case "delete":
-                    operation = "Delete"; break;
-                case "purge":
-                    operation = "Purge"; break;
-                case "blablabla":
-                    operation = "blablabla"; break;
-                default:
-                    break;
-            }
-        }
-
-        JSONObject resultJson = new JSONObject();
-        resultJson.put("deviceId", macaddress);
-        JSONArray array_reminders = new JSONArray();
-        resultJson.put("reminders", array_reminders);
-        for (int i = 1; i <= count_reminders; i++) {
-            JSONObject object_in_reminders = new JSONObject();
-            if(!newapi){
-                object_in_reminders.put("operation", operation);
-            }
-            object_in_reminders.put("reminderProgramStart", reminderProgramStart + " " + get_time(count_reminders, i));
-            object_in_reminders.put("reminderChannelNumber", reminderChannelNumber);
-            object_in_reminders.put("reminderOffset", reminderOffset);
-            if(newapi) {
-                object_in_reminders.put("reminderProgramId", reminderProgramId);
-                object_in_reminders.put("reminderScheduleId", reminderScheduleId);
-                object_in_reminders.put("reminderId", reminderId);
-            }
-            array_reminders.add(object_in_reminders);
-        }
-        String result = resultJson.toJSONString();
-        System.out.println("generated json: " + result);
-        return result;
-    }
-
-    String generate_json_reminder_purge(String macaddress, Boolean newapi) {
-        //String json = "{\"deviceId\":" + macaddress + ",\"reminders\":[]}";
-        JSONObject resultJson = new JSONObject();
-        resultJson.put("deviceId", macaddress);
-        JSONArray array_reminders = new JSONArray();
-        resultJson.put("reminders", array_reminders);
-
-        if (!newapi){
-            //String json_purge = "{\"deviceId\":" + macaddress + ",\"reminders\":[{\"operation\":\"Purge\"}]}";
-            JSONObject object_in_reminders = new JSONObject();
-            object_in_reminders.put("operation", "Purge");
-            array_reminders.add(object_in_reminders);
-        }
-
-        System.out.println("generated json: " + resultJson.toJSONString());
-        return resultJson.toJSONString();
-    }
-
-    String generate_json_change_registration(String macaddress, String ams_ip, String action) {
-        //String json = "{\"setting\":{\"groups\":[{\"options\":[],\"id\":\"STBmacaddress\",\"type\":\"device-stb\",\"amsid\":\"" + ams_ip + "\"}]}}";
-        JSONObject resultJson = new JSONObject();
-        JSONObject object_in_settings = new JSONObject();
-        JSONArray array_groups = new JSONArray();
-
-        resultJson.put("settings", object_in_settings);
-        object_in_settings.put("groups", array_groups);
-
-        JSONObject object_in_groups = new JSONObject();
-        array_groups.add(object_in_groups);
-        object_in_groups.put("id", "STB" + macaddress);
-        object_in_groups.put("type", "device-stb");
-        object_in_groups.put("amsid", ams_ip);
-        JSONArray array_options = new JSONArray();
-        object_in_groups.put("options", array_options);
-
-        System.out.println("generated json: " + resultJson.toJSONString());
-        return resultJson.toJSONString();
-    }
-
-    String generate_json_setting(String macaddress, String option, String value) {
-        //String json = "{\"settings\":{\"groups\":[{\"id\":\"STBmacaddress\",\"type\":\"device-stb\",\"options\":[{\"name\":\"Audio Output\",\"value\":\"HDMI\"}]}]}}";
-        JSONObject resultJson = new JSONObject();
-        JSONObject object_in_settings = new JSONObject();
-        JSONArray array_groups = new JSONArray();
-
-
-        resultJson.put("settings", object_in_settings);
-        object_in_settings.put("groups", array_groups);
-
-        JSONObject object_in_groups = new JSONObject();
-        array_groups.add(object_in_groups);
-        object_in_groups.put("id", "STB" + macaddress);
-        object_in_groups.put("type", "device-stb");
-        JSONArray array_options = new JSONArray();
-        object_in_groups.put("options", array_options);
-
-        JSONObject object_in_options = new JSONObject();
-        array_options.add(object_in_options);
-        object_in_options.put("name", option);
-        object_in_options.put("value", value);
-
-        System.out.println("generated json: " + resultJson.toJSONString());
-        return resultJson.toJSONString();
-    }
 
     @Deprecated
     String generate_json_test(String date, int count_remindres, String operation, int reminderOffset) {
@@ -252,7 +125,6 @@ public class API {
                 "count_reminders=" + count_remindres + ", " +
                 "operation=" + operation + ", " +
                 "reminderOffset=" + reminderOffset);
-
          /*
         //WORKING parsing from json_string to Class:
         Gson g = new Gson();
@@ -270,8 +142,6 @@ public class API {
         //parsing from Class to json_string
         System.out.println("[DBG] parsing from Class to json_string: \n" + g.toJson(reminder));
 */
-
-
 /*        //WORKING variant for one class Reminder + one class Reminders
         //==============================================================
         final Gson GSON = new GsonBuilder().setPrettyPrinting().create();
@@ -288,8 +158,6 @@ public class API {
         Reminder to_class = GSON.fromJson(json, Reminder.class);
         System.out.println("[DBG] from json string -> to class:\n" + to_class.getDeviceId()+ " " + to_class.getClass());
 */
-
-
 /*
         //from class -> to string json
         Reminder from_class = new Reminder(macaddress, Arrays.asList("operation", "reminderChannelNumber", "reminderProgramStart", "reminderProgramId", "reminderOffset"));
@@ -300,7 +168,6 @@ public class API {
         Reminder to_class = GSON.fromJson(json, Reminder.class);
         System.out.println("[DBG] from json string -> to class:\n" + to_class.getDeviceId()+ " " + to_class.getReminders_list());
 */
-
 /*
         //WORKING
         JsonObject jo = new JsonParser().parse(json_add2).getAsJsonObject();
@@ -362,6 +229,9 @@ public class API {
         }
         if(body.contains("REM-008 Reminders parsing error: incorrect message format")){
             result += "REM-008 Reminders parsing error: incorrect message format";
+        }
+        if(body.contains("REM-008 Reminders parsing error: incorrect reminderId")){
+            result += "REM-008 Reminders parsing error: incorrect reminderId";
         }
         if(body.contains("Failed to getAmsIpByMacAddress for : " + macaddress + ", with error: No amsIp found for macAddress: STB" +macaddress)){
             result += "No amsIp found for macAddress";
@@ -436,17 +306,6 @@ public class API {
         return arrayList;
     }*/
 
-    String prepare_url(String ams_ip, Enum<Operation> operation, Boolean newapi) {
-        String url;
-        if (newapi) {
-            url = "http://" + ams_ip + ":" + ams_port + "/ams/Reminders?req=" + operation;
-        } else {
-            url = "http://" + ams_ip + ":" + ams_port + "/ams/Reminders?req=ChangeReminders";
-        }
-        return url;
-    }
-
-
     ArrayList QueryDB(String ams_ip, String macaddress) throws ClassNotFoundException, SQLException {
         //ResultSet QueryDB(String macaddress) throws ClassNotFoundException, SQLException {
         System.out.println("QueryDB for macaddress=" + macaddress + " to DB AMS=" + ams_ip);
@@ -474,9 +333,6 @@ public class API {
         return arrayresult;
     }
 
-    /** generating String with one date(always tomorrow)
-     * @return String with one date(always tomorrow)
-     */
     String reminderProgramStart() {
         Calendar calendar = Calendar.getInstance();
         calendar.setTimeZone(TimeZone.getTimeZone("UTC"));
@@ -485,11 +341,6 @@ public class API {
         return pattern.format(calendar.getTime());
     }
 
-    /** generating String with one/several dates
-     * @param count
-     * @param several
-     * @return
-     */
     String get_date(int count, Boolean several) {
         Calendar calendar = Calendar.getInstance();
         calendar.setTimeZone(TimeZone.getTimeZone("UTC"));

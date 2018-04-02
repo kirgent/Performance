@@ -4,9 +4,11 @@ import org.junit.jupiter.api.Test;
 import java.io.IOException;
 import java.util.ArrayList;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.Assert.assertEquals;
 
-class testSettings extends API {
+class testAMS_Settings extends API {
+
+    private API_AMS AMS = new API_AMS();
 
     @Test
     @Disabled

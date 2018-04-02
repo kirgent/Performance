@@ -3,17 +3,17 @@ import org.junit.Test;
 import java.io.IOException;
 import java.util.ArrayList;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.Assert.assertEquals;
 
-public class testReminder_Add extends API {
+public class testAMS_Reminder_Add extends API {
 
-
+    private API_AMS AMS = new API_AMS();
 
     //@RepeatedTest(3)
     @Test
     public void testAdd() throws IOException {
         starttime();
-        ArrayList actual = AMS.Request(ams_ip, macaddress, Operation.add, 10,
+        ArrayList actual = AMS.Request(ams_ip, macaddress, Operation.add, 2,
                 reminderProgramStart(), reminderChannelNumber, reminderProgramId,
                 reminderOffset, reminderScheduleId, reminderId);
         finishtime();
@@ -145,7 +145,7 @@ public class testReminder_Add extends API {
         starttime();
         ArrayList actual = AMS.Request(ams_ip, macaddress, Operation.add, count_reminders,
                 reminderProgramStart(), reminderChannelNumber, reminderProgramId,
-                reminderOffset_empty, reminderScheduleId, reminderId);
+                reminderOffset_null, reminderScheduleId, reminderId);
         finishtime();
         System.out.println("[DBG] " + (finish - start) + "ms test, " + "return code: " + actual);
         assertEquals(expected400, actual.get(0));
@@ -197,7 +197,7 @@ public class testReminder_Add extends API {
         starttime();
         ArrayList actual = AMS.Request(ams_ip, macaddress, Operation.add, count_reminders,
                 reminderProgramStart(), reminderChannelNumber, reminderProgramId,
-                reminderOffset, reminderScheduleId_empty, reminderId);
+                reminderOffset, reminderScheduleId_null, reminderId);
         finishtime();
         System.out.println("[DBG] " + (finish - start) + "ms test, " + "return code: " + actual);
         assertEquals(expected400, actual.get(0));
@@ -249,7 +249,7 @@ public class testReminder_Add extends API {
         starttime();
         ArrayList actual = AMS.Request(ams_ip, macaddress, Operation.add, count_reminders,
                 reminderProgramStart(), reminderChannelNumber, reminderProgramId,
-                reminderOffset, reminderScheduleId, reminderId_empty);
+                reminderOffset, reminderScheduleId, reminderId_null);
         finishtime();
         System.out.println("[DBG] " + (finish - start) + "ms test, " + "return code: " + actual);
         assertEquals(expected400, actual.get(0));
