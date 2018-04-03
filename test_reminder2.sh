@@ -53,7 +53,7 @@ elif [ "$action" == "Modify" ]; then url="ams/Reminders?req=modify"; source test
 if [ "$param" == "48" ]; then reminder="reminder_modify48"
 elif [ "$param" == "288" ]; then reminder="reminder_modify288"
 elif [ "$param" == "720" ]; then reminder="reminder_modify720"
-else reminder="reminder_add1"
+else reminder="reminder_modify1"
 fi
 
 elif [ "$action" == "Delete" ]; then url="ams/Reminders?req=delete"; source test_reminder_delete.sh

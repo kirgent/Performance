@@ -1,4 +1,4 @@
-function add1(){
+function reminder_delete1(){
 macaddress="$1"
 reminderProgramStart="$2"
 reminderChannelNumber="$3"
@@ -6,7 +6,7 @@ reminderProgramId="$4"
 reminderScheduleId="$5"
 reminderId="$6"
 reminderOffset="$7"
-echo "[DBG] `date "+%a %b %d %T %N %Z %Y"`: Add 1 rems for macaddress=$macaddress with reminderProgramStart=$data, reminderChannelNumber=$reminderChannelNumber, reminderProgramId=$reminderProgramId, reminderScheduleId=$reminderScheduleId, reminderId=$reminderId, reminderOffset=$reminderOffset, iteration="$i"/"$count_iterations""|$logwrap
+echo "[DBG] `date "+%a %b %d %T %N %Z %Y"`: Add 1 rems for macaddress=$macaddress with reminderProgramStart=$data, reminderChannelNumber=$reminderChannelNumber, reminderProgramId=$reminderProgramId, reminderScheduleId=$reminderScheduleId, reminderId=$reminderId, reminderOffset=$reminderOffset, iteration="$i"/"$count_iterations""|${logwrap}
 #/usr/bin/time -f 'real %Es' -o $logfile -a $curlwrap 'http://'$ams_ip':'$ams_port'/'$url'' -H 'Content-type: application/json' \
 /usr/bin/time -f 'real %Es' -o $logfile -a $curlwrap -s 'http://'$ams_ip':'$ams_port'/'$url'' -H 'Content-type: application/json' \
 -d '{
@@ -19,7 +19,7 @@ echo "[DBG] `date "+%a %b %d %T %N %Z %Y"`: Add 1 rems for macaddress=$macaddres
 echo;echo
 }
 
-function add48(){
+function reminder_delete48(){
 macaddress="$1"
 reminderProgramStart="$2"
 reminderChannelNumber="$3"
@@ -84,7 +84,7 @@ echo "[DBG] `date "+%a %b %d %T %N %Z %Y"`: $operation 48 rems with Offset=$remi
 echo;echo
 }
 
-function add288(){
+function delete288(){
 macaddress="$1"
 reminderProgramStart="$2"
 reminderChannelNumber="$3"

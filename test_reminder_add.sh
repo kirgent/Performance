@@ -84,7 +84,7 @@ echo "[DBG] `date "+%a %b %d %T %N %Z %Y"`: Add 48rems for macaddress=$macaddres
 echo;echo
 }
 
-function add288(){
+function reminder_add288(){
 macaddress="$1"
 reminderProgramStart="$2"
 reminderChannelNumber="$3"
@@ -389,7 +389,7 @@ echo "[DBG] `date "+%a %b %d %T %N %Z %Y"`: Add 288rems for macaddress=$macaddre
 echo;echo
 }
 
-function add720(){
+function reminder_add720(){
 macaddress="$1"
 reminderProgramStart="$2"
 reminderChannelNumber="$3"
