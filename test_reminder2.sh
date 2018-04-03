@@ -26,11 +26,11 @@ reminderId=1
 reminderChannelNumber=2
 reminderOffset=0
 
-RACK_DATA=( `date +%Y-%m-%d -d "tomorrow"` )
-#RACK_DATA=( `date +%Y-%m-%d -d "tomorrow +1day"` `date +%Y-%m-%d -d "tomorrow +2day"` `date +%Y-%m-%d -d "tomorrow +3day"` `date +%Y-%m-%d -d "tomorrow +4day"` `date +%Y-%m-%d -d "tomorrow +5day"` `date +%Y-%m-%d -d "tomorrow +6day"` `date +%Y-%m-%d -d "tomorrow +7day"` `date +%Y-%m-%d -d "tomorrow +8day"` `date +%Y-%m-%d -d "tomorrow +9day"` `date +%Y-%m-%d -d "tomorrow +10day"` )
+RACK_DATE=( `date +%Y-%m-%d -d "tomorrow"` )
+#RACK_DATE=( `date +%Y-%m-%d -d "tomorrow +1day"` `date +%Y-%m-%d -d "tomorrow +2day"` `date +%Y-%m-%d -d "tomorrow +3day"` `date +%Y-%m-%d -d "tomorrow +4day"` `date +%Y-%m-%d -d "tomorrow +5day"` `date +%Y-%m-%d -d "tomorrow +6day"` `date +%Y-%m-%d -d "tomorrow +7day"` `date +%Y-%m-%d -d "tomorrow +8day"` `date +%Y-%m-%d -d "tomorrow +9day"` `date +%Y-%m-%d -d "tomorrow +10day"` )
 
 
-RACK_CHANNELS=( 2 3 4 )
+RACK_CHANNELS=( 2 )
 #RACK_CHANNELS=( 2 3 4 5 6 7 8 9 12 13 14 16 18 19 22 23 25 28 30 31 32 33 37 38 41 44 46 49 50 51 )
 
 charterapi_a="http://spec.partnerapi.engprod-charter.net/api/pub"
@@ -68,7 +68,7 @@ fi
 #url="ams/Reminders?req=ChangeReminders"
 logfile="test_reminder.log"
 logwrap="tee -a $logfile"
-startmessage="[DBG] `date "+%a %b %d %T %N %Z %Y"`: NEW START: ams_ip=$ams_ip, count_reminders=$param, count_iterations=$count_iterations, RACK_DATA=( ${RACK_DATA[@]} ), RACK_CHANNELS=( ${RACK_CHANNELS[@]} )"
+startmessage="[DBG] `date "+%a %b %d %T %N %Z %Y"`: NEW START: ams_ip=$ams_ip, count_reminders=$param, count_iterations=$count_iterations, RACK_DATE=( ${RACK_DATE[@]} ), RACK_CHANNELS=( ${RACK_CHANNELS[@]} )"
 
 synopsys="\nNAME
 \ttest_reminder.sh - script for Add / Edit / Delete / Purge reminders on MACADDRESS and also check registration / registration on AMS.
@@ -159,7 +159,7 @@ echo "[DBG] `date "+%a %b %d %T %N %Z %Y"`: NEW START: ams_ip=$ams_ip, Purge ---
 #elif [ "$action" == "All" ]; then
 #check_param
 #echo $startmessage|$logwrap
-#for (( i=1; i<=$count_iterations; i++)); do for data in ${RACK_DATA[@]}; do for channel in ${RACK_CHANNELS[@]}; do
+#for (( i=1; i<=$count_iterations; i++)); do for data in ${RACK_DATE[@]}; do for channel in ${RACK_CHANNELS[@]}; do
 #$reminder $macaddress $reminderProgramStart $reminderChannelNumber $; sleep 1
 ##$reminder Edit $Offset $Offset_new
 #$reminder Delete $Offset; sleep 1
@@ -170,22 +170,22 @@ echo "[DBG] `date "+%a %b %d %T %N %Z %Y"`: NEW START: ams_ip=$ams_ip, Purge ---
 elif [ "$action" == "Add" ]; then
 generate_params
 echo $startmessage|$logwrap
-for (( i=1; i<=$count_iterations; i++)); do for data in ${RACK_DATA[@]}; do for channel in ${RACK_CHANNELS[@]}; do
-$reminder $macaddress $data $channel $reminderProgramId $reminderScheduleId $reminderId $reminderOffset;  sleep 1; done; done; done
+for (( i=1; i<=$count_iterations; i++)); do for reminderProgramStart in ${RACK_DATE[@]}; do for reminderChannelNumber in ${RACK_CHANNELS[@]}; do
+${reminder} ${macaddress} $reminderProgramStart $reminderChannelNumber $reminderProgramId $reminderScheduleId $reminderId $reminderOffset;  sleep 1; done; done; done
 
 
 elif [ "$action" == "Modify" ]; then
 generate_params
 echo $startmessage|$logwrap
-for (( i=1; i<=$count_iterations; i++)); do for data in ${RACK_DATA[@]}; do for channel in ${RACK_CHANNELS[@]}; do
-$reminder $macaddress $data $channel $reminderProgramId $reminderScheduleId $reminderId $reminderOffset;  sleep 1; done; done; done
+for (( i=1; i<=$count_iterations; i++)); do for reminderProgramStart in ${RACK_DATE[@]}; do for reminderChannelNumber in ${RACK_CHANNELS[@]}; do
+${reminder} ${macaddress} $reminderProgramStart $reminderChannelNumber $reminderProgramId $reminderScheduleId $reminderId $reminderOffset;  sleep 1; done; done; done
 
 
 elif [ "$action" == "Delete" ]; then
 generate_params
 echo $startmessage|$logwrap
-for (( i=1; i<=$count_iterations; i++)); do for data in ${RACK_DATA[@]}; do for channel in ${RACK_CHANNELS[@]}; do
-$reminder $macaddress $data $channel $reminderProgramId $reminderScheduleId $reminderId $reminderOffset;  sleep 1; done; done; done
+for (( i=1; i<=$count_iterations; i++)); do for reminderProgramStart in ${RACK_DATE[@]}; do for reminderChannelNumber in ${RACK_CHANNELS[@]}; do
+${reminder} ${macaddress} $reminderProgramStart $reminderChannelNumber $reminderProgramId $reminderScheduleId $reminderId $reminderOffset;  sleep 1; done; done; done
 
 else
 echo -e "Incorrect action specified!$synopsys"|$logwrap; exit;
