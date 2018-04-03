@@ -40,7 +40,7 @@ public class testMiddle_Reminders_edge_middle_API extends API_AMS{
     @Test
     public void testGetAllReminder() throws IOException {
         starttime();
-        ArrayList actual = Middle.GetAllReminder(macaddress, charterapi_b, 12345);
+        ArrayList actual = Middle.GetAllReminder(macaddress, charterapi, 12345);
         finishtime();
         System.out.println("[DBG] " + (finish - start) + "ms test, return code: " + actual);
         assertEquals(expected200, actual.get(0));
@@ -51,7 +51,7 @@ public class testMiddle_Reminders_edge_middle_API extends API_AMS{
     @Test
     public void testDelete_multiple_reminders() throws IOException {
         starttime();
-        ArrayList actual = Middle.Delete_multiple_reminders(macaddress, charterapi_c,12345, 12345);
+        ArrayList actual = Middle.Delete_multiple_reminders(macaddress, charterapi,12345, 12345);
         finishtime();
         System.out.println("[DBG] " + (finish - start) + "ms test, return code: " + actual);
         assertEquals(expected200, actual.get(0));
@@ -62,7 +62,7 @@ public class testMiddle_Reminders_edge_middle_API extends API_AMS{
     @Test
     public void testDelete_multiple_reminders__Not_Found() throws IOException {
         starttime();
-        ArrayList actual = Middle.Delete_multiple_reminders(macaddress, charterapi_c,0, 0);
+        ArrayList actual = Middle.Delete_multiple_reminders(macaddress, charterapi,0, 0);
         finishtime();
         System.out.println("[DBG] " + (finish - start) + "ms test, return code: " + actual);
         assertEquals(expected404, actual.get(0));
@@ -71,9 +71,9 @@ public class testMiddle_Reminders_edge_middle_API extends API_AMS{
     }
 
     @Test
-    public void testSchedule_a_reminder() throws IOException {
+    public void testSchedule_reminder() throws IOException {
         starttime();
-        ArrayList actual = Middle.Schedule_a_reminder(macaddress, charterapi_b,12345);
+        ArrayList actual = Middle.Schedule_reminder(macaddress, charterapi,12345);
         finishtime();
         System.out.println("[DBG] " + (finish - start) + "ms test, return code: " + actual);
         assertEquals(expected200, actual.get(0));

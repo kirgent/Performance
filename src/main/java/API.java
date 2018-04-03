@@ -34,8 +34,8 @@ public class API {
     final String charterapi_b = "http://specb.partnerapi.engprod-charter.net/api/pub";
     final String charterapi_c = "http://specc.partnerapi.engprod-charter.net/api/pub";
     final String charterapi_d = "http://specd.partnerapi.engprod-charter.net/api/pub";
-    final String settings_postfix = "/networksettingsmiddle/ns/settings";
-    final String charterapi_default = charterapi_b;
+    final String postfix_settings = "/networksettingsmiddle/ns/settings";
+    final String charterapi = charterapi_b;
 
     final int expected200 = 200;
     final String expected200t = "OK";

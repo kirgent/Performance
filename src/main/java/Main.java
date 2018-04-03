@@ -29,7 +29,7 @@ public class Main extends API {
             "\n\tReminders MACADDRESS All [48][288][576] - add + edit + delete reminders (accordingly 48/288/576)" +
             "\nCURRENT SETTINGS" +
             "\n\tused AMS: " + ams_ip +
-            "\n\tused charterapi: " + charterapi_default +
+            "\n\tused charterapi: " + charterapi +
             "\n\tused count of reminders in one request: " + count_reminders +
             //"\n\tused count iterations: " + count_iterations +
             "\nSTATUSCODE" +
@@ -153,11 +153,11 @@ public class Main extends API {
         switch (operation){
             case "Check":
             case "check":
-                Middle.Check_registration(macaddress, charterapi_default);
+                Middle.Check_registration(macaddress, charterapi);
                 break;
             case "Change":
             case "change":
-                Middle.Change_registration(macaddress, charterapi_default, ams_ip);
+                Middle.Change_registration(macaddress, charterapi, ams_ip);
                 break;
             case "Purge":
             case "purge":
@@ -176,7 +176,7 @@ public class Main extends API {
             //case "Delete":
             //case "delete": api.Operation("Delete", macaddress, count_reminders, count_iterations, ams_ip_default); break;
             default:
-                Middle.Check_registration(macaddress, charterapi_default);
+                Middle.Check_registration(macaddress, charterapi);
         }
     }
 }

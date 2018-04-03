@@ -19,7 +19,7 @@ class API_Middle extends API {
         //log.info("Change_registration "+ macaddress +" to ams " + ams_ip + " via charterapi: " + charterapi);
 
         HttpClient client = HttpClients.createDefault();
-        HttpPost request = new HttpPost(charterapi + settings_postfix + "?requestor=AMS");
+        HttpPost request = new HttpPost(charterapi + postfix_settings + "?requestor=AMS");
 
         request.setEntity(new StringEntity(generate_json_change_registration(macaddress, ams_ip, "Change_registration")));
         request.setHeader("Content-type", "application/json");
@@ -51,7 +51,7 @@ class API_Middle extends API {
         System.out.println("Check_registration "+ macaddress +" via charterapi: " + charterapi);
 
         HttpClient client = HttpClients.createDefault();
-        HttpGet request = new HttpGet(charterapi + settings_postfix + "/amsIp/" + macaddress);
+        HttpGet request = new HttpGet(charterapi + postfix_settings + "/amsIp/" + macaddress);
 
         //request.setHeader("Accept", "*/*");
         //request.setHeader("Content-type", "application/json");
@@ -112,7 +112,7 @@ class API_Middle extends API {
         return arrayList;
     }
 
-    ArrayList Schedule_a_reminder(String macaddress, String charterapi, int lineupId) throws IOException {
+    ArrayList Schedule_reminder(String macaddress, String charterapi, int lineupId) throws IOException {
         System.out.println("Schedule_a_reminder:");
         HttpClient client = HttpClients.createDefault();
         HttpPost request = new HttpPost(charterapi + "/remindersmiddle/v1/reminders?lineupId=" + lineupId + "&deviceId=" + macaddress);

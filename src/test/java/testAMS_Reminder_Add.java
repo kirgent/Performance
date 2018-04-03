@@ -13,7 +13,7 @@ public class testAMS_Reminder_Add extends API {
     @Test
     public void testAdd() throws IOException {
         starttime();
-        ArrayList actual = AMS.Request(ams_ip, macaddress, Operation.add, 2,
+        ArrayList actual = AMS.Request(ams_ip, macaddress, Operation.add, 1,
                 reminderProgramStart(), reminderChannelNumber, reminderProgramId,
                 reminderOffset, reminderScheduleId, reminderId);
         finishtime();

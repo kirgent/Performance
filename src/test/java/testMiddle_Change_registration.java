@@ -58,7 +58,7 @@ public class testMiddle_Change_registration extends API {
     @Ignore
     public void testChange_registration_to_invalid_ams127_0_0_1() throws IOException, InterruptedException {
         starttime();
-        ArrayList actual = Middle.Change_registration(macaddress, charterapi_default, "127.0.0.1");
+        ArrayList actual = Middle.Change_registration(macaddress, charterapi, "127.0.0.1");
         finishtime();
         System.out.println("[DBG] " + (finish - start) + "ms test, return code: " + actual);
         assertEquals(expected200, actual.get(0));
