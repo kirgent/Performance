@@ -6,9 +6,7 @@ import org.apache.http.impl.client.HttpClients;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
-import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Objects;
@@ -32,7 +30,7 @@ class API_AMS extends API{
      * @return arrayList
      * @throws IOException -TBD
      */
-    ArrayList Request(String ams_ip, String macaddress, Enum<API.Operation> operation, int count_reminders,
+    ArrayList Request(String ams_ip, String macaddress, Enum<Operation> operation, int count_reminders,
                       String reminderProgramStart, Integer reminderChannelNumber, String reminderProgramId,
                       int reminderOffset, int reminderScheduleId, int reminderId) throws IOException {
         System.out.println(operation + "(newapi=true) for macaddress=" + macaddress + ", ams_ip=" + ams_ip + ", "
@@ -44,37 +42,27 @@ class API_AMS extends API{
                 + "reminderScheduleId=" + reminderScheduleId + ", "
                 + "reminderId=" + reminderId);
 
-        HttpClient client = HttpClients.createDefault();
         HttpPost request = new HttpPost(prepare_url(ams_ip, operation, true));
         request.setHeader("Accept", "application/json");
         request.setHeader("Content-type", "application/json");
-        //request.setHeader("Charset", "UTF-8");
-        System.out.println("[DBG] Request string: " + request);
-
         request.setEntity(new StringEntity(generate_json_reminder(macaddress, true, count_reminders, operation,
                 reminderProgramStart, reminderChannelNumber, reminderProgramId, reminderOffset, reminderScheduleId, reminderId)));
+        System.out.println("[DBG] Request string: " + request);
 
-        starttime();
-        HttpResponse response = client.execute(request);
-        finishtime();
-        System.out.print("[DBG] " + (finish - start) + "ms request, ");
-        //"[DBG] Response getStatusLine: " + response.getStatusLine());
 
-        BufferedReader reader = new BufferedReader(new InputStreamReader(response.getEntity().getContent(), "UTF-8"));
-        StringBuilder body = new StringBuilder();
-        for (String line = null; (line = reader.readLine()) != null; ) {
-            //body.append(line);
-            System.out.println("response body: " + body.append(line).append("\n"));
-        }
+        long start = System.currentTimeMillis();
+        HttpResponse response = HttpClients.createDefault().execute(request);
+        long finish = System.currentTimeMillis();
+        System.out.print("[DBG] " + (finish-start) + "ms request, ");
 
         ArrayList arrayList = new ArrayList();
-        arrayList.add(0, response.getStatusLine().getStatusCode());
-        arrayList.add(1, response.getStatusLine().getReasonPhrase());
-        arrayList.add(2, check_body_response(body.toString(), macaddress));
+        arrayList.add(0, response.getStatusLine().getStatusCode() + " " + response.getStatusLine().getReasonPhrase());
+        arrayList.add(1, check_body_response(read_response(new StringBuilder(),response).toString(), macaddress));
+        System.out.println("[DBG] return codes: " + arrayList);
         return arrayList;
     }
 
-    /** OLD_API Request method for Add/Delete
+    /** OLD_API method for Add/Delete
      * 3 MANDATORY parameters!
      * @param ams_ip - TBD
      * @param macaddress - TBD
@@ -94,32 +82,23 @@ class API_AMS extends API{
                 + "reminderChannelNumber=" + reminderChannelNumber + ", "
                 + "reminderOffset=" + reminderOffset);
 
-        HttpClient client = HttpClients.createDefault();
         HttpPost request = new HttpPost(prepare_url(ams_ip, operation, false));
         request.setHeader("Accept", "application/json");
         request.setHeader("Content-type", "application/json");
-        //request.setHeader("Charset", "UTF-8");
+        request.setEntity(new StringEntity(generate_json_reminder(macaddress, false, count_reminders, operation, reminderProgramStart, reminderChannelNumber, reminderProgramId, reminderOffset, reminderScheduleId, reminderId)));
         System.out.println("[DBG] Request string: " + request);
 
-        request.setEntity(new StringEntity(generate_json_reminder(macaddress, false, count_reminders, operation, reminderProgramStart, reminderChannelNumber, reminderProgramId, reminderOffset, reminderScheduleId, reminderId)));
 
         long start = currentTimeMillis();
-        HttpResponse response = client.execute(request);
+        HttpResponse response = HttpClients.createDefault().execute(request);
         long finish = currentTimeMillis();
         System.out.print("[DBG] " + (finish - start) + "ms request, ");
         //"[DBG] Response getStatusLine: " + response.getStatusLine());
 
-        BufferedReader reader = new BufferedReader(new InputStreamReader(response.getEntity().getContent(), "UTF-8"));
-        StringBuilder body = new StringBuilder();
-        for (String line = null; (line = reader.readLine()) != null; ) {
-            //body.append(line);
-            System.out.println("response body: " + body.append(line).append("\n"));
-        }
-
         ArrayList arrayList = new ArrayList();
-        arrayList.add(0, response.getStatusLine().getStatusCode());
-        arrayList.add(1, response.getStatusLine().getReasonPhrase());
-        arrayList.add(2, check_body_response(body.toString(), macaddress));
+        arrayList.add(0, response.getStatusLine().getStatusCode() + " " + response.getStatusLine().getReasonPhrase());
+        arrayList.add(1, check_body_response(read_response(new StringBuilder(),response).toString(), macaddress));
+        System.out.println("\n[DBG] return codes: " + arrayList);
         return arrayList;
     }
 
@@ -131,35 +110,25 @@ class API_AMS extends API{
      * @return arrayList
      * @throws IOException - TBD
      */
-    ArrayList Request_purge(String ams_ip, String macaddress, Enum<API.Operation> operation, Boolean newapi) throws IOException {
+    ArrayList Request(String ams_ip, String macaddress, Enum<API.Operation> operation, Boolean newapi) throws IOException {
         System.out.println(operation + " (newapi=" + newapi + ") for macaddress=" + macaddress + ", ams_ip=" + ams_ip);
 
-        HttpClient client = HttpClients.createDefault();
         HttpPost request = new HttpPost(prepare_url(ams_ip, operation, newapi));
         request.setHeader("Accept", "application/json");
         request.setHeader("Content-type", "application/json");
-        //request.setHeader("Charset", "UTF-8");
+        request.setEntity(new StringEntity(generate_json_reminder_purge(macaddress, newapi)));
         System.out.println("[DBG] Request string: " + request);
 
-        request.setEntity(new StringEntity(generate_json_reminder_purge(macaddress, newapi)));
-
         long start = currentTimeMillis();
-        HttpResponse response = client.execute(request);
+        HttpResponse response = HttpClients.createDefault().execute(request);
         long finish = currentTimeMillis();
         System.out.print("[DBG] " + (finish - start) + "ms request, ");
         //"[DBG] Response getStatusLine: " + response.getStatusLine());
 
-        BufferedReader reader = new BufferedReader(new InputStreamReader(response.getEntity().getContent(), "UTF-8"));
-        StringBuilder body = new StringBuilder();
-        for (String line = null; (line = reader.readLine()) != null; ) {
-            //body.append(line);
-            System.out.println("Response body: " + body.append(line).append("\n"));
-        }
-
         ArrayList arrayList = new ArrayList();
-        arrayList.add(0, response.getStatusLine().getStatusCode());
-        arrayList.add(1, response.getStatusLine().getReasonPhrase());
-        arrayList.add(2, check_body_response(body.toString(), macaddress));
+        arrayList.add(0, response.getStatusLine().getStatusCode() + " " + response.getStatusLine().getReasonPhrase());
+        arrayList.add(1, check_body_response(read_response(new StringBuilder(),response).toString(), macaddress));
+        System.out.println("\n[DBG] return codes: " + arrayList);
         return arrayList;
     }
 
@@ -195,13 +164,13 @@ class API_AMS extends API{
                     + "channel=" + Arrays.asList(rack_channel));
         }
 
-        HttpClient client = HttpClients.createDefault();
         HttpPost request = new HttpPost(prepare_url(ams_ip, operation, true));
         request.setHeader("Accept", "application/json");
         request.setHeader("Content-type", "application/json");
         System.out.println("[DBG] Request string: " + request);
         //+ "\n[DBG] Request entity: " + request.getEntity());
 
+        HttpClient client = HttpClients.createDefault();
         ArrayList arrayList = new ArrayList();
         if (Objects.equals(operation, "Purge")) {
             request.setEntity(new StringEntity(generate_json_reminder_purge(macaddress, true)));
@@ -212,16 +181,8 @@ class API_AMS extends API{
             System.out.println("[DBG] " + (finish - start) + "ms request");
             //"[DBG] Response getStatusLine: " + response.getStatusLine());
 
-            BufferedReader reader = new BufferedReader(new InputStreamReader(response.getEntity().getContent(), "UTF-8"));
-            StringBuilder body = new StringBuilder();
-            for (String line = null; (line = reader.readLine()) != null; ) {
-                body.append(line);
-                //System.out.println("[DBG] Response body: " + body.append(line).append("\n"));
-            }
-
-            arrayList.add(0, response.getStatusLine().getStatusCode());
-            arrayList.add(1, response.getStatusLine().getReasonPhrase());
-            arrayList.add(2, check_body_response(body.toString(), macaddress));
+            arrayList.add(0, response.getStatusLine().getStatusCode() + " " + response.getStatusLine().getReasonPhrase());
+            arrayList.add(1, check_body_response(read_response(new StringBuilder(),response).toString(), macaddress));
         } else {
             for (String aRack_date : rack_date) {
                 for (int aRack_channel : rack_channel) {
@@ -237,16 +198,8 @@ class API_AMS extends API{
                     System.out.println("[DBG] " + (finish - start) + "ms request, " +
                             "Response getStatusLine: " + response.getStatusLine());
 
-                    BufferedReader reader = new BufferedReader(new InputStreamReader(response.getEntity().getContent(), "UTF-8"));
-                    StringBuilder body = new StringBuilder();
-                    for (String line = null; (line = reader.readLine()) != null; ) {
-                        //body.append(line);
-                        System.out.println("[DBG] Response body: " + body.append(line).append("\n"));
-                    }
-
-                    arrayList.add(0, response.getStatusLine().getStatusCode());
-                    arrayList.add(1, response.getStatusLine().getReasonPhrase());
-                    arrayList.add(2, check_body_response(body.toString(), macaddress));
+                    arrayList.add(0, response.getStatusLine().getStatusCode() + " " + response.getStatusLine().getReasonPhrase());
+                    arrayList.add(1, check_body_response(read_response(new StringBuilder(),response).toString(), macaddress));
 
                     if (arrayList.get(0).equals(200)) {
                         break;
@@ -270,12 +223,9 @@ class API_AMS extends API{
      */
     ArrayList Change_settings(String ams_ip, String macaddress, String option, String value) throws IOException {
         System.out.println("Change settings for macaddress=" + macaddress + ", ams_ip=" + ams_ip + " option=" + option + ", value=" + value);
-
-        HttpClient client = HttpClients.createDefault();
         HttpPost request = new HttpPost("http://" + ams_ip + ":" + ams_port + "/ams/settings");
         request.setHeader("Content-type", "application/json");
 
-        ArrayList arrayList = new ArrayList();
         request.setEntity(new StringEntity(generate_json_setting(macaddress, option, value)));
 
         request.setHeader("Accept", "application/json");
@@ -284,20 +234,14 @@ class API_AMS extends API{
         //+ "\n[DBG] Request entity: " + request.getEntity());
 
         long start = currentTimeMillis();
-        HttpResponse response = client.execute(request);
+        HttpResponse response = HttpClients.createDefault().execute(request);
         long finish = currentTimeMillis();
-        System.out.println("[DBG] " + (finish - start) + "ms request");
+        System.out.print("[DBG] " + (finish - start) + "ms request");
 
-        BufferedReader reader = new BufferedReader(new InputStreamReader(response.getEntity().getContent(), "UTF-8"));
-        StringBuilder body = new StringBuilder();
-        for (String line = null; (line = reader.readLine()) != null; ) {
-            //body.append(line);
-            System.out.println("[DBG] Response body: " + body.append(line).append("\n"));
-        }
-
-        arrayList.add(0, response.getStatusLine().getStatusCode());
-        arrayList.add(1, response.getStatusLine().getReasonPhrase());
-        arrayList.add(2, check_body_response(body.toString(), macaddress));
+        ArrayList arrayList = new ArrayList();
+        arrayList.add(0, response.getStatusLine().getStatusCode() + " " + response.getStatusLine().getReasonPhrase());
+        arrayList.add(1, check_body_response(read_response(new StringBuilder(),response).toString(), macaddress));
+        System.out.println("\n[DBG] return codes: " + arrayList);
         return arrayList;
     }
 

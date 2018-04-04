@@ -1,11 +1,19 @@
+import org.apache.http.HttpResponse;
+import org.apache.http.client.methods.HttpGet;
+import org.apache.http.client.methods.HttpPost;
 import org.junit.Rule;
 import org.junit.rules.Timeout;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.sql.*;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.TimeZone;
+
+import static java.lang.System.currentTimeMillis;
 
 /**
  * we are as Middle: send requests to AMS and got responses
@@ -19,6 +27,8 @@ public class API {
     //private final static Logger log = Logger.getLogger(API.class.getName());
 
     enum Operation { add, modify, delete, purge, blablabla, blablablablablablablablablablablablablablabla }
+
+    enum Http { Get, Post };
 
     //static Logger log = Logger.getLogger(testAMS.class.getName());
     //FileHandler txtFile = new FileHandler ("log.log", true);
@@ -35,25 +45,15 @@ public class API {
     final String charterapi_c = "http://specc.partnerapi.engprod-charter.net/api/pub";
     final String charterapi_d = "http://specd.partnerapi.engprod-charter.net/api/pub";
     final String postfix_settings = "/networksettingsmiddle/ns/settings";
-    final String charterapi = charterapi_b;
+    final String charterapi = charterapi_d;
 
-    final int expected200 = 200;
-    final String expected200t = "OK";
-
-    final int expected400 = 400;
-    final String expected400t = "Bad Request";
-
-    final int expected404 = 404;
-    final String expected404t = "Not Found";
-
-    final int expected405 = 405;
-    final String expected405t = "Method Not Allowed";
-
-    final int expected500 = 500;
-    final String expected500t = "Internal Server Error";
-
-    final int expected504 = 504;
-    final String expected504t = "Server data timeout";
+    final String expected200 = "200 OK";
+    final String expected201 = "201 Created";
+    final String expected400 = "400 Bad Request";
+    final String expected404 = "404 Not Found";
+    final String expected405 = "405 Method Not Allowed";
+    final String expected500 = "500 Internal Server Error";
+    final String expected504 = "504 Server data timeout";
 
     final String macaddress_wrong = "123456789012";
     final String boxD101 = "A0722CEEC970"; //WB20 D101 ???
@@ -117,9 +117,6 @@ public class API {
     //String ams_ip = "172.30.112.19";
     //String ams_ip = "172.30.82.132";
     int ams_port = 8080;
-
-    long finish;
-    long start;
 
     @Deprecated
     String generate_json_test(String date, int count_remindres, String operation, int reminderOffset) {
@@ -217,8 +214,8 @@ public class API {
         if(body.contains("\"status\":\"Failed\"") && body.contains("\"errorMessage\":\"REM-002 Reminders Service error: Timeout detected by BoxResponseTracker\"")){
             result += "REM-002 Reminders Service error: Timeout detected by BoxResponseTracker";
         }
-        if(body.contains("\"status\":\"Failed\"") && body.contains("\"errorMessage\":\"Incorrect request")){
-            result += "Incorrect request";
+        if(body.contains("\"status\":\"Failed\"") && body.contains("\"errorMessage\":\"Incorrect request: ChangeReminders\"")){
+            result += "Incorrect request: ChangeReminders";
         }
         if(body.contains("REM-002 Reminders Service error: Can not connect to STB with stbId=" + macaddress)){
             result += "REM-002 Reminders Service error: Can not connect to STB with stbId=" + macaddress;
@@ -247,9 +244,35 @@ public class API {
         if(body.contains("SET-025 Unsupported data type: Not a JSON Object:")){
             result += "SET-025 Unsupported data type: Not a JSON Object";
         }
+        if(body.contains("responseCode\":\"ERROR_SCHEDULING_REMINDER")){
+            result += "ERROR_SCHEDULING_REMINDER";
+        }
 
         //System.out.println("[DBG] check_body_for_statuscode: result: " + result);
         return result;
+    }
+
+    StringBuilder read_response(StringBuilder body, HttpResponse response) throws IOException {
+        BufferedReader reader = new BufferedReader(new InputStreamReader(response.getEntity().getContent(), "UTF-8"));
+        //StringBuilder body = new StringBuilder();
+        for (String line; (line = reader.readLine()) != null; ) {
+            System.out.println("response body: " + body.append(line).append("\n"));
+        }
+        return body;
+    }
+
+    HttpGet prepare_get_request(String uri) {
+        HttpGet request = new HttpGet(uri);
+        request.setHeader("Content-type", "application/json");
+        request.setHeader("Cache-Control", "no-cache");
+        System.out.println("[DBG] Request string: " + request);
+        return request;
+    }
+
+    HttpPost prepare_post_request(String uri){
+        HttpPost request = new HttpPost(uri);
+        System.out.println("[DBG] Request string: " + request);
+        return request;
     }
 
     /*@Deprecated
@@ -301,16 +324,15 @@ public class API {
         }*/
 
    /*     ArrayList arrayList = new ArrayList();
-        arrayList.add(0, response.getStatusLine().getStatusCode());
-        arrayList.add(1, response.getStatusLine().getReasonPhrase());
-        arrayList.add(2, check_body_for_statuscode(body.toString()));
+        arrayList.add(0, response.getStatusLine().getStatusCode() + " " + response.getStatusLine().getReasonPhrase());
+        arrayList.add(1, check_body_for_statuscode(body.toString()));
         client.close();
         return arrayList;
     }*/
 
     ArrayList QueryDB(String ams_ip, String macaddress) throws ClassNotFoundException, SQLException {
         //ResultSet QueryDB(String macaddress) throws ClassNotFoundException, SQLException {
-        System.out.println("QueryDB for macaddress=" + macaddress + " to DB AMS=" + ams_ip);
+        System.out.println("QueryDB for macaddress=" + macaddress + " to DB on AMS=" + ams_ip);
 
         String url = "jdbc:oracle:thin:@//ams-db01.enwd.co.sa.charterlab.com:1521/zdev02";
         String username = "ams_ipv6_e591";
@@ -318,21 +340,31 @@ public class API {
 
         Class.forName("oracle.jdbc.driver.OracleDriver");
         Connection connection = DriverManager.getConnection(url, username, password);
-
         Statement statement = connection.createStatement();
 
+        long start = currentTimeMillis();
         ResultSet result = statement.executeQuery("select * from MAC_IP where MAC_STR = '" + macaddress + "\'");
-        ArrayList arrayresult = new ArrayList();
+        long finish = currentTimeMillis();
+
+        ArrayList actual = new ArrayList();
         while (result.next()) {
-            arrayresult.add(result.getLong(1));
-            arrayresult.add(result.getLong(2));
-            arrayresult.add(result.getLong(3));
-            arrayresult.add(result.getString(4));
-            arrayresult.add(result.getString(5));
+            actual.add(result.getLong(1));
+            actual.add(result.getLong(2));
+            actual.add(result.getInt(3));
+            actual.add(result.getString(4));
+            actual.add(result.getString(5));
+        }
+        System.out.println("[DBG] " + (finish - start) + "ms query");
+        if(!actual.isEmpty()) {
+            System.out.println("[DBG] return result: "
+                    + actual.get(0) + "  "
+                    + actual.get(1) + "  "
+                    + actual.get(2) + "  "
+                    + actual.get(3) + "  "
+                    + actual.get(4));
         }
         connection.close();
-
-        return arrayresult;
+        return actual;
     }
 
     String reminderProgramStart() {
@@ -404,14 +436,6 @@ public class API {
         calendar.setTime(new java.util.Date(0, 0, 0, 0, 0));
         calendar.add(Calendar.MINUTE, interval_in_minutes*(number-1));
         return pattern.format(calendar.getTime());
-    }
-
-    void starttime() {
-        start = System.currentTimeMillis();
-    }
-
-    void finishtime() {
-        finish = System.currentTimeMillis();
     }
 
 }

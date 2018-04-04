@@ -8,7 +8,6 @@ import static org.junit.Assert.*;
 
 public class testSandbox extends API {
 
-    private API_Middle Middle = new API_Middle();
     private API_AMS AMS = new API_AMS();
 
     @Test
@@ -26,51 +25,53 @@ public class testSandbox extends API {
 
     @Test
     public void testOperation_NewAPI_400_Bad_Request() throws IOException {
-        starttime();
         ArrayList actual = AMS.Request(ams_ip, macaddress, Operation.blablabla, count_reminders,
                 reminderProgramStart(), reminderChannelNumber, reminderProgramId,
                 reminderOffset, reminderScheduleId, reminderId);
-        finishtime();
-        System.out.println("[DBG] " + (finish - start) + "ms test, return code: " + actual);
         assertEquals(expected400, actual.get(0));
-        assertEquals(expected400t, actual.get(1));
-        assertEquals("", actual.get(2));
+        assertEquals("", actual.get(1));
     }
 
     @Test
     public void testOracleDB_Query() throws SQLException, ClassNotFoundException {
-        starttime();
-        ArrayList result = AMS.QueryDB(ams_ip, macaddress);
-        finishtime();
+        ArrayList actual = AMS.QueryDB(ams_ip, macaddress);
+        assertFalse(actual.isEmpty());
 
-        assertFalse(result.isEmpty());
-            System.out.println("[DBG] " + (finish - start) + "ms test, return result: "
-                    + result.get(0) + "  "
-                    + result.get(1) + "  "
-                    + result.get(2) + "  "
-                    + result.get(3) + "  "
-                    + result.get(4));
+        assertEquals(Long.class, actual.get(0).getClass());
+        assertNotEquals(0, actual.get(0));
 
-            assertNotEquals(0, result.get(0));
-            assertNotEquals(0, result.get(1));
-            assertNotEquals(0, result.get(2));
-            assertNotEquals(0, result.get(3));
-            assertNotEquals(0, result.get(4));
+        assertEquals(Long.class, actual.get(1).getClass());
+        assertNotEquals(0, actual.get(1));
+
+        assertEquals(Integer.class, actual.get(2).getClass());
+        assertEquals(0, actual.get(2));
+
+        assertEquals(String.class, actual.get(3).getClass());
+        assertNotEquals(0, actual.get(3));
+
+        assertEquals(String.class, actual.get(4).getClass());
+        assertNotEquals(0, actual.get(4));
     }
 
+    @Test
+    public void testOracleDB_Query_macaddress_empty() throws SQLException, ClassNotFoundException {
+        ArrayList result = AMS.QueryDB(ams_ip, "");
+        assertTrue(result.isEmpty());
+    }
 
+    @Test
+    public void testOracleDB_Query_macaddress_wrong() throws SQLException, ClassNotFoundException {
+        ArrayList result = AMS.QueryDB(ams_ip, macaddress_wrong);
+        assertTrue(result.isEmpty());
+    }
 
     @Test
     public void testCheck_Delete() throws IOException {
-        starttime();
         ArrayList actual = AMS.Request(ams_ip, macaddress, Operation.delete, count_reminders,
                 reminderProgramStart(), reminderChannelNumber,
                 reminderProgramId, reminderOffset, reminderScheduleId, reminderId);
-        finishtime();
-        System.out.println("[DBG] " + (finish - start) + "ms test, " + "return code: " + actual);
         assertEquals(expected200, actual.get(0));
-        assertEquals(expected200t, actual.get(1));
-        assertEquals("", actual.get(2));
+        assertEquals("", actual.get(1));
     }
 
 }

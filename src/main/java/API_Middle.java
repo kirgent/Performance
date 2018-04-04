@@ -1,5 +1,4 @@
 import org.apache.http.HttpResponse;
-import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.entity.StringEntity;
@@ -7,50 +6,35 @@ import org.apache.http.impl.client.HttpClients;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
-import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStreamReader;
 import java.util.ArrayList;
 
 class API_Middle extends API {
 
     ArrayList Change_registration(String macaddress, String charterapi, String ams_ip) throws IOException {
         System.out.println("Change_registration "+ macaddress +" to ams " + ams_ip + " via charterapi: " + charterapi);
-        //log.info("Change_registration "+ macaddress +" to ams " + ams_ip + " via charterapi: " + charterapi);
-
-        HttpClient client = HttpClients.createDefault();
         HttpPost request = new HttpPost(charterapi + postfix_settings + "?requestor=AMS");
-
-        request.setEntity(new StringEntity(generate_json_change_registration(macaddress, ams_ip, "Change_registration")));
+        request.setEntity(new StringEntity(generate_json_change_registration(macaddress, ams_ip)));
         request.setHeader("Content-type", "application/json");
         request.setHeader("Accept", "application/json");
         System.out.println("[DBG] Request string: " + request);
         //+ "\n[DBG] Request json string: " + json_change_registration);
 
-        starttime();
-        HttpResponse response = client.execute(request);
-        finishtime();
+        long start = System.currentTimeMillis();
+        HttpResponse response = HttpClients.createDefault().execute(request);
+        long finish = System.currentTimeMillis();
         System.out.println("[DBG] " + (finish - start) + "ms request, " +
                 "Response getStatusLine: " + response.getStatusLine());
 
-        BufferedReader reader = new BufferedReader(new InputStreamReader(response.getEntity().getContent(), "UTF-8"));
-        StringBuilder body = new StringBuilder();
-        for (String line = null; (line = reader.readLine()) != null; ) {
-            body.append(line);
-            //System.out.println("[DBG] Response body: " + body.append(line).append("\n"));
-        }
-
         ArrayList arrayList = new ArrayList();
-        arrayList.add(0, response.getStatusLine().getStatusCode());
-        arrayList.add(1, response.getStatusLine().getReasonPhrase());
-        arrayList.add(2, check_body_response(body.toString(), macaddress));
+        arrayList.add(0, response.getStatusLine().getStatusCode() + " " + response.getStatusLine().getReasonPhrase());
+        arrayList.add(1, check_body_response(read_response(new StringBuilder(),response).toString(), macaddress));
+        System.out.println("\n[DBG] return codes: " + arrayList);
         return arrayList;
     }
 
     ArrayList Check_registration(String macaddress, String charterapi) throws IOException {
         System.out.println("Check_registration "+ macaddress +" via charterapi: " + charterapi);
-
-        HttpClient client = HttpClients.createDefault();
         HttpGet request = new HttpGet(charterapi + postfix_settings + "/amsIp/" + macaddress);
 
         //request.setHeader("Accept", "*/*");
@@ -60,85 +44,15 @@ class API_Middle extends API {
         System.out.println("[DBG] Request string: " + request);
         //+"\n[DBG] Request getRequestLine: "+request.getRequestLine());
 
-        starttime();
-        HttpResponse response = client.execute(request);
-        finishtime();
+        long start = System.currentTimeMillis();
+        HttpResponse response = HttpClients.createDefault().execute(request);
+        long finish = System.currentTimeMillis();
         System.out.print("[DBG] " + (finish - start) + "ms request, ");
 
-        BufferedReader reader = new BufferedReader(new InputStreamReader(response.getEntity().getContent(), "UTF-8"));
-        StringBuilder body = new StringBuilder();
-        for (String line; (line = reader.readLine()) != null; ) {
-            System.out.println("response body: " + body.append(line).append("\n"));
-        }
-
         ArrayList arrayList = new ArrayList();
-        arrayList.add(0, response.getStatusLine().getStatusCode());
-        arrayList.add(1, response.getStatusLine().getReasonPhrase());
-        arrayList.add(2, check_body_response(body.toString(), macaddress));
-        return arrayList;
-    }
-
-    ArrayList Delete_multiple_reminders(String macaddress, String charterapi, int reminderScheduleId, int reminderId) throws IOException {
-        System.out.println("Delete_multiple_reminders with reminderScheduleId=" + reminderScheduleId +
-                " and reminderId=" + reminderId);
-        HttpClient client = HttpClients.createDefault();
-        HttpPost request = new HttpPost(charterapi + "/remindersmiddle/v1/reminders/deleteMultipleReminders");
-        System.out.println("[DBG] Request string: " + request);
-
-        //curl -X POST http://<ipAddress>:<port>/remindersmiddle/v1/reminders/deleteMultipleReminders -d '
-        // {"macAddress":"STB12345",
-        // [
-        // {"reminderScheduleId":1222,"reminderId":34843},
-        // {"reminderScheduleId":1223,"reminderId":34841},
-        // {"reminderScheduleId":1224,"reminderId":34842}
-        // ]}'
-        request.setEntity(new StringEntity(generate_json_reminder_delete_multiple2(macaddress, reminderScheduleId, reminderId)));
-
-        starttime();
-        HttpResponse response = client.execute(request);
-        finishtime();
-        System.out.print("[DBG] " + (finish - start) + "ms request, ");
-
-        BufferedReader reader = new BufferedReader(new InputStreamReader(response.getEntity().getContent(), "UTF-8"));
-        StringBuilder body = new StringBuilder();
-        for (String line; (line = reader.readLine()) != null; ) {
-            System.out.println("response body: " + body.append(line).append("\n"));
-        }
-
-        ArrayList arrayList = new ArrayList();
-        arrayList.add(0, response.getStatusLine().getStatusCode());
-        arrayList.add(1, response.getStatusLine().getReasonPhrase());
-        arrayList.add(2, check_body_response(body.toString(), macaddress));
-        return arrayList;
-    }
-
-    ArrayList Schedule_reminder(String macaddress, String charterapi, int lineupId) throws IOException {
-        System.out.println("Schedule_a_reminder:");
-        HttpClient client = HttpClients.createDefault();
-        HttpPost request = new HttpPost(charterapi + "/remindersmiddle/v1/reminders?lineupId=" + lineupId + "&deviceId=" + macaddress);
-        //request.setHeader("Accept", "application/json");
-        request.setHeader("Content-type", "application/json");
-        request.setHeader("Cache-Control", "no-cache");
-        System.out.println("[DBG] Request string: " + request);
-
-        request.setEntity(new StringEntity(generate_json_reminder_schedule()));
-
-        starttime();
-        HttpResponse response = client.execute(request);
-        finishtime();
-        System.out.print("[DBG] " + (finish - start) + "ms request, ");
-
-        BufferedReader reader = new BufferedReader(new InputStreamReader(response.getEntity().getContent(), "UTF-8"));
-        StringBuilder body = new StringBuilder();
-        for (String line; (line = reader.readLine()) != null; ) {
-            System.out.println("response body: " + body.append(line).append("\n"));
-        }
-        System.out.println("[DBG] get:"+ response.getHeaders("status"));
-
-        ArrayList arrayList = new ArrayList();
-        arrayList.add(0, response.getStatusLine().getStatusCode());
-        arrayList.add(1, response.getStatusLine().getReasonPhrase());
-        arrayList.add(2, check_body_response(body.toString(), macaddress));
+        arrayList.add(0, response.getStatusLine().getStatusCode() + " " + response.getStatusLine().getReasonPhrase());
+        arrayList.add(1, check_body_response(read_response(new StringBuilder(),response).toString(), macaddress));
+        System.out.println("\n[DBG] return codes: " + arrayList);
         return arrayList;
     }
 
@@ -169,7 +83,7 @@ class API_Middle extends API {
         return result;
     }
 
-    String generate_json_change_registration(String macaddress, String ams_ip, String action) {
+    private String generate_json_change_registration(String macaddress, String ams_ip) {
         //String json = "{\"setting\":{\"groups\":[{\"options\":[],\"id\":\"STBmacaddress\",\"type\":\"device-stb\",\"amsid\":\"" + ams_ip + "\"}]}}";
         JSONObject json = new JSONObject();
         JSONObject object_in_settings = new JSONObject();
@@ -189,30 +103,6 @@ class API_Middle extends API {
         String result = json.toString();
         System.out.println("generated json: " + result);
         return result;
-    }
-
-    ArrayList GetAllReminder(String macaddress, String charterapi, int lineupId) throws IOException {
-        System.out.println("GetAllReminder "+ macaddress +" via charterapi: " + charterapi);
-        HttpClient client = HttpClients.createDefault();
-        HttpGet request = new HttpGet(charterapi + "/remindersmiddle/v1/reminders?deviceId=" + macaddress + "&lineupId=" + lineupId);
-        System.out.println("[DBG] Request string: " + request);
-
-        starttime();
-        HttpResponse response = client.execute(request);
-        finishtime();
-        System.out.print("[DBG] " + (finish - start) + "ms request, ");
-
-        BufferedReader reader = new BufferedReader(new InputStreamReader(response.getEntity().getContent(), "UTF-8"));
-        StringBuilder body = new StringBuilder();
-        for (String line; (line = reader.readLine()) != null; ) {
-            System.out.println("response body: " + body.append(line).append("\n"));
-        }
-
-        ArrayList arrayList = new ArrayList();
-        arrayList.add(0, response.getStatusLine().getStatusCode());
-        arrayList.add(1, response.getStatusLine().getReasonPhrase());
-        arrayList.add(2, check_body_response(body.toString(), macaddress));
-        return arrayList;
     }
 
     //todo
@@ -248,6 +138,73 @@ class API_Middle extends API {
         String result = json.toJSONString();
         System.out.println("generated json: " + result);
         return result;
+    }
+
+    ArrayList GetAllReminder(String charterapi, String deviceId, int lineupId) throws IOException {
+        System.out.println("GetAllReminder for " +  deviceId + " via charterapi: " + charterapi);
+        long start = System.currentTimeMillis();
+        HttpResponse response = HttpClients.createDefault().execute(prepare_get_request(charterapi + "/remindersmiddle/v1/reminders?deviceId=" + deviceId + "&lineupId=" + lineupId));
+        long finish = System.currentTimeMillis();
+        System.out.print("[DBG] " + (finish-start) + "ms request, ");
+
+        ArrayList arrayList = new ArrayList();
+        arrayList.add(0, response.getStatusLine().getStatusCode() + " " + response.getStatusLine().getReasonPhrase());
+        arrayList.add(1, check_body_response(read_response(new StringBuilder(),response).toString(), deviceId));
+        System.out.println("\n[DBG] return codes: " + arrayList);
+        return arrayList;
+    }
+
+    ArrayList GetStbReminder(String charterapi, String deviceId) throws IOException {
+        System.out.println("GetStbReminder for "+ deviceId + " via charterapi: " + charterapi);
+        long start = System.currentTimeMillis();
+        HttpResponse response = HttpClients.createDefault().execute(prepare_get_request(charterapi + "/remindersmiddle/v1/stbReminders?deviceId=" + deviceId));
+        long finish = System.currentTimeMillis();
+        System.out.print("[DBG] " + (finish-start) + "ms request, ");
+
+        ArrayList arrayList = new ArrayList();
+        arrayList.add(0, response.getStatusLine().getStatusCode() + " " + response.getStatusLine().getReasonPhrase());
+        arrayList.add(1, check_body_response(read_response(new StringBuilder(),response).toString(), deviceId));
+        System.out.println("\n[DBG] return codes: " + arrayList);
+        return arrayList;
+    }
+
+    ArrayList Delete_multiple_reminders(String charterapi, String deviceId, int reminderScheduleId, int reminderId) throws IOException {
+        System.out.println("Delete_multiple_reminders with reminderScheduleId=" + reminderScheduleId + " and reminderId=" + reminderId);
+        HttpPost request = new HttpPost(charterapi + "/remindersmiddle/v1/reminders/deleteMultipleReminders");
+        request.setEntity(new StringEntity(generate_json_reminder_delete_multiple2(deviceId, reminderScheduleId, reminderId)));
+        System.out.println("[DBG] Request string: " + request);
+
+        long start = System.currentTimeMillis();
+        HttpResponse response = HttpClients.createDefault().execute(request);
+        long finish = System.currentTimeMillis();
+        System.out.print("[DBG] " + (finish-start) + "ms request, ");
+
+        ArrayList arrayList = new ArrayList();
+        arrayList.add(0, response.getStatusLine().getStatusCode() + " " + response.getStatusLine().getReasonPhrase());
+        arrayList.add(1, check_body_response(read_response(new StringBuilder(),response).toString(), deviceId));
+        System.out.println("\n[DBG] return codes: " + arrayList);
+        return arrayList;
+    }
+
+    ArrayList Schedule_reminder(String charterapi, String deviceId, int lineupId) throws IOException {
+        System.out.println("Schedule_a_reminder:");
+        HttpPost request = new HttpPost(charterapi + "/remindersmiddle/v1/reminders?lineupId=" + lineupId + "&deviceId=" + deviceId);
+        request.setHeader("Content-type", "application/json");
+        request.setHeader("Cache-Control", "no-cache");
+        request.setEntity(new StringEntity(generate_json_reminder_schedule()));
+        System.out.println("[DBG] Request string: " + request);
+
+        long start = System.currentTimeMillis();
+        HttpResponse response = HttpClients.createDefault().execute(request);
+        long finish = System.currentTimeMillis();
+        System.out.print("[DBG] " + (finish-start) + "ms request, ");
+        System.out.println("[DBG] get:"+ response.getHeaders("status"));
+
+        ArrayList arrayList = new ArrayList();
+        arrayList.add(0, response.getStatusLine().getStatusCode() + " " + response.getStatusLine().getReasonPhrase());
+        arrayList.add(1, check_body_response(read_response(new StringBuilder(), response).toString(), deviceId));
+        System.out.println("\n[DBG] return codes: " + arrayList);
+        return arrayList;
     }
 
 }

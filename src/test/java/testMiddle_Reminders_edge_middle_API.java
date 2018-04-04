@@ -5,6 +5,9 @@ import java.util.ArrayList;
 
 import static org.junit.Assert.assertEquals;
 
+/**
+ * We are as Middle: chain of requests: localhost -> AMS -> box -> AMS -> localhost (Middle)
+ */
 public class testMiddle_Reminders_edge_middle_API extends API_AMS{
 
     private API_Middle Middle = new API_Middle();
@@ -38,47 +41,66 @@ public class testMiddle_Reminders_edge_middle_API extends API_AMS{
     //Failure response code: Not equal to 201 (for example: 500, 401)
 
     @Test
-    public void testGetAllReminder() throws IOException {
-        starttime();
-        ArrayList actual = Middle.GetAllReminder(macaddress, charterapi, 12345);
-        finishtime();
-        System.out.println("[DBG] " + (finish - start) + "ms test, return code: " + actual);
+    public void testGetStbReminder() throws IOException {
+        ArrayList actual = Middle.GetStbReminder(charterapi, macaddress);
         assertEquals(expected200, actual.get(0));
-        assertEquals(expected200t, actual.get(1));
-        assertEquals("", actual.get(2));
+        assertEquals("", actual.get(1));
+    }
+
+    @Test
+    public void testGetAllReminder_a() throws IOException {
+        ArrayList actual = Middle.GetAllReminder(charterapi_a, macaddress, 0);
+        assertEquals(expected200, actual.get(0));
+        assertEquals("", actual.get(1));
+    }
+
+    @Test
+    public void testGetAllReminder_b() throws IOException {
+        ArrayList actual = Middle.GetAllReminder(charterapi_b, macaddress, 0);
+        assertEquals(expected200, actual.get(0));
+        assertEquals("", actual.get(1));
+    }
+
+    @Test
+    public void testGetAllReminder_c() throws IOException {
+        ArrayList actual = Middle.GetAllReminder(charterapi_c, macaddress, 0);
+        assertEquals(expected200, actual.get(0));
+        assertEquals("", actual.get(1));
+    }
+
+    @Test
+    public void testGetAllReminder_d() throws IOException {
+        ArrayList actual = Middle.GetAllReminder(charterapi_d, macaddress, 0);
+        assertEquals(expected200, actual.get(0));
+        assertEquals("", actual.get(1));
     }
 
     @Test
     public void testDelete_multiple_reminders() throws IOException {
-        starttime();
-        ArrayList actual = Middle.Delete_multiple_reminders(macaddress, charterapi,12345, 12345);
-        finishtime();
-        System.out.println("[DBG] " + (finish - start) + "ms test, return code: " + actual);
-        assertEquals(expected200, actual.get(0));
-        assertEquals(expected200t, actual.get(1));
-        assertEquals("", actual.get(2));
+        ArrayList actual = Middle.Delete_multiple_reminders(charterapi, macaddress,12345, 12345);
+        assertEquals(expected201, actual.get(0));
+        assertEquals("", actual.get(1));
     }
 
     @Test
     public void testDelete_multiple_reminders__Not_Found() throws IOException {
-        starttime();
-        ArrayList actual = Middle.Delete_multiple_reminders(macaddress, charterapi,0, 0);
-        finishtime();
-        System.out.println("[DBG] " + (finish - start) + "ms test, return code: " + actual);
+        ArrayList actual = Middle.Delete_multiple_reminders(charterapi, macaddress,0, 0);
         assertEquals(expected404, actual.get(0));
-        assertEquals(expected404t, actual.get(1));
-        assertEquals("", actual.get(2));
+        assertEquals("", actual.get(1));
     }
 
     @Test
     public void testSchedule_reminder() throws IOException {
-        starttime();
-        ArrayList actual = Middle.Schedule_reminder(macaddress, charterapi,12345);
-        finishtime();
-        System.out.println("[DBG] " + (finish - start) + "ms test, return code: " + actual);
+        ArrayList actual = Middle.Schedule_reminder(charterapi, macaddress,0);
         assertEquals(expected200, actual.get(0));
-        assertEquals(expected200t, actual.get(1));
-        assertEquals("", actual.get(2));
+        assertEquals("", actual.get(1));
+    }
+
+    @Test
+    public void testSchedule_reminder_ERROR_SCHEDULING_REMINDER() throws IOException {
+        ArrayList actual = Middle.Schedule_reminder(charterapi, macaddress,0);
+        assertEquals(expected200, actual.get(0));
+        assertEquals("ERROR_SCHEDULING_REMINDER", actual.get(1));
     }
 
 }
