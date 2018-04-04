@@ -45,7 +45,7 @@ public class API {
     final String charterapi_c = "http://specc.partnerapi.engprod-charter.net/api/pub";
     final String charterapi_d = "http://specd.partnerapi.engprod-charter.net/api/pub";
     final String postfix_settings = "/networksettingsmiddle/ns/settings";
-    final String charterapi = charterapi_d;
+    final String charterapi = charterapi_b;
 
     final String expected200 = "200 OK";
     final String expected201 = "201 Created";
@@ -256,7 +256,7 @@ public class API {
         BufferedReader reader = new BufferedReader(new InputStreamReader(response.getEntity().getContent(), "UTF-8"));
         //StringBuilder body = new StringBuilder();
         for (String line; (line = reader.readLine()) != null; ) {
-            System.out.println("response body: " + body.append(line).append("\n"));
+            System.out.println(", response body: " + body.append(line).append("\n"));
         }
         return body;
     }

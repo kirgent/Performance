@@ -9,7 +9,7 @@ import static org.junit.Assert.assertEquals;
 /**
  * We are as Middle: chain of requests: localhost -> AMS -> box -> AMS -> localhost (Middle)
  */
-public class testMiddle_Check_registration extends API {
+public class testMiddle_Check_registration extends API_Middle {
 
     private API_Middle Middle = new API_Middle();
 

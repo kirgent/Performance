@@ -8,7 +8,7 @@ import static org.junit.Assert.assertEquals;
 /**
  * We are as Middle: chain of requests: localhost -> AMS -> box -> AMS -> localhost (Middle)
  */
-public class testMiddle_Reminders_edge_middle_API extends API_AMS{
+public class testMiddle_Reminders_edge_middle_API extends API_Middle {
 
     private API_Middle Middle = new API_Middle();
 
@@ -48,29 +48,8 @@ public class testMiddle_Reminders_edge_middle_API extends API_AMS{
     }
 
     @Test
-    public void testGetAllReminder_a() throws IOException {
-        ArrayList actual = Middle.GetAllReminder(charterapi_a, macaddress, 0);
-        assertEquals(expected200, actual.get(0));
-        assertEquals("", actual.get(1));
-    }
-
-    @Test
-    public void testGetAllReminder_b() throws IOException {
-        ArrayList actual = Middle.GetAllReminder(charterapi_b, macaddress, 0);
-        assertEquals(expected200, actual.get(0));
-        assertEquals("", actual.get(1));
-    }
-
-    @Test
-    public void testGetAllReminder_c() throws IOException {
-        ArrayList actual = Middle.GetAllReminder(charterapi_c, macaddress, 0);
-        assertEquals(expected200, actual.get(0));
-        assertEquals("", actual.get(1));
-    }
-
-    @Test
-    public void testGetAllReminder_d() throws IOException {
-        ArrayList actual = Middle.GetAllReminder(charterapi_d, macaddress, 0);
+    public void testGetAllReminder() throws IOException {
+        ArrayList actual = Middle.GetAllReminder(charterapi, macaddress, 0);
         assertEquals(expected200, actual.get(0));
         assertEquals("", actual.get(1));
     }

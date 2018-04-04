@@ -145,7 +145,7 @@ class API_Middle extends API {
         long start = System.currentTimeMillis();
         HttpResponse response = HttpClients.createDefault().execute(prepare_get_request(charterapi + "/remindersmiddle/v1/reminders?deviceId=" + deviceId + "&lineupId=" + lineupId));
         long finish = System.currentTimeMillis();
-        System.out.print("[DBG] " + (finish-start) + "ms request, ");
+        System.out.print("[DBG] " + (finish-start) + "ms request");
 
         ArrayList arrayList = new ArrayList();
         arrayList.add(0, response.getStatusLine().getStatusCode() + " " + response.getStatusLine().getReasonPhrase());
@@ -159,7 +159,7 @@ class API_Middle extends API {
         long start = System.currentTimeMillis();
         HttpResponse response = HttpClients.createDefault().execute(prepare_get_request(charterapi + "/remindersmiddle/v1/stbReminders?deviceId=" + deviceId));
         long finish = System.currentTimeMillis();
-        System.out.print("[DBG] " + (finish-start) + "ms request, ");
+        System.out.print("[DBG] " + (finish-start) + "ms request");
 
         ArrayList arrayList = new ArrayList();
         arrayList.add(0, response.getStatusLine().getStatusCode() + " " + response.getStatusLine().getReasonPhrase());
@@ -177,7 +177,7 @@ class API_Middle extends API {
         long start = System.currentTimeMillis();
         HttpResponse response = HttpClients.createDefault().execute(request);
         long finish = System.currentTimeMillis();
-        System.out.print("[DBG] " + (finish-start) + "ms request, ");
+        System.out.print("[DBG] " + (finish-start) + "ms request");
 
         ArrayList arrayList = new ArrayList();
         arrayList.add(0, response.getStatusLine().getStatusCode() + " " + response.getStatusLine().getReasonPhrase());
@@ -197,8 +197,7 @@ class API_Middle extends API {
         long start = System.currentTimeMillis();
         HttpResponse response = HttpClients.createDefault().execute(request);
         long finish = System.currentTimeMillis();
-        System.out.print("[DBG] " + (finish-start) + "ms request, ");
-        System.out.println("[DBG] get:"+ response.getHeaders("status"));
+        System.out.print("[DBG] " + (finish-start) + "ms request");
 
         ArrayList arrayList = new ArrayList();
         arrayList.add(0, response.getStatusLine().getStatusCode() + " " + response.getStatusLine().getReasonPhrase());
