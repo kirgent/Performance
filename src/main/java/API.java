@@ -1,8 +1,6 @@
 import org.apache.http.HttpResponse;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
-import org.junit.Rule;
-import org.junit.rules.Timeout;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -21,14 +19,14 @@ import static java.lang.System.currentTimeMillis;
  */
 public class API {
 
-    @Rule
-    final public Timeout globalTimeout = Timeout.seconds(20);
+    //@Rule
+    //final public Timeout globalTimeout = Timeout.seconds(20);
 
     //private final static Logger log = Logger.getLogger(API.class.getName());
 
     enum Operation { add, modify, delete, purge, blablabla, blablablablablablablablablablablablablablabla }
 
-    enum Http { Get, Post };
+    enum Http { Get, Post, Delete };
 
     //static Logger log = Logger.getLogger(testAMS.class.getName());
     //FileHandler txtFile = new FileHandler ("log.log", true);
@@ -77,7 +75,7 @@ public class API {
     //String[] rack_date = {"2018-03-15"};
 
     //CHANNELS
-    int reminderChannelNumber = 6;
+    int reminderChannelNumber = 2;
     int reminderChannelNumber_empty;
     int reminderChannelNumber_for_statuscode3 = 9999;
     int reminderChannelNumber_for_statuscode4 = 1000;
@@ -86,8 +84,8 @@ public class API {
             32, 33, 37, 38, 41, 44, 46, 48, 49, 50 };*/
     Integer[] rack_channel = {2, 3, 4, 5, 6, 7, 8, 9, 10, 11};
 
-    String reminderProgramId = "EP0"; //"reminderProgramId": "EP002960010113"
-    //String reminderProgramId = "EP002960010113";
+    //String reminderProgramId = ""; //"reminderProgramId": "EP002960010113"
+    String reminderProgramId = "EP002960010113";
     //String reminderProgramId = "0";
     String reminderProgramId_empty;
 
@@ -345,6 +343,7 @@ public class API {
         long start = currentTimeMillis();
         ResultSet result = statement.executeQuery("select * from MAC_IP where MAC_STR = '" + macaddress + "\'");
         long finish = currentTimeMillis();
+        System.out.println("[DBG] " + (finish - start) + "ms query");
 
         ArrayList actual = new ArrayList();
         while (result.next()) {
@@ -354,7 +353,6 @@ public class API {
             actual.add(result.getString(4));
             actual.add(result.getString(5));
         }
-        System.out.println("[DBG] " + (finish - start) + "ms query");
         if(!actual.isEmpty()) {
             System.out.println("[DBG] return result: "
                     + actual.get(0) + "  "

@@ -259,7 +259,6 @@ public class testAMS_Reminder_Modify extends API {
      */
     @Test
     public void testModify_statusCode4() throws IOException {
-        
         ArrayList actual = AMS.Request(ams_ip, macaddress, Operation.modify, count_reminders,
                 reminderProgramStart(), reminderChannelNumber,
                 reminderProgramId, reminderOffset, reminderScheduleId, reminderId);
@@ -269,7 +268,6 @@ public class testAMS_Reminder_Modify extends API {
 
     @Test
     public void testModify_macaddress_empty() throws IOException {
-        
         ArrayList actual = AMS.Request(ams_ip, "", Operation.modify, count_reminders,
                 reminderProgramStart(), reminderChannelNumber, reminderProgramId,
                 reminderOffset, reminderScheduleId, reminderId);
@@ -279,7 +277,6 @@ public class testAMS_Reminder_Modify extends API {
 
     @Test
     public void testModify_macaddress_wrong() throws IOException {
-        
         ArrayList actual = AMS.Request(ams_ip, macaddress_wrong, Operation.modify, count_reminders,
                 reminderProgramStart(), reminderChannelNumber, reminderProgramId,
                 reminderOffset, reminderScheduleId, reminderId);

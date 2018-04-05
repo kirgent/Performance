@@ -1,4 +1,6 @@
+import org.junit.Rule;
 import org.junit.Test;
+import org.junit.rules.Timeout;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -10,23 +12,59 @@ import static org.junit.Assert.assertEquals;
  */
 public class testMiddle_Reminders_edge_middle_API extends API_Middle {
 
+    @Rule
+    final public Timeout globalTimeout = Timeout.seconds(600);
+
     private API_Middle Middle = new API_Middle();
+
+    @Test
+    public void testGetStbReminder() throws IOException {
+        ArrayList actual = Middle.GetStbReminder(charterapi_a, macaddress);
+        assertEquals(expected200, actual.get(0));
+        assertEquals("", actual.get(1));
+
+        actual = Middle.GetStbReminder(charterapi_b, macaddress);
+        assertEquals(expected200, actual.get(0));
+        assertEquals("", actual.get(1));
+
+        actual = Middle.GetStbReminder(charterapi_c, macaddress);
+        assertEquals(expected200, actual.get(0));
+        assertEquals("", actual.get(1));
+
+        actual = Middle.GetStbReminder(charterapi_d, macaddress);
+        assertEquals(expected200, actual.get(0));
+        assertEquals("", actual.get(1));
+    }
+
+    @Test
+    public void testGetAllReminder() throws IOException {
+        ArrayList actual = Middle.GetAllReminder(charterapi_a, macaddress, 0);
+        assertEquals(expected200, actual.get(0));
+        assertEquals("", actual.get(1));
+
+        actual = Middle.GetAllReminder(charterapi_b, macaddress, 0);
+        assertEquals(expected200, actual.get(0));
+        assertEquals("", actual.get(1));
+
+        actual = Middle.GetAllReminder(charterapi_c, macaddress, 0);
+        assertEquals(expected200, actual.get(0));
+        assertEquals("", actual.get(1));
+
+        actual = Middle.GetAllReminder(charterapi_d, macaddress, 0);
+        assertEquals(expected200, actual.get(0));
+        assertEquals("", actual.get(1));
+    }
 
     //todo
     //Delete multiple reminders by collection<reminderScheduleId and reminderId>
-
     //Request:
     //POST  /deleteMultipleReminders
-
     //Middle Request Body:
     //macAddress and List<ReminderIdentifier>
-
     //List<ReminderIdentifier> reminderIdentifiers
-
     //ReminderIdentifier:
     //reminderScheduleId	RequestObject	Long	Y	reminder Schedule Id
     //reminderId            RequestObject   Long    Y   reminderId
-
     //Sample Request Body:
     //{"macAddress":"STB12345",
     //[{"reminderScheduleId":1222,"reminderId":34843},
@@ -39,21 +77,6 @@ public class testMiddle_Reminders_edge_middle_API extends API_Middle {
     //Response:
     //Successful Http Response code: 201 Created (with no LOCATION Header)
     //Failure response code: Not equal to 201 (for example: 500, 401)
-
-    @Test
-    public void testGetStbReminder() throws IOException {
-        ArrayList actual = Middle.GetStbReminder(charterapi, macaddress);
-        assertEquals(expected200, actual.get(0));
-        assertEquals("", actual.get(1));
-    }
-
-    @Test
-    public void testGetAllReminder() throws IOException {
-        ArrayList actual = Middle.GetAllReminder(charterapi, macaddress, 0);
-        assertEquals(expected200, actual.get(0));
-        assertEquals("", actual.get(1));
-    }
-
     @Test
     public void testDelete_multiple_reminders() throws IOException {
         ArrayList actual = Middle.Delete_multiple_reminders(charterapi, macaddress,12345, 12345);

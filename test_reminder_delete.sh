@@ -6,7 +6,7 @@ reminderProgramId="$4"
 reminderScheduleId="$5"
 reminderId="$6"
 reminderOffset="$7"
-echo "[DBG] `date "+%a %b %d %T %N %Z %Y"`: Add 1 rems for macaddress=$macaddress with reminderProgramStart=$data, reminderChannelNumber=$reminderChannelNumber, reminderProgramId=$reminderProgramId, reminderScheduleId=$reminderScheduleId, reminderId=$reminderId, reminderOffset=$reminderOffset, iteration="$i"/"$count_iterations""|${logwrap}
+echo "[DBG] `date "+%a %b %d %T %N %Z %Y"`: Delete 1rem for macaddress=$macaddress with reminderProgramStart=$data, reminderChannelNumber=$reminderChannelNumber, reminderProgramId=$reminderProgramId, reminderScheduleId=$reminderScheduleId, reminderId=$reminderId, reminderOffset=$reminderOffset, iteration="$i"/"$count_iterations""|${logwrap}
 #/usr/bin/time -f 'real %Es' -o $logfile -a $curlwrap 'http://'$ams_ip':'$ams_port'/'$url'' -H 'Content-type: application/json' \
 /usr/bin/time -f 'real %Es' -o $logfile -a $curlwrap -s 'http://'$ams_ip':'$ams_port'/'$url'' -H 'Content-type: application/json' \
 -d '{

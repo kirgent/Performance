@@ -9,7 +9,10 @@ import org.json.simple.JSONObject;
 import java.io.IOException;
 import java.util.ArrayList;
 
-class API_Middle extends API {
+class API_Middle extends API{
+
+    //@Rule
+    //final public Timeout globalTimeout = Timeout.seconds(20);
 
     ArrayList Change_registration(String macaddress, String charterapi, String ams_ip) throws IOException {
         System.out.println("Change_registration "+ macaddress +" to ams " + ams_ip + " via charterapi: " + charterapi);
@@ -36,18 +39,16 @@ class API_Middle extends API {
     ArrayList Check_registration(String macaddress, String charterapi) throws IOException {
         System.out.println("Check_registration "+ macaddress +" via charterapi: " + charterapi);
         HttpGet request = new HttpGet(charterapi + postfix_settings + "/amsIp/" + macaddress);
-
         //request.setHeader("Accept", "*/*");
         //request.setHeader("Content-type", "application/json");
         //request.setHeader("Content-type", "text/plain");
         //request.setHeader("Charset", "UTF-8");
         System.out.println("[DBG] Request string: " + request);
-        //+"\n[DBG] Request getRequestLine: "+request.getRequestLine());
 
         long start = System.currentTimeMillis();
         HttpResponse response = HttpClients.createDefault().execute(request);
         long finish = System.currentTimeMillis();
-        System.out.print("[DBG] " + (finish - start) + "ms request, ");
+        System.out.print("[DBG] " + (finish - start) + "ms request");
 
         ArrayList arrayList = new ArrayList();
         arrayList.add(0, response.getStatusLine().getStatusCode() + " " + response.getStatusLine().getReasonPhrase());

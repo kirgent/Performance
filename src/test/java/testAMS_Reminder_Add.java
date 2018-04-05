@@ -15,9 +15,9 @@ public class testAMS_Reminder_Add extends API {
     //@RepeatedTest(3)
     @Test
     public void testAdd() throws IOException {
-        ArrayList actual = AMS.Request(ams_ip, macaddress, Operation.add, 1,
+        ArrayList actual = AMS.Request(ams_ip, macaddress, Operation.add, 5,
                 reminderProgramStart(), reminderChannelNumber, reminderProgramId,
-                reminderOffset, reminderScheduleId, reminderId);
+                reminderOffset, 12345, 12345);
         assertEquals(expected200, actual.get(0));
         assertEquals("", actual.get(1));
     }

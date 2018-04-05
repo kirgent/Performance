@@ -5,17 +5,21 @@ import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.HttpClients;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
+import org.junit.Rule;
+import org.junit.rules.Timeout;
 
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Objects;
 
 import static java.lang.System.currentTimeMillis;
 
 class API_AMS extends API{
 
-    /** Request method for Add/Modify/Delete
+    @Rule
+    final public Timeout globalTimeout = Timeout.seconds(20);
+
+    /** 1st method for Add/Modify/Delete
      * 6 MANDATORY parameters!
      * @param ams_ip - TBD
      * @param macaddress      - macaddress of the box
@@ -42,10 +46,10 @@ class API_AMS extends API{
                 + "reminderScheduleId=" + reminderScheduleId + ", "
                 + "reminderId=" + reminderId);
 
-        HttpPost request = new HttpPost(prepare_url(ams_ip, operation, true));
+        HttpPost request = new HttpPost(prepare_url(operation, true));
         request.setHeader("Accept", "application/json");
         request.setHeader("Content-type", "application/json");
-        request.setEntity(new StringEntity(generate_json_reminder(macaddress, true, count_reminders, operation,
+        request.setEntity(new StringEntity(generate_json_reminder(true, macaddress, count_reminders, operation,
                 reminderProgramStart, reminderChannelNumber, reminderProgramId, reminderOffset, reminderScheduleId, reminderId)));
         System.out.println("[DBG] Request string: " + request);
 
@@ -53,7 +57,7 @@ class API_AMS extends API{
         long start = System.currentTimeMillis();
         HttpResponse response = HttpClients.createDefault().execute(request);
         long finish = System.currentTimeMillis();
-        System.out.print("[DBG] " + (finish-start) + "ms request, ");
+        System.out.print("[DBG] " + (finish-start) + "ms request");
 
         ArrayList arrayList = new ArrayList();
         arrayList.add(0, response.getStatusLine().getStatusCode() + " " + response.getStatusLine().getReasonPhrase());
@@ -62,7 +66,7 @@ class API_AMS extends API{
         return arrayList;
     }
 
-    /** OLD_API method for Add/Delete
+    /** method for Add/Delete OLD_API
      * 3 MANDATORY parameters!
      * @param ams_ip - TBD
      * @param macaddress - TBD
@@ -82,17 +86,16 @@ class API_AMS extends API{
                 + "reminderChannelNumber=" + reminderChannelNumber + ", "
                 + "reminderOffset=" + reminderOffset);
 
-        HttpPost request = new HttpPost(prepare_url(ams_ip, operation, false));
+        HttpPost request = new HttpPost(prepare_url(operation, false));
         request.setHeader("Accept", "application/json");
         request.setHeader("Content-type", "application/json");
-        request.setEntity(new StringEntity(generate_json_reminder(macaddress, false, count_reminders, operation, reminderProgramStart, reminderChannelNumber, reminderProgramId, reminderOffset, reminderScheduleId, reminderId)));
+        request.setEntity(new StringEntity(generate_json_reminder(false, macaddress, count_reminders, operation, reminderProgramStart, reminderChannelNumber, reminderProgramId, reminderOffset, reminderScheduleId, reminderId)));
         System.out.println("[DBG] Request string: " + request);
-
 
         long start = currentTimeMillis();
         HttpResponse response = HttpClients.createDefault().execute(request);
         long finish = currentTimeMillis();
-        System.out.print("[DBG] " + (finish - start) + "ms request, ");
+        System.out.print("[DBG] " + (finish - start) + "ms request");
         //"[DBG] Response getStatusLine: " + response.getStatusLine());
 
         ArrayList arrayList = new ArrayList();
@@ -102,7 +105,7 @@ class API_AMS extends API{
         return arrayList;
     }
 
-    /** Request method for Purge (OLD_API / NEW_API)
+    /** method for Purge (OLD_API / NEW_API)
      * @param ams_ip - TBD
      * @param macaddress - TBD
      * @param operation - TBD
@@ -113,7 +116,7 @@ class API_AMS extends API{
     ArrayList Request(String ams_ip, String macaddress, Enum<API.Operation> operation, Boolean newapi) throws IOException {
         System.out.println(operation + " (newapi=" + newapi + ") for macaddress=" + macaddress + ", ams_ip=" + ams_ip);
 
-        HttpPost request = new HttpPost(prepare_url(ams_ip, operation, newapi));
+        HttpPost request = new HttpPost(prepare_url(operation, newapi));
         request.setHeader("Accept", "application/json");
         request.setHeader("Content-type", "application/json");
         request.setEntity(new StringEntity(generate_json_reminder_purge(macaddress, newapi)));
@@ -122,7 +125,7 @@ class API_AMS extends API{
         long start = currentTimeMillis();
         HttpResponse response = HttpClients.createDefault().execute(request);
         long finish = currentTimeMillis();
-        System.out.print("[DBG] " + (finish - start) + "ms request, ");
+        System.out.print("[DBG] " + (finish - start) + "ms request");
         //"[DBG] Response getStatusLine: " + response.getStatusLine());
 
         ArrayList arrayList = new ArrayList();
@@ -132,7 +135,7 @@ class API_AMS extends API{
         return arrayList;
     }
 
-    /** 2nd Request method for Add/Modify/Delete
+    /** 2nd variant of method for Add/Modify/Delete with RACKs:
      * RACK : String[] rack_date
      * RACK : Integer[] rack_channel
      * @param ams_ip - TBD
@@ -152,19 +155,15 @@ class API_AMS extends API{
     ArrayList Request(String ams_ip, String macaddress, Enum<API.Operation> operation, int count_reminders,
                       String[] rack_date, Integer[] rack_channel, String reminderProgramId,
                       int reminderOffset, int reminderScheduleId, int reminderId) throws IOException {
-        if (Objects.equals(operation, "Purge")) {
-            System.out.println(operation + " (newapi=true) for macaddress=" + macaddress + ", ams_ip=" + ams_ip);
-        } else {
-            System.out.println(operation + " (newapi=true) for macaddress=" + macaddress + ", ams_ip=" + ams_ip + ", "
+        System.out.println(operation + " (newapi=true) for macaddress=" + macaddress + ", ams_ip=" + ams_ip + ", "
                     + "count_reminders=" + count_reminders + ", "
                     + "reminderOffset=" + reminderOffset + ", "
                     //+ "rack_data.length=" + rack_date.length + ", "
                     + "data=" + Arrays.asList(rack_date) + ", "
                     //+ "rack_channel.length=" + rack_channel.length + ", "
                     + "channel=" + Arrays.asList(rack_channel));
-        }
 
-        HttpPost request = new HttpPost(prepare_url(ams_ip, operation, true));
+        HttpPost request = new HttpPost(prepare_url(operation, true));
         request.setHeader("Accept", "application/json");
         request.setHeader("Content-type", "application/json");
         System.out.println("[DBG] Request string: " + request);
@@ -172,42 +171,29 @@ class API_AMS extends API{
 
         HttpClient client = HttpClients.createDefault();
         ArrayList arrayList = new ArrayList();
-        if (Objects.equals(operation, "Purge")) {
-            request.setEntity(new StringEntity(generate_json_reminder_purge(macaddress, true)));
+        for (String aRack_date : rack_date) {
+            for (int aRack_channel : rack_channel) {
+                System.out.println("operation= " + operation + ", date=" + aRack_date + ", channel=" + aRack_channel);
 
-            long start = currentTimeMillis();
-            HttpResponse response = client.execute(request);
-            long finish = currentTimeMillis();
-            System.out.println("[DBG] " + (finish - start) + "ms request");
-            //"[DBG] Response getStatusLine: " + response.getStatusLine());
+                request.setEntity(new StringEntity(generate_json_reminder(true, macaddress, count_reminders, operation,
+                        aRack_date, aRack_channel,
+                        reminderProgramId, reminderOffset, reminderScheduleId, reminderId)));
 
-            arrayList.add(0, response.getStatusLine().getStatusCode() + " " + response.getStatusLine().getReasonPhrase());
-            arrayList.add(1, check_body_response(read_response(new StringBuilder(),response).toString(), macaddress));
-        } else {
-            for (String aRack_date : rack_date) {
-                for (int aRack_channel : rack_channel) {
-                    System.out.println("operation= " + operation + ", date=" + aRack_date + ", channel=" + aRack_channel);
+                long start = currentTimeMillis();
+                HttpResponse response = client.execute(request);
+                long finish = currentTimeMillis();
+                System.out.println("[DBG] " + (finish - start) + "ms request" +
+                        "Response getStatusLine: " + response.getStatusLine());
 
-                    request.setEntity(new StringEntity(generate_json_reminder(macaddress, true, count_reminders, operation,
-                            aRack_date, aRack_channel,
-                            reminderProgramId, reminderOffset, reminderScheduleId, reminderId)));
+                arrayList.add(0, response.getStatusLine().getStatusCode() + " " + response.getStatusLine().getReasonPhrase());
+                arrayList.add(1, check_body_response(read_response(new StringBuilder(),response).toString(), macaddress));
 
-                    long start = currentTimeMillis();
-                    HttpResponse response = client.execute(request);
-                    long finish = currentTimeMillis();
-                    System.out.println("[DBG] " + (finish - start) + "ms request, " +
-                            "Response getStatusLine: " + response.getStatusLine());
-
-                    arrayList.add(0, response.getStatusLine().getStatusCode() + " " + response.getStatusLine().getReasonPhrase());
-                    arrayList.add(1, check_body_response(read_response(new StringBuilder(),response).toString(), macaddress));
-
-                    if (arrayList.get(0).equals(200)) {
-                        break;
-                    }
-                }
                 if (arrayList.get(0).equals(200)) {
                     break;
                 }
+            }
+            if (arrayList.get(0).equals(200)) {
+                break;
             }
         }
         return arrayList;
@@ -272,9 +258,9 @@ class API_AMS extends API{
     }
 
     /** method for OLD/NEW API
-     * @param macaddress
-     * @param newapi
-     * @return
+     * @param macaddress - TBD
+     * @param newapi - TBD
+     * @return - TBD
      */
     private String generate_json_reminder_purge(String macaddress, Boolean newapi) {
         //String json = "{\"deviceId\":" + macaddress + ",\"reminders\":[]}";
@@ -295,11 +281,10 @@ class API_AMS extends API{
         return result;
     }
 
-    /** method for OLD/NEW API
-     * @param macaddress
-     * @param newapi
+    /** generation json for reminder
+     * @param macaddress - TBD
+     * @param newapi - TBD
      * @param count_reminders
-     * @param enum_operation
      * @param reminderProgramStart
      * @param reminderChannelNumber
      * @param reminderProgramId
@@ -308,7 +293,7 @@ class API_AMS extends API{
      * @param reminderId
      * @return
      */
-    private String generate_json_reminder(String macaddress, Boolean newapi, int count_reminders, Enum<Operation> operation,
+    private String generate_json_reminder(Boolean newapi, String macaddress, int count_reminders, Enum<Operation> operation,
                                           String reminderProgramStart, int reminderChannelNumber,
                                           String reminderProgramId, int reminderOffset, int reminderScheduleId, int reminderId) {
         //if(count_reminders <= 0){ count_reminders = 1; }
@@ -357,7 +342,7 @@ class API_AMS extends API{
         return result;
     }
 
-    private String prepare_url(String ams_ip, Enum<Operation> operation, Boolean newapi) {
+    private String prepare_url(Enum<Operation> operation, Boolean newapi) {
         String url;
         if (newapi) {
             url = "http://" + ams_ip + ":" + ams_port + "/ams/Reminders?req=" + operation;

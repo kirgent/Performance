@@ -117,7 +117,6 @@ public class testAMS_Reminder_Delete extends API {
         assertEquals("4", actual.get(1));
     }
 
-
     /**
      * @throws IOException - TBD
      */
