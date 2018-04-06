@@ -21,7 +21,7 @@ public class testAMS_Reminder_Delete extends API {
     }
 
     @Test
-    public void testDelete_reminderScheduleId_empty() throws IOException {
+    public void testDelete_reminderScheduleId_empty__statusCode4() throws IOException {
         ArrayList actual = AMS.Request(ams_ip, macaddress, Operation.delete, count_reminders,
                 "", 0, "", 0, reminderScheduleId_null, reminderId);
         assertEquals(expected200, actual.get(0));
@@ -44,12 +44,15 @@ public class testAMS_Reminder_Delete extends API {
         assertEquals("REM-008 Reminders parsing error: incorrect reminderScheduleId", actual.get(1));
     }
 
+    /** 4 - reminder is unknown. Applies to "Reminders Delete" request (Request ID=1) and "Reminders Modify" request (Request ID=2)
+     * @throws IOException - TBD
+     */
     @Test
-    public void testDelete_reminderId_empty() throws IOException {
+    public void testDelete_reminderId_empty__statusCode4() throws IOException {
         ArrayList actual = AMS.Request(ams_ip, macaddress, Operation.delete, count_reminders,
                 "", 0, "", 0, reminderScheduleId, reminderId_null);
-        assertEquals(expected400, actual.get(0));
-        assertEquals("REM-008 Reminders parsing error: incorrect reminderId", actual.get(1));
+        assertEquals(expected200, actual.get(0));
+        assertEquals("4", actual.get(1));
     }
 
     @Test
@@ -72,29 +75,7 @@ public class testAMS_Reminder_Delete extends API {
      * @throws IOException - TBD
      */
     @Test
-    public void testDelete_statusCode4_v1() throws IOException {
-        ArrayList actual = AMS.Request(ams_ip, macaddress, Operation.delete, count_reminders,
-                "", 0, "", 0, 0, reminderId);
-        assertEquals(expected200, actual.get(0));
-        assertEquals("4", actual.get(1));
-    }
-
-    /** 4 - reminder is unknown. Applies to "Reminders Delete" request (Request ID=1) and "Reminders Modify" request (Request ID=2)
-     * @throws IOException - TBD
-     */
-    @Test
-    public void testDelete_statusCode4_v2() throws IOException {
-        ArrayList actual = AMS.Request(ams_ip, macaddress, Operation.delete, count_reminders,
-                "", 0, "", 0, reminderScheduleId, 0);
-        assertEquals(expected200, actual.get(0));
-        assertEquals("4", actual.get(1));
-    }
-
-    /** 4 - reminder is unknown. Applies to "Reminders Delete" request (Request ID=1) and "Reminders Modify" request (Request ID=2)
-     * @throws IOException - TBD
-     */
-    @Test
-    public void testDelete_statusCode4_v3() throws IOException {
+    public void testDelete_both_empty__statusCode4() throws IOException {
         ArrayList actual = AMS.Request(ams_ip, macaddress, Operation.delete, count_reminders,
                 "", 0, "", 0, 0, 0);
         assertEquals(expected200, actual.get(0));
