@@ -132,8 +132,8 @@ public class testAMS_Reminder_Delete extends API {
     public void testDelete_macaddress_wrong() throws IOException {
         ArrayList actual = AMS.Request(ams_ip, macaddress_wrong, Operation.delete, count_reminders,
                 "", 0, "", 0, reminderScheduleId, reminderId);
-        assertEquals(expected400, actual.get(0));
-        assertEquals("", actual.get(1));
+        assertEquals(expected500, actual.get(0));
+        assertEquals("REM-ST-001 Box is not registered", actual.get(1));
     }
 
 }

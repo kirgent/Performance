@@ -11,6 +11,7 @@ import org.junit.rules.Timeout;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Objects;
 
 import static java.lang.System.currentTimeMillis;
 
@@ -322,7 +323,11 @@ class API_AMS extends API{
             }
 
             if (!operation.name().equals("delete")) {
-                object_in_reminders.put("reminderProgramStart", reminderProgramStart + " " + get_time(count_reminders, i));
+                if(Objects.equals(reminderProgramStart, "")) {
+                    object_in_reminders.put("reminderProgramStart", "");
+                } else {
+                    object_in_reminders.put("reminderProgramStart", reminderProgramStart + " " + get_time(count_reminders, i));
+                }
                 object_in_reminders.put("reminderChannelNumber", reminderChannelNumber);
                 object_in_reminders.put("reminderOffset", reminderOffset);
                 if (newapi) {

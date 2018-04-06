@@ -59,7 +59,7 @@ public class testAMS_Reminder_OldAPI extends API {
     @Test
     public void testAdd_statusCode2() throws IOException {
         ArrayList actual = AMS.Request(ams_ip, macaddress, Operation.add, count_reminders,
-                reminderProgramStart_for_statuscode2, reminderChannelNumber, reminderOffset);
+                reminderProgramStart_past, reminderChannelNumber, reminderOffset);
         assertEquals(expected200, actual.get(0));
         assertEquals("2", actual.get(1));
     }
@@ -161,7 +161,7 @@ public class testAMS_Reminder_OldAPI extends API {
     @Test
     public void testDelete_statusCode2() throws IOException {
         ArrayList actual = AMS.Request(ams_ip, macaddress, Operation.delete, count_reminders,
-                reminderProgramStart_for_statuscode2, reminderChannelNumber, reminderOffset);
+                reminderProgramStart_past, reminderChannelNumber, reminderOffset);
         assertEquals(expected200, actual.get(0));
         assertEquals("2", actual.get(1));
     }

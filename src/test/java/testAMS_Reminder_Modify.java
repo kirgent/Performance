@@ -280,8 +280,8 @@ public class testAMS_Reminder_Modify extends API {
         ArrayList actual = AMS.Request(ams_ip, macaddress_wrong, Operation.modify, count_reminders,
                 reminderProgramStart(), reminderChannelNumber, reminderProgramId,
                 reminderOffset, reminderScheduleId, reminderId);
-        assertEquals(expected400, actual.get(0));
-        assertEquals("", actual.get(1));
+        assertEquals(expected500, actual.get(0));
+        assertEquals("REM-ST-001 Box is not registered", actual.get(1));
     }
 
     @Test

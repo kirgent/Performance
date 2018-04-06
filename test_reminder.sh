@@ -12,7 +12,6 @@ curlwrap="curl"
 macaddress="$1"
 action="$2"
 param="$3"
-count_reminders="$4"
 
 ams_ip="172.30.81.4"
 #ams_ip="172.30.82.132"
@@ -39,35 +38,43 @@ charterapi_c="http://specc.partnerapi.engprod-charter.net/api/pub"
 charterapi_d="http://specd.partnerapi.engprod-charter.net/api/pub"
 #charterapi_d="http://specd.partnerapi.engprod-charter.net/api/pub"
 postfix_settings="networksettingsmiddle/ns/settings"
-charterapi="$charterapi_b"
 
 function generate_params(){
 if [ "$action" == "Purge" ]; then url="ams/Reminders?req=purge"; fi
 
-if [ "$action" == "Add" ]; then url="ams/Reminders?req=add"; source test_reminder_add.sh
+if [ "$action" == "Add" ]; then
+source test_reminder_add.sh
+url="ams/Reminders?req=add"
+reminder="reminder_add1"
 if [ "$param" == "48" ]; then reminder="reminder_add48"
 elif [ "$param" == "288" ]; then reminder="reminder_add288"
 elif [ "$param" == "720" ]; then reminder="reminder_add720"
-else reminder="reminder_add1"
+fi
 fi
 
-elif [ "$action" == "Modify" ]; then url="ams/Reminders?req=modify"; source test_reminder_modify.sh
+if [ "$action" == "Modify" ]; then
+source test_reminder_modify.sh
+url="ams/Reminders?req=modify"
+reminder="reminder_modify1"
+
 if [ "$param" == "48" ]; then reminder="reminder_modify48"
 elif [ "$param" == "288" ]; then reminder="reminder_modify288"
 elif [ "$param" == "720" ]; then reminder="reminder_modify720"
-else reminder="reminder_modify1"
+fi
 fi
 
-elif [ "$action" == "Delete" ]; then echo "action=Delete!!!"; url="ams/Reminders?req=delete"; source test_reminder_delete.sh
+if [ "$action" == "Delete" ]; then
+source test_reminder_delete.sh
+url="ams/Reminders?req=delete"
+reminder="reminder_delete"
+
 if [ "$param" == "48" ]; then reminder="reminder_delete48"
 elif [ "$param" == "288" ]; then reminder="reminder_delete288"
 elif [ "$param" == "720" ]; then reminder="reminder_delete720"
-else reminder="reminder_delete1"
 fi
 fi
 }
 
-#url="ams/Reminders?req=ChangeReminders"
 logfile="test_reminder.log"
 logwrap="tee -a $logfile"
 startmessage="[DBG] `date "+%a %b %d %T %N %Z %Y"`: NEW START: ams_ip=$ams_ip, count_reminders=$param, count_iterations=$count_iterations, RACK_DATE=( ${RACK_DATE[@]} ), RACK_CHANNELS=( ${RACK_CHANNELS[@]} )"
@@ -92,8 +99,7 @@ OPTIONS
 \ttest_reminder.sh MACADDRESS All    - add + edit + delete reminders (cyclically)
 CURRENT SETTINGS
 \tAMS: $ams_ip
-\tcharterapi: $charterapi
-\tcount of reminders in one request: $count_reminders
+\tcount of reminders in one request: $param
 \tcount iterations: $count_iterations
 STATUSCODE
 \tcode of the reminder processing result, one of the following:
@@ -126,7 +132,7 @@ echo -e "No macaddress specified!$synopsys"|$logwrap; exit;
 elif [ `expr length "$macaddress"` -ne "12" ]; then echo -e "Incorrect macaddress specified!$synopsys"|$logwrap; exit
 fi
 
-if [ -z "$count_reminders" ]; then count_reminders=1; fi
+if [ ! -z "$param" ]; then count_reminders=${param}; else count_reminders=1; fi
 
 if [ ! -z "$action" ]; then
 
@@ -141,9 +147,8 @@ ${curlwrap} ${charterapi_d}/${postfix_settings}/amsIp/${macaddress}; echo
 elif [ "$action" == "Change" ]; then
 if [ ! -z "$param" ]; then ams_ip=$param; fi
 echo "Changing registration to AMS $ams_ip"
-echo "Used charterapi: $charterapi"
 json_change='{"settings":{"groups":[{"options":[],"id":"STB'${macaddress}'","type":"device-stb","amsid":"'$ams_ip'"}]}}'
-${curlwrap} -H 'Content-Type:application/json' -d $json_change "$charterapi_c/$postfix_settings?requestor=AMS"; echo
+${curlwrap} -H 'Content-Type:application/json' -d $json_change "$charterapi_a/$postfix_settings?requestor=AMS"; echo
 ${curlwrap} -H 'Content-Type:application/json' -d $json_change "$charterapi_b/$postfix_settings?requestor=AMS"; echo
 ${curlwrap} -H 'Content-Type:application/json' -d $json_change "$charterapi_c/$postfix_settings?requestor=AMS"; echo
 ${curlwrap} -H 'Content-Type:application/json' -d $json_change "$charterapi_d/$postfix_settings?requestor=AMS"; echo
@@ -170,26 +175,26 @@ echo "[DBG] `date "+%a %b %d %T %N %Z %Y"`: NEW START: ams_ip=$ams_ip, Purge ---
 
 elif [ "$action" == "Add" ]; then
 generate_params
-echo $startmessage|$logwrap
+echo ${startmessage}|${logwrap}
 for (( i=1; i<=$count_iterations; i++)); do for reminderProgramStart in ${RACK_DATE[@]}; do for reminderChannelNumber in ${RACK_CHANNELS[@]}; do
-${reminder} ${macaddress} $reminderProgramStart $reminderChannelNumber $reminderProgramId $reminderScheduleId $reminderId $reminderOffset;  sleep 1; done; done; done
+reminder_add1 ${macaddress} $reminderProgramStart $reminderChannelNumber $reminderProgramId $reminderScheduleId $reminderId $reminderOffset;  sleep 1; done; done; done
 
 
 elif [ "$action" == "Modify" ]; then
 generate_params
-echo $startmessage|$logwrap
+echo ${startmessage}|${logwrap}
 for (( i=1; i<=$count_iterations; i++)); do for reminderProgramStart in ${RACK_DATE[@]}; do for reminderChannelNumber in ${RACK_CHANNELS[@]}; do
 ${reminder} ${macaddress} $reminderProgramStart $reminderChannelNumber $reminderProgramId $reminderScheduleId $reminderId $reminderOffset;  sleep 1; done; done; done
 
 
 elif [ "$action" == "Delete" ]; then
 generate_params
-echo $startmessage|$logwrap
+echo ${startmessage}|${logwrap}
 for (( i=1; i<=$count_iterations; i++)); do for reminderProgramStart in ${RACK_DATE[@]}; do for reminderChannelNumber in ${RACK_CHANNELS[@]}; do
-${reminder} ${macaddress} $reminderProgramStart $reminderChannelNumber $reminderProgramId $reminderScheduleId $reminderId $reminderOffset;  sleep 1; done; done; done
+reminder_delete ${macaddress} ${reminderScheduleId} ${reminderId};  sleep 1; done; done; done
 
 else
-echo -e "Incorrect action specified!$synopsys"|${logwrap}; exit;
+echo -e "Incorrect action specified!"; exit;
 
 
 fi

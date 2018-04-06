@@ -1,21 +1,14 @@
-function reminder_delete1(){
+### ### ###
+function reminder_delete(){
 macaddress="$1"
-reminderProgramStart="$2"
-reminderChannelNumber="$3"
-reminderProgramId="$4"
-reminderScheduleId="$5"
-reminderId="$6"
-reminderOffset="$7"
-echo "[DBG] `date "+%a %b %d %T %N %Z %Y"`: Delete 1rem for macaddress=$macaddress with reminderProgramStart=$data, reminderChannelNumber=$reminderChannelNumber, reminderProgramId=$reminderProgramId, reminderScheduleId=$reminderScheduleId, reminderId=$reminderId, reminderOffset=$reminderOffset, iteration="$i"/"$count_iterations""|${logwrap}
+reminderScheduleId="$2"
+reminderId="$3"
+echo "[DBG] `date "+%a %b %d %T %N %Z %Y"`: Delete 1rem for macaddress=$macaddress with reminderScheduleId=$reminderScheduleId, reminderId=$reminderId, iteration="$i"/"$count_iterations""|${logwrap}
 #/usr/bin/time -f 'real %Es' -o $logfile -a $curlwrap 'http://'$ams_ip':'$ams_port'/'$url'' -H 'Content-type: application/json' \
 /usr/bin/time -f 'real %Es' -o $logfile -a $curlwrap -s 'http://'$ams_ip':'$ams_port'/'$url'' -H 'Content-type: application/json' \
 -d '{
-"deviceId": '$macaddress',
-"reminders":
-[
-{ "reminderProgramStart": "'$reminderProgramStart' 00:00", "reminderChannelNumber": '$reminderChannelNumber', "reminderProgramId": '$reminderProgramId', 
-"reminderScheduleId":'$reminderScheduleId', "reminderId":'$reminderId', "reminderOffset": '$reminderOffset' }
-]}'
+"deviceId": '${macaddress}',
+"reminders":[{ "reminderScheduleId":'${reminderScheduleId}', "reminderId":'${reminderId}'}]}'
 echo;echo
 }
 

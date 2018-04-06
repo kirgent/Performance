@@ -1,5 +1,7 @@
 import org.junit.Ignore;
+import org.junit.Rule;
 import org.junit.Test;
+import org.junit.rules.Timeout;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -10,6 +12,9 @@ import static org.junit.Assert.assertEquals;
  * We are as Middle: chain of requests: localhost -> AMS -> box -> AMS -> localhost (Middle)
  */
 public class testMiddle_Check_registration extends API_Middle {
+
+    @Rule
+    final public Timeout globalTimeout = Timeout.seconds(20);
 
     private API_Middle Middle = new API_Middle();
 

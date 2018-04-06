@@ -71,7 +71,9 @@ public class API {
 
     //DATES
     //String reminderProgramStart = "2018-03-24";
-    String reminderProgramStart_for_statuscode2 = "2000-01-01";
+    String reminderProgramStart_past = "2000-01-01";
+    String reminderProgramStart_wrong = "0000-00-00";
+    String reminderProgramStart_text = "yyyy-mm-dd";
     //String[] rack_date = {"2018-03-15"};
 
     //CHANNELS
@@ -105,11 +107,11 @@ public class API {
 
     private static String[] statuscode = {
             "0 - requested operation with the reminder was accomplished successfully. Always returned for \"Reminders Purge\" request (Request ID=3)",
-            "1 - empty, TBD",
+            "1 - the number of reminders for the STB exceeded the limitation Applies to \"Reminders Add\" request (Request ID=0)",
             "2 - reminder is set for time in the past. Applies to \"Reminders Add\" request (Request ID=0)",
             "3 - reminder is set for unknown channel. \"Reminders Add\" request (Request ID=0)",
             "4 - reminder is unknown. Applies to \"Reminders Delete\" request (Request ID=1) and \"Reminders Modify\" request (Request ID=2)",
-            "5 - reminder with provided pair of identifiers (reminderScheduleId and reminderId) is already set \"Reminders Add\" request (Request ID=0)" };
+            "5 - reminder with provided pair of identifiers (reminderScheduleId and reminderId) is already set \"Reminders Add\" request (Request ID=0)"};
 
     String ams_ip = "172.30.81.4";
     //String ams_ip = "172.30.112.19";
@@ -212,8 +214,20 @@ public class API {
         if(body.contains("\"status\":\"Failed\"") && body.contains("\"errorMessage\":\"REM-002 Reminders Service error: Timeout detected by BoxResponseTracker\"")){
             result += "REM-002 Reminders Service error: Timeout detected by BoxResponseTracker";
         }
+        if(body.contains("\"status\":\"Failed\"") && body.contains("\"errorMessage\":\"REM-008 Reminders parsing error: missing program start\"")){
+            result += "REM-008 Reminders parsing error: missing program start";
+        }
+        if(body.contains("\"status\":\"Failed\"") && body.contains("\"errorMessage\":\"REM-008 Reminders parsing error: missing channel number\"")){
+            result += "REM-008 Reminders parsing error: missing channel number";
+        }
+        if(body.contains("\"status\":\"Failed\"") && body.contains("\"errorMessage\":\"REM-008 Reminders parsing error: incorrect reminderScheduleId\"")){
+            result += "REM-008 Reminders parsing error: incorrect reminderScheduleId";
+        }
         if(body.contains("\"status\":\"Failed\"") && body.contains("\"errorMessage\":\"Incorrect request: ChangeReminders\"")){
             result += "Incorrect request: ChangeReminders";
+        }
+        if(body.contains("\"status\":\"Failed\"") && body.contains("\"errorMessage\":\"name cannot be null\"")){
+            result += "name cannot be null";
         }
         if(body.contains("REM-002 Reminders Service error: Can not connect to STB with stbId=" + macaddress)){
             result += "REM-002 Reminders Service error: Can not connect to STB with stbId=" + macaddress;
