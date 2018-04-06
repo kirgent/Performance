@@ -70,16 +70,7 @@ public class testAMS_Reminder_Modify extends API {
                 reminderProgramStart(), reminderChannelNumber_empty, reminderProgramId,
                 reminderOffset, reminderScheduleId, reminderId);
         assertEquals(expected400, actual.get(0));
-        assertEquals("", actual.get(1));
-    }
-
-    @Test
-    public void testModify_reminderChannelNumber_negative() throws IOException {
-        ArrayList actual = AMS.Request(ams_ip, macaddress, Operation.modify, count_reminders,
-                reminderProgramStart(), -1, reminderProgramId,
-                reminderOffset, reminderScheduleId, reminderId);
-        assertEquals(expected400, actual.get(0));
-        assertEquals("", actual.get(1));
+        assertEquals("REM-008 Reminders parsing error: missing channel number", actual.get(1));
     }
 
     @Test
@@ -97,7 +88,7 @@ public class testAMS_Reminder_Modify extends API {
                 reminderProgramStart(), Integer.MIN_VALUE, reminderProgramId,
                 reminderOffset, reminderScheduleId, reminderId);
         assertEquals(expected400, actual.get(0));
-        assertEquals("", actual.get(1));
+        assertEquals("REM-008 Reminders parsing error: missing channel number", actual.get(1));
     }
 
     @Test
@@ -169,16 +160,7 @@ public class testAMS_Reminder_Modify extends API {
                 reminderProgramStart(), reminderChannelNumber, reminderProgramId,
                 Integer.MIN_VALUE, reminderScheduleId, reminderId);
         assertEquals(expected400, actual.get(0));
-        assertEquals("", actual.get(1));
-    }
-
-    @Test
-    public void testModify_reminderOffset_negative() throws IOException {
-        ArrayList actual = AMS.Request(ams_ip, macaddress, Operation.modify, count_reminders,
-                reminderProgramStart(), reminderChannelNumber, reminderProgramId,
-                -1, reminderScheduleId, reminderId);
-        assertEquals(expected400, actual.get(0));
-        assertEquals("", actual.get(1));
+        assertEquals("REM-008 Reminders parsing error: missing offset", actual.get(1));
     }
 
     @Test
@@ -206,16 +188,7 @@ public class testAMS_Reminder_Modify extends API {
                 reminderProgramStart(), reminderChannelNumber, reminderProgramId,
                 reminderOffset, Integer.MIN_VALUE, reminderId);
         assertEquals(expected400, actual.get(0));
-        assertEquals("", actual.get(1));
-    }
-
-    @Test
-    public void testModify_reminderScheduleId_negative() throws IOException {
-        ArrayList actual = AMS.Request(ams_ip, macaddress, Operation.modify, count_reminders,
-                reminderProgramStart(), reminderChannelNumber, reminderProgramId,
-                reminderOffset, -1, reminderId);
-        assertEquals(expected400, actual.get(0));
-        assertEquals("", actual.get(1));
+        assertEquals("REM-008 Reminders parsing error: incorrect reminderScheduleId", actual.get(1));
     }
 
     @Test
@@ -242,16 +215,7 @@ public class testAMS_Reminder_Modify extends API {
                 reminderProgramStart(), reminderChannelNumber, reminderProgramId,
                 reminderOffset, reminderScheduleId, Integer.MIN_VALUE);
         assertEquals(expected400, actual.get(0));
-        assertEquals("", actual.get(1));
-    }
-
-    @Test
-    public void testModify_reminderId_negative() throws IOException {
-        ArrayList actual = AMS.Request(ams_ip, macaddress, Operation.modify, count_reminders,
-                reminderProgramStart(), reminderChannelNumber, reminderProgramId,
-                reminderOffset, reminderScheduleId, -1);
-        assertEquals(expected400, actual.get(0));
-        assertEquals("", actual.get(1));
+        assertEquals("REM-008 Reminders parsing error: incorrect reminderId", actual.get(1));
     }
 
     /** 4 - reminder is unknown. Applies to "Reminders Delete" request (Request ID=1) and "Reminders Modify" request (Request ID=2)
@@ -285,6 +249,7 @@ public class testAMS_Reminder_Modify extends API {
     }
 
     @Test
+    @Deprecated
     public void testModify_REM_ST_001_Box_is_not_registered() throws IOException {
         ArrayList actual = AMS.Request(ams_ip, macaddress, Operation.modify, count_reminders,
                 reminderProgramStart(), reminderChannelNumber, reminderProgramId,
