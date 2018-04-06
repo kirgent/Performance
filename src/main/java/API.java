@@ -220,6 +220,9 @@ public class API {
         if(body.contains("\"status\":\"Failed\"") && body.contains("\"errorMessage\":\"REM-008 Reminders parsing error: missing channel number\"")){
             result += "REM-008 Reminders parsing error: missing channel number";
         }
+        if(body.contains("\"status\":\"Failed\"") && body.contains("\"errorMessage\":\"REM-008 Reminders parsing error: missing offset\"")){
+            result += "REM-008 Reminders parsing error: missing offset";
+        }
         if(body.contains("\"status\":\"Failed\"") && body.contains("\"errorMessage\":\"REM-008 Reminders parsing error: incorrect reminderScheduleId\"")){
             result += "REM-008 Reminders parsing error: incorrect reminderScheduleId";
         }

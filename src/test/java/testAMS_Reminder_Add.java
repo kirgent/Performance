@@ -133,16 +133,7 @@ public class testAMS_Reminder_Add extends API {
                 reminderProgramStart(), reminderChannelNumber, reminderProgramId,
                 Integer.MIN_VALUE, reminderScheduleId, reminderId);
         assertEquals(expected400, actual.get(0));
-        assertEquals("", actual.get(1));
-    }
-
-    @Test
-    public void testAdd_reminderOffset_negative() throws IOException {
-        ArrayList actual = AMS.Request(ams_ip, macaddress, Operation.add, count_reminders,
-                reminderProgramStart(), reminderChannelNumber, reminderProgramId,
-                -1, reminderScheduleId, reminderId);
-        assertEquals(expected400, actual.get(0));
-        assertEquals("", actual.get(1));
+        assertEquals("REM-008 Reminders parsing error: missing offset", actual.get(1));
     }
 
     @Test

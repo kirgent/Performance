@@ -24,16 +24,16 @@ public class testAMS_Reminder_Delete extends API {
     public void testDelete_reminderScheduleId_empty() throws IOException {
         ArrayList actual = AMS.Request(ams_ip, macaddress, Operation.delete, count_reminders,
                 "", 0, "", 0, reminderScheduleId_null, reminderId);
-        assertEquals(expected400, actual.get(0));
-        assertEquals("", actual.get(1));
+        assertEquals(expected200, actual.get(0));
+        assertEquals("4", actual.get(1));
     }
 
     @Test
-    public void testDelete_reminderScheduleId_MAX_VALUE() throws IOException {
+    public void testDelete_reminderScheduleId_MAX_VALUE__statusCode4() throws IOException {
         ArrayList actual = AMS.Request(ams_ip, macaddress, Operation.delete, count_reminders,
                 "", 0, "", 0, Integer.MAX_VALUE, reminderId);
-        assertEquals(expected400, actual.get(0));
-        assertEquals("", actual.get(1));
+        assertEquals(expected200, actual.get(0));
+        assertEquals("4", actual.get(1));
     }
 
     @Test
@@ -41,15 +41,7 @@ public class testAMS_Reminder_Delete extends API {
         ArrayList actual = AMS.Request(ams_ip, macaddress, Operation.delete, count_reminders,
                 "", 0, "", 0, Integer.MIN_VALUE, reminderId);
         assertEquals(expected400, actual.get(0));
-        assertEquals("", actual.get(1));
-    }
-
-    @Test
-    public void testDelete_reminderScheduleId_negative() throws IOException {
-        ArrayList actual = AMS.Request(ams_ip, macaddress, Operation.delete, count_reminders,
-                "", 0, "", 0, -1, reminderId);
-        assertEquals(expected400, actual.get(0));
-        assertEquals("", actual.get(1));
+        assertEquals("REM-008 Reminders parsing error: incorrect reminderScheduleId", actual.get(1));
     }
 
     @Test
@@ -61,25 +53,17 @@ public class testAMS_Reminder_Delete extends API {
     }
 
     @Test
-    public void testDelete_reminderId_MAX_VALUE() throws IOException {
+    public void testDelete_reminderId_MAX_VALUE__statusCode4() throws IOException {
         ArrayList actual = AMS.Request(ams_ip, macaddress, Operation.delete, count_reminders,
                 "", 0, "", 0, reminderScheduleId, Integer.MAX_VALUE);
-        assertEquals(expected400, actual.get(0));
-        assertEquals("REM-008 Reminders parsing error: incorrect reminderId", actual.get(1));
+        assertEquals(expected200, actual.get(0));
+        assertEquals("4", actual.get(1));
     }
 
     @Test
     public void testDelete_reminderId_MIN_VALUE() throws IOException {
         ArrayList actual = AMS.Request(ams_ip, macaddress, Operation.delete, count_reminders,
                 "", 0, "", 0, reminderScheduleId, Integer.MIN_VALUE);
-        assertEquals(expected400, actual.get(0));
-        assertEquals("REM-008 Reminders parsing error: incorrect reminderId", actual.get(1));
-    }
-
-    @Test
-    public void testDelete_reminderId_negative() throws IOException {
-        ArrayList actual = AMS.Request(ams_ip, macaddress, Operation.delete, count_reminders,
-                "", 0, "", 0, reminderScheduleId, -1);
         assertEquals(expected400, actual.get(0));
         assertEquals("REM-008 Reminders parsing error: incorrect reminderId", actual.get(1));
     }
