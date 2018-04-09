@@ -15,7 +15,9 @@ class API_Middle extends API{
     //final public Timeout globalTimeout = Timeout.seconds(20);
 
     ArrayList Change_registration(String macaddress, String charterapi, String ams_ip) throws IOException {
-        System.out.println("Change_registration "+ macaddress +" to ams " + ams_ip + " via charterapi: " + charterapi);
+        if(show_extra_info) {
+            System.out.println("Change_registration " + macaddress + " to ams " + ams_ip + " via charterapi: " + charterapi);
+        }
         HttpPost request = new HttpPost(charterapi + postfix_settings + "?requestor=AMS");
         request.setEntity(new StringEntity(generate_json_change_registration(macaddress, ams_ip)));
         request.setHeader("Content-type", "application/json");
@@ -32,12 +34,14 @@ class API_Middle extends API{
         ArrayList arrayList = new ArrayList();
         arrayList.add(0, response.getStatusLine().getStatusCode() + " " + response.getStatusLine().getReasonPhrase());
         arrayList.add(1, check_body_response(read_response(new StringBuilder(),response).toString(), macaddress));
-        System.out.println("\n[DBG] return codes: " + arrayList);
+        System.out.println("[DBG] return codes: " + arrayList);
         return arrayList;
     }
 
     ArrayList Check_registration(String macaddress, String charterapi) throws IOException {
-        System.out.println("Check_registration "+ macaddress +" via charterapi: " + charterapi);
+        if(show_extra_info) {
+            System.out.println("Check_registration " + macaddress + " via charterapi: " + charterapi);
+        }
         HttpGet request = new HttpGet(charterapi + postfix_settings + "/amsIp/" + macaddress);
         //request.setHeader("Accept", "*/*");
         //request.setHeader("Content-type", "application/json");
@@ -53,7 +57,7 @@ class API_Middle extends API{
         ArrayList arrayList = new ArrayList();
         arrayList.add(0, response.getStatusLine().getStatusCode() + " " + response.getStatusLine().getReasonPhrase());
         arrayList.add(1, check_body_response(read_response(new StringBuilder(),response).toString(), macaddress));
-        System.out.println("\n[DBG] return codes: " + arrayList);
+        System.out.println("[DBG] return codes: " + arrayList);
         return arrayList;
     }
 
@@ -80,7 +84,9 @@ class API_Middle extends API{
         json.put("reminderPresetTime", 5);
         json.put("newOnly", true);
         String result = json.toJSONString();
-        System.out.println("generated json: " + result);
+        if(show_generated_json) {
+            System.out.println("generated json: " + result);
+        }
         return result;
     }
 
@@ -102,7 +108,9 @@ class API_Middle extends API{
         object_in_groups.put("options", array_options);
 
         String result = json.toString();
-        System.out.println("generated json: " + result);
+        if(show_generated_json) {
+            System.out.println("generated json: " + result);
+        }
         return result;
     }
 
@@ -120,7 +128,9 @@ class API_Middle extends API{
         object_in_array.put("reminderId", reminderId);
         //}
         String result = json.toJSONString();
-        System.out.println("generated json: " + result);
+        if(show_generated_json) {
+            System.out.println("generated json: " + result);
+        }
         return result;
     }
 
@@ -137,7 +147,9 @@ class API_Middle extends API{
         object_in_array.put("reminderId", reminderId);
         //}
         String result = json.toJSONString();
-        System.out.println("generated json: " + result);
+        if(show_generated_json) {
+            System.out.println("generated json: " + result);
+        }
         return result;
     }
 
@@ -151,7 +163,7 @@ class API_Middle extends API{
         ArrayList arrayList = new ArrayList();
         arrayList.add(0, response.getStatusLine().getStatusCode() + " " + response.getStatusLine().getReasonPhrase());
         arrayList.add(1, check_body_response(read_response(new StringBuilder(),response).toString(), deviceId));
-        System.out.println("\n[DBG] return codes: " + arrayList);
+        System.out.println("[DBG] return codes: " + arrayList);
         return arrayList;
     }
 
@@ -165,12 +177,14 @@ class API_Middle extends API{
         ArrayList arrayList = new ArrayList();
         arrayList.add(0, response.getStatusLine().getStatusCode() + " " + response.getStatusLine().getReasonPhrase());
         arrayList.add(1, check_body_response(read_response(new StringBuilder(),response).toString(), deviceId));
-        System.out.println("\n[DBG] return codes: " + arrayList);
+        System.out.println("[DBG] return codes: " + arrayList);
         return arrayList;
     }
 
     ArrayList Delete_multiple_reminders(String charterapi, String deviceId, int reminderScheduleId, int reminderId) throws IOException {
-        System.out.println("Delete_multiple_reminders with reminderScheduleId=" + reminderScheduleId + " and reminderId=" + reminderId);
+        if(show_extra_info) {
+            System.out.println("Delete_multiple_reminders with reminderScheduleId=" + reminderScheduleId + " and reminderId=" + reminderId);
+        }
         HttpPost request = new HttpPost(charterapi + "/remindersmiddle/v1/reminders/deleteMultipleReminders");
         request.setEntity(new StringEntity(generate_json_reminder_delete_multiple2(deviceId, reminderScheduleId, reminderId)));
         System.out.println("[DBG] Request string: " + request);
@@ -183,7 +197,7 @@ class API_Middle extends API{
         ArrayList arrayList = new ArrayList();
         arrayList.add(0, response.getStatusLine().getStatusCode() + " " + response.getStatusLine().getReasonPhrase());
         arrayList.add(1, check_body_response(read_response(new StringBuilder(),response).toString(), deviceId));
-        System.out.println("\n[DBG] return codes: " + arrayList);
+        System.out.println("[DBG] return codes: " + arrayList);
         return arrayList;
     }
 
@@ -203,7 +217,7 @@ class API_Middle extends API{
         ArrayList arrayList = new ArrayList();
         arrayList.add(0, response.getStatusLine().getStatusCode() + " " + response.getStatusLine().getReasonPhrase());
         arrayList.add(1, check_body_response(read_response(new StringBuilder(), response).toString(), deviceId));
-        System.out.println("\n[DBG] return codes: " + arrayList);
+        System.out.println("[DBG] return codes: " + arrayList);
         return arrayList;
     }
 

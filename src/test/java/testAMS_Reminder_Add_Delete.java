@@ -1,7 +1,8 @@
-import org.junit.jupiter.api.RepeatedTest;
+import org.junit.Test;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Random;
 
 import static org.junit.Assert.assertEquals;
 
@@ -9,66 +10,82 @@ import static org.junit.Assert.assertEquals;
  * We are as Middle: chain of requests: localhost -> AMS -> box -> AMS -> localhost (Middle)
  */
 //@FixMethodOrder(MethodSorters.NAME_ASCENDING)
-class testAMS_Reminder_Add_Delete extends API {
+public class testAMS_Reminder_Add_Delete extends API {
 
     private API_AMS AMS = new API_AMS();
 
-    @RepeatedTest(1)
-    void testAdd_Delete() throws IOException {
-        ArrayList actual = AMS.Request(ams_ip, macaddress, Operation.add, 10,
-                reminderProgramStart(), reminderChannelNumber, reminderProgramId,
-                reminderOffset, reminderScheduleId, reminderId);
+    @Test
+    public void testAdd_Delete() throws IOException {
+        int count_reminders = 1;
+        /*Random random = new Random();
+        Random random2 = new Random();
+        Long reminderScheduleId = Math.abs(random.nextLong());
+        Long reminderId = Math.abs(random2.nextLong());*/
+
+        ArrayList actual = AMS.Request(macaddress, Operation.add, count_reminders, reminderProgramStart(), reminderChannelNumber,
+                reminderProgramId, reminderOffset, reminderScheduleId_random, reminderId_random);
         assertEquals(expected200, actual.get(0));
         assertEquals("", actual.get(1));
 
-        actual = AMS.Request(ams_ip, macaddress, Operation.delete, 10,
-                reminderProgramStart(), reminderChannelNumber, reminderProgramId,
-                reminderOffset, reminderScheduleId, reminderId);
-        assertEquals(expected200, actual.get(0));
-        assertEquals("", actual.get(1));
-    }
-
-    @RepeatedTest(10)
-    void testAdd_Delete48() throws IOException {
-        ArrayList actual = AMS.Request(ams_ip, macaddress, Operation.add, 48,
-                reminderProgramStart(), reminderChannelNumber, reminderProgramId,
-                reminderOffset, reminderScheduleId, reminderId);
-        assertEquals(expected200, actual.get(0));
-        assertEquals("", actual.get(1));
-
-        actual = AMS.Request(ams_ip, macaddress, Operation.delete, 48,
-                reminderProgramStart(), reminderChannelNumber, reminderProgramId,
-                reminderOffset, reminderScheduleId, reminderId);
+        actual = AMS.Request(macaddress, Operation.delete, count_reminders, reminderProgramStart(), reminderChannelNumber,
+                reminderProgramId, reminderOffset, reminderScheduleId_arraylist(), reminderId_arraylist());
         assertEquals(expected200, actual.get(0));
         assertEquals("", actual.get(1));
     }
 
-    @RepeatedTest(10)
-    void testAdd_Delete288() throws IOException {
-        ArrayList actual = AMS.Request(ams_ip, macaddress, Operation.add, 288,
-                reminderProgramStart(), reminderChannelNumber, reminderProgramId,
-                reminderOffset, reminderScheduleId, reminderId);
+    @Test
+    public void testAdd_Delete48() throws IOException {
+        int count_reminders = 48;
+        Random random = new Random();
+        Random random2 = new Random();
+        Long reminderScheduleId = Math.abs(random.nextLong());
+        Long reminderId = Math.abs(random2.nextLong());
+
+        ArrayList actual = AMS.Request(macaddress, Operation.add, count_reminders, reminderProgramStart(),
+                reminderChannelNumber, reminderProgramId, reminderOffset, reminderScheduleId, reminderId);
         assertEquals(expected200, actual.get(0));
         assertEquals("", actual.get(1));
 
-        actual = AMS.Request(ams_ip, macaddress, Operation.delete, 288,
-                reminderProgramStart(), reminderChannelNumber, reminderProgramId,
-                reminderOffset, reminderScheduleId, reminderId);
+        actual = AMS.Request(macaddress, Operation.delete, count_reminders, reminderProgramStart(),
+                reminderChannelNumber, reminderProgramId, reminderOffset, reminderScheduleId, reminderId);
         assertEquals(expected200, actual.get(0));
         assertEquals("", actual.get(1));
     }
 
-    @RepeatedTest(10)
-    void testAdd_Delete720() throws IOException {
-        ArrayList actual = AMS.Request(ams_ip, macaddress, Operation.add, 720,
-                reminderProgramStart(), reminderChannelNumber, reminderProgramId,
-                reminderOffset, reminderScheduleId, reminderId);
+    @Test
+    public void testAdd_Delete288() throws IOException {
+        int count_reminders = 288;
+        Random random = new Random();
+        Random random2 = new Random();
+        Long reminderScheduleId = Math.abs(random.nextLong());
+        Long reminderId = Math.abs(random2.nextLong());
+
+        ArrayList actual = AMS.Request(macaddress, Operation.add, count_reminders, reminderProgramStart(),
+                reminderChannelNumber, reminderProgramId, reminderOffset, reminderScheduleId, reminderId);
         assertEquals(expected200, actual.get(0));
         assertEquals("", actual.get(1));
 
-        actual = AMS.Request(ams_ip, macaddress, Operation.delete, 720,
-                reminderProgramStart(), reminderChannelNumber, reminderProgramId,
-                reminderOffset, reminderScheduleId, reminderId);
+        actual = AMS.Request(macaddress, Operation.delete, count_reminders, reminderProgramStart(),
+                reminderChannelNumber, reminderProgramId, reminderOffset, reminderScheduleId, reminderId);
+        assertEquals(expected200, actual.get(0));
+        assertEquals("", actual.get(1));
+    }
+
+    @Test
+    public void testAdd_Delete720() throws IOException {
+        int count_reminders = 720;
+        Random random = new Random();
+        Random random2 = new Random();
+        Long reminderScheduleId = Math.abs(random.nextLong());
+        Long reminderId = Math.abs(random2.nextLong());
+
+        ArrayList actual = AMS.Request(macaddress, Operation.add, count_reminders, reminderProgramStart(),
+                reminderChannelNumber, reminderProgramId, reminderOffset, reminderScheduleId, reminderId);
+        assertEquals(expected200, actual.get(0));
+        assertEquals("", actual.get(1));
+
+        actual = AMS.Request(macaddress, Operation.delete, count_reminders, reminderProgramStart(),
+                reminderChannelNumber, reminderProgramId, reminderOffset, reminderScheduleId, reminderId);
         assertEquals(expected200, actual.get(0));
         assertEquals("", actual.get(1));
     }

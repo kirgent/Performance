@@ -9,6 +9,7 @@ import java.sql.*;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Random;
 import java.util.TimeZone;
 
 import static java.lang.System.currentTimeMillis;
@@ -19,6 +20,21 @@ import static java.lang.System.currentTimeMillis;
  */
 public class API {
 
+    API(){
+        reminderScheduleId_arraylist = new ArrayList<>();
+        reminderId_arraylist = new ArrayList<>();
+    }
+    private ArrayList<Long> reminderScheduleId_arraylist;
+    private ArrayList<Long> reminderId_arraylist;
+
+    long reminderScheduleId_arraylist() {
+        return reminderScheduleId_arraylist.get(0);
+    }
+
+    long reminderId_arraylist() {
+        return reminderId_arraylist.get(0);
+    }
+
     //@Rule
     //final public Timeout globalTimeout = Timeout.seconds(20);
 
@@ -26,7 +42,10 @@ public class API {
 
     enum Operation { add, modify, delete, purge, blablabla, blablablablablablablablablablablablablablabla }
 
-    enum Http { Get, Post, Delete };
+    Boolean show_generated_json = true;
+
+    Boolean show_extra_info = false;
+    //enum Http { Get, Post, Delete };
 
     //static Logger log = Logger.getLogger(testAMS.class.getName());
     //FileHandler txtFile = new FileHandler ("log.log", true);
@@ -70,14 +89,13 @@ public class API {
 
 
     //DATES
-    //String reminderProgramStart = "2018-03-24";
     String reminderProgramStart_past = "2000-01-01";
     String reminderProgramStart_wrong = "0000-00-00";
     String reminderProgramStart_text = "yyyy-mm-dd";
     //String[] rack_date = {"2018-03-15"};
 
     //CHANNELS
-    int reminderChannelNumber = 2;
+    int reminderChannelNumber = 3;
     int reminderChannelNumber_empty;
     int reminderChannelNumber_for_statuscode3 = 9999;
     int reminderChannelNumber_for_statuscode4 = 1000;
@@ -93,15 +111,13 @@ public class API {
 
     int reminderOffset = 0;
     int reminderOffset_null;
-    int reminderOffset_wrong = -1;
 
-    int reminderScheduleId = 1;
-    int reminderScheduleId_null;
-    int reminderScheduleId_wrong = -1;
+    long reminderScheduleId = 1;
+    long reminderScheduleId_null;
+    long reminderScheduleId_random = -1;
 
-    int reminderId = 1;
-    int reminderId_null;
-    int reminderId_wrong = -1;
+    long reminderId = 1;
+    long reminderId_random = -1;
 
     int count_reminders = 1;
 
@@ -271,7 +287,10 @@ public class API {
         BufferedReader reader = new BufferedReader(new InputStreamReader(response.getEntity().getContent(), "UTF-8"));
         //StringBuilder body = new StringBuilder();
         for (String line; (line = reader.readLine()) != null; ) {
-            System.out.println(", response body: " + body.append(line).append("\n"));
+            System.out.print(", response body: " + body.append(line));
+            if(reader.readLine() == null){
+                System.out.println();
+            }
         }
         return body;
     }
@@ -388,6 +407,20 @@ public class API {
         SimpleDateFormat pattern = new SimpleDateFormat("yyyy-MM-dd");
         calendar.add(Calendar.DAY_OF_YEAR, +1);
         return pattern.format(calendar.getTime());
+    }
+
+    Long reminderScheduleId(){
+        Random random = new Random();
+        Long reminderScheduleId = Math.abs(random.nextLong());
+        reminderScheduleId_arraylist.add(reminderScheduleId);
+        return reminderScheduleId;
+    }
+
+    Long reminderId(){
+        Random random = new Random();
+        Long reminderId = Math.abs(random.nextLong());
+        reminderId_arraylist.add(reminderId);
+        return reminderId;
     }
 
     String get_date(int count, Boolean several) {

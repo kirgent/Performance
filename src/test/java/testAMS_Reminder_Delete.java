@@ -14,32 +14,28 @@ public class testAMS_Reminder_Delete extends API {
 
     @Test
     public void testDelete() throws IOException {
-        ArrayList actual = AMS.Request(ams_ip, macaddress, Operation.delete, count_reminders,
-                "", 0, "", 0, reminderScheduleId, reminderId);
+        ArrayList actual = AMS.Request(macaddress, 1, 1);
         assertEquals(expected200, actual.get(0));
         assertEquals("", actual.get(1));
     }
 
     @Test
     public void testDelete_reminderScheduleId_empty__statusCode4() throws IOException {
-        ArrayList actual = AMS.Request(ams_ip, macaddress, Operation.delete, count_reminders,
-                "", 0, "", 0, reminderScheduleId_null, reminderId);
+        ArrayList actual = AMS.Request(macaddress, reminderScheduleId_null, reminderId);
         assertEquals(expected200, actual.get(0));
         assertEquals("4", actual.get(1));
     }
 
     @Test
     public void testDelete_reminderScheduleId_MAX_VALUE__statusCode4() throws IOException {
-        ArrayList actual = AMS.Request(ams_ip, macaddress, Operation.delete, count_reminders,
-                "", 0, "", 0, Integer.MAX_VALUE, reminderId);
+        ArrayList actual = AMS.Request(macaddress, Long.MAX_VALUE, reminderId);
         assertEquals(expected200, actual.get(0));
         assertEquals("4", actual.get(1));
     }
 
     @Test
     public void testDelete_reminderScheduleId_MIN_VALUE() throws IOException {
-        ArrayList actual = AMS.Request(ams_ip, macaddress, Operation.delete, count_reminders,
-                "", 0, "", 0, Integer.MIN_VALUE, reminderId);
+        ArrayList actual = AMS.Request(macaddress, Long.MIN_VALUE, reminderId);
         assertEquals(expected400, actual.get(0));
         assertEquals("REM-008 Reminders parsing error: incorrect reminderScheduleId", actual.get(1));
     }
@@ -49,24 +45,21 @@ public class testAMS_Reminder_Delete extends API {
      */
     @Test
     public void testDelete_reminderId_empty__statusCode4() throws IOException {
-        ArrayList actual = AMS.Request(ams_ip, macaddress, Operation.delete, count_reminders,
-                "", 0, "", 0, reminderScheduleId, reminderId_null);
+        ArrayList actual = AMS.Request(macaddress, reminderScheduleId, 0);
         assertEquals(expected200, actual.get(0));
         assertEquals("4", actual.get(1));
     }
 
     @Test
     public void testDelete_reminderId_MAX_VALUE__statusCode4() throws IOException {
-        ArrayList actual = AMS.Request(ams_ip, macaddress, Operation.delete, count_reminders,
-                "", 0, "", 0, reminderScheduleId, Integer.MAX_VALUE);
+        ArrayList actual = AMS.Request(macaddress, reminderScheduleId, Long.MAX_VALUE);
         assertEquals(expected200, actual.get(0));
         assertEquals("4", actual.get(1));
     }
 
     @Test
     public void testDelete_reminderId_MIN_VALUE() throws IOException {
-        ArrayList actual = AMS.Request(ams_ip, macaddress, Operation.delete, count_reminders,
-                "", 0, "", 0, reminderScheduleId, Integer.MIN_VALUE);
+        ArrayList actual = AMS.Request(macaddress, reminderScheduleId, Long.MIN_VALUE);
         assertEquals(expected400, actual.get(0));
         assertEquals("REM-008 Reminders parsing error: incorrect reminderId", actual.get(1));
     }
@@ -76,8 +69,7 @@ public class testAMS_Reminder_Delete extends API {
      */
     @Test
     public void testDelete_both_empty__statusCode4() throws IOException {
-        ArrayList actual = AMS.Request(ams_ip, macaddress, Operation.delete, count_reminders,
-                "", 0, "", 0, 0, 0);
+        ArrayList actual = AMS.Request(macaddress, 0, 0);
         assertEquals(expected200, actual.get(0));
         assertEquals("4", actual.get(1));
     }
@@ -87,16 +79,14 @@ public class testAMS_Reminder_Delete extends API {
      */
     @Test
     public void testDelete_macaddress_empty() throws IOException {
-        ArrayList actual = AMS.Request(ams_ip, "", Operation.delete, count_reminders,
-                "", 0, "", 0, reminderScheduleId, reminderId);
+        ArrayList actual = AMS.Request("", reminderScheduleId, reminderId);
         assertEquals(expected400, actual.get(0));
         assertEquals("REM-008 Reminders parsing error: wrong deviceId", actual.get(1));
     }
 
     @Test
     public void testDelete_macaddress_wrong() throws IOException {
-        ArrayList actual = AMS.Request(ams_ip, macaddress_wrong, Operation.delete, count_reminders,
-                "", 0, "", 0, reminderScheduleId, reminderId);
+        ArrayList actual = AMS.Request(macaddress_wrong, reminderScheduleId, reminderId);
         assertEquals(expected500, actual.get(0));
         assertEquals("REM-ST-001 Box is not registered", actual.get(1));
     }

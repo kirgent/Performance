@@ -3,6 +3,7 @@ import org.junit.Test;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Random;
 
 import static org.junit.Assert.*;
 
@@ -20,12 +21,18 @@ public class testSandbox extends API {
 
     @Test
     public void testTime() {
-        assertEquals("00:30", get_time(1, 2));
+        //assertEquals("00:30", get_time(1, 2));
+        Random random = new Random();
+        System.out.println(random.nextLong());
+
+        Random random2 = new Random();
+        //random.setSeed(1);
+        System.out.println(random2.nextLong());
     }
 
     @Test
     public void testOperation_NewAPI_400_Bad_Request() throws IOException {
-        ArrayList actual = AMS.Request(ams_ip, macaddress, Operation.blablabla, count_reminders,
+        ArrayList actual = AMS.Request(macaddress, Operation.blablabla, count_reminders,
                 reminderProgramStart(), reminderChannelNumber, reminderProgramId,
                 reminderOffset, reminderScheduleId, reminderId);
         assertEquals(expected400, actual.get(0));
@@ -67,7 +74,7 @@ public class testSandbox extends API {
 
     @Test
     public void testCheck_Delete() throws IOException {
-        ArrayList actual = AMS.Request(ams_ip, macaddress, Operation.delete, count_reminders,
+        ArrayList actual = AMS.Request(macaddress, Operation.delete, count_reminders,
                 reminderProgramStart(), reminderChannelNumber,
                 reminderProgramId, reminderOffset, reminderScheduleId, reminderId);
         assertEquals(expected200, actual.get(0));
