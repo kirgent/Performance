@@ -9,7 +9,7 @@ macaddress="$1"
 reminderScheduleId="$2"
 reminderId="$3"
 echo "[DBG] `date "+%a %b %d %T %N %Z %Y"`: Delete 1rem in iteration=$i/$count_iterations with reminderScheduleId=$reminderScheduleId, reminderId=$reminderId"|$logwrap
-#/usr/bin/time -f 'real %Es' -o $logfile -a $curlwrap 'http://'$ams_ip':'$ams_port'/'$url'' -H 'Content-type: application/json' \
+#/usr/bin/time -f 'real %Es' -o $logfile -a $curlwrap 'http://'$ams_ip':'$ams_port'/'url_delete'' -H 'Content-type: application/json' \
 /usr/bin/time -f 'real %Es' -o ${logfile} -a ${curlwrap} -s 'http://'${ams_ip}':'${ams_port}'/'${url_delete}'' -H 'Content-type: application/json' \
 -d '{
 "deviceId": '${macaddress}',
@@ -22,7 +22,7 @@ macaddress="$1"
 reminderScheduleId="$2"
 reminderId="$3"
 echo "[DBG] `date "+%a %b %d %T %N %Z %Y"`: Delete 48rems in iteration=$i/$count_iterations with reminderScheduleId=$reminderScheduleId, reminderId=$reminderId"|$logwrap
-/usr/bin/time -f 'real %Es' -o ${logfile} -a ${curlwrap} 'http://'$ams_ip':'$ams_port'/'$url'' -H 'Content-type: application/json' \
+/usr/bin/time -f 'real %Es' -o ${logfile} -a ${curlwrap} 'http://'$ams_ip':'$ams_port'/'$url_delete'' -H 'Content-type: application/json' \
 -d '{ 
 "deviceId": '${macaddress}',
 "reminders": [
@@ -83,7 +83,7 @@ macaddress="$1"
 reminderScheduleId="$2"
 reminderId="$3"
 echo "[DBG] `date "+%a %b %d %T %N %Z %Y"`: Delete 288rems in iteration=$i/$count_iterations with reminderScheduleId=$reminderScheduleId, reminderId=$reminderId"|$logwrap
-/usr/bin/time -f 'real %Es' -o $logfile -a $curlwrap 'http://'$ams_ip':'$ams_port'/'$url'' -H 'Content-type: application/json' \
+/usr/bin/time -f 'real %Es' -o $logfile -a $curlwrap 'http://'$ams_ip':'$ams_port'/'$url_delete'' -H 'Content-type: application/json' \
 -d '{
 "deviceId": '$macaddress',
 "reminders": [
@@ -385,7 +385,7 @@ macaddress="$1"
 reminderScheduleId="$2"
 reminderId="$3"
 echo "[DBG] `date "+%a %b %d %T %N %Z %Y"`: Delete 720rems in iteration=$i/$count_iterations with reminderScheduleId=$reminderScheduleId, reminderId=$reminderId"|$logwrap
-/usr/bin/time -f 'real %Es' -o $logfile -a $curlwrap 'http://'$ams_ip':'$ams_port'/'$url'' -H 'Content-type: application/json' \
+/usr/bin/time -f 'real %Es' -o $logfile -a $curlwrap 'http://'$ams_ip':'$ams_port'/'$url_delete'' -H 'Content-type: application/json' \
 -d '{
 "deviceId": '$macaddress',
 "reminders": [

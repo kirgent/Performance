@@ -1,4 +1,5 @@
 #!/bin/bash
+### ### ### OLD_API !!! req=ChangeReminders !!!
 # written by Kirill Grushin (kirill.grushin@dev.zodiac.tv)
 
 curlwrap="curl"

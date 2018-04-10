@@ -10,7 +10,7 @@ reminderId="$6"
 reminderOffset="$7"
 echo "[DBG] `date "+%a %b %d %T %N %Z %Y"`: Add 1rem in iteration=$i/$count_iterations with reminderProgramStart=$reminderProgramStart, reminderChannelNumber=$reminderChannelNumber, reminderProgramId=$reminderProgramId, reminderOffset=$reminderOffset, reminderScheduleId=$reminderScheduleId, reminderId=$reminderId"|$logwrap
 
-#/usr/bin/time -f 'real %Es' -o $logfile -a $curlwrap 'http://'$ams_ip':'$ams_port'/'$url'' -H 'Content-type: application/json' \
+#/usr/bin/time -f 'real %Es' -o $logfile -a $curlwrap 'http://'$ams_ip':'$ams_port'/'url_add'' -H 'Content-type: application/json' \
 /usr/bin/time -f 'real %Es' -o $logfile -a $curlwrap -s 'http://'$ams_ip':'$ams_port'/'$url_add'' -H 'Content-type: application/json' \
 -d '{
 "deviceId": '$macaddress',
@@ -30,7 +30,7 @@ reminderScheduleId="$5"
 reminderId="$6"
 reminderOffset="$7"
 echo "[DBG] `date "+%a %b %d %T %N %Z %Y"`: Add 48rems in iteration=$i/$count_iterations with reminderProgramStart=$reminderProgramStart, reminderChannelNumber=$reminderChannelNumber, reminderProgramId=$reminderProgramId, reminderOffset=$reminderOffset, reminderScheduleId=$reminderScheduleId, reminderId=$reminderId"|$logwrap
-/usr/bin/time -f 'real %Es' -o $logfile -a $curlwrap 'http://'$ams_ip':'$ams_port'/'$url'' -H 'Content-type: application/json' \
+/usr/bin/time -f 'real %Es' -o ${logfile} -a ${curlwrap} 'http://'${ams_ip}':'${ams_port}'/'${url_add}'' -H 'Content-type: application/json' \
 -d '{ 
 "deviceId": '$macaddress',
 "reminders": [
@@ -95,7 +95,7 @@ reminderScheduleId="$5"
 reminderId="$6"
 reminderOffset="$7"
 echo "[DBG] `date "+%a %b %d %T %N %Z %Y"`: Add 288rems in iteration=$i/$count_iterations with reminderProgramStart=$reminderProgramStart, reminderChannelNumber=$reminderChannelNumber, reminderProgramId=$reminderProgramId, reminderOffset=$reminderOffset, reminderScheduleId=$reminderScheduleId, reminderId=$reminderId"|$logwrap
-/usr/bin/time -f 'real %Es' -o $logfile -a $curlwrap 'http://'$ams_ip':'$ams_port'/'$url'' -H 'Content-type: application/json' \
+/usr/bin/time -f 'real %Es' -o $logfile -a $curlwrap 'http://'$ams_ip':'$ams_port'/'$url_add'' -H 'Content-type: application/json' \
 -d '{
 "deviceId": '$macaddress',
 "reminders": [
@@ -401,7 +401,7 @@ reminderId="$6"
 reminderOffset="$7"
 echo "[DBG] `date "+%a %b %d %T %N %Z %Y"`: Add 720rems in iteration=$i/$count_iterations with reminderProgramStart=$reminderProgramStart,
 reminderChannelNumber=$reminderChannelNumber, reminderProgramId=$reminderProgramId, reminderOffset=$reminderOffset, reminderScheduleId=$reminderScheduleId, reminderId=$reminderId"|$logwrap
-/usr/bin/time -f 'real %Es' -o $logfile -a $curlwrap 'http://'$ams_ip':'$ams_port'/'$url'' -H 'Content-type: application/json' \
+/usr/bin/time -f 'real %Es' -o $logfile -a $curlwrap 'http://'$ams_ip':'$ams_port'/'$url_add'' -H 'Content-type: application/json' \
 -d '{
 "deviceId": '$macaddress',
 "reminders": [
