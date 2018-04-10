@@ -14,7 +14,7 @@ public class testAMS_Reminder_Delete extends API {
 
     @Test
     public void testDelete() throws IOException {
-        ArrayList actual = AMS.Request(macaddress, 1, 1);
+        ArrayList actual = AMS.Request(macaddress, 2, 2);
         assertEquals(expected200, actual.get(0));
         assertEquals("", actual.get(1));
     }
@@ -89,6 +89,15 @@ public class testAMS_Reminder_Delete extends API {
         ArrayList actual = AMS.Request(macaddress_wrong, reminderScheduleId, reminderId);
         assertEquals(expected500, actual.get(0));
         assertEquals("REM-ST-001 Box is not registered", actual.get(1));
+    }
+
+    @Test
+    public void testDelete_count_reminders_is_empty() throws IOException {
+        ArrayList actual = AMS.Request(macaddress, Operation.delete, 0,
+                reminderProgramStart(), reminderChannelNumber, reminderProgramId,
+                reminderOffset, reminderScheduleId, reminderId);
+        assertEquals(expected400, actual.get(0));
+        assertEquals("REM-008 Reminders parsing error: wrong number of reminders", actual.get(1));
     }
 
 }

@@ -7,25 +7,25 @@ import java.util.Random;
 import static org.junit.Assert.assertEquals;
 
 public class testAMS_Reminder_Modify extends API {
+    //"reminderChannelNumber": <new value for the DCN the reminder is set to>,
+    //"reminderProgramStart": "<new value for the date/time of program the reminder is set to>",
+    //"reminderProgramId": "<new value for the TMS Program ID the reminder is set to>",
+    //"reminderOffset": <new value for the number of minutes before the program start the reminder should be shown>
+    //"reminderScheduleId": "<series or Individual program reminder schedule reference ID>",
+    //"reminderId": "<episode or Individual program reminder reference ID of a particular schedule>",
 
     private API_AMS AMS = new API_AMS();
 
     @Test
     public void testModify() throws IOException {
-        //"reminderChannelNumber": <new value for the DCN the reminder is set to>,
-        //"reminderProgramStart": "<new value for the date/time of program the reminder is set to>",
-        //"reminderProgramId": "<new value for the TMS Program ID the reminder is set to>",
-        //"reminderOffset": <new value for the number of minutes before the program start the reminder should be shown>
-        //"reminderScheduleId": "<series or Individual program reminder schedule reference ID>",
-        //"reminderId": "<episode or Individual program reminder reference ID of a particular schedule>",
         Random random = new Random();
         Random random2 = new Random();
-        Long reminderScheduleId = Math.abs(random.nextLong());
-        Long reminderId = Math.abs(random2.nextLong());
+        long reminderScheduleId = Math.abs(random.nextLong());
+        long reminderId = Math.abs(random2.nextLong());
 
         ArrayList actual = AMS.Request(macaddress, Operation.modify, count_reminders,
                 reminderProgramStart(), reminderChannelNumber, reminderProgramId,
-                10, reminderScheduleId, reminderId);
+                reminderOffset_new, 12345, 12345);
         assertEquals(expected200, actual.get(0));
         assertEquals("", actual.get(1));
     }
@@ -183,7 +183,7 @@ public class testAMS_Reminder_Modify extends API {
         
         ArrayList actual = AMS.Request(macaddress, Operation.modify, count_reminders,
                 reminderProgramStart(), reminderChannelNumber, reminderProgramId,
-                reminderOffset, Integer.MAX_VALUE, reminderId);
+                reminderOffset, Long.MAX_VALUE, reminderId);
         assertEquals(expected400, actual.get(0));
         assertEquals("", actual.get(1));
     }
@@ -293,6 +293,24 @@ public class testAMS_Reminder_Modify extends API {
                 reminderOffset, reminderScheduleId_null, 0);
         assertEquals(expected400, actual.get(0));
         assertEquals("", actual.get(1));
+    }
+
+    @Test
+    public void testModify_count_reminders_is_empty() throws IOException {
+        ArrayList actual = AMS.Request(macaddress, Operation.modify, 0,
+                reminderProgramStart(), reminderChannelNumber, reminderProgramId,
+                reminderOffset_new, reminderScheduleId, reminderId);
+        assertEquals(expected400, actual.get(0));
+        assertEquals("REM-008 Reminders parsing error: wrong number of reminders", actual.get(1));
+    }
+
+    @Test
+    public void testModify_all_wrong() throws IOException {
+        ArrayList actual = AMS.Request(macaddress_wrong, Operation.modify, 0,
+                reminderProgramStart_wrong, 0, reminderProgramId_empty,
+                reminderOffset, reminderScheduleId, reminderId);
+        assertEquals(expected400, actual.get(0));
+        assertEquals("REM-008 Reminders parsing error: wrong number of reminders", actual.get(1));
     }
     
 }

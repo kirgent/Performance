@@ -12,8 +12,10 @@
         <option value="i" />
         <option value="logfile" />
         <option value="logwrap" />
-        <option value="operation" />
         <option value="reminderOffset_new" />
+        <option value="reminder_add" />
+        <option value="reminder_delete" />
+        <option value="reminder_modify" />
         <option value="url" />
       </set>
     </option>

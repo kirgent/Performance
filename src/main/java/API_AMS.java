@@ -83,7 +83,7 @@ class API_AMS extends API{
         HttpPost request = new HttpPost(prepare_url(Operation.delete, true));
         request.setHeader("Accept", "application/json");
         request.setHeader("Content-type", "application/json");
-        request.setEntity(new StringEntity(generate_json_reminder(true, macaddress, reminderScheduleId, reminderId)));
+        request.setEntity(new StringEntity(generate_json_reminder_delete(true, macaddress, reminderScheduleId, reminderId)));
         System.out.println("[DBG] Request string: " + request);
 
         long start = System.currentTimeMillis();
@@ -165,7 +165,7 @@ class API_AMS extends API{
         ArrayList arrayList = new ArrayList();
         arrayList.add(0, response.getStatusLine().getStatusCode() + " " + response.getStatusLine().getReasonPhrase());
         arrayList.add(1, check_body_response(read_response(new StringBuilder(),response).toString(), macaddress));
-        System.out.println("[DBG] return codes: " + arrayList);
+        System.out.println("[DBG] return codes: " + arrayList + "\n");
         return arrayList;
     }
 
@@ -192,9 +192,9 @@ class API_AMS extends API{
             System.out.println(operation + " (newapi=true) for macaddress=" + macaddress + ", ams_ip=" + ams_ip + ", "
                     + "count_reminders=" + count_reminders + ", "
                     + "reminderOffset=" + reminderOffset + ", "
-                    //+ "rack_data.length=" + rack_date.length + ", "
+                    + "rack_data.length=" + rack_date.length + ", "
                     + "data=" + Arrays.asList(rack_date) + ", "
-                    //+ "rack_channel.length=" + rack_channel.length + ", "
+                    + "rack_channel.length=" + rack_channel.length + ", "
                     + "channel=" + Arrays.asList(rack_channel));
         }
 
@@ -330,7 +330,7 @@ class API_AMS extends API{
     private String generate_json_reminder(Boolean newapi, String macaddress, int count_reminders, Enum<Operation> operation,
                                           String reminderProgramStart, int reminderChannelNumber,
                                           String reminderProgramId, int reminderOffset, long reminderScheduleId, long reminderId) {
-        //if(count_reminders <= 0){ count_reminders = 1; }
+        if(count_reminders < 0){ count_reminders = 0; }
         if(count_reminders > 1440){ count_reminders = 1440; }
 
         String action = "";
@@ -390,7 +390,14 @@ class API_AMS extends API{
         return result;
     }
 
-    private String generate_json_reminder(Boolean newapi, String macaddress, long reminderScheduleId, long reminderId) {
+    /**
+     * @param newapi
+     * @param macaddress
+     * @param reminderScheduleId
+     * @param reminderId
+     * @return
+     */
+    private String generate_json_reminder_delete(Boolean newapi, String macaddress, long reminderScheduleId, long reminderId) {
         //if(count_reminders <= 0){ count_reminders = 1; }
         //if(count_reminders > 1440){ count_reminders = 1440; }
 

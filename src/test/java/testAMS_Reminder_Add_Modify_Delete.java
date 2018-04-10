@@ -16,23 +16,25 @@ class testAMS_Reminder_Add_Modify_Delete extends API {
     @RepeatedTest(1)
     void testAdd_Modify_Delete() throws IOException {
         int count_reminders = 1;
+        int reminderOffset_new = 10;
         Random random = new Random();
         Random random2 = new Random();
         Long reminderScheduleId = Math.abs(random.nextLong());
         Long reminderId = Math.abs(random2.nextLong());
 
-        ArrayList actual = AMS.Request(macaddress, Operation.add, count_reminders, reminderProgramStart(),
+        ArrayList actual;
+        actual = AMS.Request(macaddress, Operation.add, count_reminders, reminderProgramStart(),
                 reminderChannelNumber, reminderProgramId, reminderOffset, reminderScheduleId, reminderId);
         assertEquals(expected200, actual.get(0));
         assertEquals("", actual.get(1));
 
         actual = AMS.Request(macaddress, Operation.modify, count_reminders, reminderProgramStart(),
-                reminderChannelNumber, reminderProgramId, reminderOffset, reminderScheduleId, reminderId);
+                reminderChannelNumber, reminderProgramId, reminderOffset_new, reminderScheduleId, reminderId);
         assertEquals(expected200, actual.get(0));
         assertEquals("", actual.get(1));
 
         actual = AMS.Request(macaddress, Operation.delete, count_reminders, reminderProgramStart(),
-                reminderChannelNumber, reminderProgramId, reminderOffset, reminderScheduleId, reminderId);
+                reminderChannelNumber, reminderProgramId, reminderOffset_new, reminderScheduleId, reminderId);
         assertEquals(expected200, actual.get(0));
         assertEquals("", actual.get(1));
     }

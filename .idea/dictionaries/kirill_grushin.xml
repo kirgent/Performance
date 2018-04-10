@@ -11,6 +11,7 @@
       <w>requestor</w>
       <w>starttime</w>
       <w>statuscode</w>
+      <w>statuscodes</w>
     </words>
   </dictionary>
 </component>

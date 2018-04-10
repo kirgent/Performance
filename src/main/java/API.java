@@ -111,6 +111,8 @@ public class API {
 
     int reminderOffset = 0;
     int reminderOffset_null;
+    int reminderOffset_new = 10;
+    int reminderOffset_new_null;
 
     long reminderScheduleId = 1;
     long reminderScheduleId_null;
@@ -242,8 +244,14 @@ public class API {
         if(body.contains("\"status\":\"Failed\"") && body.contains("\"errorMessage\":\"REM-008 Reminders parsing error: incorrect reminderScheduleId\"")){
             result += "REM-008 Reminders parsing error: incorrect reminderScheduleId";
         }
+        if(body.contains("\"status\":\"Failed\"") && body.contains("\"errorMessage\":\"REM-008 Reminders parsing error: wrong number of reminders\"")){
+            result += "REM-008 Reminders parsing error: wrong number of reminders";
+        }
         if(body.contains("\"status\":\"Failed\"") && body.contains("\"errorMessage\":\"Incorrect request: ChangeReminders\"")){
             result += "Incorrect request: ChangeReminders";
+        }
+        if(body.contains("\"status\":\"Failed\"") && body.contains("\"errorMessage\":\"Incorrect request: blablabla\"")){
+            result += "Incorrect request: blablabla";
         }
         if(body.contains("\"status\":\"Failed\"") && body.contains("\"errorMessage\":\"name cannot be null\"")){
             result += "name cannot be null";
@@ -407,6 +415,11 @@ public class API {
         SimpleDateFormat pattern = new SimpleDateFormat("yyyy-MM-dd");
         calendar.add(Calendar.DAY_OF_YEAR, +1);
         return pattern.format(calendar.getTime());
+    }
+
+    int reminderChannelNumber() {
+        Random random = new Random();
+        return Math.abs(random.nextInt(5000));
     }
 
     Long reminderScheduleId(){
