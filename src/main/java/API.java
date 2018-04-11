@@ -1,6 +1,8 @@
 import org.apache.http.HttpResponse;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
+import org.junit.Rule;
+import org.junit.rules.Timeout;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -20,23 +22,23 @@ import static java.lang.System.currentTimeMillis;
  */
 public class API {
 
-    API(){
-        reminderScheduleId_arraylist = new ArrayList<>();
-        reminderId_arraylist = new ArrayList<>();
-    }
-    private ArrayList<Long> reminderScheduleId_arraylist;
-    private ArrayList<Long> reminderId_arraylist;
+    //API(){
+    //    reminderScheduleId_arraylist = new ArrayList<>();
+    //    reminderId_arraylist = new ArrayList<>();
+    //}
+    //private ArrayList<Long> reminderScheduleId_arraylist;
+    //private ArrayList<Long> reminderId_arraylist;
 
-    long reminderScheduleId_arraylist() {
-        return reminderScheduleId_arraylist.get(0);
-    }
+    //long reminderScheduleId_arraylist() {
+    //    return reminderScheduleId_arraylist.get(0);
+    //}
 
-    long reminderId_arraylist() {
-        return reminderId_arraylist.get(0);
-    }
+    //long reminderId_arraylist() {
+    //    return reminderId_arraylist.get(0);
+    //}
 
-    //@Rule
-    //final public Timeout globalTimeout = Timeout.seconds(20);
+    @Rule
+    final public Timeout globalTimeout = Timeout.seconds(20);
 
     //private final static Logger log = Logger.getLogger(API.class.getName());
 
@@ -95,7 +97,8 @@ public class API {
     //String[] rack_date = {"2018-03-15"};
 
     //CHANNELS
-    int reminderChannelNumber = 3;
+    @Deprecated
+    int reminderChannelNumber = 2;
     int reminderChannelNumber_empty;
     int reminderChannelNumber_for_statuscode3 = 9999;
     int reminderChannelNumber_for_statuscode4 = 1000;
@@ -419,20 +422,20 @@ public class API {
 
     int reminderChannelNumber() {
         Random random = new Random();
-        return Math.abs(random.nextInt(5000));
+        return Math.abs(random.nextInt(1000));
     }
 
-    Long reminderScheduleId(){
+    long reminderScheduleId(){
         Random random = new Random();
-        Long reminderScheduleId = Math.abs(random.nextLong());
-        reminderScheduleId_arraylist.add(reminderScheduleId);
+        long reminderScheduleId = Math.abs(random.nextLong());
+        //reminderScheduleId_arraylist.add(reminderScheduleId);
         return reminderScheduleId;
     }
 
-    Long reminderId(){
+    long reminderId(){
         Random random = new Random();
-        Long reminderId = Math.abs(random.nextLong());
-        reminderId_arraylist.add(reminderId);
+        long reminderId = Math.abs(random.nextLong());
+        //reminderId_arraylist.add(reminderId);
         return reminderId;
     }
 

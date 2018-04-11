@@ -18,7 +18,7 @@ import static java.lang.System.currentTimeMillis;
 class API_AMS extends API{
 
     @Rule
-    final public Timeout globalTimeout = Timeout.seconds(20);
+    Timeout globalTimeout = Timeout.seconds(20);
 
     /** method Add/Modify
      * @param macaddress      - macaddress of the box
@@ -73,7 +73,7 @@ class API_AMS extends API{
      * @return arrayList
      * @throws IOException -TBD
      */
-    ArrayList Request(String macaddress, long reminderScheduleId, long reminderId) throws IOException {
+    ArrayList Request(String macaddress, Enum<Operation> operation, int count_reminders, long reminderScheduleId, long reminderId) throws IOException {
         if(show_extra_info) {
             System.out.println("Delete for macaddress=" + macaddress + ", ams_ip=" + ams_ip + ", "
                     + "reminderScheduleId=" + reminderScheduleId + ", "
