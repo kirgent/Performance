@@ -87,6 +87,7 @@ public class API {
     final String box_Katya_V = "0000048D4EB4"; //Katya_V
     final String boxD111 = "2c7e81ee2530";
     final String boxX = "1";
+    final String box4212 = "A0722CEEC9A4";
     String macaddress = boxD102;
 
 

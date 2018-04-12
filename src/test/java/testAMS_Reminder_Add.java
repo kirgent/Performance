@@ -2,7 +2,6 @@ import org.junit.Test;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Random;
 
 import static org.junit.Assert.assertEquals;
 
@@ -19,21 +18,19 @@ public class testAMS_Reminder_Add extends API {
 
     private API_AMS AMS = new API_AMS();
 
-    //@RepeatedTest(3)
     @Test
     public void testAdd() throws IOException {
         int count_reminders = 1;
         int reminderChannelNumber = 305;
-        Random random = new Random();
-        Random random2 = new Random();
-        //long reminderScheduleId = Math.abs(random.nextLong());
-        //long reminderId = Math.abs(random2.nextLong());
+
+        //long reminderScheduleId = 2;
+        //long reminderId = 2;
+
+        long reminderScheduleId = reminderScheduleId();
+        long reminderId = reminderId();
 
         //long reminderScheduleId = reminderScheduleId_random;
         //long reminderId = reminderId_random;
-
-        long reminderScheduleId = 12345;
-        long reminderId = 12345;
 
         ArrayList actual = AMS.Request(macaddress, Operation.add, count_reminders,
                 reminderProgramStart(), reminderChannelNumber,
@@ -49,7 +46,7 @@ public class testAMS_Reminder_Add extends API {
     public void testAdd_reminderChannelNumber_empty__statusCode3() throws IOException {
         ArrayList actual = AMS.Request(macaddress, Operation.add, count_reminders,
                 reminderProgramStart(), reminderChannelNumber_empty, reminderProgramId,
-                reminderOffset, reminderScheduleId, reminderId);
+                reminderOffset, reminderScheduleId(), reminderId());
         assertEquals(expected200, actual.get(0));
         assertEquals("3", actual.get(1));
     }
@@ -58,7 +55,7 @@ public class testAMS_Reminder_Add extends API {
     public void testAdd_reminderChannelNumber_MAX_VALUE__statusCode3() throws IOException {
         ArrayList actual = AMS.Request(macaddress, Operation.add, count_reminders,
                 reminderProgramStart(), Integer.MAX_VALUE, reminderProgramId,
-                reminderOffset, reminderScheduleId, reminderId);
+                reminderOffset, reminderScheduleId(), reminderId());
         assertEquals(expected200, actual.get(0));
         assertEquals("3", actual.get(1));
     }
@@ -67,16 +64,17 @@ public class testAMS_Reminder_Add extends API {
     public void testAdd_reminderChannelNumber_MIN_VALUE() throws IOException {
         ArrayList actual = AMS.Request(macaddress, Operation.add, count_reminders,
                 reminderProgramStart(), Integer.MIN_VALUE, reminderProgramId,
-                reminderOffset, reminderScheduleId, reminderId);
+                reminderOffset, reminderScheduleId(), reminderId());
         assertEquals(expected400, actual.get(0));
         assertEquals("REM-008 Reminders parsing error: missing channel number", actual.get(1));
     }
 
     @Test
+    //todo https://jira.zodiac.tv/browse/CH0098-134
     public void testAdd_reminderProgramStart_empty() throws IOException {
         ArrayList actual = AMS.Request(macaddress, Operation.add, count_reminders,
                 "", reminderChannelNumber, reminderProgramId,
-                reminderOffset, reminderScheduleId, reminderId);
+                reminderOffset, reminderScheduleId(), reminderId());
         assertEquals(expected400, actual.get(0));
         assertEquals("REM-008 Reminders parsing error: missing program start", actual.get(1));
     }
@@ -88,7 +86,7 @@ public class testAMS_Reminder_Add extends API {
     public void testAdd_reminderProgramStart_PAST__statusCode2() throws IOException {
         ArrayList actual = AMS.Request(macaddress, Operation.add, count_reminders,
                 "2000-01-01", reminderChannelNumber, reminderProgramId,
-                reminderOffset, reminderScheduleId, reminderId);
+                reminderOffset, reminderScheduleId(), reminderId());
         assertEquals(expected200, actual.get(0));
         assertEquals("2", actual.get(1));
     }
@@ -97,7 +95,7 @@ public class testAMS_Reminder_Add extends API {
     public void testAdd_reminderProgramStart_wrong() throws IOException {
         ArrayList actual = AMS.Request(macaddress, Operation.add, count_reminders,
                 reminderProgramStart_wrong, reminderChannelNumber, reminderProgramId,
-                reminderOffset, reminderScheduleId, reminderId);
+                reminderOffset, reminderScheduleId(), reminderId());
         assertEquals(expected400, actual.get(0));
         assertEquals("REM-008 Reminders parsing error: missing program start", actual.get(1));
     }
@@ -106,7 +104,7 @@ public class testAMS_Reminder_Add extends API {
     public void testAdd_reminderProgramStart_text() throws IOException {
         ArrayList actual = AMS.Request(macaddress, Operation.add, count_reminders,
                 reminderProgramStart_text, reminderChannelNumber, reminderProgramId,
-                reminderOffset, reminderScheduleId, reminderId);
+                reminderOffset, reminderScheduleId(), reminderId());
         assertEquals(expected500, actual.get(0));
         assertEquals("name cannot be null", actual.get(1));
     }
@@ -115,7 +113,7 @@ public class testAMS_Reminder_Add extends API {
     public void testAdd_reminderProgramId_empty() throws IOException {
         ArrayList actual = AMS.Request(macaddress, Operation.add, count_reminders,
                 reminderProgramStart(), reminderChannelNumber, "",
-                reminderOffset, reminderScheduleId, reminderId);
+                reminderOffset, reminderScheduleId(), reminderId());
         assertEquals(expected400, actual.get(0));
         assertEquals("REM-008 Reminders parsing error: wrong programId", actual.get(1));
     }
@@ -124,25 +122,26 @@ public class testAMS_Reminder_Add extends API {
     public void testAdd_reminderProgramId_wrong() throws IOException {
         ArrayList actual = AMS.Request(macaddress, Operation.add, count_reminders,
                 reminderProgramStart(), reminderChannelNumber, "EP#@$%#$%@#$^$#%^#$%^",
-                reminderOffset, reminderScheduleId, reminderId);
+                reminderOffset, reminderScheduleId(), reminderId());
         assertEquals(expected400, actual.get(0));
-        assertEquals("", actual.get(1));
+        assertEquals("REM-008 Reminders parsing error: wrong programId", actual.get(1));
     }
 
     @Test
+    //todo POSSIBLE BUG !!!
     public void testAdd_reminderOffset_MAX_VALUE() throws IOException {
         ArrayList actual = AMS.Request(macaddress, Operation.add, count_reminders,
                 reminderProgramStart(), reminderChannelNumber, reminderProgramId,
-                Integer.MAX_VALUE, reminderScheduleId, reminderId);
+                Integer.MAX_VALUE, reminderScheduleId(), reminderId());
         assertEquals(expected400, actual.get(0));
-        assertEquals("REM-008 Reminders parsing error: incorrect offset", actual.get(1));
+        assertEquals("REM-008 Reminders parsing error: missing offset", actual.get(1));
     }
 
     @Test
     public void testAdd_reminderOffset_MIN_VALUE() throws IOException {
         ArrayList actual = AMS.Request(macaddress, Operation.add, count_reminders,
                 reminderProgramStart(), reminderChannelNumber, reminderProgramId,
-                Integer.MIN_VALUE, reminderScheduleId, reminderId);
+                Integer.MIN_VALUE, reminderScheduleId(), reminderId());
         assertEquals(expected400, actual.get(0));
         assertEquals("REM-008 Reminders parsing error: missing offset", actual.get(1));
     }
@@ -230,7 +229,7 @@ public class testAMS_Reminder_Add extends API {
     public void testAdd__REM_002_Reminders_Service_error_Can_not_connect_to_STB_with_stbId() throws IOException {
         ArrayList actual = AMS.Request(macaddress, Operation.add, count_reminders,
                 reminderProgramStart(), reminderChannelNumber, reminderProgramId,
-                reminderOffset, reminderScheduleId, reminderId);
+                reminderOffset, reminderScheduleId(), reminderId());
         assertEquals(expected500, actual.get(0));
         assertEquals("REM-002 Reminders Service error: Can not connect to STB with stbId=" + macaddress, actual.get(1));
     }
@@ -239,7 +238,7 @@ public class testAMS_Reminder_Add extends API {
     public void testAdd_macaddress_empty() throws IOException {
         ArrayList actual = AMS.Request("", Operation.add, count_reminders,
                 reminderProgramStart(), reminderChannelNumber, reminderProgramId,
-                reminderOffset, reminderScheduleId, reminderId);
+                reminderOffset, reminderScheduleId(), reminderId());
         assertEquals(expected400, actual.get(0));
         assertEquals("REM-008 Reminders parsing error: wrong deviceId", actual.get(1));
     }
@@ -248,16 +247,16 @@ public class testAMS_Reminder_Add extends API {
     public void testAdd_macaddress_wrong() throws IOException {
         ArrayList actual = AMS.Request(macaddress_wrong, Operation.add, count_reminders,
                 reminderProgramStart(), reminderChannelNumber, reminderProgramId,
-                reminderOffset, reminderScheduleId, reminderId);
+                reminderOffset, reminderScheduleId(), reminderId());
         assertEquals(expected500, actual.get(0));
         assertEquals("REM-ST-001 Box is not registered", actual.get(1));
     }
 
     @Test
-    public void testAdd_count_reminders_is_empty() throws IOException {
+    public void testAdd_count_reminders_is_0() throws IOException {
         ArrayList actual = AMS.Request(macaddress, Operation.add, 0,
                 reminderProgramStart(), reminderChannelNumber, reminderProgramId,
-                reminderOffset, reminderScheduleId, reminderId);
+                reminderOffset, reminderScheduleId(), reminderId());
         assertEquals(expected400, actual.get(0));
         assertEquals("REM-008 Reminders parsing error: wrong number of reminders", actual.get(1));
     }

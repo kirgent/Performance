@@ -2,7 +2,6 @@ import org.junit.Test;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Random;
 
 import static org.junit.Assert.assertEquals;
 
@@ -21,10 +20,8 @@ public class testAMS_Reminder_Modify extends API {
         int count_reminders = 1;
         int reminderChannelNumber = 305;
 
-        //Random random = new Random();
-        //Random random2 = new Random();
-        //long reminderScheduleId = Math.abs(random.nextLong());
-        //long reminderId = Math.abs(random2.nextLong());
+        //long reminderScheduleId = reminderScheduleId();
+        //long reminderId = reminderId();
 
         long reminderScheduleId = 12345;
         long reminderId = 12345;
@@ -113,6 +110,7 @@ public class testAMS_Reminder_Modify extends API {
     }
 
     @Test
+    //todo https://jira.zodiac.tv/browse/CH0098-134
     public void testModify_reminderProgramStart_empty() throws IOException {
         ArrayList actual = AMS.Request(macaddress, Operation.modify, count_reminders,
                 "", reminderChannelNumber,
@@ -235,10 +233,8 @@ public class testAMS_Reminder_Modify extends API {
      */
     @Test
     public void testModify_statusCode4() throws IOException {
-        Random random = new Random();
-        Random random2 = new Random();
-        long reminderScheduleId = Math.abs(random.nextLong());
-        long reminderId = Math.abs(random2.nextLong());
+        long reminderScheduleId = reminderScheduleId();
+        long reminderId = reminderId();
 
         ArrayList actual = AMS.Request(macaddress, Operation.modify, count_reminders,
                 reminderProgramStart(), reminderChannelNumber,
@@ -303,10 +299,10 @@ public class testAMS_Reminder_Modify extends API {
     }
 
     @Test
-    public void testModify_count_reminders_is_empty() throws IOException {
+    public void testModify_count_reminders_is_0() throws IOException {
         ArrayList actual = AMS.Request(macaddress, Operation.modify, 0,
                 reminderProgramStart(), reminderChannelNumber, reminderProgramId,
-                reminderOffset_new, reminderScheduleId, reminderId);
+                reminderOffset, reminderScheduleId, reminderId);
         assertEquals(expected400, actual.get(0));
         assertEquals("REM-008 Reminders parsing error: wrong number of reminders", actual.get(1));
     }

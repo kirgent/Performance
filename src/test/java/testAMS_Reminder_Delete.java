@@ -95,7 +95,10 @@ public class testAMS_Reminder_Delete extends API {
     }
 
     @Test
-    public void testDelete_count_reminders_is_empty() throws IOException {
+    public void testDelete_count_reminders_is_0() throws IOException {
+        long reminderScheduleId = 2;
+        long reminderId = 2;
+
         ArrayList actual = AMS.Request(macaddress, Operation.delete, 0, reminderScheduleId, reminderId);
         assertEquals(expected400, actual.get(0));
         assertEquals("REM-008 Reminders parsing error: wrong number of reminders", actual.get(1));

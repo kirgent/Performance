@@ -83,7 +83,7 @@ class API_AMS extends API{
         HttpPost request = new HttpPost(prepare_url(Operation.delete, true));
         request.setHeader("Accept", "application/json");
         request.setHeader("Content-type", "application/json");
-        request.setEntity(new StringEntity(generate_json_reminder_delete(true, macaddress, reminderScheduleId, reminderId)));
+        request.setEntity(new StringEntity(generate_json_reminder_delete(true, macaddress, count_reminders, reminderScheduleId, reminderId)));
         System.out.println("[DBG] Request string: " + request);
 
         long start = System.currentTimeMillis();
@@ -397,7 +397,7 @@ class API_AMS extends API{
      * @param reminderId
      * @return
      */
-    private String generate_json_reminder_delete(Boolean newapi, String macaddress, long reminderScheduleId, long reminderId) {
+    private String generate_json_reminder_delete(Boolean newapi, String macaddress, int count_reminders, long reminderScheduleId, long reminderId) {
         //if(count_reminders <= 0){ count_reminders = 1; }
         //if(count_reminders > 1440){ count_reminders = 1440; }
 
@@ -417,7 +417,7 @@ class API_AMS extends API{
         json.put("deviceId", macaddress);
         JSONArray array_reminders = new JSONArray();
         json.put("reminders", array_reminders);
-        //for (int i = 1; i <= count_reminders; i++) {
+        for (int i = 1; i <= count_reminders; i++) {
             JSONObject object_in_reminders = new JSONObject();
             //if (!newapi) {
             //    object_in_reminders.put("operation", action);
@@ -425,7 +425,7 @@ class API_AMS extends API{
             object_in_reminders.put("reminderScheduleId", reminderScheduleId);
             object_in_reminders.put("reminderId", reminderId);
             array_reminders.add(object_in_reminders);
-        //}
+        }
         String result = json.toString();
         if(show_generated_json) {
             System.out.println("generated json: " + result);

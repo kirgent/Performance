@@ -19,6 +19,7 @@ public class testMiddle_Check_registration extends API_Middle {
     private API_Middle Middle = new API_Middle();
 
     @Test
+    @Deprecated
     public void testCheck_registration_via_charterapi_a() throws IOException {
         ArrayList actual = Middle.Check_registration(macaddress, charterapi_a);
         assertEquals(expected200, actual.get(0));

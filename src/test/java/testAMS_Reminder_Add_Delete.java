@@ -2,7 +2,6 @@ import org.junit.jupiter.api.RepeatedTest;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Random;
 
 import static org.junit.Assert.assertEquals;
 
@@ -14,14 +13,13 @@ class testAMS_Reminder_Add_Delete extends API {
 
     private API_AMS AMS = new API_AMS();
 
-    @RepeatedTest(10)
+    @RepeatedTest(1000)
     void testAdd_Delete() throws IOException, InterruptedException {
         int count_reminders = 1;
-        int reminderChannelNumber = 305;
-        Random random = new Random();
-        Random random2 = new Random();
-        long reminderScheduleId = Math.abs(random.nextLong());
-        long reminderId = Math.abs(random2.nextLong());
+        //int reminderChannelNumber = 305;
+        int reminderChannelNumber = reminderChannelNumber();
+        long reminderScheduleId = reminderScheduleId();
+        long reminderId = reminderId();
 
         ArrayList actual = AMS.Request(macaddress, Operation.add, count_reminders,
                 reminderProgramStart(), reminderChannelNumber,
@@ -38,10 +36,8 @@ class testAMS_Reminder_Add_Delete extends API {
     void testAdd_Delete48() throws IOException {
         int count_reminders = 48;
         int reminderChannelNumber = reminderChannelNumber();
-        Random random = new Random();
-        Random random2 = new Random();
-        long reminderScheduleId = Math.abs(random.nextLong());
-        long reminderId = Math.abs(random2.nextLong());
+        long reminderScheduleId = reminderScheduleId();
+        long reminderId = reminderId();
 
         ArrayList actual;
         actual = AMS.Request(macaddress, Operation.add, count_reminders,
@@ -59,10 +55,8 @@ class testAMS_Reminder_Add_Delete extends API {
     void testAdd_Delete288() throws IOException {
         int count_reminders = 288;
         int reminderChannelNumber = reminderChannelNumber();
-        Random random = new Random();
-        Random random2 = new Random();
-        long reminderScheduleId = Math.abs(random.nextLong());
-        long reminderId = Math.abs(random2.nextLong());
+        long reminderScheduleId = reminderScheduleId();
+        long reminderId = reminderId();
 
         ArrayList actual;
         actual = AMS.Request(macaddress, Operation.add, count_reminders,
@@ -80,10 +74,8 @@ class testAMS_Reminder_Add_Delete extends API {
     void testAdd_Delete720() throws IOException {
         int count_reminders = 720;
         int reminderChannelNumber = reminderChannelNumber();
-        Random random = new Random();
-        Random random2 = new Random();
-        long reminderScheduleId = Math.abs(random.nextLong());
-        long reminderId = Math.abs(random2.nextLong());
+        long reminderScheduleId = reminderScheduleId();
+        long reminderId = reminderId();
 
         ArrayList actual;
         actual = AMS.Request(macaddress, Operation.add, count_reminders,
