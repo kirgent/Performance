@@ -94,7 +94,7 @@ class API_AMS extends API{
         ArrayList arrayList = new ArrayList();
         arrayList.add(0, response.getStatusLine().getStatusCode() + " " + response.getStatusLine().getReasonPhrase());
         arrayList.add(1, check_body_response(read_response(new StringBuilder(),response).toString(), macaddress));
-        System.out.println("[DBG] return codes: " + arrayList);
+        System.out.println("[DBG] return codes: " + arrayList + "\n");
         return arrayList;
     }
 

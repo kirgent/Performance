@@ -17,18 +17,15 @@ public class testAMS_Reminder_Modify extends API {
 
     @Test
     public void testModify() throws IOException {
-        int count_reminders = 1;
         int reminderChannelNumber = 305;
-
         //long reminderScheduleId = reminderScheduleId();
         //long reminderId = reminderId();
-
-        long reminderScheduleId = 12345;
-        long reminderId = 12345;
+        long reminderScheduleId = 5;
+        long reminderId = 5;
 
         ArrayList actual = AMS.Request(macaddress, Operation.modify, count_reminders,
                 reminderProgramStart(), reminderChannelNumber,
-                reminderProgramId, reminderOffset_new, reminderScheduleId, reminderId);
+                reminderProgramId, 150, reminderScheduleId, reminderId);
         assertEquals(expected200, actual.get(0));
         assertEquals("", actual.get(1));
     }
@@ -46,9 +43,14 @@ public class testAMS_Reminder_Modify extends API {
     @Test
     @Deprecated
     public void testModify_increase_reminderOffset() throws IOException {
+        int reminderChannelNumber = 305;
+        //long reminderScheduleId = reminderScheduleId();
+        //long reminderId = reminderId();
+        long reminderScheduleId = 5;
+        long reminderId = 5;
         ArrayList actual = AMS.Request(macaddress, Operation.modify, count_reminders,
                 reminderProgramStart(), reminderChannelNumber,
-                reminderProgramId, reminderOffset+5, reminderScheduleId, reminderId);
+                reminderProgramId, reminderOffset+1, reminderScheduleId, reminderId);
         assertEquals(expected200, actual.get(0));
         assertEquals("", actual.get(1));
     }
@@ -110,13 +112,12 @@ public class testAMS_Reminder_Modify extends API {
     }
 
     @Test
-    //todo https://jira.zodiac.tv/browse/CH0098-134
     public void testModify_reminderProgramStart_empty() throws IOException {
         ArrayList actual = AMS.Request(macaddress, Operation.modify, count_reminders,
                 "", reminderChannelNumber,
                 reminderProgramId, reminderOffset, reminderScheduleId, reminderId);
         assertEquals(expected400, actual.get(0));
-        assertEquals("", actual.get(1));
+        assertEquals("REM-008 Reminders parsing error: missing program start", actual.get(1));
     }
 
     @Test

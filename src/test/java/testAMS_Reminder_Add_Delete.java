@@ -13,7 +13,7 @@ class testAMS_Reminder_Add_Delete extends API {
 
     private API_AMS AMS = new API_AMS();
 
-    @RepeatedTest(1000)
+    @RepeatedTest(100)
     void testAdd_Delete() throws IOException, InterruptedException {
         int count_reminders = 1;
         //int reminderChannelNumber = 305;
@@ -28,6 +28,10 @@ class testAMS_Reminder_Add_Delete extends API {
         assertEquals("", actual.get(1));
 
         actual = AMS.Request(macaddress, Operation.delete, count_reminders, reminderScheduleId, reminderId);
+        assertEquals(expected200, actual.get(0));
+        assertEquals("", actual.get(1));
+
+        actual = AMS.Request(macaddress, Operation.purge, true);
         assertEquals(expected200, actual.get(0));
         assertEquals("", actual.get(1));
     }

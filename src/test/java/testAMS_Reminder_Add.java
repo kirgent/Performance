@@ -23,11 +23,11 @@ public class testAMS_Reminder_Add extends API {
         int count_reminders = 1;
         int reminderChannelNumber = 305;
 
-        //long reminderScheduleId = 2;
-        //long reminderId = 2;
+        long reminderScheduleId = 5;
+        long reminderId = 5;
 
-        long reminderScheduleId = reminderScheduleId();
-        long reminderId = reminderId();
+        //long reminderScheduleId = reminderScheduleId();
+        //long reminderId = reminderId();
 
         //long reminderScheduleId = reminderScheduleId_random;
         //long reminderId = reminderId_random;
