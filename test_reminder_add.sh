@@ -1,19 +1,19 @@
 url_add="ams/Reminders?req=add"
 
 function add1(){
-macaddress="$1"
+mac="$1"
 reminderProgramStart="$2"
 reminderChannelNumber="$3"
 reminderProgramId="$4"
 reminderScheduleId="$5"
 reminderId="$6"
 reminderOffset="$7"
-echo "[DBG] `date "+%a %b %d %T %N %Z %Y"`: Add 1rem in iteration=$i/$count_iterations with reminderProgramStart=$reminderProgramStart, reminderChannelNumber=$reminderChannelNumber, reminderProgramId=$reminderProgramId, reminderOffset=$reminderOffset, reminderScheduleId=$reminderScheduleId, reminderId=$reminderId"|$logwrap
+echo "[DBG] `date "+%a %b %d %T %N %Z %Y"`: Add 1rem in iteration=$i/$count_iterations with reminderProgramStart=$reminderProgramStart, reminderChannelNumber=$reminderChannelNumber, reminderScheduleId=$reminderScheduleId, reminderId=$reminderId"|$logwrap
 
 #/usr/bin/time -f 'real %Es' -o $logfile -a $curlwrap 'http://'$ams_ip':'$ams_port'/'url_add'' -H 'Content-type: application/json' \
-/usr/bin/time -f 'real %Es' -o $logfile -a $curlwrap -s 'http://'$ams_ip':'$ams_port'/'$url_add'' -H 'Content-type: application/json' \
+/usr/bin/time -f 'real %Es' -o ${logfile} -a ${curlwrap} -s 'http://'$ams_ip':'$ams_port'/'$url_add'' -H 'Content-type: application/json' \
 -d '{
-"deviceId": '$macaddress',
+"deviceId": '$mac',
 "reminders":
 [
 { "reminderProgramStart": "'$reminderProgramStart' 00:00", "reminderChannelNumber": '$reminderChannelNumber', "reminderProgramId": '$reminderProgramId', "reminderScheduleId":'$reminderScheduleId', "reminderId":'$reminderId', "reminderOffset": '$reminderOffset' }
@@ -22,17 +22,17 @@ echo;echo
 }
 
 function add48(){
-macaddress="$1"
+mac="$1"
 reminderProgramStart="$2"
 reminderChannelNumber="$3"
 reminderProgramId="$4"
 reminderScheduleId="$5"
 reminderId="$6"
 reminderOffset="$7"
-echo "[DBG] `date "+%a %b %d %T %N %Z %Y"`: Add 48rems in iteration=$i/$count_iterations with reminderProgramStart=$reminderProgramStart, reminderChannelNumber=$reminderChannelNumber, reminderProgramId=$reminderProgramId, reminderOffset=$reminderOffset, reminderScheduleId=$reminderScheduleId, reminderId=$reminderId"|$logwrap
+echo "[DBG] `date "+%a %b %d %T %N %Z %Y"`: Add 48rems in iteration=$i/$count_iterations with reminderProgramStart=$reminderProgramStart, reminderChannelNumber=$reminderChannelNumber, reminderScheduleId=$reminderScheduleId, reminderId=$reminderId"|$logwrap
 /usr/bin/time -f 'real %Es' -o ${logfile} -a ${curlwrap} 'http://'${ams_ip}':'${ams_port}'/'${url_add}'' -H 'Content-type: application/json' \
 -d '{ 
-"deviceId": '$macaddress',
+"deviceId": '$mac',
 "reminders": [
  { "reminderProgramStart": "'$reminderProgramStart' 00:00", "reminderChannelNumber": '$reminderChannelNumber', "reminderProgramId": '$reminderProgramId', "reminderScheduleId":'$reminderScheduleId', "reminderId":'$reminderId', "reminderOffset": '$reminderOffset' },
  { "reminderProgramStart": "'$reminderProgramStart' 00:30", "reminderChannelNumber": '$reminderChannelNumber', "reminderProgramId": '$reminderProgramId', "reminderScheduleId":'$reminderScheduleId', "reminderId":'$reminderId', "reminderOffset": '$reminderOffset' },
@@ -87,17 +87,17 @@ echo;echo
 }
 
 function add288(){
-macaddress="$1"
+mac="$1"
 reminderProgramStart="$2"
 reminderChannelNumber="$3"
 reminderProgramId="$4"
 reminderScheduleId="$5"
 reminderId="$6"
 reminderOffset="$7"
-echo "[DBG] `date "+%a %b %d %T %N %Z %Y"`: Add 288rems in iteration=$i/$count_iterations with reminderProgramStart=$reminderProgramStart, reminderChannelNumber=$reminderChannelNumber, reminderProgramId=$reminderProgramId, reminderOffset=$reminderOffset, reminderScheduleId=$reminderScheduleId, reminderId=$reminderId"|$logwrap
-/usr/bin/time -f 'real %Es' -o $logfile -a $curlwrap 'http://'$ams_ip':'$ams_port'/'$url_add'' -H 'Content-type: application/json' \
+echo "[DBG] `date "+%a %b %d %T %N %Z %Y"`: Add 288rems in iteration=$i/$count_iterations with reminderProgramStart=$reminderProgramStart, reminderChannelNumber=$reminderChannelNumber, reminderScheduleId=$reminderScheduleId, reminderId=$reminderId"|$logwrap
+/usr/bin/time -f 'real %Es' -o ${logfile} -a ${curlwrap} 'http://'$ams_ip':'$ams_port'/'$url_add'' -H 'Content-type: application/json' \
 -d '{
-"deviceId": '$macaddress',
+"deviceId": '$mac',
 "reminders": [
  { "reminderProgramStart": "'$reminderProgramStart' 00:00", "reminderChannelNumber": '$reminderChannelNumber', "reminderProgramId": '$reminderProgramId', "reminderScheduleId":'$reminderScheduleId', "reminderId":'$reminderId', "reminderOffset": '$reminderOffset'},
  { "reminderProgramStart": "'$reminderProgramStart' 00:05", "reminderChannelNumber": '$reminderChannelNumber', "reminderProgramId": '$reminderProgramId', "reminderScheduleId":'$reminderScheduleId', "reminderId":'$reminderId', "reminderOffset": '$reminderOffset'},
@@ -392,18 +392,17 @@ echo;echo
 }
 
 function add720(){
-macaddress="$1"
+mac="$1"
 reminderProgramStart="$2"
 reminderChannelNumber="$3"
 reminderProgramId="$4"
 reminderScheduleId="$5"
 reminderId="$6"
 reminderOffset="$7"
-echo "[DBG] `date "+%a %b %d %T %N %Z %Y"`: Add 720rems in iteration=$i/$count_iterations with reminderProgramStart=$reminderProgramStart,
-reminderChannelNumber=$reminderChannelNumber, reminderProgramId=$reminderProgramId, reminderOffset=$reminderOffset, reminderScheduleId=$reminderScheduleId, reminderId=$reminderId"|$logwrap
-/usr/bin/time -f 'real %Es' -o $logfile -a $curlwrap 'http://'$ams_ip':'$ams_port'/'$url_add'' -H 'Content-type: application/json' \
+echo "[DBG] `date "+%a %b %d %T %N %Z %Y"`: Add 720rems in iteration=$i/$count_iterations with reminderProgramStart=$reminderProgramStart, reminderChannelNumber=$reminderChannelNumber, reminderScheduleId=$reminderScheduleId, reminderId=$reminderId"|$logwrap
+/usr/bin/time -f 'real %Es' -o ${logfile} -a ${curlwrap} 'http://'$ams_ip':'$ams_port'/'$url_add'' -H 'Content-type: application/json' \
 -d '{
-"deviceId": '$macaddress',
+"deviceId": '$mac',
 "reminders": [
  { "reminderProgramStart": "'$reminderProgramStart' 00:00", "reminderChannelNumber": '$reminderChannelNumber', "reminderProgramId": '$reminderProgramId', "reminderScheduleId":'$reminderScheduleId', "reminderId":'$reminderId', "reminderOffset": '$reminderOffset'},
  { "reminderProgramStart": "'$reminderProgramStart' 00:02", "reminderChannelNumber": '$reminderChannelNumber', "reminderProgramId": '$reminderProgramId', "reminderScheduleId":'$reminderScheduleId', "reminderId":'$reminderId', "reminderOffset": '$reminderOffset'},

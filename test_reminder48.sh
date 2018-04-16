@@ -4,13 +4,13 @@ operation="$1"
 reminderOffset="$2"
 reminderOffset_new="$3"
 
-echo "[DBG] `date "+%a %b %d %T %N %Z %Y"`: $operation 48rems with reminderOffset=$reminderOffset, reminderOffset_new=$reminderOffset_new): iteration="$i"/"$count_iterations", macaddress=$macaddress, reminderProgramStart=$reminderProgramStart, reminderChannelNumber=$reminderChannelNumber)"|$logwrap
+echo "[DBG] `date "+%a %b %d %T %N %Z %Y"`: $operation 48rems with reminderOffset=$reminderOffset, reminderOffset_new=$reminderOffset_new): iteration="$i"/"$count_iterations", mac=$mac, reminderProgramStart=$reminderProgramStart, reminderChannelNumber=$reminderChannelNumber)"|$logwrap
 
 if [ "$operation" != "Edit" ]; then
 #/usr/bin/time -f 'real %Es' -o $logfile -a $curlwrap 'http://'$ams_ip':'$ams_port'/'$url'' -H 'Content-type: application/json' \
 /usr/bin/time -f 'real %Es' -o ${logfile} -a ${curlwrap} -s 'http://'${ams_ip}':'${ams_port}'/'${url}'' -H 'Content-type: application/json' \
 -d '{
-"deviceId": '${macaddress}',
+"deviceId": '${mac}',
 "reminders": [
  { "operation": '$operation', "reminderChannelNumber": '$reminderChannelNumber', "reminderProgramStart": "'$reminderProgramStart' 00:00", "reminderProgramId": 0, "reminderOffset": '$reminderOffset' },
  { "operation": '$operation', "reminderChannelNumber": '$reminderChannelNumber', "reminderProgramStart": "'$reminderProgramStart' 00:30", "reminderProgramId": 0, "reminderOffset": '$reminderOffset' },
@@ -65,7 +65,7 @@ echo;echo
 elif [ "$operation" == "Edit" ]; then
 /usr/bin/time -f 'real %Es' -o $logfile -a $curlwrap 'http://'$ams_ip':'$ams_port'/'$url'' -H 'Content-type: application/json' \
 -d '{
-"deviceId": '$macaddress',
+"deviceId": '$mac',
 "reminders": [
  { "operation": Delete, "reminderChannelNumber": '$reminderChannelNumber', "reminderProgramStart": "'$reminderProgramStart' 00:00", "reminderProgramId": 0, "reminderOffset": '$reminderOffset' },
  { "operation": Delete, "reminderChannelNumber": '$reminderChannelNumber', "reminderProgramStart": "'$reminderProgramStart' 00:30", "reminderProgramId": 0, "reminderOffset": '$reminderOffset' },

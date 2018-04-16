@@ -17,12 +17,12 @@ public class testAMS_Reminder_OldAPI extends API {
     @Test
     public void testAdd_Delete() throws IOException {
         int count_reminders = 1;
-        ArrayList actual = AMS.Request(macaddress, Operation.add, count_reminders,
+        ArrayList actual = AMS.Request(mac, Operation.add, count_reminders,
                 reminderProgramStart(), reminderChannelNumber, reminderOffset);
         assertEquals(expected200, actual.get(0));
         assertEquals("", actual.get(1));
 
-        actual = AMS.Request(macaddress, Operation.delete, count_reminders,
+        actual = AMS.Request(mac, Operation.delete, count_reminders,
                 reminderProgramStart(), reminderChannelNumber, reminderOffset);
         assertEquals(expected200, actual.get(0));
         assertEquals("", actual.get(1));
@@ -31,7 +31,7 @@ public class testAMS_Reminder_OldAPI extends API {
     //@RepeatedTest(3)
     @Test
     public void testAdd() throws IOException {
-        ArrayList actual = AMS.Request(macaddress, Operation.add, count_reminders,
+        ArrayList actual = AMS.Request(mac, Operation.add, count_reminders,
                 reminderProgramStart(), reminderChannelNumber, reminderOffset);
         assertEquals(expected200, actual.get(0));
         assertEquals("", actual.get(1));
@@ -39,7 +39,7 @@ public class testAMS_Reminder_OldAPI extends API {
 
     @Test
     public void testAdd_400_Bad_Request() throws IOException {
-        ArrayList actual = AMS.Request(macaddress, Operation.add, count_reminders,
+        ArrayList actual = AMS.Request(mac, Operation.add, count_reminders,
                 "YYYY-MM-DD", reminderChannelNumber, reminderOffset);
         assertEquals(expected400, actual.get(0));
         assertEquals("REM-008 Reminders parsing error: incorrect message format", actual.get(1));
@@ -47,7 +47,7 @@ public class testAMS_Reminder_OldAPI extends API {
 
     @Test
     public void testAdd_REM_ST_001_Box_is_not_registered() throws IOException {
-        ArrayList actual = AMS.Request(macaddress, Operation.add, count_reminders,
+        ArrayList actual = AMS.Request(mac, Operation.add, count_reminders,
                 reminderProgramStart(), reminderChannelNumber, reminderOffset);
         assertEquals(expected500, actual.get(0));
         assertEquals("REM-ST-001 Box is not registered", actual.get(1));
@@ -58,7 +58,7 @@ public class testAMS_Reminder_OldAPI extends API {
      */
     @Test
     public void testAdd_statusCode2() throws IOException {
-        ArrayList actual = AMS.Request(macaddress, Operation.add, count_reminders,
+        ArrayList actual = AMS.Request(mac, Operation.add, count_reminders,
                 reminderProgramStart_past, reminderChannelNumber, reminderOffset);
         assertEquals(expected200, actual.get(0));
         assertEquals("2", actual.get(1));
@@ -69,7 +69,7 @@ public class testAMS_Reminder_OldAPI extends API {
      */
     @Test
     public void testAdd_statusCode3() throws IOException {
-        ArrayList actual = AMS.Request(macaddress, Operation.add, count_reminders,
+        ArrayList actual = AMS.Request(mac, Operation.add, count_reminders,
                 reminderProgramStart(), reminderChannelNumber_for_statuscode3, reminderOffset);
         assertEquals(expected200, actual.get(0));
         assertEquals("3", actual.get(1));
@@ -80,7 +80,7 @@ public class testAMS_Reminder_OldAPI extends API {
      */
     @Test
     public void testAdd_statusCode4() throws IOException {
-        ArrayList actual = AMS.Request(macaddress, Operation.add, count_reminders,
+        ArrayList actual = AMS.Request(mac, Operation.add, count_reminders,
                 reminderProgramStart(), reminderChannelNumber, reminderOffset);
         assertEquals(expected200, actual.get(0));
         assertEquals("4", actual.get(1));
@@ -88,7 +88,7 @@ public class testAMS_Reminder_OldAPI extends API {
 
     @Test
     public void testDelete() throws IOException {
-        ArrayList actual = AMS.Request(macaddress, Operation.delete, count_reminders,
+        ArrayList actual = AMS.Request(mac, Operation.delete, count_reminders,
                 reminderProgramStart(), reminderChannelNumber, reminderOffset);
         assertEquals(expected200, actual.get(0));
         assertEquals("", actual.get(1));
@@ -96,7 +96,7 @@ public class testAMS_Reminder_OldAPI extends API {
 
     @Test
     public void testDelete_400_Bad_Request() throws IOException {
-        ArrayList actual = AMS.Request(macaddress, Operation.delete, count_reminders,
+        ArrayList actual = AMS.Request(mac, Operation.delete, count_reminders,
                 "YYYY-MM-DD", reminderChannelNumber, reminderOffset);
         assertEquals(expected400, actual.get(0));
         assertEquals("REM-008 Reminders parsing error: incorrect message format", actual.get(1));
@@ -104,7 +104,7 @@ public class testAMS_Reminder_OldAPI extends API {
 
     @Test
     public void testDelete_REM_ST_001_Box_is_not_registered() throws IOException {
-        ArrayList actual = AMS.Request(macaddress, Operation.delete, count_reminders,
+        ArrayList actual = AMS.Request(mac, Operation.delete, count_reminders,
                 reminderProgramStart(), reminderChannelNumber, reminderOffset);
         assertEquals(expected500, actual.get(0));
         assertEquals("REM-ST-001 Box is not registered", actual.get(1));
@@ -112,29 +112,29 @@ public class testAMS_Reminder_OldAPI extends API {
 
     @Test
     public void testPurge() throws IOException {
-        ArrayList actual = AMS.Request(macaddress, Operation.purge, false);
+        ArrayList actual = AMS.Request(mac, Operation.purge, false);
         assertEquals(expected200, actual.get(0));
         assertEquals("", actual.get(1));
 
     }
 
     @Test
-    public void testPurge_macaddress_empty() throws IOException {
+    public void testPurge_mac_empty() throws IOException {
         ArrayList actual = AMS.Request("", Operation.purge, false);
         assertEquals(expected400, actual.get(0));
         assertEquals("REM-008 Reminders parsing error: wrong deviceId", actual.get(1));
     }
 
     @Test
-    public void testPurge_macaddress_wrong() throws IOException {
-        ArrayList actual = AMS.Request(macaddress_wrong, Operation.purge, false);
+    public void testPurge_mac_wrong() throws IOException {
+        ArrayList actual = AMS.Request(mac_wrong, Operation.purge, false);
         assertEquals(expected500, actual.get(0));
         assertEquals("REM-ST-001 Box is not registered", actual.get(1));
     }
 
     @Test
     public void testPurge_REM_ST_01_Box_is_not_registered() throws IOException {
-        ArrayList actual = AMS.Request(macaddress, Operation.purge, false);
+        ArrayList actual = AMS.Request(mac, Operation.purge, false);
         assertEquals(expected500, actual.get(0));
         assertEquals("REM-ST-001 Box is not registered", actual.get(1));
     }
@@ -142,7 +142,7 @@ public class testAMS_Reminder_OldAPI extends API {
     @Test
     @Deprecated
     public void testPurge_500_Internal_Server_Error() throws IOException {
-        ArrayList actual = AMS.Request(macaddress, Operation.purge, false);
+        ArrayList actual = AMS.Request(mac, Operation.purge, false);
         assertEquals(expected500, actual.get(0));
         assertEquals("", actual.get(1));
     }
@@ -150,7 +150,7 @@ public class testAMS_Reminder_OldAPI extends API {
     @Test
     @Deprecated
     public void testPurge_504_Server_data_timeout() throws IOException {
-        ArrayList actual = AMS.Request(macaddress, Operation.purge, false);
+        ArrayList actual = AMS.Request(mac, Operation.purge, false);
         assertEquals(expected504, actual.get(0));
         assertEquals("", actual.get(1));
     }
@@ -160,7 +160,7 @@ public class testAMS_Reminder_OldAPI extends API {
      */
     @Test
     public void testDelete_statusCode2() throws IOException {
-        ArrayList actual = AMS.Request(macaddress, Operation.delete, count_reminders,
+        ArrayList actual = AMS.Request(mac, Operation.delete, count_reminders,
                 reminderProgramStart_past, reminderChannelNumber, reminderOffset);
         assertEquals(expected200, actual.get(0));
         assertEquals("2", actual.get(1));
@@ -171,7 +171,7 @@ public class testAMS_Reminder_OldAPI extends API {
      */
     @Test
     public void testDelete_statusCode3() throws IOException {
-        ArrayList actual = AMS.Request(macaddress, Operation.delete, count_reminders,
+        ArrayList actual = AMS.Request(mac, Operation.delete, count_reminders,
                 reminderProgramStart(), reminderChannelNumber_for_statuscode3, reminderOffset);
         assertEquals(expected200, actual.get(0));
         assertEquals("3", actual.get(1));
@@ -182,7 +182,7 @@ public class testAMS_Reminder_OldAPI extends API {
      */
     @Test
     public void testDelete_statusCode4() throws IOException {
-        ArrayList actual = AMS.Request(macaddress, Operation.delete, count_reminders,
+        ArrayList actual = AMS.Request(mac, Operation.delete, count_reminders,
                 reminderProgramStart(), reminderChannelNumber, reminderOffset);
         assertEquals(expected200, actual.get(0));
         assertEquals("4", actual.get(1));
@@ -190,7 +190,7 @@ public class testAMS_Reminder_OldAPI extends API {
 
     @Test
     public void testOperation_wrong_400_Bad_Request() throws IOException {
-        ArrayList actual = AMS.Request(macaddress, Operation.blablabla, count_reminders,
+        ArrayList actual = AMS.Request(mac, Operation.blablabla, count_reminders,
                 reminderProgramStart(), reminderChannelNumber, reminderOffset);
         assertEquals(expected400, actual.get(0));
         assertEquals("REM-008 Reminders parsing error: wrong operation", actual.get(1));

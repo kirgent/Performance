@@ -42,7 +42,7 @@ public class API {
 
     //private final static Logger log = Logger.getLogger(API.class.getName());
 
-    enum Operation { add, modify, delete, purge, blablabla, blablablablablablablablablablablablablablabla }
+    enum Operation { add, modify, delete, purge, blablabla }
 
     Boolean show_generated_json = true;
 
@@ -74,7 +74,7 @@ public class API {
     final String expected500 = "500 Internal Server Error";
     final String expected504 = "504 Server data timeout";
 
-    final String macaddress_wrong = "123456789012";
+    final String mac_wrong = "123456789012";
     final String boxD101 = "A0722CEEC970"; //WB20 D101 ???
     final String boxD102 = "3438B7EB2E24"; //WB20 D102
     final String boxD103 = "3438B7EB2E28"; //WB20 D103
@@ -88,7 +88,7 @@ public class API {
     final String boxD111 = "2c7e81ee2530";
     final String boxX = "1";
     final String box4212 = "A0722CEEC9A4";
-    String macaddress = boxD102;
+    String mac = boxD102;
 
 
     //DATES
@@ -150,7 +150,7 @@ public class API {
         //WORKING parsing from json_string to Class:
         Gson g = new Gson();
         Reminder reminder = g.fromJson(json_add2, Reminder.class);
-        System.out.println("[DBG] parsing from json_string to Class: \nmacaddress: " + reminder.deviceId);
+        System.out.println("[DBG] parsing from json_string to Class: \nmac: " + reminder.deviceId);
         System.out.println("[DBG] count of reminders in class: " + reminder.reminders.size());
         for(Reminders rems : reminder.reminders){System.out.println(
                     "operation: " + rems.operation + ", " +
@@ -170,7 +170,7 @@ public class API {
         //from class -> to string json
         //class with fields:
         Reminders rs = new Reminders(operation, reminderChannelNumber, reminderProgramStart, reminderProgramId, reminderOffset);
-        Reminder r = new Reminder(macaddress, rs);
+        Reminder r = new Reminder(mac, rs);
         //create json structure:
         String json = GSON.toJson(r);
         System.out.println("[DBG] from class -> to string json:\n" + json);
@@ -181,7 +181,7 @@ public class API {
 */
 /*
         //from class -> to string json
-        Reminder from_class = new Reminder(macaddress, Arrays.asList("operation", "reminderChannelNumber", "reminderProgramStart", "reminderProgramId", "reminderOffset"));
+        Reminder from_class = new Reminder(mac, Arrays.asList("operation", "reminderChannelNumber", "reminderProgramStart", "reminderProgramId", "reminderOffset"));
         String json = GSON.toJson(from_class);
         System.out.println("[DBG] from class -> to string json:\n" + json);
 
@@ -200,7 +200,7 @@ public class API {
     return "";
     }
 
-    String check_body_response(String body, String macaddress) {
+    String check_body_response(String body, String mac) {
         String result = "";
         if(body.contains("\"statusCode\":1")){
             //log.warning("one or more statusCode's = " + statuscode[1]);
@@ -231,7 +231,7 @@ public class API {
             result += "REM-ST-001 Box is not registered";
         }
         if(body.contains("\"status\":\"Failed\"") && body.contains("\"errorMessage\":\"REM-002 Reminders Service error: REM-112\"")){
-            result += "REM-002 Reminders Service error: REM-012 [" + macaddress + "] Request not accomplished";
+            result += "REM-002 Reminders Service error: REM-012 [" + mac + "] Request not accomplished";
         }
         if(body.contains("\"status\":\"Failed\"") && body.contains("\"errorMessage\":\"REM-002 Reminders Service error: Timeout detected by BoxResponseTracker\"")){
             result += "REM-002 Reminders Service error: Timeout detected by BoxResponseTracker";
@@ -260,8 +260,8 @@ public class API {
         if(body.contains("\"status\":\"Failed\"") && body.contains("\"errorMessage\":\"name cannot be null\"")){
             result += "name cannot be null";
         }
-        if(body.contains("REM-002 Reminders Service error: Can not connect to STB with stbId=" + macaddress)){
-            result += "REM-002 Reminders Service error: Can not connect to STB with stbId=" + macaddress;
+        if(body.contains("REM-002 Reminders Service error: Can not connect to STB with stbId=" + mac)){
+            result += "REM-002 Reminders Service error: Can not connect to STB with stbId=" + mac;
         }
         if(body.contains("REM-008 Reminders parsing error: wrong deviceId")){
             result += "REM-008 Reminders parsing error: wrong deviceId";
@@ -275,11 +275,11 @@ public class API {
         if(body.contains("REM-008 Reminders parsing error: incorrect reminderId")){
             result += "REM-008 Reminders parsing error: incorrect reminderId";
         }
-        if(body.contains("Failed to getAmsIpByMacAddress for : " + macaddress + ", with error: No amsIp found for macAddress: STB" +macaddress)){
-            result += "No amsIp found for macAddress";
+        if(body.contains("Failed to getAmsIpBymac for : " + mac + ", with error: No amsIp found for mac: STB" +mac)){
+            result += "No amsIp found for mac";
         }
-        if(body.contains("STB MAC not found: " + macaddress)){
-            result += "STB MAC not found: " + macaddress;
+        if(body.contains("STB MAC not found: " + mac)){
+            result += "STB MAC not found: " + mac;
         }
         if(body.contains("incorrect value")){
             result += "incorrect value";
@@ -322,15 +322,15 @@ public class API {
     }
 
     /*@Deprecated
-    ArrayList Purge(String ams_ip, String macaddress) throws IOException {
-        System.out.println("Purge for ams_ip=" + ams_ip + " and macaddress=" + macaddress);
-        //log.info("Purge for ams_ip=" + ams_ip + " and macaddress=" + macaddress);
+    ArrayList Purge(String ams_ip, String mac) throws IOException {
+        System.out.println("Purge for ams_ip=" + ams_ip + " and mac=" + mac);
+        //log.info("Purge for ams_ip=" + ams_ip + " and mac=" + mac);
 
         String url = "http://" + ams_ip + ":" + ams_port + postfix_change;
         CloseableHttpClient client = HttpClients.createDefault();
         HttpPost request = new HttpPost(url);
 
-        String json_purge = "{\"deviceId\":" + macaddress + ",\"reminders\":[{\"operation\":\"Purge\"}]}";
+        String json_purge = "{\"deviceId\":" + mac + ",\"reminders\":[{\"operation\":\"Purge\"}]}";
         request.setEntity(new StringEntity(json_purge));
         //request.setHeader("Accept", "application/json");
         request.setHeader("Content-type", "application/json");
@@ -376,9 +376,9 @@ public class API {
         return arrayList;
     }*/
 
-    ArrayList QueryDB(String ams_ip, String macaddress) throws ClassNotFoundException, SQLException {
-        //ResultSet QueryDB(String macaddress) throws ClassNotFoundException, SQLException {
-        System.out.println("QueryDB for macaddress=" + macaddress + " to DB on AMS=" + ams_ip);
+    ArrayList QueryDB(String ams_ip, String mac) throws ClassNotFoundException, SQLException {
+        //ResultSet QueryDB(String mac) throws ClassNotFoundException, SQLException {
+        System.out.println("QueryDB for mac=" + mac + " to DB on AMS=" + ams_ip);
 
         String url = "jdbc:oracle:thin:@//ams-db01.enwd.co.sa.charterlab.com:1521/zdev02";
         String username = "ams_ipv6_e591";
@@ -389,7 +389,7 @@ public class API {
         Statement statement = connection.createStatement();
 
         long start = currentTimeMillis();
-        ResultSet result = statement.executeQuery("select * from MAC_IP where MAC_STR = '" + macaddress + "\'");
+        ResultSet result = statement.executeQuery("select * from MAC_IP where MAC_STR = '" + mac + "\'");
         long finish = currentTimeMillis();
         System.out.println("[DBG] " + (finish - start) + "ms query");
 
@@ -422,6 +422,11 @@ public class API {
     }
 
     int reminderChannelNumber() {
+        Random random = new Random();
+        return Math.abs(random.nextInt(1000));
+    }
+
+    int reminderOffset() {
         Random random = new Random();
         return Math.abs(random.nextInt(1000));
     }

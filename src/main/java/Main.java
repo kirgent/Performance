@@ -6,27 +6,27 @@ public class Main extends API {
     private static String operation;
     private static String param;
 
-    private String macaddress_by_default = "172.30.81.4";
+    private String mac_by_default = "172.30.81.4";
     private String operation_by_default = "Check";
 
     String synopsys="\nNAME" +
-            "\n\tReminders - java app for Add/Edit/Delete/Purge reminders and Check AMS/Change AMS registration on MACADDRESS." +
+            "\n\tReminders - java app for Add/Edit/Delete/Purge reminders and Check AMS/Change AMS registration on mac." +
             "\nSYNOPSYS" +
-            "\n\tReminders [MACADDRESS] [OPERATION] [COUNT]" +
+            "\n\tReminders [mac] [OPERATION] [COUNT]" +
             "\nDESCRIPTION" +
-            "\n\tMACADDRESS is a box macaddress, e.g. 6CB56BBA882C" +
+            "\n\tmac is a box mac, e.g. 6CB56BBA882C" +
             "\n\tOPERATION is a action for curl/json e.g. Add, Edit (it's really will be Delete+Add), Delete, Purge, Change" +
             "\n\tCOUNT is a count of reminders, can be 48, 288, 720 in one curl request" +
             "\nOPTIONS" +
             "\n\tReminders - print this help" +
-            "\n\tReminders MACADDRESS - send curl for checking registration" +
-            "\n\tReminders MACADDRESS Check - send curl for checking registration" +
-            "\n\tReminders MACADDRESS Change ams_ip- send curl for changing registration to ams_ip" +
-            "\n\tReminders MACADDRESS Purge - clear all reminders" +
-            "\n\tReminders MACADDRESS Add [48][288][576]- add reminders (accordingly 48/288/576)" +
-            "\n\tReminders MACADDRESS Edit [48][288][576]- delete reminders with current offset + add reminders with new_offset (accordingly 48/288/576)" +
-            "\n\tReminders MACADDRESS Delete [48][288][576]- delete reminders (accordingly 48/288/576)" +
-            "\n\tReminders MACADDRESS All [48][288][576] - add + edit + delete reminders (accordingly 48/288/576)" +
+            "\n\tReminders mac - send curl for checking registration" +
+            "\n\tReminders mac Check - send curl for checking registration" +
+            "\n\tReminders mac Change ams_ip- send curl for changing registration to ams_ip" +
+            "\n\tReminders mac Purge - clear all reminders" +
+            "\n\tReminders mac Add [48][288][576]- add reminders (accordingly 48/288/576)" +
+            "\n\tReminders mac Edit [48][288][576]- delete reminders with current offset + add reminders with new_offset (accordingly 48/288/576)" +
+            "\n\tReminders mac Delete [48][288][576]- delete reminders (accordingly 48/288/576)" +
+            "\n\tReminders mac All [48][288][576] - add + edit + delete reminders (accordingly 48/288/576)" +
             "\nCURRENT SETTINGS" +
             "\n\tused AMS: " + ams_ip +
             "\n\tused charterapi: " + charterapi +
@@ -67,19 +67,19 @@ public class Main extends API {
 
 
 /*        if (args[0].isEmpty()){
-            System.out.println("No macaddress specified!" + synopsys);
+            System.out.println("No mac specified!" + synopsys);
             return;
 
             } else if (args[0].length() != 12) {
-                System.out.println("Incorrect macaddress specified!" + synopsys);
+                System.out.println("Incorrect mac specified!" + synopsys);
                 return;
             } else {
-                macaddress = args[0];
-                //System.out.println("[DBG] macaddress is correct: "+macaddress);
+                mac = args[0];
+                //System.out.println("[DBG] mac is correct: "+mac);
             }*/
         //}
         //catch (ArrayIndexOutOfBoundsException e){
-        //    System.out.print("No macaddress specified!" + synopsys);
+        //    System.out.print("No mac specified!" + synopsys);
         //}
 
         //check the args[1] = OPERATION
@@ -87,10 +87,10 @@ public class Main extends API {
 
         //if (args[0].isEmpty())
         if (args.length >= 1) {
-            macaddress = args[0];
+            mac = args[0];
         }
         else {
-            macaddress = macaddress_by_default;
+            mac = mac_by_default;
         }
 
 
@@ -146,37 +146,37 @@ public class Main extends API {
             }
         }*/
 
-        System.out.println("[DBG] used macaddress=" + macaddress + ", operation=" + operation + ", param=" + param);
+        System.out.println("[DBG] used mac=" + mac + ", operation=" + operation + ", param=" + param);
 
         API_Middle Middle = new API_Middle();
 
         switch (operation){
             case "Check":
             case "check":
-                Middle.Check_registration(macaddress, charterapi);
+                Middle.Check_registration(mac, charterapi);
                 break;
             case "Change":
             case "change":
-                Middle.Change_registration(macaddress, charterapi, ams_ip);
+                Middle.Change_registration(mac, charterapi, ams_ip);
                 break;
             case "Purge":
             case "purge":
-                //api.Operation(ams_ip_by_default, macaddress[0], "Purge", false);
+                //api.Operation(ams_ip_by_default, mac[0], "Purge", false);
                 break;
             case "Purge2":
             case "purge2":
-                //api.Operation(ams_ip_by_default, macaddress[0], "Purge", false);
+                //api.Operation(ams_ip_by_default, mac[0], "Purge", false);
                 break;
             //case "Add":
-            //case "add": api.Operation("Add", macaddress, count_reminders, count_iterations, ams_ip_default); break;
+            //case "add": api.Operation("Add", mac, count_reminders, count_iterations, ams_ip_default); break;
             case "Modify":
             case "modify":
-                //api.Operation(ams_ip_by_default, macaddress[0], "Modify", true, count_reminders_by_default, reminderProgramStart, reminderChannelNumber, reminderProgramId, reminderOffset, reminderScheduleId, reminderId);
+                //api.Operation(ams_ip_by_default, mac[0], "Modify", true, count_reminders_by_default, reminderProgramStart, reminderChannelNumber, reminderProgramId, reminderOffset, reminderScheduleId, reminderId);
                 break;
             //case "Delete":
-            //case "delete": api.Operation("Delete", macaddress, count_reminders, count_iterations, ams_ip_default); break;
+            //case "delete": api.Operation("Delete", mac, count_reminders, count_iterations, ams_ip_default); break;
             default:
-                Middle.Check_registration(macaddress, charterapi);
+                Middle.Check_registration(mac, charterapi);
         }
     }
 }

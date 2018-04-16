@@ -32,7 +32,7 @@ public class testSandbox extends API {
 
     @Test
     public void testOperation_NewAPI_400_Bad_Request() throws IOException {
-        ArrayList actual = AMS.Request(macaddress, Operation.blablabla, count_reminders,
+        ArrayList actual = AMS.Request(mac, Operation.blablabla, count_reminders,
                 reminderProgramStart(), reminderChannelNumber, reminderProgramId,
                 reminderOffset, reminderScheduleId, reminderId);
         assertEquals(expected400, actual.get(0));
@@ -41,7 +41,7 @@ public class testSandbox extends API {
 
     @Test
     public void testOracleDB_Query() throws SQLException, ClassNotFoundException {
-        ArrayList actual = AMS.QueryDB(ams_ip, macaddress);
+        ArrayList actual = AMS.QueryDB(ams_ip, mac);
         assertFalse(actual.isEmpty());
 
         assertEquals(Long.class, actual.get(0).getClass());
@@ -61,20 +61,20 @@ public class testSandbox extends API {
     }
 
     @Test
-    public void testOracleDB_Query_macaddress_empty() throws SQLException, ClassNotFoundException {
+    public void testOracleDB_Query_mac_empty() throws SQLException, ClassNotFoundException {
         ArrayList result = AMS.QueryDB(ams_ip, "");
         assertTrue(result.isEmpty());
     }
 
     @Test
-    public void testOracleDB_Query_macaddress_wrong() throws SQLException, ClassNotFoundException {
-        ArrayList result = AMS.QueryDB(ams_ip, macaddress_wrong);
+    public void testOracleDB_Query_mac_wrong() throws SQLException, ClassNotFoundException {
+        ArrayList result = AMS.QueryDB(ams_ip, mac_wrong);
         assertTrue(result.isEmpty());
     }
 
     @Test
     public void testCheck_Delete() throws IOException {
-        ArrayList actual = AMS.Request(macaddress, Operation.delete, count_reminders,
+        ArrayList actual = AMS.Request(mac, Operation.delete, count_reminders,
                 reminderProgramStart(), reminderChannelNumber,
                 reminderProgramId, reminderOffset, reminderScheduleId, reminderId);
         assertEquals(expected200, actual.get(0));

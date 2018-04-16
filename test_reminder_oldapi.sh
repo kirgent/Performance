@@ -10,7 +10,7 @@ curlwrap="curl"
 #GREEN='\033[0;32m'
 #GRAY='\033[0;37m'
 
-macaddress="$1"
+mac="$1"
 action="$2"
 param="$3"
 count_reminders="$4"
@@ -53,23 +53,23 @@ logwrap="tee -a $logfile"
 startmessage="[DBG] `date "+%a %b %d %T %N %Z %Y"`: NEW START: ams_ip=$ams_ip, count_reminders=$param, count_iterations=$count_iterations, RACK_DATE=( ${RACK_DATE[@]} ), RACK_CHANNELS=( ${RACK_CHANNELS[@]} )"
 
 synopsys="\nNAME
-\ttest_reminder.sh - script for Add / Edit / Delete / Purge reminders on MACADDRESS and also check registration / registration on AMS.
+\ttest_reminder.sh - script for Add / Edit / Delete / Purge reminders on mac and also check registration / registration on AMS.
 SYNOPSYS
-\ttest_reminder.sh [MACADDRESS] [OPERATION] [COUNT]
+\ttest_reminder.sh [mac] [OPERATION] [COUNT]
 \nDESCRIPTION
-\tMACADDRESS is a box macaddress, e.g. A0722CB1AF24
+\tmac is a box mac, e.g. A0722CB1AF24
 \tOPERATION is a action for curl/json e.g. Add, Edit (it's really will be Delete+Add), Delete, Purge, Change
 \tCOUNT is a count of reminders, can be 48, 288, 720 in one curl request
 OPTIONS
 \ttest_Reminder.sh                   - print this help
-\ttest_reminder.sh MACADDRESS        - send curl for checking registration
-\ttest_reminder.sh MACADDRESS Check  - send curl for checking registration
-\ttest_reminder.sh MACADDRESS Change - send curl for changing registration to new AMS
-\ttest_reminder.sh MACADDRESS Purge  - clear all reminders
-\ttest_reminder.sh MACADDRESS Add    - add reminders (cyclically)
-\ttest_reminder.sh MACADDRESS Edit   - delete reminders with current reminderOffset + add reminders with reminderOffset_new (cyclically)
-\ttest_reminder.sh MACADDRESS Delete - delete reminders (cyclically)
-\ttest_reminder.sh MACADDRESS All    - add + edit + delete reminders (cyclically)
+\ttest_reminder.sh mac        - send curl for checking registration
+\ttest_reminder.sh mac Check  - send curl for checking registration
+\ttest_reminder.sh mac Change - send curl for changing registration to new AMS
+\ttest_reminder.sh mac Purge  - clear all reminders
+\ttest_reminder.sh mac Add    - add reminders (cyclically)
+\ttest_reminder.sh mac Edit   - delete reminders with current reminderOffset + add reminders with reminderOffset_new (cyclically)
+\ttest_reminder.sh mac Delete - delete reminders (cyclically)
+\ttest_reminder.sh mac All    - add + edit + delete reminders (cyclically)
 DEFAULT CURRENT SETTINGS:
 \tAMS: $ams_ip
 \tcharterapi: $charterapi
@@ -99,9 +99,9 @@ statuscodes="code of the reminder processing result, one of the following:
 if [ ! -x "`which curl`" ]; then echo -e "No curl detected! please check.$synopsys"; exit; fi
 
 ########################### main() ###########################
-if [ -z "$macaddress" ]; then
-echo -e "No macaddress specified!$synopsys"|${logwrap}; exit;
-elif [ `expr length "$macaddress"` -ne "12" ]; then echo -e "Incorrect macaddress specified!$synopsys"|${logwrap}; exit
+if [ -z "$mac" ]; then
+echo -e "No mac specified!$synopsys"|${logwrap}; exit;
+elif [ `expr length "$mac"` -ne "12" ]; then echo -e "Incorrect mac specified!$synopsys"|${logwrap}; exit
 fi
 
 if [ -z "$count_reminders" ]; then count_reminders=1; fi
@@ -110,17 +110,17 @@ if [ ! -z "$action" ]; then
 
 if [ "$action" == "Check" ]; then
 echo "Checking registration:"
-${curlwrap} ${charterapi_a}/${postfix_settings}/amsIp/${macaddress}; echo
-${curlwrap} ${charterapi_b}/${postfix_settings}/amsIp/${macaddress}; echo
-${curlwrap} ${charterapi_c}/${postfix_settings}/amsIp/${macaddress}; echo
-${curlwrap} ${charterapi_d}/${postfix_settings}/amsIp/${macaddress}; echo
+${curlwrap} ${charterapi_a}/${postfix_settings}/amsIp/${mac}; echo
+${curlwrap} ${charterapi_b}/${postfix_settings}/amsIp/${mac}; echo
+${curlwrap} ${charterapi_c}/${postfix_settings}/amsIp/${mac}; echo
+${curlwrap} ${charterapi_d}/${postfix_settings}/amsIp/${mac}; echo
 
 
 elif [ "$action" == "Change" ]; then
 if [ ! -z "$param" ]; then ams_ip=${param}; fi
 echo "Changing registration to AMS $ams_ip"
 echo "Used charterapi: $charterapi"
-json_change='{"settings":{"groups":[{"options":[],"id":"STB'${macaddress}'","type":"device-stb","amsid":"'${ams_ip}'"}]}}'
+json_change='{"settings":{"groups":[{"options":[],"id":"STB'${mac}'","type":"device-stb","amsid":"'${ams_ip}'"}]}}'
 ${curlwrap} -H 'Content-Type:application/json' -d ${json_change} "$charterapi_c/$postfix_settings?requestor=AMS"; echo
 ${curlwrap} -H 'Content-Type:application/json' -d ${json_change} "$charterapi_b/$postfix_settings?requestor=AMS"; echo
 ${curlwrap} -H 'Content-Type:application/json' -d ${json_change} "$charterapi_c/$postfix_settings?requestor=AMS"; echo
@@ -130,8 +130,8 @@ ${curlwrap} -H 'Content-Type:application/json' -d ${json_change} "$charterapi_d/
 
 elif [ "$action" == "Purge" ]; then
 echo "[DBG] `date "+%a %b %d %T %N %Z %Y"`: NEW START: ams_ip=$ams_ip, Purge ---> (_|_)"|${logwrap}
-/usr/bin/time -f 'real %Es' -o ${logfile} -a ${curlwrap} 'http://'${ams_ip}':'${ams_port}'/'$url'' -H 'Content-type: application/json' -d '{ "deviceId": '${macaddress}', "reminders": [{"operation": "Purge"}]}'; echo
-#/usr/bin/time -f 'real %Es' curl -s 'http://'$ams_ip':'$ams_port'/'$url'' -H 'Content-type: text/plain' --data '{ "deviceId": '$macaddress', "reminders": [{"operation": "Purge"}]}' 2>&1|tee -a $logfile; echo
+/usr/bin/time -f 'real %Es' -o ${logfile} -a ${curlwrap} 'http://'${ams_ip}':'${ams_port}'/'$url'' -H 'Content-type: application/json' -d '{ "deviceId": '${mac}', "reminders": [{"operation": "Purge"}]}'; echo
+#/usr/bin/time -f 'real %Es' curl -s 'http://'$ams_ip':'$ams_port'/'$url'' -H 'Content-type: text/plain' --data '{ "deviceId": '$mac', "reminders": [{"operation": "Purge"}]}' 2>&1|tee -a $logfile; echo
 
 
 elif [ "$action" == "All" ]; then
@@ -172,10 +172,10 @@ echo -e "Incorrect action specified!$synopsys"|${logwrap}; exit;
 fi
 else
 echo "Checking registration:"
-${curlwrap} ${charterapi_a}/${postfix_settings}/amsIp/${macaddress}; echo
-${curlwrap} ${charterapi_b}/${postfix_settings}/amsIp/${macaddress}; echo
-${curlwrap} ${charterapi_c}/${postfix_settings}/amsIp/${macaddress}; echo
-${curlwrap} ${charterapi_d}/${postfix_settings}/amsIp/${macaddress}; echo
+${curlwrap} ${charterapi_a}/${postfix_settings}/amsIp/${mac}; echo
+${curlwrap} ${charterapi_b}/${postfix_settings}/amsIp/${mac}; echo
+${curlwrap} ${charterapi_c}/${postfix_settings}/amsIp/${mac}; echo
+${curlwrap} ${charterapi_d}/${postfix_settings}/amsIp/${mac}; echo
 
 fi
 ########################### main() end ###########################
