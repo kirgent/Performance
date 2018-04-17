@@ -63,7 +63,7 @@ class testAMS_Reminder_Add_Modify_Delete_Purge extends API {
 
     @RepeatedTest(10)
     void test3_Add_Modify_Purge() throws IOException {
-        int count_reminders = 48;
+        int count_reminders = 5;
         int reminderChannelNumber = reminderChannelNumber();
         long reminderScheduleId = reminderScheduleId();
         long reminderId = reminderId();
@@ -134,15 +134,17 @@ class testAMS_Reminder_Add_Modify_Delete_Purge extends API {
         assertEquals("", actual.get(1));
     }
 
-    @RepeatedTest(1000)
+    @RepeatedTest(10000)
     void test6_Add_Delete() throws IOException, InterruptedException {
-        int count_reminders = 1;
+        int count_reminders = 48;
         int reminderOffset = reminderOffset();
         int reminderChannelNumber = reminderChannelNumber();
+        //int reminderChannelNumber = 97;
         long reminderScheduleId = reminderScheduleId();
         long reminderId = reminderId();
 
-        ArrayList actual = AMS.Request(mac, Operation.add, count_reminders, reminderProgramStart(), reminderChannelNumber, reminderProgramId, reminderOffset, reminderScheduleId, reminderId);
+        ArrayList actual;
+        actual = AMS.Request(mac, Operation.add, count_reminders, reminderProgramStart(), reminderChannelNumber, reminderProgramId, reminderOffset, reminderScheduleId, reminderId);
         assertEquals(expected200, actual.get(0));
         assertEquals("", actual.get(1));
 

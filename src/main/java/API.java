@@ -22,6 +22,9 @@ import static java.lang.System.currentTimeMillis;
  */
 public class API {
 
+    ArrayList<Long> reminderScheduleId_list = new ArrayList<>();
+    ArrayList<Long> reminderId_list = new ArrayList<>();
+
     //API(){
     //    reminderScheduleId_arraylist = new ArrayList<>();
     //    reminderId_arraylist = new ArrayList<>();
@@ -39,12 +42,14 @@ public class API {
 
     @Rule
     final public Timeout globalTimeout = Timeout.seconds(20);
+    //private Long reminderId_list;
+    //private Long reminderScheduleId_list;
 
     //private final static Logger log = Logger.getLogger(API.class.getName());
 
     enum Operation { add, modify, delete, purge, blablabla }
 
-    Boolean show_generated_json = true;
+    Boolean show_generated_json = false;
 
     Boolean show_extra_info = false;
     //enum Http { Get, Post, Delete };
@@ -434,14 +439,16 @@ public class API {
     long reminderScheduleId(){
         Random random = new Random();
         long reminderScheduleId = Math.abs(random.nextLong());
-        //reminderScheduleId_arraylist.add(reminderScheduleId);
+        reminderScheduleId_list.add(reminderScheduleId);
+        //System.out.println("reminderScheduleId: " + reminderScheduleId);
         return reminderScheduleId;
     }
 
     long reminderId(){
         Random random = new Random();
         long reminderId = Math.abs(random.nextLong());
-        //reminderId_arraylist.add(reminderId);
+        reminderId_list.add(reminderId);
+        //System.out.println("reminderId: " + reminderId);
         return reminderId;
     }
 

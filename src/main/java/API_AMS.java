@@ -333,6 +333,11 @@ class API_AMS extends API{
         if(count_reminders < 0){ count_reminders = 0; }
         if(count_reminders > 1440){ count_reminders = 1440; }
 
+        if (count_reminders > 1){
+            reminderScheduleId=reminderScheduleId_random;
+            reminderId=reminderId_random;
+        }
+
         String action = "";
 
         if (!newapi) {
@@ -365,13 +370,14 @@ class API_AMS extends API{
                 object_in_reminders.put("reminderOffset", reminderOffset);
                 if (newapi) {
                     object_in_reminders.put("reminderProgramId", reminderProgramId);
-                    if(reminderScheduleId==-1){
+                    if(reminderScheduleId==reminderScheduleId_random){
                         object_in_reminders.put("reminderScheduleId", reminderScheduleId());
                     } else {
                         object_in_reminders.put("reminderScheduleId", reminderScheduleId);
                     }
-                    if(reminderId==-1) {
+                    if(reminderId==reminderId_random) {
                         object_in_reminders.put("reminderId", reminderId());
+                        //reminderId_list.add
                     } else {
                         object_in_reminders.put("reminderId", reminderId);
                     }
@@ -413,6 +419,11 @@ class API_AMS extends API{
             }
         }*/
 
+        if (count_reminders > 1){
+            reminderScheduleId=reminderScheduleId_random;
+            reminderId=reminderId_random;
+        }
+
         JSONObject json = new JSONObject();
         json.put("deviceId", macaddress);
         JSONArray array_reminders = new JSONArray();
@@ -422,8 +433,16 @@ class API_AMS extends API{
             //if (!newapi) {
             //    object_in_reminders.put("operation", action);
             //}
-            object_in_reminders.put("reminderScheduleId", reminderScheduleId);
-            object_in_reminders.put("reminderId", reminderId);
+            if (reminderScheduleId==reminderScheduleId_random){
+                object_in_reminders.put("reminderScheduleId", reminderScheduleId_list.get(i-1));
+            }else {
+                object_in_reminders.put("reminderScheduleId", reminderScheduleId);
+            }
+            if (reminderId==reminderId_random){
+                object_in_reminders.put("reminderId", reminderId_list.get(i-1));
+            }else {
+                object_in_reminders.put("reminderId", reminderId);
+            }
             array_reminders.add(object_in_reminders);
         }
         String result = json.toString();
