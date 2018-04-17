@@ -333,11 +333,6 @@ class API_AMS extends API{
         if(count_reminders < 0){ count_reminders = 0; }
         if(count_reminders > 1440){ count_reminders = 1440; }
 
-        if (count_reminders > 1){
-            reminderScheduleId=reminderScheduleId_random;
-            reminderId=reminderId_random;
-        }
-
         String action = "";
 
         if (!newapi) {
@@ -370,15 +365,11 @@ class API_AMS extends API{
                 object_in_reminders.put("reminderOffset", reminderOffset);
                 if (newapi) {
                     object_in_reminders.put("reminderProgramId", reminderProgramId);
-                    if(reminderScheduleId==reminderScheduleId_random){
+                    if(count_reminders>1){
                         object_in_reminders.put("reminderScheduleId", reminderScheduleId());
+                        object_in_reminders.put("reminderId", reminderId());
                     } else {
                         object_in_reminders.put("reminderScheduleId", reminderScheduleId);
-                    }
-                    if(reminderId==reminderId_random) {
-                        object_in_reminders.put("reminderId", reminderId());
-                        //reminderId_list.add
-                    } else {
                         object_in_reminders.put("reminderId", reminderId);
                     }
                 }
@@ -404,26 +395,6 @@ class API_AMS extends API{
      * @return
      */
     private String generate_json_reminder_delete(Boolean newapi, String macaddress, int count_reminders, long reminderScheduleId, long reminderId) {
-        //if(count_reminders <= 0){ count_reminders = 1; }
-        //if(count_reminders > 1440){ count_reminders = 1440; }
-
-        //String action = "";
-
-        /*if (!newapi) {
-            switch (operation.name()) {
-                case "add"       : action = "Add"; break;
-                case "delete"    : action = "Delete"; break;
-                case "purge"     : action = "Purge"; break;
-                case "blablabla" : action = "blablabla"; break;
-                default: break;
-            }
-        }*/
-
-        if (count_reminders > 1){
-            reminderScheduleId=reminderScheduleId_random;
-            reminderId=reminderId_random;
-        }
-
         JSONObject json = new JSONObject();
         json.put("deviceId", macaddress);
         JSONArray array_reminders = new JSONArray();
@@ -433,14 +404,11 @@ class API_AMS extends API{
             //if (!newapi) {
             //    object_in_reminders.put("operation", action);
             //}
-            if (reminderScheduleId==reminderScheduleId_random){
+            if (count_reminders>1){
                 object_in_reminders.put("reminderScheduleId", reminderScheduleId_list.get(i-1));
-            }else {
-                object_in_reminders.put("reminderScheduleId", reminderScheduleId);
-            }
-            if (reminderId==reminderId_random){
                 object_in_reminders.put("reminderId", reminderId_list.get(i-1));
             }else {
+                object_in_reminders.put("reminderScheduleId", reminderScheduleId);
                 object_in_reminders.put("reminderId", reminderId);
             }
             array_reminders.add(object_in_reminders);

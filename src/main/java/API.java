@@ -22,36 +22,22 @@ import static java.lang.System.currentTimeMillis;
  */
 public class API {
 
+    Boolean show_generated_json = false;
+    Boolean show_extra_info = true;
+
     ArrayList<Long> reminderScheduleId_list = new ArrayList<>();
     ArrayList<Long> reminderId_list = new ArrayList<>();
-
-    //API(){
-    //    reminderScheduleId_arraylist = new ArrayList<>();
-    //    reminderId_arraylist = new ArrayList<>();
-    //}
-    //private ArrayList<Long> reminderScheduleId_arraylist;
-    //private ArrayList<Long> reminderId_arraylist;
-
-    //long reminderScheduleId_arraylist() {
-    //    return reminderScheduleId_arraylist.get(0);
-    //}
-
-    //long reminderId_arraylist() {
-    //    return reminderId_arraylist.get(0);
-    //}
+    private ArrayList<Long> reminderScheduleId_arraylist;
 
     @Rule
     final public Timeout globalTimeout = Timeout.seconds(20);
-    //private Long reminderId_list;
-    //private Long reminderScheduleId_list;
 
     //private final static Logger log = Logger.getLogger(API.class.getName());
 
     enum Operation { add, modify, delete, purge, blablabla }
 
-    Boolean show_generated_json = false;
 
-    Boolean show_extra_info = false;
+
     //enum Http { Get, Post, Delete };
 
     //static Logger log = Logger.getLogger(testAMS.class.getName());
@@ -75,7 +61,6 @@ public class API {
     final String expected201 = "201 Created";
     final String expected400 = "400 Bad Request";
     final String expected404 = "404 Not Found";
-    final String expected405 = "405 Method Not Allowed";
     final String expected500 = "500 Internal Server Error";
     final String expected504 = "504 Server data timeout";
 
@@ -97,38 +82,35 @@ public class API {
 
 
     //DATES
-    String reminderProgramStart_past = "2000-01-01";
-    String reminderProgramStart_wrong = "0000-00-00";
-    String reminderProgramStart_text = "yyyy-mm-dd";
+    final String reminderProgramStart_past = "2000-01-01";
+    final String reminderProgramStart_wrong = "0000-00-00";
+    final String reminderProgramStart_text = "yyyy-mm-dd";
     //String[] rack_date = {"2018-03-15"};
 
     //CHANNELS
     @Deprecated
-    int reminderChannelNumber = 2;
+    final int reminderChannelNumber = 2;
     int reminderChannelNumber_empty;
-    int reminderChannelNumber_for_statuscode3 = 9999;
-    int reminderChannelNumber_for_statuscode4 = 1000;
+    final int reminderChannelNumber_for_statuscode3 = 9999;
+    final int reminderChannelNumber_for_statuscode4 = 1000;
     /*private Integer[] rack_channel30 = { 2, 3, 4, 5, 6, 7, 8, 9, 12, 13,
             14, 16, 18, 19, 22, 23, 25, 28, 30, 31,
             32, 33, 37, 38, 41, 44, 46, 48, 49, 50 };*/
     Integer[] rack_channel = {2, 3, 4, 5, 6, 7, 8, 9, 10, 11};
 
     //String reminderProgramId = ""; //"reminderProgramId": "EP002960010113"
-    String reminderProgramId = "EP002960010113";
+    final String reminderProgramId = "EP002960010113";
     //String reminderProgramId = "0";
     String reminderProgramId_empty;
 
     int reminderOffset = 0;
     int reminderOffset_null;
-    int reminderOffset_new = 10;
     int reminderOffset_new_null;
 
     long reminderScheduleId = 1;
     long reminderScheduleId_null;
-    long reminderScheduleId_random = -1;
-
     long reminderId = 1;
-    long reminderId_random = -1;
+    final int random = -1;
 
     int count_reminders = 1;
 

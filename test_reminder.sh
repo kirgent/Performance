@@ -9,6 +9,9 @@ curlwrap="curl"
 #GREEN='\033[0;32m'
 #GRAY='\033[0;37m'
 
+show_generated_json=true
+show_extra_info=true
+
 mac="$1"
 action="$2"
 param="$3"
@@ -18,14 +21,15 @@ ams_ip="172.30.81.4"
 #ams_ip="172.30.112.19"
 ams_port="8080"
 
+random="-1"
 count_iterations=1
-#count_reminders=1
+count_reminders=1
 reminderChannelNumber=3
 reminderProgramId="EP002960010113"
-reminderOffset=0
+#reminderOffset=0
 reminderOffset_new=10
-reminderScheduleId=12345
-reminderId=12345
+#reminderScheduleId=12345
+#reminderId=12345
 
 RACK_DATE=( `date +%Y-%m-%d -d "tomorrow"` )
 #RACK_DATE=( `date +%Y-%m-%d -d "tomorrow +1day"` `date +%Y-%m-%d -d "tomorrow +2day"` `date +%Y-%m-%d -d "tomorrow +3day"` `date +%Y-%m-%d -d "tomorrow +4day"` `date +%Y-%m-%d -d "tomorrow +5day"` `date +%Y-%m-%d -d "tomorrow +6day"` `date +%Y-%m-%d -d "tomorrow +7day"` `date +%Y-%m-%d -d "tomorrow +8day"` `date +%Y-%m-%d -d "tomorrow +9day"` `date +%Y-%m-%d -d "tomorrow +10day"` )
@@ -57,7 +61,6 @@ if [ "$count_reminders" == "48" ]; then reminder_add="add48"
 elif [ "$count_reminders" == "288" ]; then reminder_add="add288"
 elif [ "$count_reminders" == "720" ]; then reminder_add="add720"
 else reminder_add="add1"
-echo "count_reminders=$count_reminders"
 fi
 
 elif [ "$action" == "Modify" ]; then
@@ -76,6 +79,43 @@ elif [ "$count_reminders" == "720" ]; then reminder_delete="delete720"
 else reminder_delete="delete1"
 fi
 fi
+}
+
+
+function reminderOffset_random(){
+number=$RANDOM
+echo ${number}
+# If you need a random int within a certain range, use the 'modulo' operator.
+# This returns the remainder of a division operation.
+#RANGE=500
+#number=$RANDOM
+#let "number %= $RANGE"
+#echo "Random number less than $RANGE  ---  $number"
+#echo
+}
+
+function reminderId_random(){
+number=$RANDOM
+echo ${number}
+# If you need a random int within a certain range, use the 'modulo' operator.
+# This returns the remainder of a division operation.
+#RANGE=500
+#number=$RANDOM
+#let "number %= $RANGE"
+#echo "Random number less than $RANGE  ---  $number"
+#echo
+}
+
+function reminderScheduleId_random(){
+number=$RANDOM
+echo ${number}
+# If you need a random int within a certain range, use the 'modulo' operator.
+# This returns the remainder of a division operation.
+#RANGE=500
+#number=$RANDOM
+#let "number %= $RANGE"
+#echo "Random number less than $RANGE  ---  $number"
+#echo
 }
 
 logfile="test_reminder.log"
@@ -126,6 +166,8 @@ statuscodes="code of the reminder processing result, one of the following:
 ########################### ########################### ########################### ########################### ###########################
 ########################### ########################### ########################### ########################### ###########################
 
+
+
 if [ ! -x "`which time`" ]; then echo -e "No time detected! Please check."; exit
 else time="/usr/bin/time -f 'real %Es' -o $logfile -a"
 fi
@@ -174,8 +216,8 @@ generate_params
 for (( i=1; i<=$count_iterations; i++)); do
 for reminderProgramStart in ${RACK_DATE[@]}; do
 for reminderChannelNumber in ${RACK_CHANNELS[@]}; do
-${reminder_add} ${mac} ${reminderProgramStart} ${reminderChannelNumber} ${reminderProgramId} ${reminderScheduleId} ${reminderId} ${reminderOffset};  sleep 1
-${reminder_modify} ${mac} ${reminderProgramStart} ${reminderChannelNumber} ${reminderProgramId} ${reminderScheduleId} ${reminderId} ${reminderOffset_new};  sleep 1
+${reminder_add} ${mac} ${reminderProgramStart} ${reminderChannelNumber} ${reminderProgramId} ${reminderOffset} ${reminderScheduleId} ${reminderId}; sleep 1
+${reminder_modify} ${mac} ${reminderProgramStart} ${reminderChannelNumber} ${reminderProgramId} ${reminderOffset_new} ${reminderScheduleId} ${reminderId}; sleep 1
 ${reminder_delete} ${mac} ${reminderScheduleId} ${reminderId};  sleep 1; done; done; done
 
 
@@ -184,7 +226,15 @@ generate_params
 for (( i=1; i<=$count_iterations; i++)); do
 for reminderProgramStart in ${RACK_DATE[@]}; do
 for reminderChannelNumber in ${RACK_CHANNELS[@]}; do
-${reminder_add} ${mac} ${reminderProgramStart} ${reminderChannelNumber} ${reminderProgramId} ${reminderScheduleId} ${reminderId} ${reminderOffset};  sleep 1; done; done; done
+reminderOffset=$random
+reminderOffset_new=10
+#reminderScheduleId=12345
+#reminderId=12345
+reminderScheduleId=$random
+reminderId=$random
+echo "reminderScheduleId=$reminderScheduleId"
+echo "reminderId=$reminderId"
+${reminder_add} ${mac} ${reminderProgramStart} ${reminderChannelNumber} ${reminderProgramId} ${reminderOffset} ${reminderScheduleId} ${reminderId}; sleep 1; done; done; done
 
 
 elif [ "$action" == "Modify" ]; then
@@ -192,7 +242,7 @@ generate_params
 for (( i=1; i<=$count_iterations; i++)); do
 for reminderProgramStart in ${RACK_DATE[@]}; do
 for reminderChannelNumber in ${RACK_CHANNELS[@]}; do
-${reminder_modify} ${mac} ${reminderProgramStart} ${reminderChannelNumber} ${reminderProgramId} ${reminderScheduleId} ${reminderId} ${reminderOffset_new};  sleep 1; done; done; done
+${reminder_modify} ${mac} ${reminderProgramStart} ${reminderChannelNumber} ${reminderProgramId} ${reminderOffset_new} ${reminderScheduleId} ${reminderId};  sleep 1; done; done; done
 
 
 elif [ "$action" == "Delete" ]; then

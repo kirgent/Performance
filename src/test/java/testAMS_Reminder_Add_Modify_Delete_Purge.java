@@ -16,8 +16,8 @@ class testAMS_Reminder_Add_Modify_Delete_Purge extends API {
     void test1_Add_Purge() throws IOException {
         int count_reminders = 1;
         //int reminderChannelNumber = reminderChannelNumber();
-        int reminderOffset = reminderOffset();
         int reminderChannelNumber = 305;
+        int reminderOffset = reminderOffset();
         long reminderScheduleId = reminderScheduleId();
         long reminderId = reminderId();
 
@@ -26,18 +26,15 @@ class testAMS_Reminder_Add_Modify_Delete_Purge extends API {
         assertEquals(expected200, actual.get(0));
         assertEquals("", actual.get(1));
 
-        //actual = AMS.Request(mac, Operation.delete, count_reminders, reminderScheduleId, reminderId);
-        //assertEquals(expected200, actual.get(0));
-        //assertEquals("", actual.get(1));
-
         actual = AMS.Request(mac, Operation.purge, true);
         assertEquals(expected200, actual.get(0));
         assertEquals("", actual.get(1));
     }
 
-    @RepeatedTest(1000)
+    @RepeatedTest(5)
     void test2_Add_Modify() throws IOException {
-        int count_reminders = 1;
+        int count_reminders = 1000;
+        int reminderOffset = reminderOffset();
         int reminderOffset_new = reminderOffset();
         int reminderChannelNumber = reminderChannelNumber();
         long reminderScheduleId = reminderScheduleId();
@@ -51,20 +48,13 @@ class testAMS_Reminder_Add_Modify_Delete_Purge extends API {
         actual = AMS.Request(mac, Operation.modify, count_reminders, reminderProgramStart(), reminderChannelNumber, reminderProgramId, reminderOffset_new, reminderScheduleId, reminderId);
         assertEquals(expected200, actual.get(0));
         assertEquals("", actual.get(1));
-
-        //actual = AMS.Request(mac, Operation.delete, count_reminders, reminderScheduleId, reminderId);
-        //assertEquals(expected200, actual.get(0));
-        //assertEquals("", actual.get(1));
-
-        //actual = AMS.Request(mac, Operation.purge, true);
-        //assertEquals(expected200, actual.get(0));
-        //assertEquals("", actual.get(1));
     }
 
     @RepeatedTest(10)
     void test3_Add_Modify_Purge() throws IOException {
         int count_reminders = 5;
         int reminderChannelNumber = reminderChannelNumber();
+        int reminderOffset_new = reminderOffset();
         long reminderScheduleId = reminderScheduleId();
         long reminderId = reminderId();
 
@@ -77,18 +67,15 @@ class testAMS_Reminder_Add_Modify_Delete_Purge extends API {
         assertEquals(expected200, actual.get(0));
         assertEquals("", actual.get(1));
 
-        //actual = AMS.Request(mac, Operation.delete, count_reminders, reminderScheduleId, reminderId);
-        //assertEquals(expected200, actual.get(0));
-        //assertEquals("", actual.get(1));
-
         actual = AMS.Request(mac, Operation.purge, true);
         assertEquals(expected200, actual.get(0));
         assertEquals("", actual.get(1));
     }
 
-    @RepeatedTest(100000)
+    @RepeatedTest(10)
     void test4_Add_Modify_Delete() throws IOException {
-        int count_reminders = 1;
+        int count_reminders = 48;
+        int reminderOffset = reminderOffset();
         int reminderOffset_new = reminderOffset();
         int reminderChannelNumber = reminderChannelNumber();
         long reminderScheduleId = reminderScheduleId();
@@ -108,9 +95,10 @@ class testAMS_Reminder_Add_Modify_Delete_Purge extends API {
         assertEquals("", actual.get(1));
     }
 
-    @RepeatedTest(1000)
+    @RepeatedTest(10)
     void test5_Add_Modify_Delete_Purge() throws IOException {
-        int count_reminders = 48;
+        int count_reminders = 2;
+        int reminderOffset = reminderOffset();
         int reminderOffset_new = reminderOffset();
         int reminderChannelNumber = reminderChannelNumber();
         long reminderScheduleId = reminderScheduleId();
@@ -139,7 +127,6 @@ class testAMS_Reminder_Add_Modify_Delete_Purge extends API {
         int count_reminders = 48;
         int reminderOffset = reminderOffset();
         int reminderChannelNumber = reminderChannelNumber();
-        //int reminderChannelNumber = 97;
         long reminderScheduleId = reminderScheduleId();
         long reminderId = reminderId();
 
@@ -148,17 +135,9 @@ class testAMS_Reminder_Add_Modify_Delete_Purge extends API {
         assertEquals(expected200, actual.get(0));
         assertEquals("", actual.get(1));
 
-        //actual = AMS.Request(mac, Operation.modify, count_reminders, reminderProgramStart(), reminderChannelNumber, reminderProgramId, reminderOffset_new, reminderScheduleId, reminderId);
-        //assertEquals(expected200, actual.get(0));
-        //assertEquals("", actual.get(1));
-
         actual = AMS.Request(mac, Operation.delete, count_reminders, reminderScheduleId, reminderId);
         assertEquals(expected200, actual.get(0));
         assertEquals("", actual.get(1));
-
-        //actual = AMS.Request(mac, Operation.purge, true);
-        //assertEquals(expected200, actual.get(0));
-        //assertEquals("", actual.get(1));
     }
 
     @RepeatedTest(1000)
@@ -169,13 +148,10 @@ class testAMS_Reminder_Add_Modify_Delete_Purge extends API {
         long reminderScheduleId = reminderScheduleId();
         long reminderId = reminderId();
 
-        ArrayList actual = AMS.Request(mac, Operation.add, count_reminders, reminderProgramStart(), reminderChannelNumber, reminderProgramId, reminderOffset, reminderScheduleId, reminderId);
+        ArrayList actual;
+        actual = AMS.Request(mac, Operation.add, count_reminders, reminderProgramStart(), reminderChannelNumber, reminderProgramId, reminderOffset, reminderScheduleId, reminderId);
         assertEquals(expected200, actual.get(0));
         assertEquals("", actual.get(1));
-
-        //actual = AMS.Request(mac, Operation.modify, count_reminders, reminderProgramStart(), reminderChannelNumber, reminderProgramId, reminderOffset_new, reminderScheduleId, reminderId);
-        //assertEquals(expected200, actual.get(0));
-        //assertEquals("", actual.get(1));
 
         actual = AMS.Request(mac, Operation.delete, count_reminders, reminderScheduleId, reminderId);
         assertEquals(expected200, actual.get(0));

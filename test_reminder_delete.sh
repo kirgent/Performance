@@ -3,7 +3,10 @@ url_delete="ams/Reminders?req=delete"
 ID=( 2 3 4 5 6 7 8 9 12 13 14 16 18 19 22 23 25 28 30 31 32 33 37 38 41 44 46 49 50 51 )
 #for (( i=1; i<=$count_iterations; i++)); do for reminderProgramStart in ${RACK_DATE[@]}; do
 
-### ### ###
+mac="$1"
+reminderScheduleId="$2"
+reminderId="$3"
+
 function delete1(){
 mac="$1"
 reminderScheduleId="$2"
@@ -18,9 +21,6 @@ echo;echo
 }
 
 function delete48(){
-mac="$1"
-reminderScheduleId="$2"
-reminderId="$3"
 echo "[DBG] `date "+%a %b %d %T %N %Z %Y"`: Delete 48rems in iteration=$i/$count_iterations with reminderProgramStart=$reminderProgramStart, reminderChannelNumber=$reminderChannelNumber, reminderScheduleId=$reminderScheduleId, reminderId=$reminderId"|$logwrap
 /usr/bin/time -f 'real %Es' -o ${logfile} -a ${curlwrap} 'http://'$ams_ip':'$ams_port'/'$url_delete'' -H 'Content-type: application/json' \
 -d '{ 
@@ -79,9 +79,6 @@ echo;echo
 }
 
 function delete288(){
-mac="$1"
-reminderScheduleId="$2"
-reminderId="$3"
 echo "[DBG] `date "+%a %b %d %T %N %Z %Y"`: Delete 288rems in iteration=$i/$count_iterations with reminderProgramStart=$reminderProgramStart, reminderChannelNumber=$reminderChannelNumber, reminderScheduleId=$reminderScheduleId, reminderId=$reminderId"|$logwrap
 /usr/bin/time -f 'real %Es' -o ${logfile} -a ${curlwrap} 'http://'$ams_ip':'$ams_port'/'$url_delete'' -H 'Content-type: application/json' \
 -d '{
@@ -381,9 +378,6 @@ echo;echo
 
 
 function delete720(){
-mac="$1"
-reminderScheduleId="$2"
-reminderId="$3"
 echo "[DBG] `date "+%a %b %d %T %N %Z %Y"`: Delete 720rems in iteration=$i/$count_iterations with reminderProgramStart=$reminderProgramStart, reminderChannelNumber=$reminderChannelNumber, reminderScheduleId=$reminderScheduleId, reminderId=$reminderId"|$logwrap
 /usr/bin/time -f 'real %Es' -o ${logfile} -a ${curlwrap} 'http://'$ams_ip':'$ams_port'/'$url_delete'' -H 'Content-type: application/json' \
 -d '{
