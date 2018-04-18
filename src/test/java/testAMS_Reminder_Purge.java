@@ -1,3 +1,4 @@
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.RepeatedTest;
 
@@ -15,6 +16,7 @@ class testAMS_Reminder_Purge extends API {
 
     @RepeatedTest(1)
     @BeforeEach
+    @AfterEach
     void testPurge() throws IOException {
         ArrayList actual = AMS.Request(mac, Operation.purge, true);
         assertEquals(expected200, actual.get(0));

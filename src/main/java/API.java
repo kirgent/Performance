@@ -22,12 +22,12 @@ import static java.lang.System.currentTimeMillis;
  */
 public class API {
 
-    Boolean show_generated_json = false;
     Boolean show_extra_info = true;
+    Boolean show_generated_json = true;
+    private Boolean show_response_body = false;
 
     ArrayList<Long> reminderScheduleId_list = new ArrayList<>();
     ArrayList<Long> reminderId_list = new ArrayList<>();
-    private ArrayList<Long> reminderScheduleId_arraylist;
 
     @Rule
     final public Timeout globalTimeout = Timeout.seconds(20);
@@ -88,8 +88,7 @@ public class API {
     //String[] rack_date = {"2018-03-15"};
 
     //CHANNELS
-    @Deprecated
-    final int reminderChannelNumber = 2;
+    final int reminderChannelNumber = reminderChannelNumber();
     int reminderChannelNumber_empty;
     final int reminderChannelNumber_for_statuscode3 = 9999;
     final int reminderChannelNumber_for_statuscode4 = 1000;
@@ -98,19 +97,21 @@ public class API {
             32, 33, 37, 38, 41, 44, 46, 48, 49, 50 };*/
     Integer[] rack_channel = {2, 3, 4, 5, 6, 7, 8, 9, 10, 11};
 
-    //String reminderProgramId = ""; //"reminderProgramId": "EP002960010113"
+    @Deprecated
     final String reminderProgramId = "EP002960010113";
     //String reminderProgramId = "0";
     String reminderProgramId_empty;
 
-    int reminderOffset = 0;
+    int reminderOffset = reminderOffset();
     int reminderOffset_null;
-    int reminderOffset_new_null;
 
-    long reminderScheduleId = 1;
+    long reminderScheduleId = reminderScheduleId();
     long reminderScheduleId_null;
-    long reminderId = 1;
-    final int random = -1;
+    final int reminderScheduleId_multi = 777;
+
+    long reminderId = reminderId();
+    long reminderId_null;
+    final int reminderId_multi = 777;
 
     int count_reminders = 1;
 
@@ -220,17 +221,23 @@ public class API {
         if(body.contains("\"status\":\"Failed\"") && body.contains("\"errorMessage\":\"REM-002 Reminders Service error: REM-112\"")){
             result += "REM-002 Reminders Service error: REM-012 [" + mac + "] Request not accomplished";
         }
-        if(body.contains("\"status\":\"Failed\"") && body.contains("\"errorMessage\":\"REM-002 Reminders Service error: Timeout detected by BoxResponseTracker\"")){
+        if(body.contains("\"status\":\"Failed\"") && body.contains("\"errorMessage\":\"REM-002 Reminders Service error: Timeout detected by BoxResponseTracker, (" + mac)){
             result += "REM-002 Reminders Service error: Timeout detected by BoxResponseTracker";
         }
         if(body.contains("\"status\":\"Failed\"") && body.contains("\"errorMessage\":\"REM-008 Reminders parsing error: missing program start\"")){
             result += "REM-008 Reminders parsing error: missing program start";
         }
-        if(body.contains("\"status\":\"Failed\"") && body.contains("\"errorMessage\":\"REM-008 Reminders parsing error: missing channel number\"")){
-            result += "REM-008 Reminders parsing error: missing channel number";
+        if(body.contains("\"status\":\"Failed\"") && body.contains("\"errorMessage\":\"REM-008 Reminders parsing error: invalid program start\"")){
+            result += "REM-008 Reminders parsing error: invalid program start";
         }
-        if(body.contains("\"status\":\"Failed\"") && body.contains("\"errorMessage\":\"REM-008 Reminders parsing error: missing offset\"")){
-            result += "REM-008 Reminders parsing error: missing offset";
+        //if(body.contains("\"status\":\"Failed\"") && body.contains("\"errorMessage\":\"REM-008 Reminders parsing error: missing channel number\"")){
+            //result += "REM-008 Reminders parsing error: missing channel number";
+        //}
+        if(body.contains("\"status\":\"Failed\"") && body.contains("\"errorMessage\":\"REM-008 Reminders parsing error: invalid channel number\"")){
+            result += "REM-008 Reminders parsing error: invalid channel number";
+        }
+        if(body.contains("\"status\":\"Failed\"") && body.contains("\"errorMessage\":\"REM-008 Reminders parsing error: invalid offset\"")){
+            result += "REM-008 Reminders parsing error: invalid offset";
         }
         if(body.contains("\"status\":\"Failed\"") && body.contains("\"errorMessage\":\"REM-008 Reminders parsing error: incorrect reminderScheduleId\"")){
             result += "REM-008 Reminders parsing error: incorrect reminderScheduleId";
@@ -286,8 +293,12 @@ public class API {
         BufferedReader reader = new BufferedReader(new InputStreamReader(response.getEntity().getContent(), "UTF-8"));
         //StringBuilder body = new StringBuilder();
         for (String line; (line = reader.readLine()) != null; ) {
-            System.out.print(", response body: " + body.append(line));
-            if(reader.readLine() == null){
+            if(show_response_body) {
+                System.out.print(", response body: " + body.append(line));
+            }else{
+                body.append(line);
+            }
+            if (reader.readLine() == null) {
                 System.out.println();
             }
         }
@@ -409,20 +420,18 @@ public class API {
     }
 
     int reminderChannelNumber() {
-        Random random = new Random();
-        return Math.abs(random.nextInt(1000));
+        //Random random = new Random();
+        return Math.abs(new Random().nextInt(1000));
     }
 
     int reminderOffset() {
-        Random random = new Random();
-        return Math.abs(random.nextInt(1000));
+        return Math.abs(new Random().nextInt(1000));
     }
 
     long reminderScheduleId(){
         Random random = new Random();
         long reminderScheduleId = Math.abs(random.nextLong());
         reminderScheduleId_list.add(reminderScheduleId);
-        //System.out.println("reminderScheduleId: " + reminderScheduleId);
         return reminderScheduleId;
     }
 
@@ -430,7 +439,6 @@ public class API {
         Random random = new Random();
         long reminderId = Math.abs(random.nextLong());
         reminderId_list.add(reminderId);
-        //System.out.println("reminderId: " + reminderId);
         return reminderId;
     }
 

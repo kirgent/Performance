@@ -168,13 +168,13 @@ public class Main extends API {
                 //api.Operation(ams_ip_by_default, mac[0], "Purge", false);
                 break;
             //case "Add":
-            //case "add": api.Operation("Add", mac, count_reminders, count_iterations, ams_ip_default); break;
+            //case "add": api.Operation("Add", mac, count, count_iterations, ams_ip_default); break;
             case "Modify":
             case "modify":
-                //api.Operation(ams_ip_by_default, mac[0], "Modify", true, count_reminders_by_default, reminderProgramStart, reminderChannelNumber, reminderProgramId, reminderOffset, reminderScheduleId, reminderId);
+                //api.Operation(ams_ip_by_default, mac[0], "Modify", true, count_by_default, reminderProgramStart, reminderChannelNumber, reminderProgramId, reminderOffset, reminderScheduleId, reminderId);
                 break;
             //case "Delete":
-            //case "delete": api.Operation("Delete", mac, count_reminders, count_iterations, ams_ip_default); break;
+            //case "delete": api.Operation("Delete", mac, count, count_iterations, ams_ip_default); break;
             default:
                 Middle.Check_registration(mac, charterapi);
         }
