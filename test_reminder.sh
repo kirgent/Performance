@@ -84,7 +84,7 @@ fi
 
 function reminderOffset_random(){
 number=$RANDOM
-echo ${number}
+return ${number}
 # If you need a random int within a certain range, use the 'modulo' operator.
 # This returns the remainder of a division operation.
 #RANGE=500
@@ -97,25 +97,11 @@ echo ${number}
 function reminderId_random(){
 number=$RANDOM
 echo ${number}
-# If you need a random int within a certain range, use the 'modulo' operator.
-# This returns the remainder of a division operation.
-#RANGE=500
-#number=$RANDOM
-#let "number %= $RANGE"
-#echo "Random number less than $RANGE  ---  $number"
-#echo
 }
 
 function reminderScheduleId_random(){
 number=$RANDOM
 echo ${number}
-# If you need a random int within a certain range, use the 'modulo' operator.
-# This returns the remainder of a division operation.
-#RANGE=500
-#number=$RANDOM
-#let "number %= $RANGE"
-#echo "Random number less than $RANGE  ---  $number"
-#echo
 }
 
 logfile="test_reminder.log"
@@ -213,6 +199,10 @@ echo "[DBG] `date "+%a %b %d %T %N %Z %Y"`: ams_ip=$ams_ip, iteration=$i/$count_
 
 elif [ "$action" == "All" ]; then
 generate_params
+reminderOffset=${random}
+reminderOffset_new=10
+reminderScheduleId=${random}
+reminderId=${random}
 for (( i=1; i<=$count_iterations; i++)); do
 for reminderProgramStart in ${RACK_DATE[@]}; do
 for reminderChannelNumber in ${RACK_CHANNELS[@]}; do
@@ -223,33 +213,31 @@ ${reminder_delete} ${mac} ${reminderScheduleId} ${reminderId};  sleep 1; done; d
 
 elif [ "$action" == "Add" ]; then
 generate_params
-for (( i=1; i<=$count_iterations; i++)); do
-for reminderProgramStart in ${RACK_DATE[@]}; do
-for reminderChannelNumber in ${RACK_CHANNELS[@]}; do
-reminderOffset=$random
+reminderOffset=${random}
 reminderOffset_new=10
-#reminderScheduleId=12345
-#reminderId=12345
-reminderScheduleId=$random
-reminderId=$random
-echo "reminderScheduleId=$reminderScheduleId"
-echo "reminderId=$reminderId"
+reminderScheduleId=${random}
+reminderId=${random}
+echo "main reminderScheduleId=$reminderScheduleId"
+echo "main reminderId=$reminderId"
+for (( i=1; i<=$count_iterations; i++)); do for reminderProgramStart in ${RACK_DATE[@]}; do for reminderChannelNumber in ${RACK_CHANNELS[@]}; do
 ${reminder_add} ${mac} ${reminderProgramStart} ${reminderChannelNumber} ${reminderProgramId} ${reminderOffset} ${reminderScheduleId} ${reminderId}; sleep 1; done; done; done
 
 
 elif [ "$action" == "Modify" ]; then
 generate_params
-for (( i=1; i<=$count_iterations; i++)); do
-for reminderProgramStart in ${RACK_DATE[@]}; do
-for reminderChannelNumber in ${RACK_CHANNELS[@]}; do
+reminderOffset=${random}
+reminderOffset_new=10
+reminderScheduleId=12345
+reminderId=12345
+for (( i=1; i<=$count_iterations; i++)); do for reminderProgramStart in ${RACK_DATE[@]}; do for reminderChannelNumber in ${RACK_CHANNELS[@]}; do
 ${reminder_modify} ${mac} ${reminderProgramStart} ${reminderChannelNumber} ${reminderProgramId} ${reminderOffset_new} ${reminderScheduleId} ${reminderId};  sleep 1; done; done; done
 
 
 elif [ "$action" == "Delete" ]; then
 generate_params
-for (( i=1; i<=$count_iterations; i++)); do
-for reminderProgramStart in ${RACK_DATE[@]}; do
-for reminderChannelNumber in ${RACK_CHANNELS[@]}; do
+reminderScheduleId=12345
+reminderId=12345
+for (( i=1; i<=$count_iterations; i++)); do for reminderProgramStart in ${RACK_DATE[@]}; do for reminderChannelNumber in ${RACK_CHANNELS[@]}; do
 ${reminder_delete} ${mac} ${reminderScheduleId} ${reminderId};  sleep 1; done; done; done
 
 else

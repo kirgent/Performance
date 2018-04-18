@@ -7,11 +7,14 @@ mac="$1"
 reminderScheduleId="$2"
 reminderId="$3"
 
+if [ "$show_extra_info" = true ]; then
+echo "[DBG] `date "+%a %b %d %T %N %Z %Y"`: Delete $count_reminders rem(s) in iteration=$i/$count_iterations with reminderProgramStart=$reminderProgramStart, reminderChannelNumber=$reminderChannelNumber, reminderScheduleId=$reminderScheduleId, reminderId=$reminderId"|$logwrap
+fi
+
 function delete1(){
 mac="$1"
 reminderScheduleId="$2"
 reminderId="$3"
-echo "[DBG] `date "+%a %b %d %T %N %Z %Y"`: Delete 1rem in iteration=$i/$count_iterations with reminderProgramStart=$reminderProgramStart, reminderChannelNumber=$reminderChannelNumber, reminderScheduleId=$reminderScheduleId, reminderId=$reminderId"|$logwrap
 #/usr/bin/time -f 'real %Es' -o $logfile -a $curlwrap 'http://'$ams_ip':'$ams_port'/'url_delete'' -H 'Content-type: application/json' \
 /usr/bin/time -f 'real %Es' -o ${logfile} -a ${curlwrap} -s 'http://'${ams_ip}':'${ams_port}'/'${url_delete}'' -H 'Content-type: application/json' \
 -d '{
@@ -21,7 +24,6 @@ echo;echo
 }
 
 function delete48(){
-echo "[DBG] `date "+%a %b %d %T %N %Z %Y"`: Delete 48rems in iteration=$i/$count_iterations with reminderProgramStart=$reminderProgramStart, reminderChannelNumber=$reminderChannelNumber, reminderScheduleId=$reminderScheduleId, reminderId=$reminderId"|$logwrap
 /usr/bin/time -f 'real %Es' -o ${logfile} -a ${curlwrap} 'http://'$ams_ip':'$ams_port'/'$url_delete'' -H 'Content-type: application/json' \
 -d '{ 
 "deviceId": '${mac}',
@@ -79,7 +81,6 @@ echo;echo
 }
 
 function delete288(){
-echo "[DBG] `date "+%a %b %d %T %N %Z %Y"`: Delete 288rems in iteration=$i/$count_iterations with reminderProgramStart=$reminderProgramStart, reminderChannelNumber=$reminderChannelNumber, reminderScheduleId=$reminderScheduleId, reminderId=$reminderId"|$logwrap
 /usr/bin/time -f 'real %Es' -o ${logfile} -a ${curlwrap} 'http://'$ams_ip':'$ams_port'/'$url_delete'' -H 'Content-type: application/json' \
 -d '{
 "deviceId": '$mac',
@@ -378,7 +379,6 @@ echo;echo
 
 
 function delete720(){
-echo "[DBG] `date "+%a %b %d %T %N %Z %Y"`: Delete 720rems in iteration=$i/$count_iterations with reminderProgramStart=$reminderProgramStart, reminderChannelNumber=$reminderChannelNumber, reminderScheduleId=$reminderScheduleId, reminderId=$reminderId"|$logwrap
 /usr/bin/time -f 'real %Es' -o ${logfile} -a ${curlwrap} 'http://'$ams_ip':'$ams_port'/'$url_delete'' -H 'Content-type: application/json' \
 -d '{
 "deviceId": '$mac',
