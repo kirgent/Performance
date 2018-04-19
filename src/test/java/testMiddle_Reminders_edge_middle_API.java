@@ -79,7 +79,20 @@ public class testMiddle_Reminders_edge_middle_API extends API_Middle {
     //Failure response code: Not equal to 201 (for example: 500, 401)
     @Test
     public void testDelete_multiple_reminders() throws IOException {
-        ArrayList actual = Middle.Delete_multiple_reminders(charterapi, mac,12345, 12345);
+        ArrayList actual;
+        actual = Middle.Delete_multiple_reminders(charterapi_a, mac,1, 1);
+        assertEquals(expected201, actual.get(0));
+        assertEquals("", actual.get(1));
+
+        actual = Middle.Delete_multiple_reminders(charterapi_b, mac,1, 1);
+        assertEquals(expected201, actual.get(0));
+        assertEquals("", actual.get(1));
+
+        actual = Middle.Delete_multiple_reminders(charterapi_c, mac,1, 1);
+        assertEquals(expected201, actual.get(0));
+        assertEquals("", actual.get(1));
+
+        actual = Middle.Delete_multiple_reminders(charterapi_d, mac,1, 1);
         assertEquals(expected201, actual.get(0));
         assertEquals("", actual.get(1));
     }

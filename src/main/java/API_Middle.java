@@ -11,15 +11,12 @@ import java.util.ArrayList;
 
 class API_Middle extends API{
 
-    //@Rule
-    //final public Timeout globalTimeout = Timeout.seconds(20);
-
-    ArrayList Change_registration(String macaddress, String charterapi, String ams_ip) throws IOException {
+    ArrayList Change_registration(String mac, String charterapi, String ams_ip) throws IOException {
         if(show_extra_info) {
-            System.out.println("Change_registration " + macaddress + " to ams " + ams_ip + " via charterapi: " + charterapi);
+            System.out.println("Change_registration " + mac + " to ams " + ams_ip + " via charterapi: " + charterapi);
         }
         HttpPost request = new HttpPost(charterapi + postfix_settings + "?requestor=AMS");
-        request.setEntity(new StringEntity(generate_json_change_registration(macaddress, ams_ip)));
+        request.setEntity(new StringEntity(generate_json_change_registration(mac, ams_ip)));
         request.setHeader("Content-type", "application/json");
         request.setHeader("Accept", "application/json");
         System.out.println("[DBG] Request string: " + request);
@@ -33,16 +30,16 @@ class API_Middle extends API{
 
         ArrayList arrayList = new ArrayList();
         arrayList.add(0, response.getStatusLine().getStatusCode() + " " + response.getStatusLine().getReasonPhrase());
-        arrayList.add(1, check_body_response(read_response(new StringBuilder(),response).toString(), macaddress));
+        arrayList.add(1, check_body_response(read_response(new StringBuilder(),response).toString(), mac));
         System.out.println("[DBG] return codes: " + arrayList);
         return arrayList;
     }
 
-    ArrayList Check_registration(String macaddress, String charterapi) throws IOException {
+    ArrayList Check_registration(String mac, String charterapi) throws IOException {
         if(show_extra_info) {
-            System.out.println("Check_registration " + macaddress + " via charterapi: " + charterapi);
+            System.out.println("Check_registration " + mac + " via charterapi: " + charterapi);
         }
-        HttpGet request = new HttpGet(charterapi + postfix_settings + "/amsIp/" + macaddress);
+        HttpGet request = new HttpGet(charterapi + postfix_settings + "/amsIp/" + mac);
         //request.setHeader("Accept", "*/*");
         //request.setHeader("Content-type", "application/json");
         //request.setHeader("Content-type", "text/plain");
@@ -56,7 +53,7 @@ class API_Middle extends API{
 
         ArrayList arrayList = new ArrayList();
         arrayList.add(0, response.getStatusLine().getStatusCode() + " " + response.getStatusLine().getReasonPhrase());
-        arrayList.add(1, check_body_response(read_response(new StringBuilder(),response).toString(), macaddress));
+        arrayList.add(1, check_body_response(read_response(new StringBuilder(),response).toString(), mac));
         System.out.println("[DBG] return codes: " + arrayList);
         return arrayList;
     }
@@ -90,7 +87,7 @@ class API_Middle extends API{
         return result;
     }
 
-    private String generate_json_change_registration(String macaddress, String ams_ip) {
+    private String generate_json_change_registration(String mac, String ams_ip) {
         //String json = "{\"setting\":{\"groups\":[{\"options\":[],\"id\":\"STBmacaddress\",\"type\":\"device-stb\",\"amsid\":\"" + ams_ip + "\"}]}}";
         JSONObject json = new JSONObject();
         JSONObject object_in_settings = new JSONObject();
@@ -101,7 +98,7 @@ class API_Middle extends API{
 
         JSONObject object_in_groups = new JSONObject();
         array_groups.add(object_in_groups);
-        object_in_groups.put("id", "STB" + macaddress);
+        object_in_groups.put("id", "STB" + mac);
         object_in_groups.put("type", "device-stb");
         object_in_groups.put("amsid", ams_ip);
         JSONArray array_options = new JSONArray();
@@ -115,13 +112,13 @@ class API_Middle extends API{
     }
 
     //todo
-    private String generate_json_reminder_delete_multiple(String macaddress, int reminderScheduleId, int reminderId) {
+    private String generate_json_reminder_delete_multiple(String mac, int reminderScheduleId, int reminderId) {
         JSONObject json = new JSONObject();
-        json.put("macAddress", macaddress);
+        json.put("macAddress", mac);
         JSONArray array = new JSONArray();
         //todo
         json.put("",array);
-        //for (int i = 1; i <= count_reminders; i++) {
+        //for (int i = 1; i <= count; i++) {
         JSONObject object_in_array = new JSONObject();
         array.add(object_in_array);
         object_in_array.put("reminderScheduleId", reminderScheduleId);
@@ -135,12 +132,12 @@ class API_Middle extends API{
     }
 
     //todo
-    private String generate_json_reminder_delete_multiple2(String macaddress, int reminderScheduleId, int reminderId) {
+    private String generate_json_reminder_delete_multiple2(String mac, int reminderScheduleId, int reminderId) {
         JSONObject json = new JSONObject();
-        json.put("macAddress", "STB" + macaddress);
+        json.put("macAddress", "STB" + mac);
         JSONArray array = new JSONArray();
         json.put("reminderIdentifiers",array);
-        //for (int i = 1; i <= count_reminders; i++) {
+        //for (int i = 1; i <= count; i++) {
         JSONObject object_in_array = new JSONObject();
         array.add(object_in_array);
         object_in_array.put("reminderScheduleId", reminderScheduleId);

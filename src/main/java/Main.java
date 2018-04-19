@@ -19,18 +19,18 @@ public class Main extends API {
             "\n\tCOUNT is a count of reminders, can be 48, 288, 720 in one curl request" +
             "\nOPTIONS" +
             "\n\tReminders - print this help" +
-            "\n\tReminders mac - send curl for checking registration" +
-            "\n\tReminders mac Check - send curl for checking registration" +
-            "\n\tReminders mac Change ams_ip- send curl for changing registration to ams_ip" +
-            "\n\tReminders mac Purge - clear all reminders" +
-            "\n\tReminders mac Add [48][288][576]- add reminders (accordingly 48/288/576)" +
-            "\n\tReminders mac Edit [48][288][576]- delete reminders with current offset + add reminders with new_offset (accordingly 48/288/576)" +
-            "\n\tReminders mac Delete [48][288][576]- delete reminders (accordingly 48/288/576)" +
-            "\n\tReminders mac All [48][288][576] - add + edit + delete reminders (accordingly 48/288/576)" +
+            "\n\tReminders mac                - send curl for checking registration" +
+            "\n\tReminders mac check          - send curl for checking registration" +
+            "\n\tReminders mac change ams_ip  - send curl for changing registration to ams_ip" +
+            "\n\tReminders mac purge          - clear all reminders" +
+            "\n\tReminders mac add [count]    - add reminders (accordingly 48/288/720)" +
+            "\n\tReminders mac modify [count] - modify reminders" +
+            "\n\tReminders mac delete [count] - delete reminders" +
+            "\n\tReminders mac all [count]    - add + modify + delete reminders" +
             "\nCURRENT SETTINGS" +
             "\n\tused AMS: " + ams_ip +
             "\n\tused charterapi: " + charterapi +
-            "\n\tused count of reminders in one request: " + count_reminders +
+            "\n\tused count of reminders in one request: " + count +
             //"\n\tused count iterations: " + count_iterations +
             "\nSTATUSCODE" +
             "\n\tcode of the reminder processing result, one of the following:" +
@@ -114,26 +114,24 @@ public class Main extends API {
                 || operation.equalsIgnoreCase("delete")) {
             switch (param) {
                 case "48":
-                    count_reminders = 48;
+                    count = 48;
                     break;
                 case "288":
-                    count_reminders = 288;
+                    count = 288;
                     break;
                 case "720":
-                    count_reminders = 720;
+                    count = 720;
                     break;
                 default:
-                    count_reminders = 720;
+                    count = 720;
             }
         }
-
 
         if (args.length>0){
             for (int i = 0; i < args.length; i++) {
                 System.out.println("[DBG] args.length=" + args.length + " and args[" + i + "]: " + args[i]);
             }
         }
-
 
         /*for (int i=0; i<args.length; ++i) {
             String arg = args[i];

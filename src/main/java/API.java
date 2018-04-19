@@ -24,7 +24,7 @@ public class API {
 
     Boolean show_extra_info = true;
     Boolean show_generated_json = true;
-    private Boolean show_response_body = false;
+    private Boolean show_response_body = true;
 
     ArrayList<Long> reminderScheduleId_list = new ArrayList<>();
     ArrayList<Long> reminderId_list = new ArrayList<>();
@@ -103,17 +103,16 @@ public class API {
     String reminderProgramId_empty;
 
     int reminderOffset = reminderOffset();
+    int reminderOffset_new = reminderOffset();
     int reminderOffset_null;
 
     long reminderScheduleId = reminderScheduleId();
     long reminderScheduleId_null;
-    final int reminderScheduleId_multi = 777;
 
     long reminderId = reminderId();
     long reminderId_null;
-    final int reminderId_multi = 777;
 
-    int count_reminders = 1;
+    int count = 2;
 
     private static String[] statuscode = {
             "0 - requested operation with the reminder was accomplished successfully. Always returned for \"Reminders Purge\" request (Request ID=3)",
@@ -131,7 +130,7 @@ public class API {
     @Deprecated
     String generate_json_test(String date, int count_remindres, String operation, int reminderOffset) {
         System.out.println("[DBG] [date] Generate_json: with date=" + date + ", " +
-                "count_reminders=" + count_remindres + ", " +
+                "count=" + count_remindres + ", " +
                 "operation=" + operation + ", " +
                 "reminderOffset=" + reminderOffset);
          /*
@@ -221,8 +220,8 @@ public class API {
         if(body.contains("\"status\":\"Failed\"") && body.contains("\"errorMessage\":\"REM-002 Reminders Service error: REM-112\"")){
             result += "REM-002 Reminders Service error: REM-012 [" + mac + "] Request not accomplished";
         }
-        if(body.contains("\"status\":\"Failed\"") && body.contains("\"errorMessage\":\"REM-002 Reminders Service error: Timeout detected by BoxResponseTracker, (" + mac)){
-            result += "REM-002 Reminders Service error: Timeout detected by BoxResponseTracker";
+        if(body.contains("\"status\":\"Failed\"") && body.contains("\"errorMessage\":\"Timeout detected by BoxResponseTracker")){
+            result += "Timeout detected by BoxResponseTracker";
         }
         if(body.contains("\"status\":\"Failed\"") && body.contains("\"errorMessage\":\"REM-008 Reminders parsing error: missing program start\"")){
             result += "REM-008 Reminders parsing error: missing program start";
@@ -235,6 +234,9 @@ public class API {
         //}
         if(body.contains("\"status\":\"Failed\"") && body.contains("\"errorMessage\":\"REM-008 Reminders parsing error: invalid channel number\"")){
             result += "REM-008 Reminders parsing error: invalid channel number";
+        }
+        if(body.contains("\"status\":\"Failed\"") && body.contains("\"errorMessage\":\"REM-008 Reminders parsing error: missing offset\"")){
+            result += "REM-008 Reminders parsing error: missing offset";
         }
         if(body.contains("\"status\":\"Failed\"") && body.contains("\"errorMessage\":\"REM-008 Reminders parsing error: invalid offset\"")){
             result += "REM-008 Reminders parsing error: invalid offset";
@@ -420,7 +422,6 @@ public class API {
     }
 
     int reminderChannelNumber() {
-        //Random random = new Random();
         return Math.abs(new Random().nextInt(1000));
     }
 
@@ -432,6 +433,7 @@ public class API {
         Random random = new Random();
         long reminderScheduleId = Math.abs(random.nextLong());
         reminderScheduleId_list.add(reminderScheduleId);
+        //System.out.println("reminderScheduleId=" + reminderScheduleId);
         return reminderScheduleId;
     }
 
@@ -439,6 +441,7 @@ public class API {
         Random random = new Random();
         long reminderId = Math.abs(random.nextLong());
         reminderId_list.add(reminderId);
+        //System.out.println("reminderId=" + reminderId);
         return reminderId;
     }
 
@@ -464,11 +467,11 @@ public class API {
     }
 
     @Deprecated
-    String get_time(int count_reminders) {
+    String get_time(int count) {
         int interval_in_minutes;
-        if (count_reminders<=48){ interval_in_minutes = 30; }
-        else if (count_reminders<=288){ interval_in_minutes = 5; }
-        else if (count_reminders<=720){ interval_in_minutes = 2; }
+        if (count<=48){ interval_in_minutes = 30; }
+        else if (count<=288){ interval_in_minutes = 5; }
+        else if (count<=720){ interval_in_minutes = 2; }
         else interval_in_minutes = 1;
 
         Calendar calendar = Calendar.getInstance();
@@ -477,10 +480,10 @@ public class API {
         calendar.setTime(new java.util.Date(0, 0, 0, 0, 0));
 
         StringBuilder result = new StringBuilder();
-        for (int i=1; i<=count_reminders; i++){
+        for (int i=1; i<=count; i++){
             result.append(pattern.format(calendar.getTime()));
             calendar.add(Calendar.MINUTE, interval_in_minutes);
-            if(i!=count_reminders){
+            if(i!=count){
                 result.append(" ");
             }
         }
@@ -488,11 +491,11 @@ public class API {
         return result.toString();
     }
 
-    String get_time(int count_reminders, int number) {
+    String get_time(int count, int number) {
         int interval_in_minutes;
-        if (count_reminders<=48){ interval_in_minutes = 30; }
-        else if (count_reminders<=288){ interval_in_minutes = 5; }
-        else if (count_reminders<=720){ interval_in_minutes = 2; }
+        if (count<=48){ interval_in_minutes = 30; }
+        else if (count<=288){ interval_in_minutes = 5; }
+        else if (count<=720){ interval_in_minutes = 2; }
         else interval_in_minutes = 1;
 
         if (number < 1) { number = 1; }
