@@ -63,7 +63,7 @@ class testAMS_Reminder_Add extends API {
      * @throws IOException
      */
     @Test
-    void testAdd_reminderChannelNumber_empty__statusCode3() throws IOException {
+    void testAdd_reminderChannelNumber_zero__statusCode3() throws IOException {
         ArrayList actual = AMS.Request(mac, Operation.add, count, reminderProgramStart(), 0, reminderProgramId, reminderOffset, reminderScheduleId, reminderId);
         assertEquals(expected200, actual.get(0));
         assertEquals("3", actual.get(1));
