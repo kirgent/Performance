@@ -246,9 +246,12 @@ class API_AMS extends API{
             } else {
                 object_in_reminders.put("reminderProgramStart", reminderProgramStart + " " + get_time(count, i));
             }
-            if (reminderChannelNumber == 0) {
+            if (reminderChannelNumber == -1) {
                 object_in_reminders.put("reminderChannelNumber", "");
-            } else {
+            } else if(reminderChannelNumber == -2) {
+                object_in_reminders.put("reminderOffset", null);
+            } else
+            {
                 object_in_reminders.put("reminderChannelNumber", reminderChannelNumber);
             }
 
@@ -275,6 +278,8 @@ class API_AMS extends API{
                     object_in_reminders.put("reminderScheduleId", 0);
                 } else if (reminderScheduleId == -1) {
                     object_in_reminders.put("reminderScheduleId", "");
+                } else if (reminderScheduleId == -2) {
+                    object_in_reminders.put("reminderScheduleId", null);
                 } else if (reminderScheduleId == Long.MAX_VALUE) {
                     object_in_reminders.put("reminderScheduleId", Long.MAX_VALUE);
                 } else if (reminderScheduleId == Long.MIN_VALUE) {
@@ -289,6 +294,8 @@ class API_AMS extends API{
                     object_in_reminders.put("reminderId", 0);
                 } else if (reminderId == -1) {
                     object_in_reminders.put("reminderId", "");
+                } else if (reminderId == -2) {
+                    object_in_reminders.put("reminderId", null);
                 } else if (reminderId == Long.MAX_VALUE) {
                     object_in_reminders.put("reminderId", Long.MAX_VALUE);
                 } else if (reminderId == Long.MIN_VALUE) {
