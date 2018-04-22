@@ -433,15 +433,30 @@ public class API {
         Random random = new Random();
         long reminderScheduleId = Math.abs(random.nextLong());
         reminderScheduleId_list.add(reminderScheduleId);
-        //System.out.println("reminderScheduleId=" + reminderScheduleId);
+        if(show_extra_info) {
+            System.out.println("add->reminderScheduleId_list=" + reminderScheduleId);
+        }
         return reminderScheduleId;
+    }
+
+    public static Boolean ContainsAllNulls(ArrayList list)
+    {
+        if(list != null)
+        {
+            for(Object a : list)
+                if(a != null) return false;
+        }
+
+        return true;
     }
 
     long reminderId(){
         Random random = new Random();
         long reminderId = Math.abs(random.nextLong());
         reminderId_list.add(reminderId);
-        //System.out.println("reminderId=" + reminderId);
+        if(show_extra_info) {
+            System.out.println("add->reminderId_list=" + reminderId);
+        }
         return reminderId;
     }
 

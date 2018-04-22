@@ -320,6 +320,9 @@ class API_AMS extends API{
             }*/
 
             //3RD VARIANT!!!
+
+            //reminderScheduleId_list != null && !reminderScheduleId_list.isEmpty()
+
             if (reminderScheduleId == 0) {
                 object_in_reminders.put("reminderScheduleId", 0);
             } else if (reminderScheduleId == -1) {
@@ -330,13 +333,19 @@ class API_AMS extends API{
                 object_in_reminders.put("reminderScheduleId", Long.MAX_VALUE);
             } else if (reminderScheduleId == Long.MIN_VALUE) {
                 object_in_reminders.put("reminderScheduleId", Long.MIN_VALUE);
+
+            //} else if (count > 1 && operation.name().equals("modify") && reminderScheduleId_list == null && !reminderScheduleId_list.isEmpty()) {
             } else if (count > 1 && operation.name().equals("modify")) {
                 object_in_reminders.put("reminderScheduleId", reminderScheduleId_list.get(i));
+                System.out.println("get->reminderScheduleId_list=" + reminderScheduleId_list.get(i));
+
             } else if (count > 1 && !operation.name().equals("modify")) {
                 object_in_reminders.put("reminderScheduleId", reminderScheduleId());
+
             } else {
                 object_in_reminders.put("reminderScheduleId", reminderScheduleId);
             }
+
             if (reminderId == 0) {
                 object_in_reminders.put("reminderId", 0);
             } else if (reminderId == -1) {
@@ -347,10 +356,15 @@ class API_AMS extends API{
                 object_in_reminders.put("reminderId", Long.MAX_VALUE);
             } else if (reminderId == Long.MIN_VALUE) {
                 object_in_reminders.put("reminderId", Long.MIN_VALUE);
+
+            //} else if (count > 1 && operation.name().equals("modify") && reminderId_list == null && !reminderId_list.isEmpty()) {
             } else if (count > 1 && operation.name().equals("modify")) {
                 object_in_reminders.put("reminderId", reminderId_list.get(i));
+                System.out.println("get->reminderId_list=" + reminderId_list.get(i));
+
             } else if (count > 1 && !operation.name().equals("modify")) {
                 object_in_reminders.put("reminderId", reminderId());
+
             } else {
                 object_in_reminders.put("reminderId", reminderId);
             }
