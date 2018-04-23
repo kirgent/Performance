@@ -35,7 +35,7 @@ class testAMS_Reminder_Purge extends API {
 
     @RepeatedTest(1)
     void testblablabla_jsonAdd__400_Bad_Request() throws IOException {
-        ArrayList actual = AMS.Request(mac, Operation.blablabla, count, reminderProgramStart(), reminderChannelNumber, reminderProgramId, reminderOffset, reminderScheduleId, reminderId);
+        ArrayList actual = AMS.Request(mac, Operation.blablabla, count, reminderProgramStart, reminderChannelNumber, reminderProgramId, reminderOffset, reminderScheduleId, reminderId);
         assertEquals(expected400, actual.get(0));
         assertEquals("Incorrect request: blablabla", actual.get(1));
     }

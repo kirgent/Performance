@@ -22,12 +22,9 @@ import static java.lang.System.currentTimeMillis;
  */
 public class API {
 
-    Boolean show_extra_info = true;
-    Boolean show_generated_json = true;
+    Boolean show_extra_info = false;
+    Boolean show_generated_json = false;
     private Boolean show_response_body = true;
-
-    ArrayList<Long> reminderScheduleId_list = new ArrayList<>();
-    ArrayList<Long> reminderId_list = new ArrayList<>();
 
     @Rule
     final public Timeout globalTimeout = Timeout.seconds(20);
@@ -87,6 +84,11 @@ public class API {
     final String reminderProgramStart_text = "yyyy-mm-dd";
     //String[] rack_date = {"2018-03-15"};
 
+    ArrayList reminderScheduleId_list = new ArrayList();
+    ArrayList reminderId_list = new ArrayList();
+    //ArrayList<Long> reminderScheduleId_list;
+    //ArrayList<Long> reminderId_list;
+
     //CHANNELS
     final int reminderChannelNumber = reminderChannelNumber();
     int reminderChannelNumber_empty;
@@ -101,6 +103,8 @@ public class API {
     final String reminderProgramId = "EP002960010113";
     //String reminderProgramId = "0";
     String reminderProgramId_empty;
+
+    String reminderProgramStart = reminderProgramStart();
 
     int reminderOffset = reminderOffset();
     int reminderOffset_new = reminderOffset();
@@ -413,7 +417,7 @@ public class API {
         return actual;
     }
 
-    String reminderProgramStart() {
+    private String reminderProgramStart() {
         Calendar calendar = Calendar.getInstance();
         calendar.setTimeZone(TimeZone.getTimeZone("UTC"));
         SimpleDateFormat pattern = new SimpleDateFormat("yyyy-MM-dd");
@@ -421,11 +425,11 @@ public class API {
         return pattern.format(calendar.getTime());
     }
 
-    int reminderChannelNumber() {
+    private int reminderChannelNumber() {
         return Math.abs(new Random().nextInt(1000));
     }
 
-    int reminderOffset() {
+    private int reminderOffset() {
         return Math.abs(new Random().nextInt(1000));
     }
 
@@ -439,14 +443,21 @@ public class API {
         return reminderScheduleId;
     }
 
-    public static Boolean ContainsAllNulls(ArrayList list)
+    void printArrayList(ArrayList list){
+        if(list != null)
+        {
+            for(Object a : list)
+                if(a != null) System.out.println("element:" + a);
+        }
+    }
+
+    static Boolean ContainsAllNulls(ArrayList list)
     {
         if(list != null)
         {
             for(Object a : list)
                 if(a != null) return false;
         }
-
         return true;
     }
 

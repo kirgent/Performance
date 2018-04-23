@@ -9,9 +9,9 @@ reminderOffset="$5"
 reminderScheduleId="$6"
 reminderId="$7"
 
-if [ "$reminderOffset" -eq "-1" ]; then reminderOffset=$RANDOM; fi
-if [ "$reminderScheduleId" -eq "-1" ]; then reminderScheduleId=$RANDOM; fi
-if [ "$reminderId" -eq "-1" ]; then reminderId=$RANDOM; fi
+#if [ "$reminderOffset" -eq "-1" ]; then reminderOffset=$RANDOM; fi
+#if [ "$reminderScheduleId" -eq "-1" ]; then reminderScheduleId=$RANDOM; fi
+#if [ "$reminderId" -eq "-1" ]; then reminderId=$RANDOM; fi
 
 if [ "$show_extra_info" = true ]; then
 echo "[DBG] `date "+%a %b %d %T %N %Z %Y"`: Add $count_reminders rem(s) in iteration=$i/$count_iterations with reminderProgramStart=$reminderProgramStart, reminderChannelNumber=$reminderChannelNumber, reminderScheduleId=$reminderScheduleId, reminderId=$reminderId"|$logwrap

@@ -54,8 +54,7 @@ class API_AMS extends API{
         HttpPost request = new HttpPost(prepare_url(operation));
         request.setHeader("Accept", "application/json");
         request.setHeader("Content-type", "application/json");
-        request.setEntity(new StringEntity(generate_json_reminder(mac, count, operation,
-                reminderProgramStart, reminderChannelNumber, reminderProgramId, reminderOffset, reminderScheduleId, reminderId)));
+        request.setEntity(new StringEntity(generate_json_reminder(mac, count, operation, reminderProgramStart, reminderChannelNumber, reminderProgramId, reminderOffset, reminderScheduleId, reminderId)));
         System.out.println("[DBG] Request string: " + request);
 
         long start = System.currentTimeMillis();
@@ -228,8 +227,8 @@ class API_AMS extends API{
     }
 
     private String generate_json_reminder(String mac, int count, Enum<Operation> operation, String reminderProgramStart, int reminderChannelNumber, String reminderProgramId, int reminderOffset, long reminderScheduleId, long reminderId) {
-        if (count < 0) {            count = 0;        }
-        if (count > 1440) {            count = 1440;        }
+        if (count < 0) { count = 0; }
+        if (count > 1440) { count = 1440; }
 
         JSONObject json = new JSONObject();
         json.put("deviceId", mac);
@@ -242,12 +241,12 @@ class API_AMS extends API{
             } else {
                 object_in_reminders.put("reminderProgramStart", reminderProgramStart + " " + get_time(count, i));
             }
+
             if (reminderChannelNumber == -1) {
                 object_in_reminders.put("reminderChannelNumber", "");
             } else if(reminderChannelNumber == -2) {
                 object_in_reminders.put("reminderOffset", null);
-            } else
-            {
+            } else {
                 object_in_reminders.put("reminderChannelNumber", reminderChannelNumber);
             }
 
@@ -261,68 +260,11 @@ class API_AMS extends API{
                 object_in_reminders.put("reminderOffset", reminderOffset);
             }
 
-// from THERE
-            /*if (operation.name().equals("modify")) {
-                if (reminderScheduleId == 0) {
-                    object_in_reminders.put("reminderScheduleId", 0);
-                } else if (reminderScheduleId == -1) {
-                    object_in_reminders.put("reminderScheduleId", "");
-                } else if (reminderScheduleId == -2) {
-                    object_in_reminders.put("reminderScheduleId", null);
-                } else if (count > 1) {
-                    object_in_reminders.put("reminderScheduleId", reminderScheduleId_list.get(i));
-                } else {
-                    object_in_reminders.put("reminderScheduleId", reminderScheduleId);
-                }
-                if (reminderId == 0) {
-                    object_in_reminders.put("reminderId", 0);
-                } else if (reminderId == -1) {
-                    object_in_reminders.put("reminderId", "");
-                } else if (reminderId == -2) {
-                    object_in_reminders.put("reminderId", null);
-                } else if (count > 1) {
-                    object_in_reminders.put("reminderId", reminderId_list.get(i));
-                } else {
-                    object_in_reminders.put("reminderId", reminderId);
-                }
+            if(show_extra_info) {
+                System.out.println("reminderScheduleId_list.size()=" + reminderScheduleId_list.size() + ", reminderId_list.size()=" + reminderId_list.size());
+            }
 
-            } else {
-                if (reminderScheduleId == 0) {
-                    object_in_reminders.put("reminderScheduleId", 0);
-                } else if (reminderScheduleId == -1) {
-                    object_in_reminders.put("reminderScheduleId", "");
-                } else if (reminderScheduleId == -2) {
-                    object_in_reminders.put("reminderScheduleId", null);
-                } else if (reminderScheduleId == Long.MAX_VALUE) {
-                    object_in_reminders.put("reminderScheduleId", Long.MAX_VALUE);
-                } else if (reminderScheduleId == Long.MIN_VALUE) {
-                    object_in_reminders.put("reminderScheduleId", Long.MIN_VALUE);
-                } else if (count > 1) {
-                    object_in_reminders.put("reminderScheduleId", reminderScheduleId());
-                } else {
-                    object_in_reminders.put("reminderScheduleId", reminderScheduleId);
-                }
-                if (reminderId == 0) {
-                    object_in_reminders.put("reminderId", 0);
-                } else if (reminderId == -1) {
-                    object_in_reminders.put("reminderId", "");
-                } else if (reminderId == -2) {
-                    object_in_reminders.put("reminderId", null);
-                } else if (reminderId == Long.MAX_VALUE) {
-                    object_in_reminders.put("reminderId", Long.MAX_VALUE);
-                } else if (reminderId == Long.MIN_VALUE) {
-                    object_in_reminders.put("reminderId", Long.MIN_VALUE);
-                } else if (count > 1) {
-                    object_in_reminders.put("reminderId", reminderId());
-                } else {
-                    object_in_reminders.put("reminderId", reminderId);
-                }
-            }*/
-
-            //3RD VARIANT!!!
-
-            //reminderScheduleId_list != null && !reminderScheduleId_list.isEmpty()
-
+            //MAIN WORKING WARIANT
             if (reminderScheduleId == 0) {
                 object_in_reminders.put("reminderScheduleId", 0);
             } else if (reminderScheduleId == -1) {
@@ -333,15 +275,19 @@ class API_AMS extends API{
                 object_in_reminders.put("reminderScheduleId", Long.MAX_VALUE);
             } else if (reminderScheduleId == Long.MIN_VALUE) {
                 object_in_reminders.put("reminderScheduleId", Long.MIN_VALUE);
-
-            //} else if (count > 1 && operation.name().equals("modify") && reminderScheduleId_list == null && !reminderScheduleId_list.isEmpty()) {
-            } else if (count > 1 && operation.name().equals("modify")) {
-                object_in_reminders.put("reminderScheduleId", reminderScheduleId_list.get(i));
-                System.out.println("get->reminderScheduleId_list=" + reminderScheduleId_list.get(i));
-
-            } else if (count > 1 && !operation.name().equals("modify")) {
+            } else if (count>1 && operation.name().equals("modify")) {
+                //todo//todo//todo FIXME
+                if(reminderScheduleId_list!=null && !reminderScheduleId_list.isEmpty()) {
+                    object_in_reminders.put("reminderScheduleId", reminderScheduleId_list.get(i));
+                }else {
+                    object_in_reminders.put("reminderScheduleId", reminderScheduleId());
+                }
+                //todo//todo//todo FIXME
+                if(show_extra_info) {
+                    System.out.println("get(" + i + ")->reminderScheduleId_list=" + reminderScheduleId_list.get(i));
+                }
+            } else if (count>1 && operation.name().equals("add")) {
                 object_in_reminders.put("reminderScheduleId", reminderScheduleId());
-
             } else {
                 object_in_reminders.put("reminderScheduleId", reminderScheduleId);
             }
@@ -356,20 +302,136 @@ class API_AMS extends API{
                 object_in_reminders.put("reminderId", Long.MAX_VALUE);
             } else if (reminderId == Long.MIN_VALUE) {
                 object_in_reminders.put("reminderId", Long.MIN_VALUE);
-
-            //} else if (count > 1 && operation.name().equals("modify") && reminderId_list == null && !reminderId_list.isEmpty()) {
-            } else if (count > 1 && operation.name().equals("modify")) {
-                object_in_reminders.put("reminderId", reminderId_list.get(i));
-                System.out.println("get->reminderId_list=" + reminderId_list.get(i));
-
-            } else if (count > 1 && !operation.name().equals("modify")) {
+            } else if (count>1 && operation.name().equals("modify")) {
+                //todo//todo//todo FIXME
+                if(reminderId_list!=null && !reminderId_list.isEmpty()) {
+                    object_in_reminders.put("reminderId", reminderId_list.get(i));
+                }else {
+                    object_in_reminders.put("reminderId", reminderId());
+                }
+                //todo//todo//todo FIXME
+                if(show_extra_info) {
+                    System.out.println("get(" + i + ")->reminderId_list=" + reminderId_list.get(i));
+                }
+            } else if (count>1 && operation.name().equals("add")) {
                 object_in_reminders.put("reminderId", reminderId());
-
             } else {
                 object_in_reminders.put("reminderId", reminderId);
             }
 
+
+            /*if (reminderScheduleId == 0) {
+                object_in_reminders.put("reminderScheduleId", 0);
+            } else if (reminderScheduleId == -1) {
+                object_in_reminders.put("reminderScheduleId", "");
+            } else if (reminderScheduleId == -2) {
+                object_in_reminders.put("reminderScheduleId", null);
+            } else if (reminderScheduleId == Long.MAX_VALUE) {
+                object_in_reminders.put("reminderScheduleId", Long.MAX_VALUE);
+            } else if (reminderScheduleId == Long.MIN_VALUE) {
+                object_in_reminders.put("reminderScheduleId", Long.MIN_VALUE);
+                //} else if (count > 1 && operation.name().equals("modify") && reminderScheduleId_list == null && !reminderScheduleId_list.isEmpty()) {
+            } else if (count > 1) {
+                if(reminderScheduleId_list == null || !reminderScheduleId_list.isEmpty()) {
+                    object_in_reminders.put("reminderScheduleId", reminderScheduleId());
+                }else {
+                    object_in_reminders.put("reminderScheduleId", reminderScheduleId_list.get(i));
+                    System.out.println("get(" + i + ")->reminderScheduleId_list=" + reminderScheduleId_list.get(i));
+                }
+            } else {
+                object_in_reminders.put("reminderScheduleId", reminderScheduleId);
+            }
+
+            if (reminderId == 0) {
+                object_in_reminders.put("reminderId", 0);
+            } else if (reminderId == -1) {
+                object_in_reminders.put("reminderId", "");
+            } else if (reminderId == -2) {
+                object_in_reminders.put("reminderId", null);
+            } else if (reminderId == Long.MAX_VALUE) {
+                object_in_reminders.put("reminderId", Long.MAX_VALUE);
+            } else if (reminderId == Long.MIN_VALUE) {
+                object_in_reminders.put("reminderId", Long.MIN_VALUE);
+                //} else if (count > 1 && operation.name().equals("modify") && reminderId_list == null && !reminderId_list.isEmpty()) {
+            } else if (count > 1) {
+                if(!reminderId_list.isEmpty()) {
+                    object_in_reminders.put("reminderId", reminderId());
+                }else {
+                    object_in_reminders.put("reminderId", reminderId_list.get(i));
+                    System.out.println("get(" + i + ")->reminderId_list=" + reminderId_list.get(i));
+                }
+            } else {
+                object_in_reminders.put("reminderId", reminderId);
+            }*/
+
+// TESTED VARIANT
+            /*if (reminderScheduleId == 0) {
+                object_in_reminders.put("reminderScheduleId", 0);
+            } else if (reminderScheduleId == -1) {
+                object_in_reminders.put("reminderScheduleId", "");
+            } else if (reminderScheduleId == -2) {
+                object_in_reminders.put("reminderScheduleId", null);
+            } else if (reminderScheduleId == Long.MAX_VALUE) {
+                object_in_reminders.put("reminderScheduleId", Long.MAX_VALUE);
+            } else if (reminderScheduleId == Long.MIN_VALUE) {
+                object_in_reminders.put("reminderScheduleId", Long.MIN_VALUE);
+
+            //} else if (count > 1 && operation.name().equals("modify") && reminderScheduleId_list == null && !reminderScheduleId_list.isEmpty()) {
+            } else if (count > 1 && operation.name().equals("modify")) {
+
+                //todo//todo//todo FIXME
+                if(reminderScheduleId_list==null && !reminderScheduleId_list.isEmpty()) {
+                    object_in_reminders.put("reminderScheduleId", reminderScheduleId_list.get(i));
+                    System.out.println("get(" + i + ")->reminderScheduleId_list=" + reminderScheduleId_list.get(i));
+                }else {
+                    object_in_reminders.put("reminderScheduleId", reminderScheduleId());
+                }
+                //todo//todo//todo FIXME
+
+            } else if (count > 1 && operation.name().equals("add")) {
+                object_in_reminders.put("reminderScheduleId", reminderScheduleId());
+            } else {
+                object_in_reminders.put("reminderScheduleId", reminderScheduleId);
+            }
+
+
+            if (reminderId == 0) {
+                object_in_reminders.put("reminderId", 0);
+            } else if (reminderId == -1) {
+                object_in_reminders.put("reminderId", "");
+            } else if (reminderId == -2) {
+                object_in_reminders.put("reminderId", null);
+            } else if (reminderId == Long.MAX_VALUE) {
+                object_in_reminders.put("reminderId", Long.MAX_VALUE);
+            } else if (reminderId == Long.MIN_VALUE) {
+                object_in_reminders.put("reminderId", Long.MIN_VALUE);
+
+            //} else if (count > 1 && operation.name().equals("modify") && reminderId_list == null && !reminderId_list.isEmpty()) {
+            } else if (count > 1 && operation.name().equals("modify")) {
+
+                //todo//todo//todo FIXME
+                if(reminderId_list==null && !reminderId_list.isEmpty()) {
+                    object_in_reminders.put("reminderId", reminderId_list.get(i));
+                    System.out.println("get(" + i + ")->reminderId_list=" + reminderId_list.get(i));
+                }else {
+                    object_in_reminders.put("reminderId", reminderId());
+                }
+                //todo//todo//todo FIXME
+
+            } else if (count > 1 && operation.name().equals("add")) {
+                object_in_reminders.put("reminderId", reminderId());
+
+            } else {
+                object_in_reminders.put("reminderId", reminderId);
+            }*/
+
+
             array_reminders.add(object_in_reminders);
+
+            //if(show_extra_info) {
+            //    System.out.println("reminderScheduleId_list.size() = " + reminderScheduleId_list.size());
+            //    System.out.println("reminderId_list.size() = " + reminderId_list.size());
+            //}
         }
         String xxx = "{\"reminders\":[" +
                 "{\"reminderChannelNumber\":211,\"reminderProgramId\":\"EP002960010113\",\"reminderId\":1,\"reminderProgramStart\":\"2018-04-21 00:00\",\"reminderScheduleId\":2,\"reminderOffset\":732}," +
