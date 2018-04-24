@@ -101,7 +101,6 @@ class testAMS_Reminder_Modify extends API {
      */
     @RepeatedTest(1)
     void testModify_reminderId_0__statusCode4() throws IOException {
-        int reminderChannelNumber = 211;
         //todo
         int count=1;
         ArrayList actual;
@@ -169,11 +168,10 @@ class testAMS_Reminder_Modify extends API {
     @RepeatedTest(1)
     void testModify_reminderOffset_MIN_VALUE() throws IOException {
         //todo!!!
-        int reminderScheduleId = 123;
-        int reminderId = 123;
+        int count = 1;
         ArrayList actual = AMS.Request(mac, Operation.modify, count, reminderProgramStart, reminderChannelNumber, reminderProgramId, Integer.MIN_VALUE, reminderScheduleId, reminderId);
         assertEquals(expected400, actual.get(0));
-        assertEquals("REM-008 Reminders parsing error: missing offset", actual.get(1));
+        assertEquals("REM-008 Reminders parsing error: invalid offset", actual.get(1));
     }
 
     /** reminderProgramId can be empty, AMS is removed his from json
@@ -214,50 +212,54 @@ class testAMS_Reminder_Modify extends API {
         actual = AMS.Request(mac, Operation.add, count, reminderProgramStart, reminderChannelNumber, reminderProgramId, reminderOffset, reminderScheduleId, reminderId);
         assertEquals(expected200, actual.get(0));
         assertEquals("", actual.get(1));
-
+        //todo!!!
+        //int count = 1;
         actual = AMS.Request(mac, Operation.modify, count, "", reminderChannelNumber, reminderProgramId, reminderOffset, reminderScheduleId, reminderId);
         assertEquals(expected200, actual.get(0));
         assertEquals("", actual.get(1));
         testPurge();
     }
 
-    @RepeatedTest(10)
+    @RepeatedTest(1)
     void testModify_reminderProgramStart_PAST__statusCode2() throws IOException {
         ArrayList actual;
-        actual = AMS.Request(mac, Operation.add, count, reminderProgramStart, reminderChannelNumber, reminderProgramId, reminderOffset, reminderScheduleId, reminderId);
-        assertEquals(expected200, actual.get(0));
-        assertEquals("", actual.get(1));
+        //actual = AMS.Request(mac, Operation.add, count, reminderProgramStart, reminderChannelNumber, reminderProgramId, reminderOffset, reminderScheduleId, reminderId);
+        //assertEquals(expected200, actual.get(0));
+        //assertEquals("", actual.get(1));
         //todo!!!
+        int count = 1;
         actual = AMS.Request(mac, Operation.modify, count, "2000-01-01", reminderChannelNumber, reminderProgramId, reminderOffset, reminderScheduleId, reminderId);
         assertEquals(expected200, actual.get(0));
         assertEquals("2", actual.get(1));
-        testPurge();
+        //testPurge();
     }
 
-    @RepeatedTest(10)
+    @RepeatedTest(1)
     void testModify_reminderProgramStart_text() throws IOException {
         ArrayList actual;
-        actual = AMS.Request(mac, Operation.add, count, reminderProgramStart, reminderChannelNumber, reminderProgramId, reminderOffset, reminderScheduleId, reminderId);
-        assertEquals(expected200, actual.get(0));
-        assertEquals("", actual.get(1));
+        //actual = AMS.Request(mac, Operation.add, count, reminderProgramStart, reminderChannelNumber, reminderProgramId, reminderOffset, reminderScheduleId, reminderId);
+        //assertEquals(expected200, actual.get(0));
+        //assertEquals("", actual.get(1));
         //todo!!!
+        int count = 1;
         actual = AMS.Request(mac, Operation.modify, count, "YYYY-mm-dd", reminderChannelNumber, reminderProgramId, reminderOffset, reminderScheduleId, reminderId);
         assertEquals(expected500, actual.get(0));
         assertEquals("name cannot be null", actual.get(1));
-        testPurge();
+        //testPurge();
     }
 
-    @RepeatedTest(10)
+    @RepeatedTest(1)
     void testModify_reminderProgramStart_wrong() throws IOException {
         ArrayList actual;
-        actual = AMS.Request(mac, Operation.add, count, reminderProgramStart, reminderChannelNumber, reminderProgramId, reminderOffset, reminderScheduleId, reminderId);
-        assertEquals(expected200, actual.get(0));
-        assertEquals("", actual.get(1));
+        //actual = AMS.Request(mac, Operation.add, count, reminderProgramStart, reminderChannelNumber, reminderProgramId, reminderOffset, reminderScheduleId, reminderId);
+        //assertEquals(expected200, actual.get(0));
+        //assertEquals("", actual.get(1));
         //todo!!!
+        int count = 1;
         actual = AMS.Request(mac, Operation.modify, count, "0000-00-00", reminderChannelNumber, reminderProgramId, reminderOffset, reminderScheduleId, reminderId);
         assertEquals(expected400, actual.get(0));
         assertEquals("REM-008 Reminders parsing error: invalid program start", actual.get(1));
-        testPurge();
+        //testPurge();
     }
 
     /** 4 - reminder is unknown. Applies to "Reminders Delete" request (Request ID=1) and "Reminders Modify" request (Request ID=2)
@@ -265,16 +267,26 @@ class testAMS_Reminder_Modify extends API {
      */
     @RepeatedTest(1)
     void testModify_reminderScheduleId_0__statusCode4() throws IOException {
-        int reminderChannelNumber = 211;
+        //todo
+        int count = 1;
         ArrayList actual;
-        actual = AMS.Request(mac, Operation.add, count, reminderProgramStart, reminderChannelNumber, reminderProgramId, reminderOffset, reminderScheduleId, reminderId);
-        assertEquals(expected200, actual.get(0));
-        assertEquals("", actual.get(1));
-
         actual = AMS.Request(mac, Operation.modify, count, reminderProgramStart, reminderChannelNumber, reminderProgramId, reminderOffset, 0, reminderId);
         assertEquals(expected200, actual.get(0));
         assertEquals("4", actual.get(1));
-        testPurge();
+        //testPurge();
+    }
+
+    /** 4 - reminder is unknown. Applies to "Reminders Delete" request (Request ID=1) and "Reminders Modify" request (Request ID=2)
+     * @throws IOException - TBD
+     */
+    @RepeatedTest(1)
+    void testModify_reminderScheduleId_0_reminderId_0__statusCode4() throws IOException {
+        //todo
+        int count = 1;
+        ArrayList actual;
+        actual = AMS.Request(mac, Operation.modify, count, reminderProgramStart, reminderChannelNumber, reminderProgramId, reminderOffset, 0, 0);
+        assertEquals(expected200, actual.get(0));
+        assertEquals("4", actual.get(1));
     }
 
     @RepeatedTest(1)
@@ -289,16 +301,6 @@ class testAMS_Reminder_Modify extends API {
         assertEquals(expected500, actual.get(0));
         assertEquals("name cannot be null", actual.get(1));
         testPurge();
-    }
-
-    /** 4 - reminder is unknown. Applies to "Reminders Delete" request (Request ID=1) and "Reminders Modify" request (Request ID=2)
-     * @throws IOException - TBD
-     */
-    @RepeatedTest(1)
-    void testModify_reminderScheduleId_0_reminderId_0__statusCode4() throws IOException {
-        ArrayList actual = AMS.Request(mac, Operation.modify, count, reminderProgramStart, reminderChannelNumber, reminderProgramId, reminderOffset, 0, 0);
-        assertEquals(expected200, actual.get(0));
-        assertEquals("4", actual.get(1));
     }
 
     @RepeatedTest(1)

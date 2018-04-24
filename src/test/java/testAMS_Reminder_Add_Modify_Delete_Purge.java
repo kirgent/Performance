@@ -13,7 +13,7 @@ class testAMS_Reminder_Add_Modify_Delete_Purge extends API {
 
     private API_AMS AMS = new API_AMS();
     final private int countrepeat = 10;
-    final private int count = 1000;
+    final private int count = 1440;
 
     @RepeatedTest(countrepeat)
     void test1_Add() throws IOException {
@@ -24,19 +24,7 @@ class testAMS_Reminder_Add_Modify_Delete_Purge extends API {
     }
 
     @RepeatedTest(countrepeat)
-    void test2_Add_Purge() throws IOException {
-        ArrayList actual;
-        actual = AMS.Request(mac, Operation.add, count, reminderProgramStart, reminderChannelNumber, reminderProgramId, reminderOffset, reminderScheduleId, reminderId);
-        assertEquals(expected200, actual.get(0));
-        assertEquals("", actual.get(1));
-
-        actual = AMS.Request(mac, Operation.purge);
-        assertEquals(expected200, actual.get(0));
-        assertEquals("", actual.get(1));
-    }
-
-    @RepeatedTest(countrepeat)
-    void test3_Add_Modify() throws IOException {
+    void test2_Add_Modify() throws IOException {
         ArrayList actual;
         actual = AMS.Request(mac, Operation.add, count, reminderProgramStart, reminderChannelNumber, reminderProgramId, reminderOffset, reminderScheduleId, reminderId);
         assertEquals(expected200, actual.get(0));
@@ -45,28 +33,10 @@ class testAMS_Reminder_Add_Modify_Delete_Purge extends API {
         actual = AMS.Request(mac, Operation.modify, count, reminderProgramStart, reminderChannelNumber, reminderProgramId, reminderOffset_new, reminderScheduleId, reminderId);
         assertEquals(expected200, actual.get(0));
         assertEquals("", actual.get(1));
-
     }
 
     @RepeatedTest(countrepeat)
-    void test4_Add_Modify_Purge() throws IOException {
-        ArrayList actual;
-        actual = AMS.Request(mac, Operation.add, count, reminderProgramStart, reminderChannelNumber, reminderProgramId, reminderOffset, reminderScheduleId, reminderId);
-        assertEquals(expected200, actual.get(0));
-        assertEquals("", actual.get(1));
-
-        actual = AMS.Request(mac, Operation.modify, count, reminderProgramStart, reminderChannelNumber, reminderProgramId, reminderOffset_new, reminderScheduleId, reminderId);
-        assertEquals(expected200, actual.get(0));
-        assertEquals("", actual.get(1));
-
-        actual = AMS.Request(mac, Operation.purge);
-        assertEquals(expected200, actual.get(0));
-        assertEquals("", actual.get(1));
-    }
-
-    @RepeatedTest(countrepeat)
-    void test5_Add_Modify_Delete() throws IOException {
-        //int reminderChannelNumber = 164;
+    void test3_Add_Modify_Delete() throws IOException {
         ArrayList actual;
         actual = AMS.Request(mac, Operation.add, count, reminderProgramStart, reminderChannelNumber, reminderProgramId, reminderOffset, reminderScheduleId, reminderId);
         assertEquals(expected200, actual.get(0));
@@ -82,49 +52,13 @@ class testAMS_Reminder_Add_Modify_Delete_Purge extends API {
     }
 
     @RepeatedTest(countrepeat)
-    void test6_Add_Modify_Delete_Purge() throws IOException {
-        ArrayList actual;
-        actual = AMS.Request(mac, Operation.add, count, reminderProgramStart, reminderChannelNumber, reminderProgramId, reminderOffset, reminderScheduleId, reminderId);
-        assertEquals(expected200, actual.get(0));
-        assertEquals("", actual.get(1));
-
-        actual = AMS.Request(mac, Operation.modify, count, reminderProgramStart, reminderChannelNumber, reminderProgramId, reminderOffset_new, reminderScheduleId, reminderId);
-        assertEquals(expected200, actual.get(0));
-        assertEquals("", actual.get(1));
-
-        actual = AMS.Request(mac, Operation.delete, count, reminderScheduleId, reminderId);
-        assertEquals(expected200, actual.get(0));
-        assertEquals("", actual.get(1));
-
-        actual = AMS.Request(mac, Operation.purge);
-        assertEquals(expected200, actual.get(0));
-        assertEquals("", actual.get(1));
-    }
-
-    @RepeatedTest(countrepeat)
-    void test7_Add_Delete() throws IOException, InterruptedException {
+    void test4_Add_Delete() throws IOException, InterruptedException {
         ArrayList actual;
         actual = AMS.Request(mac, Operation.add, count, reminderProgramStart, reminderChannelNumber, reminderProgramId, reminderOffset, reminderScheduleId, reminderId);
         assertEquals(expected200, actual.get(0));
         assertEquals("", actual.get(1));
 
         actual = AMS.Request(mac, Operation.delete, count, reminderScheduleId, reminderId);
-        assertEquals(expected200, actual.get(0));
-        assertEquals("", actual.get(1));
-    }
-
-    @RepeatedTest(countrepeat)
-    void test8_Add_Delete_Purge() throws IOException, InterruptedException {
-        ArrayList actual;
-        actual = AMS.Request(mac, Operation.add, count, reminderProgramStart, reminderChannelNumber, reminderProgramId, reminderOffset, reminderScheduleId, reminderId);
-        assertEquals(expected200, actual.get(0));
-        assertEquals("", actual.get(1));
-
-        actual = AMS.Request(mac, Operation.delete, count, reminderScheduleId, reminderId);
-        assertEquals(expected200, actual.get(0));
-        assertEquals("", actual.get(1));
-
-        actual = AMS.Request(mac, Operation.purge);
         assertEquals(expected200, actual.get(0));
         assertEquals("", actual.get(1));
     }

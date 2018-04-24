@@ -23,7 +23,7 @@ import static java.lang.System.currentTimeMillis;
 public class API {
 
     Boolean show_extra_info = false;
-    Boolean show_generated_json = false;
+    Boolean show_generated_json = true;
     private Boolean show_response_body = true;
 
     @Rule

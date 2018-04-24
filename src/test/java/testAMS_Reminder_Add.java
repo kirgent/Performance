@@ -205,28 +205,6 @@ class testAMS_Reminder_Add extends API {
         assertEquals("REM-008 Reminders parsing error: invalid program start", actual.get(1));
     }
 
-    @RepeatedTest(1)
-    void testAdd_reminderScheduleId_empty() throws IOException {
-        ArrayList actual = AMS.Request(mac, Operation.add, count, reminderProgramStart, reminderChannelNumber, reminderProgramId, reminderOffset, -1, reminderId);
-        assertEquals(expected500, actual.get(0));
-        assertEquals("name cannot be null", actual.get(1));
-    }
-
-    @RepeatedTest(10)
-    void testAdd_reminderScheduleId_MAX_VALUE() throws IOException {
-        ArrayList actual = AMS.Request(mac, Operation.add, count, reminderProgramStart, reminderChannelNumber, reminderProgramId, reminderOffset, Long.MAX_VALUE, reminderId);
-        assertEquals(expected200, actual.get(0));
-        assertEquals("", actual.get(1));
-        testPurge();
-    }
-
-    @RepeatedTest(1)
-    void testAdd_reminderScheduleId_MIN_VALUE() throws IOException {
-        ArrayList actual = AMS.Request(mac, Operation.add, count, reminderProgramStart, reminderChannelNumber, reminderProgramId, reminderOffset, Long.MIN_VALUE, reminderId);
-        assertEquals(expected400, actual.get(0));
-        assertEquals("REM-008 Reminders parsing error: incorrect reminderScheduleId", actual.get(1));
-    }
-
     /** 4 - reminder is unknown. Applies to "Reminders Delete" request (Request ID=1) and "Reminders Modify" request (Request ID=2)
      * @throws IOException - TBD
      */
@@ -250,6 +228,28 @@ class testAMS_Reminder_Add extends API {
         //assertEquals("REM-008 Reminders parsing error: incorrect ScheduleId", actual.get(1));
         assertEquals(expected200, actual.get(0));
         assertEquals("45", actual.get(1));
+    }
+
+    @RepeatedTest(1)
+    void testAdd_reminderScheduleId_empty() throws IOException {
+        ArrayList actual = AMS.Request(mac, Operation.add, count, reminderProgramStart, reminderChannelNumber, reminderProgramId, reminderOffset, -1, reminderId);
+        assertEquals(expected500, actual.get(0));
+        assertEquals("name cannot be null", actual.get(1));
+    }
+
+    @RepeatedTest(10)
+    void testAdd_reminderScheduleId_MAX_VALUE() throws IOException {
+        ArrayList actual = AMS.Request(mac, Operation.add, count, reminderProgramStart, reminderChannelNumber, reminderProgramId, reminderOffset, Long.MAX_VALUE, reminderId);
+        assertEquals(expected200, actual.get(0));
+        assertEquals("", actual.get(1));
+        testPurge();
+    }
+
+    @RepeatedTest(1)
+    void testAdd_reminderScheduleId_MIN_VALUE() throws IOException {
+        ArrayList actual = AMS.Request(mac, Operation.add, count, reminderProgramStart, reminderChannelNumber, reminderProgramId, reminderOffset, Long.MIN_VALUE, reminderId);
+        assertEquals(expected400, actual.get(0));
+        assertEquals("REM-008 Reminders parsing error: incorrect reminderScheduleId", actual.get(1));
     }
 
     /**5 - reminder with provided pair of identifiers (reminderScheduleId and reminderId) is already set (for Add Reminder request)
