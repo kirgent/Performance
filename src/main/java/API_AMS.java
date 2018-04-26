@@ -82,7 +82,7 @@ class API_AMS extends API{
                 System.out.println("delete for macaddress=" + mac + ", ams_ip=" + ams_ip + ", "
                         + "reminderScheduleId=multi, "
                         + "reminderId=multi");
-            }else {
+            } else {
                 System.out.println("delete for macaddress=" + mac + ", ams_ip=" + ams_ip + ", "
                         + "reminderScheduleId=" + reminderScheduleId + ", "
                         + "reminderId=" + reminderId);
@@ -453,25 +453,40 @@ class API_AMS extends API{
         json.put("reminders", array_reminders);
         for (int i = 1; i <= count; i++) {
             JSONObject object_in_reminders = new JSONObject();
-            if (count>1){
-                //System.out.println("multi for delete: reminderScheduleId=" + reminderScheduleId);
-                //System.out.println("multi for delete: reminderId=" + reminderId);
-                //System.out.println("multi for delete: list reminderScheduleId=" + reminderScheduleId_list.get(i));
-                //System.out.println("multi for delete: list reminderId=" + reminderId_list.get(i));
+
+            if (reminderScheduleId == 0) {
+                object_in_reminders.put("reminderScheduleId", 0);
+            } else if (reminderScheduleId == -1) {
+                object_in_reminders.put("reminderScheduleId", "");
+            } else if (reminderScheduleId == Long.MAX_VALUE) {
+                object_in_reminders.put("reminderScheduleId", Long.MAX_VALUE);
+            } else if (reminderScheduleId == Long.MIN_VALUE) {
+                object_in_reminders.put("reminderScheduleId", Long.MIN_VALUE);
+            } else if (count > 1) {
                 object_in_reminders.put("reminderScheduleId", reminderScheduleId_list.get(i));
-                object_in_reminders.put("reminderId", reminderId_list.get(i));
-            }else {
-                //System.out.println("1for delete: reminderScheduleId=" + reminderScheduleId);
-                //System.out.println("1for delete: reminderId=" + reminderId);
+            } else {
                 object_in_reminders.put("reminderScheduleId", reminderScheduleId);
+            }
+
+            if (reminderId == 0) {
+                object_in_reminders.put("reminderId", 0);
+            } else if (reminderId == -1) {
+                object_in_reminders.put("reminderId", "");
+            } else if (reminderId == Long.MAX_VALUE) {
+                object_in_reminders.put("reminderId", Long.MAX_VALUE);
+            } else if (reminderId == Long.MIN_VALUE) {
+                object_in_reminders.put("reminderId", Long.MIN_VALUE);
+            } else if (count > 1) {
+                object_in_reminders.put("reminderId", reminderId_list.get(i));
+            } else {
                 object_in_reminders.put("reminderId", reminderId);
             }
             array_reminders.add(object_in_reminders);
         }
-        String result = json.toString();
-        if(show_generated_json) {
-            System.out.println("generated json: " + result);
-        }
+            String result = json.toString();
+            if (show_generated_json) {
+                System.out.println("generated json: " + result);
+            }
         return result;
     }
 

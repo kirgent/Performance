@@ -221,6 +221,12 @@ public class API {
         if(body.contains("\"status\":\"Failed\"") && body.contains("\"errorMessage\":\"REM-ST-001 Box is not registered\"")){
             result += "REM-ST-001 Box is not registered";
         }
+        if(body.contains("\"status\":\"Failed\"") && body.contains("\"errorMessage\":\"unknown MAC\"")){
+            result += "unknown MAC";
+        }
+        if(body.contains("\"status\":\"Failed\"") && body.contains("\"errorMessage\":\"STB not available\"")){
+            result += "STB not available";
+        }
         if(body.contains("\"status\":\"Failed\"") && body.contains("\"errorMessage\":\"REM-002 Reminders Service error: REM-112\"")){
             result += "REM-002 Reminders Service error: REM-012 [" + mac + "] Request not accomplished";
         }
