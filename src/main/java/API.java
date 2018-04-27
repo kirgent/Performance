@@ -33,19 +33,9 @@ public class API {
 
     enum Operation { add, modify, delete, purge, blablabla }
 
-
-
-    //enum Http { Get, Post, Delete };
-
     //static Logger log = Logger.getLogger(testAMS.class.getName());
     //FileHandler txtFile = new FileHandler ("log.log", true);
     //private FileHandler fh = new FileHandler("test_reminder.log");
-
-    //public void testMiddle_Request(){
-    //curl -vk -X POST -H "Content-Type: application/json"
-    //String charterapiX = "http://specd.partnerapi.engprod-charter.net/api/pub/remindersmiddle/v1/reminders" +
-    //"?deviceId=000007444C77&lineupId=CA11-1"
-    //-d '{"reminderType":"Individual","deliveryId":"49767-MV000209150000-1488390180000","channelId":"49767","programId":"MV000209150000","channelNumber":662,"startTime":1488390180000,"reminderPresetTime":0}'
 
     final String charterapi_a = "http://spec.partnerapi.engprod-charter.net/api/pub";
     final String charterapi_b = "http://specb.partnerapi.engprod-charter.net/api/pub";
@@ -75,8 +65,11 @@ public class API {
     final String boxD111 = "2c7e81ee2530";
     final String boxX = "1";
     final String box4212 = "A0722CEEC9A4";
-    String mac = boxD102;
 
+    final String boxMoto2145_173 =  "000004B9419F"; //"B077AC5D91DD"; // "000004B9419F"; //Moto_2145_Mondo_DCX3200M_17.3_346
+
+    final String boxMoto2147_Rems = "20E56450FB2A"; //000004d67f70"; //Moto_2147_Mondo_DCX3200M_REMS
+    String mac = boxD102;
 
     //DATES
     final String reminderProgramStart_past = "2000-01-01";
@@ -86,8 +79,6 @@ public class API {
 
     ArrayList reminderScheduleId_list = new ArrayList();
     ArrayList reminderId_list = new ArrayList();
-    //ArrayList<Long> reminderScheduleId_list;
-    //ArrayList<Long> reminderId_list;
 
     //CHANNELS
     final int reminderChannelNumber = reminderChannelNumber();
@@ -101,20 +92,13 @@ public class API {
 
     @Deprecated
     final String reminderProgramId = "EP002960010113";
-    //String reminderProgramId = "0";
-    String reminderProgramId_empty;
 
     String reminderProgramStart = reminderProgramStart();
 
     int reminderOffset = reminderOffset();
     int reminderOffset_new = reminderOffset();
-    int reminderOffset_null;
-
     long reminderScheduleId = reminderScheduleId();
-    long reminderScheduleId_null;
-
     long reminderId = reminderId();
-    long reminderId_null;
 
     int count = 2;
 
@@ -217,6 +201,9 @@ public class API {
             //log.warning("one or more statusCode's = " + statuscode[5]);
             System.out.println("! one or more statusCode's = " + statuscode[5]);
             result += "5";
+        }
+        if(body.contains("\"status\":\"Failed\"") && body.contains("\"errorMessage\":\"Request not accomplished\"")){
+            result += "Request not accomplished";
         }
         if(body.contains("\"status\":\"Failed\"") && body.contains("\"errorMessage\":\"REM-ST-001 Box is not registered\"")){
             result += "REM-ST-001 Box is not registered";
@@ -435,7 +422,7 @@ public class API {
         return Math.abs(new Random().nextInt(1000));
     }
 
-    private int reminderOffset() {
+    int reminderOffset() {
         return Math.abs(new Random().nextInt(1000));
     }
 
