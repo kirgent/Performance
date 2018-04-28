@@ -1,3 +1,5 @@
+package tv.zodiac.dev;
+
 import org.junit.jupiter.api.RepeatedTest;
 import org.junit.jupiter.api.Test;
 
@@ -6,15 +8,16 @@ import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-
 /**
- * We are as Middle: chain of requests: localhost -> AMS -> box -> AMS -> localhost (Middle)
+ * We are Middle(Headend): full chain of requests: localhost(Middle) -> AMS -> STB -> AMS -> localhost(Middle)
  */
 class testAMS_Reminder_Delete extends API {
 
     private API_AMS AMS = new API_AMS();
+    final private int countrepeat = 10;
+    final private int count = 2;
 
-    @RepeatedTest(10)
+    @RepeatedTest(countrepeat)
     void testDelete() throws IOException {
         ArrayList actual;
         actual = AMS.Request(mac, Operation.add, count, reminderProgramStart, reminderChannelNumber, reminderProgramId, reminderOffset, reminderScheduleId, reminderId);
@@ -44,7 +47,7 @@ class testAMS_Reminder_Delete extends API {
     }
 
     @Test
-    void testDelete_mac_empty() throws IOException {
+    void testDelete_macaddress_empty() throws IOException {
         //todo
         int count = 1;
         ArrayList actual = AMS.Request("", Operation.delete, count, reminderScheduleId, reminderId);
@@ -53,7 +56,7 @@ class testAMS_Reminder_Delete extends API {
     }
 
     @Test
-    void testDelete_mac_wrong() throws IOException {
+    void testDelete_macaddress_wrong() throws IOException {
         //todo
         int count = 1;
         ArrayList actual = AMS.Request(mac_wrong, Operation.delete, count, reminderScheduleId, reminderId);
@@ -70,9 +73,6 @@ class testAMS_Reminder_Delete extends API {
         assertEquals("4", actual.get(1));
     }
 
-    /** 4 - reminder is unknown. Applies to "Reminders Delete" request (Request ID=1) and "Reminders Modify" request (Request ID=2)
-     * @throws IOException - TBD
-     */
     @Test
     void testDelete_reminderId_empty() throws IOException {
         //todo
@@ -82,7 +82,7 @@ class testAMS_Reminder_Delete extends API {
         assertEquals("name cannot be null", actual.get(1));
     }
 
-    @RepeatedTest(10)
+    @RepeatedTest(countrepeat)
     void testDelete_reminderId_MAX_VALUE() throws IOException {
         //todo
         int count = 1;
@@ -144,7 +144,7 @@ class testAMS_Reminder_Delete extends API {
         assertEquals("name cannot be null", actual.get(1));
     }
 
-    @RepeatedTest(10)
+    @RepeatedTest(countrepeat)
     void testDelete_reminderScheduleId_MAX_VALUE() throws IOException {
         //todo
         int count = 1;
@@ -158,7 +158,7 @@ class testAMS_Reminder_Delete extends API {
         assertEquals("", actual.get(1));
     }
 
-    @RepeatedTest(10)
+    @RepeatedTest(countrepeat)
     void testDelete_reminderScheduleId_MAX_VALUE_reminderId_MAX_VALUE() throws IOException {
         //todo
         int count = 1;

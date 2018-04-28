@@ -1,3 +1,5 @@
+package tv.zodiac.dev;
+
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.RepeatedTest;
 
@@ -13,7 +15,7 @@ class testAMS_Reminder_Add_Modify_Delete_Purge extends API {
 
     private API_AMS AMS = new API_AMS();
     final private int countrepeat = 10;
-    final private int count = 10;
+    final private int count = 1;
 
     @RepeatedTest(countrepeat)
     void test1_Add() throws IOException {
@@ -21,6 +23,7 @@ class testAMS_Reminder_Add_Modify_Delete_Purge extends API {
         actual = AMS.Request(mac, Operation.add, count, reminderProgramStart, reminderChannelNumber, reminderProgramId, reminderOffset, reminderScheduleId, reminderId);
         assertEquals(expected200, actual.get(0));
         assertEquals("", actual.get(1));
+        //System.out.println("[DBG] average add time: " + get_average_time(list_add_time));
     }
 
     @RepeatedTest(countrepeat)
@@ -68,5 +71,6 @@ class testAMS_Reminder_Add_Modify_Delete_Purge extends API {
         ArrayList actual = AMS.Request(mac, Operation.purge);
         assertEquals(expected200, actual.get(0));
         assertEquals("", actual.get(1));
+        //System.out.println("[DBG] average purge time:" + get_average_time(list_purge_time));
     }
 }

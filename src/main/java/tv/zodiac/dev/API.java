@@ -1,3 +1,5 @@
+package tv.zodiac.dev;
+
 import org.apache.http.HttpResponse;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
@@ -24,7 +26,8 @@ public class API {
 
     Boolean show_extra_info = false;
     Boolean show_generated_json = true;
-    private Boolean show_response_body = true;
+    Boolean show_response_body = true;
+    Boolean count_average = true;
 
     @Rule
     final public Timeout globalTimeout = Timeout.seconds(20);
@@ -53,7 +56,7 @@ public class API {
 
     final String mac_wrong = "123456789012";
     final String boxD101 = "A0722CEEC970"; //WB20 D101 ???
-    final String boxD102 = "3438B7EB2E24"; //WB20 D102
+    static final String boxD102 = "3438B7EB2E24"; //WB20 D102
     final String boxD103 = "3438B7EB2E28"; //WB20 D103
     final String boxD104 = "3438B7EB2E34"; //WB20 D104
     final String boxD105 = "3438B7EB2E30"; //WB20 D105
@@ -65,20 +68,22 @@ public class API {
     final String boxD111 = "2c7e81ee2530";
     final String boxX = "1";
     final String box4212 = "A0722CEEC9A4";
-
     final String boxMoto2145_173 =  "000004B9419F"; //"B077AC5D91DD"; // "000004B9419F"; //Moto_2145_Mondo_DCX3200M_17.3_346
+    final String boxMoto2147_Rems = "000004D67F70"; //000004d67f70"; //Moto_2147_Mondo_DCX3200M_REMS
 
-    final String boxMoto2147_Rems = "20E56450FB2A"; //000004d67f70"; //Moto_2147_Mondo_DCX3200M_REMS
-    String mac = boxD102;
+    String mac = boxMoto2147_Rems;
 
     //DATES
-    final String reminderProgramStart_past = "2000-01-01";
     final String reminderProgramStart_wrong = "0000-00-00";
     final String reminderProgramStart_text = "yyyy-mm-dd";
-    //String[] rack_date = {"2018-03-15"};
 
     ArrayList reminderScheduleId_list = new ArrayList();
     ArrayList reminderId_list = new ArrayList();
+    ArrayList list_add_time = new ArrayList();
+    ArrayList list_modify_time = new ArrayList();
+    ArrayList list_delete_time = new ArrayList();
+    ArrayList list_purge_time = new ArrayList();
+    //List<Long> list_add_time = new ArrayList();
 
     //CHANNELS
     final int reminderChannelNumber = reminderChannelNumber();
@@ -90,7 +95,7 @@ public class API {
             32, 33, 37, 38, 41, 44, 46, 48, 49, 50 };*/
     Integer[] rack_channel = {2, 3, 4, 5, 6, 7, 8, 9, 10, 11};
 
-    @Deprecated
+    //@Deprecated
     final String reminderProgramId = "EP002960010113";
 
     String reminderProgramStart = reminderProgramStart();
@@ -114,6 +119,48 @@ public class API {
     //String ams_ip = "172.30.112.19";
     //String ams_ip = "172.30.82.132";
     int ams_port = 8080;
+
+    long get_average_time(ArrayList list_time) {
+        long average = 0;
+        if (list_time.size() > 0) {
+            long sum = 0;
+            for (int j = 0; j < list_time.size(); j++) {
+                //System.out.println("[DBG] list_time.get(" + j + ")=" + list_time.get(j));
+                sum = sum + (Long)list_time.get(j);
+            }
+            average = sum / list_time.size();
+        }
+        //System.out.println("[DBG] average=" + average);
+        return average;
+    }
+
+    long get_min_time(ArrayList list_time) {
+        long average = 0;
+        if (list_time.size() > 0) {
+            long sum = 0;
+            for (int j = 0; j < list_time.size(); j++) {
+                //System.out.println("[DBG] list_time.get(" + j + ")=" + list_time.get(j));
+                sum = sum + (Long)list_time.get(j);
+            }
+            average = sum / list_time.size();
+        }
+        //System.out.println("[DBG] average=" + average);
+        return average;
+    }
+
+    long get_max_time(ArrayList list_time) {
+        long average = 0;
+        if (list_time.size() > 0) {
+            long sum = 0;
+            for (int j = 0; j < list_time.size(); j++) {
+                //System.out.println("[DBG] list_time.get(" + j + ")=" + list_time.get(j));
+                sum = sum + (Long)list_time.get(j);
+            }
+            average = sum / list_time.size();
+        }
+        //System.out.println("[DBG] average=" + average);
+        return average;
+    }
 
     @Deprecated
     String generate_json_test(String date, int count_remindres, String operation, int reminderOffset) {
@@ -418,7 +465,7 @@ public class API {
         return pattern.format(calendar.getTime());
     }
 
-    private int reminderChannelNumber() {
+    int reminderChannelNumber() {
         return Math.abs(new Random().nextInt(1000));
     }
 

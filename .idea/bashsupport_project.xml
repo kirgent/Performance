@@ -6,7 +6,6 @@
         <option value="ams_ip" />
         <option value="ams_port" />
         <option value="channel" />
-        <option value="count_iterations" />
         <option value="curlwrap" />
         <option value="data" />
         <option value="i" />

@@ -1,3 +1,5 @@
+package tv.zodiac.dev;
+
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpPost;
@@ -28,7 +30,7 @@ class API_AMS extends API{
      * @return arrayList
      * @throws IOException -TBD
      */
-    ArrayList Request(String mac, Enum<Operation> operation, int count, String reminderProgramStart, int reminderChannelNumber, String reminderProgramId, int reminderOffset, long reminderScheduleId, long reminderId) throws IOException {
+    ArrayList Request(String mac, Enum<Operation> operation, int count, String reminderProgramStart, long reminderChannelNumber, String reminderProgramId, long reminderOffset, long reminderScheduleId, long reminderId) throws IOException {
         if(show_extra_info) {
             if(count>1){
                 System.out.println(operation + " for macaddress=" + mac + " to ams_ip=" + ams_ip + ", "
@@ -60,11 +62,23 @@ class API_AMS extends API{
         long start = System.currentTimeMillis();
         HttpResponse response = HttpClients.createDefault().execute(request);
         long finish = System.currentTimeMillis();
-        System.out.print("[DBG] " + (finish-start) + "ms request");
+        long diff = finish - start;
+        System.out.print("[DBG] " + diff + "ms request");
 
         ArrayList arrayList = new ArrayList();
         arrayList.add(0, response.getStatusLine().getStatusCode() + " " + response.getStatusLine().getReasonPhrase());
         arrayList.add(1, check_body_response(read_response(new StringBuilder(),response).toString(), mac));
+        if(count_average) {
+            if (arrayList.get(1).equals("")) {
+                if (operation.name().equals("add")) {
+                    list_add_time.add(diff);
+                    System.out.println("[DBG] average=" + get_average_time(list_add_time) + "ms for size=" + list_add_time.size());
+                } else if (operation.name().equals("modify")) {
+                    list_modify_time.add(diff);
+                    System.out.println("[DBG] average=" + get_average_time(list_modify_time) + "ms for size=" + list_modify_time.size());
+                }
+            }
+        }
         System.out.println("[DBG] return codes: " + arrayList + "\n");
         return arrayList;
     }
@@ -98,11 +112,18 @@ class API_AMS extends API{
         long start = System.currentTimeMillis();
         HttpResponse response = HttpClients.createDefault().execute(request);
         long finish = System.currentTimeMillis();
-        System.out.print("[DBG] " + (finish-start) + "ms request");
+        long diff = finish - start;
+        System.out.print("[DBG] " + diff + "ms request");
 
         ArrayList arrayList = new ArrayList();
         arrayList.add(0, response.getStatusLine().getStatusCode() + " " + response.getStatusLine().getReasonPhrase());
         arrayList.add(1, check_body_response(read_response(new StringBuilder(),response).toString(), mac));
+        if(count_average) {
+            if (arrayList.get(1).equals("")) {
+                list_delete_time.add(diff);
+                System.out.print("[DBG] average=" + get_average_time(list_delete_time) + "ms for size=" + list_delete_time.size());
+            }
+        }
         System.out.println("[DBG] return codes: " + arrayList + "\n");
         return arrayList;
     }
@@ -127,12 +148,18 @@ class API_AMS extends API{
         long start = currentTimeMillis();
         HttpResponse response = HttpClients.createDefault().execute(request);
         long finish = currentTimeMillis();
-        System.out.print("[DBG] " + (finish - start) + "ms request");
-        //"[DBG] Response getStatusLine: " + response.getStatusLine());
+        long diff = finish - start;
+        System.out.print("[DBG] " + diff + "ms request");
 
         ArrayList arrayList = new ArrayList();
         arrayList.add(0, response.getStatusLine().getStatusCode() + " " + response.getStatusLine().getReasonPhrase());
         arrayList.add(1, check_body_response(read_response(new StringBuilder(),response).toString(), mac));
+        if(count_average) {
+            if (arrayList.get(1).equals("")) {
+                list_purge_time.add(diff);
+                System.out.print("[DBG] average=" + get_average_time(list_purge_time) + "ms for size=" + list_purge_time.size());
+            }
+        }
         System.out.println("[DBG] return codes: " + arrayList + "\n");
         return arrayList;
     }
@@ -226,7 +253,7 @@ class API_AMS extends API{
         return result;
     }
 
-    private String generate_json_reminder(String mac, int count, Enum<Operation> operation, String reminderProgramStart, int reminderChannelNumber, String reminderProgramId, int reminderOffset, long reminderScheduleId, long reminderId) {
+    private String generate_json_reminder(String mac, int count, Enum<Operation> operation, String reminderProgramStart, long reminderChannelNumber, String reminderProgramId, long reminderOffset, long reminderScheduleId, long reminderId) {
         if (count < 0) { count = 0; }
         if (count > 1440) { count = 1440; }
 
@@ -506,13 +533,6 @@ class API_AMS extends API{
         return "http://" + ams_ip + ":" + ams_port + "/ams/Reminders?req=" + operation;
     }
 
-    /** method for change settings on AMS
-     * @param mac
-     * @param option
-     * @param value
-     * @return
-     * @throws IOException
-     */
     ArrayList Change_settings(String mac, String option, String value) throws IOException {
         System.out.println("Change settings for macaddress=" + mac + ", ams_ip=" + ams_ip + " option=" + option + ", value=" + value);
         HttpPost request = new HttpPost("http://" + ams_ip + ":" + ams_port + "/ams/settings");

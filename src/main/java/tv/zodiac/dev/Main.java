@@ -1,13 +1,19 @@
+package tv.zodiac.dev;
+
 import java.io.IOException;
 import java.text.ParseException;
 
-public class Main extends API {
+public class Main {
 
+    private static String macaddress;
+    private static String charterapi;
     private static String operation;
+    private static String ams_ip;
     private static String param;
 
-    private String mac_by_default = "172.30.81.4";
-    private String operation_by_default = "Check";
+    private static String mac_by_default = "172.30.81.4";
+    private static String operation_by_default = "Check";
+    private static int count;
 
     String synopsys="\nNAME" +
             "\n\tReminders - java app for Add/Edit/Delete/Purge reminders and Check AMS/Change AMS registration on mac." +
@@ -28,9 +34,9 @@ public class Main extends API {
             "\n\tReminders mac delete [count] - delete reminders" +
             "\n\tReminders mac all [count]    - add + modify + delete reminders" +
             "\nCURRENT SETTINGS" +
-            "\n\tused AMS: " + ams_ip +
-            "\n\tused charterapi: " + charterapi +
-            "\n\tused count of reminders in one request: " + count +
+            "\n\tused AMS: " +
+            "\n\tused charterapi: " +
+            "\n\tused count of reminders in one request: " +
             //"\n\tused count iterations: " + count_iterations +
             "\nSTATUSCODE" +
             "\n\tcode of the reminder processing result, one of the following:" +
@@ -41,7 +47,7 @@ public class Main extends API {
             "\n\thttps://svn.developonbox.ru/Charter_Docs/Projects/Cloud_Based_Guide/Requirements/APIs/Reminders%20Propagation%20API-v6.docx";
 
 
-    public void main(String args[]) throws IOException, InterruptedException, ParseException {
+    public static void main(String args[]) throws IOException, InterruptedException, ParseException {
 
         /*Logger logger = Logger.getLogger("test_reminder.log");
         FileHandler fh;
@@ -87,10 +93,10 @@ public class Main extends API {
 
         //if (args[0].isEmpty())
         if (args.length >= 1) {
-            mac = args[0];
+            macaddress = args[0];
         }
         else {
-            mac = mac_by_default;
+            macaddress = mac_by_default;
         }
 
 
@@ -144,18 +150,18 @@ public class Main extends API {
             }
         }*/
 
-        System.out.println("[DBG] used mac=" + mac + ", operation=" + operation + ", param=" + param);
+        System.out.println("[DBG] used mac=" + macaddress + ", operation=" + operation + ", param=" + param);
 
         API_Middle Middle = new API_Middle();
 
         switch (operation){
             case "Check":
             case "check":
-                Middle.Check_registration(mac, charterapi);
+                Middle.Check_registration(macaddress, charterapi);
                 break;
             case "Change":
             case "change":
-                Middle.Change_registration(mac, charterapi, ams_ip);
+                Middle.Change_registration(macaddress, charterapi, ams_ip);
                 break;
             case "Purge":
             case "purge":
@@ -174,7 +180,7 @@ public class Main extends API {
             //case "Delete":
             //case "delete": api.Operation("Delete", mac, count, count_iterations, ams_ip_default); break;
             default:
-                Middle.Check_registration(mac, charterapi);
+                Middle.Check_registration(macaddress, charterapi);
         }
     }
 }

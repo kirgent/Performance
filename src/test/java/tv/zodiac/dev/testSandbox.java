@@ -1,3 +1,5 @@
+package tv.zodiac.dev;
+
 import org.junit.Test;
 
 import java.io.IOException;
@@ -59,13 +61,13 @@ public class testSandbox extends API {
     }
 
     @Test
-    public void testOracleDB_Query_mac_empty() throws SQLException, ClassNotFoundException {
+    public void testOracleDB_Query_macaddress_empty() throws SQLException, ClassNotFoundException {
         ArrayList result = AMS.QueryDB(ams_ip, "");
         assertTrue(result.isEmpty());
     }
 
     @Test
-    public void testOracleDB_Query_mac_wrong() throws SQLException, ClassNotFoundException {
+    public void testOracleDB_Query_macaddress_wrong() throws SQLException, ClassNotFoundException {
         ArrayList result = AMS.QueryDB(ams_ip, mac_wrong);
         assertTrue(result.isEmpty());
     }

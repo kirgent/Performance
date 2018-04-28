@@ -1,6 +1,7 @@
 url_modify="ams/Reminders?req=modify"
 
-mac="$1"
+function modify1(){
+macaddress="$1"
 reminderProgramStart="$2"
 reminderChannelNumber="$3"
 reminderProgramId="$4"
@@ -12,11 +13,10 @@ if [ "$show_extra_info" = true ]; then
 echo "[DBG] `date "+%a %b %d %T %N %Z %Y"`: Modify $count_reminders rem(s) in iteration=$i/$count_iterations with reminderProgramStart=$reminderProgramStart, reminderChannelNumber=$reminderChannelNumber, reminderScheduleId=$reminderScheduleId, reminderId=$reminderId"|$logwrap
 fi
 
-function modify1(){
 #/usr/bin/time -f 'real %Es' -o $logfile -a $curlwrap 'http://'$ams_ip':'$ams_port'/'url_modify'' -H 'Content-type: application/json' \
 /usr/bin/time -f 'real %Es' -o ${logfile} -a ${curlwrap} -s 'http://'${ams_ip}':'${ams_port}'/'${url_modify}'' -H 'Content-type: application/json' \
 -d '{
-"deviceId": '${mac}',
+"deviceId": '${macaddress}',
 "reminders": [
 { "reminderProgramStart": "'${reminderProgramStart}' 00:00", "reminderChannelNumber": '${reminderChannelNumber}', "reminderProgramId": '${reminderProgramId}', "reminderScheduleId":'${reminderScheduleId}', "reminderId":'${reminderId}', "reminderOffset": '${reminderOffset_new}'}]}'
 echo;echo
@@ -25,7 +25,7 @@ echo;echo
 function modify48(){
 /usr/bin/time -f 'real %Es' -o ${logfile} -a ${curlwrap} 'http://'$ams_ip':'$ams_port'/'$url_modify'' -H 'Content-type: application/json' \
 -d '{
-"deviceId": '${mac}',
+"deviceId": '${macaddress}',
 "reminders": [
  { "reminderProgramStart": "'$reminderProgramStart' 00:00", "reminderChannelNumber": '$reminderChannelNumber', "reminderProgramId": '$reminderProgramId', "reminderScheduleId":'$reminderScheduleId', "reminderId":'$reminderId', "reminderOffset": '$reminderOffset_new' },
  { "reminderProgramStart": "'$reminderProgramStart' 00:30", "reminderChannelNumber": '$reminderChannelNumber', "reminderProgramId": '$reminderProgramId', "reminderScheduleId":'$reminderScheduleId', "reminderId":'$reminderId', "reminderOffset": '$reminderOffset_new' },
@@ -82,7 +82,7 @@ echo;echo
 function modify288(){
 /usr/bin/time -f 'real %Es' -o ${logfile} -a ${curlwrap} 'http://'$ams_ip':'$ams_port'/'$url_modify'' -H 'Content-type: application/json' \
 -d '{
-"deviceId": '${mac}',
+"deviceId": '${macaddress}',
 "reminders": [
  { "reminderProgramStart": "'$reminderProgramStart' 00:00", "reminderChannelNumber": '$reminderChannelNumber', "reminderProgramId": '$reminderProgramId', "reminderScheduleId":'$reminderScheduleId', "reminderId":'$reminderId', "reminderOffset": '$reminderOffset_new' },
  { "reminderProgramStart": "'$reminderProgramStart' 00:05", "reminderChannelNumber": '$reminderChannelNumber', "reminderProgramId": '$reminderProgramId', "reminderScheduleId":'$reminderScheduleId', "reminderId":'$reminderId', "reminderOffset": '$reminderOffset_new' },
@@ -379,7 +379,7 @@ echo;echo
 function modify720(){
 /usr/bin/time -f 'real %Es' -o ${logfile} -a ${curlwrap} 'http://'$ams_ip':'$ams_port'/'$url_modify'' -H 'Content-type: application/json' \
 -d '{
-"deviceId": '${mac}',
+"deviceId": '${macaddress}',
 "reminders": [
  { "reminderProgramStart": "'$reminderProgramStart' 00:00", "reminderChannelNumber": '$reminderChannelNumber', "reminderProgramId": '$reminderProgramId', "reminderScheduleId":'$reminderScheduleId', "reminderId":'$reminderId', "reminderOffset": '$reminderOffset_new' },
  { "reminderProgramStart": "'$reminderProgramStart' 00:02", "reminderChannelNumber": '$reminderChannelNumber', "reminderProgramId": '$reminderProgramId', "reminderScheduleId":'$reminderScheduleId', "reminderId":'$reminderId', "reminderOffset": '$reminderOffset_new' },
