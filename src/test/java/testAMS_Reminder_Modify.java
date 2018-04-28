@@ -213,11 +213,13 @@ class testAMS_Reminder_Modify extends API {
     }
 
     @RepeatedTest(10)
-    void testModify_reminderProgramStart_empty() throws IOException {
+    void testModify_reminderProgramStart_empty() throws IOException, InterruptedException {
         ArrayList actual;
         actual = AMS.Request(mac, Operation.add, count, reminderProgramStart, reminderChannelNumber, reminderProgramId, reminderOffset, reminderScheduleId, reminderId);
         assertEquals(expected200, actual.get(0));
         assertEquals("", actual.get(1));
+
+        Thread.sleep(10000);
         //todo!!!
         //int count = 1;
         actual = AMS.Request(mac, Operation.modify, count, "", reminderChannelNumber, reminderProgramId, reminderOffset, reminderScheduleId, reminderId);

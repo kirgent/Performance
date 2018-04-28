@@ -28,7 +28,7 @@ class testAMS_Reminder_Add extends API {
         ArrayList actual = AMS.Request(mac, Operation.add, count, reminderProgramStart, reminderChannelNumber, reminderProgramId, reminderOffset, reminderScheduleId, reminderId);
         assertEquals(expected200, actual.get(0));
         assertEquals("", actual.get(1));
-        testPurge();
+        //testPurge();
     }
 
     @Test

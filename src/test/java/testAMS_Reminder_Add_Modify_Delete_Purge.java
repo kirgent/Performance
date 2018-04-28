@@ -13,7 +13,7 @@ class testAMS_Reminder_Add_Modify_Delete_Purge extends API {
 
     private API_AMS AMS = new API_AMS();
     final private int countrepeat = 10;
-    final private int count = 1440;
+    final private int count = 10;
 
     @RepeatedTest(countrepeat)
     void test1_Add() throws IOException {
