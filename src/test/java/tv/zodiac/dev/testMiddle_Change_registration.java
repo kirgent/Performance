@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import static org.junit.Assert.assertEquals;
 
 /**
- * We are as Middle: chain of requests: localhost -> AMS -> box -> AMS -> localhost (Middle)
+ * We are Headend (on localhost): chain of requests: localhost -> AMS -> STB -> AMS -> localhost
  */
 public class testMiddle_Change_registration extends API_Middle {
 

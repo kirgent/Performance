@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 /**
- * We are Middle(Headend): full chain of requests: localhost(Middle) -> AMS -> STB -> AMS -> localhost(Middle)
+ * We are Headend (on localhost): chain of requests: localhost -> AMS -> STB -> AMS -> localhost
  */
 class testAMS_Reminder_Delete extends API {
 

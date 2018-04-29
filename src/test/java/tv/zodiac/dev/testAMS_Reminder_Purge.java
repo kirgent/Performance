@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import static org.junit.Assert.assertEquals;
 
 /**
- * We are as Middle: chain of requests: localhost -> AMS -> box -> AMS -> localhost (Middle)
+ * We are Headend (on localhost): chain of requests: localhost -> AMS -> STB -> AMS -> localhost
  */
 class testAMS_Reminder_Purge extends API {
 

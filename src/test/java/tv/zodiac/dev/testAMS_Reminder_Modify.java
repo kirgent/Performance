@@ -9,6 +9,9 @@ import java.util.ArrayList;
 
 import static org.junit.Assert.assertEquals;
 
+/**
+ * We are Headend (on localhost): chain of requests: localhost -> AMS -> STB -> AMS -> localhost
+ */
 class testAMS_Reminder_Modify extends API {
     //"reminderChannelNumber": <new value for the DCN the reminder is set to>,
     //"reminderProgramStart": "<new value for the date/time of program the reminder is set to>",
