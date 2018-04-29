@@ -50,6 +50,13 @@ class testAMS_Reminder_Add extends API {
     }
 
     @Test
+    void testAdd_macaddress_wrong_unknown_MAC() throws IOException {
+        ArrayList actual = AMS.Request(mac_wrong, Operation.add, count, reminderProgramStart, reminderChannelNumber, reminderProgramId, reminderOffset, reminderScheduleId, reminderId);
+        assertEquals(expected200, actual.get(0));
+        assertEquals("unknown MAC", actual.get(1));
+    }
+
+    @Test
     void testAdd_macaddress_wrong() throws IOException {
         ArrayList actual = AMS.Request(mac_wrong, Operation.add, count, reminderProgramStart, reminderChannelNumber, reminderProgramId, reminderOffset, reminderScheduleId, reminderId);
         assertEquals(expected200, actual.get(0));

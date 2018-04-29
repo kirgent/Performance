@@ -24,7 +24,7 @@ import static java.lang.System.currentTimeMillis;
  */
 public class API {
 
-    Boolean show_extra_info = false;
+    Boolean show_extra_info = true;
     Boolean show_generated_json = true;
     Boolean show_response_body = true;
     Boolean count_average = true;
@@ -79,11 +79,10 @@ public class API {
 
     ArrayList reminderScheduleId_list = new ArrayList();
     ArrayList reminderId_list = new ArrayList();
-    ArrayList list_add_time = new ArrayList();
-    ArrayList list_modify_time = new ArrayList();
-    ArrayList list_delete_time = new ArrayList();
-    ArrayList list_purge_time = new ArrayList();
-    //List<Long> list_add_time = new ArrayList();
+    ArrayList<Integer> add_list = new ArrayList<>();
+    ArrayList<Integer> modify_list = new ArrayList<>();
+    ArrayList<Integer> delete_list = new ArrayList<>();
+    ArrayList<Integer> purge_list = new ArrayList<>();
 
     //CHANNELS
     final int reminderChannelNumber = reminderChannelNumber();
@@ -120,46 +119,43 @@ public class API {
     //String ams_ip = "172.30.82.132";
     int ams_port = 8080;
 
-    long get_average_time(ArrayList list_time) {
-        long average = 0;
-        if (list_time.size() > 0) {
-            long sum = 0;
-            for (int j = 0; j < list_time.size(); j++) {
+    int get_average_time(ArrayList list) {
+        int average = 0;
+        if (list.size() > 0) {
+            int sum = 0;
+            for (int j = 0; j < list.size(); j++) {
                 //System.out.println("[DBG] list_time.get(" + j + ")=" + list_time.get(j));
-                sum = sum + (Long)list_time.get(j);
+                sum = sum + (int)list.get(j);
             }
-            average = sum / list_time.size();
+            average = sum / list.size();
         }
         //System.out.println("[DBG] average=" + average);
         return average;
     }
 
-    long get_min_time(ArrayList list_time) {
-        long average = 0;
-        if (list_time.size() > 0) {
-            long sum = 0;
-            for (int j = 0; j < list_time.size(); j++) {
-                //System.out.println("[DBG] list_time.get(" + j + ")=" + list_time.get(j));
-                sum = sum + (Long)list_time.get(j);
+    long get_min_time(ArrayList list) {
+        int min = 0;
+        if (list.size() > 0) {
+            min = (int)list.get(0);
+            for (int j = 0; j < list.size(); j++) {
+                if ((int)list.get(j) < min) {
+                    min = (int) list.get(j);
+                }
             }
-            average = sum / list_time.size();
         }
-        //System.out.println("[DBG] average=" + average);
-        return average;
+        return min;
     }
 
-    long get_max_time(ArrayList list_time) {
-        long average = 0;
-        if (list_time.size() > 0) {
-            long sum = 0;
-            for (int j = 0; j < list_time.size(); j++) {
-                //System.out.println("[DBG] list_time.get(" + j + ")=" + list_time.get(j));
-                sum = sum + (Long)list_time.get(j);
+    long get_max_time(ArrayList list) {
+        int max = 0;
+        if (list.size() > 0) {
+            for (int j = 0; j < list.size(); j++) {
+                if ((int)list.get(j) > max) {
+                    max = (int) list.get(j);
+                }
             }
-            average = sum / list_time.size();
         }
-        //System.out.println("[DBG] average=" + average);
-        return average;
+        return max;
     }
 
     @Deprecated
@@ -330,7 +326,9 @@ public class API {
         if(body.contains("responseCode\":\"ERROR_SCHEDULING_REMINDER")){
             result += "ERROR_SCHEDULING_REMINDER";
         }
-
+        //if(Objects.equals(result, "")){
+            //result = " ";
+        //}
         //System.out.println("[DBG] check_body_for_statuscode: result: " + result);
         return result;
     }
@@ -473,16 +471,6 @@ public class API {
         return Math.abs(new Random().nextInt(1000));
     }
 
-    long reminderScheduleId(){
-        Random random = new Random();
-        long reminderScheduleId = Math.abs(random.nextLong());
-        reminderScheduleId_list.add(reminderScheduleId);
-        if(show_extra_info) {
-            System.out.println("add->reminderScheduleId_list=" + reminderScheduleId);
-        }
-        return reminderScheduleId;
-    }
-
     void printArrayList(ArrayList list){
         if(list != null)
         {
@@ -501,13 +489,23 @@ public class API {
         return true;
     }
 
+    long reminderScheduleId(){
+        Random random = new Random();
+        long reminderScheduleId = Math.abs(random.nextLong());
+        reminderScheduleId_list.add(reminderScheduleId);
+        //if(show_extra_info) {
+            //System.out.println("reminderScheduleId_list<-add=" + reminderScheduleId);
+        //}
+        return reminderScheduleId;
+    }
+
     long reminderId(){
         Random random = new Random();
         long reminderId = Math.abs(random.nextLong());
         reminderId_list.add(reminderId);
-        if(show_extra_info) {
-            System.out.println("add->reminderId_list=" + reminderId);
-        }
+        //if(show_extra_info) {
+            //System.out.println("reminderId_list<-add        =" + reminderId);
+        //}
         return reminderId;
     }
 

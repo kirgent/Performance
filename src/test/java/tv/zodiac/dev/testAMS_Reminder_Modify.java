@@ -24,7 +24,7 @@ class testAMS_Reminder_Modify extends API {
     final private int countrepeat = 10;
     final private int count = 2;
 
-    @RepeatedTest(countrepeat)
+    @RepeatedTest(1)
     void testModify() throws IOException {
         ArrayList actual;
         actual = AMS.Request(mac, Operation.add, count, reminderProgramStart, reminderChannelNumber, reminderProgramId, reminderOffset, reminderScheduleId, reminderId);

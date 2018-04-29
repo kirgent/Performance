@@ -56,6 +56,15 @@ class testAMS_Reminder_Delete extends API {
     }
 
     @Test
+    void testDelete_macaddress_wrong_unknown_MAC() throws IOException {
+        //todo
+        int count = 1;
+        ArrayList actual = AMS.Request(mac_wrong, Operation.delete, count, reminderScheduleId, reminderId);
+        assertEquals(expected200, actual.get(0));
+        assertEquals("unknown MAC", actual.get(1));
+    }
+
+    @Test
     void testDelete_macaddress_wrong() throws IOException {
         //todo
         int count = 1;
