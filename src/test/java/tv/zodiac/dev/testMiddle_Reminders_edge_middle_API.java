@@ -1,8 +1,6 @@
 package tv.zodiac.dev;
 
-import org.junit.Rule;
 import org.junit.Test;
-import org.junit.rules.Timeout;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -13,9 +11,6 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
  * We are Headend (on localhost): chain of requests: localhost -> AMS -> STB -> AMS -> localhost
  */
 public class testMiddle_Reminders_edge_middle_API extends API_Middle {
-
-    @Rule
-    final public Timeout globalTimeout = Timeout.seconds(600);
 
     private API_Middle Middle = new API_Middle();
 

@@ -21,8 +21,8 @@ class testAMS_Reminder_Add extends API {
     //"reminderId": "<episode or Individual program reminder reference ID of a particular schedule>",
 
     private API_AMS AMS = new API_AMS();
-    final private int countrepeat = 10;
-    final private int count = 2;
+    final private int countrepeat = 1;
+    final private int count = 1;
 
     /** common test for Adding
      * @throws IOException - TBD

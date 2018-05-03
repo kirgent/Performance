@@ -3,8 +3,6 @@ package tv.zodiac.dev;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
-import org.junit.Rule;
-import org.junit.rules.Timeout;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -24,13 +22,9 @@ import static java.lang.System.currentTimeMillis;
  */
 public class API {
 
-    Boolean show_extra_info = false;
-    Boolean show_generated_json = false;
-    Boolean show_response_body = false;
-    Boolean count_average = true;
-
-    @Rule
-    final public Timeout globalTimeout = Timeout.seconds(20);
+    Boolean show_extra_info = true;
+    Boolean show_generated_json = true;
+    Boolean show_response_body = true;
 
     //private final static Logger log = Logger.getLogger(API.class.getName());
 

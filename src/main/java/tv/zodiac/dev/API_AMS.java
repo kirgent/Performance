@@ -61,41 +61,39 @@ class API_AMS extends API{
 
         long start = System.currentTimeMillis();
         HttpResponse response = HttpClients.createDefault().execute(request);
-        long finish = System.currentTimeMillis();
-        long diff = finish - start;
+        long diff = System.currentTimeMillis() - start;
         System.out.print("[DBG] " + diff + "ms request");
 
         ArrayList arrayList = new ArrayList();
         arrayList.add(0, response.getStatusLine().getStatusCode() + " " + response.getStatusLine().getReasonPhrase());
         arrayList.add(1, check_body_response(read_response(new StringBuilder(),response).toString(), mac));
-        if(count_average) {
-            if (arrayList.get(1).equals("")) {
-                if (operation.name().equals("add")) {
-                    add_list.add((int)diff);
-                    int avg = (int)get_average_time(add_list);
-                    arrayList.add(2, (avg + "ms/" + add_list.size()));
-                    arrayList.add(3, get_min_time(add_list));
-                    arrayList.add(4, get_max_time(add_list));
-                    if(show_extra_info) {
-                        System.out.println("[DBG] average add=" + avg + "ms/" + add_list.size() + ": add_list:" + add_list);
-                    }
-                } else if (operation.name().equals("modify")) {
-                    modify_list.add((int)diff);
-                    int avg = (int)get_average_time(modify_list);
-                    arrayList.add(2, (avg + "ms/" + modify_list.size()));
-                    arrayList.add(3, get_min_time(modify_list));
-                    arrayList.add(4, get_max_time(modify_list));
-                    if(show_extra_info) {
-                        System.out.println("[DBG] average modify=" + avg + "ms/" + modify_list.size() + ": modify_list:" + modify_list);
-                    }
+        if (arrayList.get(1).equals("")) {
+            if (operation.name().equals("add")) {
+                add_list.add((int)diff);
+                int avg = get_average_time(add_list);
+                arrayList.add(2, (avg + "ms/" + add_list.size()));
+                arrayList.add(3, get_min_time(add_list));
+                arrayList.add(4, get_max_time(add_list));
+                if(show_extra_info) {
+                    System.out.println("[DBG] average add=" + avg + "ms/" + add_list.size() + ": add_list:" + add_list);
+                }
+            } else if (operation.name().equals("modify")) {
+                modify_list.add((int)diff);
+                int avg = get_average_time(modify_list);
+                arrayList.add(2, (avg + "ms/" + modify_list.size()));
+                arrayList.add(3, get_min_time(modify_list));
+                arrayList.add(4, get_max_time(modify_list));
+                if(show_extra_info) {
+                    System.out.println("[DBG] average modify=" + avg + "ms/" + modify_list.size() + ": modify_list:" + modify_list);
                 }
             }
         }
 
-        if(!arrayList.get(1).equals("")){
-            reminderScheduleId_list.clear();
-            reminderId_list.clear();
-        }
+        //todo is NEEDED???
+        //if(!arrayList.get(1).equals("")){
+            //reminderScheduleId_list.clear();
+            //reminderId_list.clear();
+        //}
         System.out.println("[DBG] return codes: " + arrayList + "\n");
         return arrayList;
     }
@@ -128,22 +126,19 @@ class API_AMS extends API{
 
         long start = System.currentTimeMillis();
         HttpResponse response = HttpClients.createDefault().execute(request);
-        long finish = System.currentTimeMillis();
-        long diff = finish - start;
+        long diff = System.currentTimeMillis() - start;
         System.out.print("[DBG] " + diff + "ms request");
 
         ArrayList arrayList = new ArrayList();
         arrayList.add(0, response.getStatusLine().getStatusCode() + " " + response.getStatusLine().getReasonPhrase());
         arrayList.add(1, check_body_response(read_response(new StringBuilder(),response).toString(), mac));
-        if(count_average) {
-            if (arrayList.get(1).equals("")) {
-                delete_list.add((int)diff);
-                int avg = get_average_time(delete_list);
-                arrayList.add(2, avg + "ms/" + delete_list.size());
-                arrayList.add(3, get_min_time(delete_list));
-                arrayList.add(4, get_max_time(delete_list));
-                System.out.println("[DBG] average delete=" + avg + "ms/" + delete_list.size() + ": delete_list:" + delete_list);
-            }
+        if (arrayList.get(1).equals("")) {
+            delete_list.add((int)diff);
+            int avg = get_average_time(delete_list);
+            arrayList.add(2, avg + "ms/" + delete_list.size());
+            arrayList.add(3, get_min_time(delete_list));
+            arrayList.add(4, get_max_time(delete_list));
+            System.out.println("[DBG] average delete=" + avg + "ms/" + delete_list.size() + ": delete_list:" + delete_list);
         }
         System.out.println("[DBG] return codes: " + arrayList + "\n");
         return arrayList;
@@ -168,22 +163,19 @@ class API_AMS extends API{
 
         long start = currentTimeMillis();
         HttpResponse response = HttpClients.createDefault().execute(request);
-        long finish = currentTimeMillis();
-        long diff = finish - start;
+        long diff = System.currentTimeMillis() - start;
         System.out.print("[DBG] " + diff + "ms request");
 
         ArrayList arrayList = new ArrayList();
         arrayList.add(0, response.getStatusLine().getStatusCode() + " " + response.getStatusLine().getReasonPhrase());
         arrayList.add(1, check_body_response(read_response(new StringBuilder(),response).toString(), mac));
-        if(count_average) {
-            if (arrayList.get(1).equals("")) {
-                purge_list.add((int)diff);
-                long avg = get_average_time(purge_list);
-                arrayList.add(2, avg + "ms/" + purge_list.size());
-                arrayList.add(3, get_min_time(purge_list));
-                arrayList.add(4, get_max_time(purge_list));
-                System.out.println("[DBG] average purge=" + avg + "ms/" + purge_list.size() + ": purge_list:" + purge_list);
-            }
+        if (arrayList.get(1).equals("")) {
+            purge_list.add((int)diff);
+            long avg = get_average_time(purge_list);
+            arrayList.add(2, avg + "ms/" + purge_list.size());
+            arrayList.add(3, get_min_time(purge_list));
+            arrayList.add(4, get_max_time(purge_list));
+            System.out.println("[DBG] average purge=" + avg + "ms/" + purge_list.size() + ": purge_list:" + purge_list);
         }
         System.out.println("[DBG] return codes: " + arrayList + "\n");
         return arrayList;
@@ -281,7 +273,6 @@ class API_AMS extends API{
     private String generate_json_reminder(String mac, int count, Enum<Operation> operation, String reminderProgramStart, long reminderChannelNumber, String reminderProgramId, long reminderOffset, long reminderScheduleId, long reminderId) {
         if (count < 0) { count = 0; }
         if (count > 1440) { count = 1440; }
-
         JSONObject json = new JSONObject();
         json.put("deviceId", mac);
         JSONArray array_reminders = new JSONArray();
@@ -338,9 +329,6 @@ class API_AMS extends API{
                     //object_in_reminders.put("reminderScheduleId", reminderScheduleId());
                 //}
                 //todo//todo//todo FIXME
-                //if(show_extra_info) {
-                    //System.out.println("get(" + i + ")->reminderScheduleId_list=" + reminderScheduleId_list.get(i));
-                //}
             } else if (count>1 && operation.name().equals("add")) {
                 object_in_reminders.put("reminderScheduleId", reminderScheduleId());
             } else {
@@ -371,59 +359,11 @@ class API_AMS extends API{
                     //object_in_reminders.put("reminderId", reminderId());
                 //}
                 //todo//todo//todo FIXME
-                //if(show_extra_info) {
-                    //System.out.println("get(" + i + ")->reminderId_list=" + reminderId_list.get(i));
-                //}
             } else if (count>1 && operation.name().equals("add")) {
                 object_in_reminders.put("reminderId", reminderId());
             } else {
                 object_in_reminders.put("reminderId", reminderId);
             }
-
-
-            /*if (reminderScheduleId == 0) {
-                object_in_reminders.put("reminderScheduleId", 0);
-            } else if (reminderScheduleId == -1) {
-                object_in_reminders.put("reminderScheduleId", "");
-            } else if (reminderScheduleId == -2) {
-                object_in_reminders.put("reminderScheduleId", null);
-            } else if (reminderScheduleId == Long.MAX_VALUE) {
-                object_in_reminders.put("reminderScheduleId", Long.MAX_VALUE);
-            } else if (reminderScheduleId == Long.MIN_VALUE) {
-                object_in_reminders.put("reminderScheduleId", Long.MIN_VALUE);
-                //} else if (count > 1 && operation.name().equals("modify") && reminderScheduleId_list == null && !reminderScheduleId_list.isEmpty()) {
-            } else if (count > 1) {
-                if(reminderScheduleId_list == null || !reminderScheduleId_list.isEmpty()) {
-                    object_in_reminders.put("reminderScheduleId", reminderScheduleId());
-                }else {
-                    object_in_reminders.put("reminderScheduleId", reminderScheduleId_list.get(i));
-                    System.out.println("get(" + i + ")->reminderScheduleId_list=" + reminderScheduleId_list.get(i));
-                }
-            } else {
-                object_in_reminders.put("reminderScheduleId", reminderScheduleId);
-            }
-
-            if (reminderId == 0) {
-                object_in_reminders.put("reminderId", 0);
-            } else if (reminderId == -1) {
-                object_in_reminders.put("reminderId", "");
-            } else if (reminderId == -2) {
-                object_in_reminders.put("reminderId", null);
-            } else if (reminderId == Long.MAX_VALUE) {
-                object_in_reminders.put("reminderId", Long.MAX_VALUE);
-            } else if (reminderId == Long.MIN_VALUE) {
-                object_in_reminders.put("reminderId", Long.MIN_VALUE);
-                //} else if (count > 1 && operation.name().equals("modify") && reminderId_list == null && !reminderId_list.isEmpty()) {
-            } else if (count > 1) {
-                if(!reminderId_list.isEmpty()) {
-                    object_in_reminders.put("reminderId", reminderId());
-                }else {
-                    object_in_reminders.put("reminderId", reminderId_list.get(i));
-                    System.out.println("get(" + i + ")->reminderId_list=" + reminderId_list.get(i));
-                }
-            } else {
-                object_in_reminders.put("reminderId", reminderId);
-            }*/
 
 // TESTED VARIANT
             /*if (reminderScheduleId == 0) {
@@ -486,13 +426,7 @@ class API_AMS extends API{
                 object_in_reminders.put("reminderId", reminderId);
             }*/
 
-
             array_reminders.add(object_in_reminders);
-
-            //if(show_extra_info) {
-            //    System.out.println("reminderScheduleId_list.size() = " + reminderScheduleId_list.size());
-            //    System.out.println("reminderId_list.size() = " + reminderId_list.size());
-            //}
         }
         String xxx = "{\"reminders\":[" +
                 "{\"reminderChannelNumber\":211,\"reminderProgramId\":\"EP002960010113\",\"reminderId\":1,\"reminderProgramStart\":\"2018-04-21 00:00\",\"reminderScheduleId\":2,\"reminderOffset\":732}," +
@@ -508,12 +442,12 @@ class API_AMS extends API{
             System.out.println("reminderScheduleId_list: size=" + reminderScheduleId_list.size() + ": " + reminderScheduleId_list
                     + "\nreminderId_list        : size=" + reminderId_list.size() + ": " + reminderId_list);
         }
+
         if(operation.name().equals("modify")) {
             reminderScheduleId_list.clear();
             reminderId_list.clear();
-            System.out.println("!!! reminderXXX_list-s CLEARED !!!");
+            System.out.println("[DBG] !!! reminderX_list-s are CLEARED !!!");
         }
-
         return result;
     }
 
