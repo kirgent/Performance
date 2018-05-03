@@ -468,7 +468,7 @@ class API_AMS extends API{
             } else if (reminderScheduleId == Long.MIN_VALUE) {
                 object_in_reminders.put("reminderScheduleId", Long.MIN_VALUE);
             } else if (count > 1) {
-                object_in_reminders.put("reminderScheduleId", reminderScheduleId_list.get(i));
+                object_in_reminders.put("reminderScheduleId", reminderScheduleId_list.get(i-1));
             } else {
                 object_in_reminders.put("reminderScheduleId", reminderScheduleId);
             }
@@ -482,16 +482,21 @@ class API_AMS extends API{
             } else if (reminderId == Long.MIN_VALUE) {
                 object_in_reminders.put("reminderId", Long.MIN_VALUE);
             } else if (count > 1) {
-                object_in_reminders.put("reminderId", reminderId_list.get(i));
+                object_in_reminders.put("reminderId", reminderId_list.get(i-1));
             } else {
                 object_in_reminders.put("reminderId", reminderId);
             }
             array_reminders.add(object_in_reminders);
         }
-            String result = json.toString();
-            if (show_generated_json) {
-                System.out.println("generated json: " + result);
-            }
+        String result = json.toString();
+        if (show_generated_json) {
+            System.out.println("generated json: " + result);
+        }
+
+        reminderScheduleId_list.clear();
+        reminderId_list.clear();
+        System.out.println("[DBG] !!! reminderX_list-s are CLEARED !!!");
+
         return result;
     }
 
