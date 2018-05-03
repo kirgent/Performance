@@ -437,11 +437,14 @@ class API_AMS extends API{
         if (show_generated_json) {
             System.out.println("generated json: " + result);
         }
+        if(show_extra_info) {
+            System.out.println("reminderScheduleId_list: size=" + reminderScheduleId_list.size() + ": " + reminderScheduleId_list
+                    + "\nreminderId_list        : size=" + reminderId_list.size() + ": " + reminderId_list);
+        }
 
         reminderScheduleId_list.clear();
         reminderId_list.clear();
         System.out.println("[DBG] !!! reminderX_list-s are CLEARED !!!");
-
         return result;
     }
 
@@ -454,10 +457,6 @@ class API_AMS extends API{
 
         String result = json.toString();
         System.out.println("generated json: " + result);
-
-        reminderScheduleId_list.clear();
-        reminderId_list.clear();
-        System.out.println("[DBG] !!! reminderX_list-s are CLEARED !!!");
         return result;
     }
 

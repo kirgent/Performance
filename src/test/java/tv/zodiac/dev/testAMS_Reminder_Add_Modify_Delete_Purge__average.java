@@ -13,13 +13,13 @@ class testAMS_Reminder_Add_Modify_Delete_Purge__average extends API{
 
     private API_AMS AMS = new API_AMS();
     final private int countrepeat = 100;
-    final private int count = 1000;
+    final private int count = 500;
 
     @Test
     @Disabled
     void test1_Add_Purge__average() throws IOException {
-        ArrayList add_list = new ArrayList();
-        ArrayList purge_list = new ArrayList();
+        ArrayList add_list = new ArrayList(),
+                purge_list = new ArrayList();
         String a_avg = "", a_min = "", a_max="",
                 p_avg = "", p_min = "", p_max="";
         for (int i = 1; i <= countrepeat; i++) {
@@ -54,12 +54,12 @@ class testAMS_Reminder_Add_Modify_Delete_Purge__average extends API{
 
     @Test
     void test2_Add_Modify_Purge___average() throws IOException {
-        ArrayList add_list = new ArrayList();
-        ArrayList modify_list = new ArrayList();
-        ArrayList purge_list = new ArrayList();
-        String a_avg = "", a_min = "", a_max="";
-        String m_avg = "", m_min = "", m_max="";
-        String p_avg = "", p_min = "", p_max="";
+        ArrayList add_list = new ArrayList(),
+                modify_list = new ArrayList(),
+                purge_list = new ArrayList();
+        String a_avg = "", a_min = "", a_max="",
+                m_avg = "", m_min = "", m_max="",
+                p_avg = "", p_min = "", p_max="";
         for (int i = 1; i <= countrepeat; i++) {
             System.out.println("========= ========= =========\nIteration = " + i);
             long reminderChannelNumber = reminderChannelNumber();
@@ -103,14 +103,14 @@ class testAMS_Reminder_Add_Modify_Delete_Purge__average extends API{
 
     @Test
     void test3_Add_Modify_Delete_Purge__average() throws IOException {
-        ArrayList add_list = new ArrayList();
-        ArrayList modify_list = new ArrayList();
-        ArrayList delete_list = new ArrayList();
-        ArrayList purge_list = new ArrayList();
-        String a_avg = "", a_min = "", a_max="";
-        String m_avg = "", m_min = "", m_max="";
-        String d_avg = "", d_min = "", d_max="";
-        String p_avg = "", p_min = "", p_max="";
+        ArrayList add_list = new ArrayList(),
+                modify_list = new ArrayList(),
+                delete_list = new ArrayList(),
+                purge_list = new ArrayList();
+        String a_avg = "", a_min = "", a_max="",
+                m_avg = "", m_min = "", m_max="",
+                d_avg = "", d_min = "", d_max="",
+                p_avg = "", p_min = "", p_max="";
         for (int i = 1; i <= countrepeat; i++) {
             System.out.println("========= ========= =========\nIteration = " + i);
             long reminderChannelNumber = reminderChannelNumber();
@@ -162,9 +162,9 @@ class testAMS_Reminder_Add_Modify_Delete_Purge__average extends API{
 
     @Test
     void test4_Add_Delete_Purge__average() throws IOException, InterruptedException {
-        ArrayList add_list = new ArrayList();
-        ArrayList delete_list = new ArrayList();
-        ArrayList purge_list = new ArrayList();
+        ArrayList add_list = new ArrayList(),
+                delete_list = new ArrayList(),
+                purge_list = new ArrayList();
         String a_avg = "", a_min = "", a_max="",
                 d_avg = "", d_min = "", d_max="",
                 p_avg = "", p_min = "", p_max="";

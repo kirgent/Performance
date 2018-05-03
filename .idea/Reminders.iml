@@ -8,13 +8,6 @@
       <sourceFolder url="file://$MODULE_DIR$/src/main/resources" type="java-resource" />
       <sourceFolder url="file://$MODULE_DIR$/src/test/java" isTestSource="true" />
       <sourceFolder url="file://$MODULE_DIR$/src/main/bash" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/target" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/target/classes" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/target/generated-sources" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/target/generated-test-sources" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/target/maven-status" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/target/site" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/target/test-classes" isTestSource="false" />
     </content>
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="inheritedJdk" />
