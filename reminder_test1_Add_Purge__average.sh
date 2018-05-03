@@ -1,9 +1,10 @@
 #!/bin/bash
-lib="/home/kirill.grushin/Reminders/lib"
+
 java -ea -Dfile.encoding=UTF-8 -classpath \
 ./target/test-classes:\
 ./target/classes:\
-$lib/*:\
+./lib/*:\
+com.intellij.rt.execution.junit.JUnitStarter -ideVersion5 -junit5 tv.zodiac.dev.testAMS_Reminder_Add_Modify_Delete_Purge__average,test1_Add_Purge__average
 #$lib/idea_rt.jar:\
 #$lib/junit-rt.jar:\
 #$lib/junit5-rt.jar:\
@@ -36,4 +37,4 @@ $lib/*:\
 #$lib/junit-vintage-engine-4.12.0-M6.jar:\
 #$lib/junit-platform-launcher-1.0.0-M6.jar:\
 #$lib/junit-jupiter-engine-5.0.0-M6.jar \
-com.intellij.rt.execution.junit.JUnitStarter -ideVersion5 -junit5 tv.zodiac.dev.testAMS_Reminder_Add_Modify_Delete_Purge__average,test1_Add_Purge__average
+
