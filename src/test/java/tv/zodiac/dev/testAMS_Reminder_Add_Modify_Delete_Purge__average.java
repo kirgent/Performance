@@ -13,7 +13,7 @@ class testAMS_Reminder_Add_Modify_Delete_Purge__average extends API{
 
     private API_AMS AMS = new API_AMS();
     final private int countrepeat = 100;
-    final private int count = 1;
+    final private int count = 10;
 
     @Test
     @Disabled
