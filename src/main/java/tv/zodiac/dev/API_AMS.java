@@ -76,16 +76,25 @@ class API_AMS extends API{
                     arrayList.add(2, (avg + "ms/" + add_list.size()));
                     arrayList.add(3, get_min_time(add_list));
                     arrayList.add(4, get_max_time(add_list));
-                    System.out.println("[DBG] average add=" + avg + "ms/" + add_list.size() + ": add_list:" + add_list);
+                    if(show_extra_info) {
+                        System.out.println("[DBG] average add=" + avg + "ms/" + add_list.size() + ": add_list:" + add_list);
+                    }
                 } else if (operation.name().equals("modify")) {
                     modify_list.add((int)diff);
                     int avg = (int)get_average_time(modify_list);
                     arrayList.add(2, (avg + "ms/" + modify_list.size()));
                     arrayList.add(3, get_min_time(modify_list));
                     arrayList.add(4, get_max_time(modify_list));
-                    System.out.println("[DBG] average modify=" + avg + "ms/" + modify_list.size() + ": modify_list:" + modify_list);
+                    if(show_extra_info) {
+                        System.out.println("[DBG] average modify=" + avg + "ms/" + modify_list.size() + ": modify_list:" + modify_list);
+                    }
                 }
             }
+        }
+
+        if(!arrayList.get(1).equals("")){
+            reminderScheduleId_list.clear();
+            reminderId_list.clear();
         }
         System.out.println("[DBG] return codes: " + arrayList + "\n");
         return arrayList;
@@ -323,7 +332,7 @@ class API_AMS extends API{
             } else if (count>1 && operation.name().equals("modify")) {
                 //todo//todo//todo FIXME
                 //if(reminderScheduleId_list!=null && !reminderScheduleId_list.isEmpty()) {
-                object_in_reminders.put("reminderScheduleId", reminderScheduleId_list.get(i));
+                object_in_reminders.put("reminderScheduleId", reminderScheduleId_list.get(i-1));
                 //reminderScheduleId_list.clear();
                 //}else {
                     //object_in_reminders.put("reminderScheduleId", reminderScheduleId());
@@ -357,7 +366,7 @@ class API_AMS extends API{
             } else if (count>1 && operation.name().equals("modify")) {
                 //todo//todo//todo FIXME
                 //if(reminderId_list!=null && !reminderId_list.isEmpty()) {
-                    object_in_reminders.put("reminderId", reminderId_list.get(i));
+                    object_in_reminders.put("reminderId", reminderId_list.get(i-1));
                 //}else {
                     //object_in_reminders.put("reminderId", reminderId());
                 //}
@@ -502,6 +511,7 @@ class API_AMS extends API{
         if(operation.name().equals("modify")) {
             reminderScheduleId_list.clear();
             reminderId_list.clear();
+            System.out.println("!!! reminderXXX_list-s CLEARED !!!");
         }
 
         return result;
