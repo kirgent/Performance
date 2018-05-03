@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 /**
- * We are Headend (on localhost): chain of requests: localhost -> AMS -> STB -> AMS -> localhost
+ * We are Headend (on localhost): chain of requests: Headend(localhost) -> AMS -> STB -> AMS -> localhost
  */
 class testMiddle_Check_registration extends API_Middle {
 

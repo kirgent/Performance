@@ -7,13 +7,13 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 /**
- * We are Headend (on localhost): chain of requests: localhost -> AMS -> STB -> AMS -> localhost
+ * We are Headend (on localhost): chain of requests: Headend(localhost) -> AMS -> STB -> AMS -> localhost
  */
 class testAMS_Reminder_Add_Modify_Delete_Purge__average extends API{
 
     private API_AMS AMS = new API_AMS();
     final private int countrepeat = 100;
-    final private int count = 10;
+    final private int count = 1000;
 
     @Test
     @Disabled
@@ -23,6 +23,7 @@ class testAMS_Reminder_Add_Modify_Delete_Purge__average extends API{
         String a_avg = "", a_min = "", a_max="",
                 p_avg = "", p_min = "", p_max="";
         for (int i = 1; i <= countrepeat; i++) {
+            System.out.println("========= ========= =========\nIteration = " + i);
             long reminderChannelNumber = reminderChannelNumber();
             long reminderOffset = reminderOffset();
             long reminderScheduleId = reminderScheduleId();
@@ -42,12 +43,12 @@ class testAMS_Reminder_Add_Modify_Delete_Purge__average extends API{
             }
             //reminderScheduleId_list.clear();
             //reminderId_list.clear();
-            //add_list.clear();
-            //purge_list.clear();
+            add_list.clear();
+            purge_list.clear();
         }
         System.out.println("========= ========= ========= ========= ========= ========="
-                + "\nFINISH add avg    =" + a_avg + ", min=" + a_min + ", max=" + a_max
-                + "\nFINISH purge avg  =" + p_avg + ", min=" + p_min + ", max=" + p_max
+                + "\nFINISH   add avg = " + a_avg + ", min=" + a_min + ", max=" + a_max
+                + "\nFINISH purge avg = " + p_avg + ", min=" + p_min + ", max=" + p_max
                 + "\n========= ========= ========= ========= ========= =========");
     }
 
@@ -60,6 +61,7 @@ class testAMS_Reminder_Add_Modify_Delete_Purge__average extends API{
         String m_avg = "", m_min = "", m_max="";
         String p_avg = "", p_min = "", p_max="";
         for (int i = 1; i <= countrepeat; i++) {
+            System.out.println("========= ========= =========\nIteration = " + i);
             long reminderChannelNumber = reminderChannelNumber();
             long reminderOffset = reminderOffset();
             long reminderOffset_new = reminderOffset();
@@ -86,30 +88,31 @@ class testAMS_Reminder_Add_Modify_Delete_Purge__average extends API{
                 }
             }
 
-            reminderScheduleId_list.clear();
-            reminderId_list.clear();
+            //reminderScheduleId_list.clear();
+            //reminderId_list.clear();
             add_list.clear();
             modify_list.clear();
             purge_list.clear();
         }
         System.out.println("========= ========= ========= ========= ========= ========="
-                + "\nFINISH add avg    =" + a_avg + ", min=" + a_min + ", max=" + a_max
-                + "\nFINISH modify avg =" + m_avg + ", min=" + m_min + ", max=" + m_max
-                + "\nFINISH purge avg  =" + p_avg + ", min=" + p_min + ", max=" + p_max
+                + "\nFINISH    add avg = " + a_avg + ", min=" + a_min + ", max=" + a_max
+                + "\nFINISH modify avg = " + m_avg + ", min=" + m_min + ", max=" + m_max
+                + "\nFINISH  purge avg = " + p_avg + ", min=" + p_min + ", max=" + p_max
                 + "\n========= ========= ========= ========= ========= =========");
     }
 
     @Test
     void test3_Add_Modify_Delete_Purge__average() throws IOException {
-        ArrayList add_list = new ArrayList();;
-        ArrayList modify_list = new ArrayList();;
-        ArrayList delete_list = new ArrayList();;
-        ArrayList purge_list = new ArrayList();;
-        String a_avg = "", a_min = "", a_max="",
-                m_avg = "", m_min = "", m_max="",
-                d_avg = "", d_min = "", d_max="",
-                p_avg = "", p_min = "", p_max="";
+        ArrayList add_list = new ArrayList();
+        ArrayList modify_list = new ArrayList();
+        ArrayList delete_list = new ArrayList();
+        ArrayList purge_list = new ArrayList();
+        String a_avg = "", a_min = "", a_max="";
+        String m_avg = "", m_min = "", m_max="";
+        String d_avg = "", d_min = "", d_max="";
+        String p_avg = "", p_min = "", p_max="";
         for (int i = 1; i <= countrepeat; i++) {
+            System.out.println("========= ========= =========\nIteration = " + i);
             long reminderChannelNumber = reminderChannelNumber();
             long reminderOffset = reminderOffset();
             long reminderOffset_new = reminderOffset();
@@ -142,18 +145,18 @@ class testAMS_Reminder_Add_Modify_Delete_Purge__average extends API{
                     p_max = purge_list.get(4).toString();
                 }
             }
-            reminderScheduleId_list.clear();
-            reminderId_list.clear();
+            //reminderScheduleId_list.clear();
+            //reminderId_list.clear();
             add_list.clear();
             modify_list.clear();
             delete_list.clear();
             purge_list.clear();
         }
         System.out.println("========= ========= ========= ========= ========= ========="
-                + "\nFINISH add avg    =" + a_avg + ", min=" + a_min + ", max=" + a_max
-                + "\nFINISH modify avg =" + m_avg + ", min=" + m_min + ", max=" + m_max
-                + "\nFINISH delete avg =" + d_avg + ", min=" + d_min + ", max=" + d_max
-                + "\nFINISH purge avg  =" + p_avg + ", min=" + p_min + ", max=" + p_max
+                + "\nFINISH    add avg = " + a_avg + ", min=" + a_min + ", max=" + a_max
+                + "\nFINISH modify avg = " + m_avg + ", min=" + m_min + ", max=" + m_max
+                + "\nFINISH delete avg = " + d_avg + ", min=" + d_min + ", max=" + d_max
+                + "\nFINISH  purge avg = " + p_avg + ", min=" + p_min + ", max=" + p_max
                 + "\n========= ========= ========= ========= ========= =========");
     }
 
@@ -166,6 +169,7 @@ class testAMS_Reminder_Add_Modify_Delete_Purge__average extends API{
                 d_avg = "", d_min = "", d_max="",
                 p_avg = "", p_min = "", p_max="";
         for (int i = 1; i <= countrepeat; i++) {
+            System.out.println("========= ========= =========\nIteration = " + i);
             long reminderScheduleId = reminderScheduleId();
             long reminderId = reminderId();
             add_list = AMS.Request(mac, Operation.add, count, reminderProgramStart, reminderChannelNumber, reminderProgramId, reminderOffset, reminderScheduleId, reminderId);
@@ -188,16 +192,16 @@ class testAMS_Reminder_Add_Modify_Delete_Purge__average extends API{
                     p_max = purge_list.get(4).toString();
                 }
             }
-            reminderScheduleId_list.clear();
-            reminderId_list.clear();
+            //reminderScheduleId_list.clear();
+            //reminderId_list.clear();
             add_list.clear();
             delete_list.clear();
             purge_list.clear();
         }
         System.out.println("========= ========= ========= ========= ========= ========="
-                + "\nFINISH add avg    =" + a_avg + ", min=" + a_min + ", max=" + a_max
-                + "\nFINISH delete avg =" + d_avg + ", min=" + d_min + ", max=" + d_max
-                + "\nFINISH purge avg  =" + p_avg + ", min=" + p_min + ", max=" + p_max
+                + "\nFINISH    add avg = " + a_avg + ", min=" + a_min + ", max=" + a_max
+                + "\nFINISH delete avg = " + d_avg + ", min=" + d_min + ", max=" + d_max
+                + "\nFINISH  purge avg = " + p_avg + ", min=" + p_min + ", max=" + p_max
                 + "\n========= ========= ========= ========= ========= =========");
     }
 

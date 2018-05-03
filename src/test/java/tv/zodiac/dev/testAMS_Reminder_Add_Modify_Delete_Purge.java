@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import static org.junit.Assert.assertEquals;
 
 /**
- * We are Headend (on localhost): chain of requests: localhost -> AMS -> STB -> AMS -> localhost
+ * We are Headend (on localhost): chain of requests: Headend(localhost) -> AMS -> STB -> AMS -> localhost
  */
 class testAMS_Reminder_Add_Modify_Delete_Purge extends API {
 

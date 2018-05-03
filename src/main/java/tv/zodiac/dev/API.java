@@ -22,9 +22,10 @@ import static java.lang.System.currentTimeMillis;
  */
 public class API {
 
-    Boolean show_extra_info = true;
-    Boolean show_generated_json = true;
-    Boolean show_response_body = true;
+    Boolean show_extra_info = false;
+    Boolean show_generated_json = false;
+    Boolean show_response_body = false;
+    Boolean used_delete_operation = false;
 
     //private final static Logger log = Logger.getLogger(API.class.getName());
 
