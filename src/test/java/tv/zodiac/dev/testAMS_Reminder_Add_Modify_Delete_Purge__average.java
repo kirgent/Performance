@@ -30,8 +30,10 @@ class testAMS_Reminder_Add_Modify_Delete_Purge__average extends API{
                 purge_list = AMS.Request(mac, Operation.purge);
             }
         }
-        System.out.println("FINISH average add=" + add_list.get(2)
-                + "\nFINISH average purge=" + purge_list.get(2));
+        System.out.println("========= ========= ========="
+                + "\nFINISH average add=" + add_list.get(2)
+                + "\nFINISH average purge=" + purge_list.get(2)
+                +"\n========= ========= =========");
     }
 
     @Test
@@ -75,9 +77,11 @@ class testAMS_Reminder_Add_Modify_Delete_Purge__average extends API{
             modify_list.clear();
             purge_list.clear();
         }
-        System.out.println("FINISH add avg=" + a_avg + ", min=" + a_min + ", max=" + a_max
+        System.out.println("========= ========= ========="
+                + "\nFINISH add avg=" + a_avg + ", min=" + a_min + ", max=" + a_max
                 + "\nFINISH modify avg=" + m_avg + ", min=" + m_min + ", max=" + m_max
-                + "\nFINISH purge avg=" + p_avg + ", min=" + p_min + ", max=" + p_max);
+                + "\nFINISH purge avg=" + p_avg + ", min=" + p_min + ", max=" + p_max
+                + "\n========= ========= =========");
         /*if (add_list.size()==3) {
             System.out.println("FINISH average add=" + add_list.get(2));
         } else System.out.println("FINISH average add=" + add_list);
@@ -135,10 +139,12 @@ class testAMS_Reminder_Add_Modify_Delete_Purge__average extends API{
                 }
             }
         }
-        System.out.println("FINISH add avg=" + a_avg + ", min=" + a_min + ", max=" + a_max
+        System.out.println("========= ========= ========="
+                + "FINISH add avg=" + a_avg + ", min=" + a_min + ", max=" + a_max
                 + "\nFINISH modify avg=" + m_avg + ", min=" + m_min + ", max=" + m_max
                 + "\nFINISH delete avg=" + d_avg + ", min=" + d_min + ", max=" + d_max
-                + "\nFINISH purge avg=" + p_avg + ", min=" + p_min + ", max=" + p_max);
+                + "\nFINISH purge avg=" + p_avg + ", min=" + p_min + ", max=" + p_max
+                + "========= ========= =========");
         /*System.out.println("FINISH average add=" + add_list.get(2)
                 + "\nFINISH average modify=" + modify_list.get(2)
                 + "\nFINISH average delete=" + delete_list.get(2)
