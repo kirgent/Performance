@@ -80,11 +80,6 @@ class API_AMS extends API{
                         System.out.println("[DBG] add avg = " + avg + "ms/" + add_list.size() + ": add_list:" + add_list);
                     }
                 }
-            } else {
-                //todo//todo//todo //FIXME
-                reminderScheduleId_list.clear();
-                reminderId_list.clear();
-                System.out.println("[DBG] !!! reminderX_list-s are CLEARED !!!");
             }
         } else if (operation.name().equals("modify")) {
             modify_list.add((int)diff);
@@ -186,7 +181,6 @@ class API_AMS extends API{
             arrayList.add(2, avg + "ms/" + purge_list.size());
             arrayList.add(3, get_min_time(purge_list));
             arrayList.add(4, get_max_time(purge_list));
-            System.out.println("[DBG] purge avg = " + avg + "ms/" + purge_list.size() + ": purge_list:" + purge_list);
             if(show_extra_info) {
                 if(purge_list.size()<=10) {
                     System.out.println("[DBG] purge avg = " + avg + "ms/" + purge_list.size() + ": purge_list:" + purge_list);

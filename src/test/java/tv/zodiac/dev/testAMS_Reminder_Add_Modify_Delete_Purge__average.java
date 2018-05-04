@@ -13,7 +13,7 @@ class testAMS_Reminder_Add_Modify_Delete_Purge__average extends API{
 
     private API_AMS AMS = new API_AMS();
     final private int countrepeat = 100;
-    final private int count = 100;
+    final private int count = 500;
 
     @Test
     @Disabled
@@ -41,8 +41,9 @@ class testAMS_Reminder_Add_Modify_Delete_Purge__average extends API{
                     p_max = purge_list.get(4).toString();
                 }
             }
-            //reminderScheduleId_list.clear();
-            //reminderId_list.clear();
+            reminderScheduleId_list.clear();
+            reminderId_list.clear();
+            System.out.println("[DBG] !!! reminderX_list-s are CLEARED !!!");
             add_list.clear();
             purge_list.clear();
         }
@@ -88,8 +89,9 @@ class testAMS_Reminder_Add_Modify_Delete_Purge__average extends API{
                 }
             }
 
-            //reminderScheduleId_list.clear();
-            //reminderId_list.clear();
+            reminderScheduleId_list.clear();
+            reminderId_list.clear();
+            System.out.println("[DBG] !!! reminderX_list-s are CLEARED !!!");
             add_list.clear();
             modify_list.clear();
             purge_list.clear();
@@ -147,7 +149,7 @@ class testAMS_Reminder_Add_Modify_Delete_Purge__average extends API{
             }
             reminderScheduleId_list.clear();
             reminderId_list.clear();
-
+            System.out.println("[DBG] !!! reminderX_list-s are CLEARED !!!");
             add_list.clear();
             modify_list.clear();
             delete_list.clear();
@@ -193,8 +195,9 @@ class testAMS_Reminder_Add_Modify_Delete_Purge__average extends API{
                     p_max = purge_list.get(4).toString();
                 }
             }
-            //reminderScheduleId_list.clear();
-            //reminderId_list.clear();
+            reminderScheduleId_list.clear();
+            reminderId_list.clear();
+            System.out.println("[DBG] !!! reminderX_list-s are CLEARED !!!");
             add_list.clear();
             delete_list.clear();
             purge_list.clear();
