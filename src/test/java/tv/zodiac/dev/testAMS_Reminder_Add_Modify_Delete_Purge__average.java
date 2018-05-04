@@ -12,7 +12,7 @@ import java.util.ArrayList;
 class testAMS_Reminder_Add_Modify_Delete_Purge__average extends API{
 
     private API_AMS AMS = new API_AMS();
-    final private int countrepeat = 100;
+    final private int countrepeat = 20;
     final private int count = 500;
 
     @Test
