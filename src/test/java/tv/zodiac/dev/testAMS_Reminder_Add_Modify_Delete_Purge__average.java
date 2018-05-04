@@ -12,8 +12,8 @@ import java.util.ArrayList;
 class testAMS_Reminder_Add_Modify_Delete_Purge__average extends API{
 
     private API_AMS AMS = new API_AMS();
-    final private int countrepeat = 20;
-    final private int count = 500;
+    final private int countrepeat = 100;
+    final private int count = 100;
 
     @Test
     @Disabled
@@ -145,8 +145,9 @@ class testAMS_Reminder_Add_Modify_Delete_Purge__average extends API{
                     p_max = purge_list.get(4).toString();
                 }
             }
-            //reminderScheduleId_list.clear();
-            //reminderId_list.clear();
+            reminderScheduleId_list.clear();
+            reminderId_list.clear();
+
             add_list.clear();
             modify_list.clear();
             delete_list.clear();
@@ -161,7 +162,7 @@ class testAMS_Reminder_Add_Modify_Delete_Purge__average extends API{
     }
 
     @Test
-    void test4_Add_Delete_Purge__average() throws IOException, InterruptedException {
+    void test4_Add_Delete_Purge__average() throws IOException {
         ArrayList add_list = new ArrayList(),
                 delete_list = new ArrayList(),
                 purge_list = new ArrayList();
