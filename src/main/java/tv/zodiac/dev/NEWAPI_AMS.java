@@ -342,7 +342,9 @@ class NEWAPI_AMS extends API{
                 //todo//todo//todo FIXME
                 if(first_clean_reminderScheduleId_list) {
                     reminderScheduleId_list.clear();
-                    System.out.println("[DBG] 1st clean for reminderScheduleId_list !!!");
+                    if(show_extra_info) {
+                        System.out.println("[DBG] 1st clean for reminderScheduleId_list !!!");
+                    }
                     first_clean_reminderScheduleId_list = false;
                 }
                 object_in_reminders.put("reminderScheduleId", reminderScheduleId());
@@ -375,7 +377,9 @@ class NEWAPI_AMS extends API{
                 if(first_clean_reminderId_list) {
                     //todo//todo//todo FIXME
                     reminderId_list.clear();
-                    System.out.println("[DBG] 1st clean for reminderId_list !!!");
+                    if(show_extra_info) {
+                        System.out.println("[DBG] 1st clean for reminderId_list !!!");
+                    }
                     first_clean_reminderId_list = false;
                 }
                 object_in_reminders.put("reminderId", reminderId());

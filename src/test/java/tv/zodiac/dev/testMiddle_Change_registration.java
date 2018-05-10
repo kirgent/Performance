@@ -14,8 +14,8 @@ import static org.junit.Assert.assertEquals;
 public class testMiddle_Change_registration extends API_Middle {
 
     private API_Middle Middle = new API_Middle();
-    String mac = boxMoto2145_173;
-    private String ams_ip = ams_ip_19;
+    //String mac = boxMoto2145_173;
+    //private String ams_ip = ams_ip_19;
 
     @Test
     public void testChange_registration_via_charterapi_a() throws IOException {

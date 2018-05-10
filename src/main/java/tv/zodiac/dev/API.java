@@ -50,7 +50,7 @@ public class API {
 
     final String mac_wrong = "123456789012";
     final String boxD101 = "A0722CEEC970"; //WB20 D101 ???
-    static final String boxD102 = "3438B7EB2E24"; //WB20 D102
+    final String boxD102 = "3438B7EB2E24"; //WB20 D102
     final String boxD103 = "3438B7EB2E28"; //WB20 D103
     final String boxD104 = "3438B7EB2E34"; //WB20 D104
     final String boxD105 = "3438B7EB2E30"; //WB20 D105
@@ -65,7 +65,7 @@ public class API {
     final String boxMoto2145_173 =  "000004B9419F"; //"B077AC5D91DD"; // "000004B9419F"; //Moto_2145_Mondo_DCX3200M_17.3_346
     final String boxMoto2147_Rems = "000004D67F70"; //000004d67f70"; //Moto_2147_Mondo_DCX3200M_REMS
 
-    String mac = boxMoto2147_Rems;
+    String mac = boxD102;
 
     //DATES
     final String reminderProgramStart_wrong = "0000-00-00";
