@@ -14,31 +14,33 @@ import static org.junit.Assert.assertEquals;
 public class testMiddle_Change_registration extends API_Middle {
 
     private API_Middle Middle = new API_Middle();
+    String mac = boxMoto2145_173;
+    private String ams_ip = ams_ip_19;
 
     @Test
     public void testChange_registration_via_charterapi_a() throws IOException {
-        ArrayList actual = Middle.Change_registration(mac, charterapi_a, ams_ip);
+        ArrayList actual = Middle.Change_registration(charterapi_a, mac, ams_ip);
         assertEquals(expected200, actual.get(0));
         assertEquals("", actual.get(1));
     }
 
     @Test
     public void testChange_registration_via_charterapi_b() throws IOException, InterruptedException {
-        ArrayList actual = Middle.Change_registration(mac, charterapi_b, ams_ip);
+        ArrayList actual = Middle.Change_registration(charterapi_b, mac, ams_ip);
         assertEquals(expected200, actual.get(0));
         assertEquals("", actual.get(1));
     }
 
     @Test
     public void testChange_registration_via_charterapi_c() throws IOException, InterruptedException {
-        ArrayList actual = Middle.Change_registration(mac, charterapi_c, ams_ip);
+        ArrayList actual = Middle.Change_registration(charterapi_c, mac, ams_ip);
         assertEquals(expected200, actual.get(0));
         assertEquals("", actual.get(1));
     }
 
     @Test
     public void testChange_registration_via_charterapi_d() throws IOException, InterruptedException {
-        ArrayList actual = Middle.Change_registration(mac, charterapi_d, ams_ip);
+        ArrayList actual = Middle.Change_registration(charterapi_d, mac, ams_ip);
         assertEquals(expected200, actual.get(0));
         assertEquals("", actual.get(1));
     }
@@ -46,7 +48,7 @@ public class testMiddle_Change_registration extends API_Middle {
     @Test
     @Ignore
     public void testChange_registration_to_invalid_ams127_0_0_1() throws IOException, InterruptedException {
-        ArrayList actual = Middle.Change_registration(mac, charterapi, "127.0.0.1");
+        ArrayList actual = Middle.Change_registration(charterapi, mac, "127.0.0.1");
         assertEquals(expected200, actual.get(0));
         assertEquals("", actual.get(1));
     }

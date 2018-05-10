@@ -13,7 +13,7 @@ import java.util.ArrayList;
 
 class API_Middle extends API{
 
-    ArrayList Change_registration(String mac, String charterapi, String ams_ip) throws IOException {
+    ArrayList Change_registration(String charterapi, String mac, String ams_ip) throws IOException {
         if(show_extra_info) {
             System.out.println("Change_registration " + mac + " to ams " + ams_ip + " via charterapi: " + charterapi);
         }

@@ -13,7 +13,7 @@ import static org.junit.Assert.assertEquals;
  */
 public class testAMS_Settings extends API {
 
-    private API_AMS AMS = new API_AMS();
+    private NEWAPI_AMS AMS = new NEWAPI_AMS();
 
     @Test
     @Ignore

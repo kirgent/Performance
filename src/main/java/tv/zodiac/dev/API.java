@@ -23,8 +23,8 @@ import static java.lang.System.currentTimeMillis;
 public class API {
 
     Boolean show_extra_info = true;
-    Boolean show_generated_json = false;
-    Boolean show_response_body = false;
+    Boolean show_generated_json = true;
+    Boolean show_response_body = true;
 
     //private final static Logger log = Logger.getLogger(API.class.getName());
 
@@ -73,10 +73,10 @@ public class API {
 
     ArrayList reminderScheduleId_list = new ArrayList();
     ArrayList reminderId_list = new ArrayList();
-    ArrayList<Integer> add_list = new ArrayList<>();
-    ArrayList<Integer> modify_list = new ArrayList<>();
-    ArrayList<Integer> delete_list = new ArrayList<>();
-    ArrayList<Integer> purge_list = new ArrayList<>();
+    ArrayList<Integer> add_avg_list = new ArrayList<>();
+    ArrayList<Integer> modify_avg_list = new ArrayList<>();
+    ArrayList<Integer> delete_avg_list = new ArrayList<>();
+    ArrayList<Integer> purge_avg_list = new ArrayList<>();
 
     //CHANNELS
     final int reminderChannelNumber = reminderChannelNumber();
@@ -108,9 +108,10 @@ public class API {
             "4 - reminder is unknown. Applies to \"Reminders Delete\" request (Request ID=1) and \"Reminders Modify\" request (Request ID=2)",
             "5 - reminder with provided pair of identifiers (reminderScheduleId and reminderId) is already set \"Reminders Add\" request (Request ID=0)"};
 
-    String ams_ip = "172.30.81.4";
-    //String ams_ip = "172.30.112.19";
-    //String ams_ip = "172.30.82.132";
+    final String ams_ip_4 = "172.30.81.4";
+    final String ams_ip_19 = "172.30.112.19";
+    final String ams_ip_132 = "172.30.82.132";
+    String ams_ip = ams_ip_4;
     int ams_port = 8080;
 
     int get_average_time(ArrayList list) {
@@ -564,6 +565,16 @@ public class API {
         calendar.setTime(new java.util.Date(0, 0, 0, 0, 0));
         calendar.add(Calendar.MINUTE, interval_in_minutes*(number-1));
         return pattern.format(calendar.getTime());
+    }
+
+    String prepare_url(String ams_ip, Enum<Operation> operation, boolean newapi) {
+        String result = "";
+        if (newapi) {
+            result = "http://" + ams_ip + ":" + ams_port + "/ams/Reminders?req=" + operation;
+        } else {
+            result = "http://" + ams_ip + ":" + ams_port + "/ams/Reminders?req=ChangeReminders";
+        }
+        return result;
     }
 
 }

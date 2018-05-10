@@ -14,6 +14,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 class testMiddle_Check_registration extends API_Middle {
 
     private API_Middle Middle = new API_Middle();
+    String mac = boxMoto2145_173;
 
     @Test
     @Deprecated
