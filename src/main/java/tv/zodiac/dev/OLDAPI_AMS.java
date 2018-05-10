@@ -12,17 +12,6 @@ import java.util.ArrayList;
 
 class OLDAPI_AMS extends API{
 
-    /** method for Add/Modify
-     * @param mac      - mac of the box
-     * @param operation       - can be Add / Modify / Delete / Purge
-     * @param count - count of reminders to generate in json {..}
-     * @param reminderProgramStart - TBD
-     * @param reminderChannelNumber - TBD
-     * @param reminderProgramId - TBD
-     * @param reminderOffset - TBD
-     * @return arrayList
-     * @throws IOException -TBD
-     */
     ArrayList request(String ams_ip, String mac, Enum<Operation> operation, int count, long reminderChannelNumber, String reminderProgramStart, String reminderProgramId, long reminderOffset) throws IOException {
         if(show_extra_info) {
             System.out.println(operation + " for macaddress=" + mac + " to ams_ip=" + ams_ip + ", "
@@ -79,11 +68,6 @@ class OLDAPI_AMS extends API{
         return arrayList;
     }
 
-    /** method for Add/Modify
-     * @param mac      - mac of the box
-     * @return arrayList
-     * @throws IOException -TBD
-     */
     ArrayList request(String ams_ip, String mac) throws IOException {
         if(show_extra_info) {
             System.out.println("Purge for macaddress=" + mac + " to ams_ip=" + ams_ip);
