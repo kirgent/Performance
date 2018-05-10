@@ -10,7 +10,7 @@ import static org.junit.Assert.assertEquals;
 /**
  * We are Headend (on localhost): chain of requests: Headend(localhost) -> AMS -> STB -> AMS -> localhost
  */
-class testAMS_oldAPI_Reminder_Purge extends API {
+class testAMS_newAPI_Reminder_Purge extends API {
 
     private NEWAPI_AMS AMS = new NEWAPI_AMS();
 

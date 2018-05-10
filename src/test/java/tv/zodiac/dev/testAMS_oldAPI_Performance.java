@@ -11,7 +11,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 /**
  * We are Headend (on localhost): chain of requests: Headend(localhost) -> AMS -> STB -> AMS -> localhost
  */
-class testAMS_oldAPI_Performance_Reminder_Add_Delete_Purge extends API{
+class testAMS_oldAPI_Performance extends API{
 
     private OLDAPI_AMS AMS = new OLDAPI_AMS();
     final private int countrepeat = 1;

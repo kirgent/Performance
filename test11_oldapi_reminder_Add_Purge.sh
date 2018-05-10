@@ -6,4 +6,4 @@ java -ea -Dfile.encoding=UTF-8 -classpath \
 com.intellij.rt.execution.junit.JUnitStarter \
 -ideVersion5 \
 -junit5 \
-tv.zodiac.dev.testAMS_newAPI_Performance,test3_Add_Modify_Delete_Purge
+tv.zodiac.dev.testAMS_oldAPI_Performance,test1_Add_Purge

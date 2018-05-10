@@ -9,7 +9,7 @@ import java.util.ArrayList;
 /**
  * We are Headend (on localhost): chain of requests: Headend(localhost) -> AMS -> STB -> AMS -> localhost
  */
-class testAMS_newAPI_Performance_Reminder_Add_Modify_Delete_Purge extends API{
+class testAMS_newAPI_Performance extends API{
 
     private NEWAPI_AMS AMS = new NEWAPI_AMS();
     final private int countrepeat = 1;
