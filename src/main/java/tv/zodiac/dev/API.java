@@ -463,7 +463,7 @@ public class API {
     }
 
     int reminderOffset() {
-        return Math.abs(new Random().nextInt(1000));
+        return Math.abs(new Random().nextInt(100));
     }
 
     void printArrayList(ArrayList list){
