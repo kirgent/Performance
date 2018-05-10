@@ -28,13 +28,13 @@ class testAMS_newAPI_Performance extends API{
             long reminderOffset = reminderOffset();
             long reminderScheduleId = reminderScheduleId();
             long reminderId = reminderId();
-            add_list = AMS.request(mac, Operation.add, count_reminders, reminderProgramStart, reminderChannelNumber, reminderProgramId, reminderOffset, reminderScheduleId, reminderId);
+            add_list = AMS.request(ams_ip, mac, Operation.add, count_reminders, reminderProgramStart, reminderChannelNumber, reminderProgramId, reminderOffset, reminderScheduleId, reminderId);
             if(add_list.get(1).equals("")) {
                 a_avg = add_list.get(2).toString();
                 a_min = add_list.get(3).toString();
                 a_max = add_list.get(4).toString();
 
-                purge_list = AMS.request(mac, Operation.purge);
+                purge_list = AMS.request(ams_ip, mac, Operation.purge);
                 if(purge_list.get(1).equals("")) {
                     p_avg = purge_list.get(2).toString();
                     p_min = purge_list.get(3).toString();
@@ -69,20 +69,20 @@ class testAMS_newAPI_Performance extends API{
             long reminderOffset = reminderOffset();
             long reminderScheduleId = reminderScheduleId();
             long reminderId = reminderId();
-            add_list = AMS.request(mac, Operation.add, count_reminders, reminderProgramStart, reminderChannelNumber, reminderProgramId, reminderOffset, reminderScheduleId, reminderId);
+            add_list = AMS.request(ams_ip, mac, Operation.add, count_reminders, reminderProgramStart, reminderChannelNumber, reminderProgramId, reminderOffset, reminderScheduleId, reminderId);
             if(add_list.get(1).equals("")) {
                 a_avg = add_list.get(2).toString();
                 a_min = add_list.get(3).toString();
                 a_max = add_list.get(4).toString();
 
-                delete_list = AMS.request(mac, Operation.delete, count_reminders, reminderScheduleId, reminderId);
+                delete_list = AMS.request(ams_ip, mac, Operation.delete, count_reminders, reminderScheduleId, reminderId);
                 if(delete_list.get(1).equals("")) {
                     d_avg = delete_list.get(2).toString();
                     d_min = delete_list.get(3).toString();
                     d_max = delete_list.get(4).toString();
                 }
 
-                purge_list = AMS.request(mac, Operation.purge);
+                purge_list = AMS.request(ams_ip, mac, Operation.purge);
                 if(purge_list.get(1).equals("")) {
                     p_avg = purge_list.get(2).toString();
                     p_min = purge_list.get(3).toString();
@@ -123,27 +123,27 @@ class testAMS_newAPI_Performance extends API{
             long reminderOffset_new = reminderOffset();
             long reminderScheduleId = reminderScheduleId();
             long reminderId = reminderId();
-            add_list = AMS.request(mac, Operation.add, count_reminders, reminderProgramStart, reminderChannelNumber, reminderProgramId, reminderOffset, reminderScheduleId, reminderId);
+            add_list = AMS.request(ams_ip, mac, Operation.add, count_reminders, reminderProgramStart, reminderChannelNumber, reminderProgramId, reminderOffset, reminderScheduleId, reminderId);
             if (add_list.get(1).equals("")) {
                 a_avg = add_list.get(2).toString();
                 a_min = add_list.get(3).toString();
                 a_max = add_list.get(4).toString();
 
-                modify_list = AMS.request(mac, Operation.modify, count_reminders, reminderProgramStart, reminderChannelNumber, reminderProgramId, reminderOffset_new, reminderScheduleId, reminderId);
+                modify_list = AMS.request(ams_ip, mac, Operation.modify, count_reminders, reminderProgramStart, reminderChannelNumber, reminderProgramId, reminderOffset_new, reminderScheduleId, reminderId);
                 if(modify_list.get(1).equals("")) {
                     m_avg = modify_list.get(2).toString();
                     m_min = modify_list.get(3).toString();
                     m_max = modify_list.get(4).toString();
                 }
 
-                delete_list = AMS.request(mac, Operation.delete, count_reminders, reminderScheduleId, reminderId);
+                delete_list = AMS.request(ams_ip, mac, Operation.delete, count_reminders, reminderScheduleId, reminderId);
                 if(delete_list.get(1).equals("")) {
                     d_avg = delete_list.get(2).toString();
                     d_min = delete_list.get(3).toString();
                     d_max = delete_list.get(4).toString();
                 }
 
-                purge_list = AMS.request(mac, Operation.purge);
+                purge_list = AMS.request(ams_ip, mac, Operation.purge);
                 if(purge_list.get(1).equals("")) {
                     p_avg = purge_list.get(2).toString();
                     p_min = purge_list.get(3).toString();

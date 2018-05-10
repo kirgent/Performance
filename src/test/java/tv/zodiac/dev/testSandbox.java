@@ -34,7 +34,7 @@ public class testSandbox extends API {
 
     @Test
     public void testOperation_NewAPI_400_Bad_request() throws IOException {
-        ArrayList actual = AMS.request(mac, Operation.blablabla, count_reminders, reminderProgramStart, reminderChannelNumber, reminderProgramId, reminderOffset, reminderScheduleId, reminderId);
+        ArrayList actual = AMS.request(ams_ip, mac, Operation.blablabla, count_reminders, reminderProgramStart, reminderChannelNumber, reminderProgramId, reminderOffset, reminderScheduleId, reminderId);
         assertEquals(expected400, actual.get(0));
         assertEquals("", actual.get(1));
     }
@@ -74,7 +74,7 @@ public class testSandbox extends API {
 
     @Test
     public void testCheck_Delete() throws IOException {
-        ArrayList actual = AMS.request(mac, Operation.delete, count_reminders, reminderProgramStart, reminderChannelNumber, reminderProgramId, reminderOffset, reminderScheduleId, reminderId);
+        ArrayList actual = AMS.request(ams_ip, mac, Operation.delete, count_reminders, reminderProgramStart, reminderChannelNumber, reminderProgramId, reminderOffset, reminderScheduleId, reminderId);
         assertEquals(expected200, actual.get(0));
         assertEquals("", actual.get(1));
     }

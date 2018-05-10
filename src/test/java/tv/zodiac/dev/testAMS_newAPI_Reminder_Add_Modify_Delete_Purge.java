@@ -24,7 +24,7 @@ class testAMS_newAPI_Reminder_Add_Modify_Delete_Purge extends API {
     @Deprecated
     void test1_Add() throws IOException {
         ArrayList actual;
-        actual = AMS.request(mac, Operation.add, count_reminders, reminderProgramStart, reminderChannelNumber, reminderProgramId, reminderOffset, reminderScheduleId, reminderId);
+        actual = AMS.request(ams_ip, mac, Operation.add, count_reminders, reminderProgramStart, reminderChannelNumber, reminderProgramId, reminderOffset, reminderScheduleId, reminderId);
         assertEquals(expected200, actual.get(0));
         assertEquals("", actual.get(1));
         //System.out.println("[DBG] average add time: " + get_average_time(list_add_time));
@@ -34,11 +34,11 @@ class testAMS_newAPI_Reminder_Add_Modify_Delete_Purge extends API {
     @Deprecated
     void test2_Add_Modify() throws IOException {
         ArrayList actual;
-        actual = AMS.request(mac, Operation.add, count_reminders, reminderProgramStart, reminderChannelNumber, reminderProgramId, reminderOffset, reminderScheduleId, reminderId);
+        actual = AMS.request(ams_ip, mac, Operation.add, count_reminders, reminderProgramStart, reminderChannelNumber, reminderProgramId, reminderOffset, reminderScheduleId, reminderId);
         assertEquals(expected200, actual.get(0));
         assertEquals("", actual.get(1));
 
-        actual = AMS.request(mac, Operation.modify, count_reminders, reminderProgramStart, reminderChannelNumber, reminderProgramId, reminderOffset_new, reminderScheduleId, reminderId);
+        actual = AMS.request(ams_ip, mac, Operation.modify, count_reminders, reminderProgramStart, reminderChannelNumber, reminderProgramId, reminderOffset_new, reminderScheduleId, reminderId);
         assertEquals(expected200, actual.get(0));
         assertEquals("", actual.get(1));
     }
@@ -47,15 +47,15 @@ class testAMS_newAPI_Reminder_Add_Modify_Delete_Purge extends API {
     @Deprecated
     void test3_Add_Modify_Delete() throws IOException {
         ArrayList actual;
-        actual = AMS.request(mac, Operation.add, count_reminders, reminderProgramStart, reminderChannelNumber, reminderProgramId, reminderOffset, reminderScheduleId, reminderId);
+        actual = AMS.request(ams_ip, mac, Operation.add, count_reminders, reminderProgramStart, reminderChannelNumber, reminderProgramId, reminderOffset, reminderScheduleId, reminderId);
         assertEquals(expected200, actual.get(0));
         assertEquals("", actual.get(1));
 
-        actual = AMS.request(mac, Operation.modify, count_reminders, reminderProgramStart, reminderChannelNumber, reminderProgramId, reminderOffset_new, reminderScheduleId, reminderId);
+        actual = AMS.request(ams_ip, mac, Operation.modify, count_reminders, reminderProgramStart, reminderChannelNumber, reminderProgramId, reminderOffset_new, reminderScheduleId, reminderId);
         assertEquals(expected200, actual.get(0));
         assertEquals("", actual.get(1));
 
-        actual = AMS.request(mac, Operation.delete, count_reminders, reminderScheduleId, reminderId);
+        actual = AMS.request(ams_ip, mac, Operation.delete, count_reminders, reminderScheduleId, reminderId);
         assertEquals(expected200, actual.get(0));
         assertEquals("", actual.get(1));
     }
@@ -64,18 +64,18 @@ class testAMS_newAPI_Reminder_Add_Modify_Delete_Purge extends API {
     @Deprecated
     void test4_Add_Delete() throws IOException, InterruptedException {
         ArrayList actual;
-        actual = AMS.request(mac, Operation.add, count_reminders, reminderProgramStart, reminderChannelNumber, reminderProgramId, reminderOffset, reminderScheduleId, reminderId);
+        actual = AMS.request(ams_ip, mac, Operation.add, count_reminders, reminderProgramStart, reminderChannelNumber, reminderProgramId, reminderOffset, reminderScheduleId, reminderId);
         assertEquals(expected200, actual.get(0));
         assertEquals("", actual.get(1));
 
-        actual = AMS.request(mac, Operation.delete, count_reminders, reminderScheduleId, reminderId);
+        actual = AMS.request(ams_ip, mac, Operation.delete, count_reminders, reminderScheduleId, reminderId);
         assertEquals(expected200, actual.get(0));
         assertEquals("", actual.get(1));
     }
 
     @AfterEach
     void testPurge() throws IOException {
-        ArrayList actual = AMS.request(mac, Operation.purge);
+        ArrayList actual = AMS.request(ams_ip, mac, Operation.purge);
         assertEquals(expected200, actual.get(0));
         assertEquals("", actual.get(1));
         //System.out.println("[DBG] average purge time:" + get_average_time(list_purge_time));

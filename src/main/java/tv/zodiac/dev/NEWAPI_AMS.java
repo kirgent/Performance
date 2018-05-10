@@ -30,7 +30,7 @@ class NEWAPI_AMS extends API{
      * @return arrayList
      * @throws IOException -TBD
      */
-    ArrayList request(String mac, Enum<Operation> operation, int count, String reminderProgramStart, long reminderChannelNumber, String reminderProgramId, long reminderOffset, long reminderScheduleId, long reminderId) throws IOException {
+    ArrayList request(String ams_ip, String mac, Enum<Operation> operation, int count, String reminderProgramStart, long reminderChannelNumber, String reminderProgramId, long reminderOffset, long reminderScheduleId, long reminderId) throws IOException {
         if(show_extra_info) {
             if(count>1){
                 System.out.println(operation + " for macaddress=" + mac + " to ams_ip=" + ams_ip + ", "
@@ -105,8 +105,7 @@ class NEWAPI_AMS extends API{
      * @return arrayList
      * @throws IOException -TBD
      */
-    ArrayList request(String mac, Enum<Operation> operation, int count, long reminderScheduleId, long reminderId) throws IOException {
-        Boolean used_delete_operation = true;
+    ArrayList request(String ams_ip, String mac, Enum<Operation> operation, int count, long reminderScheduleId, long reminderId) throws IOException {
         if(show_extra_info) {
             if(count>1) {
                 System.out.println("delete for macaddress=" + mac + ", ams_ip=" + ams_ip + ", "
@@ -156,7 +155,7 @@ class NEWAPI_AMS extends API{
      * @return arrayList
      * @throws IOException - TBD
      */
-    ArrayList request(String mac, Enum<Operation> operation) throws IOException {
+    ArrayList request(String ams_ip, String mac, Enum<Operation> operation) throws IOException {
         if(show_extra_info) {
             System.out.println(operation + " for macaddress=" + mac + " to ams_ip=" + ams_ip);
         }
@@ -207,7 +206,7 @@ class NEWAPI_AMS extends API{
      * @throws IOException - TBD
      */
     @Deprecated
-    ArrayList request(String mac, Enum<Operation> operation, int count, String[] rack_date, int[] rack_channel, String reminderProgramId, int reminderOffset, long reminderScheduleId, long reminderId) throws IOException {
+    ArrayList request(String ams_ip, String mac, Enum<Operation> operation, int count, String[] rack_date, int[] rack_channel, String reminderProgramId, int reminderOffset, long reminderScheduleId, long reminderId) throws IOException {
         if(show_extra_info) {
             System.out.println(operation + " for macaddress=" + mac + ", ams_ip=" + ams_ip + ", "
                     + "count=" + count + ", "
@@ -477,8 +476,6 @@ class NEWAPI_AMS extends API{
         }
         return result;
     }
-
-
 
     ArrayList Change_settings(String mac, String option, String value) throws IOException {
         System.out.println("Change settings for macaddress=" + mac + ", ams_ip=" + ams_ip + " option=" + option + ", value=" + value);
