@@ -14,8 +14,8 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 class testAMS_oldAPI_Performance extends API{
 
     private OLDAPI_AMS AMS = new OLDAPI_AMS();
-    final private int countrepeat = 1;
-    final private int count = 2;
+    final private int count_iterations = 1;
+    final private int count_reminders = 2;
     String mac = boxMoto2145_173;
     private String ams_ip = ams_ip_19;
 
@@ -26,11 +26,11 @@ class testAMS_oldAPI_Performance extends API{
         String a_avg = "", a_min = "", a_max="",
                 p_avg = "", p_min = "", p_max="";
 
-        for (int i = 1; i <= countrepeat; i++) {
+        for (int i = 1; i <= count_iterations; i++) {
             System.out.println("========= ========= =========\nIteration = " + i);
             long reminderChannelNumber = reminderChannelNumber();
             long reminderOffset = reminderOffset();
-            add_avg_list = AMS.request(ams_ip, mac, Operation.add, count, reminderChannelNumber, reminderProgramStart, reminderProgramId, reminderOffset);
+            add_avg_list = AMS.request(ams_ip, mac, Operation.add, count_reminders, reminderChannelNumber, reminderProgramStart, reminderProgramId, reminderOffset);
             assertEquals(expected200, add_avg_list.get(0));
             assertEquals("", add_avg_list.get(1));
             if(add_avg_list.get(1).equals("")) {
@@ -55,18 +55,18 @@ class testAMS_oldAPI_Performance extends API{
     }
 
     @Test
-    void test4_Add_Delete_Purge() throws IOException {
+    void test2_Add_Delete_Purge() throws IOException {
         ArrayList add_avg_list,
                 delete_avg_list = new ArrayList(),
                 purge_avg_list = new ArrayList();
         String a_avg = "", a_min = "", a_max="",
                 d_avg = "", d_min = "", d_max="",
                 p_avg = "", p_min = "", p_max="";
-        for (int i = 1; i <= countrepeat; i++) {
+        for (int i = 1; i <= count_iterations; i++) {
             System.out.println("========= ========= =========\nIteration = " + i);
             long reminderChannelNumber = reminderChannelNumber();
             long reminderOffset = reminderOffset();
-            add_avg_list = AMS.request(ams_ip, mac, Operation.add, count, reminderChannelNumber, reminderProgramStart, reminderProgramId, reminderOffset);
+            add_avg_list = AMS.request(ams_ip, mac, Operation.add, count_reminders, reminderChannelNumber, reminderProgramStart, reminderProgramId, reminderOffset);
             assertEquals(expected200, add_avg_list.get(0));
             assertEquals("", add_avg_list.get(1));
             if (add_avg_list.get(1).equals("")) {
@@ -74,7 +74,7 @@ class testAMS_oldAPI_Performance extends API{
                 a_min = add_avg_list.get(3).toString();
                 a_max = add_avg_list.get(4).toString();
 
-                delete_avg_list = AMS.request(ams_ip, mac, Operation.delete, count, reminderChannelNumber, reminderProgramStart, reminderProgramId, reminderOffset);
+                delete_avg_list = AMS.request(ams_ip, mac, Operation.delete, count_reminders, reminderChannelNumber, reminderProgramStart, reminderProgramId, reminderOffset);
                 if(delete_avg_list.get(1).equals("")) {
                     d_avg = delete_avg_list.get(2).toString();
                     d_min = delete_avg_list.get(3).toString();

@@ -14,17 +14,17 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 class testAMS_newAPI_Reminder_Delete extends API {
 
     private NEWAPI_AMS AMS = new NEWAPI_AMS();
-    final private int countrepeat = 10;
-    final private int count = 2;
+    final private int count_iterations = 10;
+    final private int count_reminders = 2;
 
-    @RepeatedTest(countrepeat)
+    @RepeatedTest(count_iterations)
     void testDelete() throws IOException {
         ArrayList actual;
-        actual = AMS.request(mac, Operation.add, count, reminderProgramStart, reminderChannelNumber, reminderProgramId, reminderOffset, reminderScheduleId, reminderId);
+        actual = AMS.request(mac, Operation.add, count_reminders, reminderProgramStart, reminderChannelNumber, reminderProgramId, reminderOffset, reminderScheduleId, reminderId);
         assertEquals(expected200, actual.get(0));
         assertEquals("", actual.get(1));
 
-        actual = AMS.request(mac, Operation.delete, count, reminderScheduleId, reminderId);
+        actual = AMS.request(mac, Operation.delete, count_reminders, reminderScheduleId, reminderId);
         assertEquals(expected200, actual.get(0));
         assertEquals("", actual.get(1));
     }
@@ -32,16 +32,16 @@ class testAMS_newAPI_Reminder_Delete extends API {
     @Test
     void testDelete__statusCode3() throws IOException {
         //todo
-        int count = 1;
-        ArrayList actual = AMS.request(mac, Operation.delete, count, reminderScheduleId, reminderId);
+        int count_reminders = 1;
+        ArrayList actual = AMS.request(mac, Operation.delete, count_reminders, reminderScheduleId, reminderId);
         assertEquals(expected200, actual.get(0));
         assertEquals("3", actual.get(1));
     }
 
     @Test
     void testDelete_count_is_0() throws IOException {
-        int count = 0;
-        ArrayList actual = AMS.request(mac, Operation.delete, count, reminderScheduleId, reminderId);
+        int count_reminders = 0;
+        ArrayList actual = AMS.request(mac, Operation.delete, count_reminders, reminderScheduleId, reminderId);
         assertEquals(expected400, actual.get(0));
         assertEquals("REM-008 Reminders parsing error: wrong number of reminders", actual.get(1));
     }
@@ -49,8 +49,8 @@ class testAMS_newAPI_Reminder_Delete extends API {
     @Test
     void testDelete_macaddress_empty() throws IOException {
         //todo
-        int count = 1;
-        ArrayList actual = AMS.request("", Operation.delete, count, reminderScheduleId, reminderId);
+        int count_reminders = 1;
+        ArrayList actual = AMS.request("", Operation.delete, count_reminders, reminderScheduleId, reminderId);
         assertEquals(expected400, actual.get(0));
         assertEquals("REM-008 Reminders parsing error: wrong deviceId", actual.get(1));
     }
@@ -58,8 +58,8 @@ class testAMS_newAPI_Reminder_Delete extends API {
     @Test
     void testDelete_macaddress_wrong_unknown_MAC() throws IOException {
         //todo
-        int count = 1;
-        ArrayList actual = AMS.request(mac_wrong, Operation.delete, count, reminderScheduleId, reminderId);
+        int count_reminders = 1;
+        ArrayList actual = AMS.request(mac_wrong, Operation.delete, count_reminders, reminderScheduleId, reminderId);
         assertEquals(expected200, actual.get(0));
         assertEquals("unknown MAC", actual.get(1));
     }
@@ -67,8 +67,8 @@ class testAMS_newAPI_Reminder_Delete extends API {
     @Test
     void testDelete_macaddress_wrong() throws IOException {
         //todo
-        int count = 1;
-        ArrayList actual = AMS.request(mac_wrong, Operation.delete, count, reminderScheduleId, reminderId);
+        int count_reminders = 1;
+        ArrayList actual = AMS.request(mac_wrong, Operation.delete, count_reminders, reminderScheduleId, reminderId);
         assertEquals(expected200, actual.get(0));
         assertEquals("unknown MAC", actual.get(1));
     }
@@ -76,8 +76,8 @@ class testAMS_newAPI_Reminder_Delete extends API {
     @Test
     void testDelete_reminderId_0() throws IOException {
         //todo
-        int count = 1;
-        ArrayList actual = AMS.request(mac, Operation.delete, count, reminderScheduleId, 0);
+        int count_reminders = 1;
+        ArrayList actual = AMS.request(mac, Operation.delete, count_reminders, reminderScheduleId, 0);
         assertEquals(expected200, actual.get(0));
         assertEquals("4", actual.get(1));
     }
@@ -85,22 +85,22 @@ class testAMS_newAPI_Reminder_Delete extends API {
     @Test
     void testDelete_reminderId_empty() throws IOException {
         //todo
-        int count = 1;
-        ArrayList actual = AMS.request(mac, Operation.delete, count, reminderScheduleId, -1);
+        int count_reminders = 1;
+        ArrayList actual = AMS.request(mac, Operation.delete, count_reminders, reminderScheduleId, -1);
         assertEquals(expected500, actual.get(0));
         assertEquals("name cannot be null", actual.get(1));
     }
 
-    @RepeatedTest(countrepeat)
+    @RepeatedTest(count_iterations)
     void testDelete_reminderId_MAX_VALUE() throws IOException {
         //todo
-        int count = 1;
+        int count_reminders = 1;
         ArrayList actual;
-        actual = AMS.request(mac, Operation.add, count, reminderProgramStart, reminderChannelNumber, reminderProgramId, reminderOffset, reminderScheduleId, Long.MAX_VALUE);
+        actual = AMS.request(mac, Operation.add, count_reminders, reminderProgramStart, reminderChannelNumber, reminderProgramId, reminderOffset, reminderScheduleId, Long.MAX_VALUE);
         assertEquals(expected200, actual.get(0));
         assertEquals("", actual.get(1));
 
-        actual = AMS.request(mac, Operation.delete, count, reminderScheduleId, Long.MAX_VALUE);
+        actual = AMS.request(mac, Operation.delete, count_reminders, reminderScheduleId, Long.MAX_VALUE);
         assertEquals(expected200, actual.get(0));
         assertEquals("", actual.get(1));
     }
@@ -108,8 +108,8 @@ class testAMS_newAPI_Reminder_Delete extends API {
     @Test
     void testDelete_reminderId_MIN_VALUE() throws IOException {
         //todo
-        int count = 1;
-        ArrayList actual = AMS.request(mac, Operation.delete, count, reminderScheduleId, Long.MIN_VALUE);
+        int count_reminders = 1;
+        ArrayList actual = AMS.request(mac, Operation.delete, count_reminders, reminderScheduleId, Long.MIN_VALUE);
         assertEquals(expected400, actual.get(0));
         assertEquals("REM-008 Reminders parsing error: incorrect reminderId", actual.get(1));
     }
@@ -117,8 +117,8 @@ class testAMS_newAPI_Reminder_Delete extends API {
     @Test
     void testDelete_reminderScheduleId_0() throws IOException {
         //todo
-        int count = 1;
-        ArrayList actual = AMS.request(mac, Operation.delete, count, 0, reminderId);
+        int count_reminders = 1;
+        ArrayList actual = AMS.request(mac, Operation.delete, count_reminders, 0, reminderId);
         assertEquals(expected200, actual.get(0));
         assertEquals("4", actual.get(1));
     }
@@ -126,8 +126,8 @@ class testAMS_newAPI_Reminder_Delete extends API {
     @Test
     void testDelete_reminderScheduleId_0_reminderId_0() throws IOException {
         //todo
-        int count = 1;
-        ArrayList actual = AMS.request(mac, Operation.delete, count, 0, 0);
+        int count_reminders = 1;
+        ArrayList actual = AMS.request(mac, Operation.delete, count_reminders, 0, 0);
         assertEquals(expected200, actual.get(0));
         assertEquals("4", actual.get(1));
     }
@@ -135,8 +135,8 @@ class testAMS_newAPI_Reminder_Delete extends API {
     @Test
     void testDelete_reminderScheduleId_empty() throws IOException {
         //todo
-        int count = 1;
-        ArrayList actual = AMS.request(mac, Operation.delete, count, -1, reminderId);
+        int count_reminders = 1;
+        ArrayList actual = AMS.request(mac, Operation.delete, count_reminders, -1, reminderId);
         assertEquals(expected500, actual.get(0));
         assertEquals("name cannot be null", actual.get(1));
     }
@@ -147,36 +147,36 @@ class testAMS_newAPI_Reminder_Delete extends API {
     @Test
     void testDelete_reminderScheduleId_empty_reminderId_empty() throws IOException {
         //todo
-        int count = 1;
-        ArrayList actual = AMS.request(mac, Operation.delete, count, -1, -1);
+        int count_reminders = 1;
+        ArrayList actual = AMS.request(mac, Operation.delete, count_reminders, -1, -1);
         assertEquals(expected500, actual.get(0));
         assertEquals("name cannot be null", actual.get(1));
     }
 
-    @RepeatedTest(countrepeat)
+    @RepeatedTest(count_iterations)
     void testDelete_reminderScheduleId_MAX_VALUE() throws IOException {
         //todo
-        int count = 1;
+        int count_reminders = 1;
         ArrayList actual;
-        actual = AMS.request(mac, Operation.add, count, reminderProgramStart, reminderChannelNumber, reminderProgramId, reminderOffset, Long.MAX_VALUE, reminderId);
+        actual = AMS.request(mac, Operation.add, count_reminders, reminderProgramStart, reminderChannelNumber, reminderProgramId, reminderOffset, Long.MAX_VALUE, reminderId);
         assertEquals(expected200, actual.get(0));
         assertEquals("", actual.get(1));
 
-        actual = AMS.request(mac, Operation.delete, count, Long.MAX_VALUE, reminderId);
+        actual = AMS.request(mac, Operation.delete, count_reminders, Long.MAX_VALUE, reminderId);
         assertEquals(expected200, actual.get(0));
         assertEquals("", actual.get(1));
     }
 
-    @RepeatedTest(countrepeat)
+    @RepeatedTest(count_iterations)
     void testDelete_reminderScheduleId_MAX_VALUE_reminderId_MAX_VALUE() throws IOException {
         //todo
-        int count = 1;
+        int count_reminders = 1;
         ArrayList actual;
-        actual = AMS.request(mac, Operation.add, count, reminderProgramStart, reminderChannelNumber, reminderProgramId, reminderOffset, Long.MAX_VALUE, Long.MAX_VALUE);
+        actual = AMS.request(mac, Operation.add, count_reminders, reminderProgramStart, reminderChannelNumber, reminderProgramId, reminderOffset, Long.MAX_VALUE, Long.MAX_VALUE);
         assertEquals(expected200, actual.get(0));
         assertEquals("", actual.get(1));
 
-        actual = AMS.request(mac, Operation.delete, count, Long.MAX_VALUE, Long.MAX_VALUE);
+        actual = AMS.request(mac, Operation.delete, count_reminders, Long.MAX_VALUE, Long.MAX_VALUE);
         assertEquals(expected200, actual.get(0));
         assertEquals("", actual.get(1));
     }
@@ -184,8 +184,8 @@ class testAMS_newAPI_Reminder_Delete extends API {
     @Test
     void testDelete_reminderScheduleId_MIN_VALUE() throws IOException {
         //todo
-        int count = 1;
-        ArrayList actual = AMS.request(mac, Operation.delete, count, Long.MIN_VALUE, reminderId);
+        int count_reminders = 1;
+        ArrayList actual = AMS.request(mac, Operation.delete, count_reminders, Long.MIN_VALUE, reminderId);
         assertEquals(expected400, actual.get(0));
         assertEquals("REM-008 Reminders parsing error: incorrect reminderScheduleId", actual.get(1));
     }
@@ -193,8 +193,8 @@ class testAMS_newAPI_Reminder_Delete extends API {
     @Test
     void testDelete_reminderScheduleId_MIN_VALUE_reminderId_MIN_VALUE() throws IOException {
         //todo
-        int count = 1;
-        ArrayList actual = AMS.request(mac, Operation.delete, count, Long.MIN_VALUE, Long.MIN_VALUE);
+        int count_reminders = 1;
+        ArrayList actual = AMS.request(mac, Operation.delete, count_reminders, Long.MIN_VALUE, Long.MIN_VALUE);
         assertEquals(expected400, actual.get(0));
         assertEquals("REM-008 Reminders parsing error: incorrect reminderScheduleId", actual.get(1));
     }

@@ -16,59 +16,59 @@ import static org.junit.Assert.assertEquals;
 class testAMS_newAPI_Reminder_Add_Modify_Delete_Purge extends API {
 
     private NEWAPI_AMS AMS = new NEWAPI_AMS();
-    final private int countrepeat = 10;
-    final private int count = 1;
+    final private int count_iterations = 10;
+    final private int count_reminders = 1;
 
-    @RepeatedTest(countrepeat)
+    @RepeatedTest(count_iterations)
     @Disabled
     @Deprecated
     void test1_Add() throws IOException {
         ArrayList actual;
-        actual = AMS.request(mac, Operation.add, count, reminderProgramStart, reminderChannelNumber, reminderProgramId, reminderOffset, reminderScheduleId, reminderId);
+        actual = AMS.request(mac, Operation.add, count_reminders, reminderProgramStart, reminderChannelNumber, reminderProgramId, reminderOffset, reminderScheduleId, reminderId);
         assertEquals(expected200, actual.get(0));
         assertEquals("", actual.get(1));
         //System.out.println("[DBG] average add time: " + get_average_time(list_add_time));
     }
 
-    @RepeatedTest(countrepeat)
+    @RepeatedTest(count_iterations)
     @Deprecated
     void test2_Add_Modify() throws IOException {
         ArrayList actual;
-        actual = AMS.request(mac, Operation.add, count, reminderProgramStart, reminderChannelNumber, reminderProgramId, reminderOffset, reminderScheduleId, reminderId);
+        actual = AMS.request(mac, Operation.add, count_reminders, reminderProgramStart, reminderChannelNumber, reminderProgramId, reminderOffset, reminderScheduleId, reminderId);
         assertEquals(expected200, actual.get(0));
         assertEquals("", actual.get(1));
 
-        actual = AMS.request(mac, Operation.modify, count, reminderProgramStart, reminderChannelNumber, reminderProgramId, reminderOffset_new, reminderScheduleId, reminderId);
+        actual = AMS.request(mac, Operation.modify, count_reminders, reminderProgramStart, reminderChannelNumber, reminderProgramId, reminderOffset_new, reminderScheduleId, reminderId);
         assertEquals(expected200, actual.get(0));
         assertEquals("", actual.get(1));
     }
 
-    @RepeatedTest(countrepeat)
+    @RepeatedTest(count_iterations)
     @Deprecated
     void test3_Add_Modify_Delete() throws IOException {
         ArrayList actual;
-        actual = AMS.request(mac, Operation.add, count, reminderProgramStart, reminderChannelNumber, reminderProgramId, reminderOffset, reminderScheduleId, reminderId);
+        actual = AMS.request(mac, Operation.add, count_reminders, reminderProgramStart, reminderChannelNumber, reminderProgramId, reminderOffset, reminderScheduleId, reminderId);
         assertEquals(expected200, actual.get(0));
         assertEquals("", actual.get(1));
 
-        actual = AMS.request(mac, Operation.modify, count, reminderProgramStart, reminderChannelNumber, reminderProgramId, reminderOffset_new, reminderScheduleId, reminderId);
+        actual = AMS.request(mac, Operation.modify, count_reminders, reminderProgramStart, reminderChannelNumber, reminderProgramId, reminderOffset_new, reminderScheduleId, reminderId);
         assertEquals(expected200, actual.get(0));
         assertEquals("", actual.get(1));
 
-        actual = AMS.request(mac, Operation.delete, count, reminderScheduleId, reminderId);
+        actual = AMS.request(mac, Operation.delete, count_reminders, reminderScheduleId, reminderId);
         assertEquals(expected200, actual.get(0));
         assertEquals("", actual.get(1));
     }
 
-    @RepeatedTest(countrepeat)
+    @RepeatedTest(count_iterations)
     @Deprecated
     void test4_Add_Delete() throws IOException, InterruptedException {
         ArrayList actual;
-        actual = AMS.request(mac, Operation.add, count, reminderProgramStart, reminderChannelNumber, reminderProgramId, reminderOffset, reminderScheduleId, reminderId);
+        actual = AMS.request(mac, Operation.add, count_reminders, reminderProgramStart, reminderChannelNumber, reminderProgramId, reminderOffset, reminderScheduleId, reminderId);
         assertEquals(expected200, actual.get(0));
         assertEquals("", actual.get(1));
 
-        actual = AMS.request(mac, Operation.delete, count, reminderScheduleId, reminderId);
+        actual = AMS.request(mac, Operation.delete, count_reminders, reminderScheduleId, reminderId);
         assertEquals(expected200, actual.get(0));
         assertEquals("", actual.get(1));
     }

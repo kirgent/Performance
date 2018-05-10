@@ -98,7 +98,7 @@ public class API {
     long reminderScheduleId = reminderScheduleId();
     long reminderId = reminderId();
 
-    int count = 2;
+    int count_reminders = 2;
 
     private static String[] statuscode = {
             "0 - requested operation with the reminder was accomplished successfully. Always returned for \"Reminders Purge\" request (Request ID=3)",
