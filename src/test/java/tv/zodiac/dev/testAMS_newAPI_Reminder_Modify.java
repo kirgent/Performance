@@ -12,7 +12,7 @@ import static org.junit.Assert.assertEquals;
 /**
  * We are Headend (on localhost): chain of requests: Headend(localhost) -> AMS -> STB -> AMS -> localhost
  */
-class testAMS_API_Reminder_Modify extends API {
+class testAMS_newAPI_Reminder_Modify extends API {
     //"reminderChannelNumber": <new value for the DCN the reminder is set to>,
     //"reminderProgramStart": "<new value for the date/time of program the reminder is set to>",
     //"reminderProgramId": "<new value for the TMS Program ID the reminder is set to>",

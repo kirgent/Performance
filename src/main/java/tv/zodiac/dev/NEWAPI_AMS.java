@@ -278,7 +278,9 @@ class NEWAPI_AMS extends API{
         object_in_options.put("value", value);
 
         String result = json.toString();
-        System.out.println("generated json: " + result);
+        if(show_generated_json) {
+            System.out.println("generated json: " + result);
+        }
         return result;
     }
 
@@ -388,11 +390,6 @@ class NEWAPI_AMS extends API{
             array_reminders.add(object_in_reminders);
         }
 
-        String result = json.toString();
-        if(show_generated_json) {
-            System.out.println("generated json: " + result);
-        }
-
         if(show_extra_info) {
             if(reminderScheduleId_list.size()<=10) {
                 System.out.println("reminderScheduleId_list: size=" + reminderScheduleId_list.size());
@@ -402,6 +399,11 @@ class NEWAPI_AMS extends API{
                 System.out.println("reminderId_list        : size=" + reminderId_list.size());
                 System.out.println(": " + reminderId_list);
             }
+        }
+
+        String result = json.toString();
+        if(show_generated_json) {
+            System.out.println("generated json: " + result);
         }
         return result;
     }
@@ -443,10 +445,6 @@ class NEWAPI_AMS extends API{
             }
             array_reminders.add(object_in_reminders);
         }
-        String result = json.toString();
-        if (show_generated_json) {
-            System.out.println("generated json: " + result);
-        }
 
         if(show_extra_info) {
             if(reminderScheduleId_list.size()<=10) {
@@ -457,6 +455,11 @@ class NEWAPI_AMS extends API{
                 System.out.println("reminderId_list        : size=" + reminderId_list.size());
                 System.out.println(": " + reminderId_list);
             }
+        }
+
+        String result = json.toString();
+        if (show_generated_json) {
+            System.out.println("generated json: " + result);
         }
         return result;
     }
@@ -469,7 +472,9 @@ class NEWAPI_AMS extends API{
         json.put("reminders", array_reminders);
 
         String result = json.toString();
-        System.out.println("generated json: " + result);
+        if(show_generated_json) {
+            System.out.println("generated json: " + result);
+        }
         return result;
     }
 

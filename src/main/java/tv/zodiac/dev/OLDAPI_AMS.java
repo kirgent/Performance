@@ -129,13 +129,14 @@ class OLDAPI_AMS extends API{
         json.put("deviceId", mac);
         JSONArray array_reminders = new JSONArray();
         json.put("reminders", array_reminders);
-
         JSONObject object_in_reminders = new JSONObject();
         object_in_reminders.put("operation", "Purge");
         array_reminders.add(object_in_reminders);
 
         String result = json.toString();
-        System.out.println("generated json: " + result);
+        if(show_generated_json) {
+            System.out.println("generated json: " + result);
+        }
         return result;
     }
 
