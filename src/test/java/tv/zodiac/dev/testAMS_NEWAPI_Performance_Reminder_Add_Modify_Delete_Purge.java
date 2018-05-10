@@ -12,8 +12,8 @@ import java.util.ArrayList;
 class testAMS_NEWAPI_Performance_Reminder_Add_Modify_Delete_Purge extends API{
 
     private NEWAPI_AMS AMS = new NEWAPI_AMS();
-    final private int countrepeat = 100;
-    final private int count = 500;
+    final private int countrepeat = 1;
+    final private int count = 10;
 
     @Test
     @Disabled
