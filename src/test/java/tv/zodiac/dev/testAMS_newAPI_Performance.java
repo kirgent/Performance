@@ -32,7 +32,7 @@ class testAMS_newAPI_Performance extends API{
             long reminderScheduleId = reminderScheduleId();
             long reminderId = reminderId();
             add_list = AMS.request(ams_ip, mac, Operation.add, count_reminders, reminderProgramStart, reminderChannelNumber, reminderProgramId, reminderOffset, reminderScheduleId, reminderId);
-            if(add_list.get(1).equals(expected200) && add_list.get(1).equals("")) {
+            if(add_list.get(0).equals(expected200) && add_list.get(1).equals("")) {
                 a_avg = add_list.get(2).toString();
                 a_min = add_list.get(3).toString();
                 a_max = add_list.get(4).toString();
@@ -75,7 +75,7 @@ class testAMS_newAPI_Performance extends API{
             long reminderScheduleId = reminderScheduleId();
             long reminderId = reminderId();
             add_list = AMS.request(ams_ip, mac, Operation.add, count_reminders, reminderProgramStart, reminderChannelNumber, reminderProgramId, reminderOffset, reminderScheduleId, reminderId);
-            if(add_list.get(1).equals(expected200) && add_list.get(1).equals("")) {
+            if(add_list.get(0).equals(expected200) && add_list.get(1).equals("")) {
                 a_avg = add_list.get(2).toString();
                 a_min = add_list.get(3).toString();
                 a_max = add_list.get(4).toString();
@@ -130,7 +130,7 @@ class testAMS_newAPI_Performance extends API{
             long reminderScheduleId = reminderScheduleId();
             long reminderId = reminderId();
             add_list = AMS.request(ams_ip, mac, Operation.add, count_reminders, reminderProgramStart, reminderChannelNumber, reminderProgramId, reminderOffset, reminderScheduleId, reminderId);
-            if(add_list.get(1).equals(expected200) && add_list.get(1).equals("")) {
+            if(add_list.get(0).equals(expected200) && add_list.get(1).equals("")) {
                 a_avg = add_list.get(2).toString();
                 a_min = add_list.get(3).toString();
                 a_max = add_list.get(4).toString();

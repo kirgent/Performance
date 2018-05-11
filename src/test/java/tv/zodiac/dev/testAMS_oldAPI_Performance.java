@@ -21,8 +21,8 @@ class testAMS_oldAPI_Performance extends API{
 
     @Test
     void test1_Add_Purge() throws IOException {
-        ArrayList add_avg_list,
-                purge_avg_list = new ArrayList();
+        ArrayList add_list,
+                purge_list = new ArrayList();
         String a_avg = "", a_min = "", a_max="",
                 p_avg = "", p_min = "", p_max="";
 
@@ -30,23 +30,23 @@ class testAMS_oldAPI_Performance extends API{
             System.out.println("========= ========= =========\nIteration = " + i);
             int reminderChannelNumber = reminderChannelNumber();
             long reminderOffset = reminderOffset();
-            add_avg_list = AMS.request(ams_ip, mac, Operation.add, count_reminders, reminderChannelNumber, reminderProgramStart, reminderProgramId, reminderOffset);
-            assertEquals(expected200, add_avg_list.get(0));
-            assertEquals("", add_avg_list.get(1));
-            if(add_avg_list.get(1).equals("")) {
-                a_avg = add_avg_list.get(2).toString();
-                a_min = add_avg_list.get(3).toString();
-                a_max = add_avg_list.get(4).toString();
+            add_list = AMS.request(ams_ip, mac, Operation.add, count_reminders, reminderChannelNumber, reminderProgramStart, reminderProgramId, reminderOffset);
+            assertEquals(expected200, add_list.get(0));
+            assertEquals("", add_list.get(1));
+            if(add_list.get(1).equals("")) {
+                a_avg = add_list.get(2).toString();
+                a_min = add_list.get(3).toString();
+                a_max = add_list.get(4).toString();
 
-                purge_avg_list = AMS.request(ams_ip, mac);
-                if(purge_avg_list.get(1).equals("")) {
-                    p_avg = purge_avg_list.get(2).toString();
-                    p_min = purge_avg_list.get(3).toString();
-                    p_max = purge_avg_list.get(4).toString();
+                purge_list = AMS.request(ams_ip, mac);
+                if(purge_list.get(1).equals("")) {
+                    p_avg = purge_list.get(2).toString();
+                    p_min = purge_list.get(3).toString();
+                    p_max = purge_list.get(4).toString();
                 }
             }
-            add_avg_list.clear();
-            purge_avg_list.clear();
+            add_list.clear();
+            purge_list.clear();
         }
         System.out.println("========= ========= ========= ========= ========= ========="
                 + "\nFINISH   add avg = " + a_avg + ", min=" + a_min + ", max=" + a_max
@@ -56,9 +56,9 @@ class testAMS_oldAPI_Performance extends API{
 
     @Test
     void test2_Add_Delete_Purge() throws IOException {
-        ArrayList add_avg_list,
-                delete_avg_list = new ArrayList(),
-                purge_avg_list = new ArrayList();
+        ArrayList add_list,
+                delete_list = new ArrayList(),
+                purge_list = new ArrayList();
         String a_avg = "", a_min = "", a_max="",
                 d_avg = "", d_min = "", d_max="",
                 p_avg = "", p_min = "", p_max="";
@@ -66,31 +66,31 @@ class testAMS_oldAPI_Performance extends API{
             System.out.println("========= ========= =========\nIteration = " + i);
             int reminderChannelNumber = reminderChannelNumber();
             long reminderOffset = reminderOffset();
-            add_avg_list = AMS.request(ams_ip, mac, Operation.add, count_reminders, reminderChannelNumber, reminderProgramStart, reminderProgramId, reminderOffset);
-            assertEquals(expected200, add_avg_list.get(0));
-            assertEquals("", add_avg_list.get(1));
-            if (add_avg_list.get(1).equals("")) {
-                a_avg = add_avg_list.get(2).toString();
-                a_min = add_avg_list.get(3).toString();
-                a_max = add_avg_list.get(4).toString();
+            add_list = AMS.request(ams_ip, mac, Operation.add, count_reminders, reminderChannelNumber, reminderProgramStart, reminderProgramId, reminderOffset);
+            assertEquals(expected200, add_list.get(0));
+            assertEquals("", add_list.get(1));
+            if (add_list.get(1).equals("")) {
+                a_avg = add_list.get(2).toString();
+                a_min = add_list.get(3).toString();
+                a_max = add_list.get(4).toString();
 
-                delete_avg_list = AMS.request(ams_ip, mac, Operation.delete, count_reminders, reminderChannelNumber, reminderProgramStart, reminderProgramId, reminderOffset);
-                if(delete_avg_list.get(1).equals("")) {
-                    d_avg = delete_avg_list.get(2).toString();
-                    d_min = delete_avg_list.get(3).toString();
-                    d_max = delete_avg_list.get(4).toString();
+                delete_list = AMS.request(ams_ip, mac, Operation.delete, count_reminders, reminderChannelNumber, reminderProgramStart, reminderProgramId, reminderOffset);
+                if(delete_list.get(1).equals("")) {
+                    d_avg = delete_list.get(2).toString();
+                    d_min = delete_list.get(3).toString();
+                    d_max = delete_list.get(4).toString();
                 }
 
-                purge_avg_list = AMS.request(ams_ip, mac);
-                if(purge_avg_list.get(1).equals("")) {
-                    p_avg = purge_avg_list.get(2).toString();
-                    p_min = purge_avg_list.get(3).toString();
-                    p_max = purge_avg_list.get(4).toString();
+                purge_list = AMS.request(ams_ip, mac);
+                if(purge_list.get(1).equals("")) {
+                    p_avg = purge_list.get(2).toString();
+                    p_min = purge_list.get(3).toString();
+                    p_max = purge_list.get(4).toString();
                 }
             }
-            add_avg_list.clear();
-            delete_avg_list.clear();
-            purge_avg_list.clear();
+            add_list.clear();
+            delete_list.clear();
+            purge_list.clear();
         }
         System.out.println("========= ========= ========= ========= ========= ========="
                 + "\nFINISH    add avg = " + a_avg + ", min=" + a_min + ", max=" + a_max
