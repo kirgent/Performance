@@ -12,6 +12,18 @@ import java.util.ArrayList;
 
 class OLDAPI_AMS extends API{
 
+    /** Add / Delete method
+     * @param ams_ip
+     * @param mac
+     * @param operation
+     * @param count_reminders
+     * @param reminderChannelNumber
+     * @param reminderProgramStart
+     * @param reminderProgramId
+     * @param reminderOffset
+     * @return
+     * @throws IOException
+     */
     ArrayList request(String ams_ip, String mac, Enum<Operation> operation, int count_reminders, long reminderChannelNumber, String reminderProgramStart, String reminderProgramId, long reminderOffset) throws IOException {
         if(show_debug_info) {
             System.out.println(operation + " for macaddress=" + mac + " to ams_ip=" + ams_ip + ", "
@@ -37,9 +49,8 @@ class OLDAPI_AMS extends API{
         ArrayList arrayList = new ArrayList();
         arrayList.add(0, response.getStatusLine().getStatusCode() + " " + response.getStatusLine().getReasonPhrase());
         arrayList.add(1, check_body_response(read_response(new StringBuilder(),response).toString(), mac));
-
-        if (operation.name().equals("add")) {
-            if (arrayList.get(1).equals("")) {
+        if (arrayList.get(1).equals("")) {
+            if (operation.name().equals("add")) {
                 add_avg_list.add((int) diff);
                 int avg = get_average_time(add_avg_list);
                 arrayList.add(2, avg + "ms/" + add_avg_list.size());
@@ -50,16 +61,16 @@ class OLDAPI_AMS extends API{
                         System.out.println("[DBG] add avg = " + avg + "ms/" + add_avg_list.size() + ": add_list:" + add_avg_list);
                     }
                 }
-            }
-        } else if (operation.name().equals("modify")) {
-            modify_avg_list.add((int)diff);
-            int avg = get_average_time(modify_avg_list);
-            arrayList.add(2, avg + "ms/" + modify_avg_list.size());
-            arrayList.add(3, get_min_time(modify_avg_list));
-            arrayList.add(4, get_max_time(modify_avg_list));
-            if(show_debug_info) {
-                if(modify_avg_list.size()<=10) {
-                    System.out.println("[DBG] modify avg = " + avg + "ms/" + modify_avg_list.size() + ": modify_list:" + modify_avg_list);
+            } else if (operation.name().equals("delete")) {
+                delete_avg_list.add((int) diff);
+                int avg = get_average_time(delete_avg_list);
+                arrayList.add(2, avg + "ms/" + delete_avg_list.size());
+                arrayList.add(3, get_min_time(delete_avg_list));
+                arrayList.add(4, get_max_time(delete_avg_list));
+                if (show_debug_info) {
+                    if (delete_avg_list.size() <= 10) {
+                        System.out.println("[DBG] modify avg = " + avg + "ms/" + delete_avg_list.size() + ": modify_list:" + delete_avg_list);
+                    }
                 }
             }
         }
@@ -68,6 +79,12 @@ class OLDAPI_AMS extends API{
         return arrayList;
     }
 
+    /** Purge method
+     * @param ams_ip
+     * @param mac
+     * @return
+     * @throws IOException
+     */
     ArrayList request(String ams_ip, String mac) throws IOException {
         if(show_debug_info) {
             System.out.println("Purge for macaddress=" + mac + " to ams_ip=" + ams_ip);
