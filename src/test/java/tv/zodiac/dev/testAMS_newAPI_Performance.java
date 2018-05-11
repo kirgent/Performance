@@ -26,7 +26,7 @@ class testAMS_newAPI_Performance extends API{
         String a_avg = "", a_min = "", a_max="",
                 p_avg = "", p_min = "", p_max="";
         for (int i = 1; i <= count_iterations; i++) {
-            System.out.println("========= ========= =========\nIteration = " + i);
+            System.out.println("========= ========= ========= Iteration = " + i + "========= ========= =========");
             int reminderChannelNumber = reminderChannelNumber();
             long reminderOffset = reminderOffset();
             long reminderScheduleId = reminderScheduleId();
@@ -69,7 +69,7 @@ class testAMS_newAPI_Performance extends API{
                 d_avg = "", d_min = "", d_max="",
                 p_avg = "", p_min = "", p_max="";
         for (int i = 1; i <= count_iterations; i++) {
-            System.out.println("========= ========= =========\nIteration = " + i);
+            System.out.println("========= ========= ========= Iteration = " + i + "========= ========= =========");
             int reminderChannelNumber = reminderChannelNumber();
             long reminderOffset = reminderOffset();
             long reminderScheduleId = reminderScheduleId();
@@ -123,7 +123,7 @@ class testAMS_newAPI_Performance extends API{
                 d_avg = "", d_min = "", d_max="",
                 p_avg = "", p_min = "", p_max="";
         for (int i = 1; i <= count_iterations; i++) {
-            System.out.println("========= ========= =========\nIteration = " + i);
+            System.out.println("========= ========= ========= Iteration = " + i + "========= ========= =========");
             int reminderChannelNumber = reminderChannelNumber();
             long reminderOffset = reminderOffset();
             long reminderOffset_new = reminderOffset();
