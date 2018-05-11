@@ -152,9 +152,9 @@ public class API {
     }
 
     @Deprecated
-    String generate_json_test(String date, int count_remindres, String operation, int reminderOffset) {
+    String generate_json_test(String date, int count_reminders, String operation, int reminderOffset) {
         System.out.println("[DBG] [date] Generate_json: with date=" + date + ", " +
-                "count=" + count_remindres + ", " +
+                "count=" + count_reminders + ", " +
                 "operation=" + operation + ", " +
                 "reminderOffset=" + reminderOffset);
          /*
