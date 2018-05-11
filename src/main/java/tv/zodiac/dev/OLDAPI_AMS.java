@@ -25,7 +25,7 @@ class OLDAPI_AMS extends API{
      * @throws IOException
      */
     ArrayList request(String ams_ip, String mac, Enum<Operation> operation, int count_reminders, long reminderChannelNumber, String reminderProgramStart, String reminderProgramId, long reminderOffset) throws IOException {
-        if(show_debug_info) {
+        //if(show_debug_info) {
             System.out.println("[DBG] " + operation + " for macaddress=" + mac + " to ams_ip=" + ams_ip + ", "
                     + "count_reminders=" + count_reminders + ", "
                     + "operation=" + operation + ", "
@@ -33,13 +33,15 @@ class OLDAPI_AMS extends API{
                     + "reminderProgramStart=" + reminderProgramStart + ", "
                     + "reminderProgramId=" + reminderProgramId + ", "
                     + "reminderOffset=" + reminderOffset);
-        }
+        //}
 
         HttpPost request = new HttpPost(prepare_url(ams_ip, operation,false));
         request.setHeader("Accept", "application/json");
         request.setHeader("Content-type", "application/json");
         request.setEntity(new StringEntity(generate_json_reminder(mac, count_reminders, operation, reminderChannelNumber, reminderProgramStart, reminderProgramId, reminderOffset)));
-        System.out.println("[DBG] Request string: " + request);
+        if(show_debug_info) {
+            System.out.println("[DBG] Request string: " + request);
+        }
 
         long start = System.currentTimeMillis();
         HttpResponse response = HttpClients.createDefault().execute(request);
@@ -86,15 +88,17 @@ class OLDAPI_AMS extends API{
      * @throws IOException
      */
     ArrayList request(String ams_ip, String mac) throws IOException {
-        if(show_debug_info) {
+        //if(show_debug_info) {
             System.out.println("[DBG] purge for macaddress=" + mac + " to ams_ip=" + ams_ip);
-        }
+        //}
 
         HttpPost request = new HttpPost(prepare_url(ams_ip, Operation.purge, false));
         request.setHeader("Accept", "application/json");
         request.setHeader("Content-type", "application/json");
         request.setEntity(new StringEntity(generate_json_reminder_purge(mac)));
-        System.out.println("[DBG] Request string: " + request);
+        if(show_debug_info) {
+            System.out.println("[DBG] Request string: " + request);
+        }
 
         long start = System.currentTimeMillis();
         HttpResponse response = HttpClients.createDefault().execute(request);
