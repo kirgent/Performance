@@ -48,8 +48,8 @@ class testAMS_oldAPI_Performance extends API{
             purge_list.clear();
         }
         String result = "========= ========= ========= ========= ========= ========="
-                + "\nFINISH   add avg = " + a_avg + ", min=" + a_min + ", max=" + a_max
-                + "\nFINISH purge avg = " + p_avg + ", min=" + p_min + ", max=" + p_max
+                + "\nFINISH " + count_reminders + "rems,   add avg = " + a_avg + ", min=" + a_min + ", max=" + a_max
+                + "\nFINISH " + count_reminders + "rems, purge avg = " + p_avg + ", min=" + p_min + ", max=" + p_max
                 + "\n========= ========= ========= ========= ========= =========";
         System.out.println(result);
         FileWriter writer = new FileWriter("output.log", true);
@@ -97,9 +97,9 @@ class testAMS_oldAPI_Performance extends API{
             purge_list.clear();
         }
         String result = "========= ========= ========= ========= ========= ========="
-                + "\nFINISH    add avg = " + a_avg + ", min=" + a_min + ", max=" + a_max
-                + "\nFINISH delete avg = " + d_avg + ", min=" + d_min + ", max=" + d_max
-                + "\nFINISH  purge avg = " + p_avg + ", min=" + p_min + ", max=" + p_max
+                + "\nFINISH " + count_reminders + "rems,    add avg = " + a_avg + ", min=" + a_min + ", max=" + a_max
+                + "\nFINISH " + count_reminders + "rems, delete avg = " + d_avg + ", min=" + d_min + ", max=" + d_max
+                + "\nFINISH " + count_reminders + "rems,  purge avg = " + p_avg + ", min=" + p_min + ", max=" + p_max
                 + "\n========= ========= ========= ========= ========= =========";
         System.out.println(result);
         FileWriter writer = new FileWriter("output.log", true);
