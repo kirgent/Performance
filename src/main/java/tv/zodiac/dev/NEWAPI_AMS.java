@@ -82,14 +82,16 @@ class NEWAPI_AMS extends API{
                 }
             }
         } else if (operation.name().equals("modify")) {
-            modify_avg_list.add((int)diff);
-            int avg = get_average_time(modify_avg_list);
-            arrayList.add(2, avg + "ms/" + modify_avg_list.size());
-            arrayList.add(3, get_min_time(modify_avg_list));
-            arrayList.add(4, get_max_time(modify_avg_list));
-            if(show_debug_info) {
-                if(modify_avg_list.size()<=10) {
-                    System.out.println("[DBG] modify avg = " + avg + "ms/" + modify_avg_list.size() + ": modify_avg_list:" + modify_avg_list);
+            if (arrayList.get(1).equals("")) {
+                modify_avg_list.add((int) diff);
+                int avg = get_average_time(modify_avg_list);
+                arrayList.add(2, avg + "ms/" + modify_avg_list.size());
+                arrayList.add(3, get_min_time(modify_avg_list));
+                arrayList.add(4, get_max_time(modify_avg_list));
+                if (show_debug_info) {
+                    if (modify_avg_list.size() <= 10) {
+                        System.out.println("[DBG] modify avg = " + avg + "ms/" + modify_avg_list.size() + ": modify_avg_list:" + modify_avg_list);
+                    }
                 }
             }
         }
@@ -133,17 +135,18 @@ class NEWAPI_AMS extends API{
         arrayList.add(0, response.getStatusLine().getStatusCode() + " " + response.getStatusLine().getReasonPhrase());
         arrayList.add(1, check_body_response(read_response(new StringBuilder(),response).toString(), mac));
         if (arrayList.get(1).equals("")) {
-            delete_avg_list.add((int)diff);
-            int avg = get_average_time(delete_avg_list);
-            arrayList.add(2, avg + "ms/" + delete_avg_list.size());
-            arrayList.add(3, get_min_time(delete_avg_list));
-            arrayList.add(4, get_max_time(delete_avg_list));
-            if(show_debug_info) {
-                if(delete_avg_list.size()<=10) {
-                    System.out.println("[DBG] delete avg = " + avg + "ms/" + delete_avg_list.size() + ": delete_avg_list:" + delete_avg_list);
+            if(arrayList.get(1).equals("")) {
+                delete_avg_list.add((int) diff);
+                int avg = get_average_time(delete_avg_list);
+                arrayList.add(2, avg + "ms/" + delete_avg_list.size());
+                arrayList.add(3, get_min_time(delete_avg_list));
+                arrayList.add(4, get_max_time(delete_avg_list));
+                if (show_debug_info) {
+                    if (delete_avg_list.size() <= 10) {
+                        System.out.println("[DBG] delete avg = " + avg + "ms/" + delete_avg_list.size() + ": delete_avg_list:" + delete_avg_list);
+                    }
                 }
             }
-
         }
         System.out.println("[DBG] return codes: " + arrayList + "\n");
         return arrayList;
