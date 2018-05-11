@@ -20,7 +20,7 @@ class NEWAPI_AMS extends API{
     /** method for Add/Modify
      * @param mac      - mac of the box
      * @param operation       - can be Add / Modify / Delete / Purge
-     * @param count - count of reminders to generate in json {..}
+     * @param count_reminders - count_reminders of reminders to generate in json {..}
      * @param reminderProgramStart - TBD
      * @param reminderChannelNumber - TBD
      * @param reminderProgramId - TBD
@@ -30,11 +30,11 @@ class NEWAPI_AMS extends API{
      * @return arrayList
      * @throws IOException -TBD
      */
-    ArrayList request(String ams_ip, String mac, Enum<Operation> operation, int count, String reminderProgramStart, long reminderChannelNumber, String reminderProgramId, long reminderOffset, long reminderScheduleId, long reminderId) throws IOException {
+    ArrayList request(String ams_ip, String mac, Enum<Operation> operation, int count_reminders, String reminderProgramStart, long reminderChannelNumber, String reminderProgramId, long reminderOffset, long reminderScheduleId, long reminderId) throws IOException {
         if(show_extra_info) {
-            if(count>1){
+            if(count_reminders>1){
                 System.out.println(operation + " for macaddress=" + mac + " to ams_ip=" + ams_ip + ", "
-                        + "count=" + count + ", "
+                        + "count=" + count_reminders + ", "
                         + "reminderProgramStart=" + reminderProgramStart + ", "
                         + "reminderChannelNumber=" + reminderChannelNumber + ", "
                         + "reminderProgramId=" + reminderProgramId + ", "
@@ -43,7 +43,7 @@ class NEWAPI_AMS extends API{
                         + "reminderId=multi");
             } else {
                 System.out.println(operation + " for macaddress=" + mac + " to ams_ip=" + ams_ip + ", "
-                        + "count=" + count + ", "
+                        + "count=" + count_reminders + ", "
                         + "reminderProgramStart=" + reminderProgramStart + ", "
                         + "reminderChannelNumber=" + reminderChannelNumber + ", "
                         + "reminderProgramId=" + reminderProgramId + ", "
@@ -56,7 +56,7 @@ class NEWAPI_AMS extends API{
         HttpPost request = new HttpPost(prepare_url(ams_ip, operation, true));
         request.setHeader("Accept", "application/json");
         request.setHeader("Content-type", "application/json");
-        request.setEntity(new StringEntity(generate_json_reminder(mac, count, operation, reminderProgramStart, reminderChannelNumber, reminderProgramId, reminderOffset, reminderScheduleId, reminderId)));
+        request.setEntity(new StringEntity(generate_json_reminder(mac, count_reminders, operation, reminderProgramStart, reminderChannelNumber, reminderProgramId, reminderOffset, reminderScheduleId, reminderId)));
         System.out.println("[DBG] Request string: " + request);
 
         long start = System.currentTimeMillis();
@@ -105,9 +105,9 @@ class NEWAPI_AMS extends API{
      * @return arrayList
      * @throws IOException -TBD
      */
-    ArrayList request(String ams_ip, String mac, Enum<Operation> operation, int count, long reminderScheduleId, long reminderId) throws IOException {
+    ArrayList request(String ams_ip, String mac, Enum<Operation> operation, int count_reminders, long reminderScheduleId, long reminderId) throws IOException {
         if(show_extra_info) {
-            if(count>1) {
+            if(count_reminders>1) {
                 System.out.println("delete for macaddress=" + mac + ", ams_ip=" + ams_ip + ", "
                         + "reminderScheduleId=multi, "
                         + "reminderId=multi");
@@ -121,7 +121,7 @@ class NEWAPI_AMS extends API{
         HttpPost request = new HttpPost(prepare_url(ams_ip, Operation.delete, true));
         request.setHeader("Accept", "application/json");
         request.setHeader("Content-type", "application/json");
-        request.setEntity(new StringEntity(generate_json_reminder_delete(mac, count, reminderScheduleId, reminderId)));
+        request.setEntity(new StringEntity(generate_json_reminder_delete(mac, count_reminders, reminderScheduleId, reminderId)));
         System.out.println("[DBG] Request string: " + request);
 
         long start = System.currentTimeMillis();
@@ -195,7 +195,7 @@ class NEWAPI_AMS extends API{
      * RACK : Integer[] rack_channel
      * @param mac - mac of the box
      * @param operation - can be Add / Modify / Delete
-     * @param count - count of reminders to generate in json {..}
+     * @param count_reminders - count_reminders of reminders to generate in json {..}
      * @param rack_date - TBD
      * @param rack_channel - TBD
      * @param reminderProgramId - TBD
@@ -206,10 +206,10 @@ class NEWAPI_AMS extends API{
      * @throws IOException - TBD
      */
     @Deprecated
-    ArrayList request(String ams_ip, String mac, Enum<Operation> operation, int count, String[] rack_date, int[] rack_channel, String reminderProgramId, int reminderOffset, long reminderScheduleId, long reminderId) throws IOException {
+    ArrayList request(String ams_ip, String mac, Enum<Operation> operation, int count_reminders, String[] rack_date, int[] rack_channel, String reminderProgramId, int reminderOffset, long reminderScheduleId, long reminderId) throws IOException {
         if(show_extra_info) {
             System.out.println(operation + " for macaddress=" + mac + ", ams_ip=" + ams_ip + ", "
-                    + "count=" + count + ", "
+                    + "count=" + count_reminders + ", "
                     + "reminderOffset=" + reminderOffset + ", "
                     + "rack_data.length=" + rack_date.length + ", "
                     + "data=" + Arrays.asList(rack_date) + ", "
@@ -229,7 +229,7 @@ class NEWAPI_AMS extends API{
             for (int aRack_channel : rack_channel) {
                 System.out.println("operation= " + operation + ", date=" + aRack_date + ", channel=" + aRack_channel);
 
-                request.setEntity(new StringEntity(generate_json_reminder(mac, count, operation,
+                request.setEntity(new StringEntity(generate_json_reminder(mac, count_reminders, operation,
                         aRack_date, aRack_channel,
                         reminderProgramId, reminderOffset, reminderScheduleId, reminderId)));
 
@@ -283,24 +283,24 @@ class NEWAPI_AMS extends API{
         return result;
     }
 
-    private String generate_json_reminder(String mac, int count, Enum<Operation> operation, String reminderProgramStart, long reminderChannelNumber, String reminderProgramId, long reminderOffset, long reminderScheduleId, long reminderId) {
+    private String generate_json_reminder(String mac, int count_reminders, Enum<Operation> operation, String reminderProgramStart, long reminderChannelNumber, String reminderProgramId, long reminderOffset, long reminderScheduleId, long reminderId) {
         boolean first_clean_reminderScheduleId_list = true;
         boolean first_clean_reminderId_list = true;
 
-        if (count < 0) { count = 0; }
+        if (count_reminders < 0) { count_reminders = 0; }
 
-        if (count > 1440) { count = 1440; }
+        if (count_reminders > 1440) { count_reminders = 1440; }
 
         JSONObject json = new JSONObject();
         json.put("deviceId", mac);
         JSONArray array_reminders = new JSONArray();
         json.put("reminders", array_reminders);
-        for (int i = 0; i < count; i++) {
+        for (int i = 0; i < count_reminders; i++) {
             JSONObject object_in_reminders = new JSONObject();
             if (Objects.equals(reminderProgramStart, "")) {
                 object_in_reminders.put("reminderProgramStart", "");
             } else {
-                object_in_reminders.put("reminderProgramStart", reminderProgramStart + " " + get_time(count, i+1));
+                object_in_reminders.put("reminderProgramStart", reminderProgramStart + " " + get_time(count_reminders, i+1));
             }
 
             if (reminderChannelNumber == -1) {
@@ -338,7 +338,7 @@ class NEWAPI_AMS extends API{
                 object_in_reminders.put("reminderScheduleId", Long.MAX_VALUE);
             } else if (reminderScheduleId == Long.MIN_VALUE) {
                 object_in_reminders.put("reminderScheduleId", Long.MIN_VALUE);
-            } else if (count>1 && operation.name().equals("add")) {
+            } else if (count_reminders>1 && operation.name().equals("add")) {
                 //todo//todo//todo FIXME
                 if(first_clean_reminderScheduleId_list) {
                     reminderScheduleId_list.clear();
@@ -348,7 +348,7 @@ class NEWAPI_AMS extends API{
                     first_clean_reminderScheduleId_list = false;
                 }
                 object_in_reminders.put("reminderScheduleId", reminderScheduleId());
-            } else if (count>1 && operation.name().equals("modify")) {
+            } else if (count_reminders>1 && operation.name().equals("modify")) {
                 //todo//todo//todo FIXME
                 object_in_reminders.put("reminderScheduleId", reminderScheduleId_list.get(i));
             } else {
@@ -373,7 +373,7 @@ class NEWAPI_AMS extends API{
                 object_in_reminders.put("reminderId", Long.MAX_VALUE);
             } else if (reminderId == Long.MIN_VALUE) {
                 object_in_reminders.put("reminderId", Long.MIN_VALUE);
-            } else if (count>1 && operation.name().equals("add")) {
+            } else if (count_reminders>1 && operation.name().equals("add")) {
                 if(first_clean_reminderId_list) {
                     //todo//todo//todo FIXME
                     reminderId_list.clear();
@@ -383,7 +383,7 @@ class NEWAPI_AMS extends API{
                     first_clean_reminderId_list = false;
                 }
                 object_in_reminders.put("reminderId", reminderId());
-            } else if (count>1 && operation.name().equals("modify")) {
+            } else if (count_reminders>1 && operation.name().equals("modify")) {
                 //todo//todo//todo FIXME
                 object_in_reminders.put("reminderId", reminderId_list.get(i));
             } else {
@@ -411,12 +411,12 @@ class NEWAPI_AMS extends API{
         return result;
     }
 
-    private String generate_json_reminder_delete(String mac, int count, long reminderScheduleId, long reminderId) {
+    private String generate_json_reminder_delete(String mac, int count_reminders, long reminderScheduleId, long reminderId) {
         JSONObject json = new JSONObject();
         json.put("deviceId", mac);
         JSONArray array_reminders = new JSONArray();
         json.put("reminders", array_reminders);
-        for (int i = 0; i < count; i++) {
+        for (int i = 0; i < count_reminders; i++) {
             JSONObject object_in_reminders = new JSONObject();
 
             if (reminderScheduleId == 0) {
@@ -427,7 +427,7 @@ class NEWAPI_AMS extends API{
                 object_in_reminders.put("reminderScheduleId", Long.MAX_VALUE);
             } else if (reminderScheduleId == Long.MIN_VALUE) {
                 object_in_reminders.put("reminderScheduleId", Long.MIN_VALUE);
-            } else if (count > 1) {
+            } else if (count_reminders > 1) {
                 object_in_reminders.put("reminderScheduleId", reminderScheduleId_list.get(i));
             } else {
                 object_in_reminders.put("reminderScheduleId", reminderScheduleId);
@@ -441,7 +441,7 @@ class NEWAPI_AMS extends API{
                 object_in_reminders.put("reminderId", Long.MAX_VALUE);
             } else if (reminderId == Long.MIN_VALUE) {
                 object_in_reminders.put("reminderId", Long.MIN_VALUE);
-            } else if (count > 1) {
+            } else if (count_reminders > 1) {
                 object_in_reminders.put("reminderId", reminderId_list.get(i));
             } else {
                 object_in_reminders.put("reminderId", reminderId);
