@@ -40,7 +40,7 @@ class OLDAPI_AMS extends API{
         request.setHeader("Content-type", "application/json");
         request.setEntity(new StringEntity(generate_json_reminder(mac, count_reminders, operation, reminderChannelNumber, reminderProgramStart, reminderProgramId, reminderOffset)));
         if(show_debug_info) {
-            System.out.println("[DBG] Request string: " + request);
+            System.out.println("[DBG] request string: " + request);
         }
 
         long start = System.currentTimeMillis();
@@ -97,7 +97,7 @@ class OLDAPI_AMS extends API{
         request.setHeader("Content-type", "application/json");
         request.setEntity(new StringEntity(generate_json_reminder_purge(mac)));
         if(show_debug_info) {
-            System.out.println("[DBG] Request string: " + request);
+            System.out.println("[DBG] request string: " + request);
         }
 
         long start = System.currentTimeMillis();

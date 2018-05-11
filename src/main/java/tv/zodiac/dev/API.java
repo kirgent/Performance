@@ -346,13 +346,13 @@ public class API {
         HttpGet request = new HttpGet(uri);
         request.setHeader("Content-type", "application/json");
         request.setHeader("Cache-Control", "no-cache");
-        System.out.println("[DBG] Request string: " + request);
+        System.out.println("[DBG] request string: " + request);
         return request;
     }
 
     HttpPost prepare_post_request(String uri){
         HttpPost request = new HttpPost(uri);
-        System.out.println("[DBG] Request string: " + request);
+        System.out.println("[DBG] request string: " + request);
         return request;
     }
 

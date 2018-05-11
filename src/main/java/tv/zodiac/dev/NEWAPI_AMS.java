@@ -58,7 +58,7 @@ class NEWAPI_AMS extends API{
         request.setHeader("Content-type", "application/json");
         request.setEntity(new StringEntity(generate_json_reminder(mac, count_reminders, operation, reminderProgramStart, reminderChannelNumber, reminderProgramId, reminderOffset, reminderScheduleId, reminderId)));
         if(show_debug_info) {
-            System.out.println("[DBG] Request string: " + request);
+            System.out.println("[DBG] request string: " + request);
         }
 
         long start = System.currentTimeMillis();
@@ -124,7 +124,7 @@ class NEWAPI_AMS extends API{
         request.setHeader("Content-type", "application/json");
         request.setEntity(new StringEntity(generate_json_reminder_delete(mac, count_reminders, reminderScheduleId, reminderId)));
         if(show_debug_info) {
-            System.out.println("[DBG] Request string: " + request);
+            System.out.println("[DBG] request string: " + request);
         }
 
         long start = System.currentTimeMillis();
@@ -168,7 +168,7 @@ class NEWAPI_AMS extends API{
         request.setHeader("Content-type", "application/json");
         request.setEntity(new StringEntity(generate_json_reminder_purge(mac)));
         if(show_debug_info) {
-            System.out.println("[DBG] Request string: " + request);
+            System.out.println("[DBG] request string: " + request);
         }
 
         long start = currentTimeMillis();
@@ -226,7 +226,7 @@ class NEWAPI_AMS extends API{
         request.setHeader("Accept", "application/json");
         request.setHeader("Content-type", "application/json");
         if(show_debug_info) {
-            System.out.println("[DBG] Request string: " + request);
+            System.out.println("[DBG] request string: " + request);
         }
 
         HttpClient client = HttpClients.createDefault();
@@ -495,7 +495,7 @@ class NEWAPI_AMS extends API{
         request.setHeader("Accept", "application/json");
         request.setHeader("Content-type", "application/json");
         if(show_debug_info) {
-            System.out.println("[DBG] Request string: " + request);
+            System.out.println("[DBG] request string: " + request);
         }
         //+ "\n[DBG] Request entity: " + request.getEntity());
 
