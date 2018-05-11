@@ -28,7 +28,7 @@ class testAMS_oldAPI_Performance extends API{
 
         for (int i = 1; i <= count_iterations; i++) {
             System.out.println("========= ========= =========\nIteration = " + i);
-            long reminderChannelNumber = reminderChannelNumber();
+            int reminderChannelNumber = reminderChannelNumber();
             long reminderOffset = reminderOffset();
             add_avg_list = AMS.request(ams_ip, mac, Operation.add, count_reminders, reminderChannelNumber, reminderProgramStart, reminderProgramId, reminderOffset);
             assertEquals(expected200, add_avg_list.get(0));
@@ -64,7 +64,7 @@ class testAMS_oldAPI_Performance extends API{
                 p_avg = "", p_min = "", p_max="";
         for (int i = 1; i <= count_iterations; i++) {
             System.out.println("========= ========= =========\nIteration = " + i);
-            long reminderChannelNumber = reminderChannelNumber();
+            int reminderChannelNumber = reminderChannelNumber();
             long reminderOffset = reminderOffset();
             add_avg_list = AMS.request(ams_ip, mac, Operation.add, count_reminders, reminderChannelNumber, reminderProgramStart, reminderProgramId, reminderOffset);
             assertEquals(expected200, add_avg_list.get(0));

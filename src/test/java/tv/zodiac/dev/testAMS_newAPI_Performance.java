@@ -1,6 +1,5 @@
 package tv.zodiac.dev;
 
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
@@ -18,7 +17,6 @@ class testAMS_newAPI_Performance extends API{
     private String ams_ip = ams_ip_4;
 
     @Test
-    @Disabled
     void test1_Add_Purge() throws IOException {
         ArrayList add_list,
                 purge_list = new ArrayList();
@@ -26,7 +24,7 @@ class testAMS_newAPI_Performance extends API{
                 p_avg = "", p_min = "", p_max="";
         for (int i = 1; i <= count_iterations; i++) {
             System.out.println("========= ========= =========\nIteration = " + i);
-            long reminderChannelNumber = reminderChannelNumber();
+            int reminderChannelNumber = reminderChannelNumber();
             long reminderOffset = reminderOffset();
             long reminderScheduleId = reminderScheduleId();
             long reminderId = reminderId();
@@ -67,7 +65,7 @@ class testAMS_newAPI_Performance extends API{
                 p_avg = "", p_min = "", p_max="";
         for (int i = 1; i <= count_iterations; i++) {
             System.out.println("========= ========= =========\nIteration = " + i);
-            long reminderChannelNumber = reminderChannelNumber();
+            int reminderChannelNumber = reminderChannelNumber();
             long reminderOffset = reminderOffset();
             long reminderScheduleId = reminderScheduleId();
             long reminderId = reminderId();
@@ -120,7 +118,7 @@ class testAMS_newAPI_Performance extends API{
                 p_avg = "", p_min = "", p_max="";
         for (int i = 1; i <= count_iterations; i++) {
             System.out.println("========= ========= =========\nIteration = " + i);
-            long reminderChannelNumber = reminderChannelNumber();
+            int reminderChannelNumber = reminderChannelNumber();
             long reminderOffset = reminderOffset();
             long reminderOffset_new = reminderOffset();
             long reminderScheduleId = reminderScheduleId();

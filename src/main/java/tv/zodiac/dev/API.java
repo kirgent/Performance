@@ -79,14 +79,13 @@ public class API {
     ArrayList<Integer> purge_avg_list = new ArrayList<>();
 
     //CHANNELS
-    final int reminderChannelNumber = reminderChannelNumber();
-    int reminderChannelNumber_empty;
-    final int reminderChannelNumber_for_statuscode3 = 9999;
-    final int reminderChannelNumber_for_statuscode4 = 1000;
+    int reminderChannelNumber = reminderChannelNumber();
+    //int reminderChannelNumber_for_statuscode3 = 9999;
+    //int reminderChannelNumber_for_statuscode4 = 1000;
     /*private Integer[] rack_channel30 = { 2, 3, 4, 5, 6, 7, 8, 9, 12, 13,
             14, 16, 18, 19, 22, 23, 25, 28, 30, 31,
             32, 33, 37, 38, 41, 44, 46, 48, 49, 50 };*/
-    Integer[] rack_channel = {2, 3, 4, 5, 6, 7, 8, 9, 10, 11};
+    //Integer[] rack_channel = {2, 3, 4, 5, 6, 7, 8, 9, 10, 11};
 
     //@Deprecated
     final String reminderProgramId = "EP002960010113";
@@ -94,7 +93,7 @@ public class API {
     String reminderProgramStart = reminderProgramStart();
 
     int reminderOffset = reminderOffset();
-    int reminderOffset_new = reminderOffset();
+    //int reminderOffset_new = reminderOffset();
     long reminderScheduleId = reminderScheduleId();
     long reminderId = reminderId();
 
@@ -124,7 +123,6 @@ public class API {
             }
             average = sum / list.size();
         }
-        //System.out.println("[DBG] average=" + average);
         return average;
     }
 

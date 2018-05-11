@@ -461,7 +461,7 @@ class NEWAPI_AMS extends API{
         }
 
         String result = json.toString();
-        if (show_generated_json) {
+        if(show_generated_json) {
             System.out.println("generated json: " + result);
         }
         return result;
