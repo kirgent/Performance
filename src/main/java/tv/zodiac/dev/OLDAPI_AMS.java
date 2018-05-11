@@ -26,7 +26,7 @@ class OLDAPI_AMS extends API{
      */
     ArrayList request(String ams_ip, String mac, Enum<Operation> operation, int count_reminders, long reminderChannelNumber, String reminderProgramStart, String reminderProgramId, long reminderOffset) throws IOException {
         if(show_debug_info) {
-            System.out.println(operation + " for macaddress=" + mac + " to ams_ip=" + ams_ip + ", "
+            System.out.println("[DBG] " + operation + " for macaddress=" + mac + " to ams_ip=" + ams_ip + ", "
                     + "count_reminders=" + count_reminders + ", "
                     + "operation=" + operation + ", "
                     + "reminderChannelNumber=" + reminderChannelNumber + ", "
@@ -87,7 +87,7 @@ class OLDAPI_AMS extends API{
      */
     ArrayList request(String ams_ip, String mac) throws IOException {
         if(show_debug_info) {
-            System.out.println("Purge for macaddress=" + mac + " to ams_ip=" + ams_ip);
+            System.out.println("[DBG] purge for macaddress=" + mac + " to ams_ip=" + ams_ip);
         }
 
         HttpPost request = new HttpPost(prepare_url(ams_ip, Operation.purge, false));
