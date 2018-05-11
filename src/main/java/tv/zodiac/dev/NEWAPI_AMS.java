@@ -31,7 +31,7 @@ class NEWAPI_AMS extends API{
      * @throws IOException -TBD
      */
     ArrayList request(String ams_ip, String mac, Enum<Operation> operation, int count_reminders, String reminderProgramStart, long reminderChannelNumber, String reminderProgramId, long reminderOffset, long reminderScheduleId, long reminderId) throws IOException {
-        if(show_extra_info) {
+        if(show_debug_info) {
             if(count_reminders>1){
                 System.out.println(operation + " for macaddress=" + mac + " to ams_ip=" + ams_ip + ", "
                         + "count=" + count_reminders + ", "
@@ -75,7 +75,7 @@ class NEWAPI_AMS extends API{
                 arrayList.add(2, avg + "ms/" + add_avg_list.size());
                 arrayList.add(3, get_min_time(add_avg_list));
                 arrayList.add(4, get_max_time(add_avg_list));
-                if (show_extra_info) {
+                if (show_debug_info) {
                     if (add_avg_list.size() <= 10) {
                         System.out.println("[DBG] add avg = " + avg + "ms/" + add_avg_list.size() + ": add_avg_list:" + add_avg_list);
                     }
@@ -87,7 +87,7 @@ class NEWAPI_AMS extends API{
             arrayList.add(2, avg + "ms/" + modify_avg_list.size());
             arrayList.add(3, get_min_time(modify_avg_list));
             arrayList.add(4, get_max_time(modify_avg_list));
-            if(show_extra_info) {
+            if(show_debug_info) {
                 if(modify_avg_list.size()<=10) {
                     System.out.println("[DBG] modify avg = " + avg + "ms/" + modify_avg_list.size() + ": modify_avg_list:" + modify_avg_list);
                 }
@@ -106,7 +106,7 @@ class NEWAPI_AMS extends API{
      * @throws IOException -TBD
      */
     ArrayList request(String ams_ip, String mac, Enum<Operation> operation, int count_reminders, long reminderScheduleId, long reminderId) throws IOException {
-        if(show_extra_info) {
+        if(show_debug_info) {
             if(count_reminders>1) {
                 System.out.println("delete for macaddress=" + mac + ", ams_ip=" + ams_ip + ", "
                         + "reminderScheduleId=multi, "
@@ -138,7 +138,7 @@ class NEWAPI_AMS extends API{
             arrayList.add(2, avg + "ms/" + delete_avg_list.size());
             arrayList.add(3, get_min_time(delete_avg_list));
             arrayList.add(4, get_max_time(delete_avg_list));
-            if(show_extra_info) {
+            if(show_debug_info) {
                 if(delete_avg_list.size()<=10) {
                     System.out.println("[DBG] delete avg = " + avg + "ms/" + delete_avg_list.size() + ": delete_avg_list:" + delete_avg_list);
                 }
@@ -156,7 +156,7 @@ class NEWAPI_AMS extends API{
      * @throws IOException - TBD
      */
     ArrayList request(String ams_ip, String mac, Enum<Operation> operation) throws IOException {
-        if(show_extra_info) {
+        if(show_debug_info) {
             System.out.println(operation + " for macaddress=" + mac + " to ams_ip=" + ams_ip);
         }
 
@@ -180,7 +180,7 @@ class NEWAPI_AMS extends API{
             arrayList.add(2, avg + "ms/" + purge_avg_list.size());
             arrayList.add(3, get_min_time(purge_avg_list));
             arrayList.add(4, get_max_time(purge_avg_list));
-            if(show_extra_info) {
+            if(show_debug_info) {
                 if(purge_avg_list.size()<=10) {
                     System.out.println("[DBG] purge avg = " + avg + "ms/" + purge_avg_list.size() + ": purge_avg_list:" + purge_avg_list);
                 }
@@ -207,7 +207,7 @@ class NEWAPI_AMS extends API{
      */
     @Deprecated
     ArrayList request(String ams_ip, String mac, Enum<Operation> operation, int count_reminders, String[] rack_date, int[] rack_channel, String reminderProgramId, int reminderOffset, long reminderScheduleId, long reminderId) throws IOException {
-        if(show_extra_info) {
+        if(show_debug_info) {
             System.out.println(operation + " for macaddress=" + mac + ", ams_ip=" + ams_ip + ", "
                     + "count=" + count_reminders + ", "
                     + "reminderOffset=" + reminderOffset + ", "
@@ -342,7 +342,7 @@ class NEWAPI_AMS extends API{
                 //todo//todo//todo FIXME
                 if(first_clean_reminderScheduleId_list) {
                     reminderScheduleId_list.clear();
-                    if(show_extra_info) {
+                    if(show_debug_info) {
                         System.out.println("[DBG] 1st clean for reminderScheduleId_list !!!");
                     }
                     first_clean_reminderScheduleId_list = false;
@@ -377,7 +377,7 @@ class NEWAPI_AMS extends API{
                 if(first_clean_reminderId_list) {
                     //todo//todo//todo FIXME
                     reminderId_list.clear();
-                    if(show_extra_info) {
+                    if(show_debug_info) {
                         System.out.println("[DBG] 1st clean for reminderId_list !!!");
                     }
                     first_clean_reminderId_list = false;
@@ -393,7 +393,7 @@ class NEWAPI_AMS extends API{
             array_reminders.add(object_in_reminders);
         }
 
-        if(show_extra_info) {
+        if(show_debug_info) {
             if(reminderScheduleId_list.size()<=10) {
                 System.out.println("reminderScheduleId_list: size=" + reminderScheduleId_list.size());
                 System.out.println(": " + reminderScheduleId_list);
@@ -449,7 +449,7 @@ class NEWAPI_AMS extends API{
             array_reminders.add(object_in_reminders);
         }
 
-        if(show_extra_info) {
+        if(show_debug_info) {
             if(reminderScheduleId_list.size()<=10) {
                 System.out.println("reminderScheduleId_list: size=" + reminderScheduleId_list.size());
                 System.out.println(": " + reminderScheduleId_list);

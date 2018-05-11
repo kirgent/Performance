@@ -45,7 +45,7 @@ class testAMS_newAPI_Performance extends API{
             }
             reminderScheduleId_list.clear();
             reminderId_list.clear();
-            if(show_extra_info) {
+            if(show_debug_info) {
                 System.out.println("[DBG] reminderX_list-s are CLEARED !!!");
             }
             add_list.clear();
@@ -94,7 +94,7 @@ class testAMS_newAPI_Performance extends API{
 
             reminderScheduleId_list.clear();
             reminderId_list.clear();
-            if(show_extra_info) {
+            if(show_debug_info) {
                 System.out.println("[DBG] reminderX_list-s are CLEARED !!!");
             }
             add_list.clear();
@@ -154,7 +154,7 @@ class testAMS_newAPI_Performance extends API{
             }
             reminderScheduleId_list.clear();
             reminderId_list.clear();
-            if(show_extra_info) {
+            if(show_debug_info) {
                 System.out.println("[DBG] reminderX_list-s are CLEARED !!!");
             }
             add_list.clear();

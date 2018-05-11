@@ -14,7 +14,7 @@ import java.util.ArrayList;
 class API_Middle extends API{
 
     ArrayList Change_registration(String charterapi, String mac, String ams_ip) throws IOException {
-        if(show_extra_info) {
+        if(show_debug_info) {
             System.out.println("Change_registration " + mac + " to ams " + ams_ip + " via charterapi: " + charterapi);
         }
         HttpPost request = new HttpPost(charterapi + postfix_settings + "?requestor=AMS");
@@ -38,7 +38,7 @@ class API_Middle extends API{
     }
 
     ArrayList Check_registration(String mac, String charterapi) throws IOException {
-        if(show_extra_info) {
+        if(show_debug_info) {
             System.out.println("Check_registration " + mac + " via charterapi: " + charterapi);
         }
         HttpGet request = new HttpGet(charterapi + postfix_settings + "/amsIp/" + mac);
@@ -181,7 +181,7 @@ class API_Middle extends API{
     }
 
     ArrayList Delete_multiple_reminders(String charterapi, String deviceId, int reminderScheduleId, int reminderId) throws IOException {
-        if(show_extra_info) {
+        if(show_debug_info) {
             System.out.println("Delete_multiple_reminders with reminderScheduleId=" + reminderScheduleId + " and reminderId=" + reminderId);
         }
         HttpPost request = new HttpPost(charterapi + "/remindersmiddle/v1/reminders/deleteMultipleReminders");
