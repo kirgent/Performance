@@ -140,8 +140,8 @@ class NEWAPI_AMS extends API{
                 delete_avg_list.add((int) diff);
                 int avg = get_average_time(delete_avg_list);
                 arrayList.add(2, avg + "ms/" + delete_avg_list.size());
-                arrayList.add(3, get_min_time(delete_avg_list));
-                arrayList.add(4, get_max_time(delete_avg_list));
+                arrayList.add(3, get_min_time(delete_avg_list) + "ms");
+                arrayList.add(4, get_max_time(delete_avg_list) + "ms");
                 if (show_debug_info) {
                     if (delete_avg_list.size() <= 10) {
                         System.out.println("[DBG] delete avg = " + avg + "ms/" + delete_avg_list.size() + ": delete_avg_list:" + delete_avg_list);
@@ -183,8 +183,8 @@ class NEWAPI_AMS extends API{
             purge_avg_list.add((int)diff);
             long avg = get_average_time(purge_avg_list);
             arrayList.add(2, avg + "ms/" + purge_avg_list.size());
-            arrayList.add(3, get_min_time(purge_avg_list));
-            arrayList.add(4, get_max_time(purge_avg_list));
+            arrayList.add(3, get_min_time(purge_avg_list) + "ms");
+            arrayList.add(4, get_max_time(purge_avg_list) + "ms");
             if(show_debug_info) {
                 if(purge_avg_list.size()<=10) {
                     System.out.println("[DBG] purge avg = " + avg + "ms/" + purge_avg_list.size() + ": purge_avg_list:" + purge_avg_list);
