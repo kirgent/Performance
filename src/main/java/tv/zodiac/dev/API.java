@@ -566,7 +566,7 @@ public class API {
     }
 
     String prepare_url(String ams_ip, Enum<Operation> operation, boolean newapi) {
-        String result = "";
+        String result;
         if (newapi) {
             result = "http://" + ams_ip + ":" + ams_port + "/ams/Reminders?req=" + operation;
         } else {

@@ -2,7 +2,10 @@ package tv.zodiac.dev;
 
 import org.junit.jupiter.api.Test;
 
+import java.io.BufferedOutputStream;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.PrintStream;
 import java.util.ArrayList;
 
 /**
@@ -29,7 +32,7 @@ class testAMS_newAPI_Performance extends API{
             long reminderScheduleId = reminderScheduleId();
             long reminderId = reminderId();
             add_list = AMS.request(ams_ip, mac, Operation.add, count_reminders, reminderProgramStart, reminderChannelNumber, reminderProgramId, reminderOffset, reminderScheduleId, reminderId);
-            if(add_list.get(1).equals("")) {
+            if(add_list.get(1).equals(expected200) && add_list.get(1).equals("")) {
                 a_avg = add_list.get(2).toString();
                 a_min = add_list.get(3).toString();
                 a_max = add_list.get(4).toString();
@@ -53,6 +56,8 @@ class testAMS_newAPI_Performance extends API{
                 + "\nFINISH   add avg = " + a_avg + ", min=" + a_min + ", max=" + a_max
                 + "\nFINISH purge avg = " + p_avg + ", min=" + p_min + ", max=" + p_max
                 + "\n========= ========= ========= ========= ========= =========");
+        System.setOut(new PrintStream(new BufferedOutputStream(new FileOutputStream("stdout.log")), true));
+
     }
 
     @Test
@@ -70,7 +75,7 @@ class testAMS_newAPI_Performance extends API{
             long reminderScheduleId = reminderScheduleId();
             long reminderId = reminderId();
             add_list = AMS.request(ams_ip, mac, Operation.add, count_reminders, reminderProgramStart, reminderChannelNumber, reminderProgramId, reminderOffset, reminderScheduleId, reminderId);
-            if(add_list.get(1).equals("")) {
+            if(add_list.get(1).equals(expected200) && add_list.get(1).equals("")) {
                 a_avg = add_list.get(2).toString();
                 a_min = add_list.get(3).toString();
                 a_max = add_list.get(4).toString();
@@ -104,6 +109,7 @@ class testAMS_newAPI_Performance extends API{
                 + "\nFINISH delete avg = " + d_avg + ", min=" + d_min + ", max=" + d_max
                 + "\nFINISH  purge avg = " + p_avg + ", min=" + p_min + ", max=" + p_max
                 + "\n========= ========= ========= ========= ========= =========");
+        System.setOut(new PrintStream(new BufferedOutputStream(new FileOutputStream("stdout.log")), true));
     }
 
     @Test
@@ -124,7 +130,7 @@ class testAMS_newAPI_Performance extends API{
             long reminderScheduleId = reminderScheduleId();
             long reminderId = reminderId();
             add_list = AMS.request(ams_ip, mac, Operation.add, count_reminders, reminderProgramStart, reminderChannelNumber, reminderProgramId, reminderOffset, reminderScheduleId, reminderId);
-            if (add_list.get(1).equals("")) {
+            if(add_list.get(1).equals(expected200) && add_list.get(1).equals("")) {
                 a_avg = add_list.get(2).toString();
                 a_min = add_list.get(3).toString();
                 a_max = add_list.get(4).toString();
@@ -166,6 +172,7 @@ class testAMS_newAPI_Performance extends API{
                 + "\nFINISH delete avg = " + d_avg + ", min=" + d_min + ", max=" + d_max
                 + "\nFINISH  purge avg = " + p_avg + ", min=" + p_min + ", max=" + p_max
                 + "\n========= ========= ========= ========= ========= =========");
+        System.setOut(new PrintStream(new BufferedOutputStream(new FileOutputStream("stdout.log")), true));
     }
 
 }
