@@ -34,7 +34,7 @@ class NEWAPI_AMS extends API{
         if(show_debug_info) {
             if(count_reminders>1){
                 System.out.println(operation + " for macaddress=" + mac + " to ams_ip=" + ams_ip + ", "
-                        + "count=" + count_reminders + ", "
+                        + "count_reminders=" + count_reminders + ", "
                         + "reminderProgramStart=" + reminderProgramStart + ", "
                         + "reminderChannelNumber=" + reminderChannelNumber + ", "
                         + "reminderProgramId=" + reminderProgramId + ", "
@@ -43,7 +43,7 @@ class NEWAPI_AMS extends API{
                         + "reminderId=multi");
             } else {
                 System.out.println(operation + " for macaddress=" + mac + " to ams_ip=" + ams_ip + ", "
-                        + "count=" + count_reminders + ", "
+                        + "count_reminders=" + count_reminders + ", "
                         + "reminderProgramStart=" + reminderProgramStart + ", "
                         + "reminderChannelNumber=" + reminderChannelNumber + ", "
                         + "reminderProgramId=" + reminderProgramId + ", "
@@ -209,7 +209,7 @@ class NEWAPI_AMS extends API{
     ArrayList request(String ams_ip, String mac, Enum<Operation> operation, int count_reminders, String[] rack_date, int[] rack_channel, String reminderProgramId, int reminderOffset, long reminderScheduleId, long reminderId) throws IOException {
         if(show_debug_info) {
             System.out.println(operation + " for macaddress=" + mac + ", ams_ip=" + ams_ip + ", "
-                    + "count=" + count_reminders + ", "
+                    + "count_reminders=" + count_reminders + ", "
                     + "reminderOffset=" + reminderOffset + ", "
                     + "rack_data.length=" + rack_date.length + ", "
                     + "data=" + Arrays.asList(rack_date) + ", "

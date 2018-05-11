@@ -116,7 +116,7 @@ class API_Middle extends API{
         JSONArray array = new JSONArray();
         //todo
         json.put("",array);
-        //for (int i = 1; i <= count; i++) {
+        //for (int i = 1; i <= count_reminders; i++) {
         JSONObject object_in_array = new JSONObject();
         array.add(object_in_array);
         object_in_array.put("reminderScheduleId", reminderScheduleId);
@@ -135,7 +135,7 @@ class API_Middle extends API{
         json.put("macAddress", "STB" + mac);
         JSONArray array = new JSONArray();
         json.put("reminderIdentifiers",array);
-        //for (int i = 1; i <= count; i++) {
+        //for (int i = 1; i <= count_reminders; i++) {
         JSONObject object_in_array = new JSONObject();
         array.add(object_in_array);
         object_in_array.put("reminderScheduleId", reminderScheduleId);
