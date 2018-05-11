@@ -2,6 +2,7 @@ package tv.zodiac.dev;
 
 import org.junit.jupiter.api.Test;
 
+import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 
@@ -46,10 +47,15 @@ class testAMS_oldAPI_Performance extends API{
             add_list.clear();
             purge_list.clear();
         }
-        System.out.println("========= ========= ========= ========= ========= ========="
+        String result = "========= ========= ========= ========= ========= ========="
                 + "\nFINISH   add avg = " + a_avg + ", min=" + a_min + ", max=" + a_max
                 + "\nFINISH purge avg = " + p_avg + ", min=" + p_min + ", max=" + p_max
-                + "\n========= ========= ========= ========= ========= =========");
+                + "\n========= ========= ========= ========= ========= =========";
+        System.out.println(result);
+        FileWriter writer = new FileWriter("output.log", true);
+        writer.write(result);
+        writer.append('\n');
+        writer.flush();
     }
 
     @Test
@@ -90,11 +96,16 @@ class testAMS_oldAPI_Performance extends API{
             delete_list.clear();
             purge_list.clear();
         }
-        System.out.println("========= ========= ========= ========= ========= ========="
+        String result = "========= ========= ========= ========= ========= ========="
                 + "\nFINISH    add avg = " + a_avg + ", min=" + a_min + ", max=" + a_max
                 + "\nFINISH delete avg = " + d_avg + ", min=" + d_min + ", max=" + d_max
                 + "\nFINISH  purge avg = " + p_avg + ", min=" + p_min + ", max=" + p_max
-                + "\n========= ========= ========= ========= ========= =========");
+                + "\n========= ========= ========= ========= ========= =========";
+        System.out.println(result);
+        FileWriter writer = new FileWriter("output.log", true);
+        writer.write(result);
+        writer.append('\n');
+        writer.flush();
     }
 
 }
