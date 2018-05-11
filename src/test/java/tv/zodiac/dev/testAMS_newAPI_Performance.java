@@ -21,7 +21,7 @@ class testAMS_newAPI_Performance extends API{
     void test1_Add_Purge() throws IOException {
         ArrayList add_list,
                 purge_list = new ArrayList();
-        String a_avg = "", a_min = "", a_max="", t="",
+        String a_avg = "", a_min = "", a_max="",
                 p_avg = "", p_min = "", p_max="";
         for (int i = 1; i <= count_iterations; i++) {
             System.out.println("========= ========= ========= Iteration = " + i + "/" + count_iterations + " ========= ========= =========");
@@ -34,7 +34,6 @@ class testAMS_newAPI_Performance extends API{
                 a_avg = add_list.get(2).toString();
                 a_min = add_list.get(3).toString();
                 a_max = add_list.get(4).toString();
-                t = add_list.get(5).toString();
 
                 purge_list = AMS.request(ams_ip, mac, Operation.purge);
                 if(purge_list.get(1).equals("")) {
@@ -53,7 +52,7 @@ class testAMS_newAPI_Performance extends API{
         }
 
         String result = "========= ========= ========= ========= ========= ========="
-                + "\nFINISH   add avg = " + a_avg + ", min=" + a_min + ", max=" + a_max + ", total iterations=" + t
+                + "\nFINISH   add avg = " + a_avg + ", min=" + a_min + ", max=" + a_max
                 + "\nFINISH purge avg = " + p_avg + ", min=" + p_min + ", max=" + p_max
                 + "\n========= ========= ========= ========= ========= =========";
         System.out.println(result);

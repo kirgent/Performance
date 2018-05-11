@@ -77,7 +77,6 @@ class NEWAPI_AMS extends API{
                 arrayList.add(2, avg + "ms/" + add_avg_list.size());
                 arrayList.add(3, get_min_time(add_avg_list) + "ms");
                 arrayList.add(4, get_max_time(add_avg_list) + "ms");
-                arrayList.add(5, "total iterations = " + add_avg_list.size() + " of " + count_reminders);
                 if (show_debug_info) {
                     if (add_avg_list.size() <= 10) {
                         System.out.println("[DBG] add avg = " + avg + "ms/" + add_avg_list.size() + ": add_avg_list:" + add_avg_list);
