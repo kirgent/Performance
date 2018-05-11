@@ -1,6 +1,5 @@
 package tv.zodiac.dev;
 
-import org.junit.Ignore;
 import org.junit.Test;
 
 import java.io.IOException;
@@ -41,14 +40,6 @@ public class testMiddle_Change_registration extends API_Middle {
     @Test
     public void testChange_registration_via_charterapi_d() throws IOException, InterruptedException {
         ArrayList actual = Middle.Change_registration(charterapi_d, mac, ams_ip);
-        assertEquals(expected200, actual.get(0));
-        assertEquals("", actual.get(1));
-    }
-
-    @Test
-    @Ignore
-    public void testChange_registration_to_invalid_ams127_0_0_1() throws IOException, InterruptedException {
-        ArrayList actual = Middle.Change_registration(charterapi, mac, "127.0.0.1");
         assertEquals(expected200, actual.get(0));
         assertEquals("", actual.get(1));
     }

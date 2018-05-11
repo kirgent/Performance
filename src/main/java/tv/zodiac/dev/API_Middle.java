@@ -14,9 +14,7 @@ import java.util.ArrayList;
 class API_Middle extends API{
 
     ArrayList Change_registration(String charterapi, String mac, String ams_ip) throws IOException {
-        if(show_debug_info) {
-            System.out.println("Change_registration " + mac + " to ams " + ams_ip + " via charterapi: " + charterapi);
-        }
+        System.out.println("[DBG] Change_registration " + mac + " to ams " + ams_ip + " via charterapi: " + charterapi);
         HttpPost request = new HttpPost(charterapi + postfix_settings + "?requestor=AMS");
         request.setEntity(new StringEntity(generate_json_change_registration(mac, ams_ip)));
         request.setHeader("Content-type", "application/json");
@@ -38,9 +36,7 @@ class API_Middle extends API{
     }
 
     ArrayList Check_registration(String mac, String charterapi) throws IOException {
-        if(show_debug_info) {
-            System.out.println("Check_registration " + mac + " via charterapi: " + charterapi);
-        }
+        System.out.println("[DBG] Check_registration " + mac + " via charterapi: " + charterapi);
         HttpGet request = new HttpGet(charterapi + postfix_settings + "/amsIp/" + mac);
         //request.setHeader("Accept", "*/*");
         //request.setHeader("Content-type", "application/json");
