@@ -1,0 +1,53 @@
+========= ========= ========= ========= ========= =========
+FINISH    add avg = 639ms/21, min=578, max=704
+FINISH delete avg = 512ms/21, min=362, max=1430
+FINISH  purge avg = 208ms/21, min=168, max=246
+========= ========= ========= ========= ========= =========
+E========= ========= ========= ========= ========= =========
+FINISH    add avg = 660ms/24, min=543, max=1028
+FINISH modify avg = 416ms/24, min=287, max=1490
+FINISH delete avg = 423ms/24, min=341, max=1369
+FINISH  purge avg = 178ms/24, min=155, max=222
+========= ========= ========= ========= ========= =========
+E========= ========= ========= ========= ========= =========
+FINISH   add avg = 627ms/31, min=547ms, max=849ms
+FINISH purge avg = 430ms/31, min=366, max=610
+========= ========= ========= ========= ========= =========
+========= ========= ========= ========= ========= =========
+FINISH   add avg = 679ms/26, min=557ms, max=1631ms
+FINISH purge avg = 570ms/26, min=380ms, max=1452ms
+========= ========= ========= ========= ========= =========
+========= ========= ========= ========= ========= =========
+FINISH    add avg = 732ms/21, min=565ms, max=1719ms
+FINISH modify avg = 364ms/21, min=292ms, max=608ms
+FINISH delete avg = 392ms/21, min=359ms, max=447ms
+FINISH  purge avg = 237ms/21, min=159ms, max=1225ms
+========= ========= ========= ========= ========= =========
+========= ========= ========= ========= ========= =========
+FINISH    add avg = 642ms/23, min=438ms, max=1603ms
+FINISH modify avg = 387ms/23, min=287ms, max=1380ms
+FINISH delete avg = 454ms/23, min=338ms, max=1368ms
+FINISH  purge avg = 263ms/23, min=146ms, max=1182ms
+========= ========= ========= ========= ========= =========
+========= ========= ========= ========= ========= =========
+FINISH    add avg = 2444ms/28, min=2151ms, max=3274ms
+FINISH modify avg = 1358ms/28, min=1149ms, max=2231ms
+FINISH delete avg = 1787ms/28, min=1162ms, max=1934ms
+FINISH  purge avg = 274ms/28, min=148ms, max=1171ms
+========= ========= ========= ========= ========= =========
+========= ========= ========= ========= ========= =========
+FINISH 500rems,    add avg = 2359ms/19, min=2174ms, max=2671ms
+FINISH 500rems, modify avg = 1226ms/19, min=1138ms, max=1441ms
+FINISH 500rems, delete avg = 1804ms/19, min=1747ms, max=1903ms
+FINISH 500rems,  purge avg = 221ms/19, min=157ms, max=1177ms
+========= ========= ========= ========= ========= =========
+========= ========= ========= ========= ========= =========
+FINISH 500rems,    add avg = 2311ms/29, min=2163ms, max=3705ms
+FINISH 500rems, delete avg = 1852ms/29, min=1745ms, max=2854ms
+FINISH 500rems,  purge avg = 281ms/29, min=147ms, max=1197ms
+========= ========= ========= ========= ========= =========
+========= ========= ========= ========= ========= =========
+FINISH 500rems,    add avg = , min=, max=
+FINISH 500rems, delete avg = , min=, max=
+FINISH 500rems,  purge avg = , min=, max=
+========= ========= ========= ========= ========= =========

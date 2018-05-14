@@ -15,9 +15,9 @@ action="$2"
 param="$3"
 count_reminders="$4"
 
-ams_ip="172.30.81.4"
+#ams_ip="172.30.81.4"
 #ams_ip="172.30.82.132"
-#ams_ip="172.30.112.19"
+ams_ip="172.30.112.19"
 ams_port="8080"
 
 count_iterations=1

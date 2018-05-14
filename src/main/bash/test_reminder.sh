@@ -199,7 +199,7 @@ for reminderProgramStart in ${RACK_DATE[@]}; do
 #for reminderChannelNumber in ${RACK_CHANNELS[@]}; do
 reminderChannelNumber=$RANDOM
 let "reminderChannelNumber %= 1000"
-reminderOffset=0
+reminderOffset=$RANDOM
 reminderOffset_new=10
 reminderScheduleId=$RANDOM
 reminderId=$RANDOM
