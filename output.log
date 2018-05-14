@@ -51,3 +51,74 @@ FINISH 500rems,    add avg = , min=, max=
 FINISH 500rems, delete avg = , min=, max=
 FINISH 500rems,  purge avg = , min=, max=
 ========= ========= ========= ========= ========= =========
+========= ========= ========= ========= ========= =========
+FINISH 500rems,    add avg = 1859ms/24, min=1703ms, max=2232ms
+FINISH 500rems, modify avg = 906ms/24, min=717ms, max=1196ms
+FINISH 500rems, delete avg = 1415ms/24, min=1358ms, max=1520ms
+FINISH 500rems,  purge avg = 91ms/24, min=80ms, max=138ms
+========= ========= ========= ========= ========= =========
+========= ========= ========= ========= ========= =========
+FINISH 500rems,    add avg = 1811ms/18, min=1711ms, max=2158ms
+FINISH 500rems, modify avg = 885ms/18, min=805ms, max=1079ms
+FINISH 500rems, delete avg = 1455ms/18, min=1405ms, max=1578ms
+FINISH 500rems,  purge avg = 111ms/18, min=80ms, max=157ms
+========= ========= ========= ========= ========= =========
+========= ========= ========= ========= ========= =========
+FINISH 500rems,    add avg = 1898ms/25, min=1738ms, max=2790ms
+FINISH 500rems, delete avg = 1449ms/25, min=1377ms, max=1953ms
+FINISH 500rems,  purge avg = 90ms/25, min=77ms, max=108ms
+========= ========= ========= ========= ========= =========
+========= ========= ========= ========= ========= =========
+FINISH 500rems,    add avg = 1821ms/16, min=1711ms, max=2138ms
+FINISH 500rems, delete avg = 1436ms/16, min=1371ms, max=1504ms
+FINISH 500rems,  purge avg = 99ms/16, min=83ms, max=143ms
+========= ========= ========= ========= ========= =========
+========= ========= ========= ========= ========= =========
+FINISH 500rems,   add avg = 1899ms/21, min=1691ms, max=2235ms
+FINISH 500rems, purge avg = 1086ms/21, min=1045ms, max=1139ms
+========= ========= ========= ========= ========= =========
+========= ========= ========= ========= ========= =========
+FINISH 500rems,   add avg = 1813ms/26, min=1702ms, max=2219ms
+FINISH 500rems, purge avg = 1108ms/26, min=1041ms, max=1696ms
+========= ========= ========= ========= ========= =========
+========= ========= ========= ========= ========= =========
+FINISH 10rems,    add avg = 131ms/24, min=113ms, max=190ms
+FINISH 10rems, modify avg = 105ms/24, min=92ms, max=140ms
+FINISH 10rems, delete avg = 113ms/24, min=93ms, max=172ms
+FINISH 10rems,  purge avg = 98ms/24, min=83ms, max=136ms
+========= ========= ========= ========= ========= =========
+========= ========= ========= ========= ========= =========
+FINISH 10rems,    add avg = 149ms/27, min=110ms, max=459ms
+FINISH 10rems, modify avg = 111ms/27, min=95ms, max=149ms
+FINISH 10rems, delete avg = 156ms/27, min=92ms, max=1113ms
+FINISH 10rems,  purge avg = 182ms/27, min=83ms, max=1110ms
+========= ========= ========= ========= ========= =========
+========= ========= ========= ========= ========= =========
+FINISH 10rems,    add avg = 139ms/23, min=113ms, max=188ms
+FINISH 10rems, delete avg = 124ms/23, min=99ms, max=208ms
+FINISH 10rems,  purge avg = 192ms/23, min=82ms, max=1159ms
+========= ========= ========= ========= ========= =========
+========= ========= ========= ========= ========= =========
+FINISH 10rems,    add avg = 176ms/27, min=104ms, max=1144ms
+FINISH 10rems, delete avg = 160ms/27, min=98ms, max=1111ms
+FINISH 10rems,  purge avg = 115ms/27, min=85ms, max=323ms
+========= ========= ========= ========= ========= =========
+========= ========= ========= ========= ========= =========
+FINISH 10rems,    add avg = 171ms/26, min=114ms, max=1143ms
+FINISH 10rems, delete avg = 115ms/26, min=98ms, max=194ms
+FINISH 10rems,  purge avg = 97ms/26, min=76ms, max=153ms
+========= ========= ========= ========= ========= =========
+========= ========= ========= ========= ========= =========
+FINISH 10rems,   add avg = 181ms/30, min=111ms, max=1157ms
+FINISH 10rems, purge avg = 169ms/30, min=105ms, max=1177ms
+========= ========= ========= ========= ========= =========
+========= ========= ========= ========= ========= =========
+FINISH 10rems,   add avg = 138ms/23, min=114ms, max=174ms
+FINISH 10rems, purge avg = 130ms/23, min=95ms, max=189ms
+========= ========= ========= ========= ========= =========
+========= ========= ========= ========= ========= =========
+FINISH 10rems,    add avg = 204ms/21, min=92ms, max=1181ms
+FINISH 10rems, modify avg = 221ms/21, min=92ms, max=1164ms
+FINISH 10rems, delete avg = 190ms/21, min=96ms, max=1161ms
+FINISH 10rems,  purge avg = 212ms/21, min=82ms, max=1162ms
+========= ========= ========= ========= ========= =========
