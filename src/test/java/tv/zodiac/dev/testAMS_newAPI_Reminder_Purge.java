@@ -29,7 +29,8 @@ class testAMS_newAPI_Reminder_Purge extends API {
     }
 
     @Test
-    void testPurge_macaddress_wrong() throws IOException {
+    @Deprecated
+    void testPurge_macaddress_wrong__Box_is_not_registered() throws IOException {
         ArrayList actual = AMS.request(ams_ip, mac_wrong, Operation.purge);
         assertEquals(expected200, actual.get(0));
         assertEquals("REM-ST-001 Box is not registered", actual.get(1));

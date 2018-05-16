@@ -1,6 +1,6 @@
 package tv.zodiac.dev;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
 import java.sql.SQLException;
@@ -9,12 +9,12 @@ import java.util.Random;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-public class testSandbox extends API {
+class testSandbox extends API {
 
     private NEWAPI_AMS AMS = new NEWAPI_AMS();
 
     @Test
-    public void testDate() {
+    void testDate() {
         assertEquals("2018-03-31", reminderProgramStart);
         assertEquals("2018-03-31", get_date(1, false));
         assertEquals("2018-03-31 2018-04-01", get_date(2, true));
@@ -22,7 +22,7 @@ public class testSandbox extends API {
     }
 
     @Test
-    public void testTime() {
+    void testTime() {
         //assertEquals("00:30", get_time(1, 2));
         Random random = new Random();
         System.out.println(random.nextLong());
@@ -33,14 +33,14 @@ public class testSandbox extends API {
     }
 
     @Test
-    public void testOperation_NewAPI_400_Bad_request() throws IOException {
+    void testOperation_NewAPI_400_Bad_request() throws IOException {
         ArrayList actual = AMS.request(ams_ip, mac, Operation.blablabla, count_reminders, reminderProgramStart, reminderChannelNumber, reminderProgramId, reminderOffset, reminderScheduleId, reminderId);
         assertEquals(expected400, actual.get(0));
         assertEquals("", actual.get(1));
     }
 
     @Test
-    public void testOracleDB_Query() throws SQLException, ClassNotFoundException {
+    void testOracleDB_Query() throws SQLException, ClassNotFoundException {
         ArrayList actual = AMS.QueryDB(ams_ip, mac);
         assertFalse(actual.isEmpty());
 
@@ -61,19 +61,19 @@ public class testSandbox extends API {
     }
 
     @Test
-    public void testOracleDB_Query_macaddress_empty() throws SQLException, ClassNotFoundException {
+    void testOracleDB_Query_macaddress_empty() throws SQLException, ClassNotFoundException {
         ArrayList result = AMS.QueryDB(ams_ip, "");
         assertTrue(result.isEmpty());
     }
 
     @Test
-    public void testOracleDB_Query_macaddress_wrong() throws SQLException, ClassNotFoundException {
+    void testOracleDB_Query_macaddress_wrong() throws SQLException, ClassNotFoundException {
         ArrayList result = AMS.QueryDB(ams_ip, mac_wrong);
         assertTrue(result.isEmpty());
     }
 
     @Test
-    public void testCheck_Delete() throws IOException {
+    void testCheck_Delete() throws IOException {
         ArrayList actual = AMS.request(ams_ip, mac, Operation.delete, count_reminders, reminderProgramStart, reminderChannelNumber, reminderProgramId, reminderOffset, reminderScheduleId, reminderId);
         assertEquals(expected200, actual.get(0));
         assertEquals("", actual.get(1));

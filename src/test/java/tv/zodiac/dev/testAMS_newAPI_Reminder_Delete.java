@@ -1,5 +1,6 @@
 package tv.zodiac.dev;
 
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.RepeatedTest;
 import org.junit.jupiter.api.Test;
 
@@ -65,21 +66,22 @@ class testAMS_newAPI_Reminder_Delete extends API {
     }
 
     @Test
-    void testDelete_macaddress_wrong() throws IOException {
+    @Deprecated
+    void testDelete_macaddress_wrong__Box_is_not_registered() throws IOException {
         //todo
         int count_reminders = 1;
         ArrayList actual = AMS.request(ams_ip, mac_wrong, Operation.delete, count_reminders, reminderScheduleId, reminderId);
         assertEquals(expected200, actual.get(0));
-        assertEquals("unknown MAC", actual.get(1));
+        assertEquals("REM-ST-001 Box is not registered", actual.get(1));
     }
 
     @Test
-    void testDelete_reminderId_0() throws IOException {
+    void testDelete_reminderId_() throws IOException {
         //todo
         int count_reminders = 1;
         ArrayList actual = AMS.request(ams_ip, mac, Operation.delete, count_reminders, reminderScheduleId, 0);
-        assertEquals(expected200, actual.get(0));
-        assertEquals("4", actual.get(1));
+        assertEquals(expected400, actual.get(0));
+        assertEquals("REM-008 Reminders parsing error: incorrect reminderId", actual.get(1));
     }
 
     @Test
@@ -106,6 +108,7 @@ class testAMS_newAPI_Reminder_Delete extends API {
     }
 
     @Test
+    @DisplayName("testDelete - check reminderId for Long.MIN_VALUE")
     void testDelete_reminderId_MIN_VALUE() throws IOException {
         //todo
         int count_reminders = 1;

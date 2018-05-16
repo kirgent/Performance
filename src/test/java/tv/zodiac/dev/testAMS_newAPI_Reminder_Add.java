@@ -57,7 +57,8 @@ class testAMS_newAPI_Reminder_Add extends API {
     }
 
     @Test
-    void testAdd_macaddress_wrong() throws IOException {
+    @Deprecated
+    void testAdd_macaddress_wrong__Box_is_not_registered() throws IOException {
         ArrayList actual = AMS.request(ams_ip, mac_wrong, Operation.add, count_reminders, reminderProgramStart, reminderChannelNumber, reminderProgramId, reminderOffset, reminderScheduleId, reminderId);
         assertEquals(expected200, actual.get(0));
         assertEquals("REM-ST-001 Box is not registered", actual.get(1));
@@ -219,14 +220,14 @@ class testAMS_newAPI_Reminder_Add extends API {
 
     @Test
     void testAdd_reminderProgramStart_text() throws IOException {
-        ArrayList actual = AMS.request(ams_ip, mac, Operation.add, count_reminders, reminderProgramStart_text, reminderChannelNumber, reminderProgramId, reminderOffset, reminderScheduleId, reminderId);
+        ArrayList actual = AMS.request(ams_ip, mac, Operation.add, count_reminders, "yyyy-mm-dd", reminderChannelNumber, reminderProgramId, reminderOffset, reminderScheduleId, reminderId);
         assertEquals(expected500, actual.get(0));
         assertEquals("name cannot be null", actual.get(1));
     }
 
     @Test
     void testAdd_reminderProgramStart_wrong() throws IOException {
-        ArrayList actual = AMS.request(ams_ip, mac, Operation.add, count_reminders, reminderProgramStart_wrong, reminderChannelNumber, reminderProgramId, reminderOffset, reminderScheduleId, reminderId);
+        ArrayList actual = AMS.request(ams_ip, mac, Operation.add, count_reminders, "0000-00-00", reminderChannelNumber, reminderProgramId, reminderOffset, reminderScheduleId, reminderId);
         assertEquals(expected400, actual.get(0));
         assertEquals("REM-008 Reminders parsing error: invalid program start", actual.get(1));
     }

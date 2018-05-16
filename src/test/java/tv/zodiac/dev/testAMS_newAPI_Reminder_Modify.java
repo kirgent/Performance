@@ -59,12 +59,22 @@ class testAMS_newAPI_Reminder_Modify extends API {
     }
 
     @Test
-    void testModify_macaddress_wrong() throws IOException {
+    @Deprecated
+    void testModify_macaddress_wrong__Box_is_not_registered() throws IOException {
         //todo!!!
         int count_reminders = 1;
         ArrayList actual = AMS.request(ams_ip, mac_wrong, Operation.modify, count_reminders, reminderProgramStart, reminderChannelNumber, reminderProgramId, reminderOffset, reminderScheduleId, reminderId);
         assertEquals(expected200, actual.get(0));
         assertEquals("REM-ST-001 Box is not registered", actual.get(1));
+    }
+
+    @Test
+    void testModify_macaddress_wrong__unknown_MAC() throws IOException {
+        //todo!!!
+        int count_reminders = 1;
+        ArrayList actual = AMS.request(ams_ip, mac_wrong, Operation.modify, count_reminders, reminderProgramStart, reminderChannelNumber, reminderProgramId, reminderOffset, reminderScheduleId, reminderId);
+        assertEquals(expected200, actual.get(0));
+        assertEquals("unknown MAC", actual.get(1));
     }
 
     @Test
@@ -296,30 +306,11 @@ class testAMS_newAPI_Reminder_Modify extends API {
         assertEquals("4", actual.get(1));
     }
 
-    /** 4 - reminder is unknown. Applies to "Reminders Delete" request (request ID=1) and "Reminders Modify" request (request ID=2)
-     * @throws IOException - TBD
-     */
-    @Test
-    void testModify_reminderScheduleId_reminderId_0__statusCode4() throws IOException {
-        //todo
-        int count_reminders = 1;
-        ArrayList actual = AMS.request(ams_ip, mac, Operation.modify, count_reminders, reminderProgramStart, reminderChannelNumber, reminderProgramId, reminderOffset, 0, 0);
-        assertEquals(expected200, actual.get(0));
-        assertEquals("4", actual.get(1));
-    }
-
     @Test
     void testModify_reminderScheduleId_empty() throws IOException {
         //todo
         int count_reminders = 1;
         ArrayList actual = AMS.request(ams_ip, mac, Operation.modify, count_reminders, reminderProgramStart, reminderChannelNumber, reminderProgramId, reminderOffset, -1, reminderId);
-        assertEquals(expected500, actual.get(0));
-        assertEquals("name cannot be null", actual.get(1));
-    }
-
-    @Test
-    void testModify_reminderScheduleId_reminderId_empty() throws IOException {
-        ArrayList actual = AMS.request(ams_ip, mac, Operation.modify, count_reminders, reminderProgramStart, reminderChannelNumber, reminderProgramId, reminderOffset, -1, -1);
         assertEquals(expected500, actual.get(0));
         assertEquals("name cannot be null", actual.get(1));
     }
@@ -340,16 +331,39 @@ class testAMS_newAPI_Reminder_Modify extends API {
 
     @Test
     void testModify_reminderScheduleId_MIN_VALUE() throws IOException {
-        int reminderChannelNumber = 211;
-        ArrayList actual;
-        actual = AMS.request(ams_ip, mac, Operation.add, count_reminders, reminderProgramStart, reminderChannelNumber, reminderProgramId, reminderOffset, reminderScheduleId, reminderId);
-        assertEquals(expected200, actual.get(0));
-        assertEquals("", actual.get(1));
-
-        actual = AMS.request(ams_ip, mac, Operation.modify, count_reminders, reminderProgramStart, reminderChannelNumber, reminderProgramId, reminderOffset, Long.MIN_VALUE, reminderId);
+        //todo
+        int count_reminders = 1;
+        ArrayList actual = AMS.request(ams_ip, mac, Operation.modify, count_reminders, reminderProgramStart, reminderChannelNumber, reminderProgramId, reminderOffset, Long.MIN_VALUE, reminderId);
         assertEquals(expected400, actual.get(0));
         assertEquals("REM-008 Reminders parsing error: incorrect reminderScheduleId", actual.get(1));
-        testPurge();
+    }
+
+    /** 4 - reminder is unknown. Applies to "Reminders Delete" request (request ID=1) and "Reminders Modify" request (request ID=2)
+     * @throws IOException - TBD
+     */
+    @Test
+    void testModify_reminderScheduleId_reminderId_0__statusCode4() throws IOException {
+        //todo
+        int count_reminders = 1;
+        ArrayList actual = AMS.request(ams_ip, mac, Operation.modify, count_reminders, reminderProgramStart, reminderChannelNumber, reminderProgramId, reminderOffset, 0, 0);
+        assertEquals(expected200, actual.get(0));
+        assertEquals("4", actual.get(1));
+    }
+
+    @Test
+    void testModify_reminderScheduleId_reminderId_empty() throws IOException {
+        ArrayList actual = AMS.request(ams_ip, mac, Operation.modify, count_reminders, reminderProgramStart, reminderChannelNumber, reminderProgramId, reminderOffset, -1, -1);
+        assertEquals(expected500, actual.get(0));
+        assertEquals("name cannot be null", actual.get(1));
+    }
+
+    @Test
+    void testModify_reminderScheduleId_reminderId_MIN_VALUE() throws IOException {
+        //todo
+        int count_reminders = 1;
+        ArrayList actual = AMS.request(ams_ip, mac, Operation.modify, count_reminders, reminderProgramStart, reminderChannelNumber, reminderProgramId, reminderOffset, Long.MIN_VALUE,  Long.MIN_VALUE);
+        assertEquals(expected400, actual.get(0));
+        assertEquals("REM-008 Reminders parsing error: incorrect reminderScheduleId", actual.get(1));
     }
 
     @Disabled
@@ -358,5 +372,5 @@ class testAMS_newAPI_Reminder_Modify extends API {
         assertEquals(expected200, actual.get(0));
         assertEquals("", actual.get(1));
     }
-    
+
 }
