@@ -156,7 +156,7 @@ class testAMS_newAPI_Reminder_Modify extends API {
 
     @RepeatedTest(count_iterations)
     @Deprecated
-    //todo
+        //todo WHY it was deprecated?
     void testModify_reminderId_MAX_VALUE() throws IOException {
         ArrayList actual;
         actual = AMS.request(ams_ip, mac, Operation.add, count_reminders, reminderProgramStart, reminderChannelNumber, reminderProgramId, reminderOffset, reminderScheduleId, Long.MAX_VALUE);
@@ -317,6 +317,7 @@ class testAMS_newAPI_Reminder_Modify extends API {
 
     @RepeatedTest(count_iterations)
     @Deprecated
+        //todo WHY it was deprecated?
     void testModify_reminderScheduleId_MAX_VALUE() throws IOException {
         ArrayList actual;
         actual = AMS.request(ams_ip, mac, Operation.add, count_reminders, reminderProgramStart, reminderChannelNumber, reminderProgramId, reminderOffset, Long.MAX_VALUE, reminderId);
@@ -324,6 +325,21 @@ class testAMS_newAPI_Reminder_Modify extends API {
         assertEquals("", actual.get(1));
 
         actual = AMS.request(ams_ip, mac, Operation.modify, count_reminders, reminderProgramStart, reminderChannelNumber, reminderProgramId, reminderOffset(), Long.MAX_VALUE, reminderId);
+        assertEquals(expected200, actual.get(0));
+        assertEquals("", actual.get(1));
+        testPurge();
+    }
+
+    @RepeatedTest(count_iterations)
+    @Deprecated
+        //todo WHY it was deprecated?
+    void testModify_reminderScheduleId_reminderId_MAX_VALUE() throws IOException {
+        ArrayList actual;
+        actual = AMS.request(ams_ip, mac, Operation.add, count_reminders, reminderProgramStart, reminderChannelNumber, reminderProgramId, reminderOffset, Long.MAX_VALUE, Long.MAX_VALUE);
+        assertEquals(expected200, actual.get(0));
+        assertEquals("", actual.get(1));
+
+        actual = AMS.request(ams_ip, mac, Operation.modify, count_reminders, reminderProgramStart, reminderChannelNumber, reminderProgramId, reminderOffset(), Long.MAX_VALUE, Long.MAX_VALUE);
         assertEquals(expected200, actual.get(0));
         assertEquals("", actual.get(1));
         testPurge();
