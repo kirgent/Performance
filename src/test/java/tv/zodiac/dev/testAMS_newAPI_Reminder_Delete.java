@@ -56,7 +56,7 @@ class testAMS_newAPI_Reminder_Delete extends API {
     }
 
     @Test
-    void testDelete_macaddress_wrong_unknown_MAC() throws IOException {
+    void testDelete_macaddress_wrong__unknown_MAC() throws IOException {
         //todo
         int count_reminders = 1;
         ArrayList actual = AMS.request(ams_ip, mac_wrong, Operation.delete, count_reminders, reminderScheduleId, reminderId);
@@ -124,7 +124,7 @@ class testAMS_newAPI_Reminder_Delete extends API {
     }
 
     @Test
-    void testDelete_reminderScheduleId_0_reminderId_0() throws IOException {
+    void testDelete_reminderScheduleId_reminderId_0() throws IOException {
         //todo
         int count_reminders = 1;
         ArrayList actual = AMS.request(ams_ip, mac, Operation.delete, count_reminders, 0, 0);
@@ -145,7 +145,7 @@ class testAMS_newAPI_Reminder_Delete extends API {
      * @throws IOException - TBD
      */
     @Test
-    void testDelete_reminderScheduleId_empty_reminderId_empty() throws IOException {
+    void testDelete_reminderScheduleId_reminderId_empty() throws IOException {
         //todo
         int count_reminders = 1;
         ArrayList actual = AMS.request(ams_ip, mac, Operation.delete, count_reminders, -1, -1);
@@ -168,7 +168,7 @@ class testAMS_newAPI_Reminder_Delete extends API {
     }
 
     @RepeatedTest(count_iterations)
-    void testDelete_reminderScheduleId_MAX_VALUE_reminderId_MAX_VALUE() throws IOException {
+    void testDelete_reminderScheduleId_reminderId_MAX_VALUE() throws IOException {
         //todo
         int count_reminders = 1;
         ArrayList actual;
@@ -191,7 +191,7 @@ class testAMS_newAPI_Reminder_Delete extends API {
     }
 
     @Test
-    void testDelete_reminderScheduleId_MIN_VALUE_reminderId_MIN_VALUE() throws IOException {
+    void testDelete_reminderScheduleId_reminderId_MIN_VALUE() throws IOException {
         //todo
         int count_reminders = 1;
         ArrayList actual = AMS.request(ams_ip, mac, Operation.delete, count_reminders, Long.MIN_VALUE, Long.MIN_VALUE);

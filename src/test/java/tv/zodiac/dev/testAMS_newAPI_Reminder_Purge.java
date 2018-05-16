@@ -36,7 +36,7 @@ class testAMS_newAPI_Reminder_Purge extends API {
     }
 
     @Test
-    void testPurge_macaddress_wrong_unknown_MAC() throws IOException {
+    void testPurge_macaddress_wrong__unknown_MAC() throws IOException {
         ArrayList actual = AMS.request(ams_ip, mac_wrong, Operation.purge);
         assertEquals(expected200, actual.get(0));
         assertEquals("unknown MAC", actual.get(1));

@@ -146,6 +146,7 @@ class testAMS_newAPI_Reminder_Modify extends API {
 
     @RepeatedTest(count_iterations)
     @Deprecated
+    //todo
     void testModify_reminderId_MAX_VALUE() throws IOException {
         ArrayList actual;
         actual = AMS.request(ams_ip, mac, Operation.add, count_reminders, reminderProgramStart, reminderChannelNumber, reminderProgramId, reminderOffset, reminderScheduleId, Long.MAX_VALUE);
@@ -178,7 +179,7 @@ class testAMS_newAPI_Reminder_Modify extends API {
 
     @Test
     void testModify_reminderOffset_LONG_MAX_VALUE() throws IOException {
-        //todo!!!
+        //todo
         int count_reminders = 1;
         ArrayList actual = AMS.request(ams_ip, mac, Operation.modify, count_reminders, reminderProgramStart, reminderChannelNumber, reminderProgramId, Long.MAX_VALUE, reminderScheduleId, reminderId);
         assertEquals(expected500, actual.get(0));
@@ -299,7 +300,7 @@ class testAMS_newAPI_Reminder_Modify extends API {
      * @throws IOException - TBD
      */
     @Test
-    void testModify_reminderScheduleId_0_reminderId_0__statusCode4() throws IOException {
+    void testModify_reminderScheduleId_reminderId_0__statusCode4() throws IOException {
         //todo
         int count_reminders = 1;
         ArrayList actual = AMS.request(ams_ip, mac, Operation.modify, count_reminders, reminderProgramStart, reminderChannelNumber, reminderProgramId, reminderOffset, 0, 0);
@@ -317,7 +318,7 @@ class testAMS_newAPI_Reminder_Modify extends API {
     }
 
     @Test
-    void testModify_reminderScheduleId_empty_reminderId_empty() throws IOException {
+    void testModify_reminderScheduleId_reminderId_empty() throws IOException {
         ArrayList actual = AMS.request(ams_ip, mac, Operation.modify, count_reminders, reminderProgramStart, reminderChannelNumber, reminderProgramId, reminderOffset, -1, -1);
         assertEquals(expected500, actual.get(0));
         assertEquals("name cannot be null", actual.get(1));
