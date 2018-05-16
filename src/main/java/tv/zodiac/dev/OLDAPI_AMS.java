@@ -152,7 +152,7 @@ class OLDAPI_AMS extends API{
 
         String result = json.toString();
         if(show_generated_json) {
-            System.out.println("generated json: " + result);
+            System.out.println("[JSON] generated json: " + result);
         }
         return result;
     }
@@ -168,7 +168,7 @@ class OLDAPI_AMS extends API{
 
         String result = json.toString();
         if(show_generated_json) {
-            System.out.println("generated json: " + result);
+            System.out.println("[JSON] generated json: " + result);
         }
         return result;
     }
