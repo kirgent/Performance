@@ -15,14 +15,14 @@ class testAMS_newAPI_Performance extends API{
     private NEWAPI_AMS AMS = new NEWAPI_AMS();
     final private int count_iterations = 1;
     final private int count_reminders = 500;
-    String mac = boxMoto2147_Rems;
+    String mac = boxD105;
     private String ams_ip = ams_ip_4;
 
     @Test
     void test1_Add_Purge() throws IOException, InterruptedException {
         ArrayList add_list,
                 purge_list = new ArrayList();
-        int a_avg = 0, a_min = 0, a_max=0,
+        long a_avg = 0, a_min = 0, a_max=0,
                 p_avg = 0, p_min = 0, p_max=0,
                 a_iterations = 0,
                 p_iterations = 0;
@@ -40,14 +40,14 @@ class testAMS_newAPI_Performance extends API{
                 a_avg = (int)add_list.get(2);
                 a_min = (int)add_list.get(3);
                 a_max = (int)add_list.get(4);
-                a_iterations = (int)add_list.get(5);
+                a_iterations = (long)add_list.get(5);
 
                 purge_list = AMS.request(ams_ip, mac, Operation.purge);
                 if(purge_list.get(1).equals("")) {
                     p_avg = (int)purge_list.get(2);
                     p_min = (int)purge_list.get(3);
                     p_max = (int)purge_list.get(4);
-                    p_iterations = (int)add_list.get(5);
+                    p_iterations = (long)add_list.get(5);
                 }
             }
             reminderScheduleId_list.clear();
