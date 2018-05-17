@@ -15,7 +15,7 @@ class testAMS_newAPI_Performance extends API{
     private NEWAPI_AMS AMS = new NEWAPI_AMS();
     final private int count_iterations = 1;
     final private int count_reminders = 500;
-    String mac = boxD102;
+    String mac = boxD105;
     private String ams_ip = ams_ip_4;
 
     @Test
