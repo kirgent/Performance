@@ -62,7 +62,7 @@ class NEWAPI_AMS extends API{
 
         if (arrayList.get(1).equals("")) {
             if (operation.name().equals("add")) {
-                add_avg_list.add((int) diff);
+                add_avg_list.add((int)diff);
                 int avg = get_average_time(add_avg_list);
                 arrayList.add(2, avg);
                 arrayList.add(3, get_min_time(add_avg_list));

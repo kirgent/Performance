@@ -7,7 +7,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Date;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
 /**
  * We are Headend (on localhost): chain of requests: Headend(localhost) -> AMS -> STB -> AMS -> localhost
@@ -24,7 +24,7 @@ class testAMS_newAPI_Performance extends API{
     void test1_Add_Purge() throws IOException, InterruptedException {
         ArrayList add_list,
                 purge_list = new ArrayList();
-        long a_avg = 0, a_min = 0, a_max=0, a_iterations = 0,
+        int a_avg = 0, a_min = 0, a_max=0, a_iterations = 0,
                 p_avg = 0, p_min = 0, p_max=0, p_iterations = 0;
 
         for (int i = 1; i <= count_iterations; i++) {
@@ -38,17 +38,17 @@ class testAMS_newAPI_Performance extends API{
             long reminderId = reminderId();
             add_list = AMS.request(ams_ip, mac, Operation.add, count_reminders, reminderProgramStart, reminderChannelNumber, reminderProgramId, reminderOffset, reminderScheduleId, reminderId);
             if(add_list.get(0).equals(expected200) && add_list.get(1).equals("")) {
-                a_avg = (long)add_list.get(2);
-                a_min = (long)add_list.get(3);
-                a_max = (long)add_list.get(4);
-                a_iterations = (long)add_list.get(5);
+                a_avg = (int)add_list.get(2);
+                a_min = (int)add_list.get(3);
+                a_max = (int)add_list.get(4);
+                a_iterations = (int)add_list.get(5);
 
                 purge_list = AMS.request(ams_ip, mac, Operation.purge);
                 if(purge_list.get(1).equals("")) {
-                    p_avg = (long)purge_list.get(2);
-                    p_min = (long)purge_list.get(3);
-                    p_max = (long)purge_list.get(4);
-                    p_iterations = (long)add_list.get(5);
+                    p_avg = (int)purge_list.get(2);
+                    p_min = (int)purge_list.get(3);
+                    p_max = (int)purge_list.get(4);
+                    p_iterations = (int)add_list.get(5);
                 }
             }
             reminderScheduleId_list.clear();
@@ -72,10 +72,8 @@ class testAMS_newAPI_Performance extends API{
             writer.append('\n');
             writer.flush();
         }
-        System.out.println(a_avg);
-        System.out.println(p_avg);
-        assertEquals(0, a_avg);
-        assertEquals(0, p_avg);
+        assertNotEquals(0, a_avg);
+        assertNotEquals(0, p_avg);
 
     }
 
@@ -144,9 +142,9 @@ class testAMS_newAPI_Performance extends API{
             writer.append('\n');
             writer.flush();
         }
-        assertEquals(0, a_avg);
-        assertEquals(0, d_avg);
-        assertEquals(0, p_avg);
+        assertNotEquals(0, a_avg);
+        assertNotEquals(0, d_avg);
+        assertNotEquals(0, p_avg);
     }
 
     @Test
@@ -227,10 +225,10 @@ class testAMS_newAPI_Performance extends API{
             writer.append('\n');
             writer.flush();
         }
-        assertEquals(0, a_avg);
-        assertEquals(0, m_avg);
-        assertEquals(0, d_avg);
-        assertEquals(0, p_avg);
+        assertNotEquals(0, a_avg);
+        assertNotEquals(0, m_avg);
+        assertNotEquals(0, d_avg);
+        assertNotEquals(0, p_avg);
     }
 
 }
