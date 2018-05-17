@@ -33,7 +33,7 @@ class NEWAPI_AMS extends API{
      */
     ArrayList request(String ams_ip, String mac, Enum<Operation> operation, int count_reminders, String reminderProgramStart, long reminderChannelNumber, String reminderProgramId, long reminderOffset, long reminderScheduleId, long reminderId) throws IOException {
         //if(show_debug_info) {
-        System.out.println("[INF] " + operation + " for macaddress=" + mac + " to ams_ip=" + ams_ip + ", "
+        System.out.println("[INF] " + new Date() + ": " + operation + " for macaddress=" + mac + " to ams_ip=" + ams_ip + ", "
                 + "count_reminders=" + count_reminders + ", "
                 + "reminderProgramStart=" + reminderProgramStart + ", "
                 + "reminderChannelNumber=" + reminderChannelNumber + ", "
@@ -47,7 +47,7 @@ class NEWAPI_AMS extends API{
         request.setHeader("Accept", "application/json");
         request.setHeader("Content-type", "application/json");
         request.setEntity(new StringEntity(generate_json_reminder(mac, count_reminders, operation, reminderProgramStart, reminderChannelNumber, reminderProgramId, reminderOffset, reminderScheduleId, reminderId)));
-        if(show_debug_info) {
+        if(show_debug_level) {
             System.out.println("[DBG] request string: " + request);
         }
 
@@ -55,7 +55,7 @@ class NEWAPI_AMS extends API{
         HttpResponse response = HttpClients.createDefault().execute(request);
         long finish = System.currentTimeMillis();
         int diff = (int)(finish-start);
-        System.out.print("[DBG] " + diff + "ms request");
+        System.out.print("[INF] " + diff + "ms request");
 
         ArrayList arrayList = new ArrayList();
         arrayList.add(0, response.getStatusLine().getStatusCode() + " " + response.getStatusLine().getReasonPhrase());
@@ -69,7 +69,7 @@ class NEWAPI_AMS extends API{
                 arrayList.add(3, get_min_time(add_avg_list));
                 arrayList.add(4, get_max_time(add_avg_list));
                 arrayList.add(5, add_avg_list.size());
-                if (show_debug_info) {
+                if (show_debug_level) {
                     if (add_avg_list.size() <= 10) {
                         System.out.println("[DBG] " + new Date() + ": add avg = " + avg + "ms" + add_avg_list.size() + ": add_avg_list:" + add_avg_list);
                     }
@@ -81,15 +81,16 @@ class NEWAPI_AMS extends API{
                 arrayList.add(3, get_min_time(modify_avg_list));
                 arrayList.add(4, get_max_time(modify_avg_list));
                 arrayList.add(5, modify_avg_list.size());
-                if (show_debug_info) {
+                if (show_debug_level) {
                     if (modify_avg_list.size() <= 10) {
                         System.out.println("[DBG] " + new Date() + ": modify avg = " + avg + "ms/" + modify_avg_list.size() + ": modify_avg_list:" + modify_avg_list);
                     }
                 }
             }
         }
-
-        System.out.println("[DBG] return codes: " + arrayList + "\n");
+        if(show_info_level) {
+            System.out.println("[INF] return codes: " + arrayList + "\n");
+        }
         return arrayList;
     }
 
@@ -102,7 +103,7 @@ class NEWAPI_AMS extends API{
      */
     ArrayList request(String ams_ip, String mac, Enum<Operation> operation, int count_reminders, long reminderScheduleId, long reminderId) throws IOException {
         //if(show_debug_info) {
-        System.out.println("[INF] delete for macaddress=" + mac + ", ams_ip=" + ams_ip + ", "
+        System.out.println("[INF] " + new Date() + ": delete for macaddress=" + mac + ", ams_ip=" + ams_ip + ", "
                 + "reminderScheduleId=multi, "
                 + "reminderId=multi");
 
@@ -111,7 +112,7 @@ class NEWAPI_AMS extends API{
         request.setHeader("Accept", "application/json");
         request.setHeader("Content-type", "application/json");
         request.setEntity(new StringEntity(generate_json_reminder_delete(mac, count_reminders, reminderScheduleId, reminderId)));
-        if(show_debug_info) {
+        if(show_debug_level) {
             System.out.println("[DBG] request string: " + request);
         }
 
@@ -119,7 +120,7 @@ class NEWAPI_AMS extends API{
         HttpResponse response = HttpClients.createDefault().execute(request);
         long finish = System.currentTimeMillis();
         int diff = (int)(finish-start);
-        System.out.print("[DBG] " + diff + "ms request");
+        System.out.print("[INF] " + diff + "ms request");
 
         ArrayList arrayList = new ArrayList();
         arrayList.add(0, response.getStatusLine().getStatusCode() + " " + response.getStatusLine().getReasonPhrase());
@@ -132,14 +133,16 @@ class NEWAPI_AMS extends API{
                 arrayList.add(3, get_min_time(delete_avg_list));
                 arrayList.add(4, get_max_time(delete_avg_list));
                 arrayList.add(5, delete_avg_list.size());
-                if (show_debug_info) {
+                if (show_debug_level) {
                     if (delete_avg_list.size() <= 10) {
                         System.out.println("[DBG] " + new Date() + ": delete avg = " + avg + "ms/" + delete_avg_list.size() + ": delete_avg_list:" + delete_avg_list);
                     }
                 }
             }
         }
-        System.out.println("[DBG] return codes: " + arrayList + "\n");
+        if(show_info_level) {
+            System.out.println("[INF] return codes: " + arrayList + "\n");
+        }
         return arrayList;
     }
 
@@ -150,14 +153,14 @@ class NEWAPI_AMS extends API{
      * @throws IOException - TBD
      */
     ArrayList request(String ams_ip, String mac, Enum<Operation> operation) throws IOException {
-        //if(show_debug_info) {
-            System.out.println("[INF] purge for macaddress=" + mac + " to ams_ip=" + ams_ip);
-        //}
+        if(show_info_level) {
+            System.out.println("[INF] " + new Date() + ": purge for macaddress=" + mac + " to ams_ip=" + ams_ip);
+        }
         HttpPost request = new HttpPost(prepare_url(ams_ip, operation, true));
         request.setHeader("Accept", "application/json");
         request.setHeader("Content-type", "application/json");
         request.setEntity(new StringEntity(generate_json_reminder_purge(mac)));
-        if(show_debug_info) {
+        if(show_debug_level) {
             System.out.println("[DBG] request string: " + request);
         }
 
@@ -177,13 +180,15 @@ class NEWAPI_AMS extends API{
             arrayList.add(3, get_min_time(purge_avg_list));
             arrayList.add(4, get_max_time(purge_avg_list));
             arrayList.add(5, purge_avg_list.size());
-            if(show_debug_info) {
+            if(show_debug_level) {
                 if(purge_avg_list.size()<=10) {
                     System.out.println("[DBG] " + new Date() + ": purge avg = " + avg + "ms/" + purge_avg_list.size() + ": purge_avg_list:" + purge_avg_list);
                 }
             }
         }
-        System.out.println("[DBG] return codes: " + arrayList + "\n");
+        if(show_info_level) {
+            System.out.println("[DBG] return codes: " + arrayList + "\n");
+        }
         return arrayList;
     }
 
@@ -204,7 +209,7 @@ class NEWAPI_AMS extends API{
      */
     @Deprecated
     ArrayList request(String ams_ip, String mac, Enum<Operation> operation, int count_reminders, String[] rack_date, int[] rack_channel, String reminderProgramId, int reminderOffset, long reminderScheduleId, long reminderId) throws IOException {
-        if(show_debug_info) {
+        if(show_debug_level) {
             System.out.println("[DBG] "+ operation + " for macaddress=" + mac + ", ams_ip=" + ams_ip + ", "
                     + "count_reminders=" + count_reminders + ", "
                     + "reminderOffset=" + reminderOffset + ", "
@@ -217,7 +222,7 @@ class NEWAPI_AMS extends API{
         HttpPost request = new HttpPost(prepare_url(ams_ip, operation, true));
         request.setHeader("Accept", "application/json");
         request.setHeader("Content-type", "application/json");
-        if(show_debug_info) {
+        if(show_debug_level) {
             System.out.println("[DBG] request string: " + request);
         }
 
@@ -338,7 +343,7 @@ class NEWAPI_AMS extends API{
                 //todo//todo//todo FIXME
                 if(first_clean_reminderScheduleId_list) {
                     reminderScheduleId_list.clear();
-                    if(show_debug_info) {
+                    if(show_debug_level) {
                         System.out.println("[DBG] preliminary clean reminderScheduleId_list !!!");
                     }
                     first_clean_reminderScheduleId_list = false;
@@ -373,7 +378,7 @@ class NEWAPI_AMS extends API{
                 if(first_clean_reminderId_list) {
                     //todo//todo//todo FIXME
                     reminderId_list.clear();
-                    if(show_debug_info) {
+                    if(show_debug_level) {
                         System.out.println("[DBG] preliminary clean reminderId_list !!!");
                     }
                     first_clean_reminderId_list = false;
@@ -389,7 +394,7 @@ class NEWAPI_AMS extends API{
             array_reminders.add(object_in_reminders);
         }
 
-        if(show_debug_info) {
+        if(show_debug_level) {
             if(reminderScheduleId_list.size()<=10) {
                 System.out.println("reminderScheduleId_list: size=" + reminderScheduleId_list.size());
                 System.out.println(": " + reminderScheduleId_list);
@@ -445,7 +450,7 @@ class NEWAPI_AMS extends API{
             array_reminders.add(object_in_reminders);
         }
 
-        if(show_debug_info) {
+        if(show_debug_level) {
             if(reminderScheduleId_list.size()<=10) {
                 System.out.println("reminderScheduleId_list: size=" + reminderScheduleId_list.size());
                 System.out.println(": " + reminderScheduleId_list);
@@ -486,7 +491,7 @@ class NEWAPI_AMS extends API{
 
         request.setHeader("Accept", "application/json");
         request.setHeader("Content-type", "application/json");
-        if(show_debug_info) {
+        if(show_debug_level) {
             System.out.println("[DBG] request string: " + request);
         }
         //+ "\n[DBG] Request entity: " + request.getEntity());
@@ -494,12 +499,14 @@ class NEWAPI_AMS extends API{
         long start = currentTimeMillis();
         HttpResponse response = HttpClients.createDefault().execute(request);
         long finish = currentTimeMillis();
-        System.out.print("[DBG] " + (finish - start) + "ms request");
+        System.out.print("[DBG] " + (finish-start) + "ms request");
 
         ArrayList arrayList = new ArrayList();
         arrayList.add(0, response.getStatusLine().getStatusCode() + " " + response.getStatusLine().getReasonPhrase());
         arrayList.add(1, check_body_response(read_response(new StringBuilder(),response).toString(), mac));
-        System.out.println("[DBG] return codes: " + arrayList + "\n");
+        if(show_info_level) {
+            System.out.println("[INF] return codes: " + arrayList + "\n");
+        }
         return arrayList;
     }
 

@@ -22,7 +22,8 @@ import static java.lang.System.currentTimeMillis;
  */
 public class API {
 
-    Boolean show_debug_info = false;
+    Boolean show_info_level = true;
+    Boolean show_debug_level = false;
     Boolean show_generated_json = false;
     Boolean show_response_body = false;
 

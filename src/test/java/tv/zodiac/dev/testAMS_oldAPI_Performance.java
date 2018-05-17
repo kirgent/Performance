@@ -27,8 +27,7 @@ class testAMS_oldAPI_Performance extends API{
                 p_avg = "0", p_min = "0", p_max="0";
 
         for (int i = 1; i <= count_iterations; i++) {
-            System.out.println("========= ========= ========= Iteration = " + i + "/" + count_iterations + " ========= ========= =========\n"
-                    + new Date());
+            System.out.println("========= ========= ========= Iteration = " + i + "/" + count_iterations + " ========= ========= =========\n");
             int reminderChannelNumber = reminderChannelNumber();
             long reminderOffset = reminderOffset();
             add_list = AMS.request(ams_ip, mac, Operation.add, count_reminders, reminderChannelNumber, reminderProgramStart, reminderProgramId, reminderOffset);
@@ -70,8 +69,7 @@ class testAMS_oldAPI_Performance extends API{
                 d_avg = "0", d_min = "0", d_max="0",
                 p_avg = "0", p_min = "0", p_max="0";
         for (int i = 1; i <= count_iterations; i++) {
-            System.out.println("========= ========= ========= Iteration = " + i + "/" + count_iterations + " ========= ========= =========\n"
-                    + new Date());
+            System.out.println("========= ========= ========= Iteration = " + i + "/" + count_iterations + " ========= ========= =========\n");
             int reminderChannelNumber = reminderChannelNumber();
             long reminderOffset = reminderOffset();
             add_list = AMS.request(ams_ip, mac, Operation.add, count_reminders, reminderChannelNumber, reminderProgramStart, reminderProgramId, reminderOffset);

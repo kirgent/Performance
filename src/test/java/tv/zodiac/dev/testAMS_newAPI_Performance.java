@@ -29,9 +29,11 @@ class testAMS_newAPI_Performance extends API{
                 a_iterations = 0,
                 p_iterations = 0;
 
+        Integer[] rack_channels_wb = { 2, 31, 63, 209, 211, 631, 755, 808 };
+        Integer[] rack_channels_moto = { 2 };
+
         for (int i = 1; i <= count_iterations; i++) {
-            System.out.println("========= ========= ========= Iteration = " + i + "/" + count_iterations + " ========= ========= =========\n"
-                    + new Date());
+            System.out.println("========= ========= ========= Iteration = " + i + "/" + count_iterations + " ========= ========= =========\n");
             //int reminderChannelNumber = reminderChannelNumber();
             int reminderChannelNumber = 2;
             //2,31,211,209,63,755,808,631
@@ -55,7 +57,7 @@ class testAMS_newAPI_Performance extends API{
             }
             reminderScheduleId_list.clear();
             reminderId_list.clear();
-            if(show_debug_info) {
+            if(show_debug_level) {
                 System.out.println("[DBG] reminderX_list-s are CLEARED !!!");
             }
             add_list.clear();
@@ -91,8 +93,7 @@ class testAMS_newAPI_Performance extends API{
                 d_iterations = 0,
                 p_iterations = 0;
         for (int i = 1; i <= count_iterations; i++) {
-            System.out.println("========= ========= ========= Iteration = " + i + "/" + count_iterations + " ========= ========= =========\n"
-                    + new Date());
+            System.out.println("========= ========= ========= Iteration = " + i + "/" + count_iterations + " ========= ========= =========\n");
             int reminderChannelNumber = reminderChannelNumber();
             long reminderOffset = reminderOffset();
             long reminderScheduleId = reminderScheduleId();
@@ -123,7 +124,7 @@ class testAMS_newAPI_Performance extends API{
 
             reminderScheduleId_list.clear();
             reminderId_list.clear();
-            if(show_debug_info) {
+            if(show_debug_level) {
                 System.out.println("[DBG] reminderX_list-s are CLEARED !!!");
             }
             add_list.clear();
@@ -164,8 +165,7 @@ class testAMS_newAPI_Performance extends API{
                 d_iterations = 0,
                 p_iterations = 0;
         for (int i = 1; i <= count_iterations; i++) {
-            System.out.println("========= ========= ========= Iteration = " + i + "/" + count_iterations + " ========= ========= =========\n"
-                    + new Date());
+            System.out.println("========= ========= ========= Iteration = " + i + "/" + count_iterations + " ========= ========= =========\n");
             int reminderChannelNumber = reminderChannelNumber();
             long reminderOffset = reminderOffset();
             long reminderOffset_new = reminderOffset();
@@ -204,7 +204,7 @@ class testAMS_newAPI_Performance extends API{
             }
             reminderScheduleId_list.clear();
             reminderId_list.clear();
-            if(show_debug_info) {
+            if(show_debug_level) {
                 System.out.println("[DBG] reminderX_list-s are CLEARED !!!");
             }
             add_list.clear();
