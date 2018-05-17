@@ -23,11 +23,12 @@ class testAMS_oldAPI_Performance extends API{
     void test1_Add_Purge() throws IOException {
         ArrayList add_list,
                 purge_list = new ArrayList();
-        String a_avg = "", a_min = "", a_max="",
-                p_avg = "", p_min = "", p_max="";
+        String a_avg = "0", a_min = "0", a_max="0",
+                p_avg = "0", p_min = "0", p_max="0";
 
         for (int i = 1; i <= count_iterations; i++) {
-            System.out.println("========= ========= ========= Iteration = " + i + "/" + count_iterations + " ========= ========= =========");
+            System.out.println("========= ========= ========= Iteration = " + i + "/" + count_iterations + " ========= ========= =========\n"
+                    + new Date());
             int reminderChannelNumber = reminderChannelNumber();
             long reminderOffset = reminderOffset();
             add_list = AMS.request(ams_ip, mac, Operation.add, count_reminders, reminderChannelNumber, reminderProgramStart, reminderProgramId, reminderOffset);
@@ -48,10 +49,10 @@ class testAMS_oldAPI_Performance extends API{
             add_list.clear();
             purge_list.clear();
         }
-        String result = "========= ========= ========= ========= ========= ========="
+        String result = "========= ========= ========= Total measurements ========= ========= ========="
                 + "\n" + new Date()
-                + "\ncount_reminders=" + count_reminders + ",   add avg = " + a_avg + ", min=" + a_min + ", max=" + a_max
-                + "\ncount_reminders=" + count_reminders + ", purge avg = " + p_avg + ", min=" + p_min + ", max=" + p_max
+                + "\ncount_reminders=" + count_reminders + ",   add avg=" + a_avg + ", min=" + a_min + "ms, max=" + a_max + "ms"
+                + "\ncount_reminders=" + count_reminders + ", purge avg=" + p_avg + ", min=" + p_min + "ms, max=" + p_max + "ms"
                 + "\n========= ========= ========= ========= ========= =========";
         System.out.println(result);
         FileWriter writer = new FileWriter("output.log", true);
@@ -65,11 +66,12 @@ class testAMS_oldAPI_Performance extends API{
         ArrayList add_list,
                 delete_list = new ArrayList(),
                 purge_list = new ArrayList();
-        String a_avg = "", a_min = "", a_max="",
-                d_avg = "", d_min = "", d_max="",
-                p_avg = "", p_min = "", p_max="";
+        String a_avg = "0", a_min = "0", a_max="0",
+                d_avg = "0", d_min = "0", d_max="0",
+                p_avg = "0", p_min = "0", p_max="0";
         for (int i = 1; i <= count_iterations; i++) {
-            System.out.println("========= ========= ========= Iteration = " + i + "/" + count_iterations + " ========= ========= =========");
+            System.out.println("========= ========= ========= Iteration = " + i + "/" + count_iterations + " ========= ========= =========\n"
+                    + new Date());
             int reminderChannelNumber = reminderChannelNumber();
             long reminderOffset = reminderOffset();
             add_list = AMS.request(ams_ip, mac, Operation.add, count_reminders, reminderChannelNumber, reminderProgramStart, reminderProgramId, reminderOffset);
@@ -98,11 +100,11 @@ class testAMS_oldAPI_Performance extends API{
             delete_list.clear();
             purge_list.clear();
         }
-        String result = "========= ========= ========= ========= ========= ========="
+        String result = "========= ========= ========= Total measurements ========= ========= ========="
                 + "\n" + new Date()
-                + "\ncount_reminders=" + count_reminders + ",    add avg = " + a_avg + ", min=" + a_min + ", max=" + a_max
-                + "\ncount_reminders=" + count_reminders + ", delete avg = " + d_avg + ", min=" + d_min + ", max=" + d_max
-                + "\ncount_reminders=" + count_reminders + ",  purge avg = " + p_avg + ", min=" + p_min + ", max=" + p_max
+                + "\ncount_reminders=" + count_reminders + ",    add avg=" + a_avg + ", min=" + a_min + "ms, max=" + a_max + "ms"
+                + "\ncount_reminders=" + count_reminders + ", delete avg=" + d_avg + ", min=" + d_min + "ms, max=" + d_max + "ms"
+                + "\ncount_reminders=" + count_reminders + ",  purge avg=" + p_avg + ", min=" + p_min + "ms, max=" + p_max + "ms"
                 + "\n========= ========= ========= ========= ========= =========";
         System.out.println(result);
         FileWriter writer = new FileWriter("output.log", true);

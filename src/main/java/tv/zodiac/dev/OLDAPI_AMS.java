@@ -55,9 +55,10 @@ class OLDAPI_AMS extends API{
             if (operation.name().equals("add")) {
                 add_avg_list.add((int) diff);
                 int avg = get_average_time(add_avg_list);
-                arrayList.add(2, avg + "ms/" + add_avg_list.size());
+                arrayList.add(2, avg);
                 arrayList.add(3, get_min_time(add_avg_list));
                 arrayList.add(4, get_max_time(add_avg_list));
+                arrayList.add(5, add_avg_list.size());
                 if (show_debug_info) {
                     if (add_avg_list.size() <= 10) {
                         System.out.println("[DBG] add avg = " + avg + "ms/" + add_avg_list.size() + ": add_list:" + add_avg_list);
@@ -66,9 +67,10 @@ class OLDAPI_AMS extends API{
             } else if (operation.name().equals("delete")) {
                 delete_avg_list.add((int) diff);
                 int avg = get_average_time(delete_avg_list);
-                arrayList.add(2, avg + "ms/" + delete_avg_list.size());
+                arrayList.add(2, avg);
                 arrayList.add(3, get_min_time(delete_avg_list));
                 arrayList.add(4, get_max_time(delete_avg_list));
+                arrayList.add(5, delete_avg_list.size());
                 if (show_debug_info) {
                     if (delete_avg_list.size() <= 10) {
                         System.out.println("[DBG] modify avg = " + avg + "ms/" + delete_avg_list.size() + ": modify_list:" + delete_avg_list);
@@ -111,9 +113,10 @@ class OLDAPI_AMS extends API{
         if (arrayList.get(1).equals("")) {
             purge_avg_list.add((int)diff);
             long avg = get_average_time(purge_avg_list);
-            arrayList.add(2, avg + "ms/" + purge_avg_list.size());
+            arrayList.add(2, avg);
             arrayList.add(3, get_min_time(purge_avg_list));
             arrayList.add(4, get_max_time(purge_avg_list));
+            arrayList.add(5, purge_avg_list.size());
             if(show_debug_info) {
                 if(purge_avg_list.size()<=10) {
                     System.out.println("[DBG] purge avg = " + avg + "ms/" + purge_avg_list.size() + ": purge_avg_list:" + purge_avg_list);
