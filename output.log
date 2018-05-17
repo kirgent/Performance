@@ -132,3 +132,8 @@ FINISH Thu May 17 15:05:12 MSK 2018
 FINISH 500rems,   add avg = , min=, max=
 FINISH 500rems, purge avg = , min=, max=
 ========= ========= ========= ========= ========= =========
+========= ========= ========= ========= ========= =========
+Thu May 17 15:15:50 MSK 2018
+count_reminders=500,   add avg = 0ms, min=0ms, max=0ms
+count_reminders=500, purge avg = 0ms, min=0ms, max=0ms
+========= ========= ========= ========= ========= =========
