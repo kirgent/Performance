@@ -187,7 +187,7 @@ class NEWAPI_AMS extends API{
             }
         }
         if(show_info_level) {
-            System.out.println("[DBG] return codes: " + arrayList + "\n");
+            System.out.println("[INF] return codes: " + arrayList + "\n");
         }
         return arrayList;
     }
@@ -239,7 +239,7 @@ class NEWAPI_AMS extends API{
                 long start = currentTimeMillis();
                 HttpResponse response = client.execute(request);
                 long finish = currentTimeMillis();
-                System.out.println("[DBG] " + (finish - start) + "ms request" +
+                System.out.println("[DBG] " + (finish-start) + "ms request" +
                         "Response getStatusLine: " + response.getStatusLine());
 
                 arrayList.add(0, response.getStatusLine().getStatusCode() + " " + response.getStatusLine().getReasonPhrase());
