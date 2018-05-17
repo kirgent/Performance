@@ -5,6 +5,7 @@ import org.junit.jupiter.api.Test;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Date;
 
 /**
  * We are Headend (on localhost): chain of requests: Headend(localhost) -> AMS -> STB -> AMS -> localhost
@@ -19,12 +20,13 @@ class testAMS_newAPI_Performance extends API{
 
     @Test
     void test1_Add_Purge() throws IOException {
+        Date date = new Date();
         ArrayList add_list,
                 purge_list = new ArrayList();
         String a_avg = "", a_min = "", a_max="",
                 p_avg = "", p_min = "", p_max="";
         for (int i = 1; i <= count_iterations; i++) {
-            System.out.println("========= ========= ========= Iteration = " + i + "/" + count_iterations + " ========= ========= =========");
+            System.out.println(date + "========= ========= ========= Iteration = " + i + "/" + count_iterations + " ========= ========= =========");
             //int reminderChannelNumber = reminderChannelNumber();
             int reminderChannelNumber = 2;
             //int reminderChannelNumber = 31;
