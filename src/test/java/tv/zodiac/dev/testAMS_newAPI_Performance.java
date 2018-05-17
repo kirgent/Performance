@@ -26,10 +26,12 @@ class testAMS_newAPI_Performance extends API{
         String a_avg = "", a_min = "", a_max="",
                 p_avg = "", p_min = "", p_max="";
         for (int i = 1; i <= count_iterations; i++) {
-            System.out.println(date + "========= ========= ========= Iteration = " + i + "/" + count_iterations + " ========= ========= =========");
+            System.out.println("========= ========= ========= Iteration = " + i + "/" + count_iterations + " ========= ========= =========");
+            System.out.println(date);
+            System.out.println(date.toString());
             //int reminderChannelNumber = reminderChannelNumber();
             int reminderChannelNumber = 2;
-            //int reminderChannelNumber = 31;
+            //2,31,211,209,63,755,808,631
             long reminderOffset = reminderOffset();
             long reminderScheduleId = reminderScheduleId();
             long reminderId = reminderId();
