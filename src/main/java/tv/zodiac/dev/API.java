@@ -22,9 +22,9 @@ import static java.lang.System.currentTimeMillis;
  */
 public class API {
 
-    Boolean show_debug_info = false;
+    Boolean show_debug_info = true;
     Boolean show_generated_json = false;
-    Boolean show_response_body = false;
+    Boolean show_response_body = true;
 
     //private final static Logger log = Logger.getLogger(API.class.getName());
 
@@ -122,7 +122,7 @@ public class API {
         return average;
     }
 
-    long get_min_time(ArrayList list) {
+    int get_min_time(ArrayList list) {
         int min = 0;
         if (list.size() > 0) {
             min = (int)list.get(0);
@@ -135,7 +135,7 @@ public class API {
         return min;
     }
 
-    long get_max_time(ArrayList list) {
+    int get_max_time(ArrayList list) {
         int max = 0;
         if (list.size() > 0) {
             for (int j = 0; j < list.size(); j++) {
