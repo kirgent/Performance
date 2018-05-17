@@ -53,7 +53,8 @@ class NEWAPI_AMS extends API{
 
         long start = System.currentTimeMillis();
         HttpResponse response = HttpClients.createDefault().execute(request);
-        long diff = System.currentTimeMillis() - start;
+        long finish = System.currentTimeMillis();
+        int diff = (int)(finish-start);
         System.out.print("[DBG] " + diff + "ms request");
 
         ArrayList arrayList = new ArrayList();
@@ -62,7 +63,7 @@ class NEWAPI_AMS extends API{
 
         if (arrayList.get(1).equals("")) {
             if (operation.name().equals("add")) {
-                add_avg_list.add((int)diff);
+                add_avg_list.add(diff);
                 int avg = get_average_time(add_avg_list);
                 arrayList.add(2, avg);
                 arrayList.add(3, get_min_time(add_avg_list));
@@ -74,7 +75,7 @@ class NEWAPI_AMS extends API{
                     }
                 }
             } else if (operation.name().equals("modify")) {
-                modify_avg_list.add((int) diff);
+                modify_avg_list.add(diff);
                 int avg = get_average_time(modify_avg_list);
                 arrayList.add(2, avg);
                 arrayList.add(3, get_min_time(modify_avg_list));
@@ -116,7 +117,8 @@ class NEWAPI_AMS extends API{
 
         long start = System.currentTimeMillis();
         HttpResponse response = HttpClients.createDefault().execute(request);
-        long diff = System.currentTimeMillis() - start;
+        long finish = System.currentTimeMillis();
+        int diff = (int)(finish-start);
         System.out.print("[DBG] " + diff + "ms request");
 
         ArrayList arrayList = new ArrayList();
@@ -124,7 +126,7 @@ class NEWAPI_AMS extends API{
         arrayList.add(1, check_body_response(read_response(new StringBuilder(),response).toString(), mac));
         if (arrayList.get(1).equals("")) {
             if(arrayList.get(1).equals("")) {
-                delete_avg_list.add((int) diff);
+                delete_avg_list.add(diff);
                 int avg = get_average_time(delete_avg_list);
                 arrayList.add(2, avg);
                 arrayList.add(3, get_min_time(delete_avg_list));
@@ -161,15 +163,16 @@ class NEWAPI_AMS extends API{
 
         long start = currentTimeMillis();
         HttpResponse response = HttpClients.createDefault().execute(request);
-        long diff = System.currentTimeMillis() - start;
+        long finish = System.currentTimeMillis();
+        int diff = (int)(finish-start);
         System.out.print("[DBG] " + diff + "ms request");
 
         ArrayList arrayList = new ArrayList();
         arrayList.add(0, response.getStatusLine().getStatusCode() + " " + response.getStatusLine().getReasonPhrase());
         arrayList.add(1, check_body_response(read_response(new StringBuilder(),response).toString(), mac));
         if (arrayList.get(1).equals("")) {
-            purge_avg_list.add((int)diff);
-            long avg = get_average_time(purge_avg_list);
+            purge_avg_list.add(diff);
+            int avg = get_average_time(purge_avg_list);
             arrayList.add(2, avg);
             arrayList.add(3, get_min_time(purge_avg_list));
             arrayList.add(4, get_max_time(purge_avg_list));
