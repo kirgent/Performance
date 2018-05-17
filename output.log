@@ -147,3 +147,8 @@ Thu May 17 16:24:40 MSK 2018
 count_reminders=500,   add avg=0, min=0ms, max=0ms, count_iterations=0
 count_reminders=500, purge avg=0, min=0ms, max=0ms, count_iterations=0
 ========= ========= ========= ========= ========= =========
+========= ========= ========= Total measurements ========= ========= =========
+Thu May 17 19:14:41 MSK 2018
+count_reminders=500,   add avg=19783ms, min=19783ms, max=19783ms, count_iterations=1
+count_reminders=500, purge avg=486ms, min=486ms, max=486ms, count_iterations=1
+========= ========= ========= ========= ========= =========
