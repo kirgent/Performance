@@ -24,8 +24,10 @@ class testAMS_newAPI_Performance extends API{
     void test1_Add_Purge() throws IOException, InterruptedException {
         ArrayList add_list,
                 purge_list = new ArrayList();
-        int a_avg = 0, a_min = 0, a_max=0, a_iterations = 0,
-                p_avg = 0, p_min = 0, p_max=0, p_iterations = 0;
+        int a_avg = 0, a_min = 0, a_max=0,
+                p_avg = 0, p_min = 0, p_max=0,
+                a_iterations = 0,
+                p_iterations = 0;
 
         for (int i = 1; i <= count_iterations; i++) {
             System.out.println("========= ========= ========= Iteration = " + i + "/" + count_iterations + " ========= ========= =========\n"
