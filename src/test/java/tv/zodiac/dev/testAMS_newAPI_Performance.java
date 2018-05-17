@@ -54,16 +54,18 @@ class testAMS_newAPI_Performance extends API{
             purge_list.clear();
         }
 
-        String result = "========= ========= ========= ========= ========= ========="
-                + "\n" + new Date()
-                + "\ncount_reminders=" + count_reminders + ",   add avg=" + a_avg + ", min=" + a_min + "ms, max=" + a_max + "ms"
-                + "\ncount_reminders=" + count_reminders + ", purge avg=" + p_avg + ", min=" + p_min + "ms, max=" + p_max + "ms"
-                + "\n========= ========= ========= ========= ========= =========";
-        System.out.println(result);
-        FileWriter writer = new FileWriter("output.log", true);
-        writer.write(result);
-        writer.append('\n');
-        writer.flush();
+        if(!a_avg.equals("0") && !p_avg.equals("0")) {
+            String result = "========= ========= ========= ========= ========= ========="
+                    + "\n" + new Date()
+                    + "\ncount_reminders=" + count_reminders + ",   add avg=" + a_avg + ", min=" + a_min + "ms, max=" + a_max + "ms"
+                    + "\ncount_reminders=" + count_reminders + ", purge avg=" + p_avg + ", min=" + p_min + "ms, max=" + p_max + "ms"
+                    + "\n========= ========= ========= ========= ========= =========";
+            System.out.println(result);
+            FileWriter writer = new FileWriter("output.log", true);
+            writer.write(result);
+            writer.append('\n');
+            writer.flush();
+        }
     }
 
     @Test
@@ -177,6 +179,8 @@ class testAMS_newAPI_Performance extends API{
             delete_list.clear();
             purge_list.clear();
         }
+
+
         String result = "========= ========= ========= ========= ========= ========="
                 + "\n" + new Date()
                 + "\ncount_reminders=" + count_reminders + ",    add avg=" + a_avg + ", min=" + a_min + "ms, max=" + a_max + "ms"
