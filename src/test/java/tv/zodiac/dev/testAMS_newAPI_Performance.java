@@ -19,16 +19,13 @@ class testAMS_newAPI_Performance extends API{
     private String ams_ip = ams_ip_4;
 
     @Test
-    void test1_Add_Purge() throws IOException {
-        Date date = new Date();
+    void test1_Add_Purge() throws IOException, InterruptedException {
         ArrayList add_list,
                 purge_list = new ArrayList();
         String a_avg = "", a_min = "", a_max="",
                 p_avg = "", p_min = "", p_max="";
         for (int i = 1; i <= count_iterations; i++) {
             System.out.println("========= ========= ========= Iteration = " + i + "/" + count_iterations + " ========= ========= =========");
-            System.out.println(date);
-            System.out.println(date.toString());
             //int reminderChannelNumber = reminderChannelNumber();
             int reminderChannelNumber = 2;
             //2,31,211,209,63,755,808,631
@@ -58,6 +55,7 @@ class testAMS_newAPI_Performance extends API{
         }
 
         String result = "========= ========= ========= ========= ========= ========="
+                + "\nFINISH " + new Date()
                 + "\nFINISH " + count_reminders + "rems,   add avg = " + a_avg + ", min=" + a_min + ", max=" + a_max
                 + "\nFINISH " + count_reminders + "rems, purge avg = " + p_avg + ", min=" + p_min + ", max=" + p_max
                 + "\n========= ========= ========= ========= ========= =========";
@@ -113,6 +111,7 @@ class testAMS_newAPI_Performance extends API{
             purge_list.clear();
         }
         String result = "========= ========= ========= ========= ========= ========="
+                + "\nFINISH " + new Date()
                 + "\nFINISH " + count_reminders + "rems,    add avg = " + a_avg + ", min=" + a_min + ", max=" + a_max
                 + "\nFINISH " + count_reminders + "rems, delete avg = " + d_avg + ", min=" + d_min + ", max=" + d_max
                 + "\nFINISH " + count_reminders + "rems,  purge avg = " + p_avg + ", min=" + p_min + ", max=" + p_max
@@ -179,6 +178,7 @@ class testAMS_newAPI_Performance extends API{
             purge_list.clear();
         }
         String result = "========= ========= ========= ========= ========= ========="
+                + "\nFINISH " + new Date()
                 + "\nFINISH " + count_reminders + "rems,    add avg = " + a_avg + ", min=" + a_min + ", max=" + a_max
                 + "\nFINISH " + count_reminders + "rems, modify avg = " + m_avg + ", min=" + m_min + ", max=" + m_max
                 + "\nFINISH " + count_reminders + "rems, delete avg = " + d_avg + ", min=" + d_min + ", max=" + d_max

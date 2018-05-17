@@ -122,3 +122,8 @@ FINISH 10rems, modify avg = 221ms/21, min=92ms, max=1164ms
 FINISH 10rems, delete avg = 190ms/21, min=96ms, max=1161ms
 FINISH 10rems,  purge avg = 212ms/21, min=82ms, max=1162ms
 ========= ========= ========= ========= ========= =========
+========= ========= ========= ========= ========= =========
+FINISH Thu May 17 14:54:25 MSK 2018
+FINISH 500rems,   add avg = , min=, max=
+FINISH 500rems, purge avg = , min=, max=
+========= ========= ========= ========= ========= =========
