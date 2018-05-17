@@ -86,7 +86,7 @@ class NEWAPI_AMS extends API{
             }
         }
 
-        System.out.println("[DBG] " + new Date() + " return codes: " + arrayList + "\n");
+        System.out.println("[DBG] return codes: " + arrayList + "\n");
         return arrayList;
     }
 
@@ -134,7 +134,7 @@ class NEWAPI_AMS extends API{
                 }
             }
         }
-        System.out.println("[DBG] " + new Date() + " return codes: " + arrayList + "\n");
+        System.out.println("[DBG] return codes: " + arrayList + "\n");
         return arrayList;
     }
 
@@ -176,7 +176,7 @@ class NEWAPI_AMS extends API{
                 }
             }
         }
-        System.out.println("[DBG] " + new Date() + " return codes: " + arrayList + "\n");
+        System.out.println("[DBG] return codes: " + arrayList + "\n");
         return arrayList;
     }
 
@@ -492,7 +492,7 @@ class NEWAPI_AMS extends API{
         ArrayList arrayList = new ArrayList();
         arrayList.add(0, response.getStatusLine().getStatusCode() + " " + response.getStatusLine().getReasonPhrase());
         arrayList.add(1, check_body_response(read_response(new StringBuilder(),response).toString(), mac));
-        System.out.println("[DBG] " + new Date() + " return codes: " + arrayList + "\n");
+        System.out.println("[DBG] return codes: " + arrayList + "\n");
         return arrayList;
     }
 
