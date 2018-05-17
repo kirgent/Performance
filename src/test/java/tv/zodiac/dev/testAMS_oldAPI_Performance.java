@@ -5,6 +5,7 @@ import org.junit.jupiter.api.Test;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Date;
 
 
 /**
@@ -48,8 +49,9 @@ class testAMS_oldAPI_Performance extends API{
             purge_list.clear();
         }
         String result = "========= ========= ========= ========= ========= ========="
-                + "\nFINISH " + count_reminders + "rems,   add avg = " + a_avg + ", min=" + a_min + ", max=" + a_max
-                + "\nFINISH " + count_reminders + "rems, purge avg = " + p_avg + ", min=" + p_min + ", max=" + p_max
+                + "\n" + new Date()
+                + "\ncount_reminders=" + count_reminders + ",   add avg = " + a_avg + ", min=" + a_min + ", max=" + a_max
+                + "\ncount_reminders=" + count_reminders + ", purge avg = " + p_avg + ", min=" + p_min + ", max=" + p_max
                 + "\n========= ========= ========= ========= ========= =========";
         System.out.println(result);
         FileWriter writer = new FileWriter("output.log", true);
@@ -97,9 +99,10 @@ class testAMS_oldAPI_Performance extends API{
             purge_list.clear();
         }
         String result = "========= ========= ========= ========= ========= ========="
-                + "\nFINISH " + count_reminders + "rems,    add avg = " + a_avg + ", min=" + a_min + ", max=" + a_max
-                + "\nFINISH " + count_reminders + "rems, delete avg = " + d_avg + ", min=" + d_min + ", max=" + d_max
-                + "\nFINISH " + count_reminders + "rems,  purge avg = " + p_avg + ", min=" + p_min + ", max=" + p_max
+                + "\n" + new Date()
+                + "\ncount_reminders=" + count_reminders + ",    add avg = " + a_avg + ", min=" + a_min + ", max=" + a_max
+                + "\ncount_reminders=" + count_reminders + ", delete avg = " + d_avg + ", min=" + d_min + ", max=" + d_max
+                + "\ncount_reminders=" + count_reminders + ",  purge avg = " + p_avg + ", min=" + p_min + ", max=" + p_max
                 + "\n========= ========= ========= ========= ========= =========";
         System.out.println(result);
         FileWriter writer = new FileWriter("output.log", true);
