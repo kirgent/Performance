@@ -23,8 +23,8 @@ import static java.lang.System.currentTimeMillis;
 public class API {
 
     Boolean show_debug_info = false;
-    Boolean show_generated_json = true;
-    Boolean show_response_body = true;
+    Boolean show_generated_json = false;
+    Boolean show_response_body = false;
 
     //private final static Logger log = Logger.getLogger(API.class.getName());
 
@@ -65,7 +65,7 @@ public class API {
     final String boxMoto2145_173 =  "000004B9419F"; //"B077AC5D91DD"; // "000004B9419F"; //Moto_2145_Mondo_DCX3200M_17.3_346
     final String boxMoto2147_Rems = "000004D67F70"; //000004d67f70"; //Moto_2147_Mondo_DCX3200M_REMS
 
-    String mac = boxMoto2145_173;
+    String mac = boxD102;
 
     ArrayList reminderScheduleId_list = new ArrayList();
     ArrayList reminderId_list = new ArrayList();
