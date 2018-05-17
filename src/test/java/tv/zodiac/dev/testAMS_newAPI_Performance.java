@@ -26,7 +26,7 @@ class testAMS_newAPI_Performance extends API{
         for (int i = 1; i <= count_iterations; i++) {
             System.out.println("========= ========= ========= Iteration = " + i + "/" + count_iterations + " ========= ========= =========");
             //int reminderChannelNumber = reminderChannelNumber();
-            int reminderChannelNumber = 211;
+            int reminderChannelNumber = 2;
             //int reminderChannelNumber = 31;
             long reminderOffset = reminderOffset();
             long reminderScheduleId = reminderScheduleId();
