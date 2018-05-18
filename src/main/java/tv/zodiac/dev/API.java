@@ -562,6 +562,23 @@ public class API {
         return pattern.format(calendar.getTime());
     }
 
+    String get_time2(int i) {
+        //int interval_in_minutes;
+        //if (count<=48){ interval_in_minutes = 30; }
+        //else if (count<=288){ interval_in_minutes = 5; }
+        //else if (count<=720){ interval_in_minutes = 2; }
+        //else interval_in_minutes = 1;
+
+        //if (number < 1) { number = 1; }
+
+        Calendar calendar = Calendar.getInstance();
+        SimpleDateFormat pattern = new SimpleDateFormat("HH:mm");
+        calendar.setTimeZone(TimeZone.getTimeZone("UTC"));
+        calendar.setTime(new java.util.Date(0, 0, 0, 0, 0));
+        calendar.add(Calendar.MINUTE, i);
+        return pattern.format(calendar.getTime());
+    }
+
     String prepare_url(String ams_ip, Enum<Operation> operation, boolean newapi) {
         String result;
         if (newapi) {

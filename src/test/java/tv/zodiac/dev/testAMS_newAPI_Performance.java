@@ -15,7 +15,7 @@ import static org.junit.jupiter.api.Assertions.assertNotEquals;
 class testAMS_newAPI_Performance extends API{
 
     private NEWAPI_AMS AMS = new NEWAPI_AMS();
-    final private int count_iterations = 10;
+    final private int count_iterations = 1;
     final private int count_reminders = 500;
     //String mac = box4210;
     String mac = boxMoto2147_Rems;
@@ -35,7 +35,8 @@ class testAMS_newAPI_Performance extends API{
             //int reminderChannelNumber = reminderChannelNumber();
             int reminderChannelNumber = 2;
             //2,31,211,209,63,755,808,631
-            long reminderOffset = reminderOffset();
+            //long reminderOffset = reminderOffset();
+            long reminderOffset = 0;
             long reminderScheduleId = reminderScheduleId();
             long reminderId = reminderId();
             add_list = AMS.request(ams_ip, mac, Operation.add, count_reminders, reminderProgramStart, reminderChannelNumber, reminderProgramId, reminderOffset, reminderScheduleId, reminderId);
@@ -60,6 +61,7 @@ class testAMS_newAPI_Performance extends API{
             }
             add_list.clear();
             purge_list.clear();
+            Thread.sleep(1000);
         }
 
         if(a_avg != 0 && p_avg != 0) {
@@ -80,7 +82,7 @@ class testAMS_newAPI_Performance extends API{
     }
 
     @Test
-    void test2_Add_Delete_Purge() throws IOException {
+    void test2_Add_Delete_Purge() throws IOException, InterruptedException {
         ArrayList add_list,
                 delete_list = new ArrayList(),
                 purge_list = new ArrayList();
@@ -128,6 +130,7 @@ class testAMS_newAPI_Performance extends API{
             add_list.clear();
             delete_list.clear();
             purge_list.clear();
+            Thread.sleep(1000);
         }
 
         if(a_avg != 0 && d_avg != 0 && p_avg != 0) {
@@ -149,7 +152,7 @@ class testAMS_newAPI_Performance extends API{
     }
 
     @Test
-    void test3_Add_Modify_Delete_Purge() throws IOException {
+    void test3_Add_Modify_Delete_Purge() throws IOException, InterruptedException {
         ArrayList add_list,
                 modify_list = new ArrayList(),
                 delete_list = new ArrayList(),
@@ -205,6 +208,7 @@ class testAMS_newAPI_Performance extends API{
             modify_list.clear();
             delete_list.clear();
             purge_list.clear();
+            Thread.sleep(1000);
         }
 
         if(a_avg != 0 && m_avg != 0 && d_avg != 0 && p_avg != 0) {
