@@ -5,7 +5,6 @@ import org.junit.jupiter.api.Test;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.Random;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -15,29 +14,18 @@ class testSandbox extends API {
 
     @Test
     void testDate() {
-        assertEquals("2018-03-31", reminderProgramStart);
-        assertEquals("2018-03-31", get_date(1, false));
-        assertEquals("2018-03-31 2018-04-01", get_date(2, true));
-        assertEquals("2018-04-01", get_date(2, false));
+        assertEquals("2018-05-19", reminderProgramStart());
+        assertEquals("2018-05-19", get_date(1));
+        assertEquals("2018-05-19 2018-05-20", get_date_several(2));
+        assertEquals("2018-05-20", get_date(2));
     }
 
     @Test
-    void testTime() {
-        //assertEquals("00:30", get_time(1, 2));
-        Random random = new Random();
-        System.out.println(random.nextLong());
-
-        Random random2 = new Random();
-        //random.setSeed(1);
-        System.out.println(random2.nextLong());
-    }
-
-    @Test
-    void test_get_time2() {
-        int count_reminders = 10000;
-        for (int i=1; i<=count_reminders; i++) {
-            System.out.print(get_time2(i) + ", ");
-        }
+    void test_get_date_time() throws InterruptedException {
+        assertEquals("2018-05-19 00:00", get_date_time(0));
+        assertEquals("2018-05-20 00:00", get_date_time(1440));
+        //assertEquals("2018-05-21 00:00", get_date_time(2880));
+        assertEquals("2018-05-22 00:00", get_date_time(4320));
     }
 
     @Test
@@ -79,14 +67,6 @@ class testSandbox extends API {
         ArrayList result = AMS.QueryDB(ams_ip, mac_wrong);
         assertTrue(result.isEmpty());
     }
-
-    @Test
-    void testCheck_Delete() throws IOException {
-        ArrayList actual = AMS.request(ams_ip, mac, Operation.delete, count_reminders, reminderProgramStart, reminderChannelNumber, reminderProgramId, reminderOffset, reminderScheduleId, reminderId);
-        assertEquals(expected200, actual.get(0));
-        assertEquals("", actual.get(1));
-    }
-
 
 
 }

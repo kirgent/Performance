@@ -9,10 +9,8 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.sql.*;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Random;
-import java.util.TimeZone;
+import java.util.*;
+import java.util.Date;
 
 import static java.lang.System.currentTimeMillis;
 
@@ -445,7 +443,10 @@ public class API {
         return actual;
     }
 
-    private String reminderProgramStart() {
+    /**
+     * @return just return the day=tomorrow: yyyy-mm-dd
+     */
+    String reminderProgramStart() {
         Calendar calendar = Calendar.getInstance();
         calendar.setTimeZone(TimeZone.getTimeZone("UTC"));
         SimpleDateFormat pattern = new SimpleDateFormat("yyyy-MM-dd");
@@ -461,6 +462,7 @@ public class API {
         return Math.abs(new Random().nextInt(100));
     }
 
+    @Deprecated
     void printArrayList(ArrayList list){
         if(list != null)
         {
@@ -469,6 +471,7 @@ public class API {
         }
     }
 
+    @Deprecated
     static Boolean ContainsAllNulls(ArrayList list)
     {
         if(list != null)
@@ -499,29 +502,56 @@ public class API {
         return reminderId;
     }
 
-    String get_date(int count, Boolean several) {
+
+    String get_date(int index) {
         Calendar calendar = Calendar.getInstance();
-        calendar.setTimeZone(TimeZone.getTimeZone("UTC"));
+        //calendar.setTimeZone(TimeZone.getTimeZone("UTC"));
         SimpleDateFormat pattern = new SimpleDateFormat("yyyy-MM-dd");
         StringBuilder result = new StringBuilder();
-        if (several) {
-            for (int i = 1; i <= count; i++) {
-                calendar.add(Calendar.DAY_OF_YEAR, +1);
-                result.append(pattern.format(calendar.getTime()));
-                if (i != count) {
-                    result.append(" ");
-                }
-            }
-        } else {
-            calendar.add(Calendar.DAY_OF_YEAR, +count);
-            result = result.append(pattern.format(calendar.getTime()));
-        }
-        System.out.println("generated result: " + result);
+
+        calendar.add(Calendar.DAY_OF_YEAR, +index);
+        result = result.append(pattern.format(calendar.getTime()));
+
+        System.out.println("generated date: " + result);
+        return result.toString();
+    }
+
+    String get_date_full(int index) {
+        //Calendar cal = Calendar.getInstance();
+        //cal.add(Calendar.DATE, -1);
+        //System.out.println("Yesterday's date = "+ cal.getTime());
+
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTimeZone(TimeZone.getTimeZone("UTC"));
+        SimpleDateFormat pattern = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+        StringBuilder result = new StringBuilder();
+
+        calendar.add(Calendar.DAY_OF_YEAR, +index);
+        result = result.append(pattern.format(calendar.getTime()));
+
+        System.out.println("generated date_full: " + result);
         return result.toString();
     }
 
     @Deprecated
-    String get_time(int count) {
+    String get_date_several(int count) {
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTimeZone(TimeZone.getTimeZone("UTC"));
+        SimpleDateFormat pattern = new SimpleDateFormat("yyyy-MM-dd");
+        StringBuilder result = new StringBuilder();
+        for (int i = 1; i <= count; i++) {
+            calendar.add(Calendar.DAY_OF_YEAR, +1);
+            result.append(pattern.format(calendar.getTime()));
+            if (i != count) {
+                result.append(" ");
+            }
+        }
+        System.out.println("generated date: " + result);
+        return result.toString();
+    }
+
+    @Deprecated
+    String get_time_old(int count) {
         int interval_in_minutes;
         if (count<=48){ interval_in_minutes = 30; }
         else if (count<=288){ interval_in_minutes = 5; }
@@ -555,14 +585,16 @@ public class API {
         if (number < 1) { number = 1; }
 
         Calendar calendar = Calendar.getInstance();
-        SimpleDateFormat pattern = new SimpleDateFormat("HH:mm");
         calendar.setTimeZone(TimeZone.getTimeZone("UTC"));
-        calendar.setTime(new java.util.Date(0, 0, 0, 0, 0));
+        SimpleDateFormat pattern = new SimpleDateFormat("HH:mm");
+        calendar.setTime(new Date(0, 0, 0, 0, 0));
         calendar.add(Calendar.MINUTE, interval_in_minutes*(number-1));
-        return pattern.format(calendar.getTime());
+        String result = pattern.format(calendar.getTime());
+        System.out.println("generated time: " + result);
+        return result;
     }
 
-    String get_time2(int i) {
+    String get_time(int i) {
         //int interval_in_minutes;
         //if (count<=48){ interval_in_minutes = 30; }
         //else if (count<=288){ interval_in_minutes = 5; }
@@ -572,11 +604,26 @@ public class API {
         //if (number < 1) { number = 1; }
 
         Calendar calendar = Calendar.getInstance();
-        SimpleDateFormat pattern = new SimpleDateFormat("HH:mm");
         calendar.setTimeZone(TimeZone.getTimeZone("UTC"));
-        calendar.setTime(new java.util.Date(0, 0, 0, 0, 0));
+        SimpleDateFormat pattern = new SimpleDateFormat("HH:mm");
+        //calendar.setTime(new Date(0, 0, 0, 0, 0));
         calendar.add(Calendar.MINUTE, i);
-        return pattern.format(calendar.getTime());
+        String result = pattern.format(calendar.getTime());
+        System.out.println("generated time: " + result);
+        return result;
+    }
+
+    String get_date_time(int i){
+        int count_rems_in_day = 1440;
+        //int count_full_days = count_reminders / count_rems_in_day;
+        //int ostatok = count_reminders - (count_full_days * count_rems_in_day);
+        //System.out.println("count_full_days=" + count_full_days + ", ostatok=" + ostatok);
+
+        String result = get_date((i/count_rems_in_day)+1) + " " + get_time(i);
+        //String result = get_date_full(i);
+
+        System.out.println("generated date_time: " + result + "\n");
+        return result;
     }
 
     String prepare_url(String ams_ip, Enum<Operation> operation, boolean newapi) {

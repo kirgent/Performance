@@ -302,6 +302,7 @@ class NEWAPI_AMS extends API{
                 object_in_reminders.put("reminderProgramStart", "");
             } else {
                 object_in_reminders.put("reminderProgramStart", reminderProgramStart + " " + get_time(count_reminders, i+1));
+                //object_in_reminders.put("reminderProgramStart", get_date_time(i, count_reminders, false));
             }
 
             if (reminderChannelNumber == -1) {
