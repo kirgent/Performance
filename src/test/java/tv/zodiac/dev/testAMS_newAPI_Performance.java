@@ -15,7 +15,7 @@ import static org.junit.jupiter.api.Assertions.assertNotEquals;
 class testAMS_newAPI_Performance extends API{
 
     private NEWAPI_AMS AMS = new NEWAPI_AMS();
-    final private int count_iterations = 10;
+    final private int count_iterations = 1;
     final private int count_reminders = 500;
     //String mac = box4210;
     String mac = boxMoto2147_Rems;
