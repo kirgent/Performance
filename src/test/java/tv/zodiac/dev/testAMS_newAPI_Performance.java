@@ -67,8 +67,8 @@ class testAMS_newAPI_Performance extends API{
         if(a_avg != 0 && p_avg != 0) {
             String result = "========= ========= ========= Total measurements ========= ========= ========="
                     + "\n" + new Date() + ", macaddress=" + mac + ", count_reminders=" + count_reminders + ", count_iterations=" + a_iterations + "/" + count_iterations
-                    + "\n   add avg=" + a_avg + "ms, min=" + a_min + "ms, max=" + a_max + "ms, " + a_iterations
-                    + "\n purge avg=" + p_avg + "ms, min=" + p_min + "ms, max=" + p_max + "ms, " + p_iterations
+                    + "\n   add avg=" + a_avg + "ms, min=" + a_min + "ms, max=" + a_max + "ms, /" + a_iterations
+                    + "\n purge avg=" + p_avg + "ms, min=" + p_min + "ms, max=" + p_max + "ms, /" + p_iterations
                     + "\n========= ========= ========= ========= ========= =========";
             System.out.println(result);
             FileWriter writer = new FileWriter("output.log", true);
@@ -86,12 +86,10 @@ class testAMS_newAPI_Performance extends API{
         ArrayList add_list,
                 delete_list = new ArrayList(),
                 purge_list = new ArrayList();
-        int a_avg = 0, a_min = 0, a_max=0,
-                d_avg = 0, d_min = 0, d_max=0,
-                p_avg = 0, p_min = 0, p_max=0,
-                a_iterations = 0,
-                d_iterations = 0,
-                p_iterations = 0;
+        int a_avg = 0, a_min = 0, a_max=0, a_iterations = 0,
+                d_avg = 0, d_min = 0, d_max=0, d_iterations = 0,
+                p_avg = 0, p_min = 0, p_max=0, p_iterations = 0;
+
         for (int i = 1; i <= count_iterations; i++) {
             System.out.println("========= ========= ========= Iteration = " + i + "/" + count_iterations + " ========= ========= =========");
             int reminderChannelNumber = reminderChannelNumber();
@@ -136,9 +134,9 @@ class testAMS_newAPI_Performance extends API{
         if(a_avg != 0 && d_avg != 0 && p_avg != 0) {
             String result = "========= ========= ========= Total measurements ========= ========= ========="
                     + "\n" + new Date() + ", macaddress=" + mac + ", count_reminders=" + count_reminders + ", count_iterations=" + a_iterations + "/" + count_iterations
-                    + "\n   add avg=" + a_avg + "ms, min=" + a_min + "ms, max=" + a_max + "ms, " + a_iterations
-                    + "\ndelete avg=" + d_avg + "ms, min=" + d_min + "ms, max=" + d_max + "ms, " + d_iterations
-                    + "\n purge avg=" + p_avg + "ms, min=" + p_min + "ms, max=" + p_max + "ms, " + p_iterations
+                    + "\n   add avg=" + a_avg + "ms, min=" + a_min + "ms, max=" + a_max + "ms, /" + a_iterations
+                    + "\ndelete avg=" + d_avg + "ms, min=" + d_min + "ms, max=" + d_max + "ms, /" + d_iterations
+                    + "\n purge avg=" + p_avg + "ms, min=" + p_min + "ms, max=" + p_max + "ms, /" + p_iterations
                     + "\n========= ========= ========= ========= ========= =========";
             System.out.println(result);
             FileWriter writer = new FileWriter("output.log", true);
@@ -214,10 +212,10 @@ class testAMS_newAPI_Performance extends API{
         if(a_avg != 0 && m_avg != 0 && d_avg != 0 && p_avg != 0) {
             String result = "========= ========= ========= Total measurements ========= ========= ========="
                     + "\n" + new Date() + ", macaddress=" + mac + ", count_reminders=" + count_reminders + ", count_iterations=" + a_iterations + "/" + count_iterations
-                    + "\n   add avg=" + a_avg + "ms, min=" + a_min + "ms, max=" + a_max + "ms, " + a_iterations
-                    + "\nmodify avg=" + m_avg + "ms, min=" + m_min + "ms, max=" + m_max + "ms, " + m_iterations
-                    + "\ndelete avg=" + d_avg + "ms, min=" + d_min + "ms, max=" + d_max + "ms, " + d_iterations
-                    + "\n purge avg=" + p_avg + "ms, min=" + p_min + "ms, max=" + p_max + "ms, " + p_iterations
+                    + "\n   add avg=" + a_avg + "ms, min=" + a_min + "ms, max=" + a_max + "ms, /" + a_iterations
+                    + "\nmodify avg=" + m_avg + "ms, min=" + m_min + "ms, max=" + m_max + "ms, /" + m_iterations
+                    + "\ndelete avg=" + d_avg + "ms, min=" + d_min + "ms, max=" + d_max + "ms, /" + d_iterations
+                    + "\n purge avg=" + p_avg + "ms, min=" + p_min + "ms, max=" + p_max + "ms, /" + p_iterations
                     + "\n========= ========= ========= ========= ========= =========";
             System.out.println(result);
             FileWriter writer = new FileWriter("output.log", true);
