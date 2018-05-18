@@ -34,7 +34,7 @@ class testSandbox extends API {
 
     @Test
     void test_get_time2() {
-        int count_reminders = 1000;
+        int count_reminders = 10000;
         for (int i=1; i<=count_reminders; i++) {
             System.out.print(get_time2(i) + ", ");
         }
