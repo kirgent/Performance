@@ -16,7 +16,7 @@ class testAMS_newAPI_Performance extends API{
 
     private NEWAPI_AMS AMS = new NEWAPI_AMS();
     final private int count_iterations = 10;
-    final private int count_reminders = 1000;
+    final private int count_reminders = 500;
     //String mac = box4210;
     String mac = boxMoto2147_Rems;
     private String ams_ip = ams_ip_4;
@@ -25,11 +25,8 @@ class testAMS_newAPI_Performance extends API{
     void test1_Add_Purge() throws IOException, InterruptedException {
         ArrayList add_list,
                 purge_list = new ArrayList();
-        int a_avg = 0, a_min = 0, a_max=0,
-                p_avg = 0, p_min = 0, p_max=0,
-                a_iterations = 0,
-                p_iterations = 0;
-
+        int a_avg = 0, a_min = 0, a_max=0, a_iterations = 0,
+                p_avg = 0, p_min = 0, p_max=0, p_iterations = 0;
         Integer[] rack_channels_wb = { 2, 31, 63, 209, 211, 631, 755, 808 };
         Integer[] rack_channels_moto = { 2 };
 
@@ -157,14 +154,10 @@ class testAMS_newAPI_Performance extends API{
                 modify_list = new ArrayList(),
                 delete_list = new ArrayList(),
                 purge_list = new ArrayList();
-        int a_avg = 0, a_min = 0, a_max=0,
-                m_avg = 0, m_min = 0, m_max=0,
-                d_avg = 0, d_min = 0, d_max=0,
-                p_avg = 0, p_min = 0, p_max=0,
-                a_iterations = 0,
-                m_iterations = 0,
-                d_iterations = 0,
-                p_iterations = 0;
+        int a_avg = 0, a_min = 0, a_max=0, a_iterations = 0,
+                m_avg = 0, m_min = 0, m_max=0, m_iterations = 0,
+                d_avg = 0, d_min = 0, d_max=0, d_iterations = 0,
+                p_avg = 0, p_min = 0, p_max=0, p_iterations = 0;
         for (int i = 1; i <= count_iterations; i++) {
             System.out.println("========= ========= ========= Iteration = " + i + "/" + count_iterations + " ========= ========= =========");
             int reminderChannelNumber = reminderChannelNumber();
