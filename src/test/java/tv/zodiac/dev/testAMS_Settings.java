@@ -1,23 +1,23 @@
 package tv.zodiac.dev;
 
-import org.junit.Ignore;
-import org.junit.Test;
+import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
 import java.util.ArrayList;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 /**
  * We are Headend (on localhost): chain of requests: Headend(localhost) -> AMS -> STB -> AMS -> localhost
  */
-public class testAMS_Settings extends API {
+class testAMS_Settings extends API {
 
     private NEWAPI_AMS AMS = new NEWAPI_AMS();
 
     @Test
-    @Ignore
-    public void testSettings_Channel_Filters() throws IOException {
+    @Disabled
+    void testSettings_Channel_Filters() throws IOException {
         //String json = "{"settings":{"groups":
         // [{"id":"STB000005FE680A",
         // "type":"device-stb",
@@ -30,28 +30,28 @@ public class testAMS_Settings extends API {
     }
 
     @Test
-    public void testSettings_Audio_Output_to_Other() throws IOException {
+    void testSettings_Audio_Output_to_Other() throws IOException {
         ArrayList actual = AMS.Change_settings(mac, "Audio Output", "Other");
         assertEquals(expected200, actual.get(0));
         assertEquals("", actual.get(1));
     }
 
     @Test
-    public void testSettings_Audio_Output_to_Dolby_Digital() throws IOException {
+    void testSettings_Audio_Output_to_Dolby_Digital() throws IOException {
         ArrayList actual = AMS.Change_settings(mac, "Audio Output", "Dolby Digital");
         assertEquals(expected200, actual.get(0));
         assertEquals("", actual.get(1));
     }
 
     @Test
-    public void testSettings_Audio_Output_to_HDMI() throws IOException {
+    void testSettings_Audio_Output_to_HDMI() throws IOException {
         ArrayList actual = AMS.Change_settings(mac, "Audio Output", "HDMI");
         assertEquals(expected200, actual.get(0));
         assertEquals("", actual.get(1));
     }
 
     @Test
-    public void testSettings_negative_STB_MAC_not_found() throws IOException {
+    void testSettings_negative_STB_MAC_not_found() throws IOException {
         ArrayList actual = AMS.Change_settings(mac_wrong, "Audio Output", "HDMI");
         assertEquals(expected404, actual.get(0));
         assertEquals("STB MAC not found: " + mac_wrong, actual.get(1));
