@@ -89,7 +89,7 @@ class NEWAPI_AMS extends API{
             }
         }
         if(show_info_level) {
-            System.out.println("[INF] return codes: " + arrayList + "\n");
+            System.out.println("[INF] return data: " + arrayList + "\n");
         }
         return arrayList;
     }
@@ -141,7 +141,7 @@ class NEWAPI_AMS extends API{
             }
         }
         if(show_info_level) {
-            System.out.println("[INF] return codes: " + arrayList + "\n");
+            System.out.println("[INF] return data: " + arrayList + "\n");
         }
         return arrayList;
     }
@@ -187,7 +187,7 @@ class NEWAPI_AMS extends API{
             }
         }
         if(show_info_level) {
-            System.out.println("[INF] return codes: " + arrayList + "\n");
+            System.out.println("[INF] return data: " + arrayList + "\n");
         }
         return arrayList;
     }
@@ -505,7 +505,7 @@ class NEWAPI_AMS extends API{
         arrayList.add(0, response.getStatusLine().getStatusCode() + " " + response.getStatusLine().getReasonPhrase());
         arrayList.add(1, check_body_response(read_response(new StringBuilder(),response).toString(), mac));
         if(show_info_level) {
-            System.out.println("[INF] return codes: " + arrayList + "\n");
+            System.out.println("[INF] return data: " + arrayList + "\n");
         }
         return arrayList;
     }

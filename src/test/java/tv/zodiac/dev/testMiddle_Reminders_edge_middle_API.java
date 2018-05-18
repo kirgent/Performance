@@ -1,6 +1,7 @@
 package tv.zodiac.dev;
 
-import org.junit.Test;
+
+import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -10,12 +11,12 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 /**
  * We are Headend (on localhost): chain of requests: Headend(localhost) -> AMS -> STB -> AMS -> localhost
  */
-public class testMiddle_Reminders_edge_middle_API extends API_Middle {
+class testMiddle_Reminders_edge_middle_API extends API_Middle {
 
     private API_Middle Middle = new API_Middle();
 
     @Test
-    public void testGetStbReminder() throws IOException {
+    void testGetStbReminder() throws IOException {
         ArrayList actual = Middle.GetStbReminder(charterapi_a, mac);
         assertEquals(expected200, actual.get(0));
         assertEquals("", actual.get(1));
@@ -34,7 +35,7 @@ public class testMiddle_Reminders_edge_middle_API extends API_Middle {
     }
 
     @Test
-    public void testGetAllReminder() throws IOException {
+    void testGetAllReminder() throws IOException {
         ArrayList actual = Middle.GetAllReminder(charterapi_a, mac, 0);
         assertEquals(expected200, actual.get(0));
         assertEquals("", actual.get(1));
@@ -75,7 +76,7 @@ public class testMiddle_Reminders_edge_middle_API extends API_Middle {
     //Successful Http Response code: 201 Created (with no LOCATION Header)
     //Failure response code: Not equal to 201 (for example: 500, 401)
     @Test
-    public void testDelete_multiple_reminders() throws IOException {
+    void testDelete_multiple_reminders() throws IOException {
         ArrayList actual;
         actual = Middle.Delete_multiple_reminders(charterapi_a, mac,1, 1);
         assertEquals(expected201, actual.get(0));
@@ -95,21 +96,21 @@ public class testMiddle_Reminders_edge_middle_API extends API_Middle {
     }
 
     @Test
-    public void testDelete_multiple_reminders__Not_Found() throws IOException {
+    void testDelete_multiple_reminders__Not_Found() throws IOException {
         ArrayList actual = Middle.Delete_multiple_reminders(charterapi, mac,0, 0);
         assertEquals(expected404, actual.get(0));
         assertEquals("", actual.get(1));
     }
 
     @Test
-    public void testSchedule_reminder() throws IOException {
+    void testSchedule_reminder() throws IOException {
         ArrayList actual = Middle.Schedule_reminder(charterapi, mac,0);
         assertEquals(expected200, actual.get(0));
         assertEquals("", actual.get(1));
     }
 
     @Test
-    public void testSchedule_reminder_ERROR_SCHEDULING_REMINDER() throws IOException {
+    void testSchedule_reminder_ERROR_SCHEDULING_REMINDER() throws IOException {
         ArrayList actual = Middle.Schedule_reminder(charterapi, mac,0);
         assertEquals(expected200, actual.get(0));
         assertEquals("ERROR_SCHEDULING_REMINDER", actual.get(1));

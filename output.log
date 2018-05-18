@@ -198,3 +198,10 @@ modify avg=2546ms, min=2394ms, max=2698ms, 2
 delete avg=2095ms, min=2073ms, max=2118ms, 2
  purge avg=525ms, min=512ms, max=539ms, 2
 ========= ========= ========= ========= ========= =========
+========= ========= ========= Total measurements ========= ========= =========
+Fri May 18 15:51:15 MSK 2018, macaddress=000004D67F70, count_reminders=1000, count_iterations=1/1
+   add avg=3949ms, min=3949ms, max=3949ms, 1
+modify avg=13975ms, min=13975ms, max=13975ms, 1
+delete avg=4147ms, min=4147ms, max=4147ms, 1
+ purge avg=533ms, min=533ms, max=533ms, 1
+========= ========= ========= ========= ========= =========
