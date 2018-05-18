@@ -69,7 +69,7 @@ class testAMS_newAPI_Performance extends API{
                     + "\n" + new Date() + ", macaddress=" + mac + ", count_reminders=" + count_reminders + ", count_iterations=" + a_iterations + "/" + count_iterations
                     + "\n   add avg=" + a_avg + "ms, min=" + a_min + "ms, max=" + a_max + "ms, /" + a_iterations
                     + "\n purge avg=" + p_avg + "ms, min=" + p_min + "ms, max=" + p_max + "ms, /" + p_iterations
-                    + "\n========= ========= ========= ========= ========= =========";
+                    + "\n========= ========= ========= ========= ========= ========= ========= =========";
             System.out.println(result);
             FileWriter writer = new FileWriter("output.log", true);
             writer.write(result);
@@ -139,7 +139,7 @@ class testAMS_newAPI_Performance extends API{
                     + "\n   add avg=" + a_avg + "ms, min=" + a_min + "ms, max=" + a_max + "ms, /" + a_iterations
                     + "\ndelete avg=" + d_avg + "ms, min=" + d_min + "ms, max=" + d_max + "ms, /" + d_iterations
                     + "\n purge avg=" + p_avg + "ms, min=" + p_min + "ms, max=" + p_max + "ms, /" + p_iterations
-                    + "\n========= ========= ========= ========= ========= =========";
+                    + "\n========= ========= ========= ========= ========= ========= ========= =========";
             System.out.println(result);
             FileWriter writer = new FileWriter("output.log", true);
             writer.write(result);
@@ -221,7 +221,7 @@ class testAMS_newAPI_Performance extends API{
                     + "\nmodify avg=" + m_avg + "ms, min=" + m_min + "ms, max=" + m_max + "ms, /" + m_iterations
                     + "\ndelete avg=" + d_avg + "ms, min=" + d_min + "ms, max=" + d_max + "ms, /" + d_iterations
                     + "\n purge avg=" + p_avg + "ms, min=" + p_min + "ms, max=" + p_max + "ms, /" + p_iterations
-                    + "\n========= ========= ========= ========= ========= =========";
+                    + "\n========= ========= ========= ========= ========= ========= ========= =========";
             System.out.println(result);
             FileWriter writer = new FileWriter("output.log", true);
             writer.write(result);

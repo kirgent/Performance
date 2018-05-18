@@ -284,3 +284,8 @@ Fri May 18 21:19:40 MSK 2018, macaddress=000004D67F70, count_reminders=2000, cou
    add avg=14575ms, min=14575ms, max=14575ms, /1
  purge avg=506ms, min=506ms, max=506ms, /1
 ========= ========= ========= ========= ========= =========
+========= ========= ========= Total measurements ========= ========= =========
+Fri May 18 21:21:27 MSK 2018, macaddress=000004D67F70, count_reminders=2000, count_iterations=1/1
+   add avg=4903ms, min=4903ms, max=4903ms, /1
+ purge avg=507ms, min=507ms, max=507ms, /1
+========= ========= ========= ========= ========= ========= ========= =========
