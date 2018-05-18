@@ -22,7 +22,7 @@ public class API {
 
     Boolean show_info_level = true;
     Boolean show_debug_level = false;
-    Boolean show_generated_json = false;
+    Boolean show_generated_json = true;
     Boolean show_response_body = false;
 
     //private final static Logger log = Logger.getLogger(API.class.getName());
@@ -503,36 +503,6 @@ public class API {
     }
 
 
-    String get_date(int index) {
-        Calendar calendar = Calendar.getInstance();
-        //calendar.setTimeZone(TimeZone.getTimeZone("UTC"));
-        SimpleDateFormat pattern = new SimpleDateFormat("yyyy-MM-dd");
-        StringBuilder result = new StringBuilder();
-
-        calendar.add(Calendar.DAY_OF_YEAR, +index);
-        result = result.append(pattern.format(calendar.getTime()));
-
-        System.out.println("generated date: " + result);
-        return result.toString();
-    }
-
-    String get_date_full(int index) {
-        //Calendar cal = Calendar.getInstance();
-        //cal.add(Calendar.DATE, -1);
-        //System.out.println("Yesterday's date = "+ cal.getTime());
-
-        Calendar calendar = Calendar.getInstance();
-        calendar.setTimeZone(TimeZone.getTimeZone("UTC"));
-        SimpleDateFormat pattern = new SimpleDateFormat("yyyy-MM-dd HH:mm");
-        StringBuilder result = new StringBuilder();
-
-        calendar.add(Calendar.DAY_OF_YEAR, +index);
-        result = result.append(pattern.format(calendar.getTime()));
-
-        System.out.println("generated date_full: " + result);
-        return result.toString();
-    }
-
     @Deprecated
     String get_date_several(int count) {
         Calendar calendar = Calendar.getInstance();
@@ -595,6 +565,10 @@ public class API {
     }
 
     String get_time(int i) {
+        //Calendar cal = Calendar.getInstance();
+        //cal.add(Calendar.DATE, -1);
+        //System.out.println("Yesterday's date = "+ cal.getTime());
+
         //int interval_in_minutes;
         //if (count<=48){ interval_in_minutes = 30; }
         //else if (count<=288){ interval_in_minutes = 5; }
@@ -606,24 +580,50 @@ public class API {
         Calendar calendar = Calendar.getInstance();
         calendar.setTimeZone(TimeZone.getTimeZone("UTC"));
         SimpleDateFormat pattern = new SimpleDateFormat("HH:mm");
-        //calendar.setTime(new Date(0, 0, 0, 0, 0));
+        calendar.setTime(new Date(0, 0, 0, 0, 0));
+        StringBuilder result = new StringBuilder();
         calendar.add(Calendar.MINUTE, i);
-        String result = pattern.format(calendar.getTime());
+        result = result.append(pattern.format(calendar.getTime()));
         System.out.println("generated time: " + result);
-        return result;
+        return result.toString();
     }
 
+    String get_date(int i) {
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTimeZone(TimeZone.getTimeZone("UTC"));
+        SimpleDateFormat pattern = new SimpleDateFormat("yyyy-MM-dd");
+        StringBuilder result = new StringBuilder();
+
+        calendar.add(Calendar.DAY_OF_YEAR, +i);
+        result = result.append(pattern.format(calendar.getTime()));
+
+        System.out.println("generated date: " + result);
+        return result.toString();
+    }
+
+    /**
+     * @param i - сколько минут прибавить к дате "завтра" (+сутки от текущего времени),
+     *          например, сейчас "2018-05-18 21:01", тогда вызов get_date_time(10) вернет "2018-05-19 21:11"
+     * @return - возвращаемый формат - "yyyy-mm-dd hh:mm"
+     */
     String get_date_time(int i){
-        int count_rems_in_day = 1440;
+        //int count_rems_in_day = 1440;
         //int count_full_days = count_reminders / count_rems_in_day;
         //int ostatok = count_reminders - (count_full_days * count_rems_in_day);
         //System.out.println("count_full_days=" + count_full_days + ", ostatok=" + ostatok);
 
-        String result = get_date((i/count_rems_in_day)+1) + " " + get_time(i);
-        //String result = get_date_full(i);
+        //String result = get_date((i/count_rems_in_day)+1) + " " + get_time(i);
 
-        System.out.println("generated date_time: " + result + "\n");
-        return result;
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTimeZone(TimeZone.getTimeZone("UTC"));
+        SimpleDateFormat pattern = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+        StringBuilder result = new StringBuilder();
+        calendar.add(Calendar.DAY_OF_YEAR, +1);
+        calendar.add(Calendar.MINUTE,+i);
+        result = result.append(pattern.format(calendar.getTime()));
+
+        System.out.println("generated date_time: " + result);
+        return result.toString();
     }
 
     String prepare_url(String ams_ip, Enum<Operation> operation, boolean newapi) {

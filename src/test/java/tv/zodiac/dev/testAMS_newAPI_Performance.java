@@ -16,7 +16,7 @@ class testAMS_newAPI_Performance extends API{
 
     private NEWAPI_AMS AMS = new NEWAPI_AMS();
     final private int count_iterations = 1;
-    final private int count_reminders = 500;
+    final private int count_reminders = 2000;
     //String mac = box4210;
     String mac = boxMoto2147_Rems;
     private String ams_ip = ams_ip_4;
@@ -92,8 +92,10 @@ class testAMS_newAPI_Performance extends API{
 
         for (int i = 1; i <= count_iterations; i++) {
             System.out.println("========= ========= ========= Iteration = " + i + "/" + count_iterations + " ========= ========= =========");
-            int reminderChannelNumber = reminderChannelNumber();
-            long reminderOffset = reminderOffset();
+            //int reminderChannelNumber = reminderChannelNumber();
+            int reminderChannelNumber = 2;
+            //long reminderOffset = reminderOffset();
+            long reminderOffset = 0;
             long reminderScheduleId = reminderScheduleId();
             long reminderId = reminderId();
             add_list = AMS.request(ams_ip, mac, Operation.add, count_reminders, reminderProgramStart, reminderChannelNumber, reminderProgramId, reminderOffset, reminderScheduleId, reminderId);
@@ -161,9 +163,12 @@ class testAMS_newAPI_Performance extends API{
                 p_avg = 0, p_min = 0, p_max=0, p_iterations = 0;
         for (int i = 1; i <= count_iterations; i++) {
             System.out.println("========= ========= ========= Iteration = " + i + "/" + count_iterations + " ========= ========= =========");
-            int reminderChannelNumber = reminderChannelNumber();
-            long reminderOffset = reminderOffset();
-            long reminderOffset_new = reminderOffset();
+            //int reminderChannelNumber = reminderChannelNumber();
+            int reminderChannelNumber = 2;
+            //long reminderOffset = reminderOffset();
+            long reminderOffset = 0;
+            //long reminderOffset_new = reminderOffset();
+            long reminderOffset_new = 15;
             long reminderScheduleId = reminderScheduleId();
             long reminderId = reminderId();
             add_list = AMS.request(ams_ip, mac, Operation.add, count_reminders, reminderProgramStart, reminderChannelNumber, reminderProgramId, reminderOffset, reminderScheduleId, reminderId);

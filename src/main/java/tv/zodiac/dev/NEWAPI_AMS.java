@@ -89,7 +89,7 @@ class NEWAPI_AMS extends API{
             }
         }
         if(show_info_level) {
-            System.out.println("[INF] return codes: " + arrayList + "\n");
+            System.out.println("[INF] return data: " + arrayList + "\n");
         }
         return arrayList;
     }
@@ -141,7 +141,7 @@ class NEWAPI_AMS extends API{
             }
         }
         if(show_info_level) {
-            System.out.println("[INF] return codes: " + arrayList + "\n");
+            System.out.println("[INF] return data: " + arrayList + "\n");
         }
         return arrayList;
     }
@@ -187,7 +187,7 @@ class NEWAPI_AMS extends API{
             }
         }
         if(show_info_level) {
-            System.out.println("[INF] return codes: " + arrayList + "\n");
+            System.out.println("[INF] return data: " + arrayList + "\n");
         }
         return arrayList;
     }
@@ -290,7 +290,7 @@ class NEWAPI_AMS extends API{
 
         if (count_reminders < 0) { count_reminders = 0; }
 
-        if (count_reminders > 1440) { count_reminders = 1440; }
+        //if (count_reminders > 1440) { count_reminders = 1440; }
 
         JSONObject json = new JSONObject();
         json.put("deviceId", mac);
@@ -301,8 +301,8 @@ class NEWAPI_AMS extends API{
             if (Objects.equals(reminderProgramStart, "")) {
                 object_in_reminders.put("reminderProgramStart", "");
             } else {
-                object_in_reminders.put("reminderProgramStart", reminderProgramStart + " " + get_time(count_reminders, i+1));
-                //object_in_reminders.put("reminderProgramStart", get_date_time(i, count_reminders, false));
+                //object_in_reminders.put("reminderProgramStart", reminderProgramStart + " " + get_time(count_reminders, i+1));
+                object_in_reminders.put("reminderProgramStart", get_date_time(i));
             }
 
             if (reminderChannelNumber == -1) {

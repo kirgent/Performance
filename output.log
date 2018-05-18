@@ -210,3 +210,67 @@ Fri May 18 20:14:23 MSK 2018, macaddress=000004D67F70, count_reminders=500, coun
    add avg=2255ms, min=2255ms, max=2255ms, /1
  purge avg=505ms, min=505ms, max=505ms, /1
 ========= ========= ========= ========= ========= =========
+========= ========= ========= Total measurements ========= ========= =========
+Fri May 18 20:47:47 MSK 2018, macaddress=000004D67F70, count_reminders=500, count_iterations=1/1
+   add avg=2161ms, min=2161ms, max=2161ms, /1
+ purge avg=504ms, min=504ms, max=504ms, /1
+========= ========= ========= ========= ========= =========
+========= ========= ========= Total measurements ========= ========= =========
+Fri May 18 20:48:07 MSK 2018, macaddress=000004D67F70, count_reminders=500, count_iterations=1/1
+   add avg=2147ms, min=2147ms, max=2147ms, /1
+delete avg=2119ms, min=2119ms, max=2119ms, /1
+ purge avg=528ms, min=528ms, max=528ms, /1
+========= ========= ========= ========= ========= =========
+========= ========= ========= Total measurements ========= ========= =========
+Fri May 18 20:48:59 MSK 2018, macaddress=000004D67F70, count_reminders=500, count_iterations=1/1
+   add avg=2265ms, min=2265ms, max=2265ms, /1
+delete avg=2099ms, min=2099ms, max=2099ms, /1
+ purge avg=533ms, min=533ms, max=533ms, /1
+========= ========= ========= ========= ========= =========
+========= ========= ========= Total measurements ========= ========= =========
+Fri May 18 20:50:19 MSK 2018, macaddress=000004D67F70, count_reminders=500, count_iterations=1/1
+   add avg=2079ms, min=2079ms, max=2079ms, /1
+modify avg=1905ms, min=1905ms, max=1905ms, /1
+delete avg=2195ms, min=2195ms, max=2195ms, /1
+ purge avg=514ms, min=514ms, max=514ms, /1
+========= ========= ========= ========= ========= =========
+========= ========= ========= Total measurements ========= ========= =========
+Fri May 18 20:57:11 MSK 2018, macaddress=000004D67F70, count_reminders=1500, count_iterations=1/1
+   add avg=3851ms, min=3851ms, max=3851ms, /1
+ purge avg=517ms, min=517ms, max=517ms, /1
+========= ========= ========= ========= ========= =========
+========= ========= ========= Total measurements ========= ========= =========
+Fri May 18 20:58:47 MSK 2018, macaddress=000004D67F70, count_reminders=1500, count_iterations=1/1
+   add avg=3924ms, min=3924ms, max=3924ms, /1
+ purge avg=502ms, min=502ms, max=502ms, /1
+========= ========= ========= ========= ========= =========
+========= ========= ========= Total measurements ========= ========= =========
+Fri May 18 21:06:34 MSK 2018, macaddress=000004D67F70, count_reminders=1500, count_iterations=1/1
+   add avg=4058ms, min=4058ms, max=4058ms, /1
+ purge avg=510ms, min=510ms, max=510ms, /1
+========= ========= ========= ========= ========= =========
+========= ========= ========= Total measurements ========= ========= =========
+Fri May 18 21:10:26 MSK 2018, macaddress=000004D67F70, count_reminders=1500, count_iterations=1/1
+   add avg=3791ms, min=3791ms, max=3791ms, /1
+ purge avg=524ms, min=524ms, max=524ms, /1
+========= ========= ========= ========= ========= =========
+========= ========= ========= Total measurements ========= ========= =========
+Fri May 18 21:11:39 MSK 2018, macaddress=000004D67F70, count_reminders=1500, count_iterations=1/1
+   add avg=3863ms, min=3863ms, max=3863ms, /1
+ purge avg=509ms, min=509ms, max=509ms, /1
+========= ========= ========= ========= ========= =========
+========= ========= ========= Total measurements ========= ========= =========
+Fri May 18 21:14:09 MSK 2018, macaddress=000004D67F70, count_reminders=1500, count_iterations=1/1
+   add avg=13873ms, min=13873ms, max=13873ms, /1
+ purge avg=526ms, min=526ms, max=526ms, /1
+========= ========= ========= ========= ========= =========
+========= ========= ========= Total measurements ========= ========= =========
+Fri May 18 21:15:23 MSK 2018, macaddress=000004D67F70, count_reminders=1500, count_iterations=1/1
+   add avg=3921ms, min=3921ms, max=3921ms, /1
+ purge avg=508ms, min=508ms, max=508ms, /1
+========= ========= ========= ========= ========= =========
+========= ========= ========= Total measurements ========= ========= =========
+Fri May 18 21:17:04 MSK 2018, macaddress=000004D67F70, count_reminders=2000, count_iterations=1/1
+   add avg=14570ms, min=14570ms, max=14570ms, /1
+ purge avg=506ms, min=506ms, max=506ms, /1
+========= ========= ========= ========= ========= =========
