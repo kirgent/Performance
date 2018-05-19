@@ -16,7 +16,7 @@ class testAMS_oldAPI_Performance extends API{
 
     private OLDAPI_AMS AMS = new OLDAPI_AMS();
     final private int count_iterations = 1;
-    final private int count_reminders = 500;
+    final private int count_reminders = 1000;
     String mac = boxMoto2145_173;
     private String ams_ip = ams_ip_19;
 

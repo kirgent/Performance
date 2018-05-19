@@ -501,7 +501,6 @@ public class API {
         return reminderId;
     }
 
-
     @Deprecated
     String get_date_several(int count) {
         Calendar calendar = Calendar.getInstance();
@@ -544,6 +543,7 @@ public class API {
         return result.toString();
     }
 
+    @Deprecated
     String get_time(int count, int number) {
         int interval_in_minutes;
         if (count<=48){ interval_in_minutes = 30; }
@@ -563,6 +563,7 @@ public class API {
         return result;
     }
 
+    @Deprecated
     String get_time(int i) {
         //Calendar cal = Calendar.getInstance();
         //cal.add(Calendar.DATE, -1);
@@ -587,6 +588,7 @@ public class API {
         return result.toString();
     }
 
+    @Deprecated
     String get_date(int i) {
         Calendar calendar = Calendar.getInstance();
         calendar.setTimeZone(TimeZone.getTimeZone("UTC"));
@@ -612,7 +614,6 @@ public class API {
         //System.out.println("count_full_days=" + count_full_days + ", ostatok=" + ostatok);
 
         //String result = get_date((i/count_rems_in_day)+1) + " " + get_time(i);
-
         Calendar calendar = Calendar.getInstance();
         calendar.setTimeZone(TimeZone.getTimeZone("UTC"));
         SimpleDateFormat pattern = new SimpleDateFormat("yyyy-MM-dd HH:mm");
@@ -620,8 +621,7 @@ public class API {
         calendar.add(Calendar.DAY_OF_YEAR, +1);
         calendar.add(Calendar.MINUTE,+i);
         result = result.append(pattern.format(calendar.getTime()));
-
-        System.out.println("generated date_time: " + result);
+        //System.out.println("generated date_time: " + result);
         return result.toString();
     }
 

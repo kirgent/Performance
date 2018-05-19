@@ -137,7 +137,7 @@ class OLDAPI_AMS extends API{
 
     private String generate_json_reminder(String mac, int count_reminders, Enum<Operation> operation, long reminderChannelNumber, String reminderProgramStart, String reminderProgramId, long reminderOffset) {
         if (count_reminders < 0) { count_reminders = 0; }
-        if (count_reminders > 1440) { count_reminders = 1440; }
+        //if (count_reminders > 1440) { count_reminders = 1440; }
 
         JSONObject json = new JSONObject();
         json.put("deviceId", mac);
@@ -153,7 +153,8 @@ class OLDAPI_AMS extends API{
             }
 
             object_in_reminders.put("reminderChannelNumber", reminderChannelNumber);
-            object_in_reminders.put("reminderProgramStart", reminderProgramStart + " " + get_time(count_reminders, i+1));
+            //object_in_reminders.put("reminderProgramStart", reminderProgramStart + " " + get_time(count_reminders, i+1));
+            object_in_reminders.put("reminderProgramStart", get_date_time(i));
             object_in_reminders.put("reminderProgramId", reminderProgramId);
             object_in_reminders.put("reminderOffset", reminderOffset);
 
