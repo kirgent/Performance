@@ -1,6 +1,5 @@
 package tv.zodiac.dev;
 
-
 import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
@@ -9,7 +8,7 @@ import java.util.ArrayList;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 /**
- * We are Headend (on localhost): chain of requests: Headend(localhost) -> AMS -> STB -> AMS -> localhost
+ * We are localhost (Charter Headend). Full chain of requests: localhost -> AMS -> STB -> AMS -> localhost
  */
 class testMiddle_Reminders_edge_middle_API extends API_Middle {
 

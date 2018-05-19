@@ -10,7 +10,7 @@ import java.util.Date;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
 /**
- * We are Headend (on localhost): chain of requests: Headend(localhost) -> AMS -> STB -> AMS -> localhost
+ * We are localhost (Charter Headend). Full chain of requests: localhost -> AMS -> STB -> AMS -> localhost
  */
 class testAMS_newAPI_Performance extends API{
 
@@ -78,7 +78,6 @@ class testAMS_newAPI_Performance extends API{
         }
         assertNotEquals(0, a_avg);
         assertNotEquals(0, p_avg);
-
     }
 
     @Test

@@ -15,8 +15,7 @@ import java.util.Date;
 import static java.lang.System.currentTimeMillis;
 
 /**
- * we are as Middle: send requests to AMS and got responses
- * Middle -> AMS -> box -> AMS -> Middle
+ * We are localhost (Charter Headend). Full chain of requests: localhost -> AMS -> STB -> AMS -> localhost
  */
 public class API {
 
