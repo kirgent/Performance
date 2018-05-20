@@ -10,9 +10,9 @@ import static org.junit.Assert.assertEquals;
 /**
  * We are localhost (Charter Headend). Full chain of requests: localhost -> AMS -> STB -> AMS -> localhost
  */
-class testAMS_newAPI_Reminder_Purge extends API {
+class testAMS_newAPI_Reminder_Purge extends API_common {
 
-    private NEWAPI_AMS AMS = new NEWAPI_AMS();
+    private NewAPI_AMS AMS = new NewAPI_AMS();
 
     @Test
     void testPurge() throws IOException {

@@ -5,6 +5,7 @@ import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
 
 import java.io.BufferedReader;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.sql.*;
@@ -17,20 +18,19 @@ import static java.lang.System.currentTimeMillis;
 /**
  * We are localhost (Charter Headend). Full chain of requests: localhost -> AMS -> STB -> AMS -> localhost
  */
-public class API {
+public class API_common {
 
     Boolean show_info_level = true;
     Boolean show_debug_level = false;
     Boolean show_generated_json = false;
     Boolean show_response_body = false;
 
-    //private final static Logger log = Logger.getLogger(API.class.getName());
-
-    enum Operation { add, modify, delete, purge, blablabla }
-
+    //private final static Logger log = Logger.getLogger(API_common.class.getName());
     //static Logger log = Logger.getLogger(testAMS.class.getName());
     //FileHandler txtFile = new FileHandler ("log.log", true);
     //private FileHandler fh = new FileHandler("test_reminder.log");
+
+    enum Operation { add, modify, delete, purge, blablabla }
 
     final String charterapi_a = "http://spec.partnerapi.engprod-charter.net/api/pub";
     final String charterapi_b = "http://specb.partnerapi.engprod-charter.net/api/pub";
@@ -608,21 +608,14 @@ public class API {
      * @return - возвращаемый формат - "yyyy-mm-dd hh:mm"
      */
     String get_date_time(int i){
-        //int count_rems_in_day = 1440;
-        //int count_full_days = count_reminders / count_rems_in_day;
-        //int ostatok = count_reminders - (count_full_days * count_rems_in_day);
-        //System.out.println("count_full_days=" + count_full_days + ", ostatok=" + ostatok);
-
-        //String result = get_date((i/count_rems_in_day)+1) + " " + get_time(i);
         Calendar calendar = Calendar.getInstance();
         calendar.setTimeZone(TimeZone.getTimeZone("UTC"));
         SimpleDateFormat pattern = new SimpleDateFormat("yyyy-MM-dd HH:mm");
-        StringBuilder result = new StringBuilder();
         calendar.add(Calendar.DAY_OF_YEAR, +1);
         calendar.add(Calendar.MINUTE,+i);
-        result = result.append(pattern.format(calendar.getTime()));
-        //System.out.println("generated date_time: " + result);
-        return result.toString();
+        String result = pattern.format(calendar.getTime());
+        System.out.println("generated date_time: " + result);
+        return result;
     }
 
     String prepare_url(String ams_ip, Enum<Operation> operation, boolean newapi) {
@@ -633,6 +626,13 @@ public class API {
             result = "http://" + ams_ip + ":" + ams_port + "/ams/Reminders?req=ChangeReminders";
         }
         return result;
+    }
+
+    void write_to_file(String result) throws IOException {
+        FileWriter writer = new FileWriter("output.log", true);
+        writer.write(result);
+        writer.append('\n');
+        writer.flush();
     }
 
 }

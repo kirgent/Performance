@@ -8,9 +8,9 @@ import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class testSandbox extends API {
+class testSandbox extends API_common {
 
-    private NEWAPI_AMS AMS = new NEWAPI_AMS();
+    private NewAPI_AMS AMS = new NewAPI_AMS();
 
     @Test
     void testDate() {
@@ -22,10 +22,7 @@ class testSandbox extends API {
 
     @Test
     void test_get_date_time() throws InterruptedException {
-        assertEquals("2018-05-19 00:00", get_date_time(1));
-        //assertEquals("2018-05-20 00:00", get_date_time(1440));
-        //assertEquals("2018-05-21 00:00", get_date_time(2880));
-        //assertEquals("2018-05-21 00:00", get_date_time(2880));
+        assertEquals("2018-05-19 00:00", get_date_time(0));
     }
 
     @Test

@@ -12,7 +12,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 /**
  * We are localhost (Charter Headend). Full chain of requests: localhost -> AMS -> STB -> AMS -> localhost
  */
-class testAMS_newAPI_Reminder_Modify extends API {
+class testAMS_newAPI_Reminder_Modify extends API_common {
     //"reminderChannelNumber": <new value for the DCN the reminder is set to>,
     //"reminderProgramStart": "<new value for the date/time of program the reminder is set to>",
     //"reminderProgramId": "<new value for the TMS Program ID the reminder is set to>",
@@ -20,7 +20,7 @@ class testAMS_newAPI_Reminder_Modify extends API {
     //"reminderScheduleId": "<series or Individual program reminder schedule reference ID>",
     //"reminderId": "<episode or Individual program reminder reference ID of a particular schedule>",
 
-    private NEWAPI_AMS AMS = new NEWAPI_AMS();
+    private NewAPI_AMS AMS = new NewAPI_AMS();
     final private int count_iterations = 10;
     final private int count_reminders = 2;
 

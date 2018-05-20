@@ -11,7 +11,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Date;
 
-class OLDAPI_AMS extends API{
+class OldAPI_AMS extends API_common {
 
     /** Add / Delete method
      * @param ams_ip

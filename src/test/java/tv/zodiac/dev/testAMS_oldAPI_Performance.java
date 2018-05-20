@@ -2,7 +2,6 @@ package tv.zodiac.dev;
 
 import org.junit.jupiter.api.Test;
 
-import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Date;
@@ -12,9 +11,9 @@ import static org.junit.jupiter.api.Assertions.assertNotEquals;
 /**
  * We are localhost (Charter Headend). Full chain of requests: localhost -> AMS -> STB -> AMS -> localhost
  */
-class testAMS_oldAPI_Performance extends API{
+class testAMS_oldAPI_Performance extends API_common {
 
-    private OLDAPI_AMS AMS = new OLDAPI_AMS();
+    private OldAPI_AMS AMS = new OldAPI_AMS();
     final private int count_iterations = 1;
     final private int count_reminders = 1000;
     String mac = boxMoto2145_173;
@@ -60,10 +59,7 @@ class testAMS_oldAPI_Performance extends API{
                     + "\n purge avg=" + p_avg + "ms, min=" + p_min + "ms, max=" + p_max + "ms, /" + p_iterations
                     + "\n========= ========= ========= ========= ========= ========= ========= =========";
             System.out.println(result);
-            FileWriter writer = new FileWriter("output.log", true);
-            writer.write(result);
-            writer.append('\n');
-            writer.flush();
+            write_to_file(result);
         }
         assertNotEquals(0, a_avg);
         assertNotEquals(0, p_avg);
@@ -120,10 +116,7 @@ class testAMS_oldAPI_Performance extends API{
                     + "\n purge avg=" + p_avg + "ms, min=" + p_min + "ms, max=" + p_max + "ms, /" + p_iterations
                     + "\n========= ========= ========= ========= ========= ========= ========= =========";
             System.out.println(result);
-            FileWriter writer = new FileWriter("output.log", true);
-            writer.write(result);
-            writer.append('\n');
-            writer.flush();
+            write_to_file(result);
         }
         assertNotEquals(0, a_avg);
         assertNotEquals(0, d_avg);
