@@ -1,5 +1,6 @@
 package tv.zodiac.dev;
 
+import org.junit.jupiter.api.condition.DisabledIfEnvironmentVariable;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvFileSource;
 
@@ -14,21 +15,19 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
  * We are localhost (Charter Headend). Full chain of requests: localhost -> AMS -> STB -> AMS -> localhost
  */
 class testAMS_newAPI_Performance extends API_common {
-
     private NewAPI_AMS AMS = new NewAPI_AMS();
-    final private int count_iterations = 1;
-    final private int count_reminders = 2000;
-    //String mac = box4210;
-    String mac = boxMoto2147_Rems;
-    private String ams_ip = ams_ip_4;
 
     @ParameterizedTest
-    @CsvFileSource(resources = "/reminders.csv")
+    @CsvFileSource(resources = "/reminders.csv", numLinesToSkip = 1)
+            //@DisabledIfEnvironmentVariable()
     //@CsvSource({ "test, 1", "macaddress, 2", "count_reminders, 3", "count_iterations" })
-    void test1_Add_Purge(String testname, String macaddress, int count_reminders, int count_iterations) throws InterruptedException, IOException {
-        assertNotNull(testname);
+    void test1_Add_Purge(String ams_ip, String macaddress, int count_reminders, int reminderChannelNumber, long reminderOffset, long reminderOffset_new, int count_iterations) throws InterruptedException, IOException {
+        assertNotNull(ams_ip);
         assertNotNull(macaddress);
         assertNotEquals(0, count_reminders);
+        assertNotEquals(0, reminderChannelNumber);
+        assertNotEquals(null, reminderOffset);
+        assertNotEquals(null, reminderOffset_new);
         assertNotEquals(0, count_iterations);
         //System.out.println("testname=" + testname + ", macaddress=" + macaddress + ", count_reminders=" + count_reminders + ", count_iterations=" + count_iterations);
 
@@ -41,14 +40,9 @@ class testAMS_newAPI_Performance extends API_common {
 
         for (int i = 1; i <= count_iterations; i++) {
             System.out.println("========= ========= ========= Iteration = " + i + "/" + count_iterations + " ========= ========= =========");
-            //int reminderChannelNumber = reminderChannelNumber();
-            int reminderChannelNumber = 2;
-            //2,31,211,209,63,755,808,631
-            //long reminderOffset = reminderOffset();
-            long reminderOffset = 0;
             long reminderScheduleId = reminderScheduleId();
             long reminderId = reminderId();
-            add_list = AMS.request(ams_ip, mac, Operation.add, count_reminders, reminderProgramStart, reminderChannelNumber, reminderProgramId, reminderOffset, reminderScheduleId, reminderId);
+            add_list = AMS.request(ams_ip, macaddress, Operation.add, count_reminders, reminderProgramStart, reminderChannelNumber, reminderProgramId, reminderOffset, reminderScheduleId, reminderId);
             if(add_list.get(0).equals(expected200) && add_list.get(1).equals("")) {
                 a_avg = (int)add_list.get(2);
                 a_min = (int)add_list.get(3);
@@ -87,15 +81,17 @@ class testAMS_newAPI_Performance extends API_common {
     }
 
     @ParameterizedTest
-    @CsvFileSource(resources = "/reminders.csv")
-    void test2_Add_Delete_Purge(String testname, String macaddress, int count_reminders, int count_iterations) throws IOException, InterruptedException {
-        assertNotNull(testname);
+    @CsvFileSource(resources = "/reminders.csv", numLinesToSkip = 1)
+    void test2_Add_Delete_Purge(String ams_ip, String macaddress, int count_reminders, int reminderChannelNumber, long reminderOffset, long reminderOffset_new, int count_iterations) throws IOException, InterruptedException {
+        assertNotNull(ams_ip);
         assertNotNull(macaddress);
         assertNotEquals(0, count_reminders);
+        assertNotEquals(0, reminderChannelNumber);
+        assertNotEquals(null, reminderOffset);
+        assertNotEquals(null, reminderOffset_new);
         assertNotEquals(0, count_iterations);
         //System.out.println("testname=" + testname + ", macaddress=" + macaddress + ", count_reminders=" + count_reminders + ", count_iterations=" + count_iterations);
-
-
+        
         ArrayList add_list,
                 delete_list = new ArrayList(),
                 purge_list = new ArrayList();
@@ -105,10 +101,6 @@ class testAMS_newAPI_Performance extends API_common {
 
         for (int i = 1; i <= count_iterations; i++) {
             System.out.println("========= ========= ========= Iteration = " + i + "/" + count_iterations + " ========= ========= =========");
-            //int reminderChannelNumber = reminderChannelNumber();
-            int reminderChannelNumber = 2;
-            //long reminderOffset = reminderOffset();
-            long reminderOffset = 0;
             long reminderScheduleId = reminderScheduleId();
             long reminderId = reminderId();
             add_list = AMS.request(ams_ip, mac, Operation.add, count_reminders, reminderProgramStart, reminderChannelNumber, reminderProgramId, reminderOffset, reminderScheduleId, reminderId);
@@ -162,11 +154,14 @@ class testAMS_newAPI_Performance extends API_common {
     }
 
     @ParameterizedTest
-    @CsvFileSource(resources = "/reminders.csv")
-    void test3_Add_Modify_Delete_Purge(String testname, String macaddress, int count_reminders, int count_iterations) throws IOException, InterruptedException {
-        assertNotNull(testname);
+    @CsvFileSource(resources = "/reminders.csv", numLinesToSkip = 1)
+    void test3_Add_Modify_Delete_Purge(String ams_ip, String macaddress, int count_reminders, int reminderChannelNumber, long reminderOffset, long reminderOffset_new, int count_iterations) throws IOException, InterruptedException {
+        assertNotNull(ams_ip);
         assertNotNull(macaddress);
         assertNotEquals(0, count_reminders);
+        assertNotEquals(0, reminderChannelNumber);
+        assertNotEquals(null, reminderOffset);
+        assertNotEquals(null, reminderOffset_new);
         assertNotEquals(0, count_iterations);
         //System.out.println("testname=" + testname + ", macaddress=" + macaddress + ", count_reminders=" + count_reminders + ", count_iterations=" + count_iterations);
 
@@ -180,12 +175,6 @@ class testAMS_newAPI_Performance extends API_common {
                 p_avg = 0, p_min = 0, p_max=0, p_iterations = 0;
         for (int i = 1; i <= count_iterations; i++) {
             System.out.println("========= ========= ========= Iteration = " + i + "/" + count_iterations + " ========= ========= =========");
-            //int reminderChannelNumber = reminderChannelNumber();
-            int reminderChannelNumber = 2;
-            //long reminderOffset = reminderOffset();
-            long reminderOffset = 0;
-            //long reminderOffset_new = reminderOffset();
-            long reminderOffset_new = 15;
             long reminderScheduleId = reminderScheduleId();
             long reminderId = reminderId();
             add_list = AMS.request(ams_ip, mac, Operation.add, count_reminders, reminderProgramStart, reminderChannelNumber, reminderProgramId, reminderOffset, reminderScheduleId, reminderId);

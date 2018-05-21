@@ -5,6 +5,7 @@ import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
 
 import java.io.BufferedReader;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.sql.*;
@@ -18,7 +19,7 @@ import static java.lang.System.currentTimeMillis;
  * we are as Middle: send requests to AMS and got responses
  * Middle -> AMS -> box -> AMS -> Middle
  */
-public class API {
+public class API_common {
 
     Boolean show_info_level = true;
     Boolean show_debug_level = false;
@@ -85,7 +86,7 @@ public class API {
     //@Deprecated
     final String reminderProgramId = "EP002960010113";
 
-    String reminderProgramStart = reminderProgramStart();
+    String reminderProgramStart = "";
 
     int reminderOffset = reminderOffset();
     //int reminderOffset_new = reminderOffset();
@@ -634,6 +635,13 @@ public class API {
             result = "http://" + ams_ip + ":" + ams_port + "/ams/Reminders?req=ChangeReminders";
         }
         return result;
+    }
+
+    void write_to_file(String s) throws IOException {
+        FileWriter writer = new FileWriter("output.log", true);
+        writer.write(s);
+        writer.flush();
+        writer.close();
     }
 
 }
