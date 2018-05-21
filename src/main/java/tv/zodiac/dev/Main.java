@@ -179,6 +179,7 @@ public class Main {
                 break;
             //case "Delete":
             //case "delete": api.Operation("Delete", mac, count, count_iterations, ams_ip_default); break;
+
             default:
                 Middle.Check_registration(macaddress, charterapi);
         }

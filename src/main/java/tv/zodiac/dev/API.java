@@ -622,7 +622,7 @@ public class API {
         calendar.add(Calendar.MINUTE,+i);
         result = result.append(pattern.format(calendar.getTime()));
 
-        System.out.println("generated date_time: " + result);
+        //System.out.println("generated date_time: " + result);
         return result.toString();
     }
 

@@ -1,6 +1,7 @@
 package tv.zodiac.dev;
 
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvFileSource;
 
 import java.io.FileWriter;
 import java.io.IOException;
@@ -8,6 +9,7 @@ import java.util.ArrayList;
 import java.util.Date;
 
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 /**
  * We are Headend (on localhost): chain of requests: Headend(localhost) -> AMS -> STB -> AMS -> localhost
@@ -21,8 +23,16 @@ class testAMS_newAPI_Performance extends API{
     String mac = boxMoto2147_Rems;
     private String ams_ip = ams_ip_4;
 
-    @Test
-    void test1_Add_Purge() throws IOException, InterruptedException {
+    @ParameterizedTest
+    @CsvFileSource(resources = "/reminders.csv")
+    //@CsvSource({ "test, 1", "macaddress, 2", "count_reminders, 3", "count_iterations" })
+    void test1_Add_Purge(String testname, String macaddress, int count_reminders, int count_iterations) throws InterruptedException, IOException {
+        assertNotNull(testname);
+        assertNotNull(macaddress);
+        assertNotEquals(0, count_reminders);
+        assertNotEquals(0, count_iterations);
+        //System.out.println("testname=" + testname + ", macaddress=" + macaddress + ", count_reminders=" + count_reminders + ", count_iterations=" + count_iterations);
+
         ArrayList add_list,
                 purge_list = new ArrayList();
         int a_avg = 0, a_min = 0, a_max=0, a_iterations = 0,
@@ -78,11 +88,18 @@ class testAMS_newAPI_Performance extends API{
         }
         assertNotEquals(0, a_avg);
         assertNotEquals(0, p_avg);
-
     }
 
-    @Test
-    void test2_Add_Delete_Purge() throws IOException, InterruptedException {
+    @ParameterizedTest
+    @CsvFileSource(resources = "/reminders.csv")
+    void test2_Add_Delete_Purge(String testname, String macaddress, int count_reminders, int count_iterations) throws IOException, InterruptedException {
+        assertNotNull(testname);
+        assertNotNull(macaddress);
+        assertNotEquals(0, count_reminders);
+        assertNotEquals(0, count_iterations);
+        //System.out.println("testname=" + testname + ", macaddress=" + macaddress + ", count_reminders=" + count_reminders + ", count_iterations=" + count_iterations);
+
+
         ArrayList add_list,
                 delete_list = new ArrayList(),
                 purge_list = new ArrayList();
@@ -151,8 +168,15 @@ class testAMS_newAPI_Performance extends API{
         assertNotEquals(0, p_avg);
     }
 
-    @Test
-    void test3_Add_Modify_Delete_Purge() throws IOException, InterruptedException {
+    @ParameterizedTest
+    @CsvFileSource(resources = "/reminders.csv")
+    void test3_Add_Modify_Delete_Purge(String testname, String macaddress, int count_reminders, int count_iterations) throws IOException, InterruptedException {
+        assertNotNull(testname);
+        assertNotNull(macaddress);
+        assertNotEquals(0, count_reminders);
+        assertNotEquals(0, count_iterations);
+        //System.out.println("testname=" + testname + ", macaddress=" + macaddress + ", count_reminders=" + count_reminders + ", count_iterations=" + count_iterations);
+
         ArrayList add_list,
                 modify_list = new ArrayList(),
                 delete_list = new ArrayList(),
