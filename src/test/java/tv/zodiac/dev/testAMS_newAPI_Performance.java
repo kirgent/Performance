@@ -3,7 +3,6 @@ package tv.zodiac.dev;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvFileSource;
 
-import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Date;
@@ -12,11 +11,11 @@ import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 /**
- * We are Headend (on localhost): chain of requests: Headend(localhost) -> AMS -> STB -> AMS -> localhost
+ * We are localhost (Charter Headend). Full chain of requests: localhost -> AMS -> STB -> AMS -> localhost
  */
-class testAMS_newAPI_Performance extends API{
+class testAMS_newAPI_Performance extends API_common {
 
-    private NEWAPI_AMS AMS = new NEWAPI_AMS();
+    private NewAPI_AMS AMS = new NewAPI_AMS();
     final private int count_iterations = 1;
     final private int count_reminders = 2000;
     //String mac = box4210;
@@ -81,10 +80,7 @@ class testAMS_newAPI_Performance extends API{
                     + "\n purge avg=" + p_avg + "ms, min=" + p_min + "ms, max=" + p_max + "ms, /" + p_iterations
                     + "\n========= ========= ========= ========= ========= ========= ========= =========";
             System.out.println(result);
-            FileWriter writer = new FileWriter("output.log", true);
-            writer.write(result);
-            writer.append('\n');
-            writer.flush();
+            write_to_file(result);
         }
         assertNotEquals(0, a_avg);
         assertNotEquals(0, p_avg);
@@ -158,10 +154,7 @@ class testAMS_newAPI_Performance extends API{
                     + "\n purge avg=" + p_avg + "ms, min=" + p_min + "ms, max=" + p_max + "ms, /" + p_iterations
                     + "\n========= ========= ========= ========= ========= ========= ========= =========";
             System.out.println(result);
-            FileWriter writer = new FileWriter("output.log", true);
-            writer.write(result);
-            writer.append('\n');
-            writer.flush();
+            write_to_file(result);
         }
         assertNotEquals(0, a_avg);
         assertNotEquals(0, d_avg);
@@ -247,10 +240,7 @@ class testAMS_newAPI_Performance extends API{
                     + "\n purge avg=" + p_avg + "ms, min=" + p_min + "ms, max=" + p_max + "ms, /" + p_iterations
                     + "\n========= ========= ========= ========= ========= ========= ========= =========";
             System.out.println(result);
-            FileWriter writer = new FileWriter("output.log", true);
-            writer.write(result);
-            writer.append('\n');
-            writer.flush();
+            write_to_file(result);
         }
         assertNotEquals(0, a_avg);
         assertNotEquals(0, m_avg);

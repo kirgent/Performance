@@ -16,7 +16,7 @@ import java.util.Objects;
 
 import static java.lang.System.currentTimeMillis;
 
-class NEWAPI_AMS extends API{
+class NewAPI_AMS extends API_common {
 
     /** Add / Modify method
      * @param mac      - mac of the box
