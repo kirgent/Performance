@@ -197,7 +197,7 @@ class testAMS_newAPI_Reminder_Add extends API_common {
 
     @Test
     void testAdd_reminderProgramStart_empty() throws IOException {
-        ArrayList actual = AMS.request(ams_ip, mac, Operation.add, count_reminders, "", reminderChannelNumber, reminderProgramId, reminderOffset, reminderScheduleId, reminderId);
+        ArrayList actual = AMS.request(ams_ip, mac, Operation.add, count_reminders, "-1", reminderChannelNumber, reminderProgramId, reminderOffset, reminderScheduleId, reminderId);
         assertEquals(expected400, actual.get(0));
         assertEquals("REM-008 Reminders parsing error: missing program start", actual.get(1));
     }

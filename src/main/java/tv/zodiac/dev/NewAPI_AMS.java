@@ -35,7 +35,7 @@ class NewAPI_AMS extends API_common {
         //if(show_debug_info) {
         System.out.println("[INF] " + new Date() + ": " + operation + " for macaddress=" + mac + " to ams_ip=" + ams_ip + ", "
                 + "count_reminders=" + count_reminders + ", "
-                + "reminderProgramStart=multi, "
+                + "reminderProgramStart=" + reminderProgramStart + ", "
                 + "reminderChannelNumber=" + reminderChannelNumber + ", "
                 + "reminderProgramId=" + reminderProgramId + ", "
                 + "reminderOffset=" + reminderOffset + ", "
@@ -298,7 +298,7 @@ class NewAPI_AMS extends API_common {
         json.put("reminders", array_reminders);
         for (int i = 0; i < count_reminders; i++) {
             JSONObject object_in_reminders = new JSONObject();
-            if (Objects.equals(reminderProgramStart, "")) {
+            if (Objects.equals(reminderProgramStart, "-1")) {
                 object_in_reminders.put("reminderProgramStart", "");
             } else {
                 //object_in_reminders.put("reminderProgramStart", reminderProgramStart + " " + get_time(count_reminders, i+1));

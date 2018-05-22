@@ -2,9 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="a3173ab5-15da-4bf8-8272-656fad315acb" name="Default" comment="update">
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/tv/zodiac/dev/API_common.class" afterPath="$PROJECT_DIR$/target/classes/tv/zodiac/dev/API_common.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/tv/zodiac/dev/NewAPI_AMS.class" afterPath="$PROJECT_DIR$/target/classes/tv/zodiac/dev/NewAPI_AMS.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/tv/zodiac/dev/API_common.java" afterPath="$PROJECT_DIR$/src/main/java/tv/zodiac/dev/API_common.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/tv/zodiac/dev/NewAPI_AMS.java" afterPath="$PROJECT_DIR$/src/main/java/tv/zodiac/dev/NewAPI_AMS.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/test/java/tv/zodiac/dev/testAMS_newAPI_Reminder_Add.java" afterPath="$PROJECT_DIR$/src/test/java/tv/zodiac/dev/testAMS_newAPI_Reminder_Add.java" />
     </list>
     <ignored path="target/generated-sources/" />
     <ignored path="target/generated-test-sources/" />
@@ -45,7 +47,7 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="testAMS_oldAPI_Performance.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="testAMS_oldAPI_Performance.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/test/java/tv/zodiac/dev/testAMS_oldAPI_Performance.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="77">
@@ -53,6 +55,16 @@
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="testAMS_newAPI_Reminder_Add.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/test/java/tv/zodiac/dev/testAMS_newAPI_Reminder_Add.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="215">
+              <caret line="209" column="35" lean-forward="false" selection-start-line="209" selection-start-column="35" selection-end-line="209" selection-end-column="35" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -77,13 +89,12 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="NewAPI_AMS.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="NewAPI_AMS.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/tv/zodiac/dev/NewAPI_AMS.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="77">
-              <caret line="33" column="262" lean-forward="false" selection-start-line="33" selection-start-column="262" selection-end-line="33" selection-end-column="262" />
+            <state relative-caret-position="173">
+              <caret line="377" column="67" lean-forward="false" selection-start-line="377" selection-start-column="61" selection-end-line="377" selection-end-column="67" />
               <folding>
-                <element signature="method#request#0;class#NewAPI_AMS#0" expanded="false" />
                 <element signature="method#request#1;class#NewAPI_AMS#0" expanded="false" />
                 <element signature="method#request#2;class#NewAPI_AMS#0" expanded="false" />
               </folding>
@@ -115,7 +126,7 @@
         <entry file="file://$PROJECT_DIR$/src/test/java/tv/zodiac/dev/testAMS_newAPI_Performance.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="375">
-              <caret line="43" column="98" lean-forward="false" selection-start-line="43" selection-start-column="98" selection-end-line="43" selection-end-column="98" />
+              <caret line="43" column="31" lean-forward="true" selection-start-line="43" selection-start-column="31" selection-end-line="43" selection-end-column="31" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -128,16 +139,6 @@
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="179">
               <caret line="88" column="22" lean-forward="true" selection-start-line="88" selection-start-column="22" selection-end-line="88" selection-end-column="22" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="test3_reminder_Add_Modify_Delete_Purge.sh" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/test3_reminder_Add_Modify_Delete_Purge.sh">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="136">
-              <caret line="8" column="128" lean-forward="false" selection-start-line="8" selection-start-column="128" selection-end-line="8" selection-end-column="128" />
               <folding />
             </state>
           </provider>
@@ -167,8 +168,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>3438B7EB2E30</find>
-      <find>total measurements</find>
       <find>add_avg_list</find>
       <find>ms</find>
       <find>add_list</find>
@@ -197,6 +196,8 @@
       <find>count_reminders</find>
       <find>dependen</find>
       <find>mac,</find>
+      <find>reminderProgramStart</find>
+      <find>equals</find>
     </findStrings>
     <replaceStrings>
       <replace>mac=</replace>
@@ -270,7 +271,6 @@
         <option value="$PROJECT_DIR$/src/main/bash/change_registration.sh" />
         <option value="$PROJECT_DIR$/src/main/bash/check_registration.sh" />
         <option value="$PROJECT_DIR$/src/main/bash/reminder.sh" />
-        <option value="$PROJECT_DIR$/src/test/java/tv/zodiac/dev/testAMS_newAPI_Reminder_Add.java" />
         <option value="$PROJECT_DIR$/src/test/java/tv/zodiac/dev/testAMS_newAPI_Reminder_Purge.java" />
         <option value="$PROJECT_DIR$/src/test/java/tv/zodiac/dev/testAMS_newAPI_Reminder_Delete.java" />
         <option value="$PROJECT_DIR$/src/main/java/tv/zodiac/dev/ValueSource.java" />
@@ -296,8 +296,9 @@
         <option value="$PROJECT_DIR$/test11_oldapi_reminder_Add_Purge.sh" />
         <option value="$PROJECT_DIR$/test22_oldapi_reminder_Add_Delete_Purge.sh" />
         <option value="$PROJECT_DIR$/src/test/java/tv/zodiac/dev/testAMS_newAPI_Performance.java" />
-        <option value="$PROJECT_DIR$/src/main/java/tv/zodiac/dev/NewAPI_AMS.java" />
         <option value="$PROJECT_DIR$/src/main/java/tv/zodiac/dev/API_common.java" />
+        <option value="$PROJECT_DIR$/src/test/java/tv/zodiac/dev/testAMS_newAPI_Reminder_Add.java" />
+        <option value="$PROJECT_DIR$/src/main/java/tv/zodiac/dev/NewAPI_AMS.java" />
       </list>
     </option>
   </component>
@@ -696,6 +697,15 @@
               <item name="java" type="462c0819:PsiDirectoryNode" />
               <item name="dev" type="462c0819:PsiDirectoryNode" />
               <item name="testAMS_newAPI_Performance" type="1a9f42e2:ClassTreeNode" />
+            </path>
+            <path>
+              <item name="Reminders" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Reminders" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="test" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="dev" type="462c0819:PsiDirectoryNode" />
+              <item name="testAMS_newAPI_Reminder_Add" type="1a9f42e2:ClassTreeNode" />
             </path>
             <path>
               <item name="Reminders" type="b2602c69:ProjectViewProjectNode" />
@@ -1246,9 +1256,6 @@
     <history-entry file="testAMS_newAPI_Performance_test1_Add_Purge_(2) - 2018.05.22 at 11h 57m 43s.xml">
       <configuration name="testAMS_newAPI_Performance.test1_Add_Purge (2)" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="testAMS_newAPI_Performance_test1_Add_Purge_withCsvSource_(1) - 2018.05.21 at 16h 09m 47s.xml">
-      <configuration name="testAMS_newAPI_Performance.test1_Add_Purge_withCsvSource (1)" configurationId="JUnit" />
-    </history-entry>
     <history-entry file="testAMS_newAPI_Performance_test1_Add_Purge_withCsvSource_(1) - 2018.05.21 at 16h 10m 04s.xml">
       <configuration name="testAMS_newAPI_Performance.test1_Add_Purge_withCsvSource (1)" configurationId="JUnit" />
     </history-entry>
@@ -1273,6 +1280,9 @@
     <history-entry file="testAMS_oldAPI_Performance_test1_Add_Purge - 2018.05.22 at 12h 34m 00s.xml">
       <configuration name="testAMS_oldAPI_Performance.test1_Add_Purge" configurationId="JUnit" />
     </history-entry>
+    <history-entry file="testAMS_oldAPI_Performance_test1_Add_Purge - 2018.05.22 at 12h 38m 43s.xml">
+      <configuration name="testAMS_oldAPI_Performance.test1_Add_Purge" configurationId="JUnit" />
+    </history-entry>
   </component>
   <component name="TodoView" selected-index="2">
     <todo-panel id="selected-file">
@@ -1292,10 +1302,10 @@
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.276644" sideWeight="0.5042683" order="10" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.2152439" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.13151927" sideWeight="0.49756098" order="8" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.6814059" sideWeight="0.49634147" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32426304" sideWeight="0.49634147" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32993197" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.2792683" sideWeight="0.49546486" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.3628049" sideWeight="0.49546486" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32993197" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25609756" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.19512194" sideWeight="0.50453514" order="3" side_tool="true" content_ui="tabs" />
@@ -1638,14 +1648,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/test/java/tv/zodiac/dev/testAMS_newAPI_Reminder_Add.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2363">
-          <caret line="146" column="32" lean-forward="false" selection-start-line="146" selection-start-column="32" selection-end-line="146" selection-end-column="32" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/tv/zodiac/dev/Main.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="3077">
@@ -1744,28 +1746,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/tv/zodiac/dev/NewAPI_AMS.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="77">
-          <caret line="33" column="262" lean-forward="false" selection-start-line="33" selection-start-column="262" selection-end-line="33" selection-end-column="262" />
-          <folding>
-            <element signature="method#request#0;class#NewAPI_AMS#0" expanded="false" />
-            <element signature="method#request#1;class#NewAPI_AMS#0" expanded="false" />
-            <element signature="method#request#2;class#NewAPI_AMS#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/test/java/tv/zodiac/dev/testAMS_newAPI_Performance.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="375">
-          <caret line="43" column="98" lean-forward="false" selection-start-line="43" selection-start-column="98" selection-end-line="43" selection-end-column="98" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/tv/zodiac/dev/API_common.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="179">
@@ -1788,6 +1768,35 @@
           <caret line="20" column="9" lean-forward="false" selection-start-line="20" selection-start-column="9" selection-end-line="20" selection-end-column="9" />
           <folding>
             <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/test/java/tv/zodiac/dev/testAMS_newAPI_Performance.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="375">
+          <caret line="43" column="31" lean-forward="true" selection-start-line="43" selection-start-column="31" selection-end-line="43" selection-end-column="31" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/test/java/tv/zodiac/dev/testAMS_newAPI_Reminder_Add.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="215">
+          <caret line="209" column="35" lean-forward="false" selection-start-line="209" selection-start-column="35" selection-end-line="209" selection-end-column="35" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/tv/zodiac/dev/NewAPI_AMS.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="173">
+          <caret line="377" column="67" lean-forward="false" selection-start-line="377" selection-start-column="61" selection-end-line="377" selection-end-column="67" />
+          <folding>
+            <element signature="method#request#1;class#NewAPI_AMS#0" expanded="false" />
+            <element signature="method#request#2;class#NewAPI_AMS#0" expanded="false" />
           </folding>
         </state>
       </provider>
