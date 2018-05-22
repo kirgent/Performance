@@ -16,6 +16,7 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 class testAMS_oldAPI_Performance extends API_common {
     private OldAPI_AMS AMS = new OldAPI_AMS();
     private int timeout = 20000;
+    int sleep_after_iteration = 1000;
 
     @ParameterizedTest
     @CsvFileSource(resources = "/reminders_oldapi.csv", numLinesToSkip = 1)
@@ -53,7 +54,7 @@ class testAMS_oldAPI_Performance extends API_common {
                 }
                 add_list.clear();
                 purge_list.clear();
-                Thread.sleep(1000);
+                Thread.sleep(sleep_after_iteration);
             }
 
             if (a_avg != 0 && p_avg != 0) {
@@ -116,7 +117,7 @@ class testAMS_oldAPI_Performance extends API_common {
                 add_list.clear();
                 delete_list.clear();
                 purge_list.clear();
-                Thread.sleep(1000);
+                Thread.sleep(sleep_after_iteration);
             }
 
             if (a_avg != 0 && d_avg != 0 && p_avg != 0) {
