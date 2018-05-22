@@ -86,7 +86,7 @@ public class API_common {
     //@Deprecated
     final String reminderProgramId = "EP002960010113";
 
-    String reminderProgramStart = "";
+    String reminderProgramStart = reminderProgramStart();
 
     int reminderOffset = reminderOffset();
     //int reminderOffset_new = reminderOffset();

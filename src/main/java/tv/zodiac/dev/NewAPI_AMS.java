@@ -35,7 +35,7 @@ class NewAPI_AMS extends API_common {
         //if(show_debug_info) {
         System.out.println("[INF] " + new Date() + ": " + operation + " for macaddress=" + mac + " to ams_ip=" + ams_ip + ", "
                 + "count_reminders=" + count_reminders + ", "
-                + "reminderProgramStart=" + reminderProgramStart + ", "
+                + "reminderProgramStart=multi, "
                 + "reminderChannelNumber=" + reminderChannelNumber + ", "
                 + "reminderProgramId=" + reminderProgramId + ", "
                 + "reminderOffset=" + reminderOffset + ", "
