@@ -7,8 +7,8 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Date;
 
-import static java.time.Duration.ofMillis;
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 /**
  * We are localhost (Charter Headend). Full chain of requests: localhost -> AMS -> STB -> AMS -> localhost
@@ -19,7 +19,6 @@ class testAMS_newAPI_Performance extends API_common {
 
     @ParameterizedTest
     @CsvFileSource(resources = "/reminders.csv", numLinesToSkip = 1)
-            //@DisabledIfEnvironmentVariable()
     //@CsvSource({ "test, 1", "macaddress, 2", "count_reminders, 3", "count_iterations" })
     void test1_Add_Purge(String ams_ip, String macaddress, int count_reminders, int reminderChannelNumber, long reminderOffset, long reminderOffset_new, int count_iterations) throws InterruptedException, IOException {
         assertNotNull(ams_ip);
@@ -81,7 +80,6 @@ class testAMS_newAPI_Performance extends API_common {
     @ParameterizedTest
     @CsvFileSource(resources = "/reminders.csv", numLinesToSkip = 1)
     void test2_Add_Delete_Purge(String ams_ip, String macaddress, int count_reminders, int reminderChannelNumber, long reminderOffset, long reminderOffset_new, int count_iterations) throws IOException, InterruptedException {
-        assertTimeoutPreemptively(ofMillis(timeout), () -> {
             assertNotNull(ams_ip);
             assertNotNull(macaddress);
             assertNotEquals(0, count_reminders);
@@ -148,13 +146,12 @@ class testAMS_newAPI_Performance extends API_common {
             assertNotEquals(0, a_avg);
             assertNotEquals(0, d_avg);
             assertNotEquals(0, p_avg);
-        });
+
     }
 
     @ParameterizedTest
     @CsvFileSource(resources = "/reminders.csv", numLinesToSkip = 1)
     void test3_Add_Modify_Delete_Purge(String ams_ip, String macaddress, int count_reminders, int reminderChannelNumber, long reminderOffset, long reminderOffset_new, int count_iterations) throws IOException, InterruptedException {
-        assertTimeoutPreemptively(ofMillis(timeout), () -> {
             assertNotNull(ams_ip);
             assertNotNull(macaddress);
             assertNotEquals(0, count_reminders);
@@ -180,7 +177,6 @@ class testAMS_newAPI_Performance extends API_common {
                     a_min = (int) add_list.get(3);
                     a_max = (int) add_list.get(4);
                     a_iterations = (int) add_list.get(5);
-
                     modify_list = AMS.request(ams_ip, macaddress, Operation.modify, count_reminders, reminderProgramStart, reminderChannelNumber, reminderProgramId, reminderOffset_new, reminderScheduleId, reminderId);
                     if (modify_list.get(1).equals("")) {
                         m_avg = (int) modify_list.get(2);
@@ -232,7 +228,6 @@ class testAMS_newAPI_Performance extends API_common {
             assertNotEquals(0, m_avg);
             assertNotEquals(0, d_avg);
             assertNotEquals(0, p_avg);
-        });
     }
 
 }
