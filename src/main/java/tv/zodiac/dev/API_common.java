@@ -639,7 +639,7 @@ public class API_common {
     }
 
     void write_to_file(String s) throws IOException {
-        FileWriter writer = new FileWriter("output.log", true);
+        FileWriter writer = new FileWriter("reminders.log", true);
         writer.write(s);
         writer.flush();
         writer.close();
