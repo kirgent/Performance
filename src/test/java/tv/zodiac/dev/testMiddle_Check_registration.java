@@ -1,7 +1,5 @@
 package tv.zodiac.dev;
 
-import org.junit.jupiter.api.Disabled;
-import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvFileSource;
 
@@ -30,36 +28,15 @@ class testMiddle_Check_registration extends API_Middle {
         assertEquals("", actual[0].get(1));
     }
 
-    @Test
-    @Disabled
-    void testCheck_registration_a_No_amsIp_found_for_mac() throws IOException {
-        ArrayList actual = Middle.Check_registration(charterapi_a, "123456789012");
-        assertEquals(expected500, actual.get(0));
-        assertEquals("No amsIp found for mac", actual.get(1));
-    }
-
-    @Test
-    @Disabled
-    void testCheck_registration_b_No_amsIp_found_for_mac() throws IOException {
-        ArrayList actual = Middle.Check_registration(charterapi_b, "123456789012");
-        assertEquals(expected500, actual.get(0));
-        assertEquals("No amsIp found for mac", actual.get(1));
-    }
-
-    @Test
-    @Disabled
-    void testCheck_registration_c_No_amsIp_found_for_mac() throws IOException {
-        ArrayList actual = Middle.Check_registration(charterapi_c, "123456789012");
-        assertEquals(expected500, actual.get(0));
-        assertEquals("No amsIp found for mac", actual.get(1));
-    }
-
-    @Test
-    @Disabled
-    void testCheck_registration_d_No_amsIp_found_for_mac() throws IOException {
-        ArrayList actual = Middle.Check_registration(charterapi_d, "123456789012");
-        assertEquals(expected500, actual.get(0));
-        assertEquals("No amsIp found for mac", actual.get(1));
+    @ParameterizedTest
+    @CsvFileSource(resources = "/reminders_macaddress_registrations.csv", numLinesToSkip = 1)
+    void testCheck_registration_No_amsIp_found_for_mac(String charterapi) throws IOException {
+        final ArrayList[] actual = new ArrayList[1];
+        assertTimeoutPreemptively(ofMillis(timeout), () -> {
+            actual[0] = Middle.Check_registration(charterapi, "123456789012");
+        });
+        assertEquals(expected500, actual[0].get(0));
+        assertEquals("No amsIp found for mac", actual[0].get(1));
     }
 
 }
