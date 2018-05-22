@@ -21,7 +21,6 @@ class testAMS_newAPI_Performance extends API_common {
             //@DisabledIfEnvironmentVariable()
     //@CsvSource({ "test, 1", "macaddress, 2", "count_reminders, 3", "count_iterations" })
     void test1_Add_Purge(String ams_ip, String macaddress, int count_reminders, int reminderChannelNumber, long reminderOffset, long reminderOffset_new, int count_iterations) throws InterruptedException, IOException {
-        assertTimeoutPreemptively(ofMillis(20000), () -> {
         assertNotNull(ams_ip);
         assertNotNull(macaddress);
         assertNotEquals(0, count_reminders);
@@ -31,8 +30,8 @@ class testAMS_newAPI_Performance extends API_common {
         assertNotEquals(0, count_iterations);
         //System.out.println("testname=" + testname + ", macaddress=" + macaddress + ", count_reminders=" + count_reminders + ", count_iterations=" + count_iterations);
 
-        ArrayList add_list,
-                purge_list = new ArrayList();
+        final ArrayList[] add_list = {new ArrayList()};
+        final ArrayList[] purge_list = {new ArrayList()};
         int a_avg = 0, a_min = 0, a_max=0, a_iterations = 0,
                 p_avg = 0, p_min = 0, p_max=0, p_iterations = 0;
         Integer[] rack_channels_wb = { 2, 31, 63, 209, 211, 631, 755, 808 };
@@ -42,19 +41,23 @@ class testAMS_newAPI_Performance extends API_common {
             System.out.println("========= ========= ========= Iteration = " + i + "/" + count_iterations + " ========= ========= =========");
             long reminderScheduleId = reminderScheduleId();
             long reminderId = reminderId();
-            add_list = AMS.request(ams_ip, macaddress, Operation.add, count_reminders, reminderProgramStart, reminderChannelNumber, reminderProgramId, reminderOffset, reminderScheduleId, reminderId);
-            if(add_list.get(0).equals(expected200) && add_list.get(1).equals("")) {
-                a_avg = (int)add_list.get(2);
-                a_min = (int)add_list.get(3);
-                a_max = (int)add_list.get(4);
-                a_iterations = (int)add_list.get(5);
+            assertTimeoutPreemptively(ofMillis(20000), () -> {
+                add_list[0] = AMS.request(ams_ip, macaddress, Operation.add, count_reminders, reminderProgramStart, reminderChannelNumber, reminderProgramId, reminderOffset, reminderScheduleId, reminderId);
+            });
+            if(add_list[0].get(0).equals(expected200) && add_list[0].get(1).equals("")) {
+                a_avg = (int) add_list[0].get(2);
+                a_min = (int) add_list[0].get(3);
+                a_max = (int) add_list[0].get(4);
+                a_iterations = (int) add_list[0].get(5);
 
-                purge_list = AMS.request(ams_ip, macaddress, Operation.purge);
-                if(purge_list.get(1).equals("")) {
-                    p_avg = (int)purge_list.get(2);
-                    p_min = (int)purge_list.get(3);
-                    p_max = (int)purge_list.get(4);
-                    p_iterations = (int)add_list.get(5);
+                assertTimeoutPreemptively(ofMillis(20000), () -> {
+                    purge_list[0] = AMS.request(ams_ip, macaddress, Operation.purge);
+                });
+                if(purge_list[0].get(1).equals("")) {
+                    p_avg = (int) purge_list[0].get(2);
+                    p_min = (int) purge_list[0].get(3);
+                    p_max = (int) purge_list[0].get(4);
+                    p_iterations = (int) add_list[0].get(5);
                 }
             }
             reminderScheduleId_list.clear();
@@ -62,8 +65,8 @@ class testAMS_newAPI_Performance extends API_common {
             if(show_debug_level) {
                 System.out.println("[DBG] reminderX_list-s are CLEARED !!!");
             }
-            add_list.clear();
-            purge_list.clear();
+            add_list[0].clear();
+            purge_list[0].clear();
             Thread.sleep(1000);
         }
 
@@ -78,7 +81,6 @@ class testAMS_newAPI_Performance extends API_common {
         }
         assertNotEquals(0, a_avg);
         assertNotEquals(0, p_avg);
-        });
     }
 
     @ParameterizedTest

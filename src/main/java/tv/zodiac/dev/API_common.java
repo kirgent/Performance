@@ -86,7 +86,7 @@ public class API_common {
     //@Deprecated
     final String reminderProgramId = "EP002960010113";
 
-    String reminderProgramStart = reminderProgramStart();
+    String reminderProgramStart = "";
 
     int reminderOffset = reminderOffset();
     //int reminderOffset_new = reminderOffset();
@@ -447,6 +447,7 @@ public class API_common {
     /**
      * @return just return the day=tomorrow: yyyy-mm-dd
      */
+    @Deprecated
     String reminderProgramStart() {
         Calendar calendar = Calendar.getInstance();
         calendar.setTimeZone(TimeZone.getTimeZone("UTC"));
