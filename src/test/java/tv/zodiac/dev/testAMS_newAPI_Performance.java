@@ -48,7 +48,7 @@ class testAMS_newAPI_Performance extends API_common {
                 a_max = (int)add_list.get(4);
                 a_iterations = (int)add_list.get(5);
 
-                purge_list = AMS.request(ams_ip, mac, Operation.purge);
+                purge_list = AMS.request(ams_ip, macaddress, Operation.purge);
                 if(purge_list.get(1).equals("")) {
                     p_avg = (int)purge_list.get(2);
                     p_min = (int)purge_list.get(3);
@@ -100,14 +100,14 @@ class testAMS_newAPI_Performance extends API_common {
             System.out.println("========= ========= ========= Iteration = " + i + "/" + count_iterations + " ========= ========= =========");
             long reminderScheduleId = reminderScheduleId();
             long reminderId = reminderId();
-            add_list = AMS.request(ams_ip, mac, Operation.add, count_reminders, reminderProgramStart, reminderChannelNumber, reminderProgramId, reminderOffset, reminderScheduleId, reminderId);
+            add_list = AMS.request(ams_ip, macaddress, Operation.add, count_reminders, reminderProgramStart, reminderChannelNumber, reminderProgramId, reminderOffset, reminderScheduleId, reminderId);
             if(add_list.get(0).equals(expected200) && add_list.get(1).equals("")) {
                 a_avg = (int)add_list.get(2);
                 a_min = (int)add_list.get(3);
                 a_max = (int)add_list.get(4);
                 a_iterations = (int)add_list.get(5);
 
-                delete_list = AMS.request(ams_ip, mac, Operation.delete, count_reminders, reminderScheduleId, reminderId);
+                delete_list = AMS.request(ams_ip, macaddress, Operation.delete, count_reminders, reminderScheduleId, reminderId);
                 if(delete_list.get(1).equals("")) {
                     d_avg = (int)delete_list.get(2);
                     d_min = (int)delete_list.get(3);
@@ -115,7 +115,7 @@ class testAMS_newAPI_Performance extends API_common {
                     d_iterations = (int)delete_list.get(5);
                 }
 
-                purge_list = AMS.request(ams_ip, mac, Operation.purge);
+                purge_list = AMS.request(ams_ip, macaddress, Operation.purge);
                 if(purge_list.get(1).equals("")) {
                     p_avg = (int)purge_list.get(2);
                     p_min = (int)purge_list.get(3);
@@ -172,14 +172,14 @@ class testAMS_newAPI_Performance extends API_common {
             System.out.println("========= ========= ========= Iteration = " + i + "/" + count_iterations + " ========= ========= =========");
             long reminderScheduleId = reminderScheduleId();
             long reminderId = reminderId();
-            add_list = AMS.request(ams_ip, mac, Operation.add, count_reminders, reminderProgramStart, reminderChannelNumber, reminderProgramId, reminderOffset, reminderScheduleId, reminderId);
+            add_list = AMS.request(ams_ip, macaddress, Operation.add, count_reminders, reminderProgramStart, reminderChannelNumber, reminderProgramId, reminderOffset, reminderScheduleId, reminderId);
             if(add_list.get(0).equals(expected200) && add_list.get(1).equals("")) {
                 a_avg = (int)add_list.get(2);
                 a_min = (int)add_list.get(3);
                 a_max = (int)add_list.get(4);
                 a_iterations = (int)add_list.get(5);
 
-                modify_list = AMS.request(ams_ip, mac, Operation.modify, count_reminders, reminderProgramStart, reminderChannelNumber, reminderProgramId, reminderOffset_new, reminderScheduleId, reminderId);
+                modify_list = AMS.request(ams_ip, macaddress, Operation.modify, count_reminders, reminderProgramStart, reminderChannelNumber, reminderProgramId, reminderOffset_new, reminderScheduleId, reminderId);
                 if(modify_list.get(1).equals("")) {
                     m_avg = (int)modify_list.get(2);
                     m_min = (int)modify_list.get(3);
@@ -187,7 +187,7 @@ class testAMS_newAPI_Performance extends API_common {
                     m_iterations = (int)modify_list.get(5);
                 }
 
-                delete_list = AMS.request(ams_ip, mac, Operation.delete, count_reminders, reminderScheduleId, reminderId);
+                delete_list = AMS.request(ams_ip, macaddress, Operation.delete, count_reminders, reminderScheduleId, reminderId);
                 if(delete_list.get(1).equals("")) {
                     d_avg = (int)delete_list.get(2);
                     d_min = (int)delete_list.get(3);
@@ -195,7 +195,7 @@ class testAMS_newAPI_Performance extends API_common {
                     d_iterations = (int)delete_list.get(5);
                 }
 
-                purge_list = AMS.request(ams_ip, mac, Operation.purge);
+                purge_list = AMS.request(ams_ip, macaddress, Operation.purge);
                 if(purge_list.get(1).equals("")) {
                     p_avg = (int)purge_list.get(2);
                     p_min = (int)purge_list.get(3);
