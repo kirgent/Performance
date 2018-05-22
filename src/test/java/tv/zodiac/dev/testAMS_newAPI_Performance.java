@@ -7,8 +7,8 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Date;
 
-import static org.junit.jupiter.api.Assertions.assertNotEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static java.time.Duration.ofMillis;
+import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * We are localhost (Charter Headend). Full chain of requests: localhost -> AMS -> STB -> AMS -> localhost
@@ -16,6 +16,8 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 class testAMS_newAPI_Performance extends API_common {
     private NewAPI_AMS AMS = new NewAPI_AMS();
     private int timeout = 20000;
+    Integer[] rack_channels_wb = { 2, 31, 63, 209, 211, 631, 755, 808 };
+    Integer[] rack_channels_moto = { 2 };
 
     @ParameterizedTest
     @CsvFileSource(resources = "reminders.csv", numLinesToSkip = 1)
@@ -28,30 +30,29 @@ class testAMS_newAPI_Performance extends API_common {
         assertNotEquals(null, reminderOffset);
         assertNotEquals(null, reminderOffset_new);
         assertNotEquals(0, count_iterations);
-        ArrayList add_list;
+        final ArrayList[] add_list = new ArrayList[1];
         ArrayList purge_list = new ArrayList();
         int a_avg = 0, a_min = 0, a_max=0, a_iterations = 0,
                 p_avg = 0, p_min = 0, p_max=0, p_iterations = 0;
-        Integer[] rack_channels_wb = { 2, 31, 63, 209, 211, 631, 755, 808 };
-        Integer[] rack_channels_moto = { 2 };
-
         for (int i = 1; i <= count_iterations; i++) {
             System.out.println("========= ========= ========= Iteration = " + i + "/" + count_iterations + " ========= ========= =========");
             long reminderScheduleId = reminderScheduleId();
             long reminderId = reminderId();
-            add_list = AMS.request(ams_ip, macaddress, Operation.add, count_reminders, reminderProgramStart, reminderChannelNumber, reminderProgramId, reminderOffset, reminderScheduleId, reminderId);
-            if(add_list.get(0).equals(expected200) && add_list.get(1).equals("")) {
-                a_avg = (int) add_list.get(2);
-                a_min = (int) add_list.get(3);
-                a_max = (int) add_list.get(4);
-                a_iterations = (int) add_list.get(5);
+            assertTimeoutPreemptively(ofMillis(timeout), () -> {
+                add_list[0] = AMS.request(ams_ip, macaddress, Operation.add, count_reminders, reminderProgramStart, reminderChannelNumber, reminderProgramId, reminderOffset, reminderScheduleId, reminderId);
+            });
+            if(add_list[0].get(0).equals(expected200) && add_list[0].get(1).equals("")) {
+                a_avg = (int) add_list[0].get(2);
+                a_min = (int) add_list[0].get(3);
+                a_max = (int) add_list[0].get(4);
+                a_iterations = (int) add_list[0].get(5);
 
                 purge_list = AMS.request(ams_ip, macaddress, Operation.purge);
                 if(purge_list.get(1).equals("")) {
                     p_avg = (int) purge_list.get(2);
                     p_min = (int) purge_list.get(3);
                     p_max = (int) purge_list.get(4);
-                    p_iterations = (int) add_list.get(5);
+                    p_iterations = (int) add_list[0].get(5);
                 }
             }
             reminderScheduleId_list.clear();
@@ -59,7 +60,7 @@ class testAMS_newAPI_Performance extends API_common {
             if(show_debug_level) {
                 System.out.println("[DBG] reminderX_list-s are CLEARED !!!");
             }
-            add_list.clear();
+            add_list[0].clear();
             purge_list.clear();
             Thread.sleep(1000);
         }
