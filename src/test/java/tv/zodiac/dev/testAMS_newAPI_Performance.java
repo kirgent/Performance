@@ -150,7 +150,7 @@ class testAMS_newAPI_Performance extends API_common {
     }
 
     @ParameterizedTest
-    @CsvFileSource(resources = "/reminders.csv", numLinesToSkip = 1)
+    @CsvFileSource(resources = "reminders.csv", numLinesToSkip = 1)
     void test3_Add_Modify_Delete_Purge(String ams_ip, String macaddress, int count_reminders, int reminderChannelNumber, long reminderOffset, long reminderOffset_new, int count_iterations) throws IOException, InterruptedException {
             assertNotNull(ams_ip);
             assertNotNull(macaddress);
