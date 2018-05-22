@@ -15,6 +15,7 @@ import static org.junit.jupiter.api.Assertions.*;
  */
 class testAMS_newAPI_Performance extends API_common {
     private NewAPI_AMS AMS = new NewAPI_AMS();
+    private int timeout = 20000;
 
     @ParameterizedTest
     @CsvFileSource(resources = "/reminders.csv", numLinesToSkip = 1)
@@ -28,10 +29,8 @@ class testAMS_newAPI_Performance extends API_common {
         assertNotEquals(null, reminderOffset);
         assertNotEquals(null, reminderOffset_new);
         assertNotEquals(0, count_iterations);
-        //System.out.println("testname=" + testname + ", macaddress=" + macaddress + ", count_reminders=" + count_reminders + ", count_iterations=" + count_iterations);
-
         final ArrayList[] add_list = {new ArrayList()};
-        final ArrayList[] purge_list = {new ArrayList()};
+        ArrayList purge_list = new ArrayList();
         int a_avg = 0, a_min = 0, a_max=0, a_iterations = 0,
                 p_avg = 0, p_min = 0, p_max=0, p_iterations = 0;
         Integer[] rack_channels_wb = { 2, 31, 63, 209, 211, 631, 755, 808 };
@@ -41,7 +40,7 @@ class testAMS_newAPI_Performance extends API_common {
             System.out.println("========= ========= ========= Iteration = " + i + "/" + count_iterations + " ========= ========= =========");
             long reminderScheduleId = reminderScheduleId();
             long reminderId = reminderId();
-            assertTimeoutPreemptively(ofMillis(20000), () -> {
+            assertTimeoutPreemptively(ofMillis(timeout), () -> {
                 add_list[0] = AMS.request(ams_ip, macaddress, Operation.add, count_reminders, reminderProgramStart, reminderChannelNumber, reminderProgramId, reminderOffset, reminderScheduleId, reminderId);
             });
             if(add_list[0].get(0).equals(expected200) && add_list[0].get(1).equals("")) {
@@ -50,13 +49,11 @@ class testAMS_newAPI_Performance extends API_common {
                 a_max = (int) add_list[0].get(4);
                 a_iterations = (int) add_list[0].get(5);
 
-                assertTimeoutPreemptively(ofMillis(20000), () -> {
-                    purge_list[0] = AMS.request(ams_ip, macaddress, Operation.purge);
-                });
-                if(purge_list[0].get(1).equals("")) {
-                    p_avg = (int) purge_list[0].get(2);
-                    p_min = (int) purge_list[0].get(3);
-                    p_max = (int) purge_list[0].get(4);
+                purge_list = AMS.request(ams_ip, macaddress, Operation.purge);
+                if(purge_list.get(1).equals("")) {
+                    p_avg = (int) purge_list.get(2);
+                    p_min = (int) purge_list.get(3);
+                    p_max = (int) purge_list.get(4);
                     p_iterations = (int) add_list[0].get(5);
                 }
             }
@@ -66,7 +63,7 @@ class testAMS_newAPI_Performance extends API_common {
                 System.out.println("[DBG] reminderX_list-s are CLEARED !!!");
             }
             add_list[0].clear();
-            purge_list[0].clear();
+            purge_list.clear();
             Thread.sleep(1000);
         }
 

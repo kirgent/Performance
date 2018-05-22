@@ -7,19 +7,19 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Date;
 
-import static java.time.Duration.ofMillis;
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 /**
  * We are localhost (Charter Headend). Full chain of requests: localhost -> AMS -> STB -> AMS -> localhost
  */
 class testAMS_oldAPI_Performance extends API_common {
     private OldAPI_AMS AMS = new OldAPI_AMS();
+    private int timeout = 20000;
 
     @ParameterizedTest
     @CsvFileSource(resources = "/reminders_oldapi.csv", numLinesToSkip = 1)
     void test1_Add_Purge(String ams_ip, String macaddress, int count_reminders, int reminderChannelNumber, long reminderOffset, long reminderOffset_new, int count_iterations) throws IOException, InterruptedException {
-        assertTimeoutPreemptively(ofMillis(20000), () -> {
             assertNotNull(ams_ip);
             assertNotNull(macaddress);
             assertNotEquals(0, count_reminders);
@@ -67,13 +67,12 @@ class testAMS_oldAPI_Performance extends API_common {
             }
             assertNotEquals(0, a_avg);
             assertNotEquals(0, p_avg);
-        });
+
     }
 
     @ParameterizedTest
     @CsvFileSource(resources = "/reminders_oldapi.csv", numLinesToSkip = 1)
     void test2_Add_Delete_Purge(String ams_ip, String macaddress, int count_reminders, int reminderChannelNumber, long reminderOffset, long reminderOffset_new, int count_iterations) throws IOException, InterruptedException {
-        assertTimeoutPreemptively(ofMillis(20000), () -> {
             assertNotNull(ams_ip);
             assertNotNull(macaddress);
             assertNotEquals(0, count_reminders);
@@ -133,7 +132,6 @@ class testAMS_oldAPI_Performance extends API_common {
             assertNotEquals(0, a_avg);
             assertNotEquals(0, d_avg);
             assertNotEquals(0, p_avg);
-        });
     }
 
 }

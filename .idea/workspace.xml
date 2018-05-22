@@ -1,15 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="a3173ab5-15da-4bf8-8272-656fad315acb" name="Default" comment="update">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/tv/zodiac/dev/API_common.class" afterPath="$PROJECT_DIR$/target/classes/tv/zodiac/dev/API_common.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/tv/zodiac/dev/NewAPI_AMS.class" afterPath="$PROJECT_DIR$/target/classes/tv/zodiac/dev/NewAPI_AMS.class" />
+    <list default="true" id="a3173ab5-15da-4bf8-8272-656fad315acb" name="Default" comment="">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/resources/reminders_macaddress_registrations.csv" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/test-classes/tv/zodiac/dev/testAMS_newAPI_Performance.class" afterPath="$PROJECT_DIR$/target/test-classes/tv/zodiac/dev/testAMS_newAPI_Performance.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/test-classes/tv/zodiac/dev/testAMS_oldAPI_Performance.class" afterPath="$PROJECT_DIR$/target/test-classes/tv/zodiac/dev/testAMS_oldAPI_Performance.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/tv/zodiac/dev/API_common.java" afterPath="$PROJECT_DIR$/src/main/java/tv/zodiac/dev/API_common.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/tv/zodiac/dev/NewAPI_AMS.java" afterPath="$PROJECT_DIR$/src/main/java/tv/zodiac/dev/NewAPI_AMS.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/tv/zodiac/dev/API_Middle.java" afterPath="$PROJECT_DIR$/src/main/java/tv/zodiac/dev/API_Middle.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/tv/zodiac/dev/Main.java" afterPath="$PROJECT_DIR$/src/main/java/tv/zodiac/dev/Main.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/test/java/tv/zodiac/dev/testAMS_newAPI_Performance.java" afterPath="$PROJECT_DIR$/src/test/java/tv/zodiac/dev/testAMS_newAPI_Performance.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/test/java/tv/zodiac/dev/testAMS_oldAPI_Performance.java" afterPath="$PROJECT_DIR$/src/test/java/tv/zodiac/dev/testAMS_oldAPI_Performance.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/test/java/tv/zodiac/dev/testMiddle_Change_registration.java" afterPath="$PROJECT_DIR$/src/test/java/tv/zodiac/dev/testMiddle_Change_registration.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/test/java/tv/zodiac/dev/testMiddle_Check_registration.java" afterPath="$PROJECT_DIR$/src/test/java/tv/zodiac/dev/testMiddle_Check_registration.java" />
     </list>
     <ignored path="target/generated-sources/" />
     <ignored path="target/generated-test-sources/" />
@@ -53,23 +55,12 @@
       <file leaf-file-name="testAMS_oldAPI_Performance.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/test/java/tv/zodiac/dev/testAMS_oldAPI_Performance.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="357">
-              <caret line="21" column="44" lean-forward="false" selection-start-line="21" selection-start-column="44" selection-end-line="21" selection-end-column="44" />
+            <state relative-caret-position="238">
+              <caret line="14" column="3" lean-forward="true" selection-start-line="14" selection-start-column="3" selection-end-line="14" selection-end-column="3" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#891#3614#0" expanded="false" />
-                <element signature="e#3999#7548#0" expanded="false" />
+                <element signature="method#test2_Add_Delete_Purge#0;class#testAMS_oldAPI_Performance#0" expanded="false" />
               </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="testAMS_newAPI_Reminder_Add.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/test/java/tv/zodiac/dev/testAMS_newAPI_Reminder_Add.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="3434">
-              <caret line="209" column="35" lean-forward="false" selection-start-line="209" selection-start-column="35" selection-end-line="209" selection-end-column="35" />
-              <folding />
             </state>
           </provider>
         </entry>
@@ -78,55 +69,76 @@
         <entry file="file://$PROJECT_DIR$/src/main/resources/reminders.csv">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="0">
-              <caret line="0" column="38" lean-forward="false" selection-start-line="0" selection-start-column="38" selection-end-line="0" selection-end-column="38" />
+              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="4" selection-end-column="41" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="reminders_oldapi.csv" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/resources/reminders_oldapi.csv">
+      <file leaf-file-name="Main.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/tv/zodiac/dev/Main.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="68">
-              <caret line="4" column="41" lean-forward="false" selection-start-line="4" selection-start-column="41" selection-end-line="4" selection-end-column="41" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="NewAPI_AMS.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/tv/zodiac/dev/NewAPI_AMS.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-10">
-              <caret line="286" column="19" lean-forward="false" selection-start-line="286" selection-start-column="19" selection-end-line="286" selection-end-column="19" />
-              <folding>
-                <element signature="method#request#1;class#NewAPI_AMS#0" expanded="false" />
-                <element signature="method#request#2;class#NewAPI_AMS#0" expanded="false" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="OldAPI_AMS.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/tv/zodiac/dev/OldAPI_AMS.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="306">
-              <caret line="27" column="152" lean-forward="false" selection-start-line="27" selection-start-column="132" selection-end-line="27" selection-end-column="152" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="testAMS_newAPI_Performance.java" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/test/java/tv/zodiac/dev/testAMS_newAPI_Performance.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="92">
-              <caret line="32" column="34" lean-forward="false" selection-start-line="32" selection-start-column="34" selection-end-line="32" selection-end-column="34" />
+            <state relative-caret-position="230">
+              <caret line="183" column="36" lean-forward="false" selection-start-line="183" selection-start-column="36" selection-end-line="183" selection-end-column="36" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#4683#8474#0" expanded="false" />
-                <element signature="e#8859#13514#0" expanded="false" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="testAMS_newAPI_Performance.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/test/java/tv/zodiac/dev/testAMS_newAPI_Performance.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="289">
+              <caret line="17" column="4" lean-forward="false" selection-start-line="17" selection-start-column="4" selection-end-line="17" selection-end-column="32" />
+              <folding>
+                <element signature="imports" expanded="true" />
+                <element signature="e#4429#8220#0" expanded="false" />
+                <element signature="e#8605#13260#0" expanded="false" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="testMiddle_Change_registration.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/test/java/tv/zodiac/dev/testMiddle_Change_registration.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="142">
+              <caret line="21" column="41" lean-forward="false" selection-start-line="21" selection-start-column="41" selection-end-line="21" selection-end-column="41" />
+              <folding>
+                <element signature="docComment;class#testMiddle_Change_registration#0" expanded="false" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="testMiddle_Check_registration.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/test/java/tv/zodiac/dev/testMiddle_Check_registration.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="145">
+              <caret line="17" column="56" lean-forward="true" selection-start-line="17" selection-start-column="56" selection-end-line="17" selection-end-column="56" />
+              <folding>
+                <element signature="imports" expanded="true" />
+                <element signature="e#1215#1220#0" expanded="false" />
+                <element signature="method#testCheck_registration_a_No_amsIp_found_for_mac#0;class#testMiddle_Check_registration#0" expanded="false" />
+                <element signature="e#1523#1528#0" expanded="false" />
+                <element signature="method#testCheck_registration_b_No_amsIp_found_for_mac#0;class#testMiddle_Check_registration#0" expanded="false" />
+                <element signature="e#1831#1836#0" expanded="false" />
+                <element signature="method#testCheck_registration_c_No_amsIp_found_for_mac#0;class#testMiddle_Check_registration#0" expanded="false" />
+                <element signature="e#2139#2144#0" expanded="false" />
+                <element signature="method#testCheck_registration_d_No_amsIp_found_for_mac#0;class#testMiddle_Check_registration#0" expanded="false" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="reminders_macaddress_registrations.csv" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/resources/reminders_macaddress_registrations.csv">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="68">
+              <caret line="4" column="54" lean-forward="false" selection-start-line="4" selection-start-column="54" selection-end-line="4" selection-end-column="54" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -145,25 +157,25 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="API_common.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/tv/zodiac/dev/API_common.java">
+      <file leaf-file-name="API_Middle.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/tv/zodiac/dev/API_Middle.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="49">
-              <caret line="102" column="29" lean-forward="false" selection-start-line="102" selection-start-column="29" selection-end-line="102" selection-end-column="29" />
-              <folding>
-                <element signature="e#21690#21691#0" expanded="true" />
-                <element signature="e#21748#21749#0" expanded="true" />
-              </folding>
+            <state relative-caret-position="102">
+              <caret line="15" column="21" lean-forward="true" selection-start-line="15" selection-start-column="21" selection-end-line="15" selection-end-column="21" />
+              <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="testAMS_newAPI_Reminder_Delete.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/test/java/tv/zodiac/dev/testAMS_newAPI_Reminder_Delete.java">
+      <file leaf-file-name="API_common.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/tv/zodiac/dev/API_common.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="272">
-              <caret line="23" column="74" lean-forward="false" selection-start-line="23" selection-start-column="74" selection-end-line="23" selection-end-column="74" />
-              <folding />
+            <state relative-caret-position="128">
+              <caret line="36" column="45" lean-forward="false" selection-start-line="36" selection-start-column="45" selection-end-line="36" selection-end-column="45" />
+              <folding>
+                <element signature="e#21690#21691#0" expanded="true" />
+                <element signature="e#21748#21749#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -262,7 +274,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/src/test/java/tv/zodiac/dev/testAMS_API_Reminder_Add.java" />
         <option value="$PROJECT_DIR$/src/test/java/tv/zodiac/dev/testAMS_API_Reminder_Delete.java" />
         <option value="$PROJECT_DIR$/src/test/java/tv/zodiac/dev/testAMS_Performance_Reminder_Add_Modify_Delete_Purge.java" />
         <option value="$PROJECT_DIR$/src/test/java/tv/zodiac/dev/testAMS_Performance_oldapi.java" />
@@ -281,7 +292,6 @@
         <option value="$PROJECT_DIR$/test2_reminder_Add_Modify_Purge.sh" />
         <option value="$PROJECT_DIR$/test44_oldapi_reminder_Add_Delete_Purge.sh" />
         <option value="$PROJECT_DIR$/src/test/java/tv/zodiac/dev/testAMS_newAPI_Reminder_Add_Modify_Delete_Purge.java" />
-        <option value="$PROJECT_DIR$/src/test/java/tv/zodiac/dev/testMiddle_Check_registration.java" />
         <option value="$PROJECT_DIR$/src/main/bash/change_registration.sh" />
         <option value="$PROJECT_DIR$/src/main/bash/check_registration.sh" />
         <option value="$PROJECT_DIR$/src/main/bash/reminder.sh" />
@@ -289,15 +299,12 @@
         <option value="$PROJECT_DIR$/src/test/java/tv/zodiac/dev/testAMS_newAPI_Reminder_Delete.java" />
         <option value="$PROJECT_DIR$/src/main/java/tv/zodiac/dev/ValueSource.java" />
         <option value="$PROJECT_DIR$/.idea/workspace.xml" />
-        <option value="$PROJECT_DIR$/src/main/java/tv/zodiac/dev/API_Middle.java" />
         <option value="$PROJECT_DIR$/src/test/java/tv/zodiac/dev/testAMS_newAPI_Reminder_Modify.java" />
         <option value="$PROJECT_DIR$/src/test/java/tv/zodiac/dev/testAMS_Settings.java" />
-        <option value="$PROJECT_DIR$/src/test/java/tv/zodiac/dev/testMiddle_Change_registration.java" />
         <option value="$PROJECT_DIR$/src/test/java/tv/zodiac/dev/testMiddle_Reminders_edge_middle_API.java" />
         <option value="$PROJECT_DIR$/src/main/java/tv/zodiac/dev/OLDAPI_AMS.java" />
         <option value="$PROJECT_DIR$/src/test/java/tv/zodiac/dev/testSandbox.java" />
         <option value="$PROJECT_DIR$/src/main/java/tv/zodiac/dev/NEWAPI_AMS.java" />
-        <option value="$PROJECT_DIR$/src/main/java/tv/zodiac/dev/Main.java" />
         <option value="$PROJECT_DIR$/src/main/java/tv/zodiac/dev/ParameterizedTest.java" />
         <option value="$PROJECT_DIR$/src/main/java/reminders.csv" />
         <option value="$PROJECT_DIR$/pom.xml" />
@@ -309,10 +316,15 @@
         <option value="$PROJECT_DIR$/test11_oldapi_reminder_Add_Purge.sh" />
         <option value="$PROJECT_DIR$/test22_oldapi_reminder_Add_Delete_Purge.sh" />
         <option value="$PROJECT_DIR$/src/test/java/tv/zodiac/dev/testAMS_newAPI_Reminder_Add.java" />
-        <option value="$PROJECT_DIR$/src/test/java/tv/zodiac/dev/testAMS_oldAPI_Performance.java" />
-        <option value="$PROJECT_DIR$/src/test/java/tv/zodiac/dev/testAMS_newAPI_Performance.java" />
         <option value="$PROJECT_DIR$/src/main/java/tv/zodiac/dev/NewAPI_AMS.java" />
         <option value="$PROJECT_DIR$/src/main/java/tv/zodiac/dev/API_common.java" />
+        <option value="$PROJECT_DIR$/src/test/java/tv/zodiac/dev/testAMS_oldAPI_Performance.java" />
+        <option value="$PROJECT_DIR$/src/test/java/tv/zodiac/dev/testAMS_newAPI_Performance.java" />
+        <option value="$PROJECT_DIR$/src/test/java/tv/zodiac/dev/testMiddle_Change_registration.java" />
+        <option value="$PROJECT_DIR$/src/main/java/tv/zodiac/dev/API_Middle.java" />
+        <option value="$PROJECT_DIR$/src/main/java/tv/zodiac/dev/Main.java" />
+        <option value="$PROJECT_DIR$/src/main/resources/reminders_macaddress_registrations.csv" />
+        <option value="$PROJECT_DIR$/src/test/java/tv/zodiac/dev/testMiddle_Check_registration.java" />
       </list>
     </option>
   </component>
@@ -429,6 +441,33 @@
               <item name="Reminders" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="dev" type="462c0819:PsiDirectoryNode" />
+              <item name="API_common" type="1a9f42e2:ClassTreeNode" />
+            </path>
+            <path>
+              <item name="Reminders" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Reminders" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="dev" type="462c0819:PsiDirectoryNode" />
+              <item name="API_Middle" type="1a9f42e2:ClassTreeNode" />
+            </path>
+            <path>
+              <item name="Reminders" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Reminders" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="dev" type="462c0819:PsiDirectoryNode" />
+              <item name="Main" type="1a9f42e2:ClassTreeNode" />
+            </path>
+            <path>
+              <item name="Reminders" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Reminders" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
               <item name="resources" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
@@ -459,7 +498,7 @@
               <item name="test" type="462c0819:PsiDirectoryNode" />
               <item name="java" type="462c0819:PsiDirectoryNode" />
               <item name="dev" type="462c0819:PsiDirectoryNode" />
-              <item name="testAMS_newAPI_Performance" type="1a9f42e2:ClassTreeNode" />
+              <item name="testMiddle_Change_registration" type="1a9f42e2:ClassTreeNode" />
             </path>
             <path>
               <item name="Reminders" type="b2602c69:ProjectViewProjectNode" />
@@ -468,16 +507,7 @@
               <item name="test" type="462c0819:PsiDirectoryNode" />
               <item name="java" type="462c0819:PsiDirectoryNode" />
               <item name="dev" type="462c0819:PsiDirectoryNode" />
-              <item name="testAMS_newAPI_Reminder_Delete" type="1a9f42e2:ClassTreeNode" />
-            </path>
-            <path>
-              <item name="Reminders" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Reminders" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="test" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="dev" type="462c0819:PsiDirectoryNode" />
-              <item name="testAMS_oldAPI_Performance" type="1a9f42e2:ClassTreeNode" />
+              <item name="testMiddle_Check_registration" type="1a9f42e2:ClassTreeNode" />
             </path>
             <path>
               <item name="Reminders" type="b2602c69:ProjectViewProjectNode" />
@@ -780,12 +810,9 @@
     <property name="GenerateAntBuildDialog.outputFileNameProperty" value="reminders" />
   </component>
   <component name="RecentsManager">
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/src/main/bash" />
-      <recent name="$PROJECT_DIR$/src/main" />
-      <recent name="$PROJECT_DIR$/src/main/resources" />
-      <recent name="$PROJECT_DIR$/target/classes" />
-      <recent name="$PROJECT_DIR$/src" />
+    <key name="CreateClassDialog.RecentsKey">
+      <recent name="tv.zodiac.dev" />
+      <recent name="" />
     </key>
     <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
       <recent name="tv.zodiac.dev" />
@@ -795,9 +822,12 @@
     <key name="CopyClassDialog.RECENTS_KEY">
       <recent name="" />
     </key>
-    <key name="CreateClassDialog.RecentsKey">
-      <recent name="tv.zodiac.dev" />
-      <recent name="" />
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/main/resources" />
+      <recent name="$PROJECT_DIR$/src/main/bash" />
+      <recent name="$PROJECT_DIR$/src/main" />
+      <recent name="$PROJECT_DIR$/target/classes" />
+      <recent name="$PROJECT_DIR$/src" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -812,7 +842,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="JUnit.testAMS_newAPI_Performance.test1_Add_Purge (2)">
+  <component name="RunManager" selected="JUnit.testMiddle_Check_registration.testCheck_registration">
     <configuration default="true" type="Applet" factoryName="Applet">
       <module />
       <option name="HTML_USED" value="false" />
@@ -1088,31 +1118,6 @@
       <envs />
       <patterns />
     </configuration>
-    <configuration name="testAMS_newAPI_Performance.test1_Add_Purge (1)" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea">
-        <pattern>
-          <option name="PATTERN" value="tv.zodiac.dev.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <module name="Reminders" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
-      <option name="PACKAGE_NAME" value="tv.zodiac.dev" />
-      <option name="MAIN_CLASS_NAME" value="tv.zodiac.dev.testAMS_newAPI_Performance" />
-      <option name="METHOD_NAME" value="test1_Add_Purge(java.lang.String,java.lang.String,int,int)" />
-      <option name="TEST_OBJECT" value="method" />
-      <option name="VM_PARAMETERS" value="-ea" />
-      <option name="PARAMETERS" />
-      <option name="WORKING_DIRECTORY" value="$MODULE_DIR$" />
-      <option name="ENV_VARIABLES" />
-      <option name="PASS_PARENT_ENVS" value="true" />
-      <option name="TEST_SEARCH_SCOPE">
-        <value defaultName="singleModule" />
-      </option>
-      <envs />
-      <patterns />
-    </configuration>
     <configuration name="testAMS_newAPI_Performance.test1_Add_Purge (2)" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea">
         <pattern>
@@ -1126,56 +1131,6 @@
       <option name="PACKAGE_NAME" value="tv.zodiac.dev" />
       <option name="MAIN_CLASS_NAME" value="tv.zodiac.dev.testAMS_newAPI_Performance" />
       <option name="METHOD_NAME" value="test1_Add_Purge(java.lang.String,java.lang.String,int,int,long,long,int)" />
-      <option name="TEST_OBJECT" value="method" />
-      <option name="VM_PARAMETERS" value="-ea" />
-      <option name="PARAMETERS" />
-      <option name="WORKING_DIRECTORY" value="$MODULE_DIR$" />
-      <option name="ENV_VARIABLES" />
-      <option name="PASS_PARENT_ENVS" value="true" />
-      <option name="TEST_SEARCH_SCOPE">
-        <value defaultName="singleModule" />
-      </option>
-      <envs />
-      <patterns />
-    </configuration>
-    <configuration name="testAMS_newAPI_Performance.test2_Add_Delete_Purge" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea">
-        <pattern>
-          <option name="PATTERN" value="tv.zodiac.dev.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <module name="Reminders" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
-      <option name="PACKAGE_NAME" value="tv.zodiac.dev" />
-      <option name="MAIN_CLASS_NAME" value="tv.zodiac.dev.testAMS_newAPI_Performance" />
-      <option name="METHOD_NAME" value="test2_Add_Delete_Purge(java.lang.String,java.lang.String,int,int,long,long,int)" />
-      <option name="TEST_OBJECT" value="method" />
-      <option name="VM_PARAMETERS" value="-ea" />
-      <option name="PARAMETERS" />
-      <option name="WORKING_DIRECTORY" value="$MODULE_DIR$" />
-      <option name="ENV_VARIABLES" />
-      <option name="PASS_PARENT_ENVS" value="true" />
-      <option name="TEST_SEARCH_SCOPE">
-        <value defaultName="singleModule" />
-      </option>
-      <envs />
-      <patterns />
-    </configuration>
-    <configuration name="testAMS_newAPI_Performance.test3_Add_Modify_Delete_Purge" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea">
-        <pattern>
-          <option name="PATTERN" value="tv.zodiac.dev.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <module name="Reminders" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
-      <option name="PACKAGE_NAME" value="tv.zodiac.dev" />
-      <option name="MAIN_CLASS_NAME" value="tv.zodiac.dev.testAMS_newAPI_Performance" />
-      <option name="METHOD_NAME" value="test3_Add_Modify_Delete_Purge(java.lang.String,java.lang.String,int,int,long,long,int)" />
       <option name="TEST_OBJECT" value="method" />
       <option name="VM_PARAMETERS" value="-ea" />
       <option name="PARAMETERS" />
@@ -1213,6 +1168,81 @@
       <envs />
       <patterns />
     </configuration>
+    <configuration name="testMiddle_Change_registration" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea">
+        <pattern>
+          <option name="PATTERN" value="tv.zodiac.dev.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <module name="Reminders" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="PACKAGE_NAME" value="tv.zodiac.dev" />
+      <option name="MAIN_CLASS_NAME" value="tv.zodiac.dev.testMiddle_Change_registration" />
+      <option name="METHOD_NAME" />
+      <option name="TEST_OBJECT" value="class" />
+      <option name="VM_PARAMETERS" value="-ea" />
+      <option name="PARAMETERS" />
+      <option name="WORKING_DIRECTORY" value="$MODULE_DIR$" />
+      <option name="ENV_VARIABLES" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <option name="TEST_SEARCH_SCOPE">
+        <value defaultName="singleModule" />
+      </option>
+      <envs />
+      <patterns />
+    </configuration>
+    <configuration name="testMiddle_Change_registration.testChange_registration" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea">
+        <pattern>
+          <option name="PATTERN" value="tv.zodiac.dev.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <module name="Reminders" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="PACKAGE_NAME" value="tv.zodiac.dev" />
+      <option name="MAIN_CLASS_NAME" value="tv.zodiac.dev.testMiddle_Change_registration" />
+      <option name="METHOD_NAME" value="testChange_registration(java.lang.String,java.lang.String,java.lang.String)" />
+      <option name="TEST_OBJECT" value="method" />
+      <option name="VM_PARAMETERS" value="-ea" />
+      <option name="PARAMETERS" />
+      <option name="WORKING_DIRECTORY" value="$MODULE_DIR$" />
+      <option name="ENV_VARIABLES" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <option name="TEST_SEARCH_SCOPE">
+        <value defaultName="singleModule" />
+      </option>
+      <envs />
+      <patterns />
+    </configuration>
+    <configuration name="testMiddle_Check_registration.testCheck_registration" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea">
+        <pattern>
+          <option name="PATTERN" value="tv.zodiac.dev.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <module name="Reminders" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="PACKAGE_NAME" value="tv.zodiac.dev" />
+      <option name="MAIN_CLASS_NAME" value="tv.zodiac.dev.testMiddle_Check_registration" />
+      <option name="METHOD_NAME" value="testCheck_registration(java.lang.String,java.lang.String)" />
+      <option name="TEST_OBJECT" value="method" />
+      <option name="VM_PARAMETERS" value="-ea" />
+      <option name="PARAMETERS" />
+      <option name="WORKING_DIRECTORY" value="$MODULE_DIR$" />
+      <option name="ENV_VARIABLES" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <option name="TEST_SEARCH_SCOPE">
+        <value defaultName="singleModule" />
+      </option>
+      <envs />
+      <patterns />
+    </configuration>
     <list size="14">
       <item index="0" class="java.lang.String" itemvalue="JUnit.testAMS_Reminder_Add.testAdd_reminderChannelNumber_empty" />
       <item index="1" class="java.lang.String" itemvalue="Application.test" />
@@ -1223,19 +1253,19 @@
       <item index="6" class="java.lang.String" itemvalue="Application.macaddress all 48" />
       <item index="7" class="java.lang.String" itemvalue="Application.macaddress add 48" />
       <item index="8" class="java.lang.String" itemvalue="Application.macaddress delete 48" />
-      <item index="9" class="java.lang.String" itemvalue="JUnit.testAMS_newAPI_Performance.test1_Add_Purge (1)" />
-      <item index="10" class="java.lang.String" itemvalue="JUnit.testAMS_oldAPI_Performance.test1_Add_Purge" />
-      <item index="11" class="java.lang.String" itemvalue="JUnit.testAMS_newAPI_Performance.test1_Add_Purge (2)" />
-      <item index="12" class="java.lang.String" itemvalue="JUnit.testAMS_newAPI_Performance.test2_Add_Delete_Purge" />
-      <item index="13" class="java.lang.String" itemvalue="JUnit.testAMS_newAPI_Performance.test3_Add_Modify_Delete_Purge" />
+      <item index="9" class="java.lang.String" itemvalue="JUnit.testAMS_oldAPI_Performance.test1_Add_Purge" />
+      <item index="10" class="java.lang.String" itemvalue="JUnit.testAMS_newAPI_Performance.test1_Add_Purge (2)" />
+      <item index="11" class="java.lang.String" itemvalue="JUnit.testMiddle_Change_registration" />
+      <item index="12" class="java.lang.String" itemvalue="JUnit.testMiddle_Change_registration.testChange_registration" />
+      <item index="13" class="java.lang.String" itemvalue="JUnit.testMiddle_Check_registration.testCheck_registration" />
     </list>
     <recent_temporary>
       <list size="5">
-        <item index="0" class="java.lang.String" itemvalue="JUnit.testAMS_newAPI_Performance.test1_Add_Purge (2)" />
-        <item index="1" class="java.lang.String" itemvalue="JUnit.testAMS_oldAPI_Performance.test1_Add_Purge" />
-        <item index="2" class="java.lang.String" itemvalue="JUnit.testAMS_newAPI_Performance.test3_Add_Modify_Delete_Purge" />
-        <item index="3" class="java.lang.String" itemvalue="JUnit.testAMS_newAPI_Performance.test2_Add_Delete_Purge" />
-        <item index="4" class="java.lang.String" itemvalue="JUnit.testAMS_newAPI_Performance.test1_Add_Purge (1)" />
+        <item index="0" class="java.lang.String" itemvalue="JUnit.testMiddle_Check_registration.testCheck_registration" />
+        <item index="1" class="java.lang.String" itemvalue="JUnit.testMiddle_Change_registration.testChange_registration" />
+        <item index="2" class="java.lang.String" itemvalue="JUnit.testMiddle_Change_registration" />
+        <item index="3" class="java.lang.String" itemvalue="JUnit.testAMS_newAPI_Performance.test1_Add_Purge (2)" />
+        <item index="4" class="java.lang.String" itemvalue="JUnit.testAMS_oldAPI_Performance.test1_Add_Purge" />
       </list>
     </recent_temporary>
   </component>
@@ -1249,26 +1279,14 @@
     <configuration>$USER_HOME$/.subversion</configuration>
   </component>
   <component name="TestHistory">
-    <history-entry file="testAMS_newAPI_Performance_test1_Add_Purge_(2) - 2018.05.22 at 11h 57m 43s.xml">
+    <history-entry file="testAMS_newAPI_Performance_test1_Add_Purge_(2) - 2018.05.22 at 13h 06m 06s.xml">
       <configuration name="testAMS_newAPI_Performance.test1_Add_Purge (2)" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="testAMS_newAPI_Performance_test1_Add_Purge_(2) - 2018.05.22 at 12h 46m 48s.xml">
+    <history-entry file="testAMS_newAPI_Performance_test1_Add_Purge_(2) - 2018.05.22 at 13h 06m 41s.xml">
       <configuration name="testAMS_newAPI_Performance.test1_Add_Purge (2)" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="testAMS_newAPI_Performance_test1_Add_Purge_(2) - 2018.05.22 at 12h 47m 25s.xml">
+    <history-entry file="testAMS_newAPI_Performance_test1_Add_Purge_(2) - 2018.05.22 at 13h 11m 53s.xml">
       <configuration name="testAMS_newAPI_Performance.test1_Add_Purge (2)" configurationId="JUnit" />
-    </history-entry>
-    <history-entry file="testAMS_newAPI_Performance_test1_Add_Purge_(2) - 2018.05.22 at 12h 49m 19s.xml">
-      <configuration name="testAMS_newAPI_Performance.test1_Add_Purge (2)" configurationId="JUnit" />
-    </history-entry>
-    <history-entry file="testAMS_newAPI_Performance_test2_Add_Delete_Purge - 2018.05.22 at 11h 58m 07s.xml">
-      <configuration name="testAMS_newAPI_Performance.test2_Add_Delete_Purge" configurationId="JUnit" />
-    </history-entry>
-    <history-entry file="testAMS_newAPI_Performance_test3_Add_Modify_Delete_Purge - 2018.05.22 at 11h 58m 36s.xml">
-      <configuration name="testAMS_newAPI_Performance.test3_Add_Modify_Delete_Purge" configurationId="JUnit" />
-    </history-entry>
-    <history-entry file="testAMS_oldAPI_Performance_test1_Add_Purge - 2018.05.22 at 11h 25m 42s.xml">
-      <configuration name="testAMS_oldAPI_Performance.test1_Add_Purge" configurationId="JUnit" />
     </history-entry>
     <history-entry file="testAMS_oldAPI_Performance_test1_Add_Purge - 2018.05.22 at 11h 59m 07s.xml">
       <configuration name="testAMS_oldAPI_Performance.test1_Add_Purge" configurationId="JUnit" />
@@ -1278,6 +1296,18 @@
     </history-entry>
     <history-entry file="testAMS_oldAPI_Performance_test1_Add_Purge - 2018.05.22 at 12h 38m 43s.xml">
       <configuration name="testAMS_oldAPI_Performance.test1_Add_Purge" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="testMiddle_Change_registration - 2018.05.22 at 13h 12m 26s.xml">
+      <configuration name="testMiddle_Change_registration" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="testMiddle_Change_registration_testChange_registration - 2018.05.22 at 13h 20m 40s.xml">
+      <configuration name="testMiddle_Change_registration.testChange_registration" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="testMiddle_Change_registration_testChange_registration - 2018.05.22 at 13h 21m 26s.xml">
+      <configuration name="testMiddle_Change_registration.testChange_registration" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="testMiddle_Check_registration_testCheck_registration - 2018.05.22 at 13h 25m 27s.xml">
+      <configuration name="testMiddle_Check_registration.testCheck_registration" configurationId="JUnit" />
     </history-entry>
   </component>
   <component name="TodoView" selected-index="2">
@@ -1294,15 +1324,15 @@
     <editor active="true" />
     <layout>
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3265306" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.4569161" sideWeight="0.4957317" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4569161" sideWeight="0.4957317" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.276644" sideWeight="0.5042683" order="10" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.2152439" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32426304" sideWeight="0.49634147" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.47619048" sideWeight="0.49634147" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.13151927" sideWeight="0.49756098" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32993197" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.36707318" sideWeight="0.49546486" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.34207317" sideWeight="0.49546486" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25609756" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.47619048" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.19512194" sideWeight="0.50453514" order="3" side_tool="true" content_ui="tabs" />
@@ -1396,18 +1426,11 @@
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <option name="time" value="168" />
+      <option name="time" value="169" />
     </breakpoint-manager>
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/reminders.properties">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Reminders.iml">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
@@ -1527,13 +1550,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/test/java/tv/zodiac/dev/testMiddle_Change_registration.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="680">
-          <caret line="40" column="4" lean-forward="false" selection-start-line="40" selection-start-column="4" selection-end-line="40" selection-end-column="4" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/test/java/tv/zodiac/dev/testMiddle_Reminders_edge_middle_API.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="540">
@@ -1549,27 +1565,6 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/tv/zodiac/dev/OLDAPI_AMS.java" />
-    <entry file="file://$PROJECT_DIR$/src/main/java/tv/zodiac/dev/API_Middle.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="102">
-          <caret line="15" column="35" lean-forward="false" selection-start-line="15" selection-start-column="35" selection-end-line="15" selection-end-column="35" />
-          <folding>
-            <element signature="imports" expanded="false" />
-            <marker date="1526924465429" expanded="true" signature="513:1771" ph="{...}" />
-            <marker date="1526924465429" expanded="true" signature="1856:2945" ph="{...}" />
-            <marker date="1526924465429" expanded="true" signature="2052:2262" ph="//..." />
-            <marker date="1526924465429" expanded="true" signature="3000:4004" ph="{...}" />
-            <marker date="1526924465429" expanded="true" signature="4086:5029" ph="{...}" />
-            <marker date="1526924465429" expanded="true" signature="5152:5783" ph="{...}" />
-            <marker date="1526924465429" expanded="true" signature="5907:6550" ph="{...}" />
-            <marker date="1526924465429" expanded="true" signature="6650:7475" ph="{...}" />
-            <marker date="1526924465429" expanded="true" signature="7561:8361" ph="{...}" />
-            <marker date="1526924465429" expanded="true" signature="8498:9606" ph="{...}" />
-            <marker date="1526924465429" expanded="true" signature="9709:10782" ph="{...}" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/tv/zodiac/dev/ParameterizedTest.java" />
     <entry file="jar://$MAVEN_REPOSITORY$/org/junit/jupiter/junit-jupiter-params/5.2.0/junit-jupiter-params-5.2.0.jar!/org/junit/jupiter/params/provider/CsvSource.class">
       <provider selected="true" editor-type-id="text-editor">
@@ -1606,24 +1601,6 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/reminders.csv" />
-    <entry file="file://$PROJECT_DIR$/src/test/java/tv/zodiac/dev/testMiddle_Check_registration.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-509">
-          <caret line="7" column="0" lean-forward="false" selection-start-line="7" selection-start-column="0" selection-end-line="7" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/tv/zodiac/dev/Main.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="3077">
-          <caret line="181" column="0" lean-forward="false" selection-start-line="181" selection-start-column="0" selection-end-line="181" selection-end-column="0" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/target/classes/reminders.csv">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="68">
@@ -1715,31 +1692,11 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/reminders.csv">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="38" lean-forward="false" selection-start-line="0" selection-start-column="38" selection-end-line="0" selection-end-column="38" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/resources/reminders_oldapi.csv">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="68">
           <caret line="4" column="41" lean-forward="false" selection-start-line="4" selection-start-column="41" selection-end-line="4" selection-end-column="41" />
           <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/test/java/tv/zodiac/dev/testAMS_oldAPI_Performance.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="357">
-          <caret line="21" column="44" lean-forward="false" selection-start-line="21" selection-start-column="44" selection-end-line="21" selection-end-column="44" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#891#3614#0" expanded="false" />
-            <element signature="e#3999#7548#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1774,10 +1731,29 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/test/java/tv/zodiac/dev/testAMS_oldAPI_Performance.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="238">
+          <caret line="14" column="3" lean-forward="true" selection-start-line="14" selection-start-column="3" selection-end-line="14" selection-end-column="3" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="method#test2_Add_Delete_Purge#0;class#testAMS_oldAPI_Performance#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/reminders.csv">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="4" selection-end-column="41" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/tv/zodiac/dev/API_common.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="49">
-          <caret line="102" column="29" lean-forward="false" selection-start-line="102" selection-start-column="29" selection-end-line="102" selection-end-column="29" />
+        <state relative-caret-position="128">
+          <caret line="36" column="45" lean-forward="false" selection-start-line="36" selection-start-column="45" selection-end-line="36" selection-end-column="45" />
           <folding>
             <element signature="e#21690#21691#0" expanded="true" />
             <element signature="e#21748#21749#0" expanded="true" />
@@ -1787,12 +1763,66 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/test/java/tv/zodiac/dev/testAMS_newAPI_Performance.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="92">
-          <caret line="32" column="34" lean-forward="false" selection-start-line="32" selection-start-column="34" selection-end-line="32" selection-end-column="34" />
+        <state relative-caret-position="289">
+          <caret line="17" column="4" lean-forward="false" selection-start-line="17" selection-start-column="4" selection-end-line="17" selection-end-column="32" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#4683#8474#0" expanded="false" />
-            <element signature="e#8859#13514#0" expanded="false" />
+            <element signature="e#4429#8220#0" expanded="false" />
+            <element signature="e#8605#13260#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/tv/zodiac/dev/Main.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="230">
+          <caret line="183" column="36" lean-forward="false" selection-start-line="183" selection-start-column="36" selection-end-line="183" selection-end-column="36" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/reminders_macaddress_registrations.csv">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="68">
+          <caret line="4" column="54" lean-forward="false" selection-start-line="4" selection-start-column="54" selection-end-line="4" selection-end-column="54" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/tv/zodiac/dev/API_Middle.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="102">
+          <caret line="15" column="21" lean-forward="true" selection-start-line="15" selection-start-column="21" selection-end-line="15" selection-end-column="21" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/test/java/tv/zodiac/dev/testMiddle_Check_registration.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="145">
+          <caret line="17" column="56" lean-forward="true" selection-start-line="17" selection-start-column="56" selection-end-line="17" selection-end-column="56" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#1215#1220#0" expanded="false" />
+            <element signature="method#testCheck_registration_a_No_amsIp_found_for_mac#0;class#testMiddle_Check_registration#0" expanded="false" />
+            <element signature="e#1523#1528#0" expanded="false" />
+            <element signature="method#testCheck_registration_b_No_amsIp_found_for_mac#0;class#testMiddle_Check_registration#0" expanded="false" />
+            <element signature="e#1831#1836#0" expanded="false" />
+            <element signature="method#testCheck_registration_c_No_amsIp_found_for_mac#0;class#testMiddle_Check_registration#0" expanded="false" />
+            <element signature="e#2139#2144#0" expanded="false" />
+            <element signature="method#testCheck_registration_d_No_amsIp_found_for_mac#0;class#testMiddle_Check_registration#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/test/java/tv/zodiac/dev/testMiddle_Change_registration.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="142">
+          <caret line="21" column="41" lean-forward="false" selection-start-line="21" selection-start-column="41" selection-end-line="21" selection-end-column="41" />
+          <folding>
+            <element signature="docComment;class#testMiddle_Change_registration#0" expanded="false" />
           </folding>
         </state>
       </provider>

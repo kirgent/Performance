@@ -35,7 +35,7 @@ class API_Middle extends API_common {
         return arrayList;
     }
 
-    ArrayList Check_registration(String mac, String charterapi) throws IOException {
+    ArrayList Check_registration(String charterapi, String mac) throws IOException {
         System.out.println("[DBG] Check_registration " + mac + " via charterapi: " + charterapi);
         HttpGet request = new HttpGet(charterapi + postfix_settings + "/amsIp/" + mac);
         //request.setHeader("Accept", "*/*");
