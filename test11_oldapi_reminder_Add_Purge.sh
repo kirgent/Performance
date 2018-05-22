@@ -1,4 +1,6 @@
 #!/bin/bash
+git pull
+git status
 java -ea -Dfile.encoding=UTF-8 -classpath \
 ./target/test-classes:\
 ./target/classes:\
@@ -6,4 +8,5 @@ java -ea -Dfile.encoding=UTF-8 -classpath \
 com.intellij.rt.execution.junit.JUnitStarter \
 -ideVersion5 \
 -junit5 \
-tv.zodiac.dev.testAMS_oldAPI_Performance,test1_Add_Purge\(java.lang.String,java.lang.String,java.lang.String,int,int,long,long,int\)
+tv.zodiac.dev.testAMS_oldAPI_Performance,\
+test1_Add_Purge\(java.lang.String,java.lang.String,java.lang.String,int,int,long,long,int\)
