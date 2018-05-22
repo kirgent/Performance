@@ -24,7 +24,7 @@ public class API_common {
     Boolean show_info_level = true;
     Boolean show_debug_level = false;
     Boolean show_generated_json = false;
-    Boolean show_response_body = false;
+    Boolean show_response_body = true;
 
     //private final static Logger log = Logger.getLogger(API.class.getName());
 
