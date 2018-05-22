@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="a3173ab5-15da-4bf8-8272-656fad315acb" name="Default" comment="update">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/tv/zodiac/dev/API_common.class" afterPath="$PROJECT_DIR$/target/classes/tv/zodiac/dev/API_common.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/tv/zodiac/dev/NewAPI_AMS.class" afterPath="$PROJECT_DIR$/target/classes/tv/zodiac/dev/NewAPI_AMS.class" />
+    <list default="true" id="a3173ab5-15da-4bf8-8272-656fad315acb" name="Default" comment="">
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/test-classes/tv/zodiac/dev/testAMS_newAPI_Reminder_Add.class" afterPath="$PROJECT_DIR$/target/test-classes/tv/zodiac/dev/testAMS_newAPI_Reminder_Add.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/tv/zodiac/dev/NewAPI_AMS.java" afterPath="$PROJECT_DIR$/src/main/java/tv/zodiac/dev/NewAPI_AMS.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/test/java/tv/zodiac/dev/testAMS_newAPI_Reminder_Add.java" afterPath="$PROJECT_DIR$/src/test/java/tv/zodiac/dev/testAMS_newAPI_Reminder_Add.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/test/java/tv/zodiac/dev/testAMS_newAPI_Performance.java" afterPath="$PROJECT_DIR$/src/test/java/tv/zodiac/dev/testAMS_newAPI_Performance.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/test/java/tv/zodiac/dev/testAMS_oldAPI_Performance.java" afterPath="$PROJECT_DIR$/src/test/java/tv/zodiac/dev/testAMS_oldAPI_Performance.java" />
     </list>
     <ignored path="target/generated-sources/" />
     <ignored path="target/generated-test-sources/" />
@@ -47,13 +46,15 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="testAMS_oldAPI_Performance.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="testAMS_oldAPI_Performance.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/test/java/tv/zodiac/dev/testAMS_oldAPI_Performance.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="77">
-              <caret line="20" column="9" lean-forward="false" selection-start-line="20" selection-start-column="9" selection-end-line="20" selection-end-column="9" />
+            <state relative-caret-position="262">
+              <caret line="23" column="44" lean-forward="false" selection-start-line="23" selection-start-column="44" selection-end-line="23" selection-end-column="44" />
               <folding>
                 <element signature="imports" expanded="true" />
+                <element signature="e#1041#3764#0" expanded="false" />
+                <element signature="e#4149#7698#0" expanded="false" />
               </folding>
             </state>
           </provider>
@@ -89,7 +90,7 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="NewAPI_AMS.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="NewAPI_AMS.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/tv/zodiac/dev/NewAPI_AMS.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="173">
@@ -125,10 +126,12 @@
       <file leaf-file-name="testAMS_newAPI_Performance.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/test/java/tv/zodiac/dev/testAMS_newAPI_Performance.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="375">
-              <caret line="43" column="31" lean-forward="true" selection-start-line="43" selection-start-column="31" selection-end-line="43" selection-end-column="31" />
+            <state relative-caret-position="250">
+              <caret line="25" column="58" lean-forward="true" selection-start-line="25" selection-start-column="8" selection-end-line="25" selection-end-column="58" />
               <folding>
                 <element signature="imports" expanded="true" />
+                <element signature="e#4637#8428#0" expanded="false" />
+                <element signature="e#8813#13468#0" expanded="false" />
               </folding>
             </state>
           </provider>
@@ -289,16 +292,16 @@
         <option value="$PROJECT_DIR$/pom.xml" />
         <option value="$PROJECT_DIR$/src/main/resources/reminders.csv" />
         <option value="$PROJECT_DIR$/src/main/java/tv/zodiac/dev/API.java" />
-        <option value="$PROJECT_DIR$/src/test/java/tv/zodiac/dev/testAMS_oldAPI_Performance.java" />
         <option value="$PROJECT_DIR$/test1_reminder_Add_Purge.sh" />
         <option value="$PROJECT_DIR$/test2_reminder_Add_Delete_Purge.sh" />
         <option value="$PROJECT_DIR$/test3_reminder_Add_Modify_Delete_Purge.sh" />
         <option value="$PROJECT_DIR$/test11_oldapi_reminder_Add_Purge.sh" />
         <option value="$PROJECT_DIR$/test22_oldapi_reminder_Add_Delete_Purge.sh" />
-        <option value="$PROJECT_DIR$/src/test/java/tv/zodiac/dev/testAMS_newAPI_Performance.java" />
         <option value="$PROJECT_DIR$/src/main/java/tv/zodiac/dev/API_common.java" />
         <option value="$PROJECT_DIR$/src/test/java/tv/zodiac/dev/testAMS_newAPI_Reminder_Add.java" />
         <option value="$PROJECT_DIR$/src/main/java/tv/zodiac/dev/NewAPI_AMS.java" />
+        <option value="$PROJECT_DIR$/src/test/java/tv/zodiac/dev/testAMS_newAPI_Performance.java" />
+        <option value="$PROJECT_DIR$/src/test/java/tv/zodiac/dev/testAMS_oldAPI_Performance.java" />
       </list>
     </option>
   </component>
@@ -648,24 +651,6 @@
               <item name="Reminders" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="dev" type="462c0819:PsiDirectoryNode" />
-              <item name="NewAPI_AMS" type="1a9f42e2:ClassTreeNode" />
-            </path>
-            <path>
-              <item name="Reminders" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Reminders" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="dev" type="462c0819:PsiDirectoryNode" />
-              <item name="OldAPI_AMS" type="1a9f42e2:ClassTreeNode" />
-            </path>
-            <path>
-              <item name="Reminders" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Reminders" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
               <item name="resources" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
@@ -816,7 +801,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="JUnit.testAMS_oldAPI_Performance.test1_Add_Purge">
+  <component name="RunManager" selected="JUnit.testAMS_newAPI_Performance.test1_Add_Purge (2)">
     <configuration default="true" type="Applet" factoryName="Applet">
       <module />
       <option name="HTML_USED" value="false" />
@@ -1235,10 +1220,10 @@
     </list>
     <recent_temporary>
       <list size="5">
-        <item index="0" class="java.lang.String" itemvalue="JUnit.testAMS_oldAPI_Performance.test1_Add_Purge" />
-        <item index="1" class="java.lang.String" itemvalue="JUnit.testAMS_newAPI_Performance.test3_Add_Modify_Delete_Purge" />
-        <item index="2" class="java.lang.String" itemvalue="JUnit.testAMS_newAPI_Performance.test2_Add_Delete_Purge" />
-        <item index="3" class="java.lang.String" itemvalue="JUnit.testAMS_newAPI_Performance.test1_Add_Purge (2)" />
+        <item index="0" class="java.lang.String" itemvalue="JUnit.testAMS_newAPI_Performance.test1_Add_Purge (2)" />
+        <item index="1" class="java.lang.String" itemvalue="JUnit.testAMS_oldAPI_Performance.test1_Add_Purge" />
+        <item index="2" class="java.lang.String" itemvalue="JUnit.testAMS_newAPI_Performance.test3_Add_Modify_Delete_Purge" />
+        <item index="3" class="java.lang.String" itemvalue="JUnit.testAMS_newAPI_Performance.test2_Add_Delete_Purge" />
         <item index="4" class="java.lang.String" itemvalue="JUnit.testAMS_newAPI_Performance.test1_Add_Purge (1)" />
       </list>
     </recent_temporary>
@@ -1256,14 +1241,14 @@
     <history-entry file="testAMS_newAPI_Performance_test1_Add_Purge_(2) - 2018.05.22 at 11h 57m 43s.xml">
       <configuration name="testAMS_newAPI_Performance.test1_Add_Purge (2)" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="testAMS_newAPI_Performance_test1_Add_Purge_withCsvSource_(1) - 2018.05.21 at 16h 10m 04s.xml">
-      <configuration name="testAMS_newAPI_Performance.test1_Add_Purge_withCsvSource (1)" configurationId="JUnit" />
+    <history-entry file="testAMS_newAPI_Performance_test1_Add_Purge_(2) - 2018.05.22 at 12h 46m 48s.xml">
+      <configuration name="testAMS_newAPI_Performance.test1_Add_Purge (2)" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="testAMS_newAPI_Performance_test1_Add_Purge_withCsvSource_(1) - 2018.05.21 at 16h 10m 19s.xml">
-      <configuration name="testAMS_newAPI_Performance.test1_Add_Purge_withCsvSource (1)" configurationId="JUnit" />
+    <history-entry file="testAMS_newAPI_Performance_test1_Add_Purge_(2) - 2018.05.22 at 12h 47m 25s.xml">
+      <configuration name="testAMS_newAPI_Performance.test1_Add_Purge (2)" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="testAMS_newAPI_Performance_test1_Add_Purge_withCsvSource_(1) - 2018.05.21 at 16h 11m 33s.xml">
-      <configuration name="testAMS_newAPI_Performance.test1_Add_Purge_withCsvSource (1)" configurationId="JUnit" />
+    <history-entry file="testAMS_newAPI_Performance_test1_Add_Purge_(2) - 2018.05.22 at 12h 49m 19s.xml">
+      <configuration name="testAMS_newAPI_Performance.test1_Add_Purge (2)" configurationId="JUnit" />
     </history-entry>
     <history-entry file="testAMS_newAPI_Performance_test2_Add_Delete_Purge - 2018.05.22 at 11h 58m 07s.xml">
       <configuration name="testAMS_newAPI_Performance.test2_Add_Delete_Purge" configurationId="JUnit" />
@@ -1295,6 +1280,7 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="1679" y="22" width="1682" height="1029" extended-state="6" />
+    <editor active="true" />
     <layout>
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3265306" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4569161" sideWeight="0.4957317" order="7" side_tool="false" content_ui="tabs" />
@@ -1302,7 +1288,7 @@
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.276644" sideWeight="0.5042683" order="10" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.2152439" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.13151927" sideWeight="0.49756098" order="8" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32426304" sideWeight="0.49634147" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32426304" sideWeight="0.49634147" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32993197" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.3628049" sideWeight="0.49546486" order="0" side_tool="false" content_ui="combo" />
@@ -1762,26 +1748,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/test/java/tv/zodiac/dev/testAMS_oldAPI_Performance.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="77">
-          <caret line="20" column="9" lean-forward="false" selection-start-line="20" selection-start-column="9" selection-end-line="20" selection-end-column="9" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/test/java/tv/zodiac/dev/testAMS_newAPI_Performance.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="375">
-          <caret line="43" column="31" lean-forward="true" selection-start-line="43" selection-start-column="31" selection-end-line="43" selection-end-column="31" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/test/java/tv/zodiac/dev/testAMS_newAPI_Reminder_Add.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="215">
@@ -1797,6 +1763,30 @@
           <folding>
             <element signature="method#request#1;class#NewAPI_AMS#0" expanded="false" />
             <element signature="method#request#2;class#NewAPI_AMS#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/test/java/tv/zodiac/dev/testAMS_newAPI_Performance.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="250">
+          <caret line="25" column="58" lean-forward="true" selection-start-line="25" selection-start-column="8" selection-end-line="25" selection-end-column="58" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#4637#8428#0" expanded="false" />
+            <element signature="e#8813#13468#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/test/java/tv/zodiac/dev/testAMS_oldAPI_Performance.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="262">
+          <caret line="23" column="44" lean-forward="false" selection-start-line="23" selection-start-column="44" selection-end-line="23" selection-end-column="44" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#1041#3764#0" expanded="false" />
+            <element signature="e#4149#7698#0" expanded="false" />
           </folding>
         </state>
       </provider>
