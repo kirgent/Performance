@@ -66,8 +66,8 @@ class testAMS_oldAPI_Performance extends API_common {
                 System.out.println(result);
                 write_to_file(result);
             }
-            assertNotEquals(0, a_avg);
-            assertNotEquals(0, p_avg);
+            assertNotEquals(0, a_avg, "assertNotEquals for a_avg");
+            assertNotEquals(0, p_avg, "assertNotEquals for p_avg");
 
     }
 
@@ -130,9 +130,9 @@ class testAMS_oldAPI_Performance extends API_common {
                 System.out.println(result);
                 write_to_file(result);
             }
-            assertNotEquals(0, a_avg);
-            assertNotEquals(0, d_avg);
-            assertNotEquals(0, p_avg);
+            assertNotEquals(0, a_avg, "assertNotEquals for a_avg");
+            assertNotEquals(0, d_avg, "assertNotEquals for d_avg");
+            assertNotEquals(0, p_avg, "assertNotEquals for p_avg");
     }
 
 }

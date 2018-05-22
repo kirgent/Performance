@@ -1,32 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="a3173ab5-15da-4bf8-8272-656fad315acb" name="Default" comment="update`">
+    <list default="true" id="3e202862-3d84-460d-b947-510d3ab820d4" name="Default" comment="">
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/tv/zodiac/dev/API_common.class" afterPath="$PROJECT_DIR$/target/classes/tv/zodiac/dev/API_common.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/test-classes/tv/zodiac/dev/testAMS_newAPI_Performance.class" afterPath="$PROJECT_DIR$/target/test-classes/tv/zodiac/dev/testAMS_newAPI_Performance.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/test-classes/tv/zodiac/dev/testAMS_oldAPI_Performance.class" afterPath="$PROJECT_DIR$/target/test-classes/tv/zodiac/dev/testAMS_oldAPI_Performance.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/tv/zodiac/dev/API_common.java" afterPath="$PROJECT_DIR$/src/main/java/tv/zodiac/dev/API_common.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/test/java/tv/zodiac/dev/testAMS_newAPI_Performance.java" afterPath="$PROJECT_DIR$/src/test/java/tv/zodiac/dev/testAMS_newAPI_Performance.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/test/java/tv/zodiac/dev/testAMS_oldAPI_Performance.java" afterPath="$PROJECT_DIR$/src/test/java/tv/zodiac/dev/testAMS_oldAPI_Performance.java" />
     </list>
-    <ignored path="target/generated-sources/" />
-    <ignored path="target/generated-test-sources/" />
-    <ignored path="target/maven-status/" />
-    <ignored path="target/site/" />
-    <ignored path="$PROJECT_DIR$/target/classes/" />
-    <ignored path="$PROJECT_DIR$/target/test-classes/" />
-    <manually-removed-from-ignored>
-      <directory path="$PROJECT_DIR$/target/" />
-      <directory path="$PROJECT_DIR$/out/" />
-      <directory path="$PROJECT_DIR$/target/maven-status/" />
-      <directory path="$PROJECT_DIR$/target/site/" />
-    </manually-removed-from-ignored>
-    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="true" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="true" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
-  </component>
-  <component name="CodeInsightWorkspaceSettings">
-    <option name="optimizeImportsOnTheFly" value="true" />
   </component>
   <component name="CoverageDataManager">
     <SUITE FILE_PATH="coverage/Reminders$testAMS_Reminder_Modify_testModify_reminderChannelNumber_MAX_VALUE__statusCode4.coverage" NAME="testAMS_Reminder_Modify.testModify_reminderChannelNumber_MAX_VALUE__statusCode4 Coverage Results" MODIFIED="1524475765676" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
@@ -39,30 +27,28 @@
     </SUITE>
     <SUITE FILE_PATH="coverage/Reminders$testAMS_Reminder_Add_Modify_Delete_Purge.coverage" NAME="testAMS_Reminder_Add_Modify_Delete_Purge Coverage Results" MODIFIED="1524489761477" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
   </component>
-  <component name="ExportTestResults" openResultsInEditor="true" outputFolder="$PROJECT_DIR$" userTempatePath="" />
   <component name="FavoritesManager">
     <favorites_list name="Reminders" />
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="testAMS_oldAPI_Performance.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="testAMS_oldAPI_Performance.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/test/java/tv/zodiac/dev/testAMS_oldAPI_Performance.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="576">
-              <caret line="53" column="17" lean-forward="true" selection-start-line="53" selection-start-column="17" selection-end-line="53" selection-end-column="17" />
+            <state relative-caret-position="139">
+              <caret line="66" column="38" lean-forward="true" selection-start-line="66" selection-start-column="38" selection-end-line="66" selection-end-column="38" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="method#test22_Add_Delete_Purge#0;class#testAMS_oldAPI_Performance#0" expanded="false" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="API_common.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="API_common.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/tv/zodiac/dev/API_common.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="340">
-              <caret line="33" column="62" lean-forward="true" selection-start-line="33" selection-start-column="62" selection-end-line="33" selection-end-column="62" />
+            <state relative-caret-position="110">
+              <caret line="500" column="43" lean-forward="false" selection-start-line="500" selection-start-column="43" selection-end-line="500" selection-end-column="43" />
               <folding />
             </state>
           </provider>
@@ -71,22 +57,50 @@
       <file leaf-file-name="testAMS_newAPI_Performance.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/test/java/tv/zodiac/dev/testAMS_newAPI_Performance.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="372">
-              <caret line="83" column="9" lean-forward="false" selection-start-line="83" selection-start-column="9" selection-end-line="83" selection-end-column="9" />
+            <state relative-caret-position="104">
+              <caret line="77" column="63" lean-forward="false" selection-start-line="77" selection-start-column="63" selection-end-line="77" selection-end-column="63" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="method#test3_Add_Modify_Delete_Purge#0;class#testAMS_newAPI_Performance#0" expanded="false" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="test1_reminder_Add_Purge.sh" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/test1_reminder_Add_Purge.sh">
+      <file leaf-file-name="misc.xml" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/.idea/misc.xml">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="17">
-              <caret line="1" column="0" lean-forward="false" selection-start-line="1" selection-start-column="0" selection-end-line="2" selection-end-column="10" />
+              <caret line="640" column="10" lean-forward="false" selection-start-line="640" selection-start-column="10" selection-end-line="640" selection-end-column="10" />
               <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="workspace.xml" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/.idea/workspace.xml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="629">
+              <caret line="40" column="14" lean-forward="false" selection-start-line="40" selection-start-column="14" selection-end-line="40" selection-end-column="14" />
+              <folding>
+                <marker date="1527008408661" expanded="true" signature="67968:67985" ph="..." />
+                <marker date="1527008408661" expanded="true" signature="67968:68003" ph="..." />
+                <marker date="1527008408661" expanded="true" signature="67968:68016" ph="..." />
+                <marker date="1527008408661" expanded="true" signature="67968:68031" ph="..." />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="testSandbox.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/test/java/tv/zodiac/dev/testSandbox.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="229">
+              <caret line="18" column="53" lean-forward="false" selection-start-line="18" selection-start-column="53" selection-end-line="18" selection-end-column="53" />
+              <folding>
+                <element signature="imports" expanded="true" />
+                <marker date="1526924465441" expanded="true" signature="676:680" ph="//..." />
+                <marker date="1526924465441" expanded="true" signature="676:686" ph="{...}" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -131,225 +145,29 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="reminders.csv" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/target/classes/reminders.csv">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="17">
-              <caret line="1" column="59" lean-forward="true" selection-start-line="1" selection-start-column="59" selection-end-line="1" selection-end-column="59" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="reminders_oldapi.csv" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/target/classes/reminders_oldapi.csv">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="0">
-              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
     </leaf>
-  </component>
-  <component name="FileTemplateManagerImpl">
-    <option name="RECENT_TEMPLATES">
-      <list>
-        <option value="Enum" />
-        <option value="Class" />
-        <option value="Setup Script" />
-        <option value="AnnotationType" />
-      </list>
-    </option>
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>int a</find>
-      <find>diff</find>
-      <find>int) diff</find>
-      <find>array</find>
-      <find>channels</find>
-      <find>(int)</find>
-      <find>long</find>
-      <find>long a</find>
-      <find>long start</find>
-      <find>a_avg</find>
-      <find>return</find>
-      <find>i</find>
-      <find>count</find>
-      <find>calendar.setTimeZone(TimeZone.getTimeZone(&quot;UTC&quot;));</find>
-      <find>return c</find>
-      <find>reminderScheduleId</find>
-      <find>return codes:</find>
-      <find>count_reminders</find>
-      <find>dependen</find>
-      <find>mac,</find>
-      <find>equals</find>
-      <find>reminderProgramStart</find>
-      <find>reminderProgramStart()</find>
-      <find>write</find>
-      <find>20000</find>
-      <find>000004B9419F</find>
-      <find>time</find>
-      <find>ams_ip</find>
-      <find>assertTimeoutPreemptively</find>
-      <find>mac</find>
+      <find>p_avg</find>
     </findStrings>
     <replaceStrings>
-      <replace>'</replace>
-      <replace>long reminder</replace>
-      <replace>&amp;quot;reminderOffset_new&amp;quot;: '$reminderOffset_new'</replace>
-      <replace>&amp;quot;reminderProgramId&amp;quot;: '$reminderProgramId', &amp;quot;reminderScheduleId&amp;quot;:'$reminderScheduleId', &amp;quot;reminderId&amp;quot;:'$reminderId', &amp;quot;reminderOffset&amp;quot;: '$reminderOffset'</replace>
-      <replace>&amp;quot;reminderChannelNumber&amp;quot;: '$reminderChannelNumber', &amp;quot;reminderProgramId&amp;quot;: '$reminderProgramId',</replace>
-      <replace>&amp;quot;reminderProgramId&amp;quot;: '$reminderProgramId', &amp;quot;reminderScheduleId&amp;quot;:'$reminderScheduleId', &amp;quot;reminderId&amp;quot;:'$reminderId', &amp;quot;reminderOffset_new&amp;quot;: '$reminderOffset_new'</replace>
-      <replace>long</replace>
-      <replace>reminderScheduleId(), reminderId());</replace>
-      <replace>reminderOffset</replace>
-      <replace>&amp;quot;reminderOffset&amp;quot;: '$reminderOffset_new'</replace>
-      <replace>void</replace>
-      <replace>count_reminders</replace>
-      <replace>reminderScheduleId, reminderId);</replace>
-      <replace>mac</replace>
-      <replace>count</replace>
-      <replace>String mac</replace>
-      <replace>reminderProgramStart</replace>
-      <replace>count,</replace>
-      <replace>@Test</replace>
-      <replace>(countrepeat)</replace>
-      <replace>_macaddress_</replace>
-      <replace>macaddress</replace>
-      <replace>request</replace>
-      <replace>purge_avg_list</replace>
-      <replace>(ams_ip, mac,</replace>
-      <replace>count_reminders,</replace>
-      <replace>purge_list</replace>
-      <replace>return data:</replace>
-      <replace>macaddress,</replace>
       <replace>macaddress</replace>
     </replaceStrings>
-    <dirStrings>
-      <dir>$PROJECT_DIR$/src/main/resources</dir>
-    </dirStrings>
   </component>
   <component name="Git.Settings">
-    <option name="PREVIOUS_COMMIT_AUTHORS">
-      <list>
-        <option value="kirill.grushin" />
-      </list>
-    </option>
-    <option name="PUSH_AUTO_UPDATE" value="true" />
-    <option name="ROOT_SYNC" value="DONT_SYNC" />
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/src/test/java/tv/zodiac/dev/testAMS_Performance_oldapi.java" />
-        <option value="$PROJECT_DIR$/src/test/java/tv/zodiac/dev/testAMS_API_Reminder_Add_Modify_Delete_Purge.java" />
-        <option value="$PROJECT_DIR$/src/main/java/tv/zodiac/dev/API_OLD_AMS.java" />
-        <option value="$PROJECT_DIR$/src/test/java/tv/zodiac/dev/testAMS_oldapi_Performance_Reminder_Add_Delete_Purge.java" />
-        <option value="$PROJECT_DIR$/src/main/java/tv/zodiac/dev/API_AMS.java" />
-        <option value="$PROJECT_DIR$/src/test/java/tv/zodiac/dev/testAMS_OLDAPI_Performance_Reminder_Add_Delete_Purge.java" />
-        <option value="$PROJECT_DIR$/src/test/java/tv/zodiac/dev/testAMS_NEWAPI_Performance_Reminder_Add_Modify_Delete_Purge.java" />
-        <option value="$PROJECT_DIR$/src/test/java/tv/zodiac/dev/testAMS_NEWAPI_Reminder_Add.java" />
-        <option value="$PROJECT_DIR$/src/test/java/tv/zodiac/dev/testAMS_NEWAPI_Reminder_Purge.java" />
-        <option value="$PROJECT_DIR$/src/test/java/tv/zodiac/dev/testAMS_newAPI_Performance_Reminder_Add_Modify_Delete_Purge.java" />
-        <option value="$PROJECT_DIR$/src/test/java/tv/zodiac/dev/testAMS_oldAPI_Performance_Reminder_Add_Delete_Purge.java" />
-        <option value="$PROJECT_DIR$/src/test/java/tv/zodiac/dev/testAMS_oldAPI_Reminder_Purge.java" />
-        <option value="$PROJECT_DIR$/test4_reminder_Add_Delete_Purge.sh" />
-        <option value="$PROJECT_DIR$/test2_reminder_Add_Modify_Purge.sh" />
-        <option value="$PROJECT_DIR$/test44_oldapi_reminder_Add_Delete_Purge.sh" />
-        <option value="$PROJECT_DIR$/src/test/java/tv/zodiac/dev/testAMS_newAPI_Reminder_Add_Modify_Delete_Purge.java" />
-        <option value="$PROJECT_DIR$/src/main/bash/change_registration.sh" />
-        <option value="$PROJECT_DIR$/src/main/bash/check_registration.sh" />
-        <option value="$PROJECT_DIR$/src/main/bash/reminder.sh" />
-        <option value="$PROJECT_DIR$/src/test/java/tv/zodiac/dev/testAMS_newAPI_Reminder_Purge.java" />
-        <option value="$PROJECT_DIR$/src/test/java/tv/zodiac/dev/testAMS_newAPI_Reminder_Delete.java" />
-        <option value="$PROJECT_DIR$/src/main/java/tv/zodiac/dev/ValueSource.java" />
         <option value="$PROJECT_DIR$/.idea/workspace.xml" />
-        <option value="$PROJECT_DIR$/src/test/java/tv/zodiac/dev/testAMS_newAPI_Reminder_Modify.java" />
-        <option value="$PROJECT_DIR$/src/test/java/tv/zodiac/dev/testAMS_Settings.java" />
-        <option value="$PROJECT_DIR$/src/test/java/tv/zodiac/dev/testMiddle_Reminders_edge_middle_API.java" />
-        <option value="$PROJECT_DIR$/src/main/java/tv/zodiac/dev/OLDAPI_AMS.java" />
         <option value="$PROJECT_DIR$/src/test/java/tv/zodiac/dev/testSandbox.java" />
-        <option value="$PROJECT_DIR$/src/main/java/tv/zodiac/dev/NEWAPI_AMS.java" />
-        <option value="$PROJECT_DIR$/src/main/java/tv/zodiac/dev/ParameterizedTest.java" />
-        <option value="$PROJECT_DIR$/src/main/java/reminders.csv" />
-        <option value="$PROJECT_DIR$/pom.xml" />
-        <option value="$PROJECT_DIR$/src/main/java/tv/zodiac/dev/API.java" />
-        <option value="$PROJECT_DIR$/src/test/java/tv/zodiac/dev/testAMS_newAPI_Reminder_Add.java" />
-        <option value="$PROJECT_DIR$/src/main/java/tv/zodiac/dev/NewAPI_AMS.java" />
-        <option value="$PROJECT_DIR$/src/main/java/tv/zodiac/dev/API_Middle.java" />
-        <option value="$PROJECT_DIR$/src/main/java/tv/zodiac/dev/Main.java" />
-        <option value="$PROJECT_DIR$/src/main/resources/reminders_macaddress_registrations.csv" />
-        <option value="$PROJECT_DIR$/src/test/java/tv/zodiac/dev/testMiddle_Change_registration.java" />
-        <option value="$PROJECT_DIR$/src/test/java/tv/zodiac/dev/testMiddle_Check_registration.java" />
-        <option value="$PROJECT_DIR$/src/main/resources/reminders.csv" />
-        <option value="$PROJECT_DIR$/target/classes/reminders.csv" />
-        <option value="$PROJECT_DIR$/target/classes/reminders_oldapi.csv" />
-        <option value="$PROJECT_DIR$/test3_reminder_Add_Modify_Delete_Purge.sh" />
-        <option value="$PROJECT_DIR$/test2_reminder_Add_Delete_Purge.sh" />
-        <option value="$PROJECT_DIR$/test1_reminder_Add_Purge.sh" />
-        <option value="$PROJECT_DIR$/test11_oldapi_reminder_Add_Purge.sh" />
-        <option value="$PROJECT_DIR$/test22_oldapi_reminder_Add_Delete_Purge.sh" />
-        <option value="$PROJECT_DIR$/src/test/java/tv/zodiac/dev/testAMS_newAPI_Performance.java" />
-        <option value="$PROJECT_DIR$/src/test/java/tv/zodiac/dev/testAMS_oldAPI_Performance.java" />
         <option value="$PROJECT_DIR$/src/main/java/tv/zodiac/dev/API_common.java" />
+        <option value="$PROJECT_DIR$/src/test/java/tv/zodiac/dev/testAMS_oldAPI_Performance.java" />
+        <option value="$PROJECT_DIR$/src/test/java/tv/zodiac/dev/testAMS_newAPI_Performance.java" />
       </list>
     </option>
-  </component>
-  <component name="MavenImportPreferences">
-    <option name="importingSettings">
-      <MavenImportingSettings>
-        <option name="importAutomatically" value="true" />
-        <option name="lookForNested" value="true" />
-      </MavenImportingSettings>
-    </option>
-  </component>
-  <component name="MavenProjectNavigator">
-    <treeState>
-      <expand>
-        <path>
-          <item name="" type="16c1761:MavenProjectsStructure$RootNode" />
-          <item name="Reminders" type="9519ce18:MavenProjectsStructure$ProjectNode" />
-        </path>
-        <path>
-          <item name="" type="16c1761:MavenProjectsStructure$RootNode" />
-          <item name="Reminders" type="9519ce18:MavenProjectsStructure$ProjectNode" />
-          <item name="Lifecycle" type="58874e2:MavenProjectsStructure$LifecycleNode" />
-        </path>
-      </expand>
-      <select />
-    </treeState>
-  </component>
-  <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="1629" />
-    <option name="y" value="42" />
-    <option name="width" value="1682" />
-    <option name="height" value="1052" />
-  </component>
-  <component name="ProjectInspectionProfilesVisibleTreeState">
-    <entry key="Project Default">
-      <profile-state>
-        <expanded-state>
-          <State>
-            <id />
-          </State>
-          <State>
-            <id>Compiler issuesJava</id>
-          </State>
-          <State>
-            <id>Java</id>
-          </State>
-        </expanded-state>
-        <selected-state>
-          <State>
-            <id>UNCHECKED_WARNING</id>
-          </State>
-        </selected-state>
-      </profile-state>
-    </entry>
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
     <OptionsSetting value="false" id="Update" />
@@ -420,23 +238,6 @@
               <item name="Reminders" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="dev" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="Reminders" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Reminders" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="dev" type="462c0819:PsiDirectoryNode" />
-              <item name="API_common" type="1a9f42e2:ClassTreeNode" />
-            </path>
-            <path>
-              <item name="Reminders" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Reminders" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
               <item name="resources" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
@@ -477,6 +278,15 @@
               <item name="java" type="462c0819:PsiDirectoryNode" />
               <item name="dev" type="462c0819:PsiDirectoryNode" />
               <item name="testAMS_oldAPI_Performance" type="1a9f42e2:ClassTreeNode" />
+            </path>
+            <path>
+              <item name="Reminders" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Reminders" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="test" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="dev" type="462c0819:PsiDirectoryNode" />
+              <item name="testSandbox" type="1a9f42e2:ClassTreeNode" />
             </path>
           </expand>
           <select />
@@ -693,55 +503,6 @@
       </pane>
     </panes>
   </component>
-  <component name="PropertiesComponent">
-    <property name="project.structure.last.edited" value="Modules" />
-    <property name="project.structure.proportion" value="0.15" />
-    <property name="project.structure.side.proportion" value="0.2974138" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
-    <property name="Downloaded.Files.Path.Enabled" value="false" />
-    <property name="Repository.Attach.JavaDocs" value="false" />
-    <property name="Repository.Attach.Sources" value="false" />
-    <property name="settings.editor.selected.configurable" value="vcs.Git" />
-    <property name="SearchEverywhereHistoryKey" value="count_reminders&#9;PSI&#9;JAVA://tv.zodiac.dev.testAMS_newAPI_Reminder_Add#count_reminders&#10;count_reminders,&#9;null&#9;null&#10;Random random&#9;null&#9;null&#10;Jupiter&#9;FILE&#9;file:///home/kirill.grushin/.m2/repository/org/junit/jupiter/junit-jupiter-api/5.1.0/junit-jupiter-api-5.1.0.pom&#10;public Timeout globalTimeout = Timeout.seconds(20)&#9;null&#9;null&#10;count_itera&#9;PSI&#9;JAVA://Test_reminder#count_iterations_by_default&#10;count_i&#9;PSI&#9;JAVA://testAMS#count_iterations&#10;reminder is unknown, applies to reminder deletion attempts&#9;null&#9;null&#10;ams_ip&#9;PSI&#9;JAVA://testMiddle#ams_ip&#10;[DBG]&#9;null&#9;null&#10;log4&#9;PSI&#9;JAVA://org.apache.commons.logging.impl.Log4JLogger&#10;hhmm&#9;PSI&#9;JAVA://Middle#rack_hhmm&#10;hhmm:&#9;null&#9;null" />
-    <property name="run.code.analysis.last.selected.profile" value="pProject Default" />
-    <property name="last_directory_selection" value="$PROJECT_DIR$/src/main/java/tv/zodiac/dev" />
-    <property name="SeleniumPlugin.CssSelectorCheckEnabled" value="false" />
-    <property name="SeleniumPlugin.XpathSelectorCheckEnabled" value="false" />
-    <property name="SeleniumPlugin.ClassNameSelectorCheckEnabled" value="false" />
-    <property name="SeleniumPlugin.IdSelectorCheckEnabled" value="false" />
-    <property name="SeleniumPlugin.TagNameSelectorCheckEnabled" value="false" />
-    <property name="SeleniumPlugin.IsSelectorCheckEnabled" value="false" />
-    <property name="ChangesBrowser.SHOW_FLATTEN" value="false" />
-    <property name="GenerateAntBuildDialog.generateSingleFile" value="true" />
-    <property name="GenerateAntBuildDialog.enableUiFormCompile" value="true" />
-    <property name="GenerateAntBuildDialog.forceTargetJdk" value="true" />
-    <property name="GenerateAntBuildDialog.backupFiles" value="true" />
-    <property name="GenerateAntBuildDialog.outputFileNameProperty" value="reminders" />
-  </component>
-  <component name="RecentsManager">
-    <key name="CreateClassDialog.RecentsKey">
-      <recent name="tv.zodiac.dev" />
-      <recent name="" />
-    </key>
-    <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
-      <recent name="tv.zodiac.dev" />
-      <recent name="" />
-      <recent name="reminders" />
-    </key>
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/src/main/resources" />
-    </key>
-    <key name="CopyClassDialog.RECENTS_KEY">
-      <recent name="" />
-    </key>
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/src/main/resources" />
-      <recent name="$PROJECT_DIR$/target/classes" />
-      <recent name="$PROJECT_DIR$/target" />
-      <recent name="$PROJECT_DIR$/target/classes/tv" />
-      <recent name="$PROJECT_DIR$/src/main/bash" />
-    </key>
-  </component>
   <component name="RunDashboard">
     <option name="ruleStates">
       <list>
@@ -754,7 +515,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="JUnit.testAMS_newAPI_Performance.test2_Add_Delete_Purge">
+  <component name="RunManager" selected="JUnit.testAMS_oldAPI_Performance.test11_Add_Purge">
     <configuration default="true" type="Applet" factoryName="Applet">
       <module />
       <option name="HTML_USED" value="false" />
@@ -764,10 +525,10 @@
     </configuration>
     <configuration default="true" type="Application" factoryName="Application">
       <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
-      <option name="MAIN_CLASS_NAME" value="" />
-      <option name="VM_PARAMETERS" value="" />
-      <option name="PROGRAM_PARAMETERS" value="" />
-      <option name="WORKING_DIRECTORY" value="file://$PROJECT_DIR$" />
+      <option name="MAIN_CLASS_NAME" />
+      <option name="VM_PARAMETERS" />
+      <option name="PROGRAM_PARAMETERS" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
       <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
       <option name="ALTERNATIVE_JRE_PATH" />
       <option name="ENABLE_SWING_INSPECTOR" value="false" />
@@ -836,201 +597,7 @@
       <properties />
       <listeners />
     </configuration>
-    <configuration default="true" factoryName="Nosetests" type="tests">
-      <envs />
-      <module name="" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="" />
-      <option name="IS_MODULE_SDK" value="false" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="_new_regexPattern" value="&quot;&quot;" />
-      <option name="_new_additionalArguments" value="&quot;&quot;" />
-      <option name="_new_target" value="&quot;&quot;" />
-      <option name="_new_targetType" value="&quot;PATH&quot;" />
-    </configuration>
-    <configuration default="true" factoryName="Unittests" type="tests">
-      <envs />
-      <module name="" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="" />
-      <option name="IS_MODULE_SDK" value="false" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="_new_additionalArguments" value="&quot;&quot;" />
-      <option name="_new_target" value="&quot;&quot;" />
-      <option name="_new_targetType" value="&quot;PATH&quot;" />
-    </configuration>
-    <configuration default="true" factoryName="py.test" type="tests">
-      <envs />
-      <module name="" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="" />
-      <option name="IS_MODULE_SDK" value="false" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="_new_keywords" value="&quot;&quot;" />
-      <option name="_new_additionalArguments" value="&quot;&quot;" />
-      <option name="_new_target" value="&quot;&quot;" />
-      <option name="_new_targetType" value="&quot;PATH&quot;" />
-    </configuration>
-    <configuration name="macaddress add 48" type="Application" factoryName="Application">
-      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
-      <option name="MAIN_CLASS_NAME" value="Main" />
-      <option name="VM_PARAMETERS" value="" />
-      <option name="PROGRAM_PARAMETERS" value="6CB56BBA882C add 48" />
-      <option name="WORKING_DIRECTORY" value="file://$PROJECT_DIR$" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
-      <option name="ENABLE_SWING_INSPECTOR" value="false" />
-      <option name="ENV_VARIABLES" />
-      <option name="PASS_PARENT_ENVS" value="true" />
-      <module name="Reminders" />
-      <envs />
-      <method>
-        <option name="Make" enabled="false" />
-      </method>
-    </configuration>
-    <configuration name="macaddress all 48" type="Application" factoryName="Application">
-      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
-      <option name="MAIN_CLASS_NAME" value="Main" />
-      <option name="VM_PARAMETERS" value="" />
-      <option name="PROGRAM_PARAMETERS" value="6CB56BBA882C all 48" />
-      <option name="WORKING_DIRECTORY" value="file://$PROJECT_DIR$" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
-      <option name="ENABLE_SWING_INSPECTOR" value="false" />
-      <option name="ENV_VARIABLES" />
-      <option name="PASS_PARENT_ENVS" value="true" />
-      <module name="Reminders" />
-      <envs />
-      <method>
-        <option name="Make" enabled="false" />
-      </method>
-    </configuration>
-    <configuration name="macaddress change" type="Application" factoryName="Application">
-      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
-      <option name="MAIN_CLASS_NAME" value="Main" />
-      <option name="VM_PARAMETERS" value="" />
-      <option name="PROGRAM_PARAMETERS" value="6CB56BBA882C change 172.30.81.4" />
-      <option name="WORKING_DIRECTORY" value="file://$PROJECT_DIR$" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
-      <option name="ENABLE_SWING_INSPECTOR" value="false" />
-      <option name="ENV_VARIABLES" />
-      <option name="PASS_PARENT_ENVS" value="true" />
-      <module name="Reminders" />
-      <envs />
-    </configuration>
-    <configuration name="macaddress check" type="Application" factoryName="Application">
-      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
-      <option name="MAIN_CLASS_NAME" value="Main" />
-      <option name="VM_PARAMETERS" value="" />
-      <option name="PROGRAM_PARAMETERS" value="6CB56BBA882C check" />
-      <option name="WORKING_DIRECTORY" value="file://$PROJECT_DIR$" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
-      <option name="ENABLE_SWING_INSPECTOR" value="false" />
-      <option name="ENV_VARIABLES" />
-      <option name="PASS_PARENT_ENVS" value="true" />
-      <module name="Reminders" />
-      <envs />
-      <method>
-        <option name="Make" enabled="false" />
-      </method>
-    </configuration>
-    <configuration name="macaddress delete 48" type="Application" factoryName="Application">
-      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
-      <option name="MAIN_CLASS_NAME" value="Main" />
-      <option name="VM_PARAMETERS" value="" />
-      <option name="PROGRAM_PARAMETERS" value="6CB56BBA882C delete 48" />
-      <option name="WORKING_DIRECTORY" value="file://$PROJECT_DIR$" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
-      <option name="ENABLE_SWING_INSPECTOR" value="false" />
-      <option name="ENV_VARIABLES" />
-      <option name="PASS_PARENT_ENVS" value="true" />
-      <module name="Reminders" />
-      <envs />
-      <method>
-        <option name="Make" enabled="false" />
-      </method>
-    </configuration>
-    <configuration name="macaddress purge" type="Application" factoryName="Application">
-      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
-      <option name="MAIN_CLASS_NAME" value="Main" />
-      <option name="VM_PARAMETERS" value="" />
-      <option name="PROGRAM_PARAMETERS" value="6CB56BBA882C purge" />
-      <option name="WORKING_DIRECTORY" value="file://$PROJECT_DIR$" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
-      <option name="ENABLE_SWING_INSPECTOR" value="false" />
-      <option name="ENV_VARIABLES" />
-      <option name="PASS_PARENT_ENVS" value="true" />
-      <module name="Reminders" />
-      <envs />
-    </configuration>
-    <configuration name="macaddress" type="Application" factoryName="Application">
-      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
-      <option name="MAIN_CLASS_NAME" value="Main" />
-      <option name="VM_PARAMETERS" value="" />
-      <option name="PROGRAM_PARAMETERS" value="6CB56BBA882C" />
-      <option name="WORKING_DIRECTORY" value="file://$PROJECT_DIR$" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
-      <option name="ENABLE_SWING_INSPECTOR" value="false" />
-      <option name="ENV_VARIABLES" />
-      <option name="PASS_PARENT_ENVS" value="true" />
-      <module name="Reminders" />
-      <envs />
-      <method>
-        <option name="Make" enabled="false" />
-      </method>
-    </configuration>
-    <configuration name="test" type="Application" factoryName="Application">
-      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
-      <option name="MAIN_CLASS_NAME" value="Main" />
-      <option name="VM_PARAMETERS" value="" />
-      <option name="PROGRAM_PARAMETERS" value="6CB56BBA882C test 1 1" />
-      <option name="WORKING_DIRECTORY" value="file://$PROJECT_DIR$" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
-      <option name="ENABLE_SWING_INSPECTOR" value="false" />
-      <option name="ENV_VARIABLES" />
-      <option name="PASS_PARENT_ENVS" value="true" />
-      <module name="Reminders" />
-      <envs />
-      <method>
-        <option name="Make" enabled="false" />
-      </method>
-    </configuration>
-    <configuration name="testAMS_Reminder_Add.testAdd_reminderChannelNumber_empty" type="JUnit" factoryName="JUnit" nameIsGenerated="true">
-      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
-      <module name="Reminders" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
-      <option name="PACKAGE_NAME" value="" />
-      <option name="MAIN_CLASS_NAME" value="testAMS_Reminder_Add" />
-      <option name="METHOD_NAME" value="testAdd_reminderChannelNumber_empty" />
-      <option name="TEST_OBJECT" value="method" />
-      <option name="VM_PARAMETERS" value="-ea" />
-      <option name="PARAMETERS" />
-      <option name="WORKING_DIRECTORY" value="$MODULE_DIR$" />
-      <option name="ENV_VARIABLES" />
-      <option name="PASS_PARENT_ENVS" value="true" />
-      <option name="TEST_SEARCH_SCOPE">
-        <value defaultName="singleModule" />
-      </option>
-      <envs />
-      <patterns />
-    </configuration>
-    <configuration name="testAMS_newAPI_Performance.test1_Add_Purge" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="testAMS_oldAPI_Performance.test11_Add_Purge" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea">
         <pattern>
           <option name="PATTERN" value="tv.zodiac.dev.*" />
@@ -1041,8 +608,8 @@
       <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
       <option name="ALTERNATIVE_JRE_PATH" />
       <option name="PACKAGE_NAME" value="tv.zodiac.dev" />
-      <option name="MAIN_CLASS_NAME" value="tv.zodiac.dev.testAMS_newAPI_Performance" />
-      <option name="METHOD_NAME" value="test1_Add_Purge(java.lang.String,java.lang.String,java.lang.String,int,int,long,long,int)" />
+      <option name="MAIN_CLASS_NAME" value="tv.zodiac.dev.testAMS_oldAPI_Performance" />
+      <option name="METHOD_NAME" value="test11_Add_Purge(java.lang.String,java.lang.String,java.lang.String,int,int,long,long,int)" />
       <option name="TEST_OBJECT" value="method" />
       <option name="VM_PARAMETERS" value="-ea" />
       <option name="PARAMETERS" />
@@ -1055,193 +622,37 @@
       <envs />
       <patterns />
     </configuration>
-    <configuration name="testAMS_newAPI_Performance.test2_Add_Delete_Purge" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea">
-        <pattern>
-          <option name="PATTERN" value="tv.zodiac.dev.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <module name="Reminders" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
-      <option name="PACKAGE_NAME" value="tv.zodiac.dev" />
-      <option name="MAIN_CLASS_NAME" value="tv.zodiac.dev.testAMS_newAPI_Performance" />
-      <option name="METHOD_NAME" value="test2_Add_Delete_Purge(java.lang.String,java.lang.String,java.lang.String,int,int,long,long,int)" />
-      <option name="TEST_OBJECT" value="method" />
-      <option name="VM_PARAMETERS" value="-ea" />
-      <option name="PARAMETERS" />
-      <option name="WORKING_DIRECTORY" value="$MODULE_DIR$" />
-      <option name="ENV_VARIABLES" />
-      <option name="PASS_PARENT_ENVS" value="true" />
-      <option name="TEST_SEARCH_SCOPE">
-        <value defaultName="singleModule" />
-      </option>
-      <envs />
-      <patterns />
-    </configuration>
-    <configuration name="testMiddle_Check_registration.testCheck_registration" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea">
-        <pattern>
-          <option name="PATTERN" value="tv.zodiac.dev.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <module name="Reminders" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
-      <option name="PACKAGE_NAME" value="tv.zodiac.dev" />
-      <option name="MAIN_CLASS_NAME" value="tv.zodiac.dev.testMiddle_Check_registration" />
-      <option name="METHOD_NAME" value="testCheck_registration(java.lang.String,java.lang.String)" />
-      <option name="TEST_OBJECT" value="method" />
-      <option name="VM_PARAMETERS" value="-ea" />
-      <option name="PARAMETERS" />
-      <option name="WORKING_DIRECTORY" value="$MODULE_DIR$" />
-      <option name="ENV_VARIABLES" />
-      <option name="PASS_PARENT_ENVS" value="true" />
-      <option name="TEST_SEARCH_SCOPE">
-        <value defaultName="singleModule" />
-      </option>
-      <envs />
-      <patterns />
-    </configuration>
-    <configuration name="testMiddle_Check_registration.testCheck_registration_No_amsIp_found_for_mac" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea">
-        <pattern>
-          <option name="PATTERN" value="tv.zodiac.dev.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <module name="Reminders" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
-      <option name="PACKAGE_NAME" value="tv.zodiac.dev" />
-      <option name="MAIN_CLASS_NAME" value="tv.zodiac.dev.testMiddle_Check_registration" />
-      <option name="METHOD_NAME" value="testCheck_registration_No_amsIp_found_for_mac(java.lang.String)" />
-      <option name="TEST_OBJECT" value="method" />
-      <option name="VM_PARAMETERS" value="-ea" />
-      <option name="PARAMETERS" />
-      <option name="WORKING_DIRECTORY" value="$MODULE_DIR$" />
-      <option name="ENV_VARIABLES" />
-      <option name="PASS_PARENT_ENVS" value="true" />
-      <option name="TEST_SEARCH_SCOPE">
-        <value defaultName="singleModule" />
-      </option>
-      <envs />
-      <patterns />
-    </configuration>
-    <configuration name="testMiddle_Check_registration.testCheck_registration_d_No_amsIp_found_for_mac" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea">
-        <pattern>
-          <option name="PATTERN" value="tv.zodiac.dev.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <module name="Reminders" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
-      <option name="PACKAGE_NAME" value="tv.zodiac.dev" />
-      <option name="MAIN_CLASS_NAME" value="tv.zodiac.dev.testMiddle_Check_registration" />
-      <option name="METHOD_NAME" value="testCheck_registration_d_No_amsIp_found_for_mac" />
-      <option name="TEST_OBJECT" value="method" />
-      <option name="VM_PARAMETERS" value="-ea" />
-      <option name="PARAMETERS" />
-      <option name="WORKING_DIRECTORY" value="$MODULE_DIR$" />
-      <option name="ENV_VARIABLES" />
-      <option name="PASS_PARENT_ENVS" value="true" />
-      <option name="TEST_SEARCH_SCOPE">
-        <value defaultName="singleModule" />
-      </option>
-      <envs />
-      <patterns />
-    </configuration>
-    <list size="14">
-      <item index="0" class="java.lang.String" itemvalue="JUnit.testAMS_Reminder_Add.testAdd_reminderChannelNumber_empty" />
-      <item index="1" class="java.lang.String" itemvalue="Application.test" />
-      <item index="2" class="java.lang.String" itemvalue="Application.macaddress" />
-      <item index="3" class="java.lang.String" itemvalue="Application.macaddress check" />
-      <item index="4" class="java.lang.String" itemvalue="Application.macaddress change" />
-      <item index="5" class="java.lang.String" itemvalue="Application.macaddress purge" />
-      <item index="6" class="java.lang.String" itemvalue="Application.macaddress all 48" />
-      <item index="7" class="java.lang.String" itemvalue="Application.macaddress add 48" />
-      <item index="8" class="java.lang.String" itemvalue="Application.macaddress delete 48" />
-      <item index="9" class="java.lang.String" itemvalue="JUnit.testMiddle_Check_registration.testCheck_registration" />
-      <item index="10" class="java.lang.String" itemvalue="JUnit.testMiddle_Check_registration.testCheck_registration_d_No_amsIp_found_for_mac" />
-      <item index="11" class="java.lang.String" itemvalue="JUnit.testMiddle_Check_registration.testCheck_registration_No_amsIp_found_for_mac" />
-      <item index="12" class="java.lang.String" itemvalue="JUnit.testAMS_newAPI_Performance.test1_Add_Purge" />
-      <item index="13" class="java.lang.String" itemvalue="JUnit.testAMS_newAPI_Performance.test2_Add_Delete_Purge" />
-    </list>
     <recent_temporary>
-      <list size="5">
-        <item index="0" class="java.lang.String" itemvalue="JUnit.testAMS_newAPI_Performance.test2_Add_Delete_Purge" />
-        <item index="1" class="java.lang.String" itemvalue="JUnit.testAMS_newAPI_Performance.test1_Add_Purge" />
-        <item index="2" class="java.lang.String" itemvalue="JUnit.testMiddle_Check_registration.testCheck_registration" />
-        <item index="3" class="java.lang.String" itemvalue="JUnit.testMiddle_Check_registration.testCheck_registration_No_amsIp_found_for_mac" />
-        <item index="4" class="java.lang.String" itemvalue="JUnit.testMiddle_Check_registration.testCheck_registration_d_No_amsIp_found_for_mac" />
+      <list size="1">
+        <item index="0" class="java.lang.String" itemvalue="JUnit.testAMS_oldAPI_Performance.test11_Add_Purge" />
       </list>
     </recent_temporary>
   </component>
   <component name="ShelveChangesManager" show_recycled="false">
     <option name="remove_strategy" value="false" />
   </component>
-  <component name="StructureViewFactory">
-    <option name="ACTIVE_ACTIONS" value=",SHOW_PROPERTIES,SHOW_INTERFACES" />
-  </component>
   <component name="SvnConfiguration">
-    <configuration>$USER_HOME$/.subversion</configuration>
+    <configuration />
   </component>
   <component name="TestHistory">
-    <history-entry file="testAMS_newAPI_Performance_test1_Add_Purge - 2018.05.22 at 19h 14m 24s.xml">
-      <configuration name="testAMS_newAPI_Performance.test1_Add_Purge" configurationId="JUnit" />
+    <history-entry file="testAMS_oldAPI_Performance_test11_Add_Purge - 2018.05.22 at 19h 57m 34s.xml">
+      <configuration name="testAMS_oldAPI_Performance.test11_Add_Purge" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="testAMS_newAPI_Performance_test1_Add_Purge - 2018.05.22 at 19h 14m 44s.xml">
-      <configuration name="testAMS_newAPI_Performance.test1_Add_Purge" configurationId="JUnit" />
+    <history-entry file="testAMS_oldAPI_Performance_test11_Add_Purge - 2018.05.22 at 20h 00m 29s.xml">
+      <configuration name="testAMS_oldAPI_Performance.test11_Add_Purge" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="testAMS_newAPI_Performance_test2_Add_Delete_Purge - 2018.05.22 at 19h 15m 12s.xml">
-      <configuration name="testAMS_newAPI_Performance.test2_Add_Delete_Purge" configurationId="JUnit" />
-    </history-entry>
-    <history-entry file="testMiddle_Check_registration_testCheck_registration - 2018.05.22 at 13h 25m 27s.xml">
-      <configuration name="testMiddle_Check_registration.testCheck_registration" configurationId="JUnit" />
-    </history-entry>
-    <history-entry file="testMiddle_Check_registration_testCheck_registration - 2018.05.22 at 13h 27m 32s.xml">
-      <configuration name="testMiddle_Check_registration.testCheck_registration" configurationId="JUnit" />
-    </history-entry>
-    <history-entry file="testMiddle_Check_registration_testCheck_registration - 2018.05.22 at 13h 27m 54s.xml">
-      <configuration name="testMiddle_Check_registration.testCheck_registration" configurationId="JUnit" />
-    </history-entry>
-    <history-entry file="testMiddle_Check_registration_testCheck_registration - 2018.05.22 at 13h 32m 55s.xml">
-      <configuration name="testMiddle_Check_registration.testCheck_registration" configurationId="JUnit" />
-    </history-entry>
-    <history-entry file="testMiddle_Check_registration_testCheck_registration_No_amsIp_found_for_mac - 2018.05.22 at 13h 31m 30s.xml">
-      <configuration name="testMiddle_Check_registration.testCheck_registration_No_amsIp_found_for_mac" configurationId="JUnit" />
-    </history-entry>
-    <history-entry file="testMiddle_Check_registration_testCheck_registration_No_amsIp_found_for_mac - 2018.05.22 at 13h 32m 17s.xml">
-      <configuration name="testMiddle_Check_registration.testCheck_registration_No_amsIp_found_for_mac" configurationId="JUnit" />
-    </history-entry>
-    <history-entry file="testMiddle_Check_registration_testCheck_registration_d_No_amsIp_found_for_mac - 2018.05.22 at 13h 29m 46s.xml">
-      <configuration name="testMiddle_Check_registration.testCheck_registration_d_No_amsIp_found_for_mac" configurationId="JUnit" />
-    </history-entry>
-  </component>
-  <component name="TodoView" selected-index="2">
-    <todo-panel id="selected-file">
-      <is-autoscroll-to-source value="true" />
-    </todo-panel>
-    <todo-panel id="all">
-      <are-packages-shown value="true" />
-      <is-autoscroll-to-source value="true" />
-    </todo-panel>
   </component>
   <component name="ToolWindowManager">
     <frame x="1679" y="22" width="1682" height="1029" extended-state="6" />
     <editor active="true" />
     <layout>
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3265306" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.28117913" sideWeight="0.4957317" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.28117913" sideWeight="0.4957317" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.276644" sideWeight="0.5042683" order="10" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.2152439" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.13151927" sideWeight="0.49756098" order="8" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.2573696" sideWeight="0.49634147" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.47619048" sideWeight="0.49634147" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32993197" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.3152439" sideWeight="0.49546486" order="0" side_tool="false" content_ui="combo" />
@@ -1284,58 +695,6 @@
       <window_info id="Data View" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32987806" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
     </layout-to-restore>
   </component>
-  <component name="Vcs.Log.History.Properties">
-    <option name="COLUMN_ORDER">
-      <list>
-        <option value="0" />
-        <option value="2" />
-        <option value="3" />
-        <option value="1" />
-      </list>
-    </option>
-  </component>
-  <component name="Vcs.Log.Tabs.Properties">
-    <option name="TAB_STATES">
-      <map>
-        <entry key="MAIN">
-          <value>
-            <State>
-              <option name="RECENTLY_FILTERED_USER_GROUPS">
-                <collection />
-              </option>
-              <option name="RECENTLY_FILTERED_BRANCH_GROUPS">
-                <collection />
-              </option>
-              <option name="COLUMN_ORDER">
-                <list>
-                  <option value="0" />
-                  <option value="1" />
-                  <option value="2" />
-                  <option value="3" />
-                </list>
-              </option>
-            </State>
-          </value>
-        </entry>
-      </map>
-    </option>
-  </component>
-  <component name="VcsContentAnnotationSettings">
-    <option name="myLimit" value="2678400000" />
-  </component>
-  <component name="VcsManagerConfiguration">
-    <option name="CHECK_CODE_CLEANUP_BEFORE_PROJECT_COMMIT" value="true" />
-    <option name="CHECK_NEW_TODO" value="false" />
-    <option name="PERFORM_UPDATE_IN_BACKGROUND" value="false" />
-    <option name="PERFORM_COMMIT_IN_BACKGROUND" value="false" />
-    <option name="PERFORM_EDIT_IN_BACKGROUND" value="false" />
-    <option name="PERFORM_CHECKOUT_IN_BACKGROUND" value="false" />
-    <option name="PERFORM_ADD_REMOVE_IN_BACKGROUND" value="false" />
-    <MESSAGE value="update + bash scripts" />
-    <MESSAGE value="update" />
-    <option name="LAST_COMMIT_MESSAGE" value="update" />
-    <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="true" />
-  </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <option name="time" value="170" />
@@ -1343,13 +702,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/test/java/tv/zodiac/dev/testAMS_newAPI_Reminder_Purge.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="199">
-          <caret line="17" column="9" lean-forward="false" selection-start-line="17" selection-start-column="9" selection-end-line="17" selection-end-column="9" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/tv/zodiac/dev/ValueSource.java" />
     <entry file="jar://$MAVEN_REPOSITORY$/org/junit/jupiter/junit-jupiter-api/5.1.1/junit-jupiter-api-5.1.1.jar!/org/junit/jupiter/api/Assertions.class">
       <provider selected="true" editor-type-id="text-editor">
@@ -1362,13 +714,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/.idea/workspace.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="595">
-          <caret line="36" column="14" lean-forward="true" selection-start-line="36" selection-start-column="14" selection-end-line="36" selection-end-column="14" />
         </state>
       </provider>
     </entry>
@@ -1470,18 +815,6 @@
         <state relative-caret-position="272">
           <caret line="23" column="74" lean-forward="false" selection-start-line="23" selection-start-column="74" selection-end-line="23" selection-end-column="74" />
           <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/test/java/tv/zodiac/dev/testSandbox.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="143">
-          <caret line="16" column="51" lean-forward="false" selection-start-line="16" selection-start-column="51" selection-end-line="16" selection-end-column="51" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <marker date="1526924465441" expanded="true" signature="676:680" ph="//..." />
-            <marker date="1526924465441" expanded="true" signature="676:686" ph="{...}" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1680,124 +1013,66 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/test/java/tv/zodiac/dev/testAMS_newAPI_Performance.java">
+    <entry file="file://$PROJECT_DIR$/.idea/misc.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="372">
-          <caret line="83" column="9" lean-forward="false" selection-start-line="83" selection-start-column="9" selection-end-line="83" selection-end-column="9" />
+        <state relative-caret-position="17">
+          <caret line="640" column="10" lean-forward="false" selection-start-line="640" selection-start-column="10" selection-end-line="640" selection-end-column="10" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/.idea/workspace.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="629">
+          <caret line="40" column="14" lean-forward="false" selection-start-line="40" selection-start-column="14" selection-end-line="40" selection-end-column="14" />
           <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="method#test3_Add_Modify_Delete_Purge#0;class#testAMS_newAPI_Performance#0" expanded="false" />
+            <marker date="1527008408661" expanded="true" signature="67968:67985" ph="..." />
+            <marker date="1527008408661" expanded="true" signature="67968:68003" ph="..." />
+            <marker date="1527008408661" expanded="true" signature="67968:68016" ph="..." />
+            <marker date="1527008408661" expanded="true" signature="67968:68031" ph="..." />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/test/java/tv/zodiac/dev/testAMS_oldAPI_Performance.java">
+    <entry file="file://$PROJECT_DIR$/src/test/java/tv/zodiac/dev/testSandbox.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="576">
-          <caret line="53" column="17" lean-forward="true" selection-start-line="53" selection-start-column="17" selection-end-line="53" selection-end-column="17" />
+        <state relative-caret-position="229">
+          <caret line="18" column="53" lean-forward="false" selection-start-line="18" selection-start-column="53" selection-end-line="18" selection-end-column="53" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="method#test22_Add_Delete_Purge#0;class#testAMS_oldAPI_Performance#0" expanded="false" />
+            <marker date="1526924465441" expanded="true" signature="676:680" ph="//..." />
+            <marker date="1526924465441" expanded="true" signature="676:686" ph="{...}" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/tv/zodiac/dev/API_common.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="340">
-          <caret line="33" column="62" lean-forward="true" selection-start-line="33" selection-start-column="62" selection-end-line="33" selection-end-column="62" />
+        <state relative-caret-position="110">
+          <caret line="500" column="43" lean-forward="false" selection-start-line="500" selection-start-column="43" selection-end-line="500" selection-end-column="43" />
           <folding />
         </state>
       </provider>
     </entry>
-  </component>
-  <component name="masterDetails">
-    <states>
-      <state key="ArtifactsStructureConfigurable.UI">
-        <settings>
-          <artifact-editor />
-          <splitter-proportions>
-            <option name="proportions">
-              <list>
-                <option value="0.2974138" />
-              </list>
-            </option>
-          </splitter-proportions>
-        </settings>
-      </state>
-      <state key="FacetStructureConfigurable.UI">
-        <settings>
-          <last-edited>No facets are configured</last-edited>
-          <splitter-proportions>
-            <option name="proportions">
-              <list>
-                <option value="0.2974138" />
-              </list>
-            </option>
-          </splitter-proportions>
-        </settings>
-      </state>
-      <state key="GlobalLibrariesConfigurable.UI">
-        <settings>
-          <last-edited>Reminders</last-edited>
-          <splitter-proportions>
-            <option name="proportions">
-              <list>
-                <option value="0.2974138" />
-              </list>
-            </option>
-          </splitter-proportions>
-        </settings>
-      </state>
-      <state key="JdkListConfigurable.UI">
-        <settings>
-          <last-edited>1.8</last-edited>
-          <splitter-proportions>
-            <option name="proportions">
-              <list>
-                <option value="0.2974138" />
-              </list>
-            </option>
-          </splitter-proportions>
-        </settings>
-      </state>
-      <state key="ModuleStructureConfigurable.UI">
-        <settings>
-          <last-edited>Reminders</last-edited>
-          <splitter-proportions>
-            <option name="proportions">
-              <list>
-                <option value="0.2974138" />
-                <option value="0.6" />
-              </list>
-            </option>
-          </splitter-proportions>
-        </settings>
-      </state>
-      <state key="ProjectJDKs.UI">
-        <settings>
-          <last-edited>1.8</last-edited>
-          <splitter-proportions>
-            <option name="proportions">
-              <list>
-                <option value="0.2" />
-              </list>
-            </option>
-          </splitter-proportions>
-        </settings>
-      </state>
-      <state key="ProjectLibrariesConfigurable.UI">
-        <settings>
-          <last-edited>Maven: com.beust:jcommander:1.72</last-edited>
-          <splitter-proportions>
-            <option name="proportions">
-              <list>
-                <option value="0.2974138" />
-              </list>
-            </option>
-          </splitter-proportions>
-        </settings>
-      </state>
-    </states>
+    <entry file="file://$PROJECT_DIR$/src/test/java/tv/zodiac/dev/testAMS_newAPI_Performance.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="104">
+          <caret line="77" column="63" lean-forward="false" selection-start-line="77" selection-start-column="63" selection-end-line="77" selection-end-column="63" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/test/java/tv/zodiac/dev/testAMS_oldAPI_Performance.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="139">
+          <caret line="66" column="38" lean-forward="true" selection-start-line="66" selection-start-column="38" selection-end-line="66" selection-end-column="38" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
   </component>
 </project>

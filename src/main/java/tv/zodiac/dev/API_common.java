@@ -447,7 +447,6 @@ public class API_common {
     /**
      * @return just return the day=tomorrow: yyyy-mm-dd
      */
-    @Deprecated
     String reminderProgramStart() {
         Calendar calendar = Calendar.getInstance();
         calendar.setTimeZone(TimeZone.getTimeZone("UTC"));
@@ -504,8 +503,6 @@ public class API_common {
         return reminderId;
     }
 
-
-    @Deprecated
     String get_date_several(int count) {
         Calendar calendar = Calendar.getInstance();
         calendar.setTimeZone(TimeZone.getTimeZone("UTC"));
