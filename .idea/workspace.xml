@@ -2,8 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="a3173ab5-15da-4bf8-8272-656fad315acb" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/resources/reminders.csv" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/test-classes/tv/zodiac/dev/testAMS_newAPI_Performance.class" afterPath="$PROJECT_DIR$/target/test-classes/tv/zodiac/dev/testAMS_newAPI_Performance.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/test/java/tv/zodiac/dev/testAMS_newAPI_Performance.java" afterPath="$PROJECT_DIR$/src/test/java/tv/zodiac/dev/testAMS_newAPI_Performance.java" />
     </list>
     <ignored path="target/generated-sources/" />
     <ignored path="target/generated-test-sources/" />
@@ -44,13 +45,14 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="testAMS_newAPI_Performance.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="testAMS_newAPI_Performance.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/test/java/tv/zodiac/dev/testAMS_newAPI_Performance.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="330">
-              <caret line="36" column="47" lean-forward="false" selection-start-line="36" selection-start-column="47" selection-end-line="36" selection-end-column="47" />
+            <state relative-caret-position="215">
+              <caret line="80" column="22" lean-forward="true" selection-start-line="80" selection-start-column="22" selection-end-line="80" selection-end-column="22" />
               <folding>
                 <element signature="imports" expanded="true" />
+                <element signature="method#test2_Add_Delete_Purge#0;class#testAMS_newAPI_Performance#0" expanded="false" />
                 <element signature="method#test3_Add_Modify_Delete_Purge#0;class#testAMS_newAPI_Performance#0" expanded="false" />
               </folding>
             </state>
@@ -108,16 +110,6 @@
         </entry>
       </file>
       <file leaf-file-name="reminders.csv" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/target/classes/reminders.csv">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="17">
-              <caret line="1" column="31" lean-forward="false" selection-start-line="1" selection-start-column="31" selection-end-line="1" selection-end-column="31" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="reminders.csv" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/resources/reminders.csv">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="0">
@@ -128,7 +120,7 @@
         </entry>
       </file>
       <file leaf-file-name="reminders_macaddress_registration.csv" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/target/classes/reminders_macaddress_registration.csv">
+        <entry file="file://$PROJECT_DIR$/src/main/resources/reminders_macaddress_registration.csv">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="68">
               <caret line="4" column="68" lean-forward="true" selection-start-line="4" selection-start-column="68" selection-end-line="4" selection-end-column="68" />
@@ -138,7 +130,7 @@
         </entry>
       </file>
       <file leaf-file-name="reminders_oldapi.csv" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/target/classes/reminders_oldapi.csv">
+        <entry file="file://$PROJECT_DIR$/src/main/resources/reminders_oldapi.csv">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="68">
               <caret line="4" column="30" lean-forward="true" selection-start-line="4" selection-start-column="30" selection-end-line="4" selection-end-column="30" />
@@ -286,12 +278,12 @@
         <option value="$PROJECT_DIR$/src/test/java/tv/zodiac/dev/testAMS_oldAPI_Performance.java" />
         <option value="$PROJECT_DIR$/target/classes/reminders.csv" />
         <option value="$PROJECT_DIR$/target/classes/reminders_oldapi.csv" />
-        <option value="$PROJECT_DIR$/src/test/java/tv/zodiac/dev/testAMS_newAPI_Performance.java" />
         <option value="$PROJECT_DIR$/test1_reminder_Add_Purge.sh" />
         <option value="$PROJECT_DIR$/test2_reminder_Add_Delete_Purge.sh" />
         <option value="$PROJECT_DIR$/test3_reminder_Add_Modify_Delete_Purge.sh" />
         <option value="$PROJECT_DIR$/test11_oldapi_reminder_Add_Purge.sh" />
         <option value="$PROJECT_DIR$/test22_oldapi_reminder_Add_Delete_Purge.sh" />
+        <option value="$PROJECT_DIR$/src/test/java/tv/zodiac/dev/testAMS_newAPI_Performance.java" />
       </list>
     </option>
   </component>
@@ -715,10 +707,10 @@
       <recent name="" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/main/resources" />
       <recent name="$PROJECT_DIR$/target/classes" />
       <recent name="$PROJECT_DIR$/target" />
       <recent name="$PROJECT_DIR$/target/classes/tv" />
-      <recent name="$PROJECT_DIR$/src/main/resources" />
       <recent name="$PROJECT_DIR$/src/main/bash" />
     </key>
   </component>
@@ -734,7 +726,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="JUnit.testMiddle_Check_registration.testCheck_registration">
+  <component name="RunManager" selected="JUnit.testAMS_newAPI_Performance.test2_Add_Delete_Purge">
     <configuration default="true" type="Applet" factoryName="Applet">
       <module />
       <option name="HTML_USED" value="false" />
@@ -1010,7 +1002,7 @@
       <envs />
       <patterns />
     </configuration>
-    <configuration name="testMiddle_Change_registration" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="testAMS_newAPI_Performance.test1_Add_Purge" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea">
         <pattern>
           <option name="PATTERN" value="tv.zodiac.dev.*" />
@@ -1021,9 +1013,9 @@
       <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
       <option name="ALTERNATIVE_JRE_PATH" />
       <option name="PACKAGE_NAME" value="tv.zodiac.dev" />
-      <option name="MAIN_CLASS_NAME" value="tv.zodiac.dev.testMiddle_Change_registration" />
-      <option name="METHOD_NAME" />
-      <option name="TEST_OBJECT" value="class" />
+      <option name="MAIN_CLASS_NAME" value="tv.zodiac.dev.testAMS_newAPI_Performance" />
+      <option name="METHOD_NAME" value="test1_Add_Purge(java.lang.String,java.lang.String,java.lang.String,int,int,long,long,int)" />
+      <option name="TEST_OBJECT" value="method" />
       <option name="VM_PARAMETERS" value="-ea" />
       <option name="PARAMETERS" />
       <option name="WORKING_DIRECTORY" value="$MODULE_DIR$" />
@@ -1035,7 +1027,7 @@
       <envs />
       <patterns />
     </configuration>
-    <configuration name="testMiddle_Change_registration.testChange_registration" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="testAMS_newAPI_Performance.test2_Add_Delete_Purge" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea">
         <pattern>
           <option name="PATTERN" value="tv.zodiac.dev.*" />
@@ -1046,8 +1038,8 @@
       <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
       <option name="ALTERNATIVE_JRE_PATH" />
       <option name="PACKAGE_NAME" value="tv.zodiac.dev" />
-      <option name="MAIN_CLASS_NAME" value="tv.zodiac.dev.testMiddle_Change_registration" />
-      <option name="METHOD_NAME" value="testChange_registration(java.lang.String,java.lang.String,java.lang.String)" />
+      <option name="MAIN_CLASS_NAME" value="tv.zodiac.dev.testAMS_newAPI_Performance" />
+      <option name="METHOD_NAME" value="test2_Add_Delete_Purge(java.lang.String,java.lang.String,java.lang.String,int,int,long,long,int)" />
       <option name="TEST_OBJECT" value="method" />
       <option name="VM_PARAMETERS" value="-ea" />
       <option name="PARAMETERS" />
@@ -1145,19 +1137,19 @@
       <item index="6" class="java.lang.String" itemvalue="Application.macaddress all 48" />
       <item index="7" class="java.lang.String" itemvalue="Application.macaddress add 48" />
       <item index="8" class="java.lang.String" itemvalue="Application.macaddress delete 48" />
-      <item index="9" class="java.lang.String" itemvalue="JUnit.testMiddle_Change_registration" />
-      <item index="10" class="java.lang.String" itemvalue="JUnit.testMiddle_Change_registration.testChange_registration" />
-      <item index="11" class="java.lang.String" itemvalue="JUnit.testMiddle_Check_registration.testCheck_registration" />
-      <item index="12" class="java.lang.String" itemvalue="JUnit.testMiddle_Check_registration.testCheck_registration_d_No_amsIp_found_for_mac" />
-      <item index="13" class="java.lang.String" itemvalue="JUnit.testMiddle_Check_registration.testCheck_registration_No_amsIp_found_for_mac" />
+      <item index="9" class="java.lang.String" itemvalue="JUnit.testMiddle_Check_registration.testCheck_registration" />
+      <item index="10" class="java.lang.String" itemvalue="JUnit.testMiddle_Check_registration.testCheck_registration_d_No_amsIp_found_for_mac" />
+      <item index="11" class="java.lang.String" itemvalue="JUnit.testMiddle_Check_registration.testCheck_registration_No_amsIp_found_for_mac" />
+      <item index="12" class="java.lang.String" itemvalue="JUnit.testAMS_newAPI_Performance.test1_Add_Purge" />
+      <item index="13" class="java.lang.String" itemvalue="JUnit.testAMS_newAPI_Performance.test2_Add_Delete_Purge" />
     </list>
     <recent_temporary>
       <list size="5">
-        <item index="0" class="java.lang.String" itemvalue="JUnit.testMiddle_Check_registration.testCheck_registration" />
-        <item index="1" class="java.lang.String" itemvalue="JUnit.testMiddle_Check_registration.testCheck_registration_No_amsIp_found_for_mac" />
-        <item index="2" class="java.lang.String" itemvalue="JUnit.testMiddle_Check_registration.testCheck_registration_d_No_amsIp_found_for_mac" />
-        <item index="3" class="java.lang.String" itemvalue="JUnit.testMiddle_Change_registration.testChange_registration" />
-        <item index="4" class="java.lang.String" itemvalue="JUnit.testMiddle_Change_registration" />
+        <item index="0" class="java.lang.String" itemvalue="JUnit.testAMS_newAPI_Performance.test2_Add_Delete_Purge" />
+        <item index="1" class="java.lang.String" itemvalue="JUnit.testAMS_newAPI_Performance.test1_Add_Purge" />
+        <item index="2" class="java.lang.String" itemvalue="JUnit.testMiddle_Check_registration.testCheck_registration" />
+        <item index="3" class="java.lang.String" itemvalue="JUnit.testMiddle_Check_registration.testCheck_registration_No_amsIp_found_for_mac" />
+        <item index="4" class="java.lang.String" itemvalue="JUnit.testMiddle_Check_registration.testCheck_registration_d_No_amsIp_found_for_mac" />
       </list>
     </recent_temporary>
   </component>
@@ -1171,14 +1163,14 @@
     <configuration>$USER_HOME$/.subversion</configuration>
   </component>
   <component name="TestHistory">
-    <history-entry file="testMiddle_Change_registration - 2018.05.22 at 13h 12m 26s.xml">
-      <configuration name="testMiddle_Change_registration" configurationId="JUnit" />
+    <history-entry file="testAMS_newAPI_Performance_test1_Add_Purge - 2018.05.22 at 19h 14m 24s.xml">
+      <configuration name="testAMS_newAPI_Performance.test1_Add_Purge" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="testMiddle_Change_registration_testChange_registration - 2018.05.22 at 13h 20m 40s.xml">
-      <configuration name="testMiddle_Change_registration.testChange_registration" configurationId="JUnit" />
+    <history-entry file="testAMS_newAPI_Performance_test1_Add_Purge - 2018.05.22 at 19h 14m 44s.xml">
+      <configuration name="testAMS_newAPI_Performance.test1_Add_Purge" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="testMiddle_Change_registration_testChange_registration - 2018.05.22 at 13h 21m 26s.xml">
-      <configuration name="testMiddle_Change_registration.testChange_registration" configurationId="JUnit" />
+    <history-entry file="testAMS_newAPI_Performance_test2_Add_Delete_Purge - 2018.05.22 at 19h 15m 12s.xml">
+      <configuration name="testAMS_newAPI_Performance.test2_Add_Delete_Purge" configurationId="JUnit" />
     </history-entry>
     <history-entry file="testMiddle_Check_registration_testCheck_registration - 2018.05.22 at 13h 25m 27s.xml">
       <configuration name="testMiddle_Check_registration.testCheck_registration" configurationId="JUnit" />
@@ -1213,23 +1205,24 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="1679" y="22" width="1682" height="1029" extended-state="6" />
+    <editor active="true" />
     <layout>
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3265306" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.28117913" sideWeight="0.4957317" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.276644" sideWeight="0.5042683" order="10" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.2152439" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.13151927" sideWeight="0.49756098" order="8" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.47619048" sideWeight="0.49634147" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.3968254" sideWeight="0.49634147" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32993197" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.35731706" sideWeight="0.49546486" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.35731706" sideWeight="0.49546486" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25609756" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.19512194" sideWeight="0.50453514" order="3" side_tool="true" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.47619048" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Data View" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32987806" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="SVN Repositories" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3696145" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.28117913" sideWeight="0.4957317" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
@@ -1540,7 +1533,7 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/target/classes/reminders.csv" />
-    <entry file="file://$PROJECT_DIR$/target/classes/reminders_oldapi.csv">
+    <entry file="file://$PROJECT_DIR$/src/main/resources/reminders_oldapi.csv">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="68">
           <caret line="4" column="41" lean-forward="false" selection-start-line="4" selection-start-column="41" selection-end-line="4" selection-end-column="41" />
@@ -1600,15 +1593,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/target/classes/reminders_macaddress_registration.csv">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="68">
-          <caret line="4" column="68" lean-forward="true" selection-start-line="4" selection-start-column="68" selection-end-line="4" selection-end-column="68" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/target/classes/reminders_oldapi.csv">
+    <entry file="file://$PROJECT_DIR$/src/main/resources/reminders_oldapi.csv">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="68">
           <caret line="4" column="30" lean-forward="true" selection-start-line="4" selection-start-column="30" selection-end-line="4" selection-end-column="30" />
@@ -1656,29 +1641,18 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/test22_oldapi_reminder_Add_Delete_Purge.sh">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="136">
-          <caret line="8" column="34" lean-forward="false" selection-start-line="8" selection-start-column="34" selection-end-line="8" selection-end-column="34" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/test/java/tv/zodiac/dev/testAMS_newAPI_Performance.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="330">
-          <caret line="36" column="47" lean-forward="false" selection-start-line="36" selection-start-column="47" selection-end-line="36" selection-end-column="47" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="method#test3_Add_Modify_Delete_Purge#0;class#testAMS_newAPI_Performance#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/target/classes/reminders.csv">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="17">
           <caret line="1" column="31" lean-forward="false" selection-start-line="1" selection-start-column="31" selection-end-line="1" selection-end-column="31" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/test22_oldapi_reminder_Add_Delete_Purge.sh">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="136">
+          <caret line="8" column="34" lean-forward="false" selection-start-line="8" selection-start-column="34" selection-end-line="8" selection-end-column="34" />
           <folding />
         </state>
       </provider>
@@ -1688,6 +1662,26 @@
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/reminders_macaddress_registration.csv">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="68">
+          <caret line="4" column="68" lean-forward="true" selection-start-line="4" selection-start-column="68" selection-end-line="4" selection-end-column="68" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/test/java/tv/zodiac/dev/testAMS_newAPI_Performance.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="215">
+          <caret line="80" column="22" lean-forward="true" selection-start-line="80" selection-start-column="22" selection-end-line="80" selection-end-column="22" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="method#test2_Add_Delete_Purge#0;class#testAMS_newAPI_Performance#0" expanded="false" />
+            <element signature="method#test3_Add_Modify_Delete_Purge#0;class#testAMS_newAPI_Performance#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
