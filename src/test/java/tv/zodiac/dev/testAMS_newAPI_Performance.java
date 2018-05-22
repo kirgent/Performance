@@ -1,6 +1,5 @@
 package tv.zodiac.dev;
 
-import org.junit.jupiter.api.condition.DisabledIfEnvironmentVariable;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvFileSource;
 
@@ -90,8 +89,6 @@ class testAMS_newAPI_Performance extends API_common {
         assertNotEquals(null, reminderOffset);
         assertNotEquals(null, reminderOffset_new);
         assertNotEquals(0, count_iterations);
-        //System.out.println("testname=" + testname + ", macaddress=" + macaddress + ", count_reminders=" + count_reminders + ", count_iterations=" + count_iterations);
-        
         ArrayList add_list,
                 delete_list = new ArrayList(),
                 purge_list = new ArrayList();
@@ -163,8 +160,6 @@ class testAMS_newAPI_Performance extends API_common {
         assertNotEquals(null, reminderOffset);
         assertNotEquals(null, reminderOffset_new);
         assertNotEquals(0, count_iterations);
-        //System.out.println("testname=" + testname + ", macaddress=" + macaddress + ", count_reminders=" + count_reminders + ", count_iterations=" + count_iterations);
-
         ArrayList add_list,
                 modify_list = new ArrayList(),
                 delete_list = new ArrayList(),

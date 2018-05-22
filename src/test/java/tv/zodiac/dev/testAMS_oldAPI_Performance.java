@@ -26,8 +26,6 @@ class testAMS_oldAPI_Performance extends API_common {
         assertNotEquals(null, reminderOffset);
         assertNotEquals(null, reminderOffset_new);
         assertNotEquals(0, count_iterations);
-        //System.out.println("testname=" + testname + ", macaddress=" + macaddress + ", count_reminders=" + count_reminders + ", count_iterations=" + count_iterations);
-
         ArrayList add_list,
                 purge_list = new ArrayList();
         int a_avg = 0, a_min = 0, a_max=0, a_iterations = 0,
@@ -80,8 +78,6 @@ class testAMS_oldAPI_Performance extends API_common {
         assertNotEquals(null, reminderOffset);
         assertNotEquals(null, reminderOffset_new);
         assertNotEquals(0, count_iterations);
-        //System.out.println("testname=" + testname + ", macaddress=" + macaddress + ", count_reminders=" + count_reminders + ", count_iterations=" + count_iterations);
-
         ArrayList add_list,
                 delete_list = new ArrayList(),
                 purge_list = new ArrayList();
