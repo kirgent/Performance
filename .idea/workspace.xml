@@ -4,8 +4,6 @@
     <list default="true" id="a3173ab5-15da-4bf8-8272-656fad315acb" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/test-classes/tv/zodiac/dev/testAMS_newAPI_Reminder_Add.class" afterPath="$PROJECT_DIR$/target/test-classes/tv/zodiac/dev/testAMS_newAPI_Reminder_Add.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/test/java/tv/zodiac/dev/testAMS_newAPI_Performance.java" afterPath="$PROJECT_DIR$/src/test/java/tv/zodiac/dev/testAMS_newAPI_Performance.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/test/java/tv/zodiac/dev/testAMS_oldAPI_Performance.java" afterPath="$PROJECT_DIR$/src/test/java/tv/zodiac/dev/testAMS_oldAPI_Performance.java" />
     </list>
     <ignored path="target/generated-sources/" />
     <ignored path="target/generated-test-sources/" />
@@ -46,15 +44,15 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="testAMS_oldAPI_Performance.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="testAMS_oldAPI_Performance.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/test/java/tv/zodiac/dev/testAMS_oldAPI_Performance.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="262">
-              <caret line="23" column="44" lean-forward="false" selection-start-line="23" selection-start-column="44" selection-end-line="23" selection-end-column="44" />
+              <caret line="21" column="44" lean-forward="false" selection-start-line="21" selection-start-column="44" selection-end-line="21" selection-end-column="44" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#1041#3764#0" expanded="false" />
-                <element signature="e#4149#7698#0" expanded="false" />
+                <element signature="e#891#3614#0" expanded="false" />
+                <element signature="e#3999#7548#0" expanded="false" />
               </folding>
             </state>
           </provider>
@@ -70,21 +68,21 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="test11_oldapi_reminder_Add_Purge.sh" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/test11_oldapi_reminder_Add_Purge.sh">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="136">
-              <caret line="8" column="114" lean-forward="false" selection-start-line="8" selection-start-column="114" selection-end-line="8" selection-end-column="114" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="reminders.csv" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/resources/reminders.csv">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="0">
               <caret line="0" column="38" lean-forward="false" selection-start-line="0" selection-start-column="38" selection-end-line="0" selection-end-column="38" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="reminders_oldapi.csv" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/main/resources/reminders_oldapi.csv">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="68">
+              <caret line="4" column="40" lean-forward="true" selection-start-line="4" selection-start-column="40" selection-end-line="4" selection-end-column="40" />
               <folding />
             </state>
           </provider>
@@ -127,11 +125,11 @@
         <entry file="file://$PROJECT_DIR$/src/test/java/tv/zodiac/dev/testAMS_newAPI_Performance.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="250">
-              <caret line="25" column="58" lean-forward="true" selection-start-line="25" selection-start-column="8" selection-end-line="25" selection-end-column="58" />
+              <caret line="23" column="58" lean-forward="true" selection-start-line="23" selection-start-column="8" selection-end-line="23" selection-end-column="58" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#4637#8428#0" expanded="false" />
-                <element signature="e#8813#13468#0" expanded="false" />
+                <element signature="e#4487#8278#0" expanded="false" />
+                <element signature="e#8663#13318#0" expanded="false" />
               </folding>
             </state>
           </provider>
@@ -673,24 +671,6 @@
               <item name="test" type="462c0819:PsiDirectoryNode" />
               <item name="java" type="462c0819:PsiDirectoryNode" />
               <item name="dev" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="Reminders" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Reminders" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="test" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="dev" type="462c0819:PsiDirectoryNode" />
-              <item name="testAMS_newAPI_Performance" type="1a9f42e2:ClassTreeNode" />
-            </path>
-            <path>
-              <item name="Reminders" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Reminders" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="test" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="dev" type="462c0819:PsiDirectoryNode" />
-              <item name="testAMS_newAPI_Reminder_Add" type="1a9f42e2:ClassTreeNode" />
             </path>
             <path>
               <item name="Reminders" type="b2602c69:ProjectViewProjectNode" />
@@ -1626,14 +1606,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/reminders_oldapi.csv">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/tv/zodiac/dev/Main.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="3077">
@@ -1724,14 +1696,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/reminders.csv">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="38" lean-forward="false" selection-start-line="0" selection-start-column="38" selection-end-line="0" selection-end-column="38" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/tv/zodiac/dev/API_common.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="179">
@@ -1770,11 +1734,11 @@
     <entry file="file://$PROJECT_DIR$/src/test/java/tv/zodiac/dev/testAMS_newAPI_Performance.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="250">
-          <caret line="25" column="58" lean-forward="true" selection-start-line="25" selection-start-column="8" selection-end-line="25" selection-end-column="58" />
+          <caret line="23" column="58" lean-forward="true" selection-start-line="23" selection-start-column="8" selection-end-line="23" selection-end-column="58" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#4637#8428#0" expanded="false" />
-            <element signature="e#8813#13468#0" expanded="false" />
+            <element signature="e#4487#8278#0" expanded="false" />
+            <element signature="e#8663#13318#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -1782,12 +1746,28 @@
     <entry file="file://$PROJECT_DIR$/src/test/java/tv/zodiac/dev/testAMS_oldAPI_Performance.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="262">
-          <caret line="23" column="44" lean-forward="false" selection-start-line="23" selection-start-column="44" selection-end-line="23" selection-end-column="44" />
+          <caret line="21" column="44" lean-forward="false" selection-start-line="21" selection-start-column="44" selection-end-line="21" selection-end-column="44" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#1041#3764#0" expanded="false" />
-            <element signature="e#4149#7698#0" expanded="false" />
+            <element signature="e#891#3614#0" expanded="false" />
+            <element signature="e#3999#7548#0" expanded="false" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/reminders.csv">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="38" lean-forward="false" selection-start-line="0" selection-start-column="38" selection-end-line="0" selection-end-column="38" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/reminders_oldapi.csv">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="68">
+          <caret line="4" column="40" lean-forward="true" selection-start-line="4" selection-start-column="40" selection-end-line="4" selection-end-column="40" />
+          <folding />
         </state>
       </provider>
     </entry>
