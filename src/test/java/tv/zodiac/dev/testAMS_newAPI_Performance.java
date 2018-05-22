@@ -20,7 +20,7 @@ class testAMS_newAPI_Performance extends API_common {
     @ParameterizedTest
     @CsvFileSource(resources = "reminders.csv", numLinesToSkip = 1)
     //@CsvSource({ "test, 1", "macaddress, 2", "count_reminders, 3", "count_iterations" })
-    void test1_Add_Purge(String ams_ip, String macaddress, int count_reminders, int reminderChannelNumber, long reminderOffset, long reminderOffset_new, int count_iterations) throws InterruptedException, IOException {
+    void test1_Add_Purge(String ams_ip, String boxname, String macaddress, int count_reminders, int reminderChannelNumber, long reminderOffset, long reminderOffset_new, int count_iterations) throws InterruptedException, IOException {
         assertNotNull(ams_ip);
         assertNotNull(macaddress);
         assertNotEquals(0, count_reminders);
@@ -79,7 +79,7 @@ class testAMS_newAPI_Performance extends API_common {
 
     @ParameterizedTest
     @CsvFileSource(resources = "reminders.csv", numLinesToSkip = 1)
-    void test2_Add_Delete_Purge(String ams_ip, String macaddress, int count_reminders, int reminderChannelNumber, long reminderOffset, long reminderOffset_new, int count_iterations) throws IOException, InterruptedException {
+    void test2_Add_Delete_Purge(String ams_ip, String boxname, String macaddress, int count_reminders, int reminderChannelNumber, long reminderOffset, long reminderOffset_new, int count_iterations) throws IOException, InterruptedException {
             assertNotNull(ams_ip);
             assertNotNull(macaddress);
             assertNotEquals(0, count_reminders);
@@ -151,7 +151,7 @@ class testAMS_newAPI_Performance extends API_common {
 
     @ParameterizedTest
     @CsvFileSource(resources = "reminders.csv", numLinesToSkip = 1)
-    void test3_Add_Modify_Delete_Purge(String ams_ip, String macaddress, int count_reminders, int reminderChannelNumber, long reminderOffset, long reminderOffset_new, int count_iterations) throws IOException, InterruptedException {
+    void test3_Add_Modify_Delete_Purge(String ams_ip, String boxname, String macaddress, int count_reminders, int reminderChannelNumber, long reminderOffset, long reminderOffset_new, int count_iterations) throws IOException, InterruptedException {
             assertNotNull(ams_ip);
             assertNotNull(macaddress);
             assertNotEquals(0, count_reminders);

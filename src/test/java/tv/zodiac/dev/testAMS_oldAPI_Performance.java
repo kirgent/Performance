@@ -19,7 +19,7 @@ class testAMS_oldAPI_Performance extends API_common {
 
     @ParameterizedTest
     @CsvFileSource(resources = "reminders_oldapi.csv", numLinesToSkip = 1)
-    void test1_Add_Purge(String ams_ip, String macaddress, int count_reminders, int reminderChannelNumber, long reminderOffset, long reminderOffset_new, int count_iterations) throws IOException, InterruptedException {
+    void test1_Add_Purge(String ams_ip, String boxname, String macaddress, int count_reminders, int reminderChannelNumber, long reminderOffset, long reminderOffset_new, int count_iterations) throws IOException, InterruptedException {
             assertNotNull(ams_ip);
             assertNotNull(macaddress);
             assertNotEquals(0, count_reminders);
@@ -72,7 +72,7 @@ class testAMS_oldAPI_Performance extends API_common {
 
     @ParameterizedTest
     @CsvFileSource(resources = "reminders_oldapi.csv", numLinesToSkip = 1)
-    void test2_Add_Delete_Purge(String ams_ip, String macaddress, int count_reminders, int reminderChannelNumber, long reminderOffset, long reminderOffset_new, int count_iterations) throws IOException, InterruptedException {
+    void test2_Add_Delete_Purge(String ams_ip, String boxname, String macaddress, int count_reminders, int reminderChannelNumber, long reminderOffset, long reminderOffset_new, int count_iterations) throws IOException, InterruptedException {
             assertNotNull(ams_ip);
             assertNotNull(macaddress);
             assertNotEquals(0, count_reminders);
