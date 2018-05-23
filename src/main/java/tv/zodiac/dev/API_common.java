@@ -22,7 +22,7 @@ import static java.lang.System.currentTimeMillis;
 public class API_common {
 
     Boolean show_info_level = true;
-    Boolean show_debug_level = true;
+    Boolean show_debug_level = false;
     Boolean show_generated_json = false;
     private Boolean show_response_body = true;
 
@@ -61,7 +61,6 @@ public class API_common {
     final String box4212 = "A0722CEEC9A4";
     final String boxMoto2145_173 =  "000004B9419F"; //"B077AC5D91DD"; // "000004B9419F"; //Moto_2145_Mondo_DCX3200M_17.3_346
     final String boxMoto2147_Rems = "000004D67F70"; //000004d67f70"; //Moto_2147_Mondo_DCX3200M_REMS
-
     String mac = boxD102;
 
     ArrayList reminderScheduleId_list = new ArrayList();
@@ -71,25 +70,19 @@ public class API_common {
     ArrayList<Integer> delete_avg_list = new ArrayList<>();
     ArrayList<Integer> purge_avg_list = new ArrayList<>();
 
-    //CHANNELS
-    int reminderChannelNumber = reminderChannelNumber();
-    //int reminderChannelNumber_for_statuscode3 = 9999;
-    //int reminderChannelNumber_for_statuscode4 = 1000;
     /*private Integer[] rack_channel30 = { 2, 3, 4, 5, 6, 7, 8, 9, 12, 13,
             14, 16, 18, 19, 22, 23, 25, 28, 30, 31,
             32, 33, 37, 38, 41, 44, 46, 48, 49, 50 };*/
     //Integer[] rack_channel = {2, 3, 4, 5, 6, 7, 8, 9, 10, 11};
 
-    //@Deprecated
-    //final String reminderProgramId = "EP002960010113";
-    final String reminderProgramId = "";
-
     String reminderProgramStart = "";
-
+    String reminderProgramId = "";
+    //final String reminderProgramId = "EP002960010113";
+    int reminderChannelNumber = reminderChannelNumber();
     int reminderOffset = reminderOffset();
     //int reminderOffset_new = reminderOffset();
-    long reminderScheduleId = reminderScheduleId();
-    long reminderId = reminderId();
+    long reminderScheduleId;
+    long reminderId;
 
     int count_reminders = 2;
 
@@ -628,7 +621,7 @@ public class API_common {
     String prepare_url(String ams_ip, Enum<Operation> operation, boolean newapi) {
         String result;
         if (newapi) {
-            result = "http://" + ams_ip + ":" + ams_port + "/ams/Reminders?req=" + operation;
+            result = "http://" + ams_ip + ":" + ams_port + "/ams/Reminders2?req=" + operation;
         } else {
             result = "http://" + ams_ip + ":" + ams_port + "/ams/Reminders?req=ChangeReminders";
         }

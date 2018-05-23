@@ -344,3 +344,12 @@ Mon May 21 20:40:02 MSK 2018, macaddress=000004D67F70, count_reminders=500, coun
    add avg=1839ms, min=1839ms, max=1839ms, /1
  purge avg=526ms, min=526ms, max=526ms, /1
 ========= ========= ========= ========= ========= ========= ========= =========
+========= ========= ========= Total measurements ========= ========= =========
+Wed May 23 15:50:04 MSK 2018, macaddress=000004D67F70, count_reminders=500, count_iterations=1/1
+   add avg=2399ms, min=2399ms, max=2399ms, /1
+ purge avg=519ms, min=519ms, max=519ms, /1
+========= ========= ========= ========= ========= ========= ========= ================== ========= ========= Total measurements ========= ========= =========
+Wed May 23 15:53:50 MSK 2018, macaddress=000004D67F70, count_reminders=500, count_iterations=1/1
+   add avg=2218ms, min=2218ms, max=2218ms, /1
+ purge avg=517ms, min=517ms, max=517ms, /1
+========= ========= ========= ========= ========= ========= ========= =========

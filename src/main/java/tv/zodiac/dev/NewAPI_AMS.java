@@ -277,11 +277,10 @@ class NewAPI_AMS extends API_common {
         object_in_options.put("name", option);
         object_in_options.put("value", value);
 
-        String result = json.toString();
         if(show_generated_json) {
-            System.out.println("[JSON] generated json: " + result);
+            System.out.println("[JSON] generated json: " + json);
         }
-        return result;
+        return json.toString();
     }
 
     private String generate_json_reminder(String mac, int count_reminders, Enum<Operation> operation, String reminderProgramStart, long reminderChannelNumber, String reminderProgramId, long reminderOffset, long reminderScheduleId, long reminderId) {
@@ -397,18 +396,17 @@ class NewAPI_AMS extends API_common {
 
         if(show_debug_level) {
             if(reminderScheduleId_list.size()<=10) {
-                System.out.println("reminderScheduleId_list: size=" + reminderScheduleId_list.size() + " : " + reminderScheduleId_list);
+                System.out.println("reminderScheduleId_list : size=" + reminderScheduleId_list.size() + " : " + reminderScheduleId_list);
             }
             if(reminderId_list.size()<=10) {
-                System.out.println("reminderId_list        : size=" + reminderId_list.size() + " : " + reminderId_list);
+                System.out.println("reminderId_list         : size=" + reminderId_list.size() + " : " + reminderId_list);
             }
         }
 
-        String result = json.toString();
         if(show_generated_json) {
-            System.out.println("[JSON] generated json: " + result);
+            System.out.println("[JSON] generated json: " + json);
         }
-        return result;
+        return json.toString();
     }
 
     private String generate_json_reminder_delete(String mac, int count_reminders, long reminderScheduleId, long reminderId) {
@@ -451,20 +449,17 @@ class NewAPI_AMS extends API_common {
 
         if(show_debug_level) {
             if(reminderScheduleId_list.size()<=10) {
-                System.out.println("reminderScheduleId_list: size=" + reminderScheduleId_list.size());
-                System.out.println(": " + reminderScheduleId_list);
+                System.out.println("reminderScheduleId_list : size=" + reminderScheduleId_list.size() + " : " + reminderScheduleId_list);
             }
             if(reminderId_list.size()<=10) {
-                System.out.println("reminderId_list        : size=" + reminderId_list.size());
-                System.out.println(": " + reminderId_list);
+                System.out.println("reminderId_list         : size=" + reminderId_list.size() + " : " + reminderId_list);
             }
         }
 
-        String result = json.toString();
         if(show_generated_json) {
-            System.out.println("[JSON] generated json: " + result);
+            System.out.println("[JSON] generated json: " + json);
         }
-        return result;
+        return json.toString();
     }
 
     private String generate_json_reminder_purge(String mac) {
@@ -474,11 +469,10 @@ class NewAPI_AMS extends API_common {
         JSONArray array_reminders = new JSONArray();
         json.put("reminders", array_reminders);
 
-        String result = json.toString();
         if(show_generated_json) {
-            System.out.println("[JSON] generated json: " + result);
+            System.out.println("[JSON] generated json: " + json);
         }
-        return result;
+        return json.toString();
     }
 
     ArrayList Change_settings(String mac, String option, String value) throws IOException {
