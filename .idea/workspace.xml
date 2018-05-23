@@ -1,14 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="3e202862-3d84-460d-b947-510d3ab820d4" name="Default" comment="update">
+    <list default="true" id="3e202862-3d84-460d-b947-510d3ab820d4" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/tv/zodiac/dev/API_common.class" afterPath="$PROJECT_DIR$/target/classes/tv/zodiac/dev/API_common.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/test-classes/tv/zodiac/dev/testAMS_newAPI_Performance.class" afterPath="$PROJECT_DIR$/target/test-classes/tv/zodiac/dev/testAMS_newAPI_Performance.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/test-classes/tv/zodiac/dev/testAMS_oldAPI_Performance.class" afterPath="$PROJECT_DIR$/target/test-classes/tv/zodiac/dev/testAMS_oldAPI_Performance.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/tv/zodiac/dev/NewAPI_AMS.class" afterPath="$PROJECT_DIR$/target/classes/tv/zodiac/dev/NewAPI_AMS.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/tv/zodiac/dev/API_common.java" afterPath="$PROJECT_DIR$/src/main/java/tv/zodiac/dev/API_common.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/test/java/tv/zodiac/dev/testAMS_newAPI_Performance.java" afterPath="$PROJECT_DIR$/src/test/java/tv/zodiac/dev/testAMS_newAPI_Performance.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/test/java/tv/zodiac/dev/testAMS_oldAPI_Performance.java" afterPath="$PROJECT_DIR$/src/test/java/tv/zodiac/dev/testAMS_oldAPI_Performance.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/tv/zodiac/dev/NewAPI_AMS.java" afterPath="$PROJECT_DIR$/src/main/java/tv/zodiac/dev/NewAPI_AMS.java" />
     </list>
     <ignored path="$PROJECT_DIR$/target/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -56,11 +54,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="API_common.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="API_common.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/tv/zodiac/dev/API_common.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="51">
-              <caret line="22" column="0" lean-forward="true" selection-start-line="22" selection-start-column="0" selection-end-line="22" selection-end-column="0" />
+            <state relative-caret-position="112">
+              <caret line="494" column="16" lean-forward="false" selection-start-line="494" selection-start-column="16" selection-end-line="494" selection-end-column="16" />
               <folding>
                 <element signature="method#printArrayList#0;class#API_common#0" expanded="false" />
                 <element signature="method#ContainsAllNulls#0;class#API_common#0" expanded="false" />
@@ -98,13 +96,13 @@
       <file leaf-file-name="workspace.xml" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/.idea/workspace.xml">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="697">
-              <caret line="42" column="14" lean-forward="false" selection-start-line="42" selection-start-column="14" selection-end-line="42" selection-end-column="14" />
+            <state relative-caret-position="663">
+              <caret line="40" column="14" lean-forward="false" selection-start-line="40" selection-start-column="14" selection-end-line="40" selection-end-column="14" />
               <folding>
-                <marker date="1527072282657" expanded="false" signature="70180:70197" ph="..." />
-                <marker date="1527072282657" expanded="false" signature="70180:70215" ph="..." />
-                <marker date="1527072282657" expanded="false" signature="70180:70228" ph="..." />
-                <marker date="1527072282657" expanded="false" signature="70180:70243" ph="..." />
+                <marker date="1527072768240" expanded="false" signature="70806:70823" ph="..." />
+                <marker date="1527072768240" expanded="false" signature="70806:70841" ph="..." />
+                <marker date="1527072768240" expanded="false" signature="70806:70854" ph="..." />
+                <marker date="1527072768240" expanded="false" signature="70806:70869" ph="..." />
               </folding>
             </state>
           </provider>
@@ -134,11 +132,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="NewAPI_AMS.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="NewAPI_AMS.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/tv/zodiac/dev/NewAPI_AMS.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="467">
-              <caret line="61" column="39" lean-forward="false" selection-start-line="61" selection-start-column="39" selection-end-line="61" selection-end-column="39" />
+            <state relative-caret-position="339">
+              <caret line="398" column="39" lean-forward="false" selection-start-line="398" selection-start-column="39" selection-end-line="398" selection-end-column="39" />
               <folding />
             </state>
           </provider>
@@ -161,6 +159,8 @@
       <find>p_avg</find>
       <find>update</find>
       <find>random</find>
+      <find>size=</find>
+      <find>reminderId_list</find>
     </findStrings>
     <replaceStrings>
       <replace>macaddress</replace>
@@ -174,10 +174,10 @@
       <list>
         <option value="$PROJECT_DIR$/.idea/workspace.xml" />
         <option value="$PROJECT_DIR$/src/test/java/tv/zodiac/dev/testSandbox.java" />
-        <option value="$PROJECT_DIR$/src/main/java/tv/zodiac/dev/NewAPI_AMS.java" />
         <option value="$PROJECT_DIR$/src/test/java/tv/zodiac/dev/testAMS_oldAPI_Performance.java" />
         <option value="$PROJECT_DIR$/src/test/java/tv/zodiac/dev/testAMS_newAPI_Performance.java" />
         <option value="$PROJECT_DIR$/src/main/java/tv/zodiac/dev/API_common.java" />
+        <option value="$PROJECT_DIR$/src/main/java/tv/zodiac/dev/NewAPI_AMS.java" />
       </list>
     </option>
   </component>
@@ -237,6 +237,24 @@
               <item name="main" type="462c0819:PsiDirectoryNode" />
               <item name="java" type="462c0819:PsiDirectoryNode" />
               <item name="dev" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="Reminders" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Reminders" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="dev" type="462c0819:PsiDirectoryNode" />
+              <item name="API_common" type="1a9f42e2:ClassTreeNode" />
+            </path>
+            <path>
+              <item name="Reminders" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Reminders" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="dev" type="462c0819:PsiDirectoryNode" />
+              <item name="NewAPI_AMS" type="1a9f42e2:ClassTreeNode" />
             </path>
             <path>
               <item name="Reminders" type="b2602c69:ProjectViewProjectNode" />
@@ -659,7 +677,7 @@
     <editor active="true" />
     <layout>
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3265306" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.28117913" sideWeight="0.4957317" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.28117913" sideWeight="0.4957317" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.276644" sideWeight="0.5042683" order="10" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.2152439" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -1015,13 +1033,13 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/.idea/workspace.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="697">
-          <caret line="42" column="14" lean-forward="false" selection-start-line="42" selection-start-column="14" selection-end-line="42" selection-end-column="14" />
+        <state relative-caret-position="663">
+          <caret line="40" column="14" lean-forward="false" selection-start-line="40" selection-start-column="14" selection-end-line="40" selection-end-column="14" />
           <folding>
-            <marker date="1527072282657" expanded="false" signature="70180:70197" ph="..." />
-            <marker date="1527072282657" expanded="false" signature="70180:70215" ph="..." />
-            <marker date="1527072282657" expanded="false" signature="70180:70228" ph="..." />
-            <marker date="1527072282657" expanded="false" signature="70180:70243" ph="..." />
+            <marker date="1527072768240" expanded="false" signature="70806:70823" ph="..." />
+            <marker date="1527072768240" expanded="false" signature="70806:70841" ph="..." />
+            <marker date="1527072768240" expanded="false" signature="70806:70854" ph="..." />
+            <marker date="1527072768240" expanded="false" signature="70806:70869" ph="..." />
           </folding>
         </state>
       </provider>
@@ -1054,14 +1072,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/tv/zodiac/dev/NewAPI_AMS.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="467">
-          <caret line="61" column="39" lean-forward="false" selection-start-line="61" selection-start-column="39" selection-end-line="61" selection-end-column="39" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/test/java/tv/zodiac/dev/testAMS_oldAPI_Performance.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="170">
@@ -1085,8 +1095,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/tv/zodiac/dev/API_common.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="51">
-          <caret line="22" column="0" lean-forward="true" selection-start-line="22" selection-start-column="0" selection-end-line="22" selection-end-column="0" />
+        <state relative-caret-position="112">
+          <caret line="494" column="16" lean-forward="false" selection-start-line="494" selection-start-column="16" selection-end-line="494" selection-end-column="16" />
           <folding>
             <element signature="method#printArrayList#0;class#API_common#0" expanded="false" />
             <element signature="method#ContainsAllNulls#0;class#API_common#0" expanded="false" />
@@ -1094,6 +1104,14 @@
             <element signature="method#get_time_old#0;class#API_common#0" expanded="false" />
             <element signature="method#get_time#0;class#API_common#0" expanded="false" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/tv/zodiac/dev/NewAPI_AMS.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="339">
+          <caret line="398" column="39" lean-forward="false" selection-start-line="398" selection-start-column="39" selection-end-line="398" selection-end-column="39" />
+          <folding />
         </state>
       </provider>
     </entry>

@@ -55,10 +55,7 @@ public class API_common {
     final String boxD104 = "3438B7EB2E34";//WB20 D104
     final String boxD105 = "3438B7EB2E30";//WB20 D105
     final String boxD106 = "3438B7EB2EC4";//WB20 D106
-    final String box_Kirmoto = "0000007F8214";//Kirmoto
     final String box_Tanya = "000005FE680A";//Tanya
-    final String box_Vitya = "A0722CEEC934";//Vitya
-    final String box_Katya_V = "0000048D4EB4";//Katya_V
     final String boxD111 = "2c7e81ee2530";
     final String box4210 = "A0722CEEC9B4";// 30.255.241.239  /  10.15.199.182
     final String box4212 = "A0722CEEC9A4";

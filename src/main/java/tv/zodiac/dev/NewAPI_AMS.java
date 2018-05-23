@@ -397,12 +397,10 @@ class NewAPI_AMS extends API_common {
 
         if(show_debug_level) {
             if(reminderScheduleId_list.size()<=10) {
-                System.out.println("reminderScheduleId_list: size=" + reminderScheduleId_list.size());
-                System.out.println(": " + reminderScheduleId_list);
+                System.out.println("reminderScheduleId_list: size=" + reminderScheduleId_list.size() + " : " + reminderScheduleId_list);
             }
             if(reminderId_list.size()<=10) {
-                System.out.println("reminderId_list        : size=" + reminderId_list.size());
-                System.out.println(": " + reminderId_list);
+                System.out.println("reminderId_list        : size=" + reminderId_list.size() + " : " + reminderId_list);
             }
         }
 
