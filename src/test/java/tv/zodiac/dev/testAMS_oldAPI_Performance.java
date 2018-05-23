@@ -108,7 +108,7 @@ class testAMS_oldAPI_Performance extends API_common {
                         d_avg = (int) delete_list.get(2);
                         d_min = (int) delete_list.get(3);
                         d_max = (int) delete_list.get(4);
-                        d_iterations = (int) add_list.get(5);
+                        d_iterations = (int) delete_list.get(5);
                     }
 
                     purge_list = AMS.request(ams_ip, mac);
@@ -116,7 +116,7 @@ class testAMS_oldAPI_Performance extends API_common {
                         p_avg = (int) purge_list.get(2);
                         p_min = (int) purge_list.get(3);
                         p_max = (int) purge_list.get(4);
-                        p_iterations = (int) add_list.get(5);
+                        p_iterations = (int) purge_list.get(5);
                     }
                 }
                 add_list.clear();

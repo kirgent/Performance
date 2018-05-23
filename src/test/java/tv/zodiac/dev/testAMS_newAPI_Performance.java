@@ -39,6 +39,7 @@ class testAMS_newAPI_Performance extends API_common {
             System.out.println("========= ========= ========= Iteration = " + i + "/" + count_iterations + " ========= ========= =========");
             long reminderScheduleId = reminderScheduleId();
             long reminderId = reminderId();
+
             add_list = AMS.request(ams_ip, macaddress, Operation.add, count_reminders, reminderProgramStart, reminderChannelNumber, reminderProgramId, reminderOffset, reminderScheduleId, reminderId);
             if(add_list.get(0).equals(expected200) && add_list.get(1).equals("")) {
                 a_avg = (int) add_list.get(2);
@@ -51,7 +52,7 @@ class testAMS_newAPI_Performance extends API_common {
                     p_avg = (int) purge_list.get(2);
                     p_min = (int) purge_list.get(3);
                     p_max = (int) purge_list.get(4);
-                    p_iterations = (int) add_list.get(5);
+                    p_iterations = (int) purge_list.get(5);
                 }
             }
             reminderScheduleId_list.clear();
@@ -66,7 +67,7 @@ class testAMS_newAPI_Performance extends API_common {
 
         if(a_avg != 0 && p_avg != 0) {
             String result = "========= ========= ========= Total measurements ========= ========= ========="
-                    + "\n" + new Date() + ", macaddress=" + macaddress + ", count_reminders=" + count_reminders + ", count_iterations=" + a_iterations + "/" + count_iterations
+                    + "\n" + new Date() + ", macaddress=" + macaddress + "(" + boxname + "), count_reminders=" + count_reminders + ", count_iterations=" + a_iterations + "/" + count_iterations
                     + "\n   add avg=" + a_avg + "ms, min=" + a_min + "ms, max=" + a_max + "ms, /" + a_iterations
                     + "\n purge avg=" + p_avg + "ms, min=" + p_min + "ms, max=" + p_max + "ms, /" + p_iterations
                     + "\n========= ========= ========= ========= ========= ========= ========= =========";
@@ -98,6 +99,7 @@ class testAMS_newAPI_Performance extends API_common {
                 System.out.println("========= ========= ========= Iteration = " + i + "/" + count_iterations + " ========= ========= =========");
                 long reminderScheduleId = reminderScheduleId();
                 long reminderId = reminderId();
+
                 add_list = AMS.request(ams_ip, macaddress, Operation.add, count_reminders, reminderProgramStart, reminderChannelNumber, reminderProgramId, reminderOffset, reminderScheduleId, reminderId);
                 if (add_list.get(0).equals(expected200) && add_list.get(1).equals("")) {
                     a_avg = (int) add_list.get(2);
@@ -135,7 +137,7 @@ class testAMS_newAPI_Performance extends API_common {
 
             if (a_avg != 0 && d_avg != 0 && p_avg != 0) {
                 String result = "========= ========= ========= Total measurements ========= ========= ========="
-                        + "\n" + new Date() + ", macaddress=" + macaddress + ", count_reminders=" + count_reminders + ", count_iterations=" + a_iterations + "/" + count_iterations
+                        + "\n" + new Date() + ", macaddress=" + macaddress + "(" + boxname + "), count_reminders=" + count_reminders + ", count_iterations=" + a_iterations + "/" + count_iterations
                         + "\n   add avg=" + a_avg + "ms, min=" + a_min + "ms, max=" + a_max + "ms, /" + a_iterations
                         + "\ndelete avg=" + d_avg + "ms, min=" + d_min + "ms, max=" + d_max + "ms, /" + d_iterations
                         + "\n purge avg=" + p_avg + "ms, min=" + p_min + "ms, max=" + p_max + "ms, /" + p_iterations
@@ -171,12 +173,14 @@ class testAMS_newAPI_Performance extends API_common {
                 System.out.println("========= ========= ========= Iteration = " + i + "/" + count_iterations + " ========= ========= =========");
                 long reminderScheduleId = reminderScheduleId();
                 long reminderId = reminderId();
+
                 add_list = AMS.request(ams_ip, macaddress, Operation.add, count_reminders, reminderProgramStart, reminderChannelNumber, reminderProgramId, reminderOffset, reminderScheduleId, reminderId);
                 if (add_list.get(0).equals(expected200) && add_list.get(1).equals("")) {
                     a_avg = (int) add_list.get(2);
                     a_min = (int) add_list.get(3);
                     a_max = (int) add_list.get(4);
                     a_iterations = (int) add_list.get(5);
+
                     modify_list = AMS.request(ams_ip, macaddress, Operation.modify, count_reminders, reminderProgramStart, reminderChannelNumber, reminderProgramId, reminderOffset_new, reminderScheduleId, reminderId);
                     if (modify_list.get(1).equals("")) {
                         m_avg = (int) modify_list.get(2);
