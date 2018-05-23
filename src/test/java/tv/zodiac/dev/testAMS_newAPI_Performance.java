@@ -16,7 +16,7 @@ import static org.junit.jupiter.api.Assertions.*;
 class testAMS_newAPI_Performance extends API_common {
     private NewAPI_AMS AMS = new NewAPI_AMS();
     private int timeout = 20000;
-    int sleep_after_iteration = 1000;
+    private int sleep_after_iteration = 1000;
     Integer[] rack_channels_wb = { 2, 31, 63, 209, 211, 631, 755, 808 };
     Integer[] rack_channels_moto = { 2 };
 

@@ -16,7 +16,7 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 class testAMS_oldAPI_Performance extends API_common {
     private OldAPI_AMS AMS = new OldAPI_AMS();
     private int timeout = 20000;
-    int sleep_after_iteration = 1000;
+    private int sleep_after_iteration = 1000;
 
     @ParameterizedTest
     @CsvFileSource(resources = "/reminders_oldapi.csv", numLinesToSkip = 1)

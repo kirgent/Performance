@@ -22,9 +22,9 @@ import static java.lang.System.currentTimeMillis;
 public class API_common {
 
     Boolean show_info_level = true;
-    Boolean show_debug_level = false;
+    Boolean show_debug_level = true;
     Boolean show_generated_json = false;
-    Boolean show_response_body = true;
+    private Boolean show_response_body = true;
 
     //private final static Logger log = Logger.getLogger(API.class.getName());
 
@@ -489,9 +489,9 @@ public class API_common {
         //long reminderScheduleId = Math.abs(random.nextLong());
         long reminderScheduleId = Math.abs(random.nextInt(1000));
         reminderScheduleId_list.add(reminderScheduleId);
-        //if(show_extra_info) {
-            //System.out.println("reminderScheduleId_list<-add=" + reminderScheduleId);
-        //}
+        if(show_debug_level) {
+            System.out.println("reminderScheduleId_list<-add=" + reminderScheduleId);
+        }
         return reminderScheduleId;
     }
 
@@ -500,9 +500,9 @@ public class API_common {
         //long reminderId = Math.abs(random.nextLong());
         long reminderId = Math.abs(random.nextInt(1000));
         reminderId_list.add(reminderId);
-        //if(show_extra_info) {
-            //System.out.println("reminderId_list<-add        =" + reminderId);
-        //}
+        if(show_debug_level) {
+            System.out.println("reminderId_list<-add        =" + reminderId);
+        }
         return reminderId;
     }
 
