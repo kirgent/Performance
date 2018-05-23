@@ -1,5 +1,5 @@
 charterapi,macaddress,ams_ip
-#first 2 lines are skipped: comments here.
+first 2 lines are skipped: comments here.
 "http://spec.partnerapi.engprod-charter.net/api/pub","000004D67F70","172.30.81.4"
 "http://specb.partnerapi.engprod-charter.net/api/pub","000004D67F70","172.30.81.4"
 "http://specc.partnerapi.engprod-charter.net/api/pub","000004D67F70","172.30.81.4"
