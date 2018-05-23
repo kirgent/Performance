@@ -18,7 +18,7 @@ class testMiddle_Check_registration extends API_Middle {
     private int timeout = 20000;
 
     @ParameterizedTest
-    @CsvFileSource(resources = "/reminders_macaddress_registrations.csv", numLinesToSkip = 1)
+    @CsvFileSource(resources = "/reminders_macaddress_registration.csv", numLinesToSkip = 1)
     void testCheck_registration(String charterapi, String macaddress) throws IOException {
         final ArrayList[] actual = new ArrayList[1];
         assertTimeoutPreemptively(ofMillis(timeout), () -> {
@@ -29,7 +29,7 @@ class testMiddle_Check_registration extends API_Middle {
     }
 
     @ParameterizedTest
-    @CsvFileSource(resources = "/reminders_macaddress_registrations.csv", numLinesToSkip = 1)
+    @CsvFileSource(resources = "/reminders_macaddress_registration.csv", numLinesToSkip = 1)
     void testCheck_registration_No_amsIp_found_for_mac(String charterapi) throws IOException {
         final ArrayList[] actual = new ArrayList[1];
         assertTimeoutPreemptively(ofMillis(timeout), () -> {

@@ -18,7 +18,7 @@ class testMiddle_Change_registration extends API_Middle {
     private int timeout = 20000;
 
     @ParameterizedTest
-    @CsvFileSource(resources = "/reminders_macaddress_registrations.csv", numLinesToSkip = 1)
+    @CsvFileSource(resources = "/reminders_macaddress_registration.csv", numLinesToSkip = 1)
     void testChange_registration(String charterapi, String macaddress, String ams_ip) throws IOException {
         final ArrayList[] actual = new ArrayList[1];
         assertTimeoutPreemptively(ofMillis(timeout), () -> {
