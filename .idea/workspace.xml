@@ -2,10 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="3e202862-3d84-460d-b947-510d3ab820d4" name="Default" comment="update">
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/classes/reminders.csv" afterPath="" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/tv/zodiac/dev/API_common.class" afterPath="$PROJECT_DIR$/target/classes/tv/zodiac/dev/API_common.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/reminders.log" afterPath="$PROJECT_DIR$/reminders.log" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/tv/zodiac/dev/API_common.java" afterPath="$PROJECT_DIR$/src/main/java/tv/zodiac/dev/API_common.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/reminders.csv" afterPath="$PROJECT_DIR$/src/main/resources/reminders.csv" />
     </list>
     <ignored path="$PROJECT_DIR$/target/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -34,10 +34,9 @@
       <file leaf-file-name="testAMS_oldAPI_Performance.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/test/java/tv/zodiac/dev/testAMS_oldAPI_Performance.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="255">
-              <caret line="15" column="48" lean-forward="false" selection-start-line="15" selection-start-column="48" selection-end-line="15" selection-end-column="48" />
+            <state relative-caret-position="170">
+              <caret line="10" column="21" lean-forward="true" selection-start-line="10" selection-start-column="21" selection-end-line="10" selection-end-column="21" />
               <folding>
-                <element signature="imports" expanded="true" />
                 <element signature="method#test11_Add_Purge#0;class#testAMS_oldAPI_Performance#0" expanded="false" />
                 <element signature="method#test22_Add_Delete_Purge#0;class#testAMS_oldAPI_Performance#0" expanded="false" />
               </folding>
@@ -55,14 +54,16 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="API_common.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="API_common.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/tv/zodiac/dev/API_common.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="306">
-              <caret line="21" column="25" lean-forward="true" selection-start-line="21" selection-start-column="25" selection-end-line="21" selection-end-column="25" />
+            <state relative-caret-position="172">
+              <caret line="474" column="5" lean-forward="true" selection-start-line="474" selection-start-column="5" selection-end-line="474" selection-end-column="5" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="docComment;class#API_common#0" expanded="false" />
+                <element signature="e#21281#21282#0" expanded="true" />
+                <element signature="e#21340#21341#0" expanded="true" />
                 <element signature="method#printArrayList#0;class#API_common#0" expanded="false" />
                 <element signature="method#ContainsAllNulls#0;class#API_common#0" expanded="false" />
                 <element signature="method#get_date_several#0;class#API_common#0" expanded="false" />
@@ -73,11 +74,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="reminders.csv" pinned="false" current-in-tab="true">
+      <file leaf-file-name="reminders.csv" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/resources/reminders.csv">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="17">
-              <caret line="1" column="12" lean-forward="true" selection-start-line="1" selection-start-column="12" selection-end-line="1" selection-end-column="12" />
+              <caret line="1" column="36" lean-forward="false" selection-start-line="1" selection-start-column="36" selection-end-line="1" selection-end-column="36" />
               <folding />
             </state>
           </provider>
@@ -108,13 +109,13 @@
       <file leaf-file-name="workspace.xml" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/.idea/workspace.xml">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="646">
-              <caret line="39" column="14" lean-forward="false" selection-start-line="39" selection-start-column="14" selection-end-line="39" selection-end-column="14" />
+            <state relative-caret-position="629">
+              <caret line="38" column="14" lean-forward="false" selection-start-line="38" selection-start-column="14" selection-end-line="38" selection-end-column="14" />
               <folding>
-                <marker date="1527080899177" expanded="false" signature="75594:75611" ph="..." />
-                <marker date="1527080899177" expanded="false" signature="75594:75629" ph="..." />
-                <marker date="1527080899177" expanded="false" signature="75594:75642" ph="..." />
-                <marker date="1527080899177" expanded="false" signature="75594:75657" ph="..." />
+                <marker date="1527081278402" expanded="false" signature="75606:75623" ph="..." />
+                <marker date="1527081278402" expanded="false" signature="75606:75641" ph="..." />
+                <marker date="1527081278402" expanded="false" signature="75606:75654" ph="..." />
+                <marker date="1527081278402" expanded="false" signature="75606:75669" ph="..." />
               </folding>
             </state>
           </provider>
@@ -175,15 +176,16 @@
       <find>update</find>
       <find>random</find>
       <find>size=</find>
-      <find>reminderId_list</find>
       <find>result</find>
       <find>reminderId</find>
       <find>show_</find>
-      <find>mac</find>
       <find>Reminders</find>
       <find>reminders</find>
       <find>req=</find>
       <find>prepare_ur</find>
+      <find>reminderId_list</find>
+      <find>mac</find>
+      <find>nextIn</find>
     </findStrings>
     <replaceStrings>
       <replace>macaddress</replace>
@@ -200,8 +202,8 @@
         <option value="$PROJECT_DIR$/src/main/java/tv/zodiac/dev/NewAPI_AMS.java" />
         <option value="$PROJECT_DIR$/src/test/java/tv/zodiac/dev/testAMS_oldAPI_Performance.java" />
         <option value="$PROJECT_DIR$/src/test/java/tv/zodiac/dev/testAMS_newAPI_Performance.java" />
-        <option value="$PROJECT_DIR$/src/main/java/tv/zodiac/dev/API_common.java" />
         <option value="$PROJECT_DIR$/src/main/resources/reminders.csv" />
+        <option value="$PROJECT_DIR$/src/main/java/tv/zodiac/dev/API_common.java" />
       </list>
     </option>
   </component>
@@ -542,7 +544,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="JUnit.testAMS_newAPI_Performance.test1_Add_Purge">
+  <component name="RunManager" selected="JUnit.testAMS_oldAPI_Performance.test11_Add_Purge">
     <configuration default="true" type="Applet" factoryName="Applet">
       <module />
       <option name="HTML_USED" value="false" />
@@ -680,8 +682,8 @@
     </list>
     <recent_temporary>
       <list size="2">
-        <item index="0" class="java.lang.String" itemvalue="JUnit.testAMS_newAPI_Performance.test1_Add_Purge" />
-        <item index="1" class="java.lang.String" itemvalue="JUnit.testAMS_oldAPI_Performance.test11_Add_Purge" />
+        <item index="0" class="java.lang.String" itemvalue="JUnit.testAMS_oldAPI_Performance.test11_Add_Purge" />
+        <item index="1" class="java.lang.String" itemvalue="JUnit.testAMS_newAPI_Performance.test1_Add_Purge" />
       </list>
     </recent_temporary>
   </component>
@@ -713,13 +715,13 @@
     <history-entry file="testAMS_newAPI_Performance_test1_Add_Purge - 2018.05.23 at 16h 08m 15s.xml">
       <configuration name="testAMS_newAPI_Performance.test1_Add_Purge" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="testAMS_oldAPI_Performance_test11_Add_Purge - 2018.05.22 at 20h 00m 29s.xml">
-      <configuration name="testAMS_oldAPI_Performance.test11_Add_Purge" configurationId="JUnit" />
-    </history-entry>
-    <history-entry file="testAMS_oldAPI_Performance_test11_Add_Purge - 2018.05.23 at 15h 47m 28s.xml">
-      <configuration name="testAMS_oldAPI_Performance.test11_Add_Purge" configurationId="JUnit" />
-    </history-entry>
     <history-entry file="testAMS_oldAPI_Performance_test11_Add_Purge - 2018.05.23 at 15h 59m 29s.xml">
+      <configuration name="testAMS_oldAPI_Performance.test11_Add_Purge" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="testAMS_oldAPI_Performance_test11_Add_Purge - 2018.05.23 at 16h 14m 02s.xml">
+      <configuration name="testAMS_oldAPI_Performance.test11_Add_Purge" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="testAMS_oldAPI_Performance_test11_Add_Purge - 2018.05.23 at 16h 14m 34s.xml">
       <configuration name="testAMS_oldAPI_Performance.test11_Add_Purge" configurationId="JUnit" />
     </history-entry>
   </component>
@@ -732,13 +734,13 @@
       <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.276644" sideWeight="0.5042683" order="10" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.2152439" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.9002268" sideWeight="0.49634147" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.21315193" sideWeight="0.49634147" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.13151927" sideWeight="0.49756098" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32993197" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.2957317" sideWeight="0.49546486" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25609756" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.47619048" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.47619048" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.19512194" sideWeight="0.50453514" order="3" side_tool="true" content_ui="tabs" />
       <window_info id="Data View" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32987806" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="SVN Repositories" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3696145" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
@@ -1070,13 +1072,13 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/.idea/workspace.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="646">
-          <caret line="39" column="14" lean-forward="false" selection-start-line="39" selection-start-column="14" selection-end-line="39" selection-end-column="14" />
+        <state relative-caret-position="629">
+          <caret line="38" column="14" lean-forward="false" selection-start-line="38" selection-start-column="14" selection-end-line="38" selection-end-column="14" />
           <folding>
-            <marker date="1527080899177" expanded="false" signature="75594:75611" ph="..." />
-            <marker date="1527080899177" expanded="false" signature="75594:75629" ph="..." />
-            <marker date="1527080899177" expanded="false" signature="75594:75642" ph="..." />
-            <marker date="1527080899177" expanded="false" signature="75594:75657" ph="..." />
+            <marker date="1527081278402" expanded="false" signature="75606:75623" ph="..." />
+            <marker date="1527081278402" expanded="false" signature="75606:75641" ph="..." />
+            <marker date="1527081278402" expanded="false" signature="75606:75654" ph="..." />
+            <marker date="1527081278402" expanded="false" signature="75606:75669" ph="..." />
           </folding>
         </state>
       </provider>
@@ -1106,18 +1108,6 @@
         <state relative-caret-position="442">
           <caret line="33" column="36" lean-forward="false" selection-start-line="33" selection-start-column="36" selection-end-line="33" selection-end-column="36" />
           <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/test/java/tv/zodiac/dev/testAMS_oldAPI_Performance.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="255">
-          <caret line="15" column="48" lean-forward="false" selection-start-line="15" selection-start-column="48" selection-end-line="15" selection-end-column="48" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="method#test11_Add_Purge#0;class#testAMS_oldAPI_Performance#0" expanded="false" />
-            <element signature="method#test22_Add_Delete_Purge#0;class#testAMS_oldAPI_Performance#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1160,27 +1150,40 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/reminders.csv">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="17">
+          <caret line="1" column="36" lean-forward="false" selection-start-line="1" selection-start-column="36" selection-end-line="1" selection-end-column="36" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/test/java/tv/zodiac/dev/testAMS_oldAPI_Performance.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="170">
+          <caret line="10" column="21" lean-forward="true" selection-start-line="10" selection-start-column="21" selection-end-line="10" selection-end-column="21" />
+          <folding>
+            <element signature="method#test11_Add_Purge#0;class#testAMS_oldAPI_Performance#0" expanded="false" />
+            <element signature="method#test22_Add_Delete_Purge#0;class#testAMS_oldAPI_Performance#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/tv/zodiac/dev/API_common.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="306">
-          <caret line="21" column="25" lean-forward="true" selection-start-line="21" selection-start-column="25" selection-end-line="21" selection-end-column="25" />
+        <state relative-caret-position="172">
+          <caret line="474" column="5" lean-forward="true" selection-start-line="474" selection-start-column="5" selection-end-line="474" selection-end-column="5" />
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="docComment;class#API_common#0" expanded="false" />
+            <element signature="e#21281#21282#0" expanded="true" />
+            <element signature="e#21340#21341#0" expanded="true" />
             <element signature="method#printArrayList#0;class#API_common#0" expanded="false" />
             <element signature="method#ContainsAllNulls#0;class#API_common#0" expanded="false" />
             <element signature="method#get_date_several#0;class#API_common#0" expanded="false" />
             <element signature="method#get_time_old#0;class#API_common#0" expanded="false" />
             <element signature="method#get_time#0;class#API_common#0" expanded="false" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/reminders.csv">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="17">
-          <caret line="1" column="12" lean-forward="true" selection-start-line="1" selection-start-column="12" selection-end-line="1" selection-end-column="12" />
-          <folding />
         </state>
       </provider>
     </entry>
