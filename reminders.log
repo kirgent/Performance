@@ -360,4 +360,24 @@ Wed May 23 16:06:57 MSK 2018, macaddress=000004D67F70, count_reminders=500, coun
 Wed May 23 16:08:15 MSK 2018, macaddress=000004D67F70, count_reminders=10, count_iterations=1/1
    add avg=1199ms, min=1199ms, max=1199ms, /1
  purge avg=529ms, min=529ms, max=529ms, /1
+========= ========= ========= ========= ========= ========= ========= ================== ========= ========= Total measurements ========= ========= =========
+Wed May 23 18:28:00 MSK 2018, macaddress=000004B9419F(boxMoto2145_173), count_reminders=10, count_iterations=7/10
+   add avg=864ms, min=780ms, max=1243ms, /7
+ purge avg=782ms, min=760ms, max=800ms, /7
+========= ========= ========= ========= ========= ========= ========= ================== ========= ========= Total measurements ========= ========= =========
+Wed May 23 18:29:44 MSK 2018, macaddress=000004B9419F(boxMoto2145_173), count_reminders=10, count_iterations=5/10
+   add avg=776ms, min=757ms, max=796ms, /5
+ purge avg=786ms, min=770ms, max=801ms, /5
+========= ========= ========= ========= ========= ========= ========= ================== ========= ========= Total measurements ========= ========= =========
+Wed May 23 18:30:44 MSK 2018, macaddress=000004B9419F(boxMoto2145_173), count_reminders=10, count_iterations=10/10
+   add avg=924ms, min=829ms, max=1539ms, /10
+ purge avg=830ms, min=816ms, max=849ms, /10
+========= ========= ========= ========= ========= ========= ========= ================== ========= ========= Total measurements ========= ========= =========
+Wed May 23 18:31:21 MSK 2018, macaddress=000004B9419F(boxMoto2145_173), count_reminders=100, count_iterations=1/1
+   add avg=1939ms, min=1939ms, max=1939ms, /1
+ purge avg=782ms, min=782ms, max=782ms, /1
+========= ========= ========= ========= ========= ========= ========= ================== ========= ========= Total measurements ========= ========= =========
+Wed May 23 18:31:47 MSK 2018, macaddress=000004B9419F(boxMoto2145_173), count_reminders=100, count_iterations=1/1
+   add avg=1935ms, min=1935ms, max=1935ms, /1
+ purge avg=774ms, min=774ms, max=774ms, /1
 ========= ========= ========= ========= ========= ========= ========= =========

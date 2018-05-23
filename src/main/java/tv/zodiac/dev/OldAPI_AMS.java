@@ -93,7 +93,7 @@ class OldAPI_AMS extends API_common {
      * @return
      * @throws IOException
      */
-    ArrayList request(String ams_ip, String mac) throws IOException {
+    ArrayList request(String ams_ip, String mac, Enum<Operation> operation) throws IOException {
         //if(show_debug_info) {
             System.out.println("[INF] " + new Date() + ": purge for macaddress=" + mac + " to ams_ip=" + ams_ip);
         //}
