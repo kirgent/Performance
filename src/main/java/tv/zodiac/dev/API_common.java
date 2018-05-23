@@ -84,7 +84,8 @@ public class API_common {
     //Integer[] rack_channel = {2, 3, 4, 5, 6, 7, 8, 9, 10, 11};
 
     //@Deprecated
-    final String reminderProgramId = "EP002960010113";
+    //final String reminderProgramId = "EP002960010113";
+    final String reminderProgramId = "";
 
     String reminderProgramStart = "";
 
@@ -485,7 +486,8 @@ public class API_common {
 
     long reminderScheduleId(){
         Random random = new Random();
-        long reminderScheduleId = Math.abs(random.nextLong());
+        //long reminderScheduleId = Math.abs(random.nextLong());
+        long reminderScheduleId = Math.abs(random.nextInt(1000));
         reminderScheduleId_list.add(reminderScheduleId);
         //if(show_extra_info) {
             //System.out.println("reminderScheduleId_list<-add=" + reminderScheduleId);
@@ -495,7 +497,8 @@ public class API_common {
 
     long reminderId(){
         Random random = new Random();
-        long reminderId = Math.abs(random.nextLong());
+        //long reminderId = Math.abs(random.nextLong());
+        long reminderId = Math.abs(random.nextInt(1000));
         reminderId_list.add(reminderId);
         //if(show_extra_info) {
             //System.out.println("reminderId_list<-add        =" + reminderId);
