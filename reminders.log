@@ -392,4 +392,7 @@ Wed May 23 19:19:42 MSK 2018, macaddress=000004B9419F(boxMoto2145_173), count_re
 Wed May 23 19:22:43 MSK 2018, macaddress=000004B9419F(boxMoto2145_173), count_reminders=1000, count_iterations=0/1
    add avg=0ms, min=0ms, max=0ms, /0
  purge avg=0ms, min=0ms, max=0ms, /0
+========= ========= ========= ========= ========= ========= ========= ================== ========= ========= Total measurements ========= ========= =========
+Wed May 23 11:00:56 MDT 2018, macaddress=000004B9419F(boxMoto2145_173), count_reminders=500, count_iterations=1/1
+   add avg=2720ms, min=2720ms, max=2720ms, /1
 ========= ========= ========= ========= ========= ========= ========= =========
