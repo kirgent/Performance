@@ -52,12 +52,12 @@ class testAMS_oldAPI_Performance extends API_common {
                 assertTimeoutPreemptively(ofMillis(timeout), () -> {
                     purge_list[0] = AMS.request(ams_ip, macaddress, Operation.purge);
                 });
-                if (purge_list[0].get(1).equals("")) {
+                /*if (purge_list[0].get(1).equals("")) {
                     p_avg = (int) purge_list[0].get(2);
                     p_min = (int) purge_list[0].get(3);
                     p_max = (int) purge_list[0].get(4);
                     p_iterations = (int) purge_list[0].get(5);
-                }
+                }*/
             }
             add_list[0].clear();
             purge_list[0].clear();
@@ -95,6 +95,7 @@ class testAMS_oldAPI_Performance extends API_common {
                 p_avg = 0, p_min = 0, p_max = 0, p_iterations = 0;
         for (int i = 1; i <= count_iterations; i++) {
             System.out.println("========= ========= ========= Iteration = " + i + "/" + count_iterations + " ========= ========= =========");
+            reminderChannelNumber = reminderChannelNumber();
             //assertTimeoutPreemptively(ofMillis(timeout), () -> {
                 add_list = AMS.request(ams_ip, macaddress, Operation.add, count_reminders, reminderChannelNumber, reminderProgramStart, reminderProgramId, reminderOffset);
             //});
