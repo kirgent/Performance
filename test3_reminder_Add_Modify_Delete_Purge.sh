@@ -1,7 +1,9 @@
 #!/bin/bash
 git status
 git pull
+git status
 git commit -a -m "auto commit"
+git status
 git push
 git status
 java -ea -Dfile.encoding=UTF-8 -classpath \

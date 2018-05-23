@@ -21,7 +21,7 @@ class testAMS_oldAPI_Performance extends API_common {
     private int sleep_after_iteration = 1000;
 
     @ParameterizedTest
-    @CsvFileSource(resources = "/reminders_oldapi.csv", numLinesToSkip = 1)
+    @CsvFileSource(resources = "/reminders_oldapi.csv", numLinesToSkip = 2)
     void test00_Add(String ams_ip, String boxname, String macaddress, int count_reminders, int reminderChannelNumber, long reminderOffset, long reminderOffset_new, int count_iterations) throws IOException, InterruptedException {
         assertNotNull(ams_ip);
         assertNotNull(macaddress);
@@ -63,7 +63,7 @@ class testAMS_oldAPI_Performance extends API_common {
     }
 
     @ParameterizedTest
-    @CsvFileSource(resources = "/reminders_oldapi.csv", numLinesToSkip = 1)
+    @CsvFileSource(resources = "/reminders_oldapi.csv", numLinesToSkip = 2)
     void test11_Add_Purge(String ams_ip, String boxname, String macaddress, int count_reminders, int reminderChannelNumber, long reminderOffset, long reminderOffset_new, int count_iterations) throws IOException, InterruptedException {
         assertNotNull(ams_ip);
         assertNotNull(macaddress);
@@ -120,7 +120,7 @@ class testAMS_oldAPI_Performance extends API_common {
     }
 
     @ParameterizedTest
-    @CsvFileSource(resources = "/reminders_oldapi.csv", numLinesToSkip = 1)
+    @CsvFileSource(resources = "/reminders_oldapi.csv", numLinesToSkip = 2)
     void test22_Add_Delete_Purge(String ams_ip, String boxname, String macaddress, int count_reminders, int reminderChannelNumber, long reminderOffset, long reminderOffset_new, int count_iterations) throws IOException, InterruptedException {
         assertNotNull(ams_ip);
         assertNotNull(macaddress);
