@@ -2,11 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="3e202862-3d84-460d-b947-510d3ab820d4" name="Default" comment="update">
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/classes/reminders.csv" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/classes/reminders_macaddress_registration.csv" afterPath="" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/test-classes/tv/zodiac/dev/testAMS_newAPI_Performance.class" afterPath="$PROJECT_DIR$/target/test-classes/tv/zodiac/dev/testAMS_newAPI_Performance.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Reminders.iml" afterPath="$PROJECT_DIR$/Reminders.iml" />
     </list>
     <ignored path="$PROJECT_DIR$/target/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -47,8 +44,8 @@
       <file leaf-file-name="API_common.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/tv/zodiac/dev/API_common.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="387">
-              <caret line="485" column="5" lean-forward="true" selection-start-line="485" selection-start-column="5" selection-end-line="485" selection-end-column="5" />
+            <state relative-caret-position="319">
+              <caret line="481" column="30" lean-forward="true" selection-start-line="481" selection-start-column="30" selection-end-line="481" selection-end-column="30" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="docComment;class#API_common#0" expanded="false" />
@@ -1099,10 +1096,10 @@
         <state relative-caret-position="595">
           <caret line="36" column="14" lean-forward="false" selection-start-line="36" selection-start-column="14" selection-end-line="36" selection-end-column="14" />
           <folding>
-            <marker date="1527083646073" expanded="false" signature="77961:77978" ph="..." />
-            <marker date="1527083646073" expanded="false" signature="77961:77996" ph="..." />
-            <marker date="1527083646073" expanded="false" signature="77961:78009" ph="..." />
-            <marker date="1527083646073" expanded="false" signature="81722:81737" ph="..." />
+            <marker date="1527083658588" expanded="false" signature="77961:77978" ph="..." />
+            <marker date="1527083658588" expanded="false" signature="77961:77996" ph="..." />
+            <marker date="1527083658588" expanded="false" signature="77961:78009" ph="..." />
+            <marker date="1527083658588" expanded="false" signature="81370:81385" ph="..." />
           </folding>
         </state>
       </provider>
@@ -1245,8 +1242,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/tv/zodiac/dev/API_common.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="387">
-          <caret line="485" column="5" lean-forward="true" selection-start-line="485" selection-start-column="5" selection-end-line="485" selection-end-column="5" />
+        <state relative-caret-position="319">
+          <caret line="481" column="30" lean-forward="true" selection-start-line="481" selection-start-column="30" selection-end-line="481" selection-end-column="30" />
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="docComment;class#API_common#0" expanded="false" />
