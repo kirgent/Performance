@@ -1,5 +1,8 @@
 #!/bin/bash
+git status
 git pull
+git commit -a -m "auto commit"
+git push
 git status
 java -ea -Dfile.encoding=UTF-8 -classpath \
 ./target/test-classes:\

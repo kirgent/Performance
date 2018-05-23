@@ -1,4 +1,5 @@
 #!/bin/bash
+git status
 git pull
 git commit -a -m "auto commit"
 git push
