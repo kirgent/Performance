@@ -48,7 +48,7 @@ class testAMS_newAPI_Performance extends API_common {
                 a_min = (int) add_list.get(3);
                 a_max = (int) add_list.get(4);
                 a_iterations = (int) add_list.get(5);
-
+/*
                 //assertTimeoutPreemptively(ofMillis(timeout), () -> {
                     purge_list = AMS.request(ams_ip, macaddress, Operation.purge);
                 //});
@@ -57,7 +57,7 @@ class testAMS_newAPI_Performance extends API_common {
                     p_min = (int) purge_list.get(3);
                     p_max = (int) purge_list.get(4);
                     p_iterations = (int) purge_list.get(5);
-                }
+                }*/
             }
             reminderScheduleId_list.clear();
             reminderId_list.clear();

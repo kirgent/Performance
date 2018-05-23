@@ -52,12 +52,12 @@ class testAMS_oldAPI_Performance extends API_common {
                 assertTimeoutPreemptively(ofMillis(timeout), () -> {
                     purge_list[0] = AMS.request(ams_ip, macaddress, Operation.purge);
                 });
-                /*if (purge_list[0].get(1).equals("")) {
+                if (purge_list[0].get(1).equals("")) {
                     p_avg = (int) purge_list[0].get(2);
                     p_min = (int) purge_list[0].get(3);
                     p_max = (int) purge_list[0].get(4);
                     p_iterations = (int) purge_list[0].get(5);
-                }*/
+                }
             }
             add_list[0].clear();
             purge_list[0].clear();
