@@ -22,7 +22,7 @@ class testAMS_newAPI_Performance extends API_common {
 
     @ParameterizedTest
     @CsvFileSource(resources = "/reminders.csv", numLinesToSkip = 1)
-    void test0_Add(String ams_ip, String boxname, String macaddress, int count_reminders, int reminderChannelNumber, int reminderOffset, int reminderOffset_new, int count_iterations) throws InterruptedException, IOException {
+    void test0_Add(String ams_ip, String macaddress, String boxname, int count_reminders, int reminderChannelNumber, int reminderOffset, int reminderOffset_new, int count_iterations) throws InterruptedException, IOException {
         check_csv_preconditions(ams_ip, macaddress, count_reminders, reminderChannelNumber, reminderOffset, reminderOffset_new, count_iterations);
         final ArrayList[] add_list = {new ArrayList()};
         int a_avg = 0, a_min = 0, a_max=0, a_iterations = 0;
@@ -60,7 +60,7 @@ class testAMS_newAPI_Performance extends API_common {
     @ParameterizedTest
     @CsvFileSource(resources = "/reminders.csv", numLinesToSkip = 1)
     //@CsvSource({ "ams_ip, 172.30.81.4", "macaddress, 123456789012", "count_reminders, 3", "count_iterations" })
-    void test1_Add_Purge(String ams_ip, String boxname, String macaddress, int count_reminders, int reminderChannelNumber, int reminderOffset, int reminderOffset_new, int count_iterations) throws InterruptedException, IOException {
+    void test1_Add_Purge(String ams_ip, String macaddress, String boxname, int count_reminders, int reminderChannelNumber, int reminderOffset, int reminderOffset_new, int count_iterations) throws InterruptedException, IOException {
         check_csv_preconditions(ams_ip, macaddress, count_reminders, reminderChannelNumber, reminderOffset, reminderOffset_new, count_iterations);
         ArrayList add_list = new ArrayList();
         ArrayList purge_list = new ArrayList();
@@ -111,7 +111,7 @@ class testAMS_newAPI_Performance extends API_common {
 
     @ParameterizedTest
     @CsvFileSource(resources = "/reminders.csv", numLinesToSkip = 1)
-    void test2_Add_Delete_Purge(String ams_ip, String boxname, String macaddress, int count_reminders, int reminderChannelNumber, int reminderOffset, int reminderOffset_new, int count_iterations) throws IOException, InterruptedException {
+    void test2_Add_Delete_Purge(String ams_ip, String macaddress, String boxname, int count_reminders, int reminderChannelNumber, int reminderOffset, int reminderOffset_new, int count_iterations) throws IOException, InterruptedException {
         check_csv_preconditions(ams_ip, macaddress, count_reminders, reminderChannelNumber, reminderOffset, reminderOffset_new, count_iterations);
         ArrayList add_list,
                 delete_list = new ArrayList(),
@@ -172,7 +172,7 @@ class testAMS_newAPI_Performance extends API_common {
 
     @ParameterizedTest
     @CsvFileSource(resources = "/reminders.csv", numLinesToSkip = 1)
-    void test3_Add_Modify_Delete_Purge(String ams_ip, String boxname, String macaddress, int count_reminders, int reminderChannelNumber, int reminderOffset, int reminderOffset_new, int count_iterations) throws IOException, InterruptedException {
+    void test3_Add_Modify_Delete_Purge(String ams_ip, String macaddress, String boxname, int count_reminders, int reminderChannelNumber, int reminderOffset, int reminderOffset_new, int count_iterations) throws IOException, InterruptedException {
         check_csv_preconditions(ams_ip, macaddress, count_reminders, reminderChannelNumber, reminderOffset, reminderOffset_new, count_iterations);
         ArrayList add_list;
         ArrayList modify_list = new ArrayList();
