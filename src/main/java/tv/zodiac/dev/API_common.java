@@ -628,11 +628,49 @@ public class API_common {
         return result;
     }
 
-    void write_to_file(String s) throws IOException {
+    private void write_to_file(String s) throws IOException {
         FileWriter writer = new FileWriter("reminders.log", true);
         writer.write(s);
         writer.flush();
         writer.close();
+    }
+
+    void print_total_info(String macaddress, String boxname, int count_reminders, int count_iterations,
+                          int a_avg, int a_min, int a_max, int a_iterations,
+                          int m_avg, int m_min, int m_max, int m_iterations,
+                          int d_avg, int d_min, int d_max, int d_iterations,
+                          int p_avg, int p_min, int p_max, int p_iterations
+    ) throws IOException {
+
+        String header = "========= ========= ========= Total measurements ========= ========= ========="
+                + "\n" + new Date() + ", macaddress=" + macaddress + "(" + boxname + "), count_reminders=" + count_reminders + ", count_iterations=" + a_iterations + "/" + count_iterations;
+        String a = "\n   add avg=" + a_avg + "ms, min=" + a_min + "ms, max=" + a_max + "ms, /" + a_iterations;
+        String m = "\nmodify avg=" + m_avg + "ms, min=" + m_min + "ms, max=" + m_max + "ms, /" + m_iterations;
+        String d = "\ndelete avg=" + d_avg + "ms, min=" + d_min + "ms, max=" + d_max + "ms, /" + d_iterations;
+        String p = "\n purge avg=" + p_avg + "ms, min=" + p_min + "ms, max=" + p_max + "ms, /" + p_iterations;
+        String footer = "\n========= ========= ========= ========= ========= ========= ========= =========";
+
+        /*@Deprecated
+        String ap = "========= ========= ========= Total measurements ========= ========= ========="
+                + "\n" + new Date() + ", macaddress=" + macaddress + "(" + boxname + "), count_reminders=" + count_reminders + ", count_iterations=" + a_iterations + "/" + count_iterations
+                + "\n   add avg=" + a_avg + "ms, min=" + a_min + "ms, max=" + a_max + "ms, /" + a_iterations
+                + "\n purge avg=" + p_avg + "ms, min=" + p_min + "ms, max=" + p_max + "ms, /" + p_iterations
+                + "\n========= ========= ========= ========= ========= ========= ========= =========";*/
+        /*@Deprecated
+        String adp = "========= ========= ========= Total measurements ========= ========= ========="
+                + "\n" + new Date() + ", macaddress=" + macaddress + "(" + boxname + "), count_reminders=" + count_reminders + ", count_iterations=" + a_iterations + "/" + count_iterations
+                + "\n   add avg=" + a_avg + "ms, min=" + a_min + "ms, max=" + a_max + "ms, /" + a_iterations
+                + "\ndelete avg=" + d_avg + "ms, min=" + d_min + "ms, max=" + d_max + "ms, /" + d_iterations
+                + "\n purge avg=" + p_avg + "ms, min=" + p_min + "ms, max=" + p_max + "ms, /" + p_iterations
+                + "\n========= ========= ========= ========= ========= ========= ========= =========";*/
+        String result = header;
+        if (a_avg != 0) {            result += a;        }
+        if (m_avg != 0) {            result += m;        }
+        if (d_avg != 0) {            result += d;        }
+        if (p_avg != 0) {            result += p;        }
+        result += footer;
+        System.out.println(result);
+        write_to_file(result);
     }
 
 }
