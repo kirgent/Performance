@@ -166,7 +166,7 @@ class testAMS_newAPI_Performance extends API_common {
                 p_avg, p_min, p_max, p_iterations);
         assertNotEquals(0, a_avg, "a_avg");
         assertNotEquals(0, d_avg, "d_avg");
-        assertNotEquals(0, p_avg, "p_avg");
+        //assertNotEquals(0, p_avg, "p_avg");
     }
 
     @ParameterizedTest
