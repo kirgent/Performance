@@ -209,13 +209,13 @@ class testAMS_newAPI_Performance extends API_common {
                     d_iterations = (int) delete_list.get(5);
                 }
 
-                purge_list = AMS.request(ams_ip, macaddress, Operation.purge);
+                /*purge_list = AMS.request(ams_ip, macaddress, Operation.purge);
                 if (purge_list.get(1).equals("")) {
                     p_avg = (int) purge_list.get(2);
                     p_min = (int) purge_list.get(3);
                     p_max = (int) purge_list.get(4);
                     p_iterations = (int) purge_list.get(5);
-                }
+                }*/
             }
             reminderScheduleId_list.clear();
             reminderId_list.clear();
@@ -237,7 +237,7 @@ class testAMS_newAPI_Performance extends API_common {
         assertNotEquals(0, a_avg, "a_avg");
         assertNotEquals(0, m_avg, "m_avg");
         assertNotEquals(0, d_avg, "d_avg");
-        assertNotEquals(0, p_avg, "p_avg");
+        //assertNotEquals(0, p_avg, "p_avg");
     }
 
     private void check_csv_preconditions(String ams_ip, String macaddress, int count_reminders, int reminderChannelNumber, int reminderOffset, int reminderOffset_new, int count_iterations) {
