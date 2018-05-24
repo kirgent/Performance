@@ -629,4 +629,72 @@ Thu May 24 07:14:19 MDT 2018, macaddress=000004D67F70(boxMoto2147_Rems), count_r
 modify avg=466ms, min=414ms, max=552ms, /10
 delete avg=320ms, min=293ms, max=371ms, /10
  purge avg=139ms, min=95ms, max=224ms, /10
+========= ========= ========= ========= ========= ========= ========= ================== ========= ========= Total measurements ========= ========= =========
+Thu May 24 07:17:21 MDT 2018, macaddress=000004D67F70(boxMoto2147_Rems), count_reminders=1000, count_iterations=10/10
+   add avg=1692ms, min=602ms, max=10736ms, /10
+ purge avg=111ms, min=92ms, max=153ms, /10
+========= ========= ========= ========= ========= ========= ========= ================== ========= ========= Total measurements ========= ========= =========
+Thu May 24 07:18:12 MDT 2018, macaddress=000004D67F70(boxMoto2147_Rems), count_reminders=1000, count_iterations=10/10
+   add avg=687ms, min=609ms, max=1117ms, /10
+ purge avg=109ms, min=93ms, max=124ms, /10
+========= ========= ========= ========= ========= ========= ========= ================== ========= ========= Total measurements ========= ========= =========
+Thu May 24 07:20:51 MDT 2018, macaddress=000004D67F70(boxMoto2147_Rems), count_reminders=1000, count_iterations=10/10
+   add avg=707ms, min=602ms, max=1163ms, /10
+delete avg=513ms, min=479ms, max=546ms, /10
+========= ========= ========= ========= ========= ========= ========= ================== ========= ========= Total measurements ========= ========= =========
+Thu May 24 07:22:09 MDT 2018, macaddress=000004D67F70(boxMoto2147_Rems), count_reminders=1000, count_iterations=10/10
+   add avg=720ms, min=628ms, max=1133ms, /10
+modify avg=794ms, min=733ms, max=918ms, /10
+delete avg=502ms, min=479ms, max=554ms, /10
+ purge avg=118ms, min=100ms, max=150ms, /10
+========= ========= ========= ========= ========= ========= ========= ================== ========= ========= Total measurements ========= ========= =========
+Thu May 24 07:24:04 MDT 2018, macaddress=000004D67F70(boxMoto2147_Rems), count_reminders=5000, count_iterations=10/10
+   add avg=2583ms, min=2504ms, max=3050ms, /10
+ purge avg=121ms, min=107ms, max=133ms, /10
+========= ========= ========= ========= ========= ========= ========= ================== ========= ========= Total measurements ========= ========= =========
+Thu May 24 07:25:30 MDT 2018, macaddress=000004D67F70(boxMoto2147_Rems), count_reminders=5000, count_iterations=10/10
+   add avg=2708ms, min=2441ms, max=3655ms, /10
+delete avg=1847ms, min=1805ms, max=1886ms, /10
+========= ========= ========= ========= ========= ========= ========= ================== ========= ========= Total measurements ========= ========= =========
+Thu May 24 07:27:31 MDT 2018, macaddress=000004D67F70(boxMoto2147_Rems), count_reminders=5000, count_iterations=10/10
+   add avg=2749ms, min=2618ms, max=3274ms, /10
+modify avg=3376ms, min=3119ms, max=4958ms, /10
+delete avg=1845ms, min=1799ms, max=1895ms, /10
+ purge avg=118ms, min=97ms, max=141ms, /10
+========= ========= ========= ========= ========= ========= ========= ================== ========= ========= Total measurements ========= ========= =========
+Thu May 24 07:29:55 MDT 2018, macaddress=000004D67F70(boxMoto2147_Rems), count_reminders=10000, count_iterations=10/10
+   add avg=6205ms, min=4977ms, max=15037ms, /10
+ purge avg=130ms, min=102ms, max=209ms, /10
+========= ========= ========= ========= ========= ========= ========= ================== ========= ========= Total measurements ========= ========= =========
+Thu May 24 07:31:34 MDT 2018, macaddress=000004D67F70(boxMoto2147_Rems), count_reminders=10000, count_iterations=10/10
+   add avg=5354ms, min=5003ms, max=7597ms, /10
+ purge avg=117ms, min=99ms, max=136ms, /10
+========= ========= ========= ========= ========= ========= ========= ================== ========= ========= Total measurements ========= ========= =========
+Thu May 24 07:53:25 MDT 2018, macaddress=000004D67F70(boxMoto2147_Rems), count_reminders=10000, count_iterations=10/10
+   add avg=5210ms, min=4948ms, max=6190ms, /10
+modify avg=7382ms, min=6120ms, max=16494ms, /10
+delete avg=3779ms, min=3693ms, max=4005ms, /10
+ purge avg=109ms, min=96ms, max=131ms, /10
+========= ========= ========= ========= ========= ========= ========= ================== ========= ========= Total measurements ========= ========= =========
+Thu May 24 07:59:21 MDT 2018, macaddress=000004D67F70(boxMoto2147_Rems), count_reminders=11000, count_iterations=10/10
+   add avg=6978ms, min=5273ms, max=16210ms, /10
+modify avg=9608ms, min=7001ms, max=15677ms, /10
+delete avg=4065ms, min=3767ms, max=4174ms, /10
+ purge avg=109ms, min=96ms, max=127ms, /10
+========= ========= ========= ========= ========= ========= ========= ================== ========= ========= Total measurements ========= ========= =========
+Thu May 24 08:01:25 MDT 2018, macaddress=000004D67F70(boxMoto2147_Rems), count_reminders=6000, count_iterations=1/1
+   add avg=4416ms, min=4416ms, max=4416ms, /1
+========= ========= ========= ========= ========= ========= ========= ================== ========= ========= Total measurements ========= ========= =========
+Thu May 24 08:10:30 MDT 2018, macaddress=000004D67F70(boxMoto2147_Rems), count_reminders=1000, count_iterations=100/100
+   add avg=1548ms, min=1385ms, max=2100ms, /100
+delete avg=1897ms, min=1482ms, max=2902ms, /100
+========= ========= ========= ========= ========= ========= ========= ================== ========= ========= Total measurements ========= ========= =========
+Thu May 24 08:13:40 MDT 2018, macaddress=000004D67F70(boxMoto2147_Rems), count_reminders=1000, count_iterations=1/1
+   add avg=2231ms, min=2231ms, max=2231ms, /1
+========= ========= ========= ========= ========= ========= ========= ================== ========= ========= Total measurements ========= ========= =========
+Thu May 24 08:19:55 MDT 2018, macaddress=000004D67F70(boxMoto2147_Rems), count_reminders=1000, count_iterations=100/100
+   add avg=729ms, min=594ms, max=2293ms, /100
+modify avg=812ms, min=722ms, max=1791ms, /100
+delete avg=539ms, min=450ms, max=3544ms, /100
+ purge avg=118ms, min=88ms, max=1149ms, /100
 ========= ========= ========= ========= ========= ========= ========= =========
