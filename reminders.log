@@ -446,6 +446,7 @@ delete avg=5725ms, min=5725ms, max=5725ms, /1
 Wed May 23 12:17:03 MDT 2018, macaddress=000004B9419F(boxMoto2145_173), count_reminders=1000, count_iterations=1/1
    add avg=7019ms, min=7019ms, max=7019ms, /1
 ========= ========= ========= ========= ========= ========= ========= ================== ========= ========= Total measurements ========= ========= =========
+<<<<<<< HEAD
 Thu May 24 12:51:29 MSK 2018, macaddress=000004B9419F(boxMoto2145_173), count_reminders=100, count_iterations=1/1
    add avg=1881ms, min=1881ms, max=1881ms, /1
 delete avg=1389ms, min=1389ms, max=1389ms, /1
@@ -464,4 +465,10 @@ Thu May 24 12:52:34 MSK 2018, macaddress=000004D67F70(boxMoto2147_Rems), count_r
 Thu May 24 12:53:03 MSK 2018, macaddress=000004D67F70(boxMoto2147_Rems), count_reminders=6000, count_iterations=1/1
    add avg=6018ms, min=6018ms, max=6018ms, /1
  purge avg=564ms, min=564ms, max=564ms, /1
+=======
+Wed May 23 12:20:56 MDT 2018, macaddress=000004B9419F(boxMoto2145_173), count_reminders=1000, count_iterations=1/1
+   add avg=7139ms, min=7139ms, max=7139ms, /1
+delete avg=20058ms, min=20058ms, max=20058ms, /1
+ purge avg=15261ms, min=15261ms, max=15261ms, /1
+>>>>>>> b7f97503b88e3752eb9cb5016523c53b150f2eaa
 ========= ========= ========= ========= ========= ========= ========= =========
