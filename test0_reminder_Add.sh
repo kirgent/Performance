@@ -14,4 +14,5 @@ com.intellij.rt.execution.junit.JUnitStarter \
 -ideVersion5 \
 -junit5 \
 tv.zodiac.dev.testAMS_newAPI_Performance,\
-test0_Add\(java.lang.String,java.lang.String,java.lang.String,int,int,int,int,int\)
+test0_Add\
+\(java.lang.String,java.lang.String,java.lang.String,int,int,int,int,int\)

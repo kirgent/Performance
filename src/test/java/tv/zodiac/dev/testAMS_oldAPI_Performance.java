@@ -160,7 +160,7 @@ class testAMS_oldAPI_Performance extends API_common {
         assertNotEquals(0, p_avg, "p_avg");
     }
 
-    void check_csv_preconditions(String ams_ip, String macaddress, int count_reminders, int reminderChannelNumber, int reminderOffset, int reminderOffset_new, int count_iterations) {
+    private void check_csv_preconditions(String ams_ip, String macaddress, int count_reminders, int reminderChannelNumber, int reminderOffset, int reminderOffset_new, int count_iterations) {
         assertNotNull(ams_ip);
         assertNotNull(macaddress);
         assertNotEquals(0, count_reminders);
