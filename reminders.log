@@ -583,4 +583,50 @@ delete avg=818ms, min=768ms, max=936ms, /10
 Thu May 24 04:58:23 MDT 2018, macaddress=000004B9419F(boxMoto2145_173), count_reminders=100, count_iterations=10/10
    add avg=844ms, min=748ms, max=1117ms, /10
  purge avg=433ms, min=406ms, max=485ms, /10
+========= ========= ========= ========= ========= ========= ========= ================== ========= ========= Total measurements ========= ========= =========
+Thu May 24 06:53:40 MDT 2018, macaddress=000004D67F70(boxMoto2147_Rems), count_reminders=11500, count_iterations=1/1
+   add avg=6578ms, min=6578ms, max=6578ms, /1
+ purge avg=167ms, min=167ms, max=167ms, /1
+========= ========= ========= ========= ========= ========= ========= ================== ========= ========= Total measurements ========= ========= =========
+Thu May 24 06:56:40 MDT 2018, macaddress=000004D67F70(boxMoto2147_Rems), count_reminders=11500, count_iterations=10/10
+   add avg=14955ms, min=6028ms, max=16581ms, /10
+ purge avg=121ms, min=106ms, max=144ms, /10
+========= ========= ========= ========= ========= ========= ========= ================== ========= ========= Total measurements ========= ========= =========
+Thu May 24 06:59:00 MDT 2018, macaddress=000004D67F70(boxMoto2147_Rems), count_reminders=12500, count_iterations=1/1
+   add avg=17032ms, min=17032ms, max=17032ms, /1
+ purge avg=142ms, min=142ms, max=142ms, /1
+========= ========= ========= ========= ========= ========= ========= ================== ========= ========= Total measurements ========= ========= =========
+Thu May 24 07:02:22 MDT 2018, macaddress=000004D67F70(boxMoto2147_Rems), count_reminders=12500, count_iterations=10/10
+   add avg=16554ms, min=16398ms, max=17166ms, /10
+ purge avg=128ms, min=110ms, max=149ms, /10
+========= ========= ========= ========= ========= ========= ========= ================== ========= ========= Total measurements ========= ========= =========
+Thu May 24 07:03:33 MDT 2018, macaddress=000004D67F70(boxMoto2147_Rems), count_reminders=13000, count_iterations=1/1
+   add avg=17478ms, min=17478ms, max=17478ms, /1
+ purge avg=136ms, min=136ms, max=136ms, /1
+========= ========= ========= ========= ========= ========= ========= ================== ========= ========= Total measurements ========= ========= =========
+Thu May 24 07:07:05 MDT 2018, macaddress=000004D67F70(boxMoto2147_Rems), count_reminders=13000, count_iterations=10/10
+   add avg=16857ms, min=16744ms, max=17313ms, /10
+ purge avg=136ms, min=102ms, max=175ms, /10
+========= ========= ========= ========= ========= ========= ========= ================== ========= ========= Total measurements ========= ========= =========
+Thu May 24 07:08:28 MDT 2018, macaddress=000004D67F70(boxMoto2147_Rems), count_reminders=500, count_iterations=10/10
+   add avg=432ms, min=366ms, max=825ms, /10
+ purge avg=224ms, min=96ms, max=1135ms, /10
+========= ========= ========= ========= ========= ========= ========= ================== ========= ========= Total measurements ========= ========= =========
+Thu May 24 07:09:14 MDT 2018, macaddress=000004D67F70(boxMoto2147_Rems), count_reminders=500, count_iterations=10/10
+   add avg=523ms, min=358ms, max=1421ms, /10
+ purge avg=122ms, min=105ms, max=147ms, /10
+========= ========= ========= ========= ========= ========= ========= ================== ========= ========= Total measurements ========= ========= =========
+Thu May 24 07:09:48 MDT 2018, macaddress=000004D67F70(boxMoto2147_Rems), count_reminders=500, count_iterations=10/10
+   add avg=419ms, min=361ms, max=803ms, /10
+ purge avg=109ms, min=93ms, max=128ms, /10
+========= ========= ========= ========= ========= ========= ========= ================== ========= ========= Total measurements ========= ========= =========
+Thu May 24 07:11:12 MDT 2018, macaddress=000004D67F70(boxMoto2147_Rems), count_reminders=500, count_iterations=10/10
+   add avg=423ms, min=341ms, max=790ms, /10
+delete avg=309ms, min=286ms, max=330ms, /10
+========= ========= ========= ========= ========= ========= ========= ================== ========= ========= Total measurements ========= ========= =========
+Thu May 24 07:14:19 MDT 2018, macaddress=000004D67F70(boxMoto2147_Rems), count_reminders=500, count_iterations=10/10
+   add avg=438ms, min=360ms, max=792ms, /10
+modify avg=466ms, min=414ms, max=552ms, /10
+delete avg=320ms, min=293ms, max=371ms, /10
+ purge avg=139ms, min=95ms, max=224ms, /10
 ========= ========= ========= ========= ========= ========= ========= =========
