@@ -472,6 +472,17 @@ delete avg=20058ms, min=20058ms, max=20058ms, /1
  purge avg=15261ms, min=15261ms, max=15261ms, /1
 >>>>>>> b7f97503b88e3752eb9cb5016523c53b150f2eaa
 ========= ========= ========= ========= ========= ========= ========= ================== ========= ========= Total measurements ========= ========= =========
+<<<<<<< HEAD
+Thu May 24 12:54:56 MSK 2018, macaddress=000004D67F70(boxMoto2147_Rems), count_reminders=12000, count_iterations=1/1
+   add avg=20137ms, min=20137ms, max=20137ms, /1
+ purge avg=485ms, min=485ms, max=485ms, /1
+========= ========= ========= ========= ========= ========= ========= ================== ========= ========= Total measurements ========= ========= =========
+Thu May 24 12:58:23 MSK 2018, macaddress=000004D67F70(boxMoto2147_Rems), count_reminders=12000, count_iterations=1/1
+   add avg=20056ms, min=20056ms, max=20056ms, /1
+ purge avg=488ms, min=488ms, max=488ms, /1
+========= ========= ========= ========= ========= ========= ========= ================== ========= ========= Total measurements ========= ========= =========
+Thu May 24 12:58:59 MSK 2018, macaddress=000004D67F70(boxMoto2147_Rems), count_reminders=12000, count_iterations=0/1
+=======
 Thu May 24 04:01:24 MDT 2018, macaddress=000004D67F70(boxMoto2147_Rems), count_reminders=6000, count_iterations=1/1
    add avg=5561ms, min=5561ms, max=5561ms, /1
  purge avg=115ms, min=115ms, max=115ms, /1
@@ -483,8 +494,12 @@ Thu May 24 04:03:45 MDT 2018, macaddress=000004D67F70(boxMoto2147_Rems), count_r
 Thu May 24 04:04:37 MDT 2018, macaddress=000004D67F70(boxMoto2147_Rems), count_reminders=500, count_iterations=1/1
    add avg=983ms, min=983ms, max=983ms, /1
  purge avg=100ms, min=100ms, max=100ms, /1
+<<<<<<< HEAD
 ========= ========= ========= ========= ========= ========= ========= ================== ========= ========= Total measurements ========= ========= =========
 Thu May 24 04:06:14 MDT 2018, macaddress=000004D67F70(boxMoto2147_Rems), count_reminders=500, count_iterations=1/1
    add avg=860ms, min=860ms, max=860ms, /1
  purge avg=159ms, min=159ms, max=159ms, /1
+=======
+>>>>>>> 350f1bbdc4056141b996f1694ec382e2f75fa8ad
+>>>>>>> 3505dfc2d492478054b7370d5ef0d1efd152425b
 ========= ========= ========= ========= ========= ========= ========= =========
