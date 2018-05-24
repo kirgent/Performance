@@ -26,7 +26,6 @@ class testAMS_oldAPI_Performance extends API_common {
         check_csv_preconditions(ams_ip, macaddress, count_reminders, reminderChannelNumber, reminderOffset, reminderOffset_new, count_iterations);
         final ArrayList[] add_list = {new ArrayList()};
         int a_avg = 0, a_min = 0, a_max = 0, a_iterations = 0;
-
         for (int i = 1; i <= count_iterations; i++) {
             System.out.println("========= ========= ========= Iteration = " + i + "/" + count_iterations + " ========= ========= =========");
             //reminderChannelNumber = reminderChannelNumber();
@@ -61,7 +60,6 @@ class testAMS_oldAPI_Performance extends API_common {
         final ArrayList[] purge_list = {new ArrayList()};
         int a_avg = 0, a_min = 0, a_max = 0, a_iterations = 0,
                 p_avg = 0, p_min = 0, p_max = 0, p_iterations = 0;
-
         for (int i = 1; i <= count_iterations; i++) {
             System.out.println("========= ========= ========= Iteration = " + i + "/" + count_iterations + " ========= ========= =========");
             //reminderChannelNumber = reminderChannelNumber();

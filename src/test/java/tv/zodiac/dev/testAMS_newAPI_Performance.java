@@ -59,7 +59,6 @@ class testAMS_newAPI_Performance extends API_common {
 
     @ParameterizedTest
     @CsvFileSource(resources = "/reminders.csv", numLinesToSkip = 1)
-    //@CsvSource({ "ams_ip, 172.30.81.4", "macaddress, 123456789012", "count_reminders, 3", "count_iterations" })
     void test1_Add_Purge(String ams_ip, String macaddress, String boxname, int count_reminders, int reminderChannelNumber, int reminderOffset, int reminderOffset_new, int count_iterations) throws InterruptedException, IOException {
         check_csv_preconditions(ams_ip, macaddress, count_reminders, reminderChannelNumber, reminderOffset, reminderOffset_new, count_iterations);
         ArrayList add_list = new ArrayList();

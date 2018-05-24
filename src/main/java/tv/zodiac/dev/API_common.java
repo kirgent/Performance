@@ -61,7 +61,7 @@ public class API_common {
     final String box4212 = "A0722CEEC9A4";
     final String boxMoto2145_173 =  "000004B9419F"; //"B077AC5D91DD"; // "000004B9419F"; //Moto_2145_Mondo_DCX3200M_17.3_346
     final String boxMoto2147_Rems = "000004D67F70"; //000004d67f70"; //Moto_2147_Mondo_DCX3200M_REMS
-    String mac = boxD102;
+    String mac = boxMoto2147_Rems;
 
     ArrayList reminderScheduleId_list = new ArrayList();
     ArrayList reminderId_list = new ArrayList();
@@ -650,27 +650,17 @@ public class API_common {
         String p = "\n purge avg=" + p_avg + "ms, min=" + p_min + "ms, max=" + p_max + "ms, /" + p_iterations;
         String footer = "\n========= ========= ========= ========= ========= ========= ========= =========";
 
-        /*@Deprecated
-        String ap = "========= ========= ========= Total measurements ========= ========= ========="
-                + "\n" + new Date() + ", macaddress=" + macaddress + "(" + boxname + "), count_reminders=" + count_reminders + ", count_iterations=" + a_iterations + "/" + count_iterations
-                + "\n   add avg=" + a_avg + "ms, min=" + a_min + "ms, max=" + a_max + "ms, /" + a_iterations
-                + "\n purge avg=" + p_avg + "ms, min=" + p_min + "ms, max=" + p_max + "ms, /" + p_iterations
-                + "\n========= ========= ========= ========= ========= ========= ========= =========";*/
-        /*@Deprecated
-        String adp = "========= ========= ========= Total measurements ========= ========= ========="
-                + "\n" + new Date() + ", macaddress=" + macaddress + "(" + boxname + "), count_reminders=" + count_reminders + ", count_iterations=" + a_iterations + "/" + count_iterations
-                + "\n   add avg=" + a_avg + "ms, min=" + a_min + "ms, max=" + a_max + "ms, /" + a_iterations
-                + "\ndelete avg=" + d_avg + "ms, min=" + d_min + "ms, max=" + d_max + "ms, /" + d_iterations
-                + "\n purge avg=" + p_avg + "ms, min=" + p_min + "ms, max=" + p_max + "ms, /" + p_iterations
-                + "\n========= ========= ========= ========= ========= ========= ========= =========";*/
-        String result = header;
-        if (a_avg != 0) {            result += a;        }
-        if (m_avg != 0) {            result += m;        }
-        if (d_avg != 0) {            result += d;        }
-        if (p_avg != 0) {            result += p;        }
-        result += footer;
-        System.out.println(result);
-        write_to_file(result);
+        String result = "";
+        if (a_avg != 0) {
+            result += header;
+            result += a;
+            if (m_avg != 0) {            result += m;        }
+            if (d_avg != 0) {            result += d;        }
+            if (p_avg != 0) {            result += p;        }
+            result += footer;
+            System.out.println(result);
+            write_to_file(result);
+        }
     }
 
 }
