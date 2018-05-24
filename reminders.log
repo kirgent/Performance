@@ -477,4 +477,6 @@ Thu May 24 04:01:24 MDT 2018, macaddress=000004D67F70(boxMoto2147_Rems), count_r
  purge avg=115ms, min=115ms, max=115ms, /1
 ========= ========= ========= ========= ========= ========= ========= ================== ========= ========= Total measurements ========= ========= =========
 Thu May 24 04:02:38 MDT 2018, macaddress=000004D67F70(boxMoto2147_Rems), count_reminders=12000, count_iterations=0/1
+========= ========= ========= ========= ========= ========= ========= ================== ========= ========= Total measurements ========= ========= =========
+Thu May 24 04:03:45 MDT 2018, macaddress=000004D67F70(boxMoto2147_Rems), count_reminders=11000, count_iterations=0/1
 ========= ========= ========= ========= ========= ========= ========= =========
