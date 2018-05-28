@@ -25,6 +25,7 @@ public class API_common {
     Boolean show_debug_level = false;
     Boolean show_generated_json = false;
     private Boolean show_response_body = false;
+    Boolean write_file = true;
 
     //private final static Logger log = Logger.getLogger(API.class.getName());
 
@@ -313,7 +314,7 @@ public class API_common {
         return result;
     }
 
-    StringBuilder read_response(StringBuilder body, HttpResponse response) throws IOException {
+    String read_response(StringBuilder body, HttpResponse response) throws IOException {
         BufferedReader reader = new BufferedReader(new InputStreamReader(response.getEntity().getContent(), "UTF-8"));
         //StringBuilder body = new StringBuilder();
         for (String line; (line = reader.readLine()) != null; ) {
@@ -326,7 +327,7 @@ public class API_common {
                 System.out.println();
             }
         }
-        return body;
+        return body.toString();
     }
 
     HttpGet prepare_get_request(String uri) {
@@ -628,7 +629,7 @@ public class API_common {
         return result;
     }
 
-    private void write_to_file(String s) throws IOException {
+    void write_to_file(String s) throws IOException {
         FileWriter writer = new FileWriter("reminders.log", true);
         writer.write(s);
         writer.flush();
