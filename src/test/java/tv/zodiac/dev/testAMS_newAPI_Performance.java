@@ -205,13 +205,13 @@ class testAMS_newAPI_Performance extends API_common {
                     d_iterations = (int) delete_list.get(5);
                 }
 
-                /*purge_list = AMS.request(ams_ip, macaddress, Operation.purge);
+                purge_list = AMS.request(ams_ip, macaddress, Operation.purge);
                 if (purge_list.get(1).equals("")) {
                     p_avg = (int) purge_list.get(2);
                     p_min = (int) purge_list.get(3);
                     p_max = (int) purge_list.get(4);
                     p_iterations = (int) purge_list.get(5);
-                }*/
+                }
             }
             reminderScheduleId_list.clear();
             reminderId_list.clear();
