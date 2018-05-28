@@ -32,8 +32,8 @@ class NewAPI_AMS extends API_common {
      * @throws IOException -TBD
      */
     ArrayList request(String ams_ip, String mac, Enum<Operation> operation, int count_reminders, String reminderProgramStart, long reminderChannelNumber, String reminderProgramId, long reminderOffset, long reminderScheduleId, long reminderId) throws IOException {
-        //if(show_debug_info) {
-        System.out.println("[INF] " + new Date() + ": " + operation + " for macaddress=" + mac + " to ams_ip=" + ams_ip + ", "
+        if(show_info_level) {
+            System.out.println("[INF] " + new Date() + ": " + operation + " for macaddress=" + mac + " to ams_ip=" + ams_ip + ", "
                 + "count_reminders=" + count_reminders + ", "
                 + "reminderProgramStart=multi, "
                 + "reminderChannelNumber=" + reminderChannelNumber + ", "
@@ -41,7 +41,17 @@ class NewAPI_AMS extends API_common {
                 + "reminderOffset=" + reminderOffset + ", "
                 + "reminderScheduleId=multi, "
                 + "reminderId=multi");
-        //}
+        }
+        if(write_file) {
+            write_to_file("[INF] " + new Date() + ": " + operation + " for macaddress=" + mac + " to ams_ip=" + ams_ip + ", "
+                    + "count_reminders=" + count_reminders + ", "
+                    + "reminderProgramStart=multi, "
+                    + "reminderChannelNumber=" + reminderChannelNumber + ", "
+                    + "reminderProgramId=" + reminderProgramId + ", "
+                    + "reminderOffset=" + reminderOffset + ", "
+                    + "reminderScheduleId=multi, "
+                    + "reminderId=multi\n");
+        }
 
         HttpPost request = new HttpPost(prepare_url(ams_ip, operation, true));
         request.setHeader("Accept", "application/json");
@@ -49,6 +59,9 @@ class NewAPI_AMS extends API_common {
         request.setEntity(new StringEntity(generate_json_reminder(mac, count_reminders, operation, reminderProgramStart, reminderChannelNumber, reminderProgramId, reminderOffset, reminderScheduleId, reminderId)));
         if(show_debug_level) {
             System.out.println("[DBG] request string: " + request);
+            if(write_file) {
+                write_to_file("[DBG] request string: " + request);
+            }
         }
 
         long start = System.currentTimeMillis();
@@ -56,6 +69,9 @@ class NewAPI_AMS extends API_common {
         long finish = System.currentTimeMillis();
         int diff = (int)(finish-start);
         System.out.print("[INF] " + diff + "ms request");
+        if(write_file) {
+            write_to_file("[INF] " + diff + "ms request");
+        }
 
         ArrayList arrayList = new ArrayList();
         arrayList.add(0, response.getStatusLine().getStatusCode() + " " + response.getStatusLine().getReasonPhrase());
@@ -91,6 +107,9 @@ class NewAPI_AMS extends API_common {
         if(show_info_level) {
             System.out.println("[INF] return data: " + arrayList + "\n");
         }
+        if (write_file) {
+            write_to_file("[INF] return data: " + arrayList + "\n");
+        }
         return arrayList;
     }
 
@@ -102,18 +121,25 @@ class NewAPI_AMS extends API_common {
      * @throws IOException -TBD
      */
     ArrayList request(String ams_ip, String mac, Enum<Operation> operation, int count_reminders, long reminderScheduleId, long reminderId) throws IOException {
-        //if(show_debug_info) {
-        System.out.println("[INF] " + new Date() + ": delete for macaddress=" + mac + ", ams_ip=" + ams_ip + ", "
+        if(show_info_level) {
+            System.out.println("[INF] " + new Date() + ": delete for macaddress=" + mac + ", ams_ip=" + ams_ip + ", "
                 + "reminderScheduleId=multi, "
                 + "reminderId=multi");
-
-        //}
+        }
+        if(write_file) {
+            write_to_file("[INF] " + new Date() + ": delete for macaddress=" + mac + ", ams_ip=" + ams_ip + ", "
+                    + "reminderScheduleId=multi, "
+                    + "reminderId=multi\n");
+        }
         HttpPost request = new HttpPost(prepare_url(ams_ip, Operation.delete, true));
         request.setHeader("Accept", "application/json");
         request.setHeader("Content-type", "application/json");
         request.setEntity(new StringEntity(generate_json_reminder_delete(mac, count_reminders, reminderScheduleId, reminderId)));
         if(show_debug_level) {
             System.out.println("[DBG] request string: " + request);
+            if(write_file) {
+                write_to_file("[DBG] request string: " + request);
+            }
         }
 
         long start = System.currentTimeMillis();
@@ -121,6 +147,9 @@ class NewAPI_AMS extends API_common {
         long finish = System.currentTimeMillis();
         int diff = (int)(finish-start);
         System.out.print("[INF] " + diff + "ms request");
+        if(write_file) {
+            write_to_file("[INF] " + diff + "ms request");
+        }
 
         ArrayList arrayList = new ArrayList();
         arrayList.add(0, response.getStatusLine().getStatusCode() + " " + response.getStatusLine().getReasonPhrase());
@@ -143,6 +172,9 @@ class NewAPI_AMS extends API_common {
         if(show_info_level) {
             System.out.println("[INF] return data: " + arrayList + "\n");
         }
+        if (write_file) {
+            write_to_file("[INF] return data: " + arrayList + "\n");
+        }
         return arrayList;
     }
 
@@ -156,12 +188,18 @@ class NewAPI_AMS extends API_common {
         if(show_info_level) {
             System.out.println("[INF] " + new Date() + ": purge for macaddress=" + mac + " to ams_ip=" + ams_ip);
         }
+        if(write_file) {
+            write_to_file("[INF] " + new Date() + ": purge for macaddress=" + mac + " to ams_ip=" + ams_ip + "\n");
+        }
         HttpPost request = new HttpPost(prepare_url(ams_ip, operation, true));
         request.setHeader("Accept", "application/json");
         request.setHeader("Content-type", "application/json");
         request.setEntity(new StringEntity(generate_json_reminder_purge(mac)));
         if(show_debug_level) {
             System.out.println("[DBG] request string: " + request);
+            if(write_file) {
+                write_to_file("[DBG] request string: " + request);
+            }
         }
 
         long start = currentTimeMillis();
@@ -169,6 +207,9 @@ class NewAPI_AMS extends API_common {
         long finish = System.currentTimeMillis();
         int diff = (int)(finish-start);
         System.out.print("[DBG] " + diff + "ms request");
+        if (write_file) {
+            write_to_file("[DBG] " + diff + "ms request");
+        }
 
         ArrayList arrayList = new ArrayList();
         arrayList.add(0, response.getStatusLine().getStatusCode() + " " + response.getStatusLine().getReasonPhrase());
@@ -188,6 +229,9 @@ class NewAPI_AMS extends API_common {
         }
         if(show_info_level) {
             System.out.println("[INF] return data: " + arrayList + "\n");
+        }
+        if (write_file) {
+            write_to_file("[INF] return data: " + arrayList + "\n");
         }
         return arrayList;
     }
@@ -422,6 +466,9 @@ class NewAPI_AMS extends API_common {
         request.setHeader("Content-type", "application/json");
         if(show_debug_level) {
             System.out.println("[DBG] request string: " + request);
+            if(write_file) {
+                write_to_file("[DBG] request string: " + request);
+            }
         }
         //+ "\n[DBG] Request entity: " + request.getEntity());
 
@@ -435,6 +482,9 @@ class NewAPI_AMS extends API_common {
         arrayList.add(1, check_body_response(read_response(new StringBuilder(),response).toString(), mac));
         if(show_info_level) {
             System.out.println("[INF] return data: " + arrayList + "\n");
+            if (write_file) {
+                write_to_file("[INF] return data: " + arrayList + "\n");
+            }
         }
         return arrayList;
     }
