@@ -92,7 +92,7 @@ class NewAPI_AMS extends API_common {
     ArrayList request(String ams_ip, String mac, Enum<Operation> operation, int count_reminders, long reminderScheduleId, long reminderId) throws IOException {
         logger(INFO_LEVEL,"[INF] " + new Date() + ": delete for macaddress=" + mac + ", ams_ip=" + ams_ip + ", "
                 + "reminderScheduleId=multi, "
-                + "reminderId=multi\n");
+                + "reminderId=multi");
 
         HttpPost request = new HttpPost(prepare_url(ams_ip, Operation.delete, true));
         request.setHeader("Accept", "application/json");
