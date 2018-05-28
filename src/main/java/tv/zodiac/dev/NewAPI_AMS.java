@@ -49,7 +49,7 @@ class NewAPI_AMS extends API_common {
         HttpResponse response = HttpClients.createDefault().execute(request);
         long finish = System.currentTimeMillis();
         int diff = (int)(finish-start);
-        logger(DEBUG_LEVEL, "[DBG] " + diff + "ms request");
+        logger(INFO_LEVEL, "[INF] " + diff + "ms request");
 
         ArrayList arrayList = new ArrayList();
         arrayList.add(0, response.getStatusLine().getStatusCode() + " " + response.getStatusLine().getReasonPhrase());
@@ -145,7 +145,7 @@ class NewAPI_AMS extends API_common {
         HttpResponse response = HttpClients.createDefault().execute(request);
         long finish = System.currentTimeMillis();
         int diff = (int)(finish-start);
-        logger(DEBUG_LEVEL, "[DBG] " + diff + "ms request");
+        logger(INFO_LEVEL, "[INF] " + diff + "ms request");
 
         ArrayList arrayList = new ArrayList();
         arrayList.add(0, response.getStatusLine().getStatusCode() + " " + response.getStatusLine().getReasonPhrase());
@@ -394,7 +394,7 @@ class NewAPI_AMS extends API_common {
         HttpResponse response = HttpClients.createDefault().execute(request);
         long finish = System.currentTimeMillis();
         int diff = (int)(finish-start);
-        logger(DEBUG_LEVEL, "[DBG] " + diff + "ms request");
+        logger(INFO_LEVEL, "[INF] " + diff + "ms request");
 
         ArrayList arrayList = new ArrayList();
         arrayList.add(0, response.getStatusLine().getStatusCode() + " " + response.getStatusLine().getReasonPhrase());
