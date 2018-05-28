@@ -28,7 +28,6 @@ public class API_common {
     private Boolean show_response_body = false;
     private Boolean write_file = true;
 
-
     static final String INFO_LEVEL = "INF";
     static final String DEBUG_LEVEL = "DBG";
 
