@@ -11666,3 +11666,82 @@ delete avg=605ms, min=447ms, max=8368ms, /500
 [INF] 1234ms request
 [INF] return data: [200 OK, 3]
 >>>>>>> 67ea5c82af27ef3a9bd8438c33c585597bb1ed2b
+========= ========= ========= Iteration = 1/10 ========= ========= =========
+[INF] Mon May 28 09:05:58 MDT 2018: add for macaddress=000004D67F70 to ams_ip=172.30.81.4, count_reminders=1000, reminderProgramStart=multi, reminderChannelNumber=2, reminderProgramId=, reminderOffset=0, reminderScheduleId=multi, reminderId=multi
+========= ========= ========= Iteration = 1/10 ========= ========= =========
+[INF] Mon May 28 09:09:26 MDT 2018: add for macaddress=000004D67F70 to ams_ip=172.30.81.4, count_reminders=1000, reminderProgramStart=multi, reminderChannelNumber=2, reminderProgramId=, reminderOffset=0, reminderScheduleId=multi, reminderId=multi
+========= ========= ========= Iteration = 1/10 ========= ========= =========
+[INF] Mon May 28 09:12:52 MDT 2018: add for macaddress=000004D67F70 to ams_ip=172.30.81.4, count_reminders=1000, reminderProgramStart=multi, reminderChannelNumber=2, reminderProgramId=, reminderOffset=0, reminderScheduleId=multi, reminderId=multi
+[DBG] 2702ms request
+[INF] return data: [200 OK, , 2702, 2702, 2702, 1]
+[INF] Mon May 28 09:12:55 MDT 2018: purge for macaddress=000004D67F70 to ams_ip=172.30.81.4
+[DBG] 177ms request
+[INF] return data: [200 OK, , 177, 177, 177, 1]
+========= ========= ========= Iteration = 2/10 ========= ========= =========
+[INF] Mon May 28 09:12:56 MDT 2018: add for macaddress=000004D67F70 to ams_ip=172.30.81.4, count_reminders=1000, reminderProgramStart=multi, reminderChannelNumber=2, reminderProgramId=, reminderOffset=0, reminderScheduleId=multi, reminderId=multi
+[DBG] 1946ms request
+[INF] return data: [200 OK, , 2324, 1946, 2702, 2]
+[INF] Mon May 28 09:12:58 MDT 2018: purge for macaddress=000004D67F70 to ams_ip=172.30.81.4
+[DBG] 127ms request
+[INF] return data: [200 OK, , 152, 127, 177, 2]
+========= ========= ========= Iteration = 3/10 ========= ========= =========
+[INF] Mon May 28 09:12:59 MDT 2018: add for macaddress=000004D67F70 to ams_ip=172.30.81.4, count_reminders=1000, reminderProgramStart=multi, reminderChannelNumber=2, reminderProgramId=, reminderOffset=0, reminderScheduleId=multi, reminderId=multi
+[DBG] 1958ms request
+[INF] return data: [200 OK, , 2202, 1946, 2702, 3]
+[INF] Mon May 28 09:13:01 MDT 2018: purge for macaddress=000004D67F70 to ams_ip=172.30.81.4
+[DBG] 114ms request
+[INF] return data: [200 OK, , 139, 114, 177, 3]
+========= ========= ========= Iteration = 4/10 ========= ========= =========
+[INF] Mon May 28 09:13:02 MDT 2018: add for macaddress=000004D67F70 to ams_ip=172.30.81.4, count_reminders=1000, reminderProgramStart=multi, reminderChannelNumber=2, reminderProgramId=, reminderOffset=0, reminderScheduleId=multi, reminderId=multi
+[DBG] 1956ms request
+[INF] return data: [200 OK, , 2140, 1946, 2702, 4]
+[INF] Mon May 28 09:13:05 MDT 2018: purge for macaddress=000004D67F70 to ams_ip=172.30.81.4
+[DBG] 131ms request
+[INF] return data: [200 OK, , 137, 114, 177, 4]
+========= ========= ========= Iteration = 5/10 ========= ========= =========
+[INF] Mon May 28 09:13:06 MDT 2018: add for macaddress=000004D67F70 to ams_ip=172.30.81.4, count_reminders=1000, reminderProgramStart=multi, reminderChannelNumber=2, reminderProgramId=, reminderOffset=0, reminderScheduleId=multi, reminderId=multi
+[DBG] 1977ms request
+[INF] return data: [200 OK, , 2107, 1946, 2702, 5]
+[INF] Mon May 28 09:13:08 MDT 2018: purge for macaddress=000004D67F70 to ams_ip=172.30.81.4
+[DBG] 130ms request
+[INF] return data: [200 OK, , 135, 114, 177, 5]
+========= ========= ========= Iteration = 6/10 ========= ========= =========
+[INF] Mon May 28 09:13:09 MDT 2018: add for macaddress=000004D67F70 to ams_ip=172.30.81.4, count_reminders=1000, reminderProgramStart=multi, reminderChannelNumber=2, reminderProgramId=, reminderOffset=0, reminderScheduleId=multi, reminderId=multi
+[DBG] 2302ms request
+[INF] return data: [200 OK, , 2140, 1946, 2702, 6]
+[INF] Mon May 28 09:13:11 MDT 2018: purge for macaddress=000004D67F70 to ams_ip=172.30.81.4
+[DBG] 118ms request
+[INF] return data: [200 OK, , 132, 114, 177, 6]
+========= ========= ========= Iteration = 7/10 ========= ========= =========
+[INF] Mon May 28 09:13:12 MDT 2018: add for macaddress=000004D67F70 to ams_ip=172.30.81.4, count_reminders=1000, reminderProgramStart=multi, reminderChannelNumber=2, reminderProgramId=, reminderOffset=0, reminderScheduleId=multi, reminderId=multi
+[DBG] 1923ms request
+[INF] return data: [200 OK, , 2109, 1923, 2702, 7]
+[INF] Mon May 28 09:13:14 MDT 2018: purge for macaddress=000004D67F70 to ams_ip=172.30.81.4
+[DBG] 135ms request
+[INF] return data: [200 OK, , 133, 114, 177, 7]
+========= ========= ========= Iteration = 8/10 ========= ========= =========
+[INF] Mon May 28 09:13:15 MDT 2018: add for macaddress=000004D67F70 to ams_ip=172.30.81.4, count_reminders=1000, reminderProgramStart=multi, reminderChannelNumber=2, reminderProgramId=, reminderOffset=0, reminderScheduleId=multi, reminderId=multi
+[DBG] 1947ms request
+[INF] return data: [200 OK, , 2088, 1923, 2702, 8]
+[INF] Mon May 28 09:13:17 MDT 2018: purge for macaddress=000004D67F70 to ams_ip=172.30.81.4
+[DBG] 142ms request
+[INF] return data: [200 OK, , 134, 114, 177, 8]
+========= ========= ========= Iteration = 9/10 ========= ========= =========
+[INF] Mon May 28 09:13:18 MDT 2018: add for macaddress=000004D67F70 to ams_ip=172.30.81.4, count_reminders=1000, reminderProgramStart=multi, reminderChannelNumber=2, reminderProgramId=, reminderOffset=0, reminderScheduleId=multi, reminderId=multi
+[DBG] 1943ms request
+[INF] return data: [200 OK, , 2072, 1923, 2702, 9]
+[INF] Mon May 28 09:13:20 MDT 2018: purge for macaddress=000004D67F70 to ams_ip=172.30.81.4
+[DBG] 140ms request
+[INF] return data: [200 OK, , 134, 114, 177, 9]
+========= ========= ========= Iteration = 10/10 ========= ========= =========
+[INF] Mon May 28 09:13:22 MDT 2018: add for macaddress=000004D67F70 to ams_ip=172.30.81.4, count_reminders=1000, reminderProgramStart=multi, reminderChannelNumber=2, reminderProgramId=, reminderOffset=0, reminderScheduleId=multi, reminderId=multi
+[DBG] 2033ms request
+[INF] return data: [200 OK, , 2068, 1923, 2702, 10]
+[INF] Mon May 28 09:13:24 MDT 2018: purge for macaddress=000004D67F70 to ams_ip=172.30.81.4
+[DBG] 152ms request
+[INF] return data: [200 OK, , 136, 114, 177, 10]
+========= ========= ========= Total measurements ========= ========= =========
+Mon May 28 09:13:25 MDT 2018, macaddress=000004D67F70(boxMoto2147_Rems), count_reminders=1000, count_iterations=10/10
+   add avg=2068ms, min=1923ms, max=2702ms, /10
+ purge avg=136ms, min=114ms, max=177ms, /10
+========= ========= ========= ========= ========= ========= ========= =========
