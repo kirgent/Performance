@@ -1258,3 +1258,109 @@ delete avg=851ms, min=776ms, max=981ms, /10
 [INF] 897ms request[INF] return data: [200 OK, , 893, 867, 933, 13]
 ========= ========= ========= Iteration = 14/500 ========= ========= =========
 [INF] Mon May 28 06:08:23 MDT 2018: add for macaddress=000004D67F70 to ams_ip=172.30.81.4, count_reminders=1000, reminderProgramStart=multi, reminderChannelNumber=2, reminderProgramId=, reminderOffset=0, reminderScheduleId=multi, reminderId=multi
+========= ========= ========= Iteration = 1/10 ========= ========= =========
+[INF] Mon May 28 16:26:56 MSK 2018: add for macaddress=000004B9419F to ams_ip=172.30.81.5, count_reminders=100, operation=add, reminderChannelNumber=5, reminderProgramStart=, reminderProgramId=, reminderOffset=0
+[INF] 1824ms request
+[INF] return data: [200 OK, , 1824, 1824, 1824, 1]
+========= ========= ========= Iteration = 2/10 ========= ========= =========
+[INF] Mon May 28 16:26:59 MSK 2018: add for macaddress=000004B9419F to ams_ip=172.30.81.5, count_reminders=100, operation=add, reminderChannelNumber=5, reminderProgramStart=, reminderProgramId=, reminderOffset=0
+========= ========= ========= Iteration = 1/10 ========= ========= =========
+[INF] Mon May 28 16:27:15 MSK 2018: add for macaddress=000004B9419F to ams_ip=172.30.81.5, count_reminders=100, operation=add, reminderChannelNumber=5, reminderProgramStart=, reminderProgramId=, reminderOffset=0
+[INF] 1838ms request
+[INF] return data: [200 OK, 3]
+========= ========= ========= Iteration = 2/10 ========= ========= =========
+[INF] Mon May 28 16:27:18 MSK 2018: add for macaddress=000004B9419F to ams_ip=172.30.81.5, count_reminders=100, operation=add, reminderChannelNumber=5, reminderProgramStart=, reminderProgramId=, reminderOffset=0
+[INF] 1143ms request
+[INF] return data: [200 OK, 3]
+========= ========= ========= Iteration = 3/10 ========= ========= =========
+[INF] Mon May 28 16:27:20 MSK 2018: add for macaddress=000004B9419F to ams_ip=172.30.81.5, count_reminders=100, operation=add, reminderChannelNumber=5, reminderProgramStart=, reminderProgramId=, reminderOffset=0
+[INF] 1122ms request
+[INF] return data: [200 OK, 3]
+========= ========= ========= Iteration = 4/10 ========= ========= =========
+[INF] Mon May 28 16:27:22 MSK 2018: add for macaddress=000004B9419F to ams_ip=172.30.81.5, count_reminders=100, operation=add, reminderChannelNumber=5, reminderProgramStart=, reminderProgramId=, reminderOffset=0
+[INF] 1173ms request
+[INF] return data: [200 OK, 3]
+========= ========= ========= Iteration = 5/10 ========= ========= =========
+[INF] Mon May 28 16:27:24 MSK 2018: add for macaddress=000004B9419F to ams_ip=172.30.81.5, count_reminders=100, operation=add, reminderChannelNumber=5, reminderProgramStart=, reminderProgramId=, reminderOffset=0
+[INF] 1177ms request
+[INF] return data: [200 OK, 3]
+========= ========= ========= Iteration = 1/10 ========= ========= =========
+[INF] Mon May 28 16:27:36 MSK 2018: add for macaddress=000004B9419F to ams_ip=172.30.81.5, count_reminders=100, operation=add, reminderChannelNumber=5, reminderProgramStart=, reminderProgramId=, reminderOffset=0
+[INF] 1740ms request
+[INF] return data: [200 OK, 3]
+========= ========= ========= Iteration = 2/10 ========= ========= =========
+[INF] Mon May 28 16:27:39 MSK 2018: add for macaddress=000004B9419F to ams_ip=172.30.81.5, count_reminders=100, operation=add, reminderChannelNumber=5, reminderProgramStart=, reminderProgramId=, reminderOffset=0
+[INF] 1156ms request
+[INF] return data: [200 OK, 3]
+========= ========= ========= Iteration = 3/10 ========= ========= =========
+[INF] Mon May 28 16:27:41 MSK 2018: add for macaddress=000004B9419F to ams_ip=172.30.81.5, count_reminders=100, operation=add, reminderChannelNumber=5, reminderProgramStart=, reminderProgramId=, reminderOffset=0
+[INF] 1183ms request
+[INF] return data: [200 OK, 3]
+========= ========= ========= Iteration = 4/10 ========= ========= =========
+[INF] Mon May 28 16:27:43 MSK 2018: add for macaddress=000004B9419F to ams_ip=172.30.81.5, count_reminders=100, operation=add, reminderChannelNumber=5, reminderProgramStart=, reminderProgramId=, reminderOffset=0
+[INF] 1131ms request
+[INF] return data: [200 OK, 3]
+========= ========= ========= Iteration = 5/10 ========= ========= =========
+[INF] Mon May 28 16:27:45 MSK 2018: add for macaddress=000004B9419F to ams_ip=172.30.81.5, count_reminders=100, operation=add, reminderChannelNumber=5, reminderProgramStart=, reminderProgramId=, reminderOffset=0
+[INF] 1173ms request
+[INF] return data: [200 OK, 3]
+========= ========= ========= Iteration = 6/10 ========= ========= =========
+[INF] Mon May 28 16:27:48 MSK 2018: add for macaddress=000004B9419F to ams_ip=172.30.81.5, count_reminders=100, operation=add, reminderChannelNumber=5, reminderProgramStart=, reminderProgramId=, reminderOffset=0
+[INF] 1197ms request
+[INF] return data: [200 OK, 3]
+========= ========= ========= Iteration = 7/10 ========= ========= =========
+[INF] Mon May 28 16:27:50 MSK 2018: add for macaddress=000004B9419F to ams_ip=172.30.81.5, count_reminders=100, operation=add, reminderChannelNumber=5, reminderProgramStart=, reminderProgramId=, reminderOffset=0
+[INF] 1125ms request
+[INF] return data: [200 OK, 3]
+========= ========= ========= Iteration = 8/10 ========= ========= =========
+[INF] Mon May 28 16:27:52 MSK 2018: add for macaddress=000004B9419F to ams_ip=172.30.81.5, count_reminders=100, operation=add, reminderChannelNumber=5, reminderProgramStart=, reminderProgramId=, reminderOffset=0
+[INF] 1145ms request
+[INF] return data: [200 OK, 3]
+========= ========= ========= Iteration = 9/10 ========= ========= =========
+[INF] Mon May 28 16:27:54 MSK 2018: add for macaddress=000004B9419F to ams_ip=172.30.81.5, count_reminders=100, operation=add, reminderChannelNumber=5, reminderProgramStart=, reminderProgramId=, reminderOffset=0
+[INF] 1150ms request
+[INF] return data: [200 OK, 3]
+========= ========= ========= Iteration = 10/10 ========= ========= =========
+[INF] Mon May 28 16:27:56 MSK 2018: add for macaddress=000004B9419F to ams_ip=172.30.81.5, count_reminders=100, operation=add, reminderChannelNumber=5, reminderProgramStart=, reminderProgramId=, reminderOffset=0
+[INF] 1285ms request
+[INF] return data: [200 OK, 3]
+========= ========= ========= Iteration = 1/10 ========= ========= =========
+[INF] Mon May 28 16:28:06 MSK 2018: add for macaddress=000004B9419F to ams_ip=172.30.81.5, count_reminders=100, operation=add, reminderChannelNumber=5, reminderProgramStart=, reminderProgramId=, reminderOffset=0
+[INF] 1962ms request
+[INF] return data: [200 OK, 3]
+========= ========= ========= Iteration = 2/10 ========= ========= =========
+[INF] Mon May 28 16:28:09 MSK 2018: add for macaddress=000004B9419F to ams_ip=172.30.81.5, count_reminders=100, operation=add, reminderChannelNumber=5, reminderProgramStart=, reminderProgramId=, reminderOffset=0
+[INF] 1220ms request
+[INF] return data: [200 OK, 3]
+========= ========= ========= Iteration = 3/10 ========= ========= =========
+[INF] Mon May 28 16:28:11 MSK 2018: add for macaddress=000004B9419F to ams_ip=172.30.81.5, count_reminders=100, operation=add, reminderChannelNumber=5, reminderProgramStart=, reminderProgramId=, reminderOffset=0
+[INF] 1151ms request
+[INF] return data: [200 OK, 3]
+========= ========= ========= Iteration = 4/10 ========= ========= =========
+[INF] Mon May 28 16:28:13 MSK 2018: add for macaddress=000004B9419F to ams_ip=172.30.81.5, count_reminders=100, operation=add, reminderChannelNumber=5, reminderProgramStart=, reminderProgramId=, reminderOffset=0
+[INF] 1133ms request
+[INF] return data: [200 OK, 3]
+========= ========= ========= Iteration = 5/10 ========= ========= =========
+[INF] Mon May 28 16:28:15 MSK 2018: add for macaddress=000004B9419F to ams_ip=172.30.81.5, count_reminders=100, operation=add, reminderChannelNumber=5, reminderProgramStart=, reminderProgramId=, reminderOffset=0
+[INF] 1149ms request
+[INF] return data: [200 OK, 3]
+========= ========= ========= Iteration = 6/10 ========= ========= =========
+[INF] Mon May 28 16:28:17 MSK 2018: add for macaddress=000004B9419F to ams_ip=172.30.81.5, count_reminders=100, operation=add, reminderChannelNumber=5, reminderProgramStart=, reminderProgramId=, reminderOffset=0
+[INF] 1153ms request
+[INF] return data: [200 OK, 3]
+========= ========= ========= Iteration = 7/10 ========= ========= =========
+[INF] Mon May 28 16:28:20 MSK 2018: add for macaddress=000004B9419F to ams_ip=172.30.81.5, count_reminders=100, operation=add, reminderChannelNumber=5, reminderProgramStart=, reminderProgramId=, reminderOffset=0
+[INF] 1116ms request
+[INF] return data: [200 OK, 3]
+========= ========= ========= Iteration = 8/10 ========= ========= =========
+[INF] Mon May 28 16:28:22 MSK 2018: add for macaddress=000004B9419F to ams_ip=172.30.81.5, count_reminders=100, operation=add, reminderChannelNumber=5, reminderProgramStart=, reminderProgramId=, reminderOffset=0
+[INF] 1169ms request
+[INF] return data: [200 OK, 3]
+========= ========= ========= Iteration = 9/10 ========= ========= =========
+[INF] Mon May 28 16:28:24 MSK 2018: add for macaddress=000004B9419F to ams_ip=172.30.81.5, count_reminders=100, operation=add, reminderChannelNumber=5, reminderProgramStart=, reminderProgramId=, reminderOffset=0
+[INF] 1199ms request
+[INF] return data: [200 OK, 3]
+========= ========= ========= Iteration = 10/10 ========= ========= =========
+[INF] Mon May 28 16:28:26 MSK 2018: add for macaddress=000004B9419F to ams_ip=172.30.81.5, count_reminders=100, operation=add, reminderChannelNumber=5, reminderProgramStart=, reminderProgramId=, reminderOffset=0
+[INF] 1234ms request
+[INF] return data: [200 OK, 3]
