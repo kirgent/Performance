@@ -62,7 +62,7 @@ class NewAPI_AMS extends API_common {
                 arrayList.add(2, avg);
                 arrayList.add(3, get_min_time(add_avg_list));
                 arrayList.add(4, get_max_time(add_avg_list));
-                arrayList.add(5, "/" + add_avg_list.size());
+                arrayList.add(5, add_avg_list.size());
                 if (add_avg_list.size() <= 10) {
                     logger(DEBUG_LEVEL, "[DBG] " + new Date() + ": add avg = " + avg + "ms" + add_avg_list.size() + ": add_avg_list:" + add_avg_list);
                 }
@@ -72,7 +72,7 @@ class NewAPI_AMS extends API_common {
                 arrayList.add(2, avg);
                 arrayList.add(3, get_min_time(modify_avg_list));
                 arrayList.add(4, get_max_time(modify_avg_list));
-                arrayList.add(5, "/" + modify_avg_list.size());
+                arrayList.add(5, modify_avg_list.size());
                 if (modify_avg_list.size() <= 10) {
                     logger(DEBUG_LEVEL, "[DBG] " + new Date() + ": modify avg = " + avg + "ms/" + modify_avg_list.size() + ": modify_avg_list:" + modify_avg_list);
                 }
@@ -116,7 +116,7 @@ class NewAPI_AMS extends API_common {
                 arrayList.add(2, avg);
                 arrayList.add(3, get_min_time(delete_avg_list));
                 arrayList.add(4, get_max_time(delete_avg_list));
-                arrayList.add(5, "/" + delete_avg_list.size());
+                arrayList.add(5, delete_avg_list.size());
                 if (delete_avg_list.size() <= 10) {
                     logger(DEBUG_LEVEL, "[DBG] " + new Date() + ": delete avg = " + avg + "ms/" + delete_avg_list.size() + ": delete_avg_list:" + delete_avg_list);
                 }
@@ -156,7 +156,7 @@ class NewAPI_AMS extends API_common {
             arrayList.add(2, avg);
             arrayList.add(3, get_min_time(purge_avg_list));
             arrayList.add(4, get_max_time(purge_avg_list));
-            arrayList.add(5, "/" + purge_avg_list.size());
+            arrayList.add(5, purge_avg_list.size());
             if(purge_avg_list.size()<=10) {
                 logger(DEBUG_LEVEL,"[DBG] " + new Date() + ": purge avg = " + avg + "ms/" + purge_avg_list.size() + ": purge_avg_list:" + purge_avg_list);
             }
