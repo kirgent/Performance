@@ -931,4 +931,318 @@ Mon May 28 14:18:21 MSK 2018, macaddress=000004B9419F(boxMoto2145_173), count_re
 delete avg=1404ms, min=1364ms, max=1517ms, /9
  purge avg=840ms, min=749ms, max=1094ms, /10
 >>>>>>> 8244d609334144c0c1d9c9f5d40ef6798d3eb3fd
-========= ========= ========= ========= ========= ========= ========= =========
+========= ========= ========= ========= ========= ========= ========= ================== ========= ========= Iteration = 1/5000 ========= ========= =========
+[INF] Mon May 28 05:23:59 MDT 2018: add for macaddress=000004B9419F to ams_ip=172.30.81.5, count_reminders=100, operation=add, reminderChannelNumber=2, reminderProgramStart=, reminderProgramId=, reminderOffset=0
+[INF] 1172ms request
+[INF] return data: [200 OK, , 1172, 1172, 1172, 1]
+[INF] Mon May 28 05:24:00 MDT 2018: delete for macaddress=000004B9419F to ams_ip=172.30.81.5, count_reminders=100, operation=delete, reminderChannelNumber=2, reminderProgramStart=, reminderProgramId=, reminderOffset=0
+[INF] 829ms request
+[INF] return data: [200 OK, 4]
+[INF] Mon May 28 05:24:01 MDT 2018: purge for macaddress=000004B9419F to ams_ip=172.30.81.5
+[INF] 386ms request[INF] return data: [200 OK, , 386, 386, 386, 1]
+========= ========= ========= Iteration = 2/5000 ========= ========= =========
+[INF] Mon May 28 05:24:02 MDT 2018: add for macaddress=000004B9419F to ams_ip=172.30.81.5, count_reminders=100, operation=add, reminderChannelNumber=2, reminderProgramStart=, reminderProgramId=, reminderOffset=0
+[INF] 842ms request
+[INF] return data: [200 OK, , 1007, 842, 1172, 2]
+[INF] Mon May 28 05:24:03 MDT 2018: delete for macaddress=000004B9419F to ams_ip=172.30.81.5, count_reminders=100, operation=delete, reminderChannelNumber=2, reminderProgramStart=, reminderProgramId=, reminderOffset=0
+[INF] 943ms request
+[INF] return data: [200 OK, , 943, 943, 943, 1]
+[INF] Mon May 28 05:24:04 MDT 2018: purge for macaddress=000004B9419F to ams_ip=172.30.81.5
+[INF] 569ms request[INF] return data: [200 OK, , 477, 386, 569, 2]
+========= ========= ========= Iteration = 3/5000 ========= ========= =========
+[INF] Mon May 28 05:24:05 MDT 2018: add for macaddress=000004B9419F to ams_ip=172.30.81.5, count_reminders=100, operation=add, reminderChannelNumber=2, reminderProgramStart=, reminderProgramId=, reminderOffset=0
+[INF] 841ms request
+[INF] return data: [200 OK, , 951, 841, 1172, 3]
+[INF] Mon May 28 05:24:06 MDT 2018: delete for macaddress=000004B9419F to ams_ip=172.30.81.5, count_reminders=100, operation=delete, reminderChannelNumber=2, reminderProgramStart=, reminderProgramId=, reminderOffset=0
+[INF] 1009ms request
+[INF] return data: [200 OK, , 976, 943, 1009, 2]
+[INF] Mon May 28 05:24:07 MDT 2018: purge for macaddress=000004B9419F to ams_ip=172.30.81.5
+[INF] 415ms request[INF] return data: [200 OK, , 456, 386, 569, 3]
+========= ========= ========= Iteration = 4/5000 ========= ========= =========
+[INF] Mon May 28 05:24:09 MDT 2018: add for macaddress=000004B9419F to ams_ip=172.30.81.5, count_reminders=100, operation=add, reminderChannelNumber=2, reminderProgramStart=, reminderProgramId=, reminderOffset=0
+[INF] 826ms request
+[INF] return data: [200 OK, , 920, 826, 1172, 4]
+[INF] Mon May 28 05:24:10 MDT 2018: delete for macaddress=000004B9419F to ams_ip=172.30.81.5, count_reminders=100, operation=delete, reminderChannelNumber=2, reminderProgramStart=, reminderProgramId=, reminderOffset=0
+[INF] 840ms request
+[INF] return data: [200 OK, , 930, 840, 1009, 3]
+[INF] Mon May 28 05:24:10 MDT 2018: purge for macaddress=000004B9419F to ams_ip=172.30.81.5
+[INF] 401ms request[INF] return data: [200 OK, , 442, 386, 569, 4]
+========= ========= ========= Iteration = 5/5000 ========= ========= =========
+[INF] Mon May 28 05:24:12 MDT 2018: add for macaddress=000004B9419F to ams_ip=172.30.81.5, count_reminders=100, operation=add, reminderChannelNumber=2, reminderProgramStart=, reminderProgramId=, reminderOffset=0
+[INF] 817ms request
+[INF] return data: [200 OK, , 899, 817, 1172, 5]
+[INF] Mon May 28 05:24:13 MDT 2018: delete for macaddress=000004B9419F to ams_ip=172.30.81.5, count_reminders=100, operation=delete, reminderChannelNumber=2, reminderProgramStart=, reminderProgramId=, reminderOffset=0
+[INF] 845ms request
+[INF] return data: [200 OK, , 909, 840, 1009, 4]
+[INF] Mon May 28 05:24:13 MDT 2018: purge for macaddress=000004B9419F to ams_ip=172.30.81.5
+========= ========= ========= Iteration = 1/10 ========= ========= =========
+[INF] Mon May 28 05:24:35 MDT 2018: add for macaddress=000004B9419F to ams_ip=172.30.81.5, count_reminders=100, operation=add, reminderChannelNumber=5, reminderProgramStart=, reminderProgramId=, reminderOffset=0
+[INF] 1214ms request
+[INF] return data: [200 OK, , 1214, 1214, 1214, 1]
+[INF] Mon May 28 05:24:36 MDT 2018: delete for macaddress=000004B9419F to ams_ip=172.30.81.5, count_reminders=100, operation=delete, reminderChannelNumber=5, reminderProgramStart=, reminderProgramId=, reminderOffset=0
+[INF] 847ms request
+[INF] return data: [200 OK, , 847, 847, 847, 1]
+[INF] Mon May 28 05:24:37 MDT 2018: purge for macaddress=000004B9419F to ams_ip=172.30.81.5
+[INF] 396ms request[INF] return data: [200 OK, , 396, 396, 396, 1]
+========= ========= ========= Iteration = 2/10 ========= ========= =========
+[INF] Mon May 28 05:24:38 MDT 2018: add for macaddress=000004B9419F to ams_ip=172.30.81.5, count_reminders=100, operation=add, reminderChannelNumber=5, reminderProgramStart=, reminderProgramId=, reminderOffset=0
+[INF] 861ms request
+[INF] return data: [200 OK, , 1037, 861, 1214, 2]
+[INF] Mon May 28 05:24:39 MDT 2018: delete for macaddress=000004B9419F to ams_ip=172.30.81.5, count_reminders=100, operation=delete, reminderChannelNumber=5, reminderProgramStart=, reminderProgramId=, reminderOffset=0
+[INF] 801ms request
+[INF] return data: [200 OK, , 824, 801, 847, 2]
+[INF] Mon May 28 05:24:40 MDT 2018: purge for macaddress=000004B9419F to ams_ip=172.30.81.5
+[INF] 408ms request[INF] return data: [200 OK, , 402, 396, 408, 2]
+========= ========= ========= Iteration = 3/10 ========= ========= =========
+[INF] Mon May 28 05:24:41 MDT 2018: add for macaddress=000004B9419F to ams_ip=172.30.81.5, count_reminders=100, operation=add, reminderChannelNumber=5, reminderProgramStart=, reminderProgramId=, reminderOffset=0
+[INF] 825ms request
+[INF] return data: [200 OK, , 966, 825, 1214, 3]
+[INF] Mon May 28 05:24:42 MDT 2018: delete for macaddress=000004B9419F to ams_ip=172.30.81.5, count_reminders=100, operation=delete, reminderChannelNumber=5, reminderProgramStart=, reminderProgramId=, reminderOffset=0
+[INF] 841ms request
+[INF] return data: [200 OK, , 829, 801, 847, 3]
+[INF] Mon May 28 05:24:43 MDT 2018: purge for macaddress=000004B9419F to ams_ip=172.30.81.5
+[INF] 410ms request[INF] return data: [200 OK, , 404, 396, 410, 3]
+========= ========= ========= Iteration = 4/10 ========= ========= =========
+[INF] Mon May 28 05:24:44 MDT 2018: add for macaddress=000004B9419F to ams_ip=172.30.81.5, count_reminders=100, operation=add, reminderChannelNumber=5, reminderProgramStart=, reminderProgramId=, reminderOffset=0
+[INF] 981ms request
+[INF] return data: [200 OK, , 970, 825, 1214, 4]
+[INF] Mon May 28 05:24:45 MDT 2018: delete for macaddress=000004B9419F to ams_ip=172.30.81.5, count_reminders=100, operation=delete, reminderChannelNumber=5, reminderProgramStart=, reminderProgramId=, reminderOffset=0
+[INF] 991ms request
+[INF] return data: [200 OK, , 870, 801, 991, 4]
+[INF] Mon May 28 05:24:46 MDT 2018: purge for macaddress=000004B9419F to ams_ip=172.30.81.5
+[INF] 401ms request[INF] return data: [200 OK, , 403, 396, 410, 4]
+========= ========= ========= Iteration = 5/10 ========= ========= =========
+[INF] Mon May 28 05:24:48 MDT 2018: add for macaddress=000004B9419F to ams_ip=172.30.81.5, count_reminders=100, operation=add, reminderChannelNumber=5, reminderProgramStart=, reminderProgramId=, reminderOffset=0
+[INF] 823ms request
+[INF] return data: [200 OK, , 940, 823, 1214, 5]
+[INF] Mon May 28 05:24:49 MDT 2018: delete for macaddress=000004B9419F to ams_ip=172.30.81.5, count_reminders=100, operation=delete, reminderChannelNumber=5, reminderProgramStart=, reminderProgramId=, reminderOffset=0
+[INF] 796ms request
+[INF] return data: [200 OK, , 855, 796, 991, 5]
+[INF] Mon May 28 05:24:49 MDT 2018: purge for macaddress=000004B9419F to ams_ip=172.30.81.5
+[INF] 392ms request[INF] return data: [200 OK, , 401, 392, 410, 5]
+========= ========= ========= Iteration = 6/10 ========= ========= =========
+[INF] Mon May 28 05:24:51 MDT 2018: add for macaddress=000004B9419F to ams_ip=172.30.81.5, count_reminders=100, operation=add, reminderChannelNumber=5, reminderProgramStart=, reminderProgramId=, reminderOffset=0
+[INF] 858ms request
+[INF] return data: [200 OK, , 927, 823, 1214, 6]
+[INF] Mon May 28 05:24:52 MDT 2018: delete for macaddress=000004B9419F to ams_ip=172.30.81.5, count_reminders=100, operation=delete, reminderChannelNumber=5, reminderProgramStart=, reminderProgramId=, reminderOffset=0
+[INF] 834ms request
+[INF] return data: [200 OK, , 851, 796, 991, 6]
+[INF] Mon May 28 05:24:53 MDT 2018: purge for macaddress=000004B9419F to ams_ip=172.30.81.5
+[INF] 410ms request[INF] return data: [200 OK, , 402, 392, 410, 6]
+========= ========= ========= Iteration = 7/10 ========= ========= =========
+[INF] Mon May 28 05:24:54 MDT 2018: add for macaddress=000004B9419F to ams_ip=172.30.81.5, count_reminders=100, operation=add, reminderChannelNumber=5, reminderProgramStart=, reminderProgramId=, reminderOffset=0
+[INF] 863ms request
+[INF] return data: [200 OK, , 917, 823, 1214, 7]
+[INF] Mon May 28 05:24:55 MDT 2018: delete for macaddress=000004B9419F to ams_ip=172.30.81.5, count_reminders=100, operation=delete, reminderChannelNumber=5, reminderProgramStart=, reminderProgramId=, reminderOffset=0
+[INF] 829ms request
+[INF] return data: [200 OK, , 848, 796, 991, 7]
+[INF] Mon May 28 05:24:56 MDT 2018: purge for macaddress=000004B9419F to ams_ip=172.30.81.5
+[INF] 399ms request[INF] return data: [200 OK, , 402, 392, 410, 7]
+========= ========= ========= Iteration = 8/10 ========= ========= =========
+[INF] Mon May 28 05:24:57 MDT 2018: add for macaddress=000004B9419F to ams_ip=172.30.81.5, count_reminders=100, operation=add, reminderChannelNumber=5, reminderProgramStart=, reminderProgramId=, reminderOffset=0
+[INF] 815ms request
+[INF] return data: [200 OK, , 905, 815, 1214, 8]
+[INF] Mon May 28 05:24:58 MDT 2018: delete for macaddress=000004B9419F to ams_ip=172.30.81.5, count_reminders=100, operation=delete, reminderChannelNumber=5, reminderProgramStart=, reminderProgramId=, reminderOffset=0
+[INF] 948ms request
+[INF] return data: [200 OK, , 860, 796, 991, 8]
+[INF] Mon May 28 05:24:59 MDT 2018: purge for macaddress=000004B9419F to ams_ip=172.30.81.5
+[INF] 361ms request[INF] return data: [200 OK, , 397, 361, 410, 8]
+========= ========= ========= Iteration = 9/10 ========= ========= =========
+[INF] Mon May 28 05:25:00 MDT 2018: add for macaddress=000004B9419F to ams_ip=172.30.81.5, count_reminders=100, operation=add, reminderChannelNumber=5, reminderProgramStart=, reminderProgramId=, reminderOffset=0
+[INF] 847ms request
+[INF] return data: [200 OK, , 898, 815, 1214, 9]
+[INF] Mon May 28 05:25:01 MDT 2018: delete for macaddress=000004B9419F to ams_ip=172.30.81.5, count_reminders=100, operation=delete, reminderChannelNumber=5, reminderProgramStart=, reminderProgramId=, reminderOffset=0
+[INF] 834ms request
+[INF] return data: [200 OK, , 857, 796, 991, 9]
+[INF] Mon May 28 05:25:02 MDT 2018: purge for macaddress=000004B9419F to ams_ip=172.30.81.5
+[INF] 396ms request[INF] return data: [200 OK, , 397, 361, 410, 9]
+========= ========= ========= Iteration = 10/10 ========= ========= =========
+[INF] Mon May 28 05:25:03 MDT 2018: add for macaddress=000004B9419F to ams_ip=172.30.81.5, count_reminders=100, operation=add, reminderChannelNumber=5, reminderProgramStart=, reminderProgramId=, reminderOffset=0
+[INF] 808ms request
+[INF] return data: [200 OK, , 889, 808, 1214, 10]
+[INF] Mon May 28 05:25:04 MDT 2018: delete for macaddress=000004B9419F to ams_ip=172.30.81.5, count_reminders=100, operation=delete, reminderChannelNumber=5, reminderProgramStart=, reminderProgramId=, reminderOffset=0
+[INF] 839ms request
+[INF] return data: [200 OK, , 856, 796, 991, 10]
+[INF] Mon May 28 05:25:05 MDT 2018: purge for macaddress=000004B9419F to ams_ip=172.30.81.5
+[INF] 409ms request[INF] return data: [200 OK, , 398, 361, 410, 10]
+========= ========= ========= Total measurements ========= ========= =========
+Mon May 28 05:25:06 MDT 2018, macaddress=000004B9419F(boxMoto2145_173), count_reminders=100, count_iterations=10/10
+   add avg=889ms, min=808ms, max=1214ms, /10
+delete avg=856ms, min=796ms, max=991ms, /10
+ purge avg=398ms, min=361ms, max=410ms, /10
+========= ========= ========= ========= ========= ========= ========= ================== ========= ========= Iteration = 1/10 ========= ========= =========
+[INF] Mon May 28 05:26:27 MDT 2018: add for macaddress=000004B9419F to ams_ip=172.30.81.5, count_reminders=100, operation=add, reminderChannelNumber=5, reminderProgramStart=, reminderProgramId=, reminderOffset=0
+[INF] 1233ms request
+[INF] return data: [200 OK, , 1233, 1233, 1233, 1]
+[INF] Mon May 28 05:26:29 MDT 2018: delete for macaddress=000004B9419F to ams_ip=172.30.81.5, count_reminders=100, operation=delete, reminderChannelNumber=5, reminderProgramStart=, reminderProgramId=, reminderOffset=0
+[INF] 981ms request
+[INF] return data: [200 OK, , 981, 981, 981, 1]
+[INF] Mon May 28 05:26:30 MDT 2018: purge for macaddress=000004B9419F to ams_ip=172.30.81.5
+[INF] 450ms request[INF] return data: [200 OK, , 450, 450, 450, 1]
+========= ========= ========= Iteration = 2/10 ========= ========= =========
+[INF] Mon May 28 05:26:31 MDT 2018: add for macaddress=000004B9419F to ams_ip=172.30.81.5, count_reminders=100, operation=add, reminderChannelNumber=5, reminderProgramStart=, reminderProgramId=, reminderOffset=0
+[INF] 855ms request
+[INF] return data: [200 OK, , 1044, 855, 1233, 2]
+[INF] Mon May 28 05:26:32 MDT 2018: delete for macaddress=000004B9419F to ams_ip=172.30.81.5, count_reminders=100, operation=delete, reminderChannelNumber=5, reminderProgramStart=, reminderProgramId=, reminderOffset=0
+[INF] 807ms request
+[INF] return data: [200 OK, , 894, 807, 981, 2]
+[INF] Mon May 28 05:26:33 MDT 2018: purge for macaddress=000004B9419F to ams_ip=172.30.81.5
+[INF] 432ms request[INF] return data: [200 OK, , 441, 432, 450, 2]
+========= ========= ========= Iteration = 3/10 ========= ========= =========
+[INF] Mon May 28 05:26:34 MDT 2018: add for macaddress=000004B9419F to ams_ip=172.30.81.5, count_reminders=100, operation=add, reminderChannelNumber=5, reminderProgramStart=, reminderProgramId=, reminderOffset=0
+[INF] 848ms request
+[INF] return data: [200 OK, , 978, 848, 1233, 3]
+[INF] Mon May 28 05:26:35 MDT 2018: delete for macaddress=000004B9419F to ams_ip=172.30.81.5, count_reminders=100, operation=delete, reminderChannelNumber=5, reminderProgramStart=, reminderProgramId=, reminderOffset=0
+[INF] 810ms request
+[INF] return data: [200 OK, , 866, 807, 981, 3]
+[INF] Mon May 28 05:26:36 MDT 2018: purge for macaddress=000004B9419F to ams_ip=172.30.81.5
+[INF] 394ms request[INF] return data: [200 OK, , 425, 394, 450, 3]
+========= ========= ========= Iteration = 4/10 ========= ========= =========
+[INF] Mon May 28 05:26:37 MDT 2018: add for macaddress=000004B9419F to ams_ip=172.30.81.5, count_reminders=100, operation=add, reminderChannelNumber=5, reminderProgramStart=, reminderProgramId=, reminderOffset=0
+[INF] 973ms request
+[INF] return data: [200 OK, , 977, 848, 1233, 4]
+[INF] Mon May 28 05:26:38 MDT 2018: delete for macaddress=000004B9419F to ams_ip=172.30.81.5, count_reminders=100, operation=delete, reminderChannelNumber=5, reminderProgramStart=, reminderProgramId=, reminderOffset=0
+[INF] 819ms request
+[INF] return data: [200 OK, , 854, 807, 981, 4]
+[INF] Mon May 28 05:26:39 MDT 2018: purge for macaddress=000004B9419F to ams_ip=172.30.81.5
+[INF] 414ms request[INF] return data: [200 OK, , 422, 394, 450, 4]
+========= ========= ========= Iteration = 5/10 ========= ========= =========
+[INF] Mon May 28 05:26:41 MDT 2018: add for macaddress=000004B9419F to ams_ip=172.30.81.5, count_reminders=100, operation=add, reminderChannelNumber=5, reminderProgramStart=, reminderProgramId=, reminderOffset=0
+[INF] 972ms request
+[INF] return data: [200 OK, , 976, 848, 1233, 5]
+[INF] Mon May 28 05:26:42 MDT 2018: delete for macaddress=000004B9419F to ams_ip=172.30.81.5, count_reminders=100, operation=delete, reminderChannelNumber=5, reminderProgramStart=, reminderProgramId=, reminderOffset=0
+[INF] 816ms request
+[INF] return data: [200 OK, , 846, 807, 981, 5]
+[INF] Mon May 28 05:26:42 MDT 2018: purge for macaddress=000004B9419F to ams_ip=172.30.81.5
+[INF] 547ms request[INF] return data: [200 OK, , 447, 394, 547, 5]
+========= ========= ========= Iteration = 6/10 ========= ========= =========
+[INF] Mon May 28 05:26:44 MDT 2018: add for macaddress=000004B9419F to ams_ip=172.30.81.5, count_reminders=100, operation=add, reminderChannelNumber=5, reminderProgramStart=, reminderProgramId=, reminderOffset=0
+[INF] 837ms request
+[INF] return data: [200 OK, , 953, 837, 1233, 6]
+[INF] Mon May 28 05:26:45 MDT 2018: delete for macaddress=000004B9419F to ams_ip=172.30.81.5, count_reminders=100, operation=delete, reminderChannelNumber=5, reminderProgramStart=, reminderProgramId=, reminderOffset=0
+[INF] 873ms request
+[INF] return data: [200 OK, , 851, 807, 981, 6]
+[INF] Mon May 28 05:26:46 MDT 2018: purge for macaddress=000004B9419F to ams_ip=172.30.81.5
+[INF] 451ms request[INF] return data: [200 OK, , 448, 394, 547, 6]
+========= ========= ========= Iteration = 7/10 ========= ========= =========
+[INF] Mon May 28 05:26:47 MDT 2018: add for macaddress=000004B9419F to ams_ip=172.30.81.5, count_reminders=100, operation=add, reminderChannelNumber=5, reminderProgramStart=, reminderProgramId=, reminderOffset=0
+[INF] 834ms request
+[INF] return data: [200 OK, , 936, 834, 1233, 7]
+[INF] Mon May 28 05:26:48 MDT 2018: delete for macaddress=000004B9419F to ams_ip=172.30.81.5, count_reminders=100, operation=delete, reminderChannelNumber=5, reminderProgramStart=, reminderProgramId=, reminderOffset=0
+[INF] 853ms request
+[INF] return data: [200 OK, , 851, 807, 981, 7]
+[INF] Mon May 28 05:26:49 MDT 2018: purge for macaddress=000004B9419F to ams_ip=172.30.81.5
+[INF] 681ms request[INF] return data: [200 OK, , 481, 394, 681, 7]
+========= ========= ========= Iteration = 8/10 ========= ========= =========
+[INF] Mon May 28 05:26:51 MDT 2018: add for macaddress=000004B9419F to ams_ip=172.30.81.5, count_reminders=100, operation=add, reminderChannelNumber=5, reminderProgramStart=, reminderProgramId=, reminderOffset=0
+[INF] 865ms request
+[INF] return data: [200 OK, , 927, 834, 1233, 8]
+[INF] Mon May 28 05:26:51 MDT 2018: delete for macaddress=000004B9419F to ams_ip=172.30.81.5, count_reminders=100, operation=delete, reminderChannelNumber=5, reminderProgramStart=, reminderProgramId=, reminderOffset=0
+[INF] 776ms request
+[INF] return data: [200 OK, , 841, 776, 981, 8]
+[INF] Mon May 28 05:26:52 MDT 2018: purge for macaddress=000004B9419F to ams_ip=172.30.81.5
+[INF] 387ms request[INF] return data: [200 OK, , 469, 387, 681, 8]
+========= ========= ========= Iteration = 9/10 ========= ========= =========
+[INF] Mon May 28 05:26:54 MDT 2018: add for macaddress=000004B9419F to ams_ip=172.30.81.5, count_reminders=100, operation=add, reminderChannelNumber=5, reminderProgramStart=, reminderProgramId=, reminderOffset=0
+[INF] 826ms request
+[INF] return data: [200 OK, , 915, 826, 1233, 9]
+[INF] Mon May 28 05:26:54 MDT 2018: delete for macaddress=000004B9419F to ams_ip=172.30.81.5, count_reminders=100, operation=delete, reminderChannelNumber=5, reminderProgramStart=, reminderProgramId=, reminderOffset=0
+[INF] 800ms request
+[INF] return data: [200 OK, , 837, 776, 981, 9]
+[INF] Mon May 28 05:26:55 MDT 2018: purge for macaddress=000004B9419F to ams_ip=172.30.81.5
+[INF] 399ms request[INF] return data: [200 OK, , 461, 387, 681, 9]
+========= ========= ========= Iteration = 10/10 ========= ========= =========
+[INF] Mon May 28 05:26:57 MDT 2018: add for macaddress=000004B9419F to ams_ip=172.30.81.5, count_reminders=100, operation=add, reminderChannelNumber=5, reminderProgramStart=, reminderProgramId=, reminderOffset=0
+[INF] 811ms request
+[INF] return data: [200 OK, , 905, 811, 1233, 10]
+[INF] Mon May 28 05:26:57 MDT 2018: delete for macaddress=000004B9419F to ams_ip=172.30.81.5, count_reminders=100, operation=delete, reminderChannelNumber=5, reminderProgramStart=, reminderProgramId=, reminderOffset=0
+[INF] 978ms request
+[INF] return data: [200 OK, , 851, 776, 981, 10]
+[INF] Mon May 28 05:26:58 MDT 2018: purge for macaddress=000004B9419F to ams_ip=172.30.81.5
+[INF] 440ms request[INF] return data: [200 OK, , 459, 387, 681, 10]
+========= ========= ========= Total measurements ========= ========= =========
+Mon May 28 05:27:00 MDT 2018, macaddress=000004B9419F(boxMoto2145_173), count_reminders=100, count_iterations=10/10
+   add avg=905ms, min=811ms, max=1233ms, /10
+delete avg=851ms, min=776ms, max=981ms, /10
+ purge avg=459ms, min=387ms, max=681ms, /10
+========= ========= ========= ========= ========= ========= ========= ================== ========= ========= Iteration = 1/500 ========= ========= =========
+[INF] Mon May 28 06:07:21 MDT 2018: add for macaddress=000004D67F70 to ams_ip=172.30.81.4, count_reminders=1000, reminderProgramStart=multi, reminderChannelNumber=2, reminderProgramId=, reminderOffset=0, reminderScheduleId=multi, reminderId=multi
+[INF] 1991ms request[INF] return data: [200 OK, , 1991, 1991, 1991, 1]
+[INF] Mon May 28 06:07:23 MDT 2018: modify for macaddress=000004D67F70 to ams_ip=172.30.81.4, count_reminders=1000, reminderProgramStart=multi, reminderChannelNumber=2, reminderProgramId=, reminderOffset=0, reminderScheduleId=multi, reminderId=multi
+[INF] 1417ms request[INF] return data: [200 OK, , 1417, 1417, 1417, 1]
+[INF] Mon May 28 06:07:24 MDT 2018: delete for macaddress=000004D67F70, ams_ip=172.30.81.4, reminderScheduleId=multi, reminderId=multi
+[INF] 923ms request[INF] return data: [200 OK, , 923, 923, 923, 1]
+========= ========= ========= Iteration = 2/500 ========= ========= =========
+[INF] Mon May 28 06:07:26 MDT 2018: add for macaddress=000004D67F70 to ams_ip=172.30.81.4, count_reminders=1000, reminderProgramStart=multi, reminderChannelNumber=2, reminderProgramId=, reminderOffset=0, reminderScheduleId=multi, reminderId=multi
+[INF] 1428ms request[INF] return data: [200 OK, , 1709, 1428, 1991, 2]
+[INF] Mon May 28 06:07:28 MDT 2018: modify for macaddress=000004D67F70 to ams_ip=172.30.81.4, count_reminders=1000, reminderProgramStart=multi, reminderChannelNumber=2, reminderProgramId=, reminderOffset=0, reminderScheduleId=multi, reminderId=multi
+[INF] 1396ms request[INF] return data: [200 OK, , 1406, 1396, 1417, 2]
+[INF] Mon May 28 06:07:29 MDT 2018: delete for macaddress=000004D67F70, ams_ip=172.30.81.4, reminderScheduleId=multi, reminderId=multi
+[INF] 885ms request[INF] return data: [200 OK, , 904, 885, 923, 2]
+========= ========= ========= Iteration = 3/500 ========= ========= =========
+[INF] Mon May 28 06:07:31 MDT 2018: add for macaddress=000004D67F70 to ams_ip=172.30.81.4, count_reminders=1000, reminderProgramStart=multi, reminderChannelNumber=2, reminderProgramId=, reminderOffset=0, reminderScheduleId=multi, reminderId=multi
+[INF] 1356ms request[INF] return data: [200 OK, , 1591, 1356, 1991, 3]
+[INF] Mon May 28 06:07:32 MDT 2018: modify for macaddress=000004D67F70 to ams_ip=172.30.81.4, count_reminders=1000, reminderProgramStart=multi, reminderChannelNumber=2, reminderProgramId=, reminderOffset=0, reminderScheduleId=multi, reminderId=multi
+[INF] 1398ms request[INF] return data: [200 OK, , 1403, 1396, 1417, 3]
+[INF] Mon May 28 06:07:34 MDT 2018: delete for macaddress=000004D67F70, ams_ip=172.30.81.4, reminderScheduleId=multi, reminderId=multi
+[INF] 867ms request[INF] return data: [200 OK, , 891, 867, 923, 3]
+========= ========= ========= Iteration = 4/500 ========= ========= =========
+[INF] Mon May 28 06:07:36 MDT 2018: add for macaddress=000004D67F70 to ams_ip=172.30.81.4, count_reminders=1000, reminderProgramStart=multi, reminderChannelNumber=2, reminderProgramId=, reminderOffset=0, reminderScheduleId=multi, reminderId=multi
+[INF] 1338ms request[INF] return data: [200 OK, , 1528, 1338, 1991, 4]
+[INF] Mon May 28 06:07:37 MDT 2018: modify for macaddress=000004D67F70 to ams_ip=172.30.81.4, count_reminders=1000, reminderProgramStart=multi, reminderChannelNumber=2, reminderProgramId=, reminderOffset=0, reminderScheduleId=multi, reminderId=multi
+[INF] 1373ms request[INF] return data: [200 OK, , 1396, 1373, 1417, 4]
+[INF] Mon May 28 06:07:38 MDT 2018: delete for macaddress=000004D67F70, ams_ip=172.30.81.4, reminderScheduleId=multi, reminderId=multi
+[INF] 870ms request[INF] return data: [200 OK, , 886, 867, 923, 4]
+========= ========= ========= Iteration = 5/500 ========= ========= =========
+[INF] Mon May 28 06:07:40 MDT 2018: add for macaddress=000004D67F70 to ams_ip=172.30.81.4, count_reminders=1000, reminderProgramStart=multi, reminderChannelNumber=2, reminderProgramId=, reminderOffset=0, reminderScheduleId=multi, reminderId=multi
+[INF] 1353ms request[INF] return data: [200 OK, , 1493, 1338, 1991, 5]
+[INF] Mon May 28 06:07:42 MDT 2018: modify for macaddress=000004D67F70 to ams_ip=172.30.81.4, count_reminders=1000, reminderProgramStart=multi, reminderChannelNumber=2, reminderProgramId=, reminderOffset=0, reminderScheduleId=multi, reminderId=multi
+[INF] 1379ms request[INF] return data: [200 OK, , 1392, 1373, 1417, 5]
+[INF] Mon May 28 06:07:43 MDT 2018: delete for macaddress=000004D67F70, ams_ip=172.30.81.4, reminderScheduleId=multi, reminderId=multi
+[INF] 892ms request[INF] return data: [200 OK, , 887, 867, 923, 5]
+========= ========= ========= Iteration = 6/500 ========= ========= =========
+[INF] Mon May 28 06:07:45 MDT 2018: add for macaddress=000004D67F70 to ams_ip=172.30.81.4, count_reminders=1000, reminderProgramStart=multi, reminderChannelNumber=2, reminderProgramId=, reminderOffset=0, reminderScheduleId=multi, reminderId=multi
+[INF] 1378ms request[INF] return data: [200 OK, , 1474, 1338, 1991, 6]
+[INF] Mon May 28 06:07:46 MDT 2018: modify for macaddress=000004D67F70 to ams_ip=172.30.81.4, count_reminders=1000, reminderProgramStart=multi, reminderChannelNumber=2, reminderProgramId=, reminderOffset=0, reminderScheduleId=multi, reminderId=multi
+[INF] 1442ms request[INF] return data: [200 OK, , 1400, 1373, 1442, 6]
+[INF] Mon May 28 06:07:48 MDT 2018: delete for macaddress=000004D67F70, ams_ip=172.30.81.4, reminderScheduleId=multi, reminderId=multi
+[INF] 888ms request[INF] return data: [200 OK, , 887, 867, 923, 6]
+========= ========= ========= Iteration = 7/500 ========= ========= =========
+[INF] Mon May 28 06:07:50 MDT 2018: add for macaddress=000004D67F70 to ams_ip=172.30.81.4, count_reminders=1000, reminderProgramStart=multi, reminderChannelNumber=2, reminderProgramId=, reminderOffset=0, reminderScheduleId=multi, reminderId=multi
+[INF] 1406ms request[INF] return data: [200 OK, , 1464, 1338, 1991, 7]
+[INF] Mon May 28 06:07:51 MDT 2018: modify for macaddress=000004D67F70 to ams_ip=172.30.81.4, count_reminders=1000, reminderProgramStart=multi, reminderChannelNumber=2, reminderProgramId=, reminderOffset=0, reminderScheduleId=multi, reminderId=multi
+[INF] 1389ms request[INF] return data: [200 OK, , 1399, 1373, 1442, 7]
+[INF] Mon May 28 06:07:53 MDT 2018: delete for macaddress=000004D67F70, ams_ip=172.30.81.4, reminderScheduleId=multi, reminderId=multi
+[INF] 933ms request[INF] return data: [200 OK, , 894, 867, 933, 7]
+========= ========= ========= Iteration = 8/500 ========= ========= =========
+[INF] Mon May 28 06:07:55 MDT 2018: add for macaddress=000004D67F70 to ams_ip=172.30.81.4, count_reminders=1000, reminderProgramStart=multi, reminderChannelNumber=2, reminderProgramId=, reminderOffset=0, reminderScheduleId=multi, reminderId=multi
+[INF] 1402ms request[INF] return data: [200 OK, , 1456, 1338, 1991, 8]
+[INF] Mon May 28 06:07:56 MDT 2018: modify for macaddress=000004D67F70 to ams_ip=172.30.81.4, count_reminders=1000, reminderProgramStart=multi, reminderChannelNumber=2, reminderProgramId=, reminderOffset=0, reminderScheduleId=multi, reminderId=multi
+[INF] 1402ms request[INF] return data: [200 OK, , 1399, 1373, 1442, 8]
+[INF] Mon May 28 06:07:57 MDT 2018: delete for macaddress=000004D67F70, ams_ip=172.30.81.4, reminderScheduleId=multi, reminderId=multi
+[INF] 901ms request[INF] return data: [200 OK, , 894, 867, 933, 8]
+========= ========= ========= Iteration = 9/500 ========= ========= =========
+[INF] Mon May 28 06:07:59 MDT 2018: add for macaddress=000004D67F70 to ams_ip=172.30.81.4, count_reminders=1000, reminderProgramStart=multi, reminderChannelNumber=2, reminderProgramId=, reminderOffset=0, reminderScheduleId=multi, reminderId=multi
+[INF] 1443ms request[INF] return data: [200 OK, , 1455, 1338, 1991, 9]
+[INF] Mon May 28 06:08:01 MDT 2018: modify for macaddress=000004D67F70 to ams_ip=172.30.81.4, count_reminders=1000, reminderProgramStart=multi, reminderChannelNumber=2, reminderProgramId=, reminderOffset=0, reminderScheduleId=multi, reminderId=multi
+[INF] 1823ms request[INF] return data: [200 OK, , 1446, 1373, 1823, 9]
+[INF] Mon May 28 06:08:03 MDT 2018: delete for macaddress=000004D67F70, ams_ip=172.30.81.4, reminderScheduleId=multi, reminderId=multi
+[INF] 897ms request[INF] return data: [200 OK, , 895, 867, 933, 9]
+========= ========= ========= Iteration = 10/500 ========= ========= =========
+[INF] Mon May 28 06:08:04 MDT 2018: add for macaddress=000004D67F70 to ams_ip=172.30.81.4, count_reminders=1000, reminderProgramStart=multi, reminderChannelNumber=2, reminderProgramId=, reminderOffset=0, reminderScheduleId=multi, reminderId=multi
+[INF] 1418ms request[INF] return data: [200 OK, , 1451, 1338, 1991, 10]
+[INF] Mon May 28 06:08:06 MDT 2018: modify for macaddress=000004D67F70 to ams_ip=172.30.81.4, count_reminders=1000, reminderProgramStart=multi, reminderChannelNumber=2, reminderProgramId=, reminderOffset=0, reminderScheduleId=multi, reminderId=multi
+[INF] 1397ms request[INF] return data: [200 OK, , 1441, 1373, 1823, 10]
+[INF] Mon May 28 06:08:07 MDT 2018: delete for macaddress=000004D67F70, ams_ip=172.30.81.4, reminderScheduleId=multi, reminderId=multi
+[INF] 882ms request[INF] return data: [200 OK, , 893, 867, 933, 10]
+========= ========= ========= Iteration = 11/500 ========= ========= =========
+[INF] Mon May 28 06:08:09 MDT 2018: add for macaddress=000004D67F70 to ams_ip=172.30.81.4, count_reminders=1000, reminderProgramStart=multi, reminderChannelNumber=2, reminderProgramId=, reminderOffset=0, reminderScheduleId=multi, reminderId=multi
+[INF] 1381ms request[INF] return data: [200 OK, , 1444, 1338, 1991, 11]
+[INF] Mon May 28 06:08:11 MDT 2018: modify for macaddress=000004D67F70 to ams_ip=172.30.81.4, count_reminders=1000, reminderProgramStart=multi, reminderChannelNumber=2, reminderProgramId=, reminderOffset=0, reminderScheduleId=multi, reminderId=multi
+[INF] 1385ms request[INF] return data: [200 OK, , 1436, 1373, 1823, 11]
+[INF] Mon May 28 06:08:12 MDT 2018: delete for macaddress=000004D67F70, ams_ip=172.30.81.4, reminderScheduleId=multi, reminderId=multi
+[INF] 897ms request[INF] return data: [200 OK, , 894, 867, 933, 11]
+========= ========= ========= Iteration = 12/500 ========= ========= =========
+[INF] Mon May 28 06:08:14 MDT 2018: add for macaddress=000004D67F70 to ams_ip=172.30.81.4, count_reminders=1000, reminderProgramStart=multi, reminderChannelNumber=2, reminderProgramId=, reminderOffset=0, reminderScheduleId=multi, reminderId=multi
+[INF] 1416ms request[INF] return data: [200 OK, , 1442, 1338, 1991, 12]
+[INF] Mon May 28 06:08:15 MDT 2018: modify for macaddress=000004D67F70 to ams_ip=172.30.81.4, count_reminders=1000, reminderProgramStart=multi, reminderChannelNumber=2, reminderProgramId=, reminderOffset=0, reminderScheduleId=multi, reminderId=multi
