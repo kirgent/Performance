@@ -1,3 +1,7 @@
 ams_ip,macaddress,boxname,count_reminders,reminderChannelNumber,reminderOffset,reminderOffset_new,count_iterations
 #comments are here
+<<<<<<< HEAD
 "172.30.81.4","000004D67F70","boxMoto2147_Rems",1000,2,0,0,600
+=======
+"172.30.81.4","000004D67F70","boxMoto2147_Rems",1000,2,0,0,510
+>>>>>>> b7936b52410faff40408d9db1af6c01eceb32529
