@@ -5,7 +5,6 @@ import org.junit.jupiter.params.provider.CsvFileSource;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Date;
 
 import static java.time.Duration.ofMillis;
 import static org.junit.jupiter.api.Assertions.*;
@@ -28,10 +27,7 @@ class testAMS_newAPI_Performance extends API_common {
         int a_avg = 0, a_min = 0, a_max=0, a_iterations = 0;
         for (int i = 1; i <= count_iterations; i++) {
             String header = "========= ========= ========= Iteration = " + i + "/" + count_iterations + " ========= ========= =========\n";
-            System.out.print(header);
-            if(write_file){
-                write_to_file(header);
-            }
+            logger(INFO_LEVEL, header);
             long reminderScheduleId = reminderScheduleId();
             long reminderId = reminderId();
 
@@ -46,14 +42,12 @@ class testAMS_newAPI_Performance extends API_common {
             }
             reminderScheduleId_list.clear();
             reminderId_list.clear();
-            if(show_debug_level) {
-                System.out.println("[DBG] reminderX_list-s are CLEARED !!!");
-            }
+            logger(DEBUG_LEVEL, "[DBG] reminderX_list-s are CLEARED !!!");
             add_list[0].clear();
             Thread.sleep(sleep_after_iteration);
         }
 
-        print_total_info(macaddress, boxname, count_reminders, count_iterations,
+        prepare_total_results(macaddress, boxname, count_reminders, count_iterations,
                 a_avg, a_min, a_max, a_iterations,
                 0, 0, 0, 0,
                 0, 0, 0, 0,
@@ -71,10 +65,7 @@ class testAMS_newAPI_Performance extends API_common {
                 p_avg = 0, p_min = 0, p_max=0, p_iterations = 0;
         for (int i = 1; i <= count_iterations; i++) {
             String header = "========= ========= ========= Iteration = " + i + "/" + count_iterations + " ========= ========= =========\n";
-            System.out.print(header);
-            if(write_file){
-                write_to_file(header);
-            }
+            logger(INFO_LEVEL, header);
             long reminderScheduleId = reminderScheduleId();
             long reminderId = reminderId();
 
@@ -99,15 +90,13 @@ class testAMS_newAPI_Performance extends API_common {
             }
             reminderScheduleId_list.clear();
             reminderId_list.clear();
-            if(show_debug_level) {
-                System.out.println("[DBG] reminderX_list-s are CLEARED !!!");
-            }
+            logger(DEBUG_LEVEL, "[DBG] reminderX_list-s are CLEARED !!!");
             add_list.clear();
             purge_list.clear();
             Thread.sleep(sleep_after_iteration);
         }
 
-        print_total_info(macaddress, boxname, count_reminders, count_iterations,
+        prepare_total_results(macaddress, boxname, count_reminders, count_iterations,
                 a_avg, a_min, a_max, a_iterations,
                 0, 0, 0, 0,
                 0, 0, 0, 0,
@@ -128,10 +117,7 @@ class testAMS_newAPI_Performance extends API_common {
                 p_avg = 0, p_min = 0, p_max = 0, p_iterations = 0;
         for (int i = 1; i <= count_iterations; i++) {
             String header = "========= ========= ========= Iteration = " + i + "/" + count_iterations + " ========= ========= =========\n";
-            System.out.print(header);
-            if(write_file){
-                write_to_file(header);
-            }
+            logger(INFO_LEVEL, header);
             long reminderScheduleId = reminderScheduleId();
             long reminderId = reminderId();
 
@@ -161,16 +147,14 @@ class testAMS_newAPI_Performance extends API_common {
 
             reminderScheduleId_list.clear();
             reminderId_list.clear();
-            if (show_debug_level) {
-                System.out.println("[DBG] reminderX_list-s are CLEARED !!!");
-            }
+            logger(DEBUG_LEVEL, "[DBG] reminderX_list-s are CLEARED !!!");
             add_list.clear();
             delete_list.clear();
             purge_list.clear();
             Thread.sleep(sleep_after_iteration);
         }
 
-        print_total_info(macaddress, boxname, count_reminders, count_iterations,
+        prepare_total_results(macaddress, boxname, count_reminders, count_iterations,
                 a_avg, a_min, a_max, a_iterations,
                 0, 0, 0, 0,
                 d_avg, d_min, d_max, d_iterations,
@@ -194,10 +178,7 @@ class testAMS_newAPI_Performance extends API_common {
                 p_avg = 0, p_min = 0, p_max = 0, p_iterations = 0;
         for (int i = 1; i <= count_iterations; i++) {
             String header = "========= ========= ========= Iteration = " + i + "/" + count_iterations + " ========= ========= =========\n";
-            System.out.print(header);
-            if(write_file){
-                write_to_file(header);
-            }
+            logger(INFO_LEVEL, header);
             long reminderScheduleId = reminderScheduleId();
             long reminderId = reminderId();
 
@@ -234,9 +215,7 @@ class testAMS_newAPI_Performance extends API_common {
             }
             reminderScheduleId_list.clear();
             reminderId_list.clear();
-            if (show_debug_level) {
-                System.out.println("[DBG] reminderX_list-s are CLEARED !!!");
-            }
+            logger(DEBUG_LEVEL, "[DBG] reminderX_list-s are CLEARED !!!");
             add_list.clear();
             modify_list.clear();
             delete_list.clear();
@@ -244,7 +223,7 @@ class testAMS_newAPI_Performance extends API_common {
             Thread.sleep(sleep_after_iteration);
         }
 
-        print_total_info(macaddress, boxname, count_reminders, count_iterations,
+        prepare_total_results(macaddress, boxname, count_reminders, count_iterations,
                 a_avg, a_min, a_max, a_iterations,
                 m_avg, m_min, m_max, m_iterations,
                 d_avg, d_min, d_max, d_iterations,
