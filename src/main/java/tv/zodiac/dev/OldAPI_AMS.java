@@ -26,44 +26,25 @@ class OldAPI_AMS extends API_common {
      * @throws IOException
      */
     ArrayList request(String ams_ip, String mac, Enum<Operation> operation, int count_reminders, long reminderChannelNumber, String reminderProgramStart, String reminderProgramId, long reminderOffset) throws IOException {
-        if(show_info_level) {
-            System.out.println("[INF] " + new Date() + ": " + operation + " for macaddress=" + mac + " to ams_ip=" + ams_ip + ", "
-                    + "count_reminders=" + count_reminders + ", "
-                    + "operation=" + operation + ", "
-                    + "reminderChannelNumber=" + reminderChannelNumber + ", "
-                    + "reminderProgramStart=" + reminderProgramStart + ", "
-                    + "reminderProgramId=" + reminderProgramId + ", "
-                    + "reminderOffset=" + reminderOffset);
-            if(write_file) {
-                write_to_file("[INF] " + new Date() + ": " + operation + " for macaddress=" + mac + " to ams_ip=" + ams_ip + ", "
-                        + "count_reminders=" + count_reminders + ", "
-                        + "operation=" + operation + ", "
-                        + "reminderChannelNumber=" + reminderChannelNumber + ", "
-                        + "reminderProgramStart=" + reminderProgramStart + ", "
-                        + "reminderProgramId=" + reminderProgramId + ", "
-                        + "reminderOffset=" + reminderOffset+"\n");
-            }
-        }
+        logger(INFO_LEVEL, "[INF] " + new Date() + ": " + operation + " for macaddress=" + mac + " to ams_ip=" + ams_ip + ", "
+                + "count_reminders=" + count_reminders + ", "
+                + "operation=" + operation + ", "
+                + "reminderChannelNumber=" + reminderChannelNumber + ", "
+                + "reminderProgramStart=" + reminderProgramStart + ", "
+                + "reminderProgramId=" + reminderProgramId + ", "
+                + "reminderOffset=" + reminderOffset);
 
         HttpPost request = new HttpPost(prepare_url(ams_ip, operation,false));
         request.setHeader("Accept", "application/json");
         request.setHeader("Content-type", "application/json");
         request.setEntity(new StringEntity(generate_json_reminder(mac, count_reminders, operation, reminderChannelNumber, reminderProgramStart, reminderProgramId, reminderOffset)));
-        if(show_debug_level) {
-            System.out.println("[DBG] request string: " + request);
-            if(write_file) {
-                write_to_file("[DBG] request string: " + request);
-            }
-        }
+        logger(DEBUG_LEVEL, "[DBG] request string: " + request);
 
         long start = System.currentTimeMillis();
         HttpResponse response = HttpClients.createDefault().execute(request);
         long finish = System.currentTimeMillis();
         int diff = (int)(finish-start);
-        System.out.print("[INF] " + diff + "ms request");
-        if(write_file) {
-            write_to_file("[INF] " + diff + "ms request\n");
-        }
+        logger(INFO_LEVEL, "[INF] " + diff + "ms request");
 
         ArrayList arrayList = new ArrayList();
         arrayList.add(0, response.getStatusLine().getStatusCode() + " " + response.getStatusLine().getReasonPhrase());
@@ -75,12 +56,11 @@ class OldAPI_AMS extends API_common {
                 arrayList.add(2, avg);
                 arrayList.add(3, get_min_time(add_avg_list));
                 arrayList.add(4, get_max_time(add_avg_list));
-                arrayList.add(5, add_avg_list.size());
-                if (show_debug_level) {
-                    if (add_avg_list.size() <= 10) {
-                        System.out.println("[DBG] add avg = " + avg + "ms/" + add_avg_list.size() + ": add_list:" + add_avg_list);
-                    }
+                arrayList.add(5, "/" + add_avg_list.size());
+                if (add_avg_list.size() <= 10) {
+                    logger(DEBUG_LEVEL, "[DBG] add avg = " + avg + "ms/" + add_avg_list.size() + ": add_list:" + add_avg_list);
                 }
+
             } else if (operation.name().equals("delete")) {
                 delete_avg_list.add(diff);
                 int avg = get_average_time(delete_avg_list);
@@ -88,20 +68,12 @@ class OldAPI_AMS extends API_common {
                 arrayList.add(3, get_min_time(delete_avg_list));
                 arrayList.add(4, get_max_time(delete_avg_list));
                 arrayList.add(5, delete_avg_list.size());
-                if (show_debug_level) {
-                    if (delete_avg_list.size() <= 10) {
-                        System.out.println("[DBG] modify avg = " + avg + "ms/" + delete_avg_list.size() + ": modify_list:" + delete_avg_list);
-                    }
+                if (delete_avg_list.size() <= 10) {
+                    logger(DEBUG_LEVEL, "[DBG] modify avg = " + avg + "ms/" + delete_avg_list.size() + ": modify_list:" + delete_avg_list);
                 }
             }
         }
-
-        if(show_info_level) {
-            System.out.println("[INF] return data: " + arrayList + "\n");
-        }
-        if(write_file) {
-            write_to_file("[INF] return data: " + arrayList + "\n");
-        }
+        logger(INFO_LEVEL, "[INF] return data: " + arrayList);
         return arrayList;
     }
 
@@ -112,32 +84,19 @@ class OldAPI_AMS extends API_common {
      * @throws IOException
      */
     ArrayList request(String ams_ip, String mac, Enum<Operation> operation) throws IOException {
-        if(show_info_level) {
-            System.out.println("[INF] " + new Date() + ": purge for macaddress=" + mac + " to ams_ip=" + ams_ip);
-            if(write_file){
-                write_to_file("[INF] " + new Date() + ": purge for macaddress=" + mac + " to ams_ip=" + ams_ip + "\n");
-            }
-        }
+        logger(INFO_LEVEL, "[INF] " + new Date() + ": purge for macaddress=" + mac + " to ams_ip=" + ams_ip);
 
         HttpPost request = new HttpPost(prepare_url(ams_ip, Operation.purge, false));
         request.setHeader("Accept", "application/json");
         request.setHeader("Content-type", "application/json");
         request.setEntity(new StringEntity(generate_json_reminder_purge(mac)));
-        if(show_debug_level) {
-            System.out.println("[DBG] request string: " + request);
-            if(write_file) {
-                write_to_file("[DBG] request string: " + request);
-            }
-        }
+        logger(DEBUG_LEVEL, "[DBG] request string: " + request);
 
         long start = System.currentTimeMillis();
         HttpResponse response = HttpClients.createDefault().execute(request);
         long finish = System.currentTimeMillis();
         int diff = (int)(finish-start);
-        System.out.print("[INF] " + diff + "ms request");
-        if(write_file) {
-            write_to_file("[INF] " + diff + "ms request\n");
-        }
+        logger(INFO_LEVEL, "[INF] " + diff + "ms request");
 
         ArrayList arrayList = new ArrayList();
         arrayList.add(0, response.getStatusLine().getStatusCode() + " " + response.getStatusLine().getReasonPhrase());
@@ -148,24 +107,16 @@ class OldAPI_AMS extends API_common {
             arrayList.add(2, avg);
             arrayList.add(3, get_min_time(purge_avg_list));
             arrayList.add(4, get_max_time(purge_avg_list));
-            arrayList.add(5, purge_avg_list.size());
-            if(show_debug_level) {
-                if(purge_avg_list.size()<=10) {
-                    System.out.println("[DBG] purge avg = " + avg + "ms/" + purge_avg_list.size() + ": purge_avg_list:" + purge_avg_list);
-                }
+            arrayList.add(5, "/" + purge_avg_list.size());
+            if(purge_avg_list.size()<=10) {
+                logger(DEBUG_LEVEL, "[DBG] purge avg = " + avg + "ms/" + purge_avg_list.size() + ": purge_avg_list:" + purge_avg_list);
             }
         }
-
-        if(show_info_level) {
-            System.out.println("[INF] return data: " + arrayList + "\n");
-        }
-        if(write_file) {
-            write_to_file("[INF] return data: " + arrayList + "\n");
-        }
+        logger(INFO_LEVEL, "[INF] return data: " + arrayList);
         return arrayList;
     }
 
-    private String generate_json_reminder(String mac, int count_reminders, Enum<Operation> operation, long reminderChannelNumber, String reminderProgramStart, String reminderProgramId, long reminderOffset) {
+    private String generate_json_reminder(String mac, int count_reminders, Enum<Operation> operation, long reminderChannelNumber, String reminderProgramStart, String reminderProgramId, long reminderOffset) throws IOException {
         if (count_reminders < 0) { count_reminders = 0; }
         //if (count_reminders > 1440) { count_reminders = 1440; }
 
@@ -191,14 +142,13 @@ class OldAPI_AMS extends API_common {
             array_reminders.add(object_in_reminders);
         }
 
-        String result = json.toString();
-        if(show_generated_json) {
-            System.out.println("[JSON] generated json: " + result);
+        if(show_generated_json && show_info_level) {
+            logger(INFO_LEVEL, "[JSON] generated json: " + json);
         }
-        return result;
+        return json.toString();
     }
 
-    private String generate_json_reminder_purge(String mac) {
+    private String generate_json_reminder_purge(String mac) throws IOException {
         JSONObject json = new JSONObject();
         json.put("deviceId", mac);
         JSONArray array_reminders = new JSONArray();
@@ -207,11 +157,10 @@ class OldAPI_AMS extends API_common {
         object_in_reminders.put("operation", "Purge");
         array_reminders.add(object_in_reminders);
 
-        String result = json.toString();
-        if(show_generated_json) {
-            System.out.println("[JSON] generated json: " + result);
+        if(show_generated_json && show_info_level) {
+            logger(INFO_LEVEL, "[JSON] generated json: " + json);
         }
-        return result;
+        return json.toString();
     }
 
 }

@@ -11666,6 +11666,7 @@ delete avg=605ms, min=447ms, max=8368ms, /500
 [INF] 1234ms request
 [INF] return data: [200 OK, 3]
 >>>>>>> 67ea5c82af27ef3a9bd8438c33c585597bb1ed2b
+<<<<<<< HEAD
 ========= ========= ========= Iteration = 1/10 ========= ========= =========
 [INF] Mon May 28 09:05:58 MDT 2018: add for macaddress=000004D67F70 to ams_ip=172.30.81.4, count_reminders=1000, reminderProgramStart=multi, reminderChannelNumber=2, reminderProgramId=, reminderOffset=0, reminderScheduleId=multi, reminderId=multi
 ========= ========= ========= Iteration = 1/10 ========= ========= =========
@@ -11745,3 +11746,183 @@ Mon May 28 09:13:25 MDT 2018, macaddress=000004D67F70(boxMoto2147_Rems), count_r
    add avg=2068ms, min=1923ms, max=2702ms, /10
  purge avg=136ms, min=114ms, max=177ms, /10
 ========= ========= ========= ========= ========= ========= ========= =========
+=======
+========= ========= ========= Iteration = 1/1 ========= ========= =========
+[INF] Mon May 28 17:07:53 MSK 2018: add for macaddress=000004B9419F to ams_ip=172.30.81.5, count_reminders=10, operation=add, reminderChannelNumber=5, reminderProgramStart=, reminderProgramId=, reminderOffset=0
+[INF] 1237ms request
+[INF] return data: [200 OK, 3]
+========= ========= ========= Iteration = 1/1 ========= ========= =========
+[INF] Mon May 28 17:08:06 MSK 2018: add for macaddress=000004B9419F to ams_ip=172.30.81.5, count_reminders=10, operation=add, reminderChannelNumber=2, reminderProgramStart=, reminderProgramId=, reminderOffset=0
+[INF] 1387ms request
+[INF] return data: [200 OK, , 1387, 1387, 1387, 1]
+[INF] Mon May 28 17:08:07 MSK 2018: purge for macaddress=000004B9419F to ams_ip=172.30.81.5
+[INF] 795ms request
+[INF] return data: [200 OK, , 795, 795, 795, 1]
+========= ========= ========= Total measurements ========= ========= =========
+Mon May 28 17:08:09 MSK 2018, macaddress=000004B9419F(boxMoto2145_173), count_reminders=10, count_iterations=1/1
+   add avg=1387ms, min=1387ms, max=1387ms, /1
+ purge avg=795ms, min=795ms, max=795ms, /1
+========= ========= ========= ========= ========= ========= ========= ================== ========= ========= Iteration = 1/1 ========= ========= =========
+[INF] Mon May 28 17:08:51 MSK 2018: add for macaddress=000004B9419F to ams_ip=172.30.81.5, count_reminders=10, operation=add, reminderChannelNumber=2, reminderProgramStart=, reminderProgramId=, reminderOffset=0
+[INF] 1411ms request
+[INF] return data: [200 OK, , 1411, 1411, 1411, 1]
+[INF] Mon May 28 17:08:53 MSK 2018: purge for macaddress=000004B9419F to ams_ip=172.30.81.5
+[INF] 764ms request
+[INF] return data: [200 OK, , 764, 764, 764, 1]
+========= ========= ========= Total measurements ========= ========= =========
+Mon May 28 17:08:55 MSK 2018, macaddress=000004B9419F(boxMoto2145_173), count_reminders=10, count_iterations=1/1
+   add avg=1411ms, min=1411ms, max=1411ms, /1
+ purge avg=764ms, min=764ms, max=764ms, /1
+========= ========= ========= ========= ========= ========= ========= ================== ========= ========= Iteration = 1/1 ========= ========= =========
+
+[INF] Mon May 28 17:35:55 MSK 2018: add for macaddress=000004B9419F to ams_ip=172.30.81.5, count_reminders=10, operation=add, reminderChannelNumber=2, reminderProgramStart=, reminderProgramId=, reminderOffset=0
+[DBG] request string: POST http://172.30.81.5:8080/ams/Reminders?req=ChangeReminders HTTP/1.1
+[INF] 1331ms request
+[INF] return data: [200 OK, , 1331, 1331, 1331, 1]
+[INF] Mon May 28 17:35:56 MSK 2018: purge for macaddress=000004B9419F to ams_ip=172.30.81.5
+[DBG] request string: POST http://172.30.81.5:8080/ams/Reminders?req=ChangeReminders HTTP/1.1
+[INF] 768ms request
+[INF] return data: [200 OK, , 768, 768, 768, 1]
+========= ========= ========= Total measurements ========= ========= =========
+Mon May 28 17:35:58 MSK 2018, macaddress=000004B9419F(boxMoto2145_173), count_reminders=10, count_iterations=1/1
+   add avg=1331ms, min=1331ms, max=1331ms, /1
+ purge avg=768ms, min=768ms, max=768ms, /1
+========= ========= ========= ========= ========= ========= ========= ================== ========= ========= Iteration = 1/1 ========= ========= =========
+[INF] Mon May 28 17:36:56 MSK 2018: add for macaddress=000004B9419F to ams_ip=172.30.81.5, count_reminders=10, operation=add, reminderChannelNumber=2, reminderProgramStart=, reminderProgramId=, reminderOffset=0
+[DBG] request string: POST http://172.30.81.5:8080/ams/Reminders?req=ChangeReminders HTTP/1.1
+[INF] 1284ms request
+[INF] return data: [200 OK, , 1284, 1284, 1284, 1]
+[INF] Mon May 28 17:36:58 MSK 2018: purge for macaddress=000004B9419F to ams_ip=172.30.81.5
+[DBG] request string: POST http://172.30.81.5:8080/ams/Reminders?req=ChangeReminders HTTP/1.1
+[INF] 802ms request
+[INF] return data: [200 OK, , 802, 802, 802, 1]
+========= ========= ========= Total measurements ========= ========= =========
+Mon May 28 17:37:00 MSK 2018, macaddress=000004B9419F(boxMoto2145_173), count_reminders=10, count_iterations=1/1
+   add avg=1284ms, min=1284ms, max=1284ms, /1
+ purge avg=802ms, min=802ms, max=802ms, /1
+========= ========= ========= ========= ========= ========= ========= ================== ========= ========= Iteration = 1/1 ========= ========= =========
+[INF] Mon May 28 17:39:30 MSK 2018: add for macaddress=000004B9419F to ams_ip=172.30.81.5, count_reminders=10, operation=add, reminderChannelNumber=2, reminderProgramStart=, reminderProgramId=, reminderOffset=0
+[DBG] request string: POST http://172.30.81.5:8080/ams/Reminders?req=ChangeReminders HTTP/1.1
+[INF] 1288ms request
+[INF] return data: [200 OK, , 1288, 1288, 1288, 1]
+[INF] Mon May 28 17:39:32 MSK 2018: purge for macaddress=000004B9419F to ams_ip=172.30.81.5
+[DBG] request string: POST http://172.30.81.5:8080/ams/Reminders?req=ChangeReminders HTTP/1.1
+[INF] 769ms request
+[INF] return data: [200 OK, , 769, 769, 769, 1]
+========= ========= ========= Total measurements ========= ========= =========
+Mon May 28 17:39:33 MSK 2018, macaddress=000004B9419F(boxMoto2145_173), count_reminders=10, count_iterations=1/1
+   add avg=1288ms, min=1288ms, max=1288ms, /1
+ purge avg=769ms, min=769ms, max=769ms, /1
+========= ========= ========= ========= ========= ========= ========= ================== ========= ========= Iteration = 1/1 ========= ========= =========
+[INF] Mon May 28 17:41:10 MSK 2018: add for macaddress=000004B9419F to ams_ip=172.30.81.5, count_reminders=10, operation=add, reminderChannelNumber=2, reminderProgramStart=, reminderProgramId=, reminderOffset=0
+[DBG] request string: POST http://172.30.81.5:8080/ams/Reminders?req=ChangeReminders HTTP/1.1
+[INF] 1224ms request
+[INF] return data: [200 OK, , 1224, 1224, 1224, 1]
+[INF] Mon May 28 17:41:11 MSK 2018: purge for macaddress=000004B9419F to ams_ip=172.30.81.5
+[DBG] request string: POST http://172.30.81.5:8080/ams/Reminders?req=ChangeReminders HTTP/1.1
+[INF] 761ms request
+[INF] return data: [200 OK, , 761, 761, 761, 1]
+========= ========= ========= Total measurements ========= ========= =========
+Mon May 28 17:41:13 MSK 2018, macaddress=000004B9419F(boxMoto2145_173), count_reminders=10, count_iterations=1/1
+   add avg=1224ms, min=1224ms, max=1224ms, /1
+ purge avg=761ms, min=761ms, max=761ms, /1
+========= ========= ========= ========= ========= ========= ========= ================== ========= ========= Iteration = 1/1 ========= ========= =========
+[INF] Mon May 28 17:45:14 MSK 2018: add for macaddress=000004B9419F to ams_ip=172.30.81.5, count_reminders=10, operation=add, reminderChannelNumber=2, reminderProgramStart=, reminderProgramId=, reminderOffset=0
+[DBG] request string: POST http://172.30.81.5:8080/ams/Reminders?req=ChangeReminders HTTP/1.1
+[INF] 1272ms request
+[INF] return data: [200 OK, , 1272, 1272, 1272, 1]
+[INF] Mon May 28 17:45:15 MSK 2018: purge for macaddress=000004B9419F to ams_ip=172.30.81.5
+[DBG] request string: POST http://172.30.81.5:8080/ams/Reminders?req=ChangeReminders HTTP/1.1
+[INF] 911ms request
+[INF] return data: [200 OK, , 911, 911, 911, 1]
+========= ========= ========= Total measurements ========= ========= =========
+Mon May 28 17:45:17 MSK 2018, macaddress=000004B9419F(boxMoto2145_173), count_reminders=10, count_iterations=1/1
+   add avg=1272ms, min=1272ms, max=1272ms, /1
+ purge avg=911ms, min=911ms, max=911ms, /1
+========= ========= ========= ========= ========= ========= ========= ================== ========= ========= Iteration = 1/1 ========= ========= =========
+[INF] Mon May 28 17:49:29 MSK 2018: add for macaddress=000004B9419F to ams_ip=172.30.81.5, count_reminders=10, operation=add, reminderChannelNumber=2, reminderProgramStart=, reminderProgramId=, reminderOffset=0
+[DBG] request string: POST http://172.30.81.5:8080/ams/Reminders?req=ChangeReminders HTTP/1.1
+[INF] 1291ms request
+[INF] return data: [200 OK, , 1291, 1291, 1291, 1]
+[INF] Mon May 28 17:49:30 MSK 2018: purge for macaddress=000004B9419F to ams_ip=172.30.81.5
+[DBG] request string: POST http://172.30.81.5:8080/ams/Reminders?req=ChangeReminders HTTP/1.1
+[INF] 739ms request
+[INF] return data: [200 OK, , 739, 739, 739, 1]
+========= ========= ========= Total measurements ========= ========= =========
+Mon May 28 17:49:32 MSK 2018, macaddress=000004B9419F(boxMoto2145_173), count_reminders=10, count_iterations=1/1
+   add avg=1291ms, min=1291ms, max=1291ms, /1
+ purge avg=739ms, min=739ms, max=739ms, /1
+========= ========= ========= ========= ========= ========= ========= =========
+========= ========= ========= Iteration = 1/1 ========= ========= =========
+[INF] Mon May 28 17:50:25 MSK 2018: add for macaddress=000004B9419F to ams_ip=172.30.81.5, count_reminders=10, operation=add, reminderChannelNumber=2, reminderProgramStart=, reminderProgramId=, reminderOffset=0
+[DBG] request string: POST http://172.30.81.5:8080/ams/Reminders?req=ChangeReminders HTTP/1.1
+[INF] 1353ms request
+[INF] return data: [200 OK, , 1353, 1353, 1353, 1]
+[INF] Mon May 28 17:50:26 MSK 2018: purge for macaddress=000004B9419F to ams_ip=172.30.81.5
+[DBG] request string: POST http://172.30.81.5:8080/ams/Reminders?req=ChangeReminders HTTP/1.1
+[INF] 755ms request
+[INF] return data: [200 OK, , 755, 755, 755, 1]
+========= ========= ========= Total measurements ========= ========= =========
+Mon May 28 17:50:28 MSK 2018, macaddress=000004B9419F(boxMoto2145_173), count_reminders=10, count_iterations=1/1
+   add avg=1353ms, min=1353ms, max=1353ms, /1
+ purge avg=755ms, min=755ms, max=755ms, /1
+========= ========= ========= ========= ========= ========= ========= =========
+
+========= ========= ========= Iteration = 1/1 ========= ========= =========
+[INF] Mon May 28 17:50:47 MSK 2018: add for macaddress=000004B9419F to ams_ip=172.30.81.5, count_reminders=10, operation=add, reminderChannelNumber=2, reminderProgramStart=, reminderProgramId=, reminderOffset=0
+[DBG] request string: POST http://172.30.81.5:8080/ams/Reminders?req=ChangeReminders HTTP/1.1
+[INF] 1310ms request
+[INF] return data: [200 OK, , 1310, 1310, 1310, 1]
+[INF] Mon May 28 17:50:49 MSK 2018: purge for macaddress=000004B9419F to ams_ip=172.30.81.5
+[DBG] request string: POST http://172.30.81.5:8080/ams/Reminders?req=ChangeReminders HTTP/1.1
+[INF] 775ms request
+[INF] return data: [200 OK, , 775, 775, 775, 1]
+========= ========= ========= Total measurements ========= ========= =========
+Mon May 28 17:50:50 MSK 2018, macaddress=000004B9419F(boxMoto2145_173), count_reminders=10, count_iterations=1/1
+   add avg=1310ms, min=1310ms, max=1310ms, /1
+ purge avg=775ms, min=775ms, max=775ms, /1
+========= ========= ========= ========= ========= ========= ========= =========
+
+========= ========= ========= Iteration = 1/1 ========= ========= =========
+[INF] Mon May 28 17:52:23 MSK 2018: add for macaddress=000004B9419F to ams_ip=172.30.81.5, count_reminders=10, operation=add, reminderChannelNumber=2, reminderProgramStart=, reminderProgramId=, reminderOffset=0
+[DBG] request string: POST http://172.30.81.5:8080/ams/Reminders?req=ChangeReminders HTTP/1.1
+[INF] 1291ms request
+[INF] return data: [200 OK, , 1291, 1291, 1291, 1]
+[INF] Mon May 28 17:52:24 MSK 2018: purge for macaddress=000004B9419F to ams_ip=172.30.81.5
+[DBG] request string: POST http://172.30.81.5:8080/ams/Reminders?req=ChangeReminders HTTP/1.1
+[INF] 770ms request
+[INF] return data: [200 OK, , 770, 770, 770, 1]
+========= ========= ========= Total measurements ========= ========= =========
+Mon May 28 17:52:26 MSK 2018, macaddress=000004B9419F(boxMoto2145_173), count_reminders=10, count_iterations=1/1
+   add avg=1291ms, min=1291ms, max=1291ms, /1
+ purge avg=770ms, min=770ms, max=770ms, /1
+========= ========= ========= ========= ========= ========= ========= =========
+========= ========= ========= Iteration = 1/1 ========= ========= =========
+[INF] Mon May 28 17:52:35 MSK 2018: add for macaddress=000004B9419F to ams_ip=172.30.81.5, count_reminders=10, operation=add, reminderChannelNumber=2, reminderProgramStart=, reminderProgramId=, reminderOffset=0
+[DBG] request string: POST http://172.30.81.5:8080/ams/Reminders?req=ChangeReminders HTTP/1.1
+[INF] 1326ms request
+[INF] return data: [200 OK, , 1326, 1326, 1326, 1]
+[INF] Mon May 28 17:52:37 MSK 2018: purge for macaddress=000004B9419F to ams_ip=172.30.81.5
+[DBG] request string: POST http://172.30.81.5:8080/ams/Reminders?req=ChangeReminders HTTP/1.1
+[INF] 771ms request
+[INF] return data: [200 OK, , 771, 771, 771, 1]
+========= ========= ========= Total measurements ========= ========= =========
+Mon May 28 17:52:38 MSK 2018, macaddress=000004B9419F(boxMoto2145_173), count_reminders=10, count_iterations=1/1
+   add avg=1326ms, min=1326ms, max=1326ms, /1
+ purge avg=771ms, min=771ms, max=771ms, /1
+========= ========= ========= ========= ========= ========= ========= =========
+========= ========= ========= Iteration = 1/1 ========= ========= =========
+[INF] Mon May 28 18:11:09 MSK 2018: add for macaddress=000004B9419F to ams_ip=172.30.81.5, count_reminders=10, operation=add, reminderChannelNumber=2, reminderProgramStart=, reminderProgramId=, reminderOffset=0
+[JSON] generated json: {"reminders":[{"reminderChannelNumber":2,"reminderProgramId":"","reminderProgramStart":"2018-05-29 18:11","reminderOffset":0,"operation":"Add"},{"reminderChannelNumber":2,"reminderProgramId":"","reminderProgramStart":"2018-05-29 18:12","reminderOffset":0,"operation":"Add"},{"reminderChannelNumber":2,"reminderProgramId":"","reminderProgramStart":"2018-05-29 18:13","reminderOffset":0,"operation":"Add"},{"reminderChannelNumber":2,"reminderProgramId":"","reminderProgramStart":"2018-05-29 18:14","reminderOffset":0,"operation":"Add"},{"reminderChannelNumber":2,"reminderProgramId":"","reminderProgramStart":"2018-05-29 18:15","reminderOffset":0,"operation":"Add"},{"reminderChannelNumber":2,"reminderProgramId":"","reminderProgramStart":"2018-05-29 18:16","reminderOffset":0,"operation":"Add"},{"reminderChannelNumber":2,"reminderProgramId":"","reminderProgramStart":"2018-05-29 18:17","reminderOffset":0,"operation":"Add"},{"reminderChannelNumber":2,"reminderProgramId":"","reminderProgramStart":"2018-05-29 18:18","reminderOffset":0,"operation":"Add"},{"reminderChannelNumber":2,"reminderProgramId":"","reminderProgramStart":"2018-05-29 18:19","reminderOffset":0,"operation":"Add"},{"reminderChannelNumber":2,"reminderProgramId":"","reminderProgramStart":"2018-05-29 18:20","reminderOffset":0,"operation":"Add"}],"deviceId":"000004B9419F"}
+[INF] 1306ms request
+[INF] return data: [200 OK, , 1306, 1306, 1306, 1]
+[INF] Mon May 28 18:11:10 MSK 2018: purge for macaddress=000004B9419F to ams_ip=172.30.81.5
+[JSON] generated json: {"reminders":[{"operation":"Purge"}],"deviceId":"000004B9419F"}
+[INF] 814ms request
+[INF] return data: [200 OK, , 814, 814, 814, 1]
+========= ========= ========= Total measurements ========= ========= =========
+Mon May 28 18:11:12 MSK 2018, macaddress=000004B9419F(boxMoto2145_173), count_reminders=10, count_iterations=1/1
+   add avg=1306ms, min=1306ms, max=1306ms, /1
+ purge avg=814ms, min=814ms, max=814ms, /1
+========= ========= ========= ========= ========= ========= ========= =========
+>>>>>>> fe4ac14045a7bb17516d200f9675c8a1f507f4ef

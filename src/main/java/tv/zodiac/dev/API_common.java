@@ -8,6 +8,7 @@ import java.io.BufferedReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.nio.charset.StandardCharsets;
 import java.sql.*;
 import java.text.SimpleDateFormat;
 import java.util.*;
@@ -23,9 +24,13 @@ public class API_common {
 
     Boolean show_info_level = true;
     Boolean show_debug_level = false;
-    Boolean show_generated_json = false;
-    private Boolean show_response_body = false;
-    Boolean write_file = true;
+    Boolean show_generated_json = true;
+    private Boolean show_response_body = true;
+    private Boolean write_file = true;
+
+
+    static final String INFO_LEVEL = "INF";
+    static final String DEBUG_LEVEL = "DBG";
 
     //private final static Logger log = Logger.getLogger(API.class.getName());
 
@@ -52,14 +57,7 @@ public class API_common {
     final String mac_wrong = "123456789012";
     final String boxD101 = "A0722CEEC970";//WB20 D101 ???
     final String boxD102 = "3438B7EB2E24";//WB20 D102
-    final String boxD103 = "3438B7EB2E28";//WB20 D103
-    final String boxD104 = "3438B7EB2E34";//WB20 D104
-    final String boxD105 = "3438B7EB2E30";//WB20 D105
-    final String boxD106 = "3438B7EB2EC4";//WB20 D106
-    final String box_Tanya = "000005FE680A";//Tanya
-    final String boxD111 = "2c7e81ee2530";
     final String box4210 = "A0722CEEC9B4";// 30.255.241.239  /  10.15.199.182
-    final String box4212 = "A0722CEEC9A4";
     final String boxMoto2145_173 =  "000004B9419F"; //"B077AC5D91DD"; // "000004B9419F"; //Moto_2145_Mondo_DCX3200M_17.3_346
     final String boxMoto2147_Rems = "000004D67F70"; //000004d67f70"; //Moto_2147_Mondo_DCX3200M_REMS
     String mac = boxMoto2147_Rems;
@@ -199,31 +197,31 @@ public class API_common {
     return "";
     }
 
-    String check_body_response(String body, String mac) {
+    String check_body_response(String body, String mac) throws IOException {
         String result = "";
         if(body.contains("\"statusCode\":1")){
             //log.warning("one or more statusCode's = " + statuscode[1]);
-            System.out.println("! one or more statusCode's = " + statuscode[1]);
+            logger(INFO_LEVEL, "! one or more statusCode's = " + statuscode[1]);
             result += "1";
         }
         if(body.contains("\"statusCode\":2")){
             //log.warning("one or more statusCode's = " + statuscode[2]);
-            System.out.println("! one or more statusCode's = " + statuscode[2]);
+            logger(INFO_LEVEL, "! one or more statusCode's = " + statuscode[2]);
             result += "2";
         }
         if(body.contains("\"statusCode\":3")){
             //log.warning("one or more statusCode's = " + statuscode[3]);
-            System.out.println("! one or more statusCode's = " + statuscode[3]);
+            logger(INFO_LEVEL,"! one or more statusCode's = " + statuscode[3]);
             result += "3";
         }
         if(body.contains("\"statusCode\":4")){
             //log.warning("one or more statusCode's = " + statuscode[4]);
-            System.out.println("! one or more statusCode's = " + statuscode[4]);
+            logger(INFO_LEVEL,"! one or more statusCode's = " + statuscode[4]);
             result += "4";
         }
         if(body.contains("\"statusCode\":5")){
             //log.warning("one or more statusCode's = " + statuscode[5]);
-            System.out.println("! one or more statusCode's = " + statuscode[5]);
+            logger(INFO_LEVEL,"! one or more statusCode's = " + statuscode[5]);
             result += "5";
         }
         if(body.contains("\"status\":\"Failed\"") && body.contains("\"errorMessage\":\"Request not accomplished\"")){
@@ -314,33 +312,33 @@ public class API_common {
         return result;
     }
 
-    String read_response(StringBuilder body, HttpResponse response) throws IOException {
-        BufferedReader reader = new BufferedReader(new InputStreamReader(response.getEntity().getContent(), "UTF-8"));
+    final String read_response(StringBuilder body, HttpResponse response) throws IOException {
+        BufferedReader reader = new BufferedReader(new InputStreamReader(response.getEntity().getContent(), StandardCharsets.UTF_8));
         //StringBuilder body = new StringBuilder();
         for (String line; (line = reader.readLine()) != null; ) {
             if(show_response_body) {
-                System.out.print(", response body: " + body.append(line));
+                logger(DEBUG_LEVEL, "[DBG] response body: " + body.append(line));
             }else{
                 body.append(line);
             }
             if (reader.readLine() == null) {
-                System.out.println();
+                logger(DEBUG_LEVEL, "\n");
             }
         }
         return body.toString();
     }
 
-    HttpGet prepare_get_request(String uri) {
+    HttpGet prepare_get_request(String uri) throws IOException {
         HttpGet request = new HttpGet(uri);
         request.setHeader("Content-type", "application/json");
         request.setHeader("Cache-Control", "no-cache");
-        System.out.println("[DBG] request string: " + request);
+        logger(DEBUG_LEVEL, "[DBG] request string: " + request);
         return request;
     }
 
-    HttpPost prepare_post_request(String uri){
+    HttpPost prepare_post_request(String uri) throws IOException {
         HttpPost request = new HttpPost(uri);
-        System.out.println("[DBG] request string: " + request);
+        logger(DEBUG_LEVEL, "[DBG] request string: " + request);
         return request;
     }
 
@@ -475,24 +473,24 @@ public class API_common {
         return true;
     }
 
-    long reminderScheduleId(){
+    long reminderScheduleId() throws IOException {
         Random random = new Random();
         long reminderScheduleId = Math.abs(random.nextLong());
         //long reminderScheduleId = Math.abs(random.nextInt(1000));
         reminderScheduleId_list.add(reminderScheduleId);
         if(show_debug_level) {
-            System.out.println("reminderScheduleId_list<-add=" + reminderScheduleId);
+            logger(DEBUG_LEVEL, "reminderScheduleId_list<-add=" + reminderScheduleId);
         }
         return reminderScheduleId;
     }
 
-    long reminderId(){
+    long reminderId() throws IOException {
         Random random = new Random();
         long reminderId = Math.abs(random.nextLong());
         //long reminderId = Math.abs(random.nextInt(1000));
         reminderId_list.add(reminderId);
         if(show_debug_level) {
-            System.out.println("reminderId_list<-add        =" + reminderId);
+            logger(DEBUG_LEVEL, "reminderId_list<-add        =" + reminderId);
         }
         return reminderId;
     }
@@ -629,18 +627,12 @@ public class API_common {
         return result;
     }
 
-    void write_to_file(String s) throws IOException {
-        FileWriter writer = new FileWriter("reminders.log", true);
-        writer.write(s);
-        writer.flush();
-        writer.close();
-    }
 
-    void print_total_info(String macaddress, String boxname, int count_reminders, int count_iterations,
-                          int a_avg, int a_min, int a_max, int a_iterations,
-                          int m_avg, int m_min, int m_max, int m_iterations,
-                          int d_avg, int d_min, int d_max, int d_iterations,
-                          int p_avg, int p_min, int p_max, int p_iterations
+    void prepare_total_results(String macaddress, String boxname, int count_reminders, int count_iterations,
+                               int a_avg, int a_min, int a_max, int a_iterations,
+                               int m_avg, int m_min, int m_max, int m_iterations,
+                               int d_avg, int d_min, int d_max, int d_iterations,
+                               int p_avg, int p_min, int p_max, int p_iterations
     ) throws IOException {
 
         String header = "========= ========= ========= Total measurements ========= ========= ========="
@@ -659,9 +651,31 @@ public class API_common {
             if (d_avg != 0) {            result += d;        }
             if (p_avg != 0) {            result += p;        }
             result += footer;
-            System.out.println(result);
-            write_to_file(result);
+            logger(INFO_LEVEL, result);
         }
+    }
+
+    void logger(String level, String s) throws IOException {
+        if(level.equals("INF") && show_info_level) {
+            System.out.println(s);
+            if (write_file) {
+                write_to_file(s + "\n");
+            }
+        }
+
+        if(level.equals("DBG") && show_debug_level) {
+            System.out.println(s);
+            if (write_file) {
+                write_to_file(s + "\n");
+            }
+        }
+    }
+
+    private void write_to_file(String s) throws IOException {
+        FileWriter writer = new FileWriter("reminders.log", true);
+        writer.write(s);
+        writer.flush();
+        writer.close();
     }
 
 }

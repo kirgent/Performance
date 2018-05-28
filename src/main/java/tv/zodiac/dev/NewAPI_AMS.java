@@ -1,7 +1,6 @@
 package tv.zodiac.dev;
 
 import org.apache.http.HttpResponse;
-import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.HttpClients;
@@ -10,7 +9,6 @@ import org.json.simple.JSONObject;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Date;
 import java.util.Objects;
 
@@ -32,8 +30,7 @@ class NewAPI_AMS extends API_common {
      * @throws IOException -TBD
      */
     ArrayList request(String ams_ip, String mac, Enum<Operation> operation, int count_reminders, String reminderProgramStart, long reminderChannelNumber, String reminderProgramId, long reminderOffset, long reminderScheduleId, long reminderId) throws IOException {
-        if(show_info_level) {
-            System.out.println("[INF] " + new Date() + ": " + operation + " for macaddress=" + mac + " to ams_ip=" + ams_ip + ", "
+        logger(INFO_LEVEL, "[INF] " + new Date() + ": " + operation + " for macaddress=" + mac + " to ams_ip=" + ams_ip + ", "
                 + "count_reminders=" + count_reminders + ", "
                 + "reminderProgramStart=multi, "
                 + "reminderChannelNumber=" + reminderChannelNumber + ", "
@@ -41,37 +38,18 @@ class NewAPI_AMS extends API_common {
                 + "reminderOffset=" + reminderOffset + ", "
                 + "reminderScheduleId=multi, "
                 + "reminderId=multi");
-        }
-        if(write_file) {
-            write_to_file("[INF] " + new Date() + ": " + operation + " for macaddress=" + mac + " to ams_ip=" + ams_ip + ", "
-                    + "count_reminders=" + count_reminders + ", "
-                    + "reminderProgramStart=multi, "
-                    + "reminderChannelNumber=" + reminderChannelNumber + ", "
-                    + "reminderProgramId=" + reminderProgramId + ", "
-                    + "reminderOffset=" + reminderOffset + ", "
-                    + "reminderScheduleId=multi, "
-                    + "reminderId=multi\n");
-        }
 
         HttpPost request = new HttpPost(prepare_url(ams_ip, operation, true));
         request.setHeader("Accept", "application/json");
         request.setHeader("Content-type", "application/json");
         request.setEntity(new StringEntity(generate_json_reminder(mac, count_reminders, operation, reminderProgramStart, reminderChannelNumber, reminderProgramId, reminderOffset, reminderScheduleId, reminderId)));
-        if(show_debug_level) {
-            System.out.println("[DBG] request string: " + request);
-            if(write_file) {
-                write_to_file("[DBG] request string: " + request);
-            }
-        }
+        logger(DEBUG_LEVEL, "[DBG] request string: " + request);
 
         long start = System.currentTimeMillis();
         HttpResponse response = HttpClients.createDefault().execute(request);
         long finish = System.currentTimeMillis();
         int diff = (int)(finish-start);
-        System.out.print("[DBG] " + diff + "ms request");
-        if (write_file) {
-            write_to_file("[DBG] " + diff + "ms request\n");
-        }
+        logger(DEBUG_LEVEL, "[DBG] " + diff + "ms request");
 
         ArrayList arrayList = new ArrayList();
         arrayList.add(0, response.getStatusLine().getStatusCode() + " " + response.getStatusLine().getReasonPhrase());
@@ -84,11 +62,9 @@ class NewAPI_AMS extends API_common {
                 arrayList.add(2, avg);
                 arrayList.add(3, get_min_time(add_avg_list));
                 arrayList.add(4, get_max_time(add_avg_list));
-                arrayList.add(5, add_avg_list.size());
-                if (show_debug_level) {
-                    if (add_avg_list.size() <= 10) {
-                        System.out.println("[DBG] " + new Date() + ": add avg = " + avg + "ms" + add_avg_list.size() + ": add_avg_list:" + add_avg_list);
-                    }
+                arrayList.add(5, "/" + add_avg_list.size());
+                if (add_avg_list.size() <= 10) {
+                    logger(DEBUG_LEVEL, "[DBG] " + new Date() + ": add avg = " + avg + "ms" + add_avg_list.size() + ": add_avg_list:" + add_avg_list);
                 }
             } else if (operation.name().equals("modify")) {
                 modify_avg_list.add(diff);
@@ -96,20 +72,13 @@ class NewAPI_AMS extends API_common {
                 arrayList.add(2, avg);
                 arrayList.add(3, get_min_time(modify_avg_list));
                 arrayList.add(4, get_max_time(modify_avg_list));
-                arrayList.add(5, modify_avg_list.size());
-                if (show_debug_level) {
-                    if (modify_avg_list.size() <= 10) {
-                        System.out.println("[DBG] " + new Date() + ": modify avg = " + avg + "ms/" + modify_avg_list.size() + ": modify_avg_list:" + modify_avg_list);
-                    }
+                arrayList.add(5, "/" + modify_avg_list.size());
+                if (modify_avg_list.size() <= 10) {
+                    logger(DEBUG_LEVEL, "[DBG] " + new Date() + ": modify avg = " + avg + "ms/" + modify_avg_list.size() + ": modify_avg_list:" + modify_avg_list);
                 }
             }
         }
-        if(show_info_level) {
-            System.out.println("[INF] return data: " + arrayList + "\n");
-        }
-        if (write_file) {
-            write_to_file("[INF] return data: " + arrayList + "\n");
-        }
+        logger(INFO_LEVEL, "[INF] return data: " + arrayList);
         return arrayList;
     }
 
@@ -121,35 +90,21 @@ class NewAPI_AMS extends API_common {
      * @throws IOException -TBD
      */
     ArrayList request(String ams_ip, String mac, Enum<Operation> operation, int count_reminders, long reminderScheduleId, long reminderId) throws IOException {
-        if(show_info_level) {
-            System.out.println("[INF] " + new Date() + ": delete for macaddress=" + mac + ", ams_ip=" + ams_ip + ", "
+        logger(INFO_LEVEL,"[INF] " + new Date() + ": delete for macaddress=" + mac + ", ams_ip=" + ams_ip + ", "
                 + "reminderScheduleId=multi, "
-                + "reminderId=multi");
-        }
-        if(write_file) {
-            write_to_file("[INF] " + new Date() + ": delete for macaddress=" + mac + ", ams_ip=" + ams_ip + ", "
-                    + "reminderScheduleId=multi, "
-                    + "reminderId=multi\n");
-        }
+                + "reminderId=multi\n");
+
         HttpPost request = new HttpPost(prepare_url(ams_ip, Operation.delete, true));
         request.setHeader("Accept", "application/json");
         request.setHeader("Content-type", "application/json");
         request.setEntity(new StringEntity(generate_json_reminder_delete(mac, count_reminders, reminderScheduleId, reminderId)));
-        if(show_debug_level) {
-            System.out.println("[DBG] request string: " + request);
-            if(write_file) {
-                write_to_file("[DBG] request string: " + request + "\n");
-            }
-        }
+        logger(DEBUG_LEVEL, "[DBG] request string: " + request);
 
         long start = System.currentTimeMillis();
         HttpResponse response = HttpClients.createDefault().execute(request);
         long finish = System.currentTimeMillis();
         int diff = (int)(finish-start);
-        System.out.print("[INF] " + diff + "ms request");
-        if(write_file) {
-            write_to_file("[INF] " + diff + "ms request\n");
-        }
+        logger(INFO_LEVEL, "[INF] " + diff + "ms request");
 
         ArrayList arrayList = new ArrayList();
         arrayList.add(0, response.getStatusLine().getStatusCode() + " " + response.getStatusLine().getReasonPhrase());
@@ -161,20 +116,13 @@ class NewAPI_AMS extends API_common {
                 arrayList.add(2, avg);
                 arrayList.add(3, get_min_time(delete_avg_list));
                 arrayList.add(4, get_max_time(delete_avg_list));
-                arrayList.add(5, delete_avg_list.size());
-                if (show_debug_level) {
-                    if (delete_avg_list.size() <= 10) {
-                        System.out.println("[DBG] " + new Date() + ": delete avg = " + avg + "ms/" + delete_avg_list.size() + ": delete_avg_list:" + delete_avg_list);
-                    }
+                arrayList.add(5, "/" + delete_avg_list.size());
+                if (delete_avg_list.size() <= 10) {
+                    logger(DEBUG_LEVEL, "[DBG] " + new Date() + ": delete avg = " + avg + "ms/" + delete_avg_list.size() + ": delete_avg_list:" + delete_avg_list);
                 }
             }
         }
-        if(show_info_level) {
-            System.out.println("[INF] return data: " + arrayList + "\n");
-        }
-        if (write_file) {
-            write_to_file("[INF] return data: " + arrayList + "\n");
-        }
+        logger(INFO_LEVEL, "[INF] return data: " + arrayList);
         return arrayList;
     }
 
@@ -185,31 +133,19 @@ class NewAPI_AMS extends API_common {
      * @throws IOException - TBD
      */
     ArrayList request(String ams_ip, String mac, Enum<Operation> operation) throws IOException {
-        if(show_info_level) {
-            System.out.println("[INF] " + new Date() + ": purge for macaddress=" + mac + " to ams_ip=" + ams_ip);
-        }
-        if(write_file) {
-            write_to_file("[INF] " + new Date() + ": purge for macaddress=" + mac + " to ams_ip=" + ams_ip + "\n");
-        }
+        logger(INFO_LEVEL, "[INF] " + new Date() + ": purge for macaddress=" + mac + " to ams_ip=" + ams_ip);
+
         HttpPost request = new HttpPost(prepare_url(ams_ip, operation, true));
         request.setHeader("Accept", "application/json");
         request.setHeader("Content-type", "application/json");
         request.setEntity(new StringEntity(generate_json_reminder_purge(mac)));
-        if(show_debug_level) {
-            System.out.println("[DBG] request string: " + request);
-            if(write_file) {
-                write_to_file("[DBG] request string: " + request + "\n");
-            }
-        }
+        logger(DEBUG_LEVEL, "[DBG] request string: " + request);
 
         long start = currentTimeMillis();
         HttpResponse response = HttpClients.createDefault().execute(request);
         long finish = System.currentTimeMillis();
         int diff = (int)(finish-start);
-        System.out.print("[DBG] " + diff + "ms request");
-        if (write_file) {
-            write_to_file("[DBG] " + diff + "ms request\n");
-        }
+        logger(DEBUG_LEVEL, "[DBG] " + diff + "ms request");
 
         ArrayList arrayList = new ArrayList();
         arrayList.add(0, response.getStatusLine().getStatusCode() + " " + response.getStatusLine().getReasonPhrase());
@@ -220,23 +156,16 @@ class NewAPI_AMS extends API_common {
             arrayList.add(2, avg);
             arrayList.add(3, get_min_time(purge_avg_list));
             arrayList.add(4, get_max_time(purge_avg_list));
-            arrayList.add(5, purge_avg_list.size());
-            if(show_debug_level) {
-                if(purge_avg_list.size()<=10) {
-                    System.out.println("[DBG] " + new Date() + ": purge avg = " + avg + "ms/" + purge_avg_list.size() + ": purge_avg_list:" + purge_avg_list);
-                }
+            arrayList.add(5, "/" + purge_avg_list.size());
+            if(purge_avg_list.size()<=10) {
+                logger(DEBUG_LEVEL,"[DBG] " + new Date() + ": purge avg = " + avg + "ms/" + purge_avg_list.size() + ": purge_avg_list:" + purge_avg_list);
             }
         }
-        if(show_info_level) {
-            System.out.println("[INF] return data: " + arrayList + "\n");
-        }
-        if (write_file) {
-            write_to_file("[INF] return data: " + arrayList + "\n");
-        }
+        logger(INFO_LEVEL, "[INF] return data: " + arrayList + "\n");
         return arrayList;
     }
 
-    private String generate_json_setting(String mac, String option, String value) {
+    private String generate_json_setting(String mac, String option, String value) throws IOException {
         //String json = "{\"settings\":{\"groups\":[{\"id\":\"STBmac\",\"type\":\"device-stb\",\"options\":[{\"name\":\"Audio Output\",\"value\":\"HDMI\"}]}]}}";
         JSONObject json = new JSONObject();
         JSONObject object_in_settings = new JSONObject();
@@ -258,12 +187,12 @@ class NewAPI_AMS extends API_common {
         object_in_options.put("value", value);
 
         if(show_generated_json) {
-            System.out.println("[JSON] generated json: " + json);
+            logger(INFO_LEVEL, "[JSON] generated json: " + json);
         }
         return json.toString();
     }
 
-    private String generate_json_reminder(String mac, int count_reminders, Enum<Operation> operation, String reminderProgramStart, long reminderChannelNumber, String reminderProgramId, long reminderOffset, long reminderScheduleId, long reminderId) {
+    private String generate_json_reminder(String mac, int count_reminders, Enum<Operation> operation, String reminderProgramStart, long reminderChannelNumber, String reminderProgramId, long reminderOffset, long reminderScheduleId, long reminderId) throws IOException {
         boolean first_clean_reminderScheduleId_list = true;
         boolean first_clean_reminderId_list = true;
 
@@ -323,9 +252,7 @@ class NewAPI_AMS extends API_common {
                 //todo//todo//todo FIXME
                 if(first_clean_reminderScheduleId_list) {
                     reminderScheduleId_list.clear();
-                    if(show_debug_level) {
-                        System.out.println("[DBG] preliminary clean reminderScheduleId_list !!!");
-                    }
+                    logger(DEBUG_LEVEL, "[DBG] preliminary clean reminderScheduleId_list !!!");
                     first_clean_reminderScheduleId_list = false;
                 }
                 object_in_reminders.put("reminderScheduleId", reminderScheduleId());
@@ -358,9 +285,7 @@ class NewAPI_AMS extends API_common {
                 if(first_clean_reminderId_list) {
                     //todo//todo//todo FIXME
                     reminderId_list.clear();
-                    if(show_debug_level) {
-                        System.out.println("[DBG] preliminary clean reminderId_list !!!");
-                    }
+                    logger(DEBUG_LEVEL,"[DBG] preliminary clean reminderId_list !!!");
                     first_clean_reminderId_list = false;
                 }
                 object_in_reminders.put("reminderId", reminderId());
@@ -374,22 +299,21 @@ class NewAPI_AMS extends API_common {
             array_reminders.add(object_in_reminders);
         }
 
-        if(show_debug_level) {
-            if(reminderScheduleId_list.size()<=10) {
-                System.out.println("reminderScheduleId_list : size=" + reminderScheduleId_list.size() + " : " + reminderScheduleId_list);
-            }
-            if(reminderId_list.size()<=10) {
-                System.out.println("reminderId_list         : size=" + reminderId_list.size() + " : " + reminderId_list);
-            }
+
+        if(reminderScheduleId_list.size()<=10) {
+            logger(DEBUG_LEVEL,"reminderScheduleId_list : size=" + reminderScheduleId_list.size() + " : " + reminderScheduleId_list);
+        }
+        if(reminderId_list.size()<=10) {
+            logger(DEBUG_LEVEL,"reminderId_list         : size=" + reminderId_list.size() + " : " + reminderId_list);
         }
 
         if(show_generated_json) {
-            System.out.println("[JSON] generated json: " + json);
+            logger(INFO_LEVEL, "[JSON] generated json: " + json);
         }
         return json.toString();
     }
 
-    private String generate_json_reminder_delete(String mac, int count_reminders, long reminderScheduleId, long reminderId) {
+    private String generate_json_reminder_delete(String mac, int count_reminders, long reminderScheduleId, long reminderId) throws IOException {
         JSONObject json = new JSONObject();
         json.put("deviceId", mac);
         JSONArray array_reminders = new JSONArray();
@@ -429,34 +353,33 @@ class NewAPI_AMS extends API_common {
 
         if(show_debug_level) {
             if(reminderScheduleId_list.size()<=10) {
-                System.out.println("reminderScheduleId_list : size=" + reminderScheduleId_list.size() + " : " + reminderScheduleId_list);
+                logger(DEBUG_LEVEL, "reminderScheduleId_list : size=" + reminderScheduleId_list.size() + " : " + reminderScheduleId_list);
             }
             if(reminderId_list.size()<=10) {
-                System.out.println("reminderId_list         : size=" + reminderId_list.size() + " : " + reminderId_list);
+                logger(DEBUG_LEVEL, "reminderId_list         : size=" + reminderId_list.size() + " : " + reminderId_list);
             }
         }
 
-        if(show_generated_json) {
-            System.out.println("[JSON] generated json: " + json);
+        if(show_generated_json && show_info_level) {
+            logger(INFO_LEVEL, "[JSON] generated json: " + json);
         }
         return json.toString();
     }
 
-    private String generate_json_reminder_purge(String mac) {
-        //String json = "{\"deviceId\":" + mac + ",\"reminders\":[]}";
+    private String generate_json_reminder_purge(String mac) throws IOException {
         JSONObject json = new JSONObject();
         json.put("deviceId", mac);
         JSONArray array_reminders = new JSONArray();
         json.put("reminders", array_reminders);
 
-        if(show_generated_json) {
-            System.out.println("[JSON] generated json: " + json);
+        if(show_generated_json && show_info_level) {
+            logger(INFO_LEVEL, "[JSON] generated json: " + json);
         }
         return json.toString();
     }
 
     ArrayList Change_settings(String mac, String option, String value) throws IOException {
-        System.out.println("Change settings for macaddress=" + mac + ", ams_ip=" + ams_ip + " option=" + option + ", value=" + value);
+        logger(INFO_LEVEL, "Change settings for macaddress=" + mac + ", ams_ip=" + ams_ip + " option=" + option + ", value=" + value);
         HttpPost request = new HttpPost("http://" + ams_ip + ":" + ams_port + "/ams/settings");
         request.setHeader("Content-type", "application/json");
 
@@ -464,32 +387,19 @@ class NewAPI_AMS extends API_common {
 
         request.setHeader("Accept", "application/json");
         request.setHeader("Content-type", "application/json");
-        if(show_debug_level) {
-            System.out.println("[DBG] request string: " + request);
-            if(write_file) {
-                write_to_file("[DBG] request string: " + request);
-            }
-        }
+        logger(DEBUG_LEVEL, "[DBG] request string: " + request);
         //+ "\n[DBG] Request entity: " + request.getEntity());
 
         long start = currentTimeMillis();
         HttpResponse response = HttpClients.createDefault().execute(request);
         long finish = System.currentTimeMillis();
         int diff = (int)(finish-start);
-        System.out.print("[DBG] " + diff + "ms request");
-        if (write_file) {
-            write_to_file("[DBG] " + diff + "ms request\n");
-        }
+        logger(DEBUG_LEVEL, "[DBG] " + diff + "ms request");
 
         ArrayList arrayList = new ArrayList();
         arrayList.add(0, response.getStatusLine().getStatusCode() + " " + response.getStatusLine().getReasonPhrase());
         arrayList.add(1, check_body_response(read_response(new StringBuilder(),response).toString(), mac));
-        if(show_info_level) {
-            System.out.println("[INF] return data: " + arrayList + "\n");
-            if (write_file) {
-                write_to_file("[INF] return data: " + arrayList + "\n");
-            }
-        }
+        logger(INFO_LEVEL, "[INF] return data: " + arrayList);
         return arrayList;
     }
 

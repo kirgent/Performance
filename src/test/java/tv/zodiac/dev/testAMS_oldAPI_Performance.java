@@ -26,11 +26,8 @@ class testAMS_oldAPI_Performance extends API_common {
         final ArrayList[] add_list = {new ArrayList()};
         int a_avg = 0, a_min = 0, a_max = 0, a_iterations = 0;
         for (int i = 1; i <= count_iterations; i++) {
-            String header = "========= ========= ========= Iteration = " + i + "/" + count_iterations + " ========= ========= =========\n";
-            System.out.print(header);
-            if(write_file){
-                write_to_file(header);
-            }
+            String header = "========= ========= ========= Iteration = " + i + "/" + count_iterations + " ========= ========= =========";
+            logger(INFO_LEVEL, header);
             //reminderChannelNumber = reminderChannelNumber();
             //int finalReminderChannelNumber = reminderChannelNumber;
             assertTimeoutPreemptively(ofMillis(timeout), () -> {
@@ -47,7 +44,7 @@ class testAMS_oldAPI_Performance extends API_common {
             Thread.sleep(sleep_after_iteration);
         }
 
-        print_total_info(macaddress, boxname, count_reminders, count_iterations,
+        prepare_total_results(macaddress, boxname, count_reminders, count_iterations,
                 a_avg, a_min, a_max, a_iterations,
                 0, 0, 0, 0,
                 0, 0, 0, 0,
@@ -64,11 +61,8 @@ class testAMS_oldAPI_Performance extends API_common {
         int a_avg = 0, a_min = 0, a_max = 0, a_iterations = 0,
                 p_avg = 0, p_min = 0, p_max = 0, p_iterations = 0;
         for (int i = 1; i <= count_iterations; i++) {
-            String header = "========= ========= ========= Iteration = " + i + "/" + count_iterations + " ========= ========= =========\n";
-            System.out.print(header);
-            if(write_file){
-                write_to_file(header);
-            }
+            String header = "========= ========= ========= Iteration = " + i + "/" + count_iterations + " ========= ========= =========";
+            logger(INFO_LEVEL, header);
             //reminderChannelNumber = reminderChannelNumber();
             //int finalReminderChannelNumber = reminderChannelNumber;
             assertTimeoutPreemptively(ofMillis(timeout), () -> {
@@ -96,7 +90,7 @@ class testAMS_oldAPI_Performance extends API_common {
             Thread.sleep(sleep_after_iteration);
         }
 
-        print_total_info(macaddress, boxname, count_reminders, count_iterations,
+        prepare_total_results(macaddress, boxname, count_reminders, count_iterations,
                 a_avg, a_min, a_max, a_iterations,
                 0, 0, 0, 0,
                 0, 0, 0, 0,
@@ -116,11 +110,8 @@ class testAMS_oldAPI_Performance extends API_common {
                 d_avg = 0, d_min = 0, d_max = 0, d_iterations = 0,
                 p_avg = 0, p_min = 0, p_max = 0, p_iterations = 0;
         for (int i = 1; i <= count_iterations; i++) {
-            String header = "========= ========= ========= Iteration = " + i + "/" + count_iterations + " ========= ========= =========\n";
-            System.out.print(header);
-            if(write_file){
-                write_to_file(header);
-            }
+            String header = "========= ========= ========= Iteration = " + i + "/" + count_iterations + " ========= ========= =========";
+            logger(INFO_LEVEL, header);
             //reminderChannelNumber = reminderChannelNumber();
             //assertTimeoutPreemptively(ofMillis(timeout), () -> {
                 add_list = AMS.request(ams_ip, macaddress, Operation.add, count_reminders, reminderChannelNumber, reminderProgramStart, reminderProgramId, reminderOffset);
@@ -159,7 +150,7 @@ class testAMS_oldAPI_Performance extends API_common {
             Thread.sleep(sleep_after_iteration);
         }
 
-        print_total_info(macaddress, boxname, count_reminders, count_iterations,
+        prepare_total_results(macaddress, boxname, count_reminders, count_iterations,
                 a_avg, a_min, a_max, a_iterations,
                 0, 0, 0, 0,
                 d_avg, d_min, d_max, d_iterations,
