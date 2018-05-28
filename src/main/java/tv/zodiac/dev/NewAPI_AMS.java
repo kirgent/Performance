@@ -378,7 +378,7 @@ class NewAPI_AMS extends API_common {
         return json.toString();
     }
 
-    ArrayList Change_settings(String mac, String option, String value) throws IOException {
+    ArrayList change_settings(String mac, String option, String value) throws IOException {
         logger(INFO_LEVEL, "Change settings for macaddress=" + mac + ", ams_ip=" + ams_ip + " option=" + option + ", value=" + value);
         HttpPost request = new HttpPost("http://" + ams_ip + ":" + ams_port + "/ams/settings");
         request.setHeader("Content-type", "application/json");
