@@ -136,7 +136,7 @@ class OldAPI_AMS extends API_common {
         int diff = (int)(finish-start);
         System.out.print("[INF] " + diff + "ms request");
         if(write_file) {
-            write_to_file("[INF] " + diff + "ms request");
+            write_to_file("[INF] " + diff + "ms request\n");
         }
 
         ArrayList arrayList = new ArrayList();
