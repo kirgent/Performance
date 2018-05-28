@@ -68,9 +68,9 @@ class NewAPI_AMS extends API_common {
         HttpResponse response = HttpClients.createDefault().execute(request);
         long finish = System.currentTimeMillis();
         int diff = (int)(finish-start);
-        System.out.print("[INF] " + diff + "ms request");
-        if(write_file) {
-            write_to_file("[INF] " + diff + "ms request");
+        System.out.print("[DBG] " + diff + "ms request");
+        if (write_file) {
+            write_to_file("[DBG] " + diff + "ms request\n");
         }
 
         ArrayList arrayList = new ArrayList();
@@ -138,7 +138,7 @@ class NewAPI_AMS extends API_common {
         if(show_debug_level) {
             System.out.println("[DBG] request string: " + request);
             if(write_file) {
-                write_to_file("[DBG] request string: " + request);
+                write_to_file("[DBG] request string: " + request + "\n");
             }
         }
 
@@ -148,7 +148,7 @@ class NewAPI_AMS extends API_common {
         int diff = (int)(finish-start);
         System.out.print("[INF] " + diff + "ms request");
         if(write_file) {
-            write_to_file("[INF] " + diff + "ms request");
+            write_to_file("[INF] " + diff + "ms request\n");
         }
 
         ArrayList arrayList = new ArrayList();
@@ -198,7 +198,7 @@ class NewAPI_AMS extends API_common {
         if(show_debug_level) {
             System.out.println("[DBG] request string: " + request);
             if(write_file) {
-                write_to_file("[DBG] request string: " + request);
+                write_to_file("[DBG] request string: " + request + "\n");
             }
         }
 
@@ -208,7 +208,7 @@ class NewAPI_AMS extends API_common {
         int diff = (int)(finish-start);
         System.out.print("[DBG] " + diff + "ms request");
         if (write_file) {
-            write_to_file("[DBG] " + diff + "ms request");
+            write_to_file("[DBG] " + diff + "ms request\n");
         }
 
         ArrayList arrayList = new ArrayList();
@@ -474,8 +474,12 @@ class NewAPI_AMS extends API_common {
 
         long start = currentTimeMillis();
         HttpResponse response = HttpClients.createDefault().execute(request);
-        long finish = currentTimeMillis();
-        System.out.print("[DBG] " + (finish-start) + "ms request");
+        long finish = System.currentTimeMillis();
+        int diff = (int)(finish-start);
+        System.out.print("[DBG] " + diff + "ms request");
+        if (write_file) {
+            write_to_file("[DBG] " + diff + "ms request\n");
+        }
 
         ArrayList arrayList = new ArrayList();
         arrayList.add(0, response.getStatusLine().getStatusCode() + " " + response.getStatusLine().getReasonPhrase());
