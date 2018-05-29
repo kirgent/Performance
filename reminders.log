@@ -15192,3 +15192,24 @@ Mon May 28 21:32:40 MSK 2018, macaddress=000004B9419F(boxMoto2145_173), count_re
  purge avg=762ms, min=762ms, max=762ms, /1
 >>>>>>> 37e4739c7c4e7343da7b25975fb6a402639c0885
 ========= ========= ========= ========= ========= ========= ========= =========
+========= ========= ========= Iteration = 1/1 ========= ========= =========
+[INF] Tue May 29 04:03:06 MDT 2018: add for macaddress=000004D67F70 to ams_ip=172.30.81.4, count_reminders=1000, reminderProgramStart=multi, reminderChannelNumber=2, reminderProgramId=, reminderOffset=0, reminderScheduleId=multi, reminderId=multi
+[INF] 1105ms request
+[INF] return data: [200 OK, , 1105, 1105, 1105, 1]
+[INF] Tue May 29 04:03:07 MDT 2018: modify for macaddress=000004D67F70 to ams_ip=172.30.81.4, count_reminders=1000, reminderProgramStart=multi, reminderChannelNumber=2, reminderProgramId=, reminderOffset=0, reminderScheduleId=multi, reminderId=multi
+[INF] 833ms request
+[INF] return data: [200 OK, , 833, 833, 833, 1]
+[INF] Tue May 29 04:03:08 MDT 2018: delete for macaddress=000004D67F70, ams_ip=172.30.81.4, reminderScheduleId=multi, reminderId=multi
+[INF] 505ms request
+[INF] return data: [200 OK, , 505, 505, 505, 1]
+[INF] Tue May 29 04:03:09 MDT 2018: purge for macaddress=000004D67F70 to ams_ip=172.30.81.4
+[INF] 112ms request
+[INF] return data: [200 OK, , 112, 112, 112, 1]
+
+========= ========= ========= Total measurements ========= ========= =========
+Tue May 29 04:03:10 MDT 2018, macaddress=000004D67F70(boxMoto2147_Rems), count_reminders=1000, count_iterations=1/1
+   add avg=1105ms, min=1105ms, max=1105ms, /1
+modify avg=833ms, min=833ms, max=833ms, /1
+delete avg=505ms, min=505ms, max=505ms, /1
+ purge avg=112ms, min=112ms, max=112ms, /1
+========= ========= ========= ========= ========= ========= ========= =========
