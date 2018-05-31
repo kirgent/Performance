@@ -175,10 +175,10 @@ class testAMS_newAPI_Performance extends API_common {
         for (int i = 1; i <= count_iterations; i++) {
             String header = "========= ========= ========= Iteration = " + i + "/" + count_iterations + " ========= ========= =========";
             logger(INFO_LEVEL, header);
-            //long reminderScheduleId = reminderScheduleId(Generation.random);
-            //long reminderId = reminderId(Generation.random);
-            long reminderScheduleId = reminderScheduleId(Generation.increment);
-            long reminderId = reminderId(Generation.increment);
+            long reminderScheduleId = reminderScheduleId(Generation.random);
+            long reminderId = reminderId(Generation.random);
+            //long reminderScheduleId = reminderScheduleId(Generation.increment);
+            //long reminderId = reminderId(Generation.increment);
 
             add_list = AMS.request(ams_ip, macaddress, Operation.add, count_reminders, reminderProgramStart, reminderChannelNumber, reminderProgramId, reminderOffset, reminderScheduleId, reminderId);
             if (add_list.get(0).equals(expected200) && add_list.get(1).equals("")) {
