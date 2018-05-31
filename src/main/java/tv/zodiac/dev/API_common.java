@@ -23,8 +23,8 @@ import static java.lang.System.currentTimeMillis;
 public class API_common {
 
     Boolean show_info_level = true;
-    Boolean show_debug_level = false;
-    Boolean show_generated_json = false;
+    Boolean show_debug_level = true;
+    Boolean show_generated_json = true;
     private Boolean show_response_body = false;
     private Boolean write_file = true;
 
@@ -35,9 +35,10 @@ public class API_common {
 
     enum Operation { add, modify, delete, purge, blablabla }
 
+    enum Generation { random, increment }
+
     //static Logger log = Logger.getLogger(testAMS.class.getName());
     //FileHandler txtFile = new FileHandler ("log.log", true);
-    //private FileHandler fh = new FileHandler("test_reminder.log");
 
     final String charterapi_a = "http://spec.partnerapi.engprod-charter.net/api/pub";
     final String charterapi_b = "http://specb.partnerapi.engprod-charter.net/api/pub";
@@ -81,8 +82,6 @@ public class API_common {
     //int reminderOffset_new = reminderOffset();
     long reminderScheduleId;
     long reminderId;
-
-    int count_reminders = 2;
 
     private static String[] statuscode = {
             "0 - requested operation with the reminder was accomplished successfully. Always returned for \"Reminders Purge\" request (Request ID=3)",
@@ -472,24 +471,35 @@ public class API_common {
         return true;
     }
 
-    long reminderScheduleId() throws IOException {
-        Random random = new Random();
-        long reminderScheduleId = Math.abs(random.nextLong());
-        //long reminderScheduleId = Math.abs(random.nextInt(1000));
+    long reminderScheduleId(Enum<Generation> generation) throws IOException {
+        if(generation.name().equals("random")) {
+            Random random = new Random();
+            reminderScheduleId = Math.abs(random.nextLong());
+            //long reminderScheduleId = Math.abs(random.nextInt(1000));
+        } else if(generation.name().equals("increment")){
+            reminderScheduleId = 1;
+            reminderScheduleId = (int)reminderScheduleId_list.get(reminderScheduleId_list.size()) + 1;
+        }
+
         reminderScheduleId_list.add(reminderScheduleId);
         if(show_debug_level) {
-            logger(DEBUG_LEVEL, "reminderScheduleId_list<-add=" + reminderScheduleId);
+            logger(DEBUG_LEVEL, "reminderScheduleId_list<-add = " + reminderScheduleId);
         }
         return reminderScheduleId;
     }
 
-    long reminderId() throws IOException {
-        Random random = new Random();
-        long reminderId = Math.abs(random.nextLong());
-        //long reminderId = Math.abs(random.nextInt(1000));
+    long reminderId(Enum<Generation> generation) throws IOException {
+        if(generation.name().equals("random")) {
+            Random random = new Random();
+            reminderId = Math.abs(random.nextLong());
+            //long reminderId = Math.abs(random.nextInt(1000));
+        } else if (generation.name().equals("increment")) {
+            reminderId = (int)reminderId_list.get(reminderId_list.size()) + 1;
+        }
+
         reminderId_list.add(reminderId);
         if(show_debug_level) {
-            logger(DEBUG_LEVEL, "reminderId_list<-add        =" + reminderId);
+            logger(DEBUG_LEVEL, "reminderId_list<-add         = " + reminderId);
         }
         return reminderId;
     }
