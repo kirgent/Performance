@@ -27,7 +27,7 @@ class testSandbox extends API_common {
 
     @Test
     void testOperation_NewAPI_400_Bad_request() throws IOException {
-        ArrayList actual = AMS.request(ams_ip, mac, Operation.blablabla, count_reminders, reminderProgramStart, reminderChannelNumber, reminderProgramId, reminderOffset, reminderScheduleId, reminderId);
+        ArrayList actual = AMS.request(ams_ip, mac, Operation.blablabla, 2, reminderProgramStart, reminderChannelNumber, reminderProgramId, reminderOffset, reminderScheduleId, reminderId);
         assertEquals(expected400, actual.get(0));
         assertEquals("", actual.get(1));
     }

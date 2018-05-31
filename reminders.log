@@ -24138,6 +24138,7 @@ delete avg=505ms, min=505ms, max=505ms, /1
 [INF] return data: [500 Internal Server Error, , 1589, 685, 88579, 592]
 [INF] Tue May 29 10:43:55 MDT 2018: delete for macaddress=000004D67F70, ams_ip=172.30.81.4, reminderScheduleId=multi, reminderId=multi
 ========= ========= ========= Iteration = 1/1000 ========= ========= =========
+<<<<<<< HEAD
 [INF] Wed May 30 03:57:50 MDT 2018: add for macaddress=000004D67F70 to ams_ip=172.30.81.4, count_reminders=1000, reminderProgramStart=multi, reminderChannelNumber=2, reminderProgramId=, reminderOffset=0, reminderScheduleId=multi, reminderId=multi
 [INF] 1106ms request
 [INF] return data: [200 OK, , 1106, 1106, 1106, 1]
@@ -32938,3 +32939,281 @@ delete avg=900ms, min=900ms, max=900ms, /1
 [INF] Thu May 31 10:27:18 MDT 2018: add for macaddress=000004D67F70 to ams_ip=172.30.81.4, count_reminders=1000, reminderProgramStart=multi, reminderChannelNumber=2, reminderProgramId=, reminderOffset=0, reminderScheduleId=multi, reminderId=multi
 [INF] 473ms request
 [INF] return data: [404 Not Found, , 473, 473, 473, 1]
+=======
+[INF] Thu May 31 15:03:39 MSK 2018: add for macaddress=000004D67F70 to ams_ip=172.30.81.4, count_reminders=1000, reminderProgramStart=multi, reminderChannelNumber=2, reminderProgramId=, reminderOffset=0, reminderScheduleId=multi, reminderId=multi
+[INF] 1061ms request
+[INF] return data: [404 Not Found, , 1061, 1061, 1061, 1]
+========= ========= ========= Iteration = 2/1000 ========= ========= =========
+[INF] Thu May 31 15:03:41 MSK 2018: add for macaddress=000004D67F70 to ams_ip=172.30.81.4, count_reminders=1000, reminderProgramStart=multi, reminderChannelNumber=2, reminderProgramId=, reminderOffset=0, reminderScheduleId=multi, reminderId=multi
+[INF] 585ms request
+[INF] return data: [404 Not Found, , 823, 585, 1061, 2]
+========= ========= ========= Iteration = 3/1000 ========= ========= =========
+[INF] Thu May 31 15:03:43 MSK 2018: add for macaddress=000004D67F70 to ams_ip=172.30.81.4, count_reminders=1000, reminderProgramStart=multi, reminderChannelNumber=2, reminderProgramId=, reminderOffset=0, reminderScheduleId=multi, reminderId=multi
+[INF] 592ms request
+[INF] return data: [404 Not Found, , 746, 585, 1061, 3]
+========= ========= ========= Iteration = 4/1000 ========= ========= =========
+[INF] Thu May 31 15:03:44 MSK 2018: add for macaddress=000004D67F70 to ams_ip=172.30.81.4, count_reminders=1000, reminderProgramStart=multi, reminderChannelNumber=2, reminderProgramId=, reminderOffset=0, reminderScheduleId=multi, reminderId=multi
+[INF] 590ms request
+[INF] return data: [404 Not Found, , 707, 585, 1061, 4]
+========= ========= ========= Iteration = 5/1000 ========= ========= =========
+[INF] Thu May 31 15:03:46 MSK 2018: add for macaddress=000004D67F70 to ams_ip=172.30.81.4, count_reminders=1000, reminderProgramStart=multi, reminderChannelNumber=2, reminderProgramId=, reminderOffset=0, reminderScheduleId=multi, reminderId=multi
+[INF] 584ms request
+[INF] return data: [404 Not Found, , 682, 584, 1061, 5]
+========= ========= ========= Iteration = 6/1000 ========= ========= =========
+[INF] Thu May 31 15:03:47 MSK 2018: add for macaddress=000004D67F70 to ams_ip=172.30.81.4, count_reminders=1000, reminderProgramStart=multi, reminderChannelNumber=2, reminderProgramId=, reminderOffset=0, reminderScheduleId=multi, reminderId=multi
+[INF] 594ms request
+[INF] return data: [404 Not Found, , 667, 584, 1061, 6]
+========= ========= ========= Iteration = 1/1 ========= ========= =========
+[INF] Thu May 31 15:04:18 MSK 2018: add for macaddress=000004D67F70 to ams_ip=172.30.81.4, count_reminders=10, reminderProgramStart=multi, reminderChannelNumber=2, reminderProgramId=, reminderOffset=0, reminderScheduleId=multi, reminderId=multi
+[INF] 997ms request
+[INF] return data: [404 Not Found, , 997, 997, 997, 1]
+========= ========= ========= Iteration = 1/1 ========= ========= =========
+[INF] Thu May 31 15:14:10 MSK 2018: add for macaddress=000004D67F70 to ams_ip=172.30.81.4, count_reminders=10, reminderProgramStart=multi, reminderChannelNumber=2, reminderProgramId=, reminderOffset=0, reminderScheduleId=multi, reminderId=multi
+[INF] 962ms request
+[INF] return data: [404 Not Found, , 962, 962, 962, 1]
+========= ========= ========= Iteration = 1/1 ========= ========= =========
+reminderScheduleId_list<-add=1
+reminderId_list<-add        =1
+[INF] Thu May 31 15:15:22 MSK 2018: add for macaddress=000004D67F70 to ams_ip=172.30.81.4, count_reminders=10, reminderProgramStart=multi, reminderChannelNumber=2, reminderProgramId=, reminderOffset=0, reminderScheduleId=multi, reminderId=multi
+reminderScheduleId_list<-add=1
+reminderId_list<-add        =1
+reminderScheduleId_list<-add=1
+reminderId_list<-add        =1
+reminderScheduleId_list<-add=1
+reminderId_list<-add        =1
+reminderScheduleId_list<-add=1
+reminderId_list<-add        =1
+reminderScheduleId_list<-add=1
+reminderId_list<-add        =1
+reminderScheduleId_list<-add=1
+reminderId_list<-add        =1
+reminderScheduleId_list<-add=1
+reminderId_list<-add        =1
+reminderScheduleId_list<-add=1
+reminderId_list<-add        =1
+reminderScheduleId_list<-add=1
+reminderId_list<-add        =1
+reminderScheduleId_list<-add=1
+reminderId_list<-add        =1
+reminderScheduleId_list : size=10 : [1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
+reminderId_list         : size=10 : [1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
+[JSON] generated json: {"reminders":[{"reminderChannelNumber":2,"reminderProgramId":"","reminderId":1,"reminderProgramStart":"2018-06-01 15:15","reminderScheduleId":1,"reminderOffset":0},{"reminderChannelNumber":2,"reminderProgramId":"","reminderId":1,"reminderProgramStart":"2018-06-01 15:16","reminderScheduleId":1,"reminderOffset":0},{"reminderChannelNumber":2,"reminderProgramId":"","reminderId":1,"reminderProgramStart":"2018-06-01 15:17","reminderScheduleId":1,"reminderOffset":0},{"reminderChannelNumber":2,"reminderProgramId":"","reminderId":1,"reminderProgramStart":"2018-06-01 15:18","reminderScheduleId":1,"reminderOffset":0},{"reminderChannelNumber":2,"reminderProgramId":"","reminderId":1,"reminderProgramStart":"2018-06-01 15:19","reminderScheduleId":1,"reminderOffset":0},{"reminderChannelNumber":2,"reminderProgramId":"","reminderId":1,"reminderProgramStart":"2018-06-01 15:20","reminderScheduleId":1,"reminderOffset":0},{"reminderChannelNumber":2,"reminderProgramId":"","reminderId":1,"reminderProgramStart":"2018-06-01 15:21","reminderScheduleId":1,"reminderOffset":0},{"reminderChannelNumber":2,"reminderProgramId":"","reminderId":1,"reminderProgramStart":"2018-06-01 15:22","reminderScheduleId":1,"reminderOffset":0},{"reminderChannelNumber":2,"reminderProgramId":"","reminderId":1,"reminderProgramStart":"2018-06-01 15:23","reminderScheduleId":1,"reminderOffset":0},{"reminderChannelNumber":2,"reminderProgramId":"","reminderId":1,"reminderProgramStart":"2018-06-01 15:24","reminderScheduleId":1,"reminderOffset":0}],"deviceId":"000004D67F70"}
+[DBG] request string: POST http://172.30.81.4:8080/ams/Reminders2?req=add HTTP/1.1
+[INF] 971ms request
+
+
+[DBG] Thu May 31 15:15:23 MSK 2018: add avg = 971ms1: add_avg_list:[971]
+[INF] return data: [404 Not Found, , 971, 971, 971, 1]
+[DBG] reminderX_list-s are CLEARED !!!
+========= ========= ========= Iteration = 1/1 ========= ========= =========
+[INF] Thu May 31 15:17:21 MSK 2018: add for macaddress=000004D67F70 to ams_ip=172.30.81.4, count_reminders=10, reminderProgramStart=multi, reminderChannelNumber=2, reminderProgramId=, reminderOffset=0, reminderScheduleId=multi, reminderId=multi
+reminderScheduleId_list<-add=1
+reminderId_list<-add        =1
+reminderScheduleId_list<-add=1
+reminderId_list<-add        =1
+reminderScheduleId_list<-add=1
+reminderId_list<-add        =1
+reminderScheduleId_list<-add=1
+reminderId_list<-add        =1
+reminderScheduleId_list<-add=1
+reminderId_list<-add        =1
+reminderScheduleId_list<-add=1
+reminderId_list<-add        =1
+reminderScheduleId_list<-add=1
+reminderId_list<-add        =1
+reminderScheduleId_list<-add=1
+reminderId_list<-add        =1
+reminderScheduleId_list<-add=1
+reminderId_list<-add        =1
+reminderScheduleId_list<-add=1
+reminderId_list<-add        =1
+reminderScheduleId_list : size=10 : [1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
+reminderId_list         : size=10 : [1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
+[JSON] generated json: {"reminders":[{"reminderChannelNumber":2,"reminderProgramId":"","reminderId":1,"reminderProgramStart":"2018-06-01 15:17","reminderScheduleId":1,"reminderOffset":0},{"reminderChannelNumber":2,"reminderProgramId":"","reminderId":1,"reminderProgramStart":"2018-06-01 15:18","reminderScheduleId":1,"reminderOffset":0},{"reminderChannelNumber":2,"reminderProgramId":"","reminderId":1,"reminderProgramStart":"2018-06-01 15:19","reminderScheduleId":1,"reminderOffset":0},{"reminderChannelNumber":2,"reminderProgramId":"","reminderId":1,"reminderProgramStart":"2018-06-01 15:20","reminderScheduleId":1,"reminderOffset":0},{"reminderChannelNumber":2,"reminderProgramId":"","reminderId":1,"reminderProgramStart":"2018-06-01 15:21","reminderScheduleId":1,"reminderOffset":0},{"reminderChannelNumber":2,"reminderProgramId":"","reminderId":1,"reminderProgramStart":"2018-06-01 15:22","reminderScheduleId":1,"reminderOffset":0},{"reminderChannelNumber":2,"reminderProgramId":"","reminderId":1,"reminderProgramStart":"2018-06-01 15:23","reminderScheduleId":1,"reminderOffset":0},{"reminderChannelNumber":2,"reminderProgramId":"","reminderId":1,"reminderProgramStart":"2018-06-01 15:24","reminderScheduleId":1,"reminderOffset":0},{"reminderChannelNumber":2,"reminderProgramId":"","reminderId":1,"reminderProgramStart":"2018-06-01 15:25","reminderScheduleId":1,"reminderOffset":0},{"reminderChannelNumber":2,"reminderProgramId":"","reminderId":1,"reminderProgramStart":"2018-06-01 15:26","reminderScheduleId":1,"reminderOffset":0}],"deviceId":"000004D67F70"}
+[DBG] request string: POST http://172.30.81.4:8080/ams/Reminders2?req=add HTTP/1.1
+[INF] 1090ms request
+
+
+[DBG] Thu May 31 15:17:22 MSK 2018: add avg = 1090ms1: add_avg_list:[1090]
+[INF] return data: [404 Not Found, , 1090, 1090, 1090, 1]
+[DBG] reminderX_list-s are CLEARED !!!
+========= ========= ========= Iteration = 1/1 ========= ========= =========
+[INF] Thu May 31 15:17:47 MSK 2018: add for macaddress=000004D67F70 to ams_ip=172.30.81.4, count_reminders=10, reminderProgramStart=multi, reminderChannelNumber=2, reminderProgramId=, reminderOffset=0, reminderScheduleId=multi, reminderId=multi
+reminderScheduleId_list<-add=1
+reminderId_list<-add        =1
+reminderScheduleId_list<-add=1
+reminderId_list<-add        =1
+reminderScheduleId_list<-add=1
+reminderId_list<-add        =1
+reminderScheduleId_list<-add=1
+reminderId_list<-add        =1
+reminderScheduleId_list<-add=1
+reminderId_list<-add        =1
+reminderScheduleId_list<-add=1
+reminderId_list<-add        =1
+reminderScheduleId_list<-add=1
+reminderId_list<-add        =1
+reminderScheduleId_list<-add=1
+reminderId_list<-add        =1
+reminderScheduleId_list<-add=1
+reminderId_list<-add        =1
+reminderScheduleId_list<-add=1
+reminderId_list<-add        =1
+reminderScheduleId_list : size=10 : [1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
+reminderId_list         : size=10 : [1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
+[JSON] generated json: {"reminders":[{"reminderChannelNumber":2,"reminderProgramId":"","reminderId":1,"reminderProgramStart":"2018-06-01 15:17","reminderScheduleId":1,"reminderOffset":0},{"reminderChannelNumber":2,"reminderProgramId":"","reminderId":1,"reminderProgramStart":"2018-06-01 15:18","reminderScheduleId":1,"reminderOffset":0},{"reminderChannelNumber":2,"reminderProgramId":"","reminderId":1,"reminderProgramStart":"2018-06-01 15:19","reminderScheduleId":1,"reminderOffset":0},{"reminderChannelNumber":2,"reminderProgramId":"","reminderId":1,"reminderProgramStart":"2018-06-01 15:20","reminderScheduleId":1,"reminderOffset":0},{"reminderChannelNumber":2,"reminderProgramId":"","reminderId":1,"reminderProgramStart":"2018-06-01 15:21","reminderScheduleId":1,"reminderOffset":0},{"reminderChannelNumber":2,"reminderProgramId":"","reminderId":1,"reminderProgramStart":"2018-06-01 15:22","reminderScheduleId":1,"reminderOffset":0},{"reminderChannelNumber":2,"reminderProgramId":"","reminderId":1,"reminderProgramStart":"2018-06-01 15:23","reminderScheduleId":1,"reminderOffset":0},{"reminderChannelNumber":2,"reminderProgramId":"","reminderId":1,"reminderProgramStart":"2018-06-01 15:24","reminderScheduleId":1,"reminderOffset":0},{"reminderChannelNumber":2,"reminderProgramId":"","reminderId":1,"reminderProgramStart":"2018-06-01 15:25","reminderScheduleId":1,"reminderOffset":0},{"reminderChannelNumber":2,"reminderProgramId":"","reminderId":1,"reminderProgramStart":"2018-06-01 15:26","reminderScheduleId":1,"reminderOffset":0}],"deviceId":"000004D67F70"}
+[DBG] request string: POST http://172.30.81.4:8080/ams/Reminders2?req=add HTTP/1.1
+[INF] 1191ms request
+
+
+[DBG] Thu May 31 15:17:49 MSK 2018: add avg = 1191ms1: add_avg_list:[1191]
+[INF] return data: [404 Not Found, , 1191, 1191, 1191, 1]
+[DBG] reminderX_list-s are CLEARED !!!
+========= ========= ========= Iteration = 1/1 ========= ========= =========
+reminderScheduleId_list<-add=0
+reminderId_list<-add        =0
+[INF] Thu May 31 15:18:36 MSK 2018: add for macaddress=000004D67F70 to ams_ip=172.30.81.4, count_reminders=10, reminderProgramStart=multi, reminderChannelNumber=2, reminderProgramId=, reminderOffset=0, reminderScheduleId=multi, reminderId=multi
+reminderScheduleId_list : size=0 : []
+reminderId_list         : size=0 : []
+[JSON] generated json: {"reminders":[{"reminderChannelNumber":2,"reminderProgramId":"","reminderId":0,"reminderProgramStart":"2018-06-01 15:18","reminderScheduleId":0,"reminderOffset":0},{"reminderChannelNumber":2,"reminderProgramId":"","reminderId":0,"reminderProgramStart":"2018-06-01 15:19","reminderScheduleId":0,"reminderOffset":0},{"reminderChannelNumber":2,"reminderProgramId":"","reminderId":0,"reminderProgramStart":"2018-06-01 15:20","reminderScheduleId":0,"reminderOffset":0},{"reminderChannelNumber":2,"reminderProgramId":"","reminderId":0,"reminderProgramStart":"2018-06-01 15:21","reminderScheduleId":0,"reminderOffset":0},{"reminderChannelNumber":2,"reminderProgramId":"","reminderId":0,"reminderProgramStart":"2018-06-01 15:22","reminderScheduleId":0,"reminderOffset":0},{"reminderChannelNumber":2,"reminderProgramId":"","reminderId":0,"reminderProgramStart":"2018-06-01 15:23","reminderScheduleId":0,"reminderOffset":0},{"reminderChannelNumber":2,"reminderProgramId":"","reminderId":0,"reminderProgramStart":"2018-06-01 15:24","reminderScheduleId":0,"reminderOffset":0},{"reminderChannelNumber":2,"reminderProgramId":"","reminderId":0,"reminderProgramStart":"2018-06-01 15:25","reminderScheduleId":0,"reminderOffset":0},{"reminderChannelNumber":2,"reminderProgramId":"","reminderId":0,"reminderProgramStart":"2018-06-01 15:26","reminderScheduleId":0,"reminderOffset":0},{"reminderChannelNumber":2,"reminderProgramId":"","reminderId":0,"reminderProgramStart":"2018-06-01 15:27","reminderScheduleId":0,"reminderOffset":0}],"deviceId":"000004D67F70"}
+[DBG] request string: POST http://172.30.81.4:8080/ams/Reminders2?req=add HTTP/1.1
+[INF] 942ms request
+
+
+[DBG] Thu May 31 15:18:37 MSK 2018: add avg = 942ms1: add_avg_list:[942]
+[INF] return data: [404 Not Found, , 942, 942, 942, 1]
+[DBG] reminderX_list-s are CLEARED !!!
+========= ========= ========= Iteration = 1/1 ========= ========= =========
+reminderScheduleId_list<-add=0
+reminderId_list<-add        =0
+[INF] Thu May 31 15:19:13 MSK 2018: add for macaddress=000004D67F70 to ams_ip=172.30.81.4, count_reminders=10, reminderProgramStart=multi, reminderChannelNumber=2, reminderProgramId=, reminderOffset=0, reminderScheduleId=multi, reminderId=multi
+reminderScheduleId_list : size=0 : []
+reminderId_list         : size=0 : []
+[JSON] generated json: {"reminders":[{"reminderChannelNumber":2,"reminderProgramId":"","reminderId":0,"reminderProgramStart":"2018-06-01 15:19","reminderScheduleId":0,"reminderOffset":0},{"reminderChannelNumber":2,"reminderProgramId":"","reminderId":0,"reminderProgramStart":"2018-06-01 15:20","reminderScheduleId":0,"reminderOffset":0},{"reminderChannelNumber":2,"reminderProgramId":"","reminderId":0,"reminderProgramStart":"2018-06-01 15:21","reminderScheduleId":0,"reminderOffset":0},{"reminderChannelNumber":2,"reminderProgramId":"","reminderId":0,"reminderProgramStart":"2018-06-01 15:22","reminderScheduleId":0,"reminderOffset":0},{"reminderChannelNumber":2,"reminderProgramId":"","reminderId":0,"reminderProgramStart":"2018-06-01 15:23","reminderScheduleId":0,"reminderOffset":0},{"reminderChannelNumber":2,"reminderProgramId":"","reminderId":0,"reminderProgramStart":"2018-06-01 15:24","reminderScheduleId":0,"reminderOffset":0},{"reminderChannelNumber":2,"reminderProgramId":"","reminderId":0,"reminderProgramStart":"2018-06-01 15:25","reminderScheduleId":0,"reminderOffset":0},{"reminderChannelNumber":2,"reminderProgramId":"","reminderId":0,"reminderProgramStart":"2018-06-01 15:26","reminderScheduleId":0,"reminderOffset":0},{"reminderChannelNumber":2,"reminderProgramId":"","reminderId":0,"reminderProgramStart":"2018-06-01 15:27","reminderScheduleId":0,"reminderOffset":0},{"reminderChannelNumber":2,"reminderProgramId":"","reminderId":0,"reminderProgramStart":"2018-06-01 15:28","reminderScheduleId":0,"reminderOffset":0}],"deviceId":"000004D67F70"}
+[DBG] request string: POST http://172.30.81.4:8080/ams/Reminders2?req=add HTTP/1.1
+[INF] 943ms request
+
+
+[DBG] Thu May 31 15:19:14 MSK 2018: add avg = 943ms1: add_avg_list:[943]
+[INF] return data: [404 Not Found, , 943, 943, 943, 1]
+[DBG] reminderX_list-s are CLEARED !!!
+========= ========= ========= Iteration = 1/1 ========= ========= =========
+reminderScheduleId_list<-add=0
+reminderId_list<-add        =0
+[INF] Thu May 31 15:19:54 MSK 2018: add for macaddress=000004D67F70 to ams_ip=172.30.81.4, count_reminders=10, reminderProgramStart=multi, reminderChannelNumber=2, reminderProgramId=, reminderOffset=0, reminderScheduleId=multi, reminderId=multi
+reminderScheduleId_list : size=0 : []
+reminderId_list         : size=0 : []
+[JSON] generated json: {"reminders":[{"reminderChannelNumber":2,"reminderProgramId":"","reminderId":0,"reminderProgramStart":"2018-06-01 15:19","reminderScheduleId":0,"reminderOffset":0},{"reminderChannelNumber":2,"reminderProgramId":"","reminderId":0,"reminderProgramStart":"2018-06-01 15:20","reminderScheduleId":0,"reminderOffset":0},{"reminderChannelNumber":2,"reminderProgramId":"","reminderId":0,"reminderProgramStart":"2018-06-01 15:21","reminderScheduleId":0,"reminderOffset":0},{"reminderChannelNumber":2,"reminderProgramId":"","reminderId":0,"reminderProgramStart":"2018-06-01 15:22","reminderScheduleId":0,"reminderOffset":0},{"reminderChannelNumber":2,"reminderProgramId":"","reminderId":0,"reminderProgramStart":"2018-06-01 15:23","reminderScheduleId":0,"reminderOffset":0},{"reminderChannelNumber":2,"reminderProgramId":"","reminderId":0,"reminderProgramStart":"2018-06-01 15:24","reminderScheduleId":0,"reminderOffset":0},{"reminderChannelNumber":2,"reminderProgramId":"","reminderId":0,"reminderProgramStart":"2018-06-01 15:25","reminderScheduleId":0,"reminderOffset":0},{"reminderChannelNumber":2,"reminderProgramId":"","reminderId":0,"reminderProgramStart":"2018-06-01 15:26","reminderScheduleId":0,"reminderOffset":0},{"reminderChannelNumber":2,"reminderProgramId":"","reminderId":0,"reminderProgramStart":"2018-06-01 15:27","reminderScheduleId":0,"reminderOffset":0},{"reminderChannelNumber":2,"reminderProgramId":"","reminderId":0,"reminderProgramStart":"2018-06-01 15:28","reminderScheduleId":0,"reminderOffset":0}],"deviceId":"000004D67F70"}
+[DBG] request string: POST http://172.30.81.4:8080/ams/Reminders2?req=add HTTP/1.1
+[INF] 1002ms request
+
+
+[DBG] Thu May 31 15:19:55 MSK 2018: add avg = 1002ms1: add_avg_list:[1002]
+[INF] return data: [404 Not Found, , 1002, 1002, 1002, 1]
+[DBG] reminderX_list-s are CLEARED !!!
+========= ========= ========= Iteration = 1/1 ========= ========= =========
+reminderScheduleId_list<-add=0
+reminderId_list<-add        =0
+========= ========= ========= Iteration = 1/1 ========= ========= =========
+reminderScheduleId_list<-add=2186711691244482369
+reminderId_list<-add        =2553167032742196050
+[INF] Thu May 31 15:25:46 MSK 2018: add for macaddress=000004D67F70 to ams_ip=172.30.81.4, count_reminders=10, reminderProgramStart=multi, reminderChannelNumber=2, reminderProgramId=, reminderOffset=0, reminderScheduleId=multi, reminderId=multi
+[DBG] preliminary clean reminderScheduleId_list !!!
+reminderScheduleId_list<-add=5736050776116193754
+[DBG] preliminary clean reminderId_list !!!
+reminderId_list<-add        =4975064337380282009
+reminderScheduleId_list<-add=8792461715305586458
+reminderId_list<-add        =3481844646211662184
+reminderScheduleId_list<-add=6022966489455771762
+reminderId_list<-add        =6299708180562964937
+reminderScheduleId_list<-add=640277111851911313
+reminderId_list<-add        =191426376077594379
+reminderScheduleId_list<-add=3313374974253795578
+reminderId_list<-add        =8420428618704442873
+reminderScheduleId_list<-add=8141016634603629208
+reminderId_list<-add        =2956495619219910608
+reminderScheduleId_list<-add=3290433593722844968
+reminderId_list<-add        =8043051541138111155
+reminderScheduleId_list<-add=1682358795235174330
+reminderId_list<-add        =3729982571614115327
+reminderScheduleId_list<-add=8213322000514492736
+reminderId_list<-add        =5383613923821078199
+reminderScheduleId_list<-add=5673542222878139057
+reminderId_list<-add        =8694767417553643890
+reminderScheduleId_list : size=10 : [5736050776116193754, 8792461715305586458, 6022966489455771762, 640277111851911313, 3313374974253795578, 8141016634603629208, 3290433593722844968, 1682358795235174330, 8213322000514492736, 5673542222878139057]
+reminderId_list         : size=10 : [4975064337380282009, 3481844646211662184, 6299708180562964937, 191426376077594379, 8420428618704442873, 2956495619219910608, 8043051541138111155, 3729982571614115327, 5383613923821078199, 8694767417553643890]
+[JSON] generated json: {"reminders":[{"reminderChannelNumber":2,"reminderProgramId":"","reminderId":4975064337380282009,"reminderProgramStart":"2018-06-01 15:25","reminderScheduleId":5736050776116193754,"reminderOffset":0},{"reminderChannelNumber":2,"reminderProgramId":"","reminderId":3481844646211662184,"reminderProgramStart":"2018-06-01 15:26","reminderScheduleId":8792461715305586458,"reminderOffset":0},{"reminderChannelNumber":2,"reminderProgramId":"","reminderId":6299708180562964937,"reminderProgramStart":"2018-06-01 15:27","reminderScheduleId":6022966489455771762,"reminderOffset":0},{"reminderChannelNumber":2,"reminderProgramId":"","reminderId":191426376077594379,"reminderProgramStart":"2018-06-01 15:28","reminderScheduleId":640277111851911313,"reminderOffset":0},{"reminderChannelNumber":2,"reminderProgramId":"","reminderId":8420428618704442873,"reminderProgramStart":"2018-06-01 15:29","reminderScheduleId":3313374974253795578,"reminderOffset":0},{"reminderChannelNumber":2,"reminderProgramId":"","reminderId":2956495619219910608,"reminderProgramStart":"2018-06-01 15:30","reminderScheduleId":8141016634603629208,"reminderOffset":0},{"reminderChannelNumber":2,"reminderProgramId":"","reminderId":8043051541138111155,"reminderProgramStart":"2018-06-01 15:31","reminderScheduleId":3290433593722844968,"reminderOffset":0},{"reminderChannelNumber":2,"reminderProgramId":"","reminderId":3729982571614115327,"reminderProgramStart":"2018-06-01 15:32","reminderScheduleId":1682358795235174330,"reminderOffset":0},{"reminderChannelNumber":2,"reminderProgramId":"","reminderId":5383613923821078199,"reminderProgramStart":"2018-06-01 15:33","reminderScheduleId":8213322000514492736,"reminderOffset":0},{"reminderChannelNumber":2,"reminderProgramId":"","reminderId":8694767417553643890,"reminderProgramStart":"2018-06-01 15:34","reminderScheduleId":5673542222878139057,"reminderOffset":0}],"deviceId":"000004D67F70"}
+[DBG] request string: POST http://172.30.81.4:8080/ams/Reminders2?req=add HTTP/1.1
+[INF] 1088ms request
+
+
+[DBG] Thu May 31 15:25:47 MSK 2018: add avg = 1088ms1: add_avg_list:[1088]
+[INF] return data: [404 Not Found, , 1088, 1088, 1088, 1]
+[DBG] reminderX_list-s are CLEARED !!!
+========= ========= ========= Iteration = 1/1 ========= ========= =========
+reminderScheduleId_list<-add=7761690626477456070
+reminderId_list<-add        =6980579626959071967
+[INF] Thu May 31 15:26:52 MSK 2018: add for macaddress=000004D67F70 to ams_ip=172.30.81.4, count_reminders=10, reminderProgramStart=multi, reminderChannelNumber=2, reminderProgramId=, reminderOffset=0, reminderScheduleId=multi, reminderId=multi
+[INF] Thu May 31 15:26:52 MSK 2018: add for macaddress=000004D67F70 to ams_ip=172.30.81.4, count_reminders=10, reminderProgramStart=multi, reminderChannelNumber=2, reminderProgramId=, reminderOffset=0, reminderScheduleId=multi, reminderId=multi
+========= ========= ========= Iteration = 1/1 ========= ========= =========
+reminderScheduleId_list<-add = 5515016931401036911
+reminderId_list<-add         = 7058666890686381564
+[INF] Thu May 31 15:28:17 MSK 2018: add for macaddress=000004D67F70 to ams_ip=172.30.81.4, count_reminders=10, reminderProgramStart=multi, reminderChannelNumber=2, reminderProgramId=, reminderOffset=0, reminderScheduleId=multi, reminderId=multi
+[DBG] preliminary clean reminderScheduleId_list !!!
+reminderScheduleId_list<-add = 2795890777133158869
+[DBG] preliminary clean reminderId_list !!!
+reminderId_list<-add         = 2936659701094972153
+reminderScheduleId_list<-add = 8548635933363146447
+reminderId_list<-add         = 3855568088458848895
+reminderScheduleId_list<-add = 2631040122982786526
+reminderId_list<-add         = 2536190125078587923
+reminderScheduleId_list<-add = 3532984177062535484
+reminderId_list<-add         = 706308084238686162
+reminderScheduleId_list<-add = 6683014962508260650
+reminderId_list<-add         = 3934626197519939140
+reminderScheduleId_list<-add = 1831802366204626076
+reminderId_list<-add         = 8802429395808502690
+reminderScheduleId_list<-add = 3767200652788402604
+reminderId_list<-add         = 1256849388551009217
+reminderScheduleId_list<-add = 5551580861753147486
+reminderId_list<-add         = 1672232177807345667
+reminderScheduleId_list<-add = 13294593359611045
+reminderId_list<-add         = 4953984231395156102
+reminderScheduleId_list<-add = 1251526726457743117
+reminderId_list<-add         = 66435270925813719
+reminderScheduleId_list : size=10 : [2795890777133158869, 8548635933363146447, 2631040122982786526, 3532984177062535484, 6683014962508260650, 1831802366204626076, 3767200652788402604, 5551580861753147486, 13294593359611045, 1251526726457743117]
+reminderId_list         : size=10 : [2936659701094972153, 3855568088458848895, 2536190125078587923, 706308084238686162, 3934626197519939140, 8802429395808502690, 1256849388551009217, 1672232177807345667, 4953984231395156102, 66435270925813719]
+[JSON] generated json: {"reminders":[{"reminderChannelNumber":2,"reminderProgramId":"","reminderId":2936659701094972153,"reminderProgramStart":"2018-06-01 15:28","reminderScheduleId":2795890777133158869,"reminderOffset":0},{"reminderChannelNumber":2,"reminderProgramId":"","reminderId":3855568088458848895,"reminderProgramStart":"2018-06-01 15:29","reminderScheduleId":8548635933363146447,"reminderOffset":0},{"reminderChannelNumber":2,"reminderProgramId":"","reminderId":2536190125078587923,"reminderProgramStart":"2018-06-01 15:30","reminderScheduleId":2631040122982786526,"reminderOffset":0},{"reminderChannelNumber":2,"reminderProgramId":"","reminderId":706308084238686162,"reminderProgramStart":"2018-06-01 15:31","reminderScheduleId":3532984177062535484,"reminderOffset":0},{"reminderChannelNumber":2,"reminderProgramId":"","reminderId":3934626197519939140,"reminderProgramStart":"2018-06-01 15:32","reminderScheduleId":6683014962508260650,"reminderOffset":0},{"reminderChannelNumber":2,"reminderProgramId":"","reminderId":8802429395808502690,"reminderProgramStart":"2018-06-01 15:33","reminderScheduleId":1831802366204626076,"reminderOffset":0},{"reminderChannelNumber":2,"reminderProgramId":"","reminderId":1256849388551009217,"reminderProgramStart":"2018-06-01 15:34","reminderScheduleId":3767200652788402604,"reminderOffset":0},{"reminderChannelNumber":2,"reminderProgramId":"","reminderId":1672232177807345667,"reminderProgramStart":"2018-06-01 15:35","reminderScheduleId":5551580861753147486,"reminderOffset":0},{"reminderChannelNumber":2,"reminderProgramId":"","reminderId":4953984231395156102,"reminderProgramStart":"2018-06-01 15:36","reminderScheduleId":13294593359611045,"reminderOffset":0},{"reminderChannelNumber":2,"reminderProgramId":"","reminderId":66435270925813719,"reminderProgramStart":"2018-06-01 15:37","reminderScheduleId":1251526726457743117,"reminderOffset":0}],"deviceId":"000004D67F70"}
+[DBG] request string: POST http://172.30.81.4:8080/ams/Reminders2?req=add HTTP/1.1
+[INF] 1145ms request
+
+
+[DBG] Thu May 31 15:28:19 MSK 2018: add avg = 1145ms1: add_avg_list:[1145]
+[INF] return data: [404 Not Found, , 1145, 1145, 1145, 1]
+[DBG] reminderX_list-s are CLEARED !!!
+========= ========= ========= Iteration = 1/1 ========= ========= =========
+reminderScheduleId_list<-add = 4804131528247105681
+reminderId_list<-add         = 6885189643966980896
+[INF] Thu May 31 15:28:45 MSK 2018: add for macaddress=000004D67F70 to ams_ip=172.30.81.4, count_reminders=3, reminderProgramStart=multi, reminderChannelNumber=2, reminderProgramId=, reminderOffset=0, reminderScheduleId=multi, reminderId=multi
+[DBG] preliminary clean reminderScheduleId_list !!!
+reminderScheduleId_list<-add = 8061414523788684165
+[DBG] preliminary clean reminderId_list !!!
+reminderId_list<-add         = 3678316014328225288
+reminderScheduleId_list<-add = 6703743017561505551
+reminderId_list<-add         = 7248371624437569875
+reminderScheduleId_list<-add = 9048557129601903213
+reminderId_list<-add         = 6575750931168859432
+reminderScheduleId_list : size=3 : [8061414523788684165, 6703743017561505551, 9048557129601903213]
+reminderId_list         : size=3 : [3678316014328225288, 7248371624437569875, 6575750931168859432]
+[JSON] generated json: {"reminders":[{"reminderChannelNumber":2,"reminderProgramId":"","reminderId":3678316014328225288,"reminderProgramStart":"2018-06-01 15:28","reminderScheduleId":8061414523788684165,"reminderOffset":0},{"reminderChannelNumber":2,"reminderProgramId":"","reminderId":7248371624437569875,"reminderProgramStart":"2018-06-01 15:29","reminderScheduleId":6703743017561505551,"reminderOffset":0},{"reminderChannelNumber":2,"reminderProgramId":"","reminderId":6575750931168859432,"reminderProgramStart":"2018-06-01 15:30","reminderScheduleId":9048557129601903213,"reminderOffset":0}],"deviceId":"000004D67F70"}
+[DBG] request string: POST http://172.30.81.4:8080/ams/Reminders2?req=add HTTP/1.1
+[INF] 1124ms request
+
+
+[DBG] Thu May 31 15:28:46 MSK 2018: add avg = 1124ms1: add_avg_list:[1124]
+[INF] return data: [404 Not Found, , 1124, 1124, 1124, 1]
+[DBG] reminderX_list-s are CLEARED !!!
+========= ========= ========= Iteration = 1/1 ========= ========= =========
+========= ========= ========= Iteration = 1/1 ========= ========= =========
+========= ========= ========= Iteration = 1/1 ========= ========= =========
+>>>>>>> 596b2a42c96baeb32fb1eb2c76ab45484c31d977

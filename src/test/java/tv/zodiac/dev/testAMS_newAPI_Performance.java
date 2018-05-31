@@ -28,8 +28,8 @@ class testAMS_newAPI_Performance extends API_common {
         for (int i = 1; i <= count_iterations; i++) {
             String header = "========= ========= ========= Iteration = " + i + "/" + count_iterations + " ========= ========= =========";
             logger(INFO_LEVEL, header);
-            long reminderScheduleId = reminderScheduleId();
-            long reminderId = reminderId();
+            long reminderScheduleId = reminderScheduleId(Generation.random);
+            long reminderId = reminderId(Generation.random);
 
             assertTimeoutPreemptively(ofMillis(timeout), () -> {
                 add_list[0] = AMS.request(ams_ip, macaddress, Operation.add, count_reminders, reminderProgramStart, reminderChannelNumber, reminderProgramId, reminderOffset, reminderScheduleId, reminderId);
@@ -66,21 +66,17 @@ class testAMS_newAPI_Performance extends API_common {
         for (int i = 1; i <= count_iterations; i++) {
             String header = "========= ========= ========= Iteration = " + i + "/" + count_iterations + " ========= ========= =========";
             logger(INFO_LEVEL, header);
-            long reminderScheduleId = reminderScheduleId();
-            long reminderId = reminderId();
+            long reminderScheduleId = reminderScheduleId(Generation.random);
+            long reminderId = reminderId(Generation.random);
 
-            //assertTimeoutPreemptively(ofMillis(timeout), () -> {
-                add_list = AMS.request(ams_ip, macaddress, Operation.add, count_reminders, reminderProgramStart, reminderChannelNumber, reminderProgramId, reminderOffset, reminderScheduleId, reminderId);
-            //});
+            add_list = AMS.request(ams_ip, macaddress, Operation.add, count_reminders, reminderProgramStart, reminderChannelNumber, reminderProgramId, reminderOffset, reminderScheduleId, reminderId);
             if(add_list.get(0).equals(expected200) && add_list.get(1).equals("")) {
                 a_avg = (int) add_list.get(2);
                 a_min = (int) add_list.get(3);
                 a_max = (int) add_list.get(4);
                 a_iterations = (int) add_list.get(5);
 
-                //assertTimeoutPreemptively(ofMillis(timeout), () -> {
-                    purge_list = AMS.request(ams_ip, macaddress, Operation.purge);
-                //});
+                purge_list = AMS.request(ams_ip, macaddress, Operation.purge);
                 if(purge_list.get(1).equals("")) {
                     p_avg = (int) purge_list.get(2);
                     p_min = (int) purge_list.get(3);
@@ -118,8 +114,8 @@ class testAMS_newAPI_Performance extends API_common {
         for (int i = 1; i <= count_iterations; i++) {
             String header = "========= ========= ========= Iteration = " + i + "/" + count_iterations + " ========= ========= =========";
             logger(INFO_LEVEL, header);
-            long reminderScheduleId = reminderScheduleId();
-            long reminderId = reminderId();
+            long reminderScheduleId = reminderScheduleId(Generation.random);
+            long reminderId = reminderId(Generation.random);
 
             add_list = AMS.request(ams_ip, macaddress, Operation.add, count_reminders, reminderProgramStart, reminderChannelNumber, reminderProgramId, reminderOffset, reminderScheduleId, reminderId);
             if (add_list.get(0).equals(expected200) && add_list.get(1).equals("")) {
@@ -150,7 +146,7 @@ class testAMS_newAPI_Performance extends API_common {
             logger(DEBUG_LEVEL, "[DBG] reminderX_list-s are CLEARED !!!");
             add_list.clear();
             delete_list.clear();
-            purge_list.clear();
+            //purge_list.clear();
             Thread.sleep(sleep_after_iteration);
         }
 
@@ -179,8 +175,10 @@ class testAMS_newAPI_Performance extends API_common {
         for (int i = 1; i <= count_iterations; i++) {
             String header = "========= ========= ========= Iteration = " + i + "/" + count_iterations + " ========= ========= =========";
             logger(INFO_LEVEL, header);
-            long reminderScheduleId = reminderScheduleId();
-            long reminderId = reminderId();
+            //long reminderScheduleId = reminderScheduleId(Generation.random);
+            //long reminderId = reminderId(Generation.random);
+            long reminderScheduleId = reminderScheduleId(Generation.increment);
+            long reminderId = reminderId(Generation.increment);
 
             add_list = AMS.request(ams_ip, macaddress, Operation.add, count_reminders, reminderProgramStart, reminderChannelNumber, reminderProgramId, reminderOffset, reminderScheduleId, reminderId);
             if (add_list.get(0).equals(expected200) && add_list.get(1).equals("")) {
