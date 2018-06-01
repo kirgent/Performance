@@ -46,8 +46,8 @@ class OldAPI_AMS extends API_common {
         HttpResponse response = HttpClients.createDefault().execute(request);
         long finish = System.currentTimeMillis();
         int diff = (int)(finish-start);
-        if(show_info_level) {
-            logger(INFO_LEVEL, "[INF] " + diff + "ms request");
+        if(show_debug_level) {
+            logger(DEBUG_LEVEL, "[DBG] " + diff + "ms request");
         }
 
         ArrayList arrayList = new ArrayList();
@@ -104,8 +104,8 @@ class OldAPI_AMS extends API_common {
         HttpResponse response = HttpClients.createDefault().execute(request);
         long finish = System.currentTimeMillis();
         int diff = (int)(finish-start);
-        if(show_info_level) {
-            logger(INFO_LEVEL, "[INF] " + diff + "ms request");
+        if(show_debug_level) {
+            logger(DEBUG_LEVEL, "[DBG] " + diff + "ms request");
         }
 
         ArrayList arrayList = new ArrayList();
