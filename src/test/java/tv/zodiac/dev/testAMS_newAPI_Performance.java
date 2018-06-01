@@ -26,7 +26,7 @@ class testAMS_newAPI_Performance extends API_common {
         final ArrayList[] add_list = {new ArrayList()};
         int a_avg = 0, a_min = 0, a_max=0, a_iterations = 0;
         for (int i = 1; i <= count_iterations; i++) {
-            String header = "========= ========= ========= Iteration = " + i + "/" + count_iterations + " ========= ========= =========";
+            String header = "========= ========= ========= Iteration = " + i + "/" + count_iterations + " ========= ========= ========= [statuscode, , avg, max, min, i, current]";
             logger(INFO_LEVEL, header);
             long reminderScheduleId = reminderScheduleId(Generation.random);
             long reminderId = reminderId(Generation.random);
@@ -64,7 +64,7 @@ class testAMS_newAPI_Performance extends API_common {
         int a_avg = 0, a_min = 0, a_max=0, a_iterations = 0,
                 p_avg = 0, p_min = 0, p_max=0, p_iterations = 0;
         for (int i = 1; i <= count_iterations; i++) {
-            String header = "========= ========= ========= Iteration = " + i + "/" + count_iterations + " ========= ========= =========";
+            String header = "========= ========= ========= Iteration = " + i + "/" + count_iterations + " ========= ========= ========= [statuscode, , avg, max, min, i, current]";
             logger(INFO_LEVEL, header);
             long reminderScheduleId = reminderScheduleId(Generation.random);
             long reminderId = reminderId(Generation.random);
@@ -112,7 +112,7 @@ class testAMS_newAPI_Performance extends API_common {
                 d_avg = 0, d_min = 0, d_max = 0, d_iterations = 0,
                 p_avg = 0, p_min = 0, p_max = 0, p_iterations = 0;
         for (int i = 1; i <= count_iterations; i++) {
-            String header = "========= ========= ========= Iteration = " + i + "/" + count_iterations + " ========= ========= =========";
+            String header = "========= ========= ========= Iteration = " + i + "/" + count_iterations + " ========= ========= ========= [statuscode, , avg, max, min, i, current]";
             logger(INFO_LEVEL, header);
             long reminderScheduleId = reminderScheduleId(Generation.random);
             long reminderId = reminderId(Generation.random);
@@ -173,7 +173,7 @@ class testAMS_newAPI_Performance extends API_common {
                 d_avg = 0, d_min = 0, d_max = 0, d_iterations = 0,
                 p_avg = 0, p_min = 0, p_max = 0, p_iterations = 0;
         for (int i = 1; i <= count_iterations; i++) {
-            String header = "========= ========= ========= Iteration = " + i + "/" + count_iterations + " ========= ========= =========";
+            String header = "========= ========= ========= Iteration = " + i + "/" + count_iterations + " ========= ========= ========= [statuscode, , avg, max, min, i, current]";
             logger(INFO_LEVEL, header);
             long reminderScheduleId = reminderScheduleId(Generation.random);
             long reminderId = reminderId(Generation.random);
