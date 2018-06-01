@@ -84,7 +84,7 @@ class NewAPI_AMS extends API_common {
                 }
             }
         }
-        logger(INFO_LEVEL, "[INF] return data: " + arrayList);
+        logger(INFO_LEVEL, "[INF] return data: " + arrayList + "\n");
         return arrayList;
     }
 
@@ -133,7 +133,7 @@ class NewAPI_AMS extends API_common {
                 }
             }
         }
-        logger(INFO_LEVEL, "[INF] return data: " + arrayList);
+        logger(INFO_LEVEL, "[INF] return data: " + arrayList + "\n");
         return arrayList;
     }
 
@@ -421,7 +421,7 @@ class NewAPI_AMS extends API_common {
         ArrayList arrayList = new ArrayList();
         arrayList.add(0, response.getStatusLine().getStatusCode() + " " + response.getStatusLine().getReasonPhrase());
         arrayList.add(1, check_body_response(read_response(new StringBuilder(),response), mac));
-        logger(INFO_LEVEL, "[INF] return data: " + arrayList);
+        logger(INFO_LEVEL, "[INF] return data: " + arrayList + "\n");
         return arrayList;
     }
 
