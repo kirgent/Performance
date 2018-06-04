@@ -23,46 +23,9 @@ class testAMS_newAPI_Performance extends API_common {
     @CsvFileSource(resources = "/reminders.csv", numLinesToSkip = 1)
     void test0_Add(String ams_ip, String macaddress, String boxname, int count_reminders, int reminderChannelNumber, int reminderOffset, int reminderOffset_new, int count_iterations) throws InterruptedException, IOException {
         check_csv_preconditions(ams_ip, macaddress, count_reminders, reminderChannelNumber, reminderOffset, reminderOffset_new, count_iterations);
-        final ArrayList[] add_list = {new ArrayList()};
-        int a_avg = 0, a_min = 0, a_max=0, a_iterations = 0;
-        for (int i = 1; i <= count_iterations; i++) {
-            String header = "========= ========= ========= Iteration = " + i + "/" + count_iterations + " [statuscode, , avg, max, min, i, current] ========= ========= =========";
-            logger(INFO_LEVEL, header);
-            long reminderScheduleId = reminderScheduleId(Generation.random);
-            long reminderId = reminderId(Generation.random);
-
-            assertTimeoutPreemptively(ofMillis(timeout), () -> {
-                add_list[0] = AMS.request(ams_ip, macaddress, Operation.add, count_reminders, reminderProgramStart, reminderChannelNumber, reminderProgramId, reminderOffset, reminderScheduleId, reminderId);
-            });
-            if(add_list[0].get(0).equals(expected200) && add_list[0].get(1).equals("")) {
-                a_avg = (int) add_list[0].get(2);
-                a_min = (int) add_list[0].get(3);
-                a_max = (int) add_list[0].get(4);
-                a_iterations = (int) add_list[0].get(5);
-            }
-            reminderScheduleId_list.clear();
-            reminderId_list.clear();
-            logger(DEBUG_LEVEL, "[DBG] reminderX_list-s are CLEARED !!!");
-            add_list[0].clear();
-            Thread.sleep(sleep_after_iteration);
-        }
-
-        prepare_total_results(macaddress, boxname, count_reminders, count_iterations,
-                a_avg, a_min, a_max, a_iterations,
-                0, 0, 0, 0,
-                0, 0, 0, 0,
-                0, 0, 0, 0);
-        assertNotEquals(0, a_avg, "a_avg");
-    }
-
-    @ParameterizedTest
-    @CsvFileSource(resources = "/reminders.csv", numLinesToSkip = 1)
-    void test1_Add_Purge(String ams_ip, String macaddress, String boxname, int count_reminders, int reminderChannelNumber, int reminderOffset, int reminderOffset_new, int count_iterations) throws InterruptedException, IOException {
-        check_csv_preconditions(ams_ip, macaddress, count_reminders, reminderChannelNumber, reminderOffset, reminderOffset_new, count_iterations);
         ArrayList add_list = new ArrayList();
-        ArrayList purge_list = new ArrayList();
-        int a_avg = 0, a_min = 0, a_max=0, a_iterations = 0,
-                p_avg = 0, p_min = 0, p_max=0, p_iterations = 0;
+        int a_avg = 0, a_min = 0, a_max=0, a_iteration = 0;
+        ArrayList a_current = new ArrayList();
         for (int i = 1; i <= count_iterations; i++) {
             String header = "========= ========= ========= Iteration = " + i + "/" + count_iterations + " [statuscode, , avg, max, min, i, current] ========= ========= =========";
             logger(INFO_LEVEL, header);
@@ -74,14 +37,52 @@ class testAMS_newAPI_Performance extends API_common {
                 a_avg = (int) add_list.get(2);
                 a_min = (int) add_list.get(3);
                 a_max = (int) add_list.get(4);
-                a_iterations = (int) add_list.get(5);
+                a_iteration = (int) add_list.get(5);
+            }
+            reminderScheduleId_list.clear();
+            reminderId_list.clear();
+            logger(DEBUG_LEVEL, "[DBG] reminderX_list-s are CLEARED !!!");
+            add_list.clear();
+            Thread.sleep(sleep_after_iteration);
+        }
+
+        prepare_total_results(macaddress, boxname, count_reminders, count_iterations,
+                a_avg, a_min, a_max, a_iteration, a_current,
+                0, 0, 0, 0, null,
+                0, 0, 0, 0, null,
+                0, 0, 0, 0, null);
+        assertNotEquals(0, a_avg, "a_avg");
+    }
+
+    @ParameterizedTest
+    @CsvFileSource(resources = "/reminders.csv", numLinesToSkip = 1)
+    void test1_Add_Purge(String ams_ip, String macaddress, String boxname, int count_reminders, int reminderChannelNumber, int reminderOffset, int reminderOffset_new, int count_iterations) throws InterruptedException, IOException {
+        check_csv_preconditions(ams_ip, macaddress, count_reminders, reminderChannelNumber, reminderOffset, reminderOffset_new, count_iterations);
+        ArrayList add_list = new ArrayList();
+        ArrayList purge_list = new ArrayList();
+        int a_avg = 0, a_min = 0, a_max=0, a_iteration = 0,
+                p_avg = 0, p_min = 0, p_max=0, p_iteration = 0;
+        ArrayList a_current = new ArrayList();
+        ArrayList p_current = new ArrayList();
+        for (int i = 1; i <= count_iterations; i++) {
+            String header = "========= ========= ========= Iteration = " + i + "/" + count_iterations + " [statuscode, , avg, max, min, i, current] ========= ========= =========";
+            logger(INFO_LEVEL, header);
+            long reminderScheduleId = reminderScheduleId(Generation.random);
+            long reminderId = reminderId(Generation.random);
+
+            add_list = AMS.request(ams_ip, macaddress, Operation.add, count_reminders, reminderProgramStart, reminderChannelNumber, reminderProgramId, reminderOffset, reminderScheduleId, reminderId);
+            if(add_list.get(0).equals(expected200) && add_list.get(1).equals("")) {
+                a_avg = (int) add_list.get(2);
+                a_min = (int) add_list.get(3);
+                a_max = (int) add_list.get(4);
+                a_iteration = (int) add_list.get(5);
 
                 purge_list = AMS.request(ams_ip, macaddress, Operation.purge);
                 if(purge_list.get(1).equals("")) {
                     p_avg = (int) purge_list.get(2);
                     p_min = (int) purge_list.get(3);
                     p_max = (int) purge_list.get(4);
-                    p_iterations = (int) purge_list.get(5);
+                    p_iteration = (int) purge_list.get(5);
                 }
             }
             reminderScheduleId_list.clear();
@@ -93,10 +94,10 @@ class testAMS_newAPI_Performance extends API_common {
         }
 
         prepare_total_results(macaddress, boxname, count_reminders, count_iterations,
-                a_avg, a_min, a_max, a_iterations,
-                0, 0, 0, 0,
-                0, 0, 0, 0,
-                p_avg, p_min, p_max, p_iterations);
+                a_avg, a_min, a_max, a_iteration, a_current,
+                0, 0, 0, 0, null,
+                0, 0, 0, 0, null,
+                p_avg, p_min, p_max, p_iteration, p_current);
         assertNotEquals(0, a_avg, "a_avg");
         assertNotEquals(0, p_avg, "p_avg");
     }
@@ -108,9 +109,12 @@ class testAMS_newAPI_Performance extends API_common {
         ArrayList add_list,
                 delete_list = new ArrayList(),
                 purge_list = new ArrayList();
-        int a_avg = 0, a_min = 0, a_max = 0, a_iterations = 0,
-                d_avg = 0, d_min = 0, d_max = 0, d_iterations = 0,
-                p_avg = 0, p_min = 0, p_max = 0, p_iterations = 0;
+        int a_avg = 0, a_min = 0, a_max = 0, a_iteration = 0,
+                d_avg = 0, d_min = 0, d_max = 0, d_iteration = 0,
+                p_avg = 0, p_min = 0, p_max = 0, p_iteration = 0;
+        ArrayList a_current = new ArrayList();
+        ArrayList d_current = new ArrayList();
+        ArrayList p_current = new ArrayList();
         for (int i = 1; i <= count_iterations; i++) {
             String header = "========= ========= ========= Iteration = " + i + "/" + count_iterations + " [statuscode, , avg, max, min, i, current] ========= ========= =========";
             logger(INFO_LEVEL, header);
@@ -122,14 +126,14 @@ class testAMS_newAPI_Performance extends API_common {
                 a_avg = (int) add_list.get(2);
                 a_min = (int) add_list.get(3);
                 a_max = (int) add_list.get(4);
-                a_iterations = (int) add_list.get(5);
+                a_iteration = (int) add_list.get(5);
 
                 delete_list = AMS.request(ams_ip, macaddress, Operation.delete, count_reminders, reminderScheduleId, reminderId);
                 if (delete_list.get(1).equals("")) {
                     d_avg = (int) delete_list.get(2);
                     d_min = (int) delete_list.get(3);
                     d_max = (int) delete_list.get(4);
-                    d_iterations = (int) delete_list.get(5);
+                    d_iteration = (int) delete_list.get(5);
                 }
 
                     /*purge_list = AMS.request(ams_ip, macaddress, Operation.purge);
@@ -137,7 +141,7 @@ class testAMS_newAPI_Performance extends API_common {
                         p_avg = (int) purge_list.get(2);
                         p_min = (int) purge_list.get(3);
                         p_max = (int) purge_list.get(4);
-                        p_iterations = (int) purge_list.get(5);
+                        p_iteration = (int) purge_list.get(5);
                     }*/
             }
 
@@ -151,10 +155,10 @@ class testAMS_newAPI_Performance extends API_common {
         }
 
         prepare_total_results(macaddress, boxname, count_reminders, count_iterations,
-                a_avg, a_min, a_max, a_iterations,
-                0, 0, 0, 0,
-                d_avg, d_min, d_max, d_iterations,
-                p_avg, p_min, p_max, p_iterations);
+                a_avg, a_min, a_max, a_iteration, a_current,
+                0, 0, 0, 0, null,
+                d_avg, d_min, d_max, d_iteration, d_current,
+                p_avg, p_min, p_max, p_iteration, p_current);
         assertNotEquals(0, a_avg, "a_avg");
         assertNotEquals(0, d_avg, "d_avg");
         //assertNotEquals(0, p_avg, "p_avg");
@@ -168,10 +172,14 @@ class testAMS_newAPI_Performance extends API_common {
         ArrayList modify_list = new ArrayList();
         ArrayList delete_list = new ArrayList();
         ArrayList purge_list = new ArrayList();
-        int a_avg = 0, a_min = 0, a_max = 0, a_iterations = 0,
-                m_avg = 0, m_min = 0, m_max = 0, m_iterations = 0,
-                d_avg = 0, d_min = 0, d_max = 0, d_iterations = 0,
-                p_avg = 0, p_min = 0, p_max = 0, p_iterations = 0;
+        int a_avg = 0, a_min = 0, a_max = 0, a_iteration = 0,
+                m_avg = 0, m_min = 0, m_max = 0, m_iteration = 0,
+                d_avg = 0, d_min = 0, d_max = 0, d_iteration = 0,
+                p_avg = 0, p_min = 0, p_max = 0, p_iteration = 0;
+        ArrayList a_current = new ArrayList();
+        ArrayList m_current = new ArrayList();
+        ArrayList d_current = new ArrayList();
+        ArrayList p_current = new ArrayList();
         for (int i = 1; i <= count_iterations; i++) {
             String header = "========= ========= ========= Iteration = " + i + "/" + count_iterations + " [statuscode, , avg, max, min, i, current] ========= ========= =========";
             logger(INFO_LEVEL, header);
@@ -185,14 +193,16 @@ class testAMS_newAPI_Performance extends API_common {
                 a_avg = (int) add_list.get(2);
                 a_min = (int) add_list.get(3);
                 a_max = (int) add_list.get(4);
-                a_iterations = (int) add_list.get(5);
+                a_iteration = (int) add_list.get(5);
+                a_current.add(add_list.get(6));
 
                 modify_list = AMS.request(ams_ip, macaddress, Operation.modify, count_reminders, reminderProgramStart, reminderChannelNumber, reminderProgramId, reminderOffset_new, reminderScheduleId, reminderId);
                 if (modify_list.get(1).equals("")) {
                     m_avg = (int) modify_list.get(2);
                     m_min = (int) modify_list.get(3);
                     m_max = (int) modify_list.get(4);
-                    m_iterations = (int) modify_list.get(5);
+                    m_iteration = (int) modify_list.get(5);
+                    m_current.add(modify_list.get(6));
                 }
 
                 delete_list = AMS.request(ams_ip, macaddress, Operation.delete, count_reminders, reminderScheduleId, reminderId);
@@ -200,7 +210,8 @@ class testAMS_newAPI_Performance extends API_common {
                     d_avg = (int) delete_list.get(2);
                     d_min = (int) delete_list.get(3);
                     d_max = (int) delete_list.get(4);
-                    d_iterations = (int) delete_list.get(5);
+                    d_iteration = (int) delete_list.get(5);
+                    d_current.add(delete_list.get(6));
                 }
 
                 purge_list = AMS.request(ams_ip, macaddress, Operation.purge);
@@ -208,7 +219,8 @@ class testAMS_newAPI_Performance extends API_common {
                     p_avg = (int) purge_list.get(2);
                     p_min = (int) purge_list.get(3);
                     p_max = (int) purge_list.get(4);
-                    p_iterations = (int) purge_list.get(5);
+                    p_iteration = (int) purge_list.get(5);
+                    p_current.add(purge_list.get(6));
                 }
             }
             reminderScheduleId_list.clear();
@@ -222,10 +234,10 @@ class testAMS_newAPI_Performance extends API_common {
         }
 
         prepare_total_results(macaddress, boxname, count_reminders, count_iterations,
-                a_avg, a_min, a_max, a_iterations,
-                m_avg, m_min, m_max, m_iterations,
-                d_avg, d_min, d_max, d_iterations,
-                p_avg, p_min, p_max, p_iterations);
+                a_avg, a_min, a_max, a_iteration, a_current,
+                m_avg, m_min, m_max, m_iteration, m_current,
+                d_avg, d_min, d_max, d_iteration, d_current,
+                p_avg, p_min, p_max, p_iteration, p_current);
         assertNotEquals(0, a_avg, "a_avg");
         assertNotEquals(0, m_avg, "m_avg");
         assertNotEquals(0, d_avg, "d_avg");
