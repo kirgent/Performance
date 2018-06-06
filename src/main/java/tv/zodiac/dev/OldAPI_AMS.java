@@ -28,8 +28,8 @@ class OldAPI_AMS extends API_common {
     ArrayList request(String ams_ip, String mac, Enum<Operation> operation, int count_reminders, long reminderChannelNumber, String reminderProgramStart, String reminderProgramId, long reminderOffset) throws IOException {
         if(operation.name().equals("add")) {
             logger(INFO_LEVEL, "[INF] " + new Date() + ": Add for mac=" + mac + " to ams=" + ams_ip);
-        } else if (operation.name().equals("modify")) {
-            logger(INFO_LEVEL, "[INF] " + new Date() + ": Modify:");
+        } else if (operation.name().equals("delete")) {
+            logger(INFO_LEVEL, "[INF] " + new Date() + ": Delete:");
         }
 
         HttpPost request = new HttpPost(prepare_url(ams_ip, operation,false));
