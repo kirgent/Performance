@@ -79,12 +79,16 @@ class NewAPI_AMS extends API_common {
             }
         }
         //logger(INFO_LEVEL, "[INF] return data: " + arrayList + "\n");
-        logger(INFO_LEVEL, "[INF] return data: [" + arrayList.get(0) + ", " + arrayList.get(1) + "]"
-                + ", measurements: cur=" + arrayList.get(2)
-                + ", avg=" + arrayList.get(3)
-                + ", min=" + arrayList.get(4)
-                + ", max=" + arrayList.get(5)
-                + ", i=" + arrayList.get(6));
+        if (arrayList.get(1).equals("")) {
+            logger(INFO_LEVEL, "[INF] return data: [" + arrayList.get(0) + ", " + arrayList.get(1) + "]"
+                    + ", measurements: cur=" + arrayList.get(2)
+                    + ", avg=" + arrayList.get(3)
+                    + ", min=" + arrayList.get(4)
+                    + ", max=" + arrayList.get(5)
+                    + ", i=" + arrayList.get(6));
+        } else {
+            logger(INFO_LEVEL, "[INF] return data: [" + arrayList.get(0) + ", " + arrayList.get(1) + "]");
+        }
         return arrayList;
     }
 
@@ -128,12 +132,16 @@ class NewAPI_AMS extends API_common {
             }
         }
         //logger(INFO_LEVEL, "[INF] return data: " + arrayList + "\n");
-        logger(INFO_LEVEL, "[INF] return data: [" + arrayList.get(0) + ", " + arrayList.get(1) + "]"
-                + ", measurements: cur=" + arrayList.get(2)
-                + ", avg=" + arrayList.get(3)
-                + ", min=" + arrayList.get(4)
-                + ", max=" + arrayList.get(5)
-                + ", i=" + arrayList.get(6));
+        if (arrayList.get(1).equals("")) {
+            logger(INFO_LEVEL, "[INF] return data: [" + arrayList.get(0) + ", " + arrayList.get(1) + "]"
+                    + ", measurements: cur=" + arrayList.get(2)
+                    + ", avg=" + arrayList.get(3)
+                    + ", min=" + arrayList.get(4)
+                    + ", max=" + arrayList.get(5)
+                    + ", i=" + arrayList.get(6));
+        } else {
+            logger(INFO_LEVEL, "[INF] return data: [" + arrayList.get(0) + ", " + arrayList.get(1) + "]");
+        }
         return arrayList;
     }
 
@@ -174,12 +182,16 @@ class NewAPI_AMS extends API_common {
             }
         }
         //logger(INFO_LEVEL, "[INF] return data: " + arrayList + "\n");
-        logger(INFO_LEVEL, "[INF] return data: [" + arrayList.get(0) + ", " + arrayList.get(1) + "]"
-                + ", measurements: cur=" + arrayList.get(2)
-                + ", avg=" + arrayList.get(3)
-                + ", min=" + arrayList.get(4)
-                + ", max=" + arrayList.get(5)
-                + ", i=" + arrayList.get(6));
+        if (arrayList.get(1).equals("")) {
+            logger(INFO_LEVEL, "[INF] return data: [" + arrayList.get(0) + ", " + arrayList.get(1) + "]"
+                    + ", measurements: cur=" + arrayList.get(2)
+                    + ", avg=" + arrayList.get(3)
+                    + ", min=" + arrayList.get(4)
+                    + ", max=" + arrayList.get(5)
+                    + ", i=" + arrayList.get(6));
+        } else {
+            logger(INFO_LEVEL, "[INF] return data: [" + arrayList.get(0) + ", " + arrayList.get(1) + "]");
+        }
         return arrayList;
     }
 
