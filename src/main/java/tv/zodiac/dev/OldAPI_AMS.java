@@ -28,8 +28,8 @@ class OldAPI_AMS extends API_common {
     ArrayList request(String ams_ip, String mac, Enum<Operation> operation, int count_reminders, long reminderChannelNumber, String reminderProgramStart, String reminderProgramId, long reminderOffset) throws IOException {
         if(operation.name().equals("add")) {
             logger(INFO_LEVEL, "[INF] " + new Date() + ": Add for mac=" + mac + " to ams=" + ams_ip);
-        } else if (operation.name().equals("modify")) {
-            logger(INFO_LEVEL, "[INF] " + new Date() + ": Modify:");
+        } else if (operation.name().equals("delete")) {
+            logger(INFO_LEVEL, "[INF] " + new Date() + ": Delete:");
         }
 
         HttpPost request = new HttpPost(prepare_url(ams_ip, operation,false));
@@ -74,12 +74,17 @@ class OldAPI_AMS extends API_common {
             }
         }
         //logger(INFO_LEVEL, "[INF] return data: " + arrayList + "\n");
-        logger(INFO_LEVEL, "[INF] return data: [" + arrayList.get(0) + ", " + arrayList.get(1) + "]"
-                + ", measurements: cur=" + arrayList.get(2)
-                + ", avg=" + arrayList.get(3)
-                + ", min=" + arrayList.get(4)
-                + ", max=" + arrayList.get(5)
-                + ", i=" + arrayList.get(6));
+        if (arrayList.get(1).equals("")) {
+            logger(INFO_LEVEL, "[INF] return data: [" + arrayList.get(0) + ", " + arrayList.get(1) + "]"
+                    + ", measurements: cur=" + arrayList.get(2)
+                    + ", avg=" + arrayList.get(3)
+                    + ", min=" + arrayList.get(4)
+                    + ", max=" + arrayList.get(5)
+                    + ", i=" + arrayList.get(6));
+        } else {
+            logger(INFO_LEVEL, "[INF] return data: [" + arrayList.get(0) + ", " + arrayList.get(1) + "]");
+        }
+
         return arrayList;
     }
 
@@ -120,12 +125,16 @@ class OldAPI_AMS extends API_common {
             }
         }
         //logger(INFO_LEVEL, "[INF] return data: " + arrayList + "\n");
-        logger(INFO_LEVEL, "[INF] return data: [" + arrayList.get(0) + ", " + arrayList.get(1) + "]"
-                + ", measurements: cur=" + arrayList.get(2)
-                + ", avg=" + arrayList.get(3)
-                + ", min=" + arrayList.get(4)
-                + ", max=" + arrayList.get(5)
-                + ", i=" + arrayList.get(6));
+        if (arrayList.get(1).equals("")) {
+            logger(INFO_LEVEL, "[INF] return data: [" + arrayList.get(0) + ", " + arrayList.get(1) + "]"
+                    + ", measurements: cur=" + arrayList.get(2)
+                    + ", avg=" + arrayList.get(3)
+                    + ", min=" + arrayList.get(4)
+                    + ", max=" + arrayList.get(5)
+                    + ", i=" + arrayList.get(6));
+        } else {
+            logger(INFO_LEVEL, "[INF] return data: [" + arrayList.get(0) + ", " + arrayList.get(1) + "]");
+        }
         return arrayList;
     }
 
