@@ -30,30 +30,27 @@ class NewAPI_AMS extends API_common {
      * @throws IOException -TBD
      */
     ArrayList request(String ams_ip, String mac, Enum<Operation> operation, int count_reminders, String reminderProgramStart, long reminderChannelNumber, String reminderProgramId, long reminderOffset, long reminderScheduleId, long reminderId) throws IOException {
-        logger(INFO_LEVEL, "[INF] " + new Date() + ": " + operation + " for macaddress=" + mac + " to ams_ip=" + ams_ip + ", "
+        logger(INFO_LEVEL, "[INF] " + new Date() + ": " + operation + " for mac=" + mac + " to ams=" + ams_ip + ", "
                 + "count_reminders=" + count_reminders + ", "
-                + "reminderProgramStart=multi, "
+                + "reminderProgramStart=, "
                 + "reminderChannelNumber=" + reminderChannelNumber + ", "
                 + "reminderProgramId=" + reminderProgramId + ", "
                 + "reminderOffset=" + reminderOffset + ", "
-                + "reminderScheduleId=multi, "
-                + "reminderId=multi");
+                + "reminderScheduleId=, "
+                + "reminderId=");
 
         HttpPost request = new HttpPost(prepare_url(ams_ip, operation, true));
         request.setHeader("Accept", "application/json");
         request.setHeader("Content-type", "application/json");
         request.setEntity(new StringEntity(generate_json_reminder(mac, count_reminders, operation, reminderProgramStart, reminderChannelNumber, reminderProgramId, reminderOffset, reminderScheduleId, reminderId)));
-        if(show_debug_level) {
-            logger(DEBUG_LEVEL, "[DBG] request string: " + request);
-        }
+        logger(DEBUG_LEVEL, "[DBG] request string: " + request);
+
 
         long start = System.currentTimeMillis();
         HttpResponse response = HttpClients.createDefault().execute(request);
         long finish = System.currentTimeMillis();
         int diff = (int)(finish-start);
-        if(show_debug_level) {
-            logger(DEBUG_LEVEL, "[DBG] " + diff + "ms request");
-        }
+        logger(DEBUG_LEVEL, "[DBG] " + diff + "ms request");
 
         ArrayList arrayList = new ArrayList();
         arrayList.add(0, response.getStatusLine().getStatusCode() + " " + response.getStatusLine().getReasonPhrase());
@@ -102,25 +99,21 @@ class NewAPI_AMS extends API_common {
      * @throws IOException -TBD
      */
     ArrayList request(String ams_ip, String mac, Enum<Operation> operation, int count_reminders, long reminderScheduleId, long reminderId) throws IOException {
-        logger(INFO_LEVEL,"[INF] " + new Date() + ": delete for macaddress=" + mac + ", ams_ip=" + ams_ip + ", "
-                + "reminderScheduleId=multi, "
-                + "reminderId=multi");
+        logger(INFO_LEVEL,"[INF] " + new Date() + ": delete for mac=" + mac + " to ams=" + ams_ip + ", "
+                + "reminderScheduleId=, "
+                + "reminderId=");
 
         HttpPost request = new HttpPost(prepare_url(ams_ip, Operation.delete, true));
         request.setHeader("Accept", "application/json");
         request.setHeader("Content-type", "application/json");
         request.setEntity(new StringEntity(generate_json_reminder_delete(mac, count_reminders, reminderScheduleId, reminderId)));
-        if(show_debug_level) {
-            logger(DEBUG_LEVEL, "[DBG] request string: " + request);
-        }
+        logger(DEBUG_LEVEL, "[DBG] request string: " + request);
 
         long start = System.currentTimeMillis();
         HttpResponse response = HttpClients.createDefault().execute(request);
         long finish = System.currentTimeMillis();
         int diff = (int)(finish-start);
-        if(show_debug_level) {
-            logger(DEBUG_LEVEL, "[DBG] " + diff + "ms request");
-        }
+        logger(DEBUG_LEVEL, "[DBG] " + diff + "ms request");
 
         ArrayList arrayList = new ArrayList();
         arrayList.add(0, response.getStatusLine().getStatusCode() + " " + response.getStatusLine().getReasonPhrase());
@@ -156,23 +149,19 @@ class NewAPI_AMS extends API_common {
      * @throws IOException - TBD
      */
     ArrayList request(String ams_ip, String mac, Enum<Operation> operation) throws IOException {
-        logger(INFO_LEVEL, "[INF] " + new Date() + ": purge for macaddress=" + mac + " to ams_ip=" + ams_ip);
+        logger(INFO_LEVEL, "[INF] " + new Date() + ": purge for mac=" + mac + " to ams=" + ams_ip);
 
         HttpPost request = new HttpPost(prepare_url(ams_ip, operation, true));
         request.setHeader("Accept", "application/json");
         request.setHeader("Content-type", "application/json");
         request.setEntity(new StringEntity(generate_json_reminder_purge(mac)));
-        if(show_debug_level) {
-            logger(DEBUG_LEVEL, "[DBG] request string: " + request);
-        }
+        logger(DEBUG_LEVEL, "[DBG] request string: " + request);
 
         long start = currentTimeMillis();
         HttpResponse response = HttpClients.createDefault().execute(request);
         long finish = System.currentTimeMillis();
         int diff = (int)(finish-start);
-        if(show_debug_level) {
-            logger(DEBUG_LEVEL, "[DBG] " + diff + "ms request");
-        }
+        logger(DEBUG_LEVEL, "[DBG] " + diff + "ms request");
 
         ArrayList arrayList = new ArrayList();
         arrayList.add(0, response.getStatusLine().getStatusCode() + " " + response.getStatusLine().getReasonPhrase());
@@ -432,9 +421,7 @@ class NewAPI_AMS extends API_common {
         HttpResponse response = HttpClients.createDefault().execute(request);
         long finish = System.currentTimeMillis();
         int diff = (int)(finish-start);
-        if(show_debug_level) {
-            logger(DEBUG_LEVEL, "[DBG] " + diff + "ms request");
-        }
+        logger(DEBUG_LEVEL, "[DBG] " + diff + "ms request");
 
         ArrayList arrayList = new ArrayList();
         arrayList.add(0, response.getStatusLine().getStatusCode() + " " + response.getStatusLine().getReasonPhrase());

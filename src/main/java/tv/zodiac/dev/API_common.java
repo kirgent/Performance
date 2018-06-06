@@ -71,11 +71,6 @@ public class API_common {
 
     private String REMINDERSLOG = "reminders.log";
 
-    /*private Integer[] rack_channel30 = { 2, 3, 4, 5, 6, 7, 8, 9, 12, 13,
-            14, 16, 18, 19, 22, 23, 25, 28, 30, 31,
-            32, 33, 37, 38, 41, 44, 46, 48, 49, 50 };*/
-    //Integer[] rack_channel = {2, 3, 4, 5, 6, 7, 8, 9, 10, 11};
-
     String reminderProgramStart = "";
     String reminderProgramId = "";
     //final String reminderProgramId = "EP002960010113";
@@ -484,9 +479,7 @@ public class API_common {
         }
 
         reminderScheduleId_list.add(reminderScheduleId);
-        if(show_debug_level) {
-            logger(DEBUG_LEVEL, "reminderScheduleId_list<-add = " + reminderScheduleId);
-        }
+        logger(DEBUG_LEVEL, "reminderScheduleId_list<-add = " + reminderScheduleId);
         return reminderScheduleId;
     }
 
@@ -500,9 +493,7 @@ public class API_common {
         }
 
         reminderId_list.add(reminderId);
-        if(show_debug_level) {
-            logger(DEBUG_LEVEL, "reminderId_list<-add         = " + reminderId);
-        }
+        logger(DEBUG_LEVEL, "reminderId_list<-add         = " + reminderId);
         return reminderId;
     }
 
