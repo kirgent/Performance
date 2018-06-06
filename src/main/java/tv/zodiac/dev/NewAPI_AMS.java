@@ -43,13 +43,17 @@ class NewAPI_AMS extends API_common {
         request.setHeader("Accept", "application/json");
         request.setHeader("Content-type", "application/json");
         request.setEntity(new StringEntity(generate_json_reminder(mac, count_reminders, operation, reminderProgramStart, reminderChannelNumber, reminderProgramId, reminderOffset, reminderScheduleId, reminderId)));
-        logger(DEBUG_LEVEL, "[DBG] request string: " + request);
+        if(show_debug_level) {
+            logger(DEBUG_LEVEL, "[DBG] request string: " + request);
+        }
 
         long start = System.currentTimeMillis();
         HttpResponse response = HttpClients.createDefault().execute(request);
         long finish = System.currentTimeMillis();
         int diff = (int)(finish-start);
-        logger(INFO_LEVEL, "[INF] " + diff + "ms request");
+        if(show_debug_level) {
+            logger(DEBUG_LEVEL, "[DBG] " + diff + "ms request");
+        }
 
         ArrayList arrayList = new ArrayList();
         arrayList.add(0, response.getStatusLine().getStatusCode() + " " + response.getStatusLine().getReasonPhrase());
@@ -63,6 +67,7 @@ class NewAPI_AMS extends API_common {
                 arrayList.add(3, get_min_time(add_avg_list));
                 arrayList.add(4, get_max_time(add_avg_list));
                 arrayList.add(5, add_avg_list.size());
+                arrayList.add(6, diff);
                 if (add_avg_list.size() <= 10) {
                     logger(DEBUG_LEVEL, "[DBG] " + new Date() + ": add avg = " + avg + "ms" + add_avg_list.size() + ": add_avg_list:" + add_avg_list);
                 }
@@ -73,12 +78,13 @@ class NewAPI_AMS extends API_common {
                 arrayList.add(3, get_min_time(modify_avg_list));
                 arrayList.add(4, get_max_time(modify_avg_list));
                 arrayList.add(5, modify_avg_list.size());
+                arrayList.add(6, diff);
                 if (modify_avg_list.size() <= 10) {
                     logger(DEBUG_LEVEL, "[DBG] " + new Date() + ": modify avg = " + avg + "ms/" + modify_avg_list.size() + ": modify_avg_list:" + modify_avg_list);
                 }
             }
         }
-        logger(INFO_LEVEL, "[INF] return data: " + arrayList);
+        logger(INFO_LEVEL, "[INF] return data: " + arrayList + "\n");
         return arrayList;
     }
 
@@ -98,13 +104,17 @@ class NewAPI_AMS extends API_common {
         request.setHeader("Accept", "application/json");
         request.setHeader("Content-type", "application/json");
         request.setEntity(new StringEntity(generate_json_reminder_delete(mac, count_reminders, reminderScheduleId, reminderId)));
-        logger(DEBUG_LEVEL, "[DBG] request string: " + request);
+        if(show_debug_level) {
+            logger(DEBUG_LEVEL, "[DBG] request string: " + request);
+        }
 
         long start = System.currentTimeMillis();
         HttpResponse response = HttpClients.createDefault().execute(request);
         long finish = System.currentTimeMillis();
         int diff = (int)(finish-start);
-        logger(INFO_LEVEL, "[INF] " + diff + "ms request");
+        if(show_debug_level) {
+            logger(DEBUG_LEVEL, "[DBG] " + diff + "ms request");
+        }
 
         ArrayList arrayList = new ArrayList();
         arrayList.add(0, response.getStatusLine().getStatusCode() + " " + response.getStatusLine().getReasonPhrase());
@@ -117,12 +127,13 @@ class NewAPI_AMS extends API_common {
                 arrayList.add(3, get_min_time(delete_avg_list));
                 arrayList.add(4, get_max_time(delete_avg_list));
                 arrayList.add(5, delete_avg_list.size());
+                arrayList.add(6, diff);
                 if (delete_avg_list.size() <= 10) {
                     logger(DEBUG_LEVEL, "[DBG] " + new Date() + ": delete avg = " + avg + "ms/" + delete_avg_list.size() + ": delete_avg_list:" + delete_avg_list);
                 }
             }
         }
-        logger(INFO_LEVEL, "[INF] return data: " + arrayList);
+        logger(INFO_LEVEL, "[INF] return data: " + arrayList + "\n");
         return arrayList;
     }
 
@@ -139,13 +150,17 @@ class NewAPI_AMS extends API_common {
         request.setHeader("Accept", "application/json");
         request.setHeader("Content-type", "application/json");
         request.setEntity(new StringEntity(generate_json_reminder_purge(mac)));
-        logger(DEBUG_LEVEL, "[DBG] request string: " + request);
+        if(show_debug_level) {
+            logger(DEBUG_LEVEL, "[DBG] request string: " + request);
+        }
 
         long start = currentTimeMillis();
         HttpResponse response = HttpClients.createDefault().execute(request);
         long finish = System.currentTimeMillis();
         int diff = (int)(finish-start);
-        logger(INFO_LEVEL, "[INF] " + diff + "ms request");
+        if(show_debug_level) {
+            logger(DEBUG_LEVEL, "[DBG] " + diff + "ms request");
+        }
 
         ArrayList arrayList = new ArrayList();
         arrayList.add(0, response.getStatusLine().getStatusCode() + " " + response.getStatusLine().getReasonPhrase());
@@ -157,6 +172,7 @@ class NewAPI_AMS extends API_common {
             arrayList.add(3, get_min_time(purge_avg_list));
             arrayList.add(4, get_max_time(purge_avg_list));
             arrayList.add(5, purge_avg_list.size());
+            arrayList.add(6, diff);
             if(purge_avg_list.size()<=10) {
                 logger(DEBUG_LEVEL,"[DBG] " + new Date() + ": purge avg = " + avg + "ms/" + purge_avg_list.size() + ": purge_avg_list:" + purge_avg_list);
             }
@@ -398,12 +414,14 @@ class NewAPI_AMS extends API_common {
         HttpResponse response = HttpClients.createDefault().execute(request);
         long finish = System.currentTimeMillis();
         int diff = (int)(finish-start);
-        logger(INFO_LEVEL, "[INF] " + diff + "ms request");
+        if(show_debug_level) {
+            logger(DEBUG_LEVEL, "[DBG] " + diff + "ms request");
+        }
 
         ArrayList arrayList = new ArrayList();
         arrayList.add(0, response.getStatusLine().getStatusCode() + " " + response.getStatusLine().getReasonPhrase());
         arrayList.add(1, check_body_response(read_response(new StringBuilder(),response), mac));
-        logger(INFO_LEVEL, "[INF] return data: " + arrayList);
+        logger(INFO_LEVEL, "[INF] return data: " + arrayList + "\n");
         return arrayList;
     }
 
