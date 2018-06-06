@@ -69,6 +69,8 @@ public class API_common {
     ArrayList<Integer> delete_avg_list = new ArrayList<>();
     ArrayList<Integer> purge_avg_list = new ArrayList<>();
 
+    private String REMINDERSLOG = "reminders.log";
+
     /*private Integer[] rack_channel30 = { 2, 3, 4, 5, 6, 7, 8, 9, 12, 13,
             14, 16, 18, 19, 22, 23, 25, 28, 30, 31,
             32, 33, 37, 38, 41, 44, 46, 48, 49, 50 };*/
@@ -638,18 +640,22 @@ public class API_common {
 
 
     void prepare_total_results(String macaddress, String boxname, int count_reminders, int count_iterations,
-                               int a_avg, int a_min, int a_max, int a_iterations,
-                               int m_avg, int m_min, int m_max, int m_iterations,
-                               int d_avg, int d_min, int d_max, int d_iterations,
-                               int p_avg, int p_min, int p_max, int p_iterations
+                               int a_avg, int a_min, int a_max, int a_iteration, ArrayList a_current_array,
+                               int m_avg, int m_min, int m_max, int m_iteration, ArrayList m_current_array,
+                               int d_avg, int d_min, int d_max, int d_iteration, ArrayList d_current_array,
+                               int p_avg, int p_min, int p_max, int p_iteration, ArrayList p_current_array
     ) throws IOException {
 
         String header = "========= ========= ========= Total measurements ========= ========= ========="
-                + "\n" + new Date() + ", macaddress=" + macaddress + "(" + boxname + "), count_reminders=" + count_reminders + ", count_iterations=" + a_iterations + "/" + count_iterations;
-        String a = "\n   add avg=" + a_avg + "ms, min=" + a_min + "ms, max=" + a_max + "ms, /" + a_iterations;
-        String m = "\nmodify avg=" + m_avg + "ms, min=" + m_min + "ms, max=" + m_max + "ms, /" + m_iterations;
-        String d = "\ndelete avg=" + d_avg + "ms, min=" + d_min + "ms, max=" + d_max + "ms, /" + d_iterations;
-        String p = "\n purge avg=" + p_avg + "ms, min=" + p_min + "ms, max=" + p_max + "ms, /" + p_iterations;
+                + "\n" + new Date() + ", macaddress=" + macaddress + "(" + boxname + "), count_reminders=" + count_reminders + ", count_iterations=" + a_iteration + "/" + count_iterations;
+        String a = "\n   add avg=" + a_avg + "ms, min=" + a_min + "ms, max=" + a_max + "ms, /" + a_iteration;
+        String m = "\nmodify avg=" + m_avg + "ms, min=" + m_min + "ms, max=" + m_max + "ms, /" + m_iteration;
+        String d = "\ndelete avg=" + d_avg + "ms, min=" + d_min + "ms, max=" + d_max + "ms, /" + d_iteration;
+        String p = "\n purge avg=" + p_avg + "ms, min=" + p_min + "ms, max=" + p_max + "ms, /" + p_iteration;
+        //String a_current = "\na_current=" + a_current_array;
+        //String m_current = "\nm_current=" + m_current_array;
+        //String d_current = "\nd_current=" + d_current_array;
+        //String p_current = "\np_current=" + p_current_array;
         String footer = "\n========= ========= ========= ========= ========= ========= ========= =========";
 
         String result = "";
@@ -659,29 +665,47 @@ public class API_common {
             if (m_avg != 0) {            result += m;        }
             if (d_avg != 0) {            result += d;        }
             if (p_avg != 0) {            result += p;        }
+            if (a_current_array != null) {
+                //result += a_current;
+                write_to_file("a.log", a_current_array.toString(), false);
+            }
+            if (m_current_array != null) {
+                //result += m_current;
+                write_to_file("m.log", m_current_array.toString(), false);
+            }
+            if (d_current_array != null){
+                //result += d_current;
+                write_to_file("d.log", d_current_array.toString(), false);
+            }
+            if (p_current_array != null) {
+                //result += p_current;
+                write_to_file("p.log", p_current_array.toString(), false);
+            }
+
             result += footer;
             logger(INFO_LEVEL, result);
         }
     }
 
     void logger(String level, String s) throws IOException {
+         boolean append = true;
         if(level.equals("INF") && show_info_level) {
             System.out.println(s);
             if (write_file) {
-                write_to_file(s + "\n");
+                write_to_file(REMINDERSLOG, s + "\n", append);
             }
         }
 
         if(level.equals("DBG") && show_debug_level) {
             System.out.println(s);
             if (write_file) {
-                write_to_file(s + "\n");
+                write_to_file(REMINDERSLOG, s + "\n", append);
             }
         }
     }
 
-    private void write_to_file(String s) throws IOException {
-        FileWriter writer = new FileWriter("reminders.log", true);
+    private void write_to_file(String filename, String s, boolean append) throws IOException {
+        FileWriter writer = new FileWriter(filename, append);
         writer.write(s);
         writer.flush();
         writer.close();
