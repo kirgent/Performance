@@ -30,14 +30,11 @@ class NewAPI_AMS extends API_common {
      * @throws IOException -TBD
      */
     ArrayList request(String ams_ip, String mac, Enum<Operation> operation, int count_reminders, String reminderProgramStart, long reminderChannelNumber, String reminderProgramId, long reminderOffset, long reminderScheduleId, long reminderId) throws IOException {
-        logger(INFO_LEVEL, "[INF] " + new Date() + ": " + operation + " for mac=" + mac + " to ams=" + ams_ip + ", "
-                + "count_reminders=" + count_reminders + ", "
-                + "reminderProgramStart=, "
-                + "reminderChannelNumber=" + reminderChannelNumber + ", "
-                + "reminderProgramId=" + reminderProgramId + ", "
-                + "reminderOffset=" + reminderOffset + ", "
-                + "reminderScheduleId=, "
-                + "reminderId=");
+        if(operation.name().equals("add")) {
+            logger(INFO_LEVEL, "[INF] " + new Date() + ": Add for mac=" + mac + " to ams=" + ams_ip);
+        } else if (operation.name().equals("modify")) {
+            logger(INFO_LEVEL, "[INF] " + new Date() + ": Modify:");
+        }
 
         HttpPost request = new HttpPost(prepare_url(ams_ip, operation, true));
         request.setHeader("Accept", "application/json");
@@ -99,9 +96,7 @@ class NewAPI_AMS extends API_common {
      * @throws IOException -TBD
      */
     ArrayList request(String ams_ip, String mac, Enum<Operation> operation, int count_reminders, long reminderScheduleId, long reminderId) throws IOException {
-        logger(INFO_LEVEL,"[INF] " + new Date() + ": delete for mac=" + mac + " to ams=" + ams_ip + ", "
-                + "reminderScheduleId=, "
-                + "reminderId=");
+        logger(INFO_LEVEL, "[INF] " + new Date() + ": Delete:");
 
         HttpPost request = new HttpPost(prepare_url(ams_ip, Operation.delete, true));
         request.setHeader("Accept", "application/json");
@@ -149,7 +144,7 @@ class NewAPI_AMS extends API_common {
      * @throws IOException - TBD
      */
     ArrayList request(String ams_ip, String mac, Enum<Operation> operation) throws IOException {
-        logger(INFO_LEVEL, "[INF] " + new Date() + ": purge for mac=" + mac + " to ams=" + ams_ip);
+        logger(INFO_LEVEL, "[INF] " + new Date() + ": Purge:");
 
         HttpPost request = new HttpPost(prepare_url(ams_ip, operation, true));
         request.setHeader("Accept", "application/json");

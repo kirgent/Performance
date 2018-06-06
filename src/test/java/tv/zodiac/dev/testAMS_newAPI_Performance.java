@@ -5,6 +5,7 @@ import org.junit.jupiter.params.provider.CsvFileSource;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Date;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -25,6 +26,14 @@ class testAMS_newAPI_Performance extends API_common {
         ArrayList add_list = new ArrayList();
         int a_avg = 0, a_min = 0, a_max=0, a_iteration = 0;
         ArrayList a_current = new ArrayList();
+        logger(INFO_LEVEL, "[INF] " + new Date() + "New start for mac=" + mac + " to ams=" + ams_ip + ", "
+                + "count_reminders=" + count_reminders + ", "
+                + "reminderProgramStart=, "
+                + "reminderChannelNumber=" + reminderChannelNumber + ", "
+                + "reminderProgramId=" + reminderProgramId + ", "
+                + "reminderOffset=" + reminderOffset + ", "
+                + "reminderScheduleId=, "
+                + "reminderId=");
         for (int i = 1; i <= count_iterations; i++) {
             String header = "========= ========= ========= Iteration = " + i + "/" + count_iterations + " ========= ========= =========";
             logger(INFO_LEVEL, header);
@@ -63,6 +72,14 @@ class testAMS_newAPI_Performance extends API_common {
                 p_avg = 0, p_min = 0, p_max=0, p_iteration = 0;
         ArrayList a_current = new ArrayList();
         ArrayList p_current = new ArrayList();
+        logger(INFO_LEVEL, "[INF] " + new Date() + "New start for mac=" + mac + " to ams=" + ams_ip + ", "
+                + "count_reminders=" + count_reminders + ", "
+                + "reminderProgramStart=, "
+                + "reminderChannelNumber=" + reminderChannelNumber + ", "
+                + "reminderProgramId=" + reminderProgramId + ", "
+                + "reminderOffset=" + reminderOffset + ", "
+                + "reminderScheduleId=, "
+                + "reminderId=");
         for (int i = 1; i <= count_iterations; i++) {
             String header = "========= ========= ========= Iteration = " + i + "/" + count_iterations + " ========= ========= =========";
             logger(INFO_LEVEL, header);
@@ -114,6 +131,14 @@ class testAMS_newAPI_Performance extends API_common {
         ArrayList a_current = new ArrayList();
         ArrayList d_current = new ArrayList();
         ArrayList p_current = new ArrayList();
+        logger(INFO_LEVEL, "[INF] " + new Date() + "New start for mac=" + mac + " to ams=" + ams_ip + ", "
+                + "count_reminders=" + count_reminders + ", "
+                + "reminderProgramStart=, "
+                + "reminderChannelNumber=" + reminderChannelNumber + ", "
+                + "reminderProgramId=" + reminderProgramId + ", "
+                + "reminderOffset=" + reminderOffset + ", "
+                + "reminderScheduleId=, "
+                + "reminderId=");
         for (int i = 1; i <= count_iterations; i++) {
             String header = "========= ========= ========= Iteration = " + i + "/" + count_iterations + " ========= ========= =========";
             logger(INFO_LEVEL, header);
@@ -179,6 +204,14 @@ class testAMS_newAPI_Performance extends API_common {
         ArrayList m_current = new ArrayList();
         ArrayList d_current = new ArrayList();
         ArrayList p_current = new ArrayList();
+        logger(INFO_LEVEL, "[INF] " + new Date() + "New start for mac=" + mac + " to ams=" + ams_ip + ", "
+                + "count_reminders=" + count_reminders + ", "
+                + "reminderProgramStart=, "
+                + "reminderChannelNumber=" + reminderChannelNumber + ", "
+                + "reminderProgramId=" + reminderProgramId + ", "
+                + "reminderOffset=" + reminderOffset + ", "
+                + "reminderScheduleId=, "
+                + "reminderId=");
         for (int i = 1; i <= count_iterations; i++) {
             String header = "========= ========= ========= Iteration = " + i + "/" + count_iterations + " ========= ========= =========";
             logger(INFO_LEVEL, header);
@@ -250,6 +283,14 @@ class testAMS_newAPI_Performance extends API_common {
         ArrayList purge_list = new ArrayList();
         int p_avg = 0, p_min = 0, p_max = 0, p_iteration = 0;
         ArrayList p_current = new ArrayList();
+        logger(INFO_LEVEL, "[INF] " + new Date() + "New start for mac=" + mac + " to ams=" + ams_ip + ", "
+                + "count_reminders=" + count_reminders + ", "
+                + "reminderProgramStart=, "
+                + "reminderChannelNumber=" + reminderChannelNumber + ", "
+                + "reminderProgramId=" + reminderProgramId + ", "
+                + "reminderOffset=" + reminderOffset + ", "
+                + "reminderScheduleId=, "
+                + "reminderId=");
         for (int i = 1; i <= count_iterations; i++) {
             String header = "========= ========= ========= Iteration = " + i + "/" + count_iterations + " ========= ========= =========";
             logger(INFO_LEVEL, header);
