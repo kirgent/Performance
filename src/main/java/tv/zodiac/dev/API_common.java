@@ -684,10 +684,10 @@ public class API_common {
 
 
     void prepare_total_results(String mac, String boxname, int count_reminders, int count_iterations,
-                               int a_avg, int a_min, int a_max, int a_iteration, ArrayList a_current_array, int a_med,
-                               int m_avg, int m_min, int m_max, int m_iteration, ArrayList m_current_array, int m_med,
-                               int d_avg, int d_min, int d_max, int d_iteration, ArrayList d_current_array, int d_med,
-                               int p_avg, int p_min, int p_max, int p_iteration, ArrayList p_current_array, int p_med
+                               int a_avg, int a_med, int a_min, int a_max, int a_iteration, ArrayList a_current,
+                               int m_avg, int m_med, int m_min, int m_max, int m_iteration, ArrayList m_current,
+                               int d_avg, int d_med, int d_min, int d_max, int d_iteration, ArrayList d_current,
+                               int p_avg, int p_med, int p_min, int p_max, int p_iteration, ArrayList p_current
     ) throws IOException {
 
         String header = "========= ========= ========= Total measurements ========= ========= ========="
@@ -705,21 +705,21 @@ public class API_common {
             if (m_avg != 0) {            result += m;        }
             if (d_avg != 0) {            result += d;        }
             if (p_avg != 0) {            result += p;        }
-            if (a_current_array != null) {
+            if (a_current != null) {
                 //result += a_current;
-                write_to_file("a.log", a_current_array.toString(), false);
+                write_to_file("a.log", a_current.toString(), false);
             }
-            if (m_current_array != null) {
+            if (m_current != null) {
                 //result += m_current;
-                write_to_file("m.log", m_current_array.toString(), false);
+                write_to_file("m.log", m_current.toString(), false);
             }
-            if (d_current_array != null){
+            if (d_current != null){
                 //result += d_current;
-                write_to_file("d.log", d_current_array.toString(), false);
+                write_to_file("d.log", d_current.toString(), false);
             }
-            if (p_current_array != null) {
+            if (p_current != null) {
                 //result += p_current;
-                write_to_file("p.log", p_current_array.toString(), false);
+                write_to_file("p.log", p_current.toString(), false);
             }
 
             result += footer;

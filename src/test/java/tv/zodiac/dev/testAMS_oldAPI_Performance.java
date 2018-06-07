@@ -69,10 +69,10 @@ class testAMS_oldAPI_Performance extends API_common {
         }
 
         prepare_total_results(mac, boxname, count_reminders, count_iterations,
-                a_avg, a_min, a_max, a_iteration, a_current, a_med,
-                0, 0, 0, 0, null, 0,
-                0, 0, 0, 0, null, 0,
-                0, 0, 0, 0, null, 0);
+                a_avg, a_med, a_min, a_max, a_iteration, a_current,
+                0, 0, 0, 0, 0, null,
+                0, 0, 0, 0, 0, null,
+                0, 0, 0, 0, 0, null);
         assertNotEquals(0, a_avg, "a_avg");
     }
 
@@ -117,10 +117,10 @@ class testAMS_oldAPI_Performance extends API_common {
         }
 
         prepare_total_results(mac, boxname, count_reminders, count_iterations,
-                a_avg, a_min, a_max, a_iteration, a_current, a_med,
-                0, 0, 0, 0, null, 0,
-                0, 0, 0, 0, null, 0,
-                p_avg, p_min, p_max, p_iteration, p_current, p_med);
+                a_avg, a_med, a_min, a_max, a_iteration, a_current,
+                0, 0, 0, 0, 0, null,
+                0, 0, 0, 0, 0, null,
+                p_avg, p_med, p_min, p_max, p_iteration, p_current);
         assertNotEquals(0, a_avg, "a_avg");
         assertNotEquals(0, p_avg, "p_avg");
     }
@@ -181,10 +181,10 @@ class testAMS_oldAPI_Performance extends API_common {
         }
 
         prepare_total_results(mac, boxname, count_reminders, count_iterations,
-                a_avg, a_min, a_max, a_iteration, a_current, a_med,
-                0, 0, 0, 0, null, 0,
-                d_avg, d_min, d_max, d_iteration, d_current, d_med,
-                p_avg, p_min, p_max, p_iteration, p_current, p_med);
+                a_avg, a_med, a_min, a_max, a_iteration, a_current,
+                0, 0, 0, 0, 0, null,
+                d_avg, d_med, d_min, d_max, d_iteration, d_current,
+                p_avg, p_med, p_min, p_max, p_iteration, p_current);
         assertNotEquals(0, a_avg, "a_avg");
         assertNotEquals(0, d_avg, "d_avg");
         assertNotEquals(0, p_avg, "p_avg");
@@ -218,10 +218,10 @@ class testAMS_oldAPI_Performance extends API_common {
         }
 
         prepare_total_results(mac, boxname, count_reminders, count_iterations,
-                -1, 0, 0, 0, null, 0,
-                0, 0, 0, 0, null, 0,
-                0, 0, 0, 0, null, 0,
-                p_avg, p_min, p_max, p_iteration, p_current, p_med);
+                -1, 0, 0, 0, 0, null,
+                0, 0, 0, 0, 0, null,
+                0, 0, 0, 0, 0, null,
+                p_avg, p_med, p_min, p_max, p_iteration, p_current);
         assertNotEquals(0, p_avg, "p_avg");
     }
 
