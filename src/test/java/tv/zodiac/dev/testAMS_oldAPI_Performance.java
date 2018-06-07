@@ -21,7 +21,7 @@ class testAMS_oldAPI_Performance extends API_common {
     private int timeout = 20000;
     private int sleep_after_iteration = 1000;
 
-    private void before(String ams_ip, String mac, String boxname, int count_reminders, int reminderChannelNumber, int reminderOffset, int reminderOffset_new, int count_iterations) throws IOException {
+    private void print_start_header(String ams_ip, String mac, String boxname, int count_reminders, int reminderChannelNumber, int reminderOffset, int reminderOffset_new, int count_iterations) throws IOException {
         check_csv(ams_ip, mac, boxname, count_reminders, reminderChannelNumber, reminderOffset, reminderOffset_new, count_iterations);
         logger(INFO_LEVEL, "[INF] " + new Date() + ": New start for mac=" + mac + "(" + boxname + ") to ams=" + ams_ip + ", "
                 + "count_reminders=" + count_reminders + ", "
@@ -45,14 +45,15 @@ class testAMS_oldAPI_Performance extends API_common {
     @ParameterizedTest
     @CsvFileSource(resources = "/reminders_oldapi.csv", numLinesToSkip = 1)
     void test00_Add(String ams_ip, String mac, String boxname, int count_reminders, int reminderChannelNumber, int reminderOffset, int reminderOffset_new, int count_iterations) throws IOException, InterruptedException {
-        before(ams_ip, mac, boxname, count_reminders, reminderChannelNumber, reminderOffset, reminderOffset_new, count_iterations);
+        print_start_header(ams_ip, mac, boxname, count_reminders, reminderChannelNumber, reminderOffset, reminderOffset_new, count_iterations);
+
         ArrayList add_list;
         ArrayList a_current = new ArrayList();
-        int a_avg = 0, a_min = 0, a_max = 0, a_iteration = 0, a_med = 0;
+        int a_avg = 0, a_med = 0, a_min = 0, a_max = 0, a_iteration = 0;
+
         for (int i = 1; i <= count_iterations; i++) {
-            String header = "========= ========= ========= Iteration = " + i + "/" + count_iterations
-                    + ", mac=" + mac + ", ams=" + ams_ip + ", count_reminders=" + count_reminders + " ========= ========= =========";
-            logger(INFO_LEVEL, header);
+            print_iteration_header(ams_ip, mac, count_reminders, i, count_iterations);
+
             //reminderChannelNumber = reminderChannelNumber();
             //int finalReminderChannelNumber = reminderChannelNumber;
             add_list = AMS.request(ams_ip, mac, Operation.add, count_reminders, reminderChannelNumber, reminderProgramStart, reminderProgramId, reminderOffset);
@@ -79,17 +80,18 @@ class testAMS_oldAPI_Performance extends API_common {
     @ParameterizedTest
     @CsvFileSource(resources = "/reminders_oldapi.csv", numLinesToSkip = 1)
     void test11_Add_Purge(String ams_ip, String mac, String boxname, int count_reminders, int reminderChannelNumber, int reminderOffset, int reminderOffset_new, int count_iterations) throws IOException, InterruptedException {
-        before(ams_ip, mac, boxname, count_reminders, reminderChannelNumber, reminderOffset, reminderOffset_new, count_iterations);
+        print_start_header(ams_ip, mac, boxname, count_reminders, reminderChannelNumber, reminderOffset, reminderOffset_new, count_iterations);
+
         ArrayList add_list,
                 purge_list = new ArrayList();
-        int a_avg = 0, a_min = 0, a_max = 0, a_iteration = 0, a_med = 0,
-                p_avg = 0, p_min = 0, p_max = 0, p_iteration = 0, p_med = 0;
-        ArrayList a_current = new ArrayList();
-        ArrayList p_current = new ArrayList();
+        int a_avg = 0, a_med = 0, a_min = 0, a_max = 0, a_iteration = 0,
+                p_avg = 0, p_med = 0, p_min = 0, p_max = 0, p_iteration = 0;
+        ArrayList a_current = new ArrayList(),
+                p_current = new ArrayList();
+
         for (int i = 1; i <= count_iterations; i++) {
-            String header = "========= ========= ========= Iteration = " + i + "/" + count_iterations
-                    + ", mac=" + mac + ", ams=" + ams_ip + ", count_reminders=" + count_reminders + " ========= ========= =========";
-            logger(INFO_LEVEL, header);
+            print_iteration_header(ams_ip, mac, count_reminders, i, count_iterations);
+
             //reminderChannelNumber = reminderChannelNumber();
             //int finalReminderChannelNumber = reminderChannelNumber;
             add_list = AMS.request(ams_ip, mac, Operation.add, count_reminders, reminderChannelNumber, reminderProgramStart, reminderProgramId, reminderOffset);
@@ -128,21 +130,21 @@ class testAMS_oldAPI_Performance extends API_common {
     @ParameterizedTest
     @CsvFileSource(resources = "/reminders_oldapi.csv", numLinesToSkip = 1)
     void test22_Add_Delete_Purge(String ams_ip, String mac, String boxname, int count_reminders, int reminderChannelNumber, int reminderOffset, int reminderOffset_new, int count_iterations) throws IOException, InterruptedException {
-        before(ams_ip, mac, boxname, count_reminders, reminderChannelNumber, reminderOffset, reminderOffset_new, count_iterations);
+        print_start_header(ams_ip, mac, boxname, count_reminders, reminderChannelNumber, reminderOffset, reminderOffset_new, count_iterations);
+
         ArrayList add_list,
                 delete_list = new ArrayList(),
                 purge_list = new ArrayList();
-        int a_avg = 0, a_min = 0, a_max = 0, a_iteration = 0, a_med = 0,
-                d_avg = 0, d_min = 0, d_max = 0, d_iteration = 0, d_med = 0,
-                p_avg = 0, p_min = 0, p_max = 0, p_iteration = 0, p_med = 0;
+        int a_avg = 0, a_med = 0, a_min = 0, a_max = 0, a_iteration = 0,
+                d_avg = 0, d_med = 0, d_min = 0, d_max = 0, d_iteration = 0,
+                p_avg = 0, p_med = 0, p_min = 0, p_max = 0, p_iteration = 0;
         ArrayList a_current = new ArrayList(),
                 d_current = new ArrayList(),
                 p_current = new ArrayList();
+
         for (int i = 1; i <= count_iterations; i++) {
-            String header = "========= ========= ========= Iteration = " + i + "/" + count_iterations
-                    + ", mac=" + mac + ", ams=" + ams_ip + ", count_reminders=" + count_reminders + " ========= ========= =========";
-            logger(INFO_LEVEL, header);
-            //reminderChannelNumber = reminderChannelNumber();
+            print_iteration_header(ams_ip, mac, count_reminders, i, count_iterations);
+
             add_list = AMS.request(ams_ip, mac, Operation.add, count_reminders, reminderChannelNumber, reminderProgramStart, reminderProgramId, reminderOffset);
             //assertEquals(expected200, add_list.get(0));
             //assertEquals("", add_list.get(1));
@@ -193,15 +195,14 @@ class testAMS_oldAPI_Performance extends API_common {
     @ParameterizedTest
     @CsvFileSource(resources = "/reminders_oldapi.csv", numLinesToSkip = 1)
     void test99_Purge(String ams_ip, String mac, String boxname, int count_reminders, int reminderChannelNumber, int reminderOffset, int reminderOffset_new, int count_iterations) throws IOException, InterruptedException {
-        before(ams_ip, mac, boxname, count_reminders, reminderChannelNumber, reminderOffset, reminderOffset_new, count_iterations);
+        print_start_header(ams_ip, mac, boxname, count_reminders, reminderChannelNumber, reminderOffset, reminderOffset_new, count_iterations);
+
         ArrayList purge_list;
-        int p_avg = 0, p_min = 0, p_max = 0, p_iteration = 0, p_med = 0;
+        int p_avg = 0, p_med = 0, p_min = 0, p_max = 0, p_iteration = 0;
         ArrayList p_current = new ArrayList();
+
         for (int i = 1; i <= count_iterations; i++) {
-            String header = "========= ========= ========= Iteration = " + i + "/" + count_iterations
-                    + ", mac=" + mac + ", ams=" + ams_ip + ", count_reminders=" + count_reminders + " ========= ========= =========";
-            logger(INFO_LEVEL, header);
-            //reminderChannelNumber = reminderChannelNumber();
+            print_iteration_header(ams_ip, mac, count_reminders, i, count_iterations);
 
             purge_list = AMS.request(ams_ip, mac, Operation.purge);
             if (purge_list.get(1).equals("")) {

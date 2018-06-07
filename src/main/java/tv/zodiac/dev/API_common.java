@@ -28,6 +28,7 @@ public class API_common {
     Boolean show_generated_json = false;
     private Boolean show_response_body = false;
     private Boolean write_file = true;
+    private boolean calc_median = true;
 
     static final String INFO_LEVEL = "INF";
     static final String DEBUG_LEVEL = "DBG";
@@ -89,17 +90,17 @@ public class API_common {
             "4 - reminder is unknown. Applies to \"Reminders Delete\" request (Request ID=1) and \"Reminders Modify\" request (Request ID=2)",
             "5 - reminder with provided pair of identifiers (reminderScheduleId and reminderId) is already set \"Reminders Add\" request (Request ID=0)"};
 
-    final String ams_ip_4 = "172.30.81.4";
-    final String ams_ip_19 = "172.30.112.19";
-    final String ams_ip_132 = "172.30.82.132";
+    private final String ams_ip_4 = "172.30.81.4";
+    private final String ams_ip_19 = "172.30.112.19";
+    private final String ams_ip_132 = "172.30.82.132";
     String ams_ip = ams_ip_4;
     int ams_port = 8080;
 
     int get_average(ArrayList list) {
         int sum = 0;
         if (list.size() > 0) {
-            for (int j = 0; j < list.size(); j++) {
-                sum = sum + (int) list.get(j);
+            for (Object aList : list) {
+                sum = sum + (int) aList;
             }
         }
         return sum / list.size();
@@ -135,26 +136,30 @@ public class API_common {
      * @return
      */
     int get_median(ArrayList list) throws IOException {
-        long start = System.currentTimeMillis();
-        for(int k = 0; k<list.size()-1; k++) {
-            for (int i = 0; i < list.size() - 1; i++) {
-                if ((int) list.get(i) > (int) list.get(i + 1)) {
-                    int big = (int) list.get(i);
-                    list.set(i, list.get(i + 1));
-                    list.set(i + 1, big);
-                }
-            }
-            logger(DEBUG_LEVEL, "sorted list: " + list);
-        }
-        long finish = System.currentTimeMillis();
-
-        logger(INFO_LEVEL, (int) (finish-start) + "ms for bubble sorting");
-
         int median;
-        if(list.size() % 2 == 0) {
-            median = ((int) list.get(list.size()/2-1) + (int)list.get(list.size()/2)) / 2;
+        if(calc_median) {
+            long start = System.currentTimeMillis();
+            for (int k = 0; k < list.size() - 1; k++) {
+                for (int i = 0; i < list.size() - 1; i++) {
+                    if ((int) list.get(i) > (int) list.get(i + 1)) {
+                        int big = (int) list.get(i);
+                        list.set(i, list.get(i + 1));
+                        list.set(i + 1, big);
+                    }
+                }
+                logger(DEBUG_LEVEL, "sorted list: " + list);
+            }
+            long finish = System.currentTimeMillis();
+
+            logger(INFO_LEVEL, (int) (finish - start) + "ms for bubble sorting");
+
+            if (list.size() % 2 == 0) {
+                median = ((int) list.get(list.size() / 2 - 1) + (int) list.get(list.size() / 2)) / 2;
+            } else {
+                median = (int) list.get(list.size() / 2);
+            }
         } else {
-            median = (int) list.get(list.size()/2);
+            median = 0;
         }
         return median;
     }
@@ -751,4 +756,9 @@ public class API_common {
         writer.close();
     }
 
+    void print_iteration_header(String ams_ip, String mac, int count_reminders, int i, int count_iterations) throws IOException {
+        String header = "========= ========= ========= Iteration = " + i + "/" + count_iterations
+                + ", mac=" + mac + ", ams=" + ams_ip + ", count_reminders=" + count_reminders + " ========= ========= =========";
+        logger(INFO_LEVEL, header);
+    }
 }

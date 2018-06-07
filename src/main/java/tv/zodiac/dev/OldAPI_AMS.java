@@ -51,7 +51,7 @@ class OldAPI_AMS extends API_common {
                 arrayList.add(3, avg);
                 arrayList.add(4, get_median(add_avg_list));
                 arrayList.add(5, get_min(add_avg_list));
-                arrayList.add(6, get_max(add_avg_list));
+                arrayList.add(5, get_max(add_avg_list));
                 arrayList.add(7, add_avg_list.size());
                 logger(DEBUG_LEVEL, "[DBG] add avg = " + avg + "ms/" + add_avg_list.size() + ": add_list:" + add_avg_list);
 
