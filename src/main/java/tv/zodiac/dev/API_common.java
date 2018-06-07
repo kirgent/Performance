@@ -132,6 +132,19 @@ public class API_common {
         return max;
     }
 
+    int get_median(ArrayList list) {
+        int median = 0;
+        int sum += value;
+        int count ++;
+        int delta = sum / count / count;        // delta = average/count
+        if (value < median) {
+            median -= delta;
+        } else {
+            median += delta;
+        }
+        return median;
+    }
+
     @Deprecated
     String generate_json_test(String date, int count_reminders, String operation, int reminderOffset) {
         System.out.println("[DBG] [date] Generate_json: with date=" + date + ", " +
