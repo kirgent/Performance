@@ -118,9 +118,10 @@ class NewAPI_AMS extends API_common {
                 int avg = get_average(delete_avg_list);
                 arrayList.add(2, diff);
                 arrayList.add(3, avg);
-                arrayList.add(4, get_min(delete_avg_list));
-                arrayList.add(5, get_max(delete_avg_list));
-                arrayList.add(6, delete_avg_list.size());
+                arrayList.add(4, get_median(delete_avg_list));
+                arrayList.add(5, get_min(delete_avg_list));
+                arrayList.add(6, get_max(delete_avg_list));
+                arrayList.add(7, delete_avg_list.size());
                 logger(DEBUG_LEVEL, "[DBG] " + new Date() + ": delete avg = " + avg + "ms/" + delete_avg_list.size() + ": delete_avg_list:" + delete_avg_list);
             }
 
