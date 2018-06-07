@@ -31,7 +31,8 @@ class NewAPI_AMS extends API_common {
      */
     ArrayList request(String ams_ip, String mac, Enum<Operation> operation, int count_reminders, String reminderProgramStart, long reminderChannelNumber, String reminderProgramId, long reminderOffset, long reminderScheduleId, long reminderId) throws IOException {
         if(operation.name().equals("add")) {
-            logger(INFO_LEVEL, "[INF] " + new Date() + ": Add for mac=" + mac + " to ams=" + ams_ip);
+            logger(INFO_LEVEL, "[INF] " + new Date() + ": Add for mac=" + mac + " to ams=" + ams_ip
+                    + ", count_reminders=" + count_reminders + ", ");
         } else if (operation.name().equals("modify")) {
             logger(INFO_LEVEL, "[INF] " + new Date() + ": Modify:");
         }

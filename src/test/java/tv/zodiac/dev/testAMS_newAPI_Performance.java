@@ -18,6 +18,7 @@ class testAMS_newAPI_Performance extends API_common {
     private int sleep_after_iteration = 1000;
 
     private void before(String ams_ip, String mac, String boxname, int count_reminders, int reminderChannelNumber, int reminderOffset, int reminderOffset_new, int count_iterations) throws IOException {
+        //String start = new Date().toString();
         check_csv(ams_ip, mac, boxname, count_reminders, reminderChannelNumber, reminderOffset, reminderOffset_new, count_iterations);
         logger(INFO_LEVEL, "[INF] " + new Date() + ": New start for mac=" + mac + "(" + boxname + ") to ams=" + ams_ip + ", "
                 + "count_reminders=" + count_reminders + ", "

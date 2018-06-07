@@ -95,16 +95,26 @@ public class API_common {
     int ams_port = 8080;
 
     int get_average_time(ArrayList list) {
-        int average = 0;
+        int sum = 0;
         if (list.size() > 0) {
-            int sum = 0;
             for (int j = 0; j < list.size(); j++) {
-                //System.out.println("[DBG] list_time.get(" + j + ")=" + list_time.get(j));
-                sum = sum + (int)list.get(j);
+                sum = sum + (int) list.get(j);
             }
-            average = sum / list.size();
         }
-        return average;
+        return sum / list.size();
+    }
+
+    int get_median(ArrayList list) {
+        int median = 0;
+        int sum += value;
+        int count ++;
+        int delta = sum / count / count;        // delta = average/count
+        if (value < median) {
+            median -= delta;
+        } else {
+            median += delta;
+        }
+        return median;
     }
 
     int get_min_time(ArrayList list) {
@@ -130,19 +140,6 @@ public class API_common {
             }
         }
         return max;
-    }
-
-    int get_median(ArrayList list) {
-        int median = 0;
-        //int sum += value;
-        //int count ++;
-        //int delta = sum / count / count;        // delta = average/count
-        /*if (value < median) {
-            median -= delta;
-        } else {
-            median += delta;
-        }*/
-        return median;
     }
 
     @Deprecated
@@ -652,14 +649,10 @@ public class API_common {
 
         String header = "========= ========= ========= Total measurements ========= ========= ========="
                 + "\n" + new Date() + ", mac=" + mac + "(" + boxname + "), count_reminders=" + count_reminders + ", count_iterations=" + a_iteration + "/" + count_iterations;
-        String a = "\n   add avg=" + a_avg + "ms, min=" + a_min + "ms, max=" + a_max + "ms, /" + a_iteration;
-        String m = "\nmodify avg=" + m_avg + "ms, min=" + m_min + "ms, max=" + m_max + "ms, /" + m_iteration;
-        String d = "\ndelete avg=" + d_avg + "ms, min=" + d_min + "ms, max=" + d_max + "ms, /" + d_iteration;
-        String p = "\n purge avg=" + p_avg + "ms, min=" + p_min + "ms, max=" + p_max + "ms, /" + p_iteration;
-        //String a_current = "\na_current=" + a_current_array;
-        //String m_current = "\nm_current=" + m_current_array;
-        //String d_current = "\nd_current=" + d_current_array;
-        //String p_current = "\np_current=" + p_current_array;
+        String a = "\n   add avg=" + a_avg + "ms, med=" + "ms, min=" + a_min + "ms, max=" + a_max + "ms, i=" + a_iteration;
+        String m = "\nmodify avg=" + m_avg + "ms, med=" + "ms, min=" + m_min + "ms, max=" + m_max + "ms, i=" + m_iteration;
+        String d = "\ndelete avg=" + d_avg + "ms, med=" + "ms, min=" + d_min + "ms, max=" + d_max + "ms, i=" + d_iteration;
+        String p = "\n purge avg=" + p_avg + "ms, med=" + "ms, min=" + p_min + "ms, max=" + p_max + "ms, i=" + p_iteration;
         String footer = "\n========= ========= ========= ========= ========= ========= ========= =========";
 
         String result = "";
