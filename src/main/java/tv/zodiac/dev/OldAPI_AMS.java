@@ -56,7 +56,7 @@ class OldAPI_AMS extends API_common {
                 arrayList.add(4, get_min_time(add_avg_list));
                 arrayList.add(5, get_max_time(add_avg_list));
                 arrayList.add(6, add_avg_list.size());
-                arrayList.add(7, get_med(add_avg_list));
+                //arrayList.add(7, get_med(add_avg_list));
                 logger(DEBUG_LEVEL, "[DBG] add avg = " + avg + "ms/" + add_avg_list.size() + ": add_list:" + add_avg_list);
 
             } else if (operation.name().equals("delete")) {

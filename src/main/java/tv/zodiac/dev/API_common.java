@@ -134,14 +134,14 @@ public class API_common {
 
     int get_median(ArrayList list) {
         int median = 0;
-        int sum += value;
-        int count ++;
-        int delta = sum / count / count;        // delta = average/count
-        if (value < median) {
+        //int sum += value;
+        //int count ++;
+        //int delta = sum / count / count;        // delta = average/count
+        /*if (value < median) {
             median -= delta;
         } else {
             median += delta;
-        }
+        }*/
         return median;
     }
 
