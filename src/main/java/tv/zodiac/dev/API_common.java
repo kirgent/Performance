@@ -15,6 +15,7 @@ import java.util.*;
 import java.util.Date;
 
 import static java.lang.System.currentTimeMillis;
+import static java.lang.System.lineSeparator;
 
 /**
  * we are as Middle: send requests to AMS and got responses
@@ -94,7 +95,7 @@ public class API_common {
     String ams_ip = ams_ip_4;
     int ams_port = 8080;
 
-    int get_average_time(ArrayList list) {
+    int get_average(ArrayList list) {
         int sum = 0;
         if (list.size() > 0) {
             for (int j = 0; j < list.size(); j++) {
@@ -104,20 +105,62 @@ public class API_common {
         return sum / list.size();
     }
 
-    int get_median(ArrayList list) {
+    /** get median by quick sort
+     * @param list
+     * @return
+     */
+    int get_median2(ArrayList list) {
+        int sum = 0;
         int median = 0;
-        int sum += value;
-        int count ++;
-        int delta = sum / count / count;        // delta = average/count
-        if (value < median) {
-            median -= delta;
+        long start = System.currentTimeMillis();
+        if (list.size() > 0) {
+            for (int j = 0; j < list.size(); j++) {
+                sum = sum + (int) list.get(j);
+                int delta = sum / list.size() / list.size();        // delta = average/count
+                if ((int) list.get(j) < median) {
+                    median -= delta;
+                } else {
+                    median += delta;
+                }
+            }
+        }
+        long finish = System.currentTimeMillis();
+        System.out.println(finish-start + "ms for bubble sorting");
+
+        return median;
+    }
+
+    /** get median using bubble sort
+     * @param list
+     * @return
+     */
+    int get_median(ArrayList list) throws IOException {
+        long start = System.currentTimeMillis();
+        for(int k = 0; k<list.size()-1; k++) {
+            for (int i = 0; i < list.size() - 1; i++) {
+                if ((int) list.get(i) > (int) list.get(i + 1)) {
+                    int big = (int) list.get(i);
+                    list.set(i, list.get(i + 1));
+                    list.set(i + 1, big);
+                }
+            }
+            logger(DEBUG_LEVEL, "sorted list: " + list);
+        }
+        long finish = System.currentTimeMillis();
+
+        logger(INFO_LEVEL, (int) (finish-start) + "ms for bubble sorting");
+
+        int median;
+        if(list.size() % 2 == 0) {
+            median = ((int) list.get(list.size()/2-1) + (int)list.get(list.size()/2)) / 2;
         } else {
-            median += delta;
+            median = (int) list.get(list.size()/2);
         }
         return median;
     }
 
-    int get_min_time(ArrayList list) {
+
+    int get_min(ArrayList list) {
         int min = 0;
         if (list.size() > 0) {
             min = (int)list.get(0);
@@ -130,7 +173,7 @@ public class API_common {
         return min;
     }
 
-    int get_max_time(ArrayList list) {
+    int get_max(ArrayList list) {
         int max = 0;
         if (list.size() > 0) {
             for (int j = 0; j < list.size(); j++) {
@@ -641,18 +684,18 @@ public class API_common {
 
 
     void prepare_total_results(String mac, String boxname, int count_reminders, int count_iterations,
-                               int a_avg, int a_min, int a_max, int a_iteration, ArrayList a_current_array,
-                               int m_avg, int m_min, int m_max, int m_iteration, ArrayList m_current_array,
-                               int d_avg, int d_min, int d_max, int d_iteration, ArrayList d_current_array,
-                               int p_avg, int p_min, int p_max, int p_iteration, ArrayList p_current_array
+                               int a_avg, int a_min, int a_max, int a_iteration, ArrayList a_current_array, int a_med,
+                               int m_avg, int m_min, int m_max, int m_iteration, ArrayList m_current_array, int m_med,
+                               int d_avg, int d_min, int d_max, int d_iteration, ArrayList d_current_array, int d_med,
+                               int p_avg, int p_min, int p_max, int p_iteration, ArrayList p_current_array, int p_med
     ) throws IOException {
 
         String header = "========= ========= ========= Total measurements ========= ========= ========="
                 + "\n" + new Date() + ", mac=" + mac + "(" + boxname + "), count_reminders=" + count_reminders + ", count_iterations=" + a_iteration + "/" + count_iterations;
-        String a = "\n   add avg=" + a_avg + "ms, med=" + "ms, min=" + a_min + "ms, max=" + a_max + "ms, i=" + a_iteration;
-        String m = "\nmodify avg=" + m_avg + "ms, med=" + "ms, min=" + m_min + "ms, max=" + m_max + "ms, i=" + m_iteration;
-        String d = "\ndelete avg=" + d_avg + "ms, med=" + "ms, min=" + d_min + "ms, max=" + d_max + "ms, i=" + d_iteration;
-        String p = "\n purge avg=" + p_avg + "ms, med=" + "ms, min=" + p_min + "ms, max=" + p_max + "ms, i=" + p_iteration;
+        String a = "\n   add avg=" + a_avg + "ms, med=" + a_med + "ms, min=" + a_min + "ms, max=" + a_max + "ms, i=" + a_iteration;
+        String m = "\nmodify avg=" + m_avg + "ms, med=" + m_med + "ms, min=" + m_min + "ms, max=" + m_max + "ms, i=" + m_iteration;
+        String d = "\ndelete avg=" + d_avg + "ms, med=" + d_med + "ms, min=" + d_min + "ms, max=" + d_max + "ms, i=" + d_iteration;
+        String p = "\n purge avg=" + p_avg + "ms, med=" + p_med + "ms, min=" + p_min + "ms, max=" + p_max + "ms, i=" + p_iteration;
         String footer = "\n========= ========= ========= ========= ========= ========= ========= =========";
 
         String result = "";

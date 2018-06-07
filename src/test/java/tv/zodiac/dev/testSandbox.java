@@ -13,6 +13,17 @@ class testSandbox extends API_common {
     private NewAPI_AMS AMS = new NewAPI_AMS();
 
     @Test
+    void test_get_median() throws IOException {
+        ArrayList list = new ArrayList();
+        list.add(0, 1000000);
+        list.add(1, 1000);
+        list.add(2, 1);
+        list.add(3, 1);
+        list.add(4, 1);
+        list.add(5, 1000000000);
+        System.out.println(get_median(list));
+    }
+    @Test
     void testDate() {
         assertEquals("2018-05-19", reminderProgramStart());
         assertEquals("2018-05-19", get_date(1));
