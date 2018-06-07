@@ -56,9 +56,7 @@ class OldAPI_AMS extends API_common {
                 arrayList.add(4, get_min_time(add_avg_list));
                 arrayList.add(5, get_max_time(add_avg_list));
                 arrayList.add(6, add_avg_list.size());
-                if (add_avg_list.size() <= 10) {
-                    logger(DEBUG_LEVEL, "[DBG] add avg = " + avg + "ms/" + add_avg_list.size() + ": add_list:" + add_avg_list);
-                }
+                logger(DEBUG_LEVEL, "[DBG] add avg = " + avg + "ms/" + add_avg_list.size() + ": add_list:" + add_avg_list);
 
             } else if (operation.name().equals("delete")) {
                 delete_avg_list.add(diff);
@@ -68,15 +66,11 @@ class OldAPI_AMS extends API_common {
                 arrayList.add(4, get_min_time(delete_avg_list));
                 arrayList.add(5, get_max_time(delete_avg_list));
                 arrayList.add(6, delete_avg_list.size());
-                if (delete_avg_list.size() <= 10) {
-                    logger(DEBUG_LEVEL, "[DBG] modify avg = " + avg + "ms/" + delete_avg_list.size() + ": modify_list:" + delete_avg_list);
-                }
+                logger(DEBUG_LEVEL, "[DBG] modify avg = " + avg + "ms/" + delete_avg_list.size() + ": modify_list:" + delete_avg_list);
             }
-        }
-        //logger(INFO_LEVEL, "[INF] return data: " + arrayList + "\n");
-        if (arrayList.get(1).equals("")) {
+
             logger(INFO_LEVEL, "[INF] return data: [" + arrayList.get(0) + ", " + arrayList.get(1) + "]"
-                    + ", measurements: cur=" + arrayList.get(2)
+                    + " measurements: cur=" + arrayList.get(2)
                     + ", avg=" + arrayList.get(3)
                     + ", min=" + arrayList.get(4)
                     + ", max=" + arrayList.get(5)
@@ -120,14 +114,10 @@ class OldAPI_AMS extends API_common {
             arrayList.add(4, get_min_time(purge_avg_list));
             arrayList.add(5, get_max_time(purge_avg_list));
             arrayList.add(6, purge_avg_list.size());
-            if(purge_avg_list.size()<=10) {
-                logger(DEBUG_LEVEL, "[DBG] purge avg = " + avg + "ms/" + purge_avg_list.size() + ": purge_avg_list:" + purge_avg_list);
-            }
-        }
-        //logger(INFO_LEVEL, "[INF] return data: " + arrayList + "\n");
-        if (arrayList.get(1).equals("")) {
+            logger(DEBUG_LEVEL, "[DBG] purge avg = " + avg + "ms/" + purge_avg_list.size() + ": purge_avg_list:" + purge_avg_list);
+
             logger(INFO_LEVEL, "[INF] return data: [" + arrayList.get(0) + ", " + arrayList.get(1) + "]"
-                    + ", measurements: cur=" + arrayList.get(2)
+                    + " measurements: cur=" + arrayList.get(2)
                     + ", avg=" + arrayList.get(3)
                     + ", min=" + arrayList.get(4)
                     + ", max=" + arrayList.get(5)

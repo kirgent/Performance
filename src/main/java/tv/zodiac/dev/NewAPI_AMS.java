@@ -62,9 +62,8 @@ class NewAPI_AMS extends API_common {
                 arrayList.add(4, get_min_time(add_avg_list));
                 arrayList.add(5, get_max_time(add_avg_list));
                 arrayList.add(6, add_avg_list.size());
-                if (add_avg_list.size() <= 10) {
-                    logger(DEBUG_LEVEL, "[DBG] " + new Date() + ": add avg = " + avg + "ms" + add_avg_list.size() + ": add_avg_list:" + add_avg_list);
-                }
+                logger(DEBUG_LEVEL, "[DBG] " + new Date() + ": add avg = " + avg + "ms" + add_avg_list.size() + ": add_avg_list:" + add_avg_list);
+
             } else if (operation.name().equals("modify")) {
                 modify_avg_list.add(diff);
                 int avg = get_average_time(modify_avg_list);
@@ -73,15 +72,11 @@ class NewAPI_AMS extends API_common {
                 arrayList.add(4, get_min_time(modify_avg_list));
                 arrayList.add(5, get_max_time(modify_avg_list));
                 arrayList.add(6, modify_avg_list.size());
-                if (modify_avg_list.size() <= 10) {
-                    logger(DEBUG_LEVEL, "[DBG] " + new Date() + ": modify avg = " + avg + "ms/" + modify_avg_list.size() + ": modify_avg_list:" + modify_avg_list);
-                }
+                logger(DEBUG_LEVEL, "[DBG] " + new Date() + ": modify avg = " + avg + "ms/" + modify_avg_list.size() + ": modify_avg_list:" + modify_avg_list);
             }
-        }
-        //logger(INFO_LEVEL, "[INF] return data: " + arrayList + "\n");
-        if (arrayList.get(1).equals("")) {
+
             logger(INFO_LEVEL, "[INF] return data: [" + arrayList.get(0) + ", " + arrayList.get(1) + "]"
-                    + ", measurements: cur=" + arrayList.get(2)
+                    + " measurements: cur=" + arrayList.get(2)
                     + ", avg=" + arrayList.get(3)
                     + ", min=" + arrayList.get(4)
                     + ", max=" + arrayList.get(5)
@@ -117,6 +112,7 @@ class NewAPI_AMS extends API_common {
         ArrayList arrayList = new ArrayList();
         arrayList.add(0, response.getStatusLine().getStatusCode() + " " + response.getStatusLine().getReasonPhrase());
         arrayList.add(1, check_body_response(read_response(new StringBuilder(),response), mac));
+
         if (arrayList.get(1).equals("")) {
             if(arrayList.get(1).equals("")) {
                 delete_avg_list.add(diff);
@@ -126,15 +122,11 @@ class NewAPI_AMS extends API_common {
                 arrayList.add(4, get_min_time(delete_avg_list));
                 arrayList.add(5, get_max_time(delete_avg_list));
                 arrayList.add(6, delete_avg_list.size());
-                if (delete_avg_list.size() <= 10) {
-                    logger(DEBUG_LEVEL, "[DBG] " + new Date() + ": delete avg = " + avg + "ms/" + delete_avg_list.size() + ": delete_avg_list:" + delete_avg_list);
-                }
+                logger(DEBUG_LEVEL, "[DBG] " + new Date() + ": delete avg = " + avg + "ms/" + delete_avg_list.size() + ": delete_avg_list:" + delete_avg_list);
             }
-        }
-        //logger(INFO_LEVEL, "[INF] return data: " + arrayList + "\n");
-        if (arrayList.get(1).equals("")) {
+
             logger(INFO_LEVEL, "[INF] return data: [" + arrayList.get(0) + ", " + arrayList.get(1) + "]"
-                    + ", measurements: cur=" + arrayList.get(2)
+                    + " measurements: cur=" + arrayList.get(2)
                     + ", avg=" + arrayList.get(3)
                     + ", min=" + arrayList.get(4)
                     + ", max=" + arrayList.get(5)
@@ -169,6 +161,7 @@ class NewAPI_AMS extends API_common {
         ArrayList arrayList = new ArrayList();
         arrayList.add(0, response.getStatusLine().getStatusCode() + " " + response.getStatusLine().getReasonPhrase());
         arrayList.add(1, check_body_response(read_response(new StringBuilder(),response), mac));
+
         if (arrayList.get(1).equals("")) {
             purge_avg_list.add(diff);
             int avg = get_average_time(purge_avg_list);
@@ -177,14 +170,10 @@ class NewAPI_AMS extends API_common {
             arrayList.add(4, get_min_time(purge_avg_list));
             arrayList.add(5, get_max_time(purge_avg_list));
             arrayList.add(6, purge_avg_list.size());
-            if(purge_avg_list.size()<=10) {
-                logger(DEBUG_LEVEL,"[DBG] " + new Date() + ": purge avg = " + avg + "ms/" + purge_avg_list.size() + ": purge_avg_list:" + purge_avg_list);
-            }
-        }
-        //logger(INFO_LEVEL, "[INF] return data: " + arrayList + "\n");
-        if (arrayList.get(1).equals("")) {
+            logger(DEBUG_LEVEL,"[DBG] " + new Date() + ": purge avg = " + avg + "ms/" + purge_avg_list.size() + ": purge_avg_list:" + purge_avg_list);
+
             logger(INFO_LEVEL, "[INF] return data: [" + arrayList.get(0) + ", " + arrayList.get(1) + "]"
-                    + ", measurements: cur=" + arrayList.get(2)
+                    + " measurements: cur=" + arrayList.get(2)
                     + ", avg=" + arrayList.get(3)
                     + ", min=" + arrayList.get(4)
                     + ", max=" + arrayList.get(5)
