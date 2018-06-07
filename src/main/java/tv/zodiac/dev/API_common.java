@@ -630,7 +630,7 @@ public class API_common {
     }
 
 
-    void prepare_total_results(String macaddress, String boxname, int count_reminders, int count_iterations,
+    void prepare_total_results(String mac, String boxname, int count_reminders, int count_iterations,
                                int a_avg, int a_min, int a_max, int a_iteration, ArrayList a_current_array,
                                int m_avg, int m_min, int m_max, int m_iteration, ArrayList m_current_array,
                                int d_avg, int d_min, int d_max, int d_iteration, ArrayList d_current_array,
@@ -638,7 +638,7 @@ public class API_common {
     ) throws IOException {
 
         String header = "========= ========= ========= Total measurements ========= ========= ========="
-                + "\n" + new Date() + ", macaddress=" + macaddress + "(" + boxname + "), count_reminders=" + count_reminders + ", count_iterations=" + a_iteration + "/" + count_iterations;
+                + "\n" + new Date() + ", mac=" + mac + "(" + boxname + "), count_reminders=" + count_reminders + ", count_iterations=" + a_iteration + "/" + count_iterations;
         String a = "\n   add avg=" + a_avg + "ms, min=" + a_min + "ms, max=" + a_max + "ms, /" + a_iteration;
         String m = "\nmodify avg=" + m_avg + "ms, min=" + m_min + "ms, max=" + m_max + "ms, /" + m_iteration;
         String d = "\ndelete avg=" + d_avg + "ms, min=" + d_min + "ms, max=" + d_max + "ms, /" + d_iteration;
