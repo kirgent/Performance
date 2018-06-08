@@ -14,14 +14,16 @@ class testSandbox extends API_common {
 
     @Test
     void test_get_median() throws IOException {
-        ArrayList list = new ArrayList();
-        list.add(0, 1000000);
-        list.add(1, 1000);
-        list.add(2, 1);
-        list.add(3, 1);
-        list.add(4, 1);
-        list.add(5, 1000000000);
-        System.out.println(get_median(list));
+
+        int[] input = {24,2,45,20,56,75,2,56,99,53,12,1};
+        System.out.println("input[] length: " + input.length);
+        get_median2(input);
+        for(int i:input){
+            System.out.print(i + " ");
+        }
+        System.out.println();
+        System.out.println("sorted[] length: " + sorted.length);
+
     }
     @Test
     void testDate() {

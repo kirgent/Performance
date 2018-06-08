@@ -32,6 +32,8 @@ public class API_common {
 
     static final String INFO_LEVEL = "INF";
     static final String DEBUG_LEVEL = "DBG";
+    int sorted[] = null;
+    int length = 0;
 
     //private final static Logger log = Logger.getLogger(API.class.getName());
 
@@ -110,25 +112,70 @@ public class API_common {
      * @param list
      * @return
      */
-    int get_median2(ArrayList list) {
-        int sum = 0;
+    int quicksort_pre(int[] inputArr) {
         int median = 0;
-        long start = System.currentTimeMillis();
-        if (list.size() > 0) {
-            for (int j = 0; j < list.size(); j++) {
-                sum = sum + (int) list.get(j);
-                int delta = sum / list.size() / list.size();        // delta = average/count
-                if ((int) list.get(j) < median) {
-                    median -= delta;
-                } else {
-                    median += delta;
-                }
+        if(calc_median) {
+            if (inputArr == null || inputArr.length == 0) {
+                return 0;
             }
+            sorted = inputArr;
+            length = inputArr.length;
+            quicksort(0, length - 1);
+
+            int median = 0;
+            if (list.size() % 2 == 0) {
+                median = ((int) list.get(list.size() / 2 - 1) + (int) list.get(list.size() / 2)) / 2;
+            } else {
+                median = (int) list.get(list.size() / 2);
+            }
+        } else {
+            median = 0;
+        }
+        return median;
+    }
+
+    private void quicksort(int lowerIndex, int higherIndex){
+        //int median = 0;
+        long start = System.currentTimeMillis();
+        //#########################
+        int i = lowerIndex;
+        int j = higherIndex;
+        // calculate pivot number, I am taking pivot as middle index number
+        int pivot = sorted[lowerIndex+(higherIndex-lowerIndex)/2];
+        // Divide into two arrays
+        while (i <= j) {
+            /**
+             * In each iteration, we will identify a number from left side which
+             * is greater then the pivot value, and also we will identify a number
+             * from right side which is less then the pivot value. Once the search
+             * is done, then we exchange both numbers.
+             */
+            while (sorted[i] < pivot) {
+                i++;
+            }
+            while (sorted[j] > pivot) {
+                j--;
+            }
+            if (i <= j) {
+                //exchange numbers: i <=> j
+                int temp = sorted[i];
+                sorted[i] = sorted[j];
+                sorted[j] = temp;
+                //move index to next position on both sides
+                i++;
+                j--;
+            }
+        }
+        //call quicksort() method recursively
+        if (lowerIndex < j) {
+            quicksort(lowerIndex, j);
+        }
+        if (i < higherIndex) {
+            quicksort(i, higherIndex);
         }
         long finish = System.currentTimeMillis();
         System.out.println(finish-start + "ms for bubble sorting");
-
-        return median;
+        logger(INFO_LEVEL, "finished sorted list: " + list);
     }
 
     /** get median using bubble sort
@@ -138,20 +185,9 @@ public class API_common {
     int get_median(ArrayList list) throws IOException {
         int median;
         if(calc_median) {
-            long start = System.currentTimeMillis();
-            for (int k = 0; k < list.size() - 1; k++) {
-                for (int i = 0; i < list.size() - 1; i++) {
-                    if ((int) list.get(i) > (int) list.get(i + 1)) {
-                        int big = (int) list.get(i);
-                        list.set(i, list.get(i + 1));
-                        list.set(i + 1, big);
-                    }
-                }
-                logger(DEBUG_LEVEL, "sorted list: " + list);
-            }
-            long finish = System.currentTimeMillis();
-
-            logger(INFO_LEVEL, (int) (finish - start) + "ms for bubble sorting");
+            //bubblesort(list);
+            quicksort_pre(list);
+            logger(INFO_LEVEL, "finished sorted list: " + list);
 
             if (list.size() % 2 == 0) {
                 median = ((int) list.get(list.size() / 2 - 1) + (int) list.get(list.size() / 2)) / 2;
@@ -164,6 +200,22 @@ public class API_common {
         return median;
     }
 
+    ArrayList bubblesort(ArrayList list) throws IOException {
+        long start = System.currentTimeMillis();
+        for (int k = 0; k < list.size() - 1; k++) {
+            for (int i = 0; i < list.size() - 1; i++) {
+                if ((int) list.get(i) > (int) list.get(i + 1)) {
+                    int temp = (int) list.get(i);
+                    list.set(i, list.get(i + 1));
+                    list.set(i + 1, temp);
+                }
+            }
+            logger(INFO_LEVEL, "sorted list: " + list);
+        }
+        long finish = System.currentTimeMillis();
+        logger(INFO_LEVEL, (int) (finish - start) + "ms for bubble sorting");
+        return list;
+    }
 
     int get_min(ArrayList list) {
         int min = 0;
