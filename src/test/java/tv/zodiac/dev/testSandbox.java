@@ -23,7 +23,7 @@ class testSandbox extends API_common {
             list.add(i,arr[i]);
         }
 
-        quicksort(list);
+        //bubblesort(list);
 
         for (Object aList : list) {
             System.out.print(aList + " ");

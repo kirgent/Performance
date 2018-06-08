@@ -97,19 +97,43 @@ public class API_common {
     int ams_port = 8080;
 
 
-    void quicksort(ArrayList list) throws IOException {
+    int get_average(ArrayList list) {
+        int sum = 0;
+        if (list.size() > 0) {
+            for (Object aList : list) {
+                sum = sum + (int) aList;
+            }
+        }
+        return sum / list.size();
+    }
+
+    private void bubblesort(ArrayList list) throws IOException {
         long start = System.currentTimeMillis();
-        quicksort_(list, 0, list.size()-1);
+        for (int k = 0; k < list.size() - 1; k++) {
+            for (int i = 0; i < list.size() - 1; i++) {
+                if ((int) list.get(i) > (int) list.get(i + 1)) {
+                    int temp = (int) list.get(i);
+                    list.set(i, list.get(i + 1));
+                    list.set(i + 1, temp);
+                }
+            }
+            logger(INFO_LEVEL, "sorted list: " + list);
+        }
+        long finish = System.currentTimeMillis();
+        logger(INFO_LEVEL, (int) (finish - start) + "ms for bubblesort");
+    }
+
+    private void quicksort(ArrayList list) throws IOException {
+        long start = System.currentTimeMillis();
+        quicksort_recursive(list, 0, list.size()-1);
         long finish = System.currentTimeMillis();
         logger(INFO_LEVEL, (int)(finish-start) + "ms for quick sort");
     }
 
-    private void quicksort_(ArrayList list, int lowerIndex, int higherIndex) {
-        System.out.println("call quicksort()");
+    private void quicksort_recursive(ArrayList list, int lowerIndex, int higherIndex) throws IOException {
         int i = lowerIndex;
         int j = higherIndex;
-        // calculate pivot number, I am taking pivot as middle index number
-
+        //calculate middle of the list
         int middle = (int) list.get(lowerIndex+(higherIndex-lowerIndex)/2);
         // Divide into two arrays
         while (i <= j) {
@@ -117,8 +141,10 @@ public class API_common {
             //is greater then the pivot value, and also we will identify a number
             //from right side which is less then the pivot value. Once the search
             //is done, then we exchange both numbers.
-            while ((int)list.get(i) < middle) i++;
-            while ((int)list.get(j) > middle) j--;
+            while ((int)list.get(i) < middle)
+                i++;
+            while ((int)list.get(j) > middle)
+                j--;
             if (i <= j) {
                 //exchange numbers: i <=> j
                 int temp = (int) list.get(i);
@@ -131,24 +157,13 @@ public class API_common {
         }
         //call quicksort() method recursively
         if (lowerIndex < j) {
-            quicksort_(list, lowerIndex, j);
+            quicksort_recursive(list, lowerIndex, j);
         }
         if (i < higherIndex) {
-            quicksort_(list, i, higherIndex);
+            quicksort_recursive(list, i, higherIndex);
         }
-        //logger(INFO_LEVEL, "sorted list: " + list);
+        logger(INFO_LEVEL, "sorted list: " + list);
     }
-
-    int get_average(ArrayList list) {
-        int sum = 0;
-        if (list.size() > 0) {
-            for (Object aList : list) {
-                sum = sum + (int) aList;
-            }
-        }
-        return sum / list.size();
-    }
-
 
     /** get median using bubble sort
      * @param list
@@ -169,22 +184,6 @@ public class API_common {
             median = 0;
         }
         return median;
-    }
-
-    private void bubblesort(ArrayList list) throws IOException {
-        long start = System.currentTimeMillis();
-        for (int k = 0; k < list.size() - 1; k++) {
-            for (int i = 0; i < list.size() - 1; i++) {
-                if ((int) list.get(i) > (int) list.get(i + 1)) {
-                    int temp = (int) list.get(i);
-                    list.set(i, list.get(i + 1));
-                    list.set(i + 1, temp);
-                }
-            }
-            logger(INFO_LEVEL, "sorted list: " + list);
-        }
-        long finish = System.currentTimeMillis();
-        logger(INFO_LEVEL, (int) (finish - start) + "ms for bubblesort");
     }
 
     int get_min(ArrayList list) {
