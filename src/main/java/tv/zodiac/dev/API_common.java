@@ -39,6 +39,9 @@ public class API_common {
 
     enum Generation { random, increment }
 
+    enum Sort { bubble, quick, selection, insertion }
+    Sort sort = Sort.quick;
+
     //static Logger log = Logger.getLogger(testAMS.class.getName());
     //FileHandler txtFile = new FileHandler ("log.log", true);
 
@@ -96,7 +99,6 @@ public class API_common {
     String ams_ip = ams_ip_4;
     int ams_port = 8080;
 
-
     int get_average(ArrayList list) {
         int sum = 0;
         if (list.size() > 0) {
@@ -107,7 +109,11 @@ public class API_common {
         return sum / list.size();
     }
 
-    private void bubblesort(ArrayList list) throws IOException {
+    /** bubble sorting
+     * @param list
+     * @throws IOException
+     */
+    void sort_bubble(ArrayList list) throws IOException {
         long start = System.currentTimeMillis();
         for (int k = 0; k < list.size() - 1; k++) {
             for (int i = 0; i < list.size() - 1; i++) {
@@ -120,17 +126,21 @@ public class API_common {
             logger(DEBUG_LEVEL, "sorted list: " + list);
         }
         long finish = System.currentTimeMillis();
-        logger(INFO_LEVEL, (int) (finish - start) + "ms for bubblesort");
+        logger(INFO_LEVEL, (int) (finish - start) + "ms for sort_bubble");
     }
 
-    private void quicksort(ArrayList list) throws IOException {
+    /** quick sorting
+     * @param list
+     * @throws IOException
+     */
+    void sort_quick(ArrayList list) throws IOException {
         long start = System.currentTimeMillis();
-        quicksort_recursive(list, 0, list.size()-1);
+        sort_quick_recursive(list, 0, list.size()-1);
         long finish = System.currentTimeMillis();
-        logger(INFO_LEVEL, (int) (finish-start) + "ms for quicksort");
+        logger(INFO_LEVEL, (int) (finish-start) + "ms for sort_quick");
     }
 
-    private void quicksort_recursive(ArrayList list, int lowerIndex, int higherIndex) throws IOException {
+    private void sort_quick_recursive(ArrayList list, int lowerIndex, int higherIndex) throws IOException {
         int i = lowerIndex;
         int j = higherIndex;
         //calculate middle of the list
@@ -157,23 +167,84 @@ public class API_common {
         }
         //call quicksort() method recursively
         if (lowerIndex < j) {
-            quicksort_recursive(list, lowerIndex, j);
+            sort_quick_recursive(list, lowerIndex, j);
         }
         if (i < higherIndex) {
-            quicksort_recursive(list, i, higherIndex);
+            sort_quick_recursive(list, i, higherIndex);
         }
         logger(DEBUG_LEVEL, "sorted list: " + list);
     }
 
-    /** get median using bubble sort
+    /** selection sorting
      * @param list
-     * @return
+     * @throws IOException
      */
-    int get_median(ArrayList list) throws IOException {
+    void sort_selection(ArrayList list) throws IOException {
+        long start = System.currentTimeMillis();
+        for (int i = 0; i < list.size()-1; i++) {
+            int index = i;
+            for (int j = i + 1; j < list.size(); j++)
+                if ((int)list.get(j) < (int)list.get(index))
+                    index = j;
+
+            int smallerNumber = (int) list.get(index);
+            list.set(index, list.get(i));
+            list.set(i, smallerNumber);
+            logger(INFO_LEVEL, "sorted list: " + list);
+        }
+        long finish = System.currentTimeMillis();
+        logger(INFO_LEVEL, (int) (finish - start) + "ms for sort_selection");
+    }
+
+    /** insertion sorting
+     * @param list
+     * @throws IOException
+     */
+    void sort_insertion(ArrayList list) throws IOException {
+        long start = System.currentTimeMillis();
+        int temp;
+        for (int i=1; i<list.size(); i++) {
+            for(int j=i; j>0; j--){
+                if((int) list.get(j) < (int) list.get(j-1)){
+                    temp = (int) list.get(j);
+                    list.set(j, list.get(j-1));
+                    list.set(j-1, temp);
+                }
+            }
+        }
+        long finish = System.currentTimeMillis();
+        logger(INFO_LEVEL, (int) (finish - start) + "ms for sort_insertion");
+    }
+
+    int get_max(ArrayList list) {
+        int max = 0;
+        if (list.size() > 0) {
+            for (int j = 0; j < list.size(); j++) {
+                if ((int)list.get(j) > max) {
+                    max = (int) list.get(j);
+                }
+            }
+        }
+        return max;
+    }
+
+    int get_median(ArrayList list, Enum<Sort> sort) throws IOException {
         int median;
         if(calc_median) {
-            //bubblesort(list);
-            quicksort(list);
+            switch (sort.name()) {
+                case "bubble":
+                    sort_bubble(list);
+                    break;
+                case "quick":
+                    sort_quick(list);
+                    break;
+                case "selection":
+                    sort_selection(list);
+                    break;
+                case "insertion":
+                    sort_insertion(list);
+                    break;
+            }
 
             if (list.size() % 2 == 0) {
                 median = ((int) list.get(list.size() / 2 - 1) + (int) list.get(list.size() / 2)) / 2;
@@ -197,18 +268,6 @@ public class API_common {
             }
         }
         return min;
-    }
-
-    int get_max(ArrayList list) {
-        int max = 0;
-        if (list.size() > 0) {
-            for (int j = 0; j < list.size(); j++) {
-                if ((int)list.get(j) > max) {
-                    max = (int) list.get(j);
-                }
-            }
-        }
-        return max;
     }
 
     @Deprecated

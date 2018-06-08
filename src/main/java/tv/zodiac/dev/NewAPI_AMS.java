@@ -55,7 +55,7 @@ class NewAPI_AMS extends API_common {
                 int avg = get_average(add_avg_list);
                 arrayList.add(2, diff);
                 arrayList.add(3, avg);
-                arrayList.add(4, get_median(add_avg_list));
+                arrayList.add(4, get_median(add_avg_list, sort));
                 arrayList.add(5, get_min(add_avg_list));
                 arrayList.add(6, get_max(add_avg_list));
                 arrayList.add(7, add_avg_list.size());
@@ -66,7 +66,7 @@ class NewAPI_AMS extends API_common {
                 int avg = get_average(modify_avg_list);
                 arrayList.add(2, diff);
                 arrayList.add(3, avg);
-                arrayList.add(4, get_median(modify_avg_list));
+                arrayList.add(4, get_median(modify_avg_list, sort));
                 arrayList.add(5, get_min(modify_avg_list));
                 arrayList.add(6, get_max(modify_avg_list));
                 arrayList.add(7, modify_avg_list.size());
@@ -118,7 +118,7 @@ class NewAPI_AMS extends API_common {
                 int avg = get_average(delete_avg_list);
                 arrayList.add(2, diff);
                 arrayList.add(3, avg);
-                arrayList.add(4, get_median(delete_avg_list));
+                arrayList.add(4, get_median(delete_avg_list, sort));
                 arrayList.add(5, get_min(delete_avg_list));
                 arrayList.add(6, get_max(delete_avg_list));
                 arrayList.add(7, delete_avg_list.size());
@@ -168,7 +168,7 @@ class NewAPI_AMS extends API_common {
             int avg = get_average(purge_avg_list);
             arrayList.add(2, diff);
             arrayList.add(3, avg);
-            arrayList.add(4, get_median(purge_avg_list));
+            arrayList.add(4, get_median(purge_avg_list, sort));
             arrayList.add(5, get_min(purge_avg_list));
             arrayList.add(6, get_max(purge_avg_list));
             arrayList.add(7, purge_avg_list.size());
