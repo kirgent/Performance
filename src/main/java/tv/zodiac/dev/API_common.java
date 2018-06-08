@@ -117,7 +117,7 @@ public class API_common {
                     list.set(i + 1, temp);
                 }
             }
-            logger(INFO_LEVEL, "sorted list: " + list);
+            logger(DEBUG_LEVEL, "sorted list: " + list);
         }
         long finish = System.currentTimeMillis();
         logger(INFO_LEVEL, (int) (finish - start) + "ms for bubblesort");
@@ -127,7 +127,7 @@ public class API_common {
         long start = System.currentTimeMillis();
         quicksort_recursive(list, 0, list.size()-1);
         long finish = System.currentTimeMillis();
-        logger(INFO_LEVEL, (int)(finish-start) + "ms for quick sort");
+        logger(INFO_LEVEL, (int) (finish-start) + "ms for quicksort");
     }
 
     private void quicksort_recursive(ArrayList list, int lowerIndex, int higherIndex) throws IOException {
@@ -162,7 +162,7 @@ public class API_common {
         if (i < higherIndex) {
             quicksort_recursive(list, i, higherIndex);
         }
-        logger(INFO_LEVEL, "sorted list: " + list);
+        logger(DEBUG_LEVEL, "sorted list: " + list);
     }
 
     /** get median using bubble sort
