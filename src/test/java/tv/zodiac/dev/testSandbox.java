@@ -5,6 +5,8 @@ import org.junit.jupiter.api.Test;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -14,15 +16,19 @@ class testSandbox extends API_common {
 
     @Test
     void test_get_median() throws IOException {
+        int[] arr = {24,2,45,20,56,75,2,56,99,53,12,1,};
+        ArrayList list = new ArrayList();
 
-        int[] input = {24,2,45,20,56,75,2,56,99,53,12,1};
-        System.out.println("input[] length: " + input.length);
-        get_median2(input);
-        for(int i:input){
-            System.out.print(i + " ");
+        for (int i = 0; i < arr.length; i++) {
+            list.add(i,arr[i]);
+        }
+
+        quicksort(list);
+
+        for (Object aList : list) {
+            System.out.print(aList + " ");
         }
         System.out.println();
-        System.out.println("sorted[] length: " + sorted.length);
 
     }
     @Test
