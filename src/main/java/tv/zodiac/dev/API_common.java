@@ -72,7 +72,7 @@ public class API_common {
             modify_list = new ArrayList<>(),
             delete_list = new ArrayList<>(),
             purge_list = new ArrayList<>();
-    int a_max, a_min,
+    private int a_max, a_min,
             m_max, m_min,
             d_max, d_min,
             p_max, p_min;
@@ -283,8 +283,10 @@ public class API_common {
         return min;
     }
 
-    int get_min(Enum<Operation> operation, int new_min) throws IOException {
-        switch (operation.name()) {
+    int get_min(Enum<Operation> operation, int current) throws IOException {
+        long start = System.currentTimeMillis();
+        // SLOW ???
+        /*switch (operation.name()) {
             case "add":
                 return search_min(add_list);
             case "modify":
@@ -295,9 +297,10 @@ public class API_common {
                 return search_min(purge_list);
             default:
                 return 0;
-        }
+        }*/
 
-        /*
+
+        // FAST???
         int min = 0;
         switch (operation.name()) {
             case "add":
@@ -313,13 +316,17 @@ public class API_common {
                 min = p_min;
                 break;
         }
+        System.out.println("1) min: " + min);
 
-        if (new_min<min){
-            min = new_min;
+
+        if(min == 0){
+            min = current;
         } else {
-
+            if (current < min) {
+                min = current;
+            }
         }
-
+        System.out.println("2) min: " + min);
 
         switch (operation.name()) {
             case "add":
@@ -335,29 +342,80 @@ public class API_common {
                 p_min = min;
                 break;
         }
+        System.out.println("3) min: " + min);
+        long finish = System.currentTimeMillis();
+        logger(INFO_LEVEL, (int) (finish-start) + "ms for get_min()");
 
-        return min;*/
+        return min;
     }
 
-    int get_max(Enum<Operation> operation, int new_max) throws IOException {
-    /*    if (x>max){
-            max=x;
-            return x;
-        } else {
-            return max;
-        }*/
+    int get_max(Enum<Operation> operation, int current) throws IOException {
+        long start = System.currentTimeMillis();
+        int max = 0;
+
+        //SLOW???
         switch (operation.name()) {
             case "add":
-                return search_max(add_list);
+                max = search_max(add_list);
+                break;
             case "modify":
-                return search_max(modify_list);
+                max = search_max(modify_list);
+                break;
             case "delete":
-                return search_max(delete_list);
+                max = search_max(delete_list);
+                break;
             case "purge":
-                return search_max(purge_list);
-                default:
-                    return 0;
+                max = search_max(purge_list);
+                break;
         }
+
+        //FAST???
+        /*switch (operation.name()) {
+            case "add":
+                max = a_max;
+                break;
+            case "modify":
+                max = m_max;
+                break;
+            case "delete":
+                max = d_max;
+                break;
+            case "purge":
+                max = p_max;
+                break;
+        }
+        System.out.println("1) max: " + max);
+
+
+        if(max == 0){
+            max = current;
+        } else {
+            if (current > max) {
+                max = current;
+            }
+        }
+        System.out.println("2) max: " + max);
+
+
+        switch (operation.name()) {
+            case "add":
+                a_max = max;
+                break;
+            case "modify":
+                m_max = max;
+                break;
+            case "delete":
+                d_max = max;
+                break;
+            case "purge":
+                p_max = max;
+                break;
+        }
+        System.out.println("3) max: " + max);*/
+        long finish = System.currentTimeMillis();
+        logger(INFO_LEVEL, (int) (finish-start) + "ms for get_max()");
+
+        return max;
     }
 
     @Deprecated
