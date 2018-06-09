@@ -15,7 +15,6 @@ import java.util.*;
 import java.util.Date;
 
 import static java.lang.System.currentTimeMillis;
-import static java.lang.System.lineSeparator;
 
 /**
  * we are as Middle: send requests to AMS and got responses
@@ -67,14 +66,16 @@ public class API_common {
     final String boxMoto2147_Rems = "000004D67F70"; //000004d67f70"; //Moto_2147_Mondo_DCX3200M_REMS
     String mac = boxMoto2147_Rems;
 
-    ArrayList reminderScheduleId_list = new ArrayList();
-    ArrayList reminderId_list = new ArrayList();
-    ArrayList<Integer> add_avg_list = new ArrayList<>();
-    ArrayList<Integer> modify_avg_list = new ArrayList<>();
-    ArrayList<Integer> delete_avg_list = new ArrayList<>();
-    ArrayList<Integer> purge_avg_list = new ArrayList<>();
-    int max;
-    int min;
+    ArrayList reminderScheduleId_list = new ArrayList(),
+            reminderId_list = new ArrayList();
+    ArrayList<Integer> add_list = new ArrayList<>(),
+            modify_list = new ArrayList<>(),
+            delete_list = new ArrayList<>(),
+            purge_list = new ArrayList<>();
+    int a_max, a_min,
+            m_max, m_min,
+            d_max, d_min,
+            p_max, p_min;
 
     private String REMINDERSLOG = "reminders.log";
 
@@ -218,7 +219,7 @@ public class API_common {
         logger(INFO_LEVEL, (int) (finish-start) + "ms for sort_insertion");
     }
 
-    int search_max(ArrayList list) throws IOException {
+    private int search_max(ArrayList list) throws IOException {
         long start = System.currentTimeMillis();
         int max = 0;
         if (list.size() > 0) {
@@ -229,12 +230,12 @@ public class API_common {
             }
         }
         long finish = System.currentTimeMillis();
-        logger(INFO_LEVEL, (int) (finish-start) + "ms for get_max()");
+        logger(INFO_LEVEL, (int) (finish-start) + "ms for search_max()");
 
         return max;
     }
 
-    int get_median(ArrayList list, Enum<Sort> sort) throws IOException {
+    int search_median(ArrayList list, Enum<Sort> sort) throws IOException {
         int median;
         if(calc_median) {
             switch (sort.name()) {
@@ -253,8 +254,10 @@ public class API_common {
             }
 
             if (list.size() % 2 == 0) {
+                //if chetnoe - take avg of 2 middle elements
                 median = ((int) list.get(list.size() / 2 - 1) + (int) list.get(list.size() / 2)) / 2;
             } else {
+                //if nechetnoe - just take middle element
                 median = (int) list.get(list.size() / 2);
             }
         } else {
@@ -263,17 +266,7 @@ public class API_common {
         return median;
     }
 
-    int get_min(int x){
-        if (x<min){
-            min=x;
-        } else {
-            
-        }
-
-        return min;
-    }
-
-    int search_min(ArrayList list) throws IOException {
+    private int search_min(ArrayList list) throws IOException {
         long start = System.currentTimeMillis();
         int min = 0;
         if (list.size() > 0) {
@@ -285,9 +278,86 @@ public class API_common {
             }
         }
         long finish = System.currentTimeMillis();
-        logger(INFO_LEVEL, (int) (finish-start) + "ms for get_min()");
+        logger(INFO_LEVEL, (int) (finish-start) + "ms for search_min()");
 
         return min;
+    }
+
+    int get_min(Enum<Operation> operation, int new_min) throws IOException {
+        switch (operation.name()) {
+            case "add":
+                return search_min(add_list);
+            case "modify":
+                return search_min(modify_list);
+            case "delete":
+                return search_min(delete_list);
+            case "purge":
+                return search_min(purge_list);
+            default:
+                return 0;
+        }
+
+        /*
+        int min = 0;
+        switch (operation.name()) {
+            case "add":
+                min = a_min;
+                break;
+            case "modify":
+                min = m_min;
+                break;
+            case "delete":
+                min = d_min;
+                break;
+            case "purge":
+                min = p_min;
+                break;
+        }
+
+        if (new_min<min){
+            min = new_min;
+        } else {
+
+        }
+
+
+        switch (operation.name()) {
+            case "add":
+                a_min = min;
+                break;
+            case "modify":
+                m_min = min;
+                break;
+            case "delete":
+                d_min = min;
+                break;
+            case "purge":
+                p_min = min;
+                break;
+        }
+
+        return min;*/
+    }
+
+    int get_max(Enum<Operation> operation, int new_max) throws IOException {
+    /*    if (x>max){
+            max=x;
+            return x;
+        } else {
+            return max;
+        }*/
+        switch (operation.name()) {
+            case "add":
+                return search_max(add_list);
+            case "modify":
+                return search_max(modify_list);
+            case "delete":
+                return search_max(delete_list);
+            case "purge":
+                return search_max(purge_list);
+                default:
+                    return 0;
+        }
     }
 
     @Deprecated

@@ -37,8 +37,8 @@ class OldAPI_AMS extends API_common {
         long start = System.currentTimeMillis();
         HttpResponse response = HttpClients.createDefault().execute(request);
         long finish = System.currentTimeMillis();
-        int diff = (int)(finish-start);
-        logger(DEBUG_LEVEL, "[DBG] " + diff + "ms request");
+        int current = (int)(finish-start);
+        logger(DEBUG_LEVEL, "[DBG] " + current + "ms request");
 
         start = System.currentTimeMillis();
         ArrayList arrayList = new ArrayList();
@@ -46,26 +46,26 @@ class OldAPI_AMS extends API_common {
         arrayList.add(1, check_body_response(read_response(new StringBuilder(),response), mac));
         if (arrayList.get(1).equals("")) {
             if (operation.name().equals("add")) {
-                add_avg_list.add(diff);
-                int avg = get_average(add_avg_list);
-                arrayList.add(2, diff);
+                add_list.add(current);
+                int avg = get_average(add_list);
+                arrayList.add(2, current);
                 arrayList.add(3, avg);
-                arrayList.add(4, get_median(add_avg_list, sort));
-                arrayList.add(5, get_min(add_avg_list));
-                arrayList.add(6, get_max(add_avg_list));
-                arrayList.add(7, add_avg_list.size());
-                logger(DEBUG_LEVEL, "[DBG] add avg = " + avg + "ms/" + add_avg_list.size() + ": add_list:" + add_avg_list);
+                arrayList.add(4, search_median(add_list, sort));
+                arrayList.add(5, get_min(Operation.add, current));
+                arrayList.add(6, get_max(Operation.add, current));
+                arrayList.add(7, add_list.size());
+                logger(DEBUG_LEVEL, "[DBG] add avg = " + avg + "ms/" + add_list.size() + ": add_list:" + add_list);
 
             } else if (operation.name().equals("delete")) {
-                delete_avg_list.add(diff);
-                int avg = get_average(delete_avg_list);
-                arrayList.add(2, diff);
+                delete_list.add(current);
+                int avg = get_average(delete_list);
+                arrayList.add(2, current);
                 arrayList.add(3, avg);
-                arrayList.add(4, get_median(delete_avg_list, sort));
-                arrayList.add(5, get_min(delete_avg_list));
-                arrayList.add(6, get_max(delete_avg_list));
-                arrayList.add(7, delete_avg_list.size());
-                logger(DEBUG_LEVEL, "[DBG] modify avg = " + avg + "ms/" + delete_avg_list.size() + ": modify_list:" + delete_avg_list);
+                arrayList.add(4, search_median(delete_list, sort));
+                arrayList.add(5, get_min(Operation.delete, current));
+                arrayList.add(6, get_max(Operation.delete, current));
+                arrayList.add(7, delete_list.size());
+                logger(DEBUG_LEVEL, "[DBG] modify avg = " + avg + "ms/" + delete_list.size() + ": modify_list:" + delete_list);
             }
 
             logger(INFO_LEVEL, "[INF] return data: [" + arrayList.get(0) + ", " + arrayList.get(1) + "]"
@@ -102,23 +102,23 @@ class OldAPI_AMS extends API_common {
         long start = System.currentTimeMillis();
         HttpResponse response = HttpClients.createDefault().execute(request);
         long finish = System.currentTimeMillis();
-        int diff = (int)(finish-start);
-        logger(DEBUG_LEVEL, "[DBG] " + diff + "ms request");
+        int current = (int)(finish-start);
+        logger(DEBUG_LEVEL, "[DBG] " + current + "ms request");
 
         start = System.currentTimeMillis();
         ArrayList arrayList = new ArrayList();
         arrayList.add(0, response.getStatusLine().getStatusCode() + " " + response.getStatusLine().getReasonPhrase());
         arrayList.add(1, check_body_response(read_response(new StringBuilder(),response), mac));
         if (arrayList.get(1).equals("")) {
-            purge_avg_list.add(diff);
-            int avg = get_average(purge_avg_list);
-            arrayList.add(2, diff);
+            purge_list.add(current);
+            int avg = get_average(purge_list);
+            arrayList.add(2, current);
             arrayList.add(3, avg);
-            arrayList.add(4, get_median(purge_avg_list, sort));
-            arrayList.add(5, get_min(purge_avg_list));
-            arrayList.add(6, get_max(purge_avg_list));
-            arrayList.add(7, purge_avg_list.size());
-            logger(DEBUG_LEVEL, "[DBG] purge avg = " + avg + "ms/" + purge_avg_list.size() + ": purge_avg_list:" + purge_avg_list);
+            arrayList.add(4, search_median(purge_list, sort));
+            arrayList.add(5, get_min(Operation.purge, current));
+            arrayList.add(6, get_max(Operation.purge, current));
+            arrayList.add(7, purge_list.size());
+            logger(DEBUG_LEVEL, "[DBG] purge avg = " + avg + "ms/" + purge_list.size() + ": purge_list:" + purge_list);
 
             logger(INFO_LEVEL, "[INF] return data: [" + arrayList.get(0) + ", " + arrayList.get(1) + "]"
                     + " measurements: cur=" + arrayList.get(2)
