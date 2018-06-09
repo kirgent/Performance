@@ -285,7 +285,7 @@ public class API_common {
 
     int get_min(Enum<Operation> operation, int current) throws IOException {
         long start = System.currentTimeMillis();
-        // SLOW ???
+        // SLOWly ???
         /*switch (operation.name()) {
             case "add":
                 return search_min(add_list);
@@ -300,7 +300,7 @@ public class API_common {
         }*/
 
 
-        // FAST???
+        // FAST??? to_confirm
         int min = 0;
         switch (operation.name()) {
             case "add":
@@ -316,7 +316,7 @@ public class API_common {
                 min = p_min;
                 break;
         }
-        System.out.println("1) min: " + min);
+        logger(DEBUG_LEVEL, "1) min: " + min);
 
 
         if(min == 0){
@@ -326,7 +326,7 @@ public class API_common {
                 min = current;
             }
         }
-        System.out.println("2) min: " + min);
+        logger(DEBUG_LEVEL, "2) min: " + min);
 
         switch (operation.name()) {
             case "add":
@@ -342,9 +342,9 @@ public class API_common {
                 p_min = min;
                 break;
         }
-        System.out.println("3) min: " + min);
+        logger(DEBUG_LEVEL, "3) min: " + min);
         long finish = System.currentTimeMillis();
-        logger(INFO_LEVEL, (int) (finish-start) + "ms for get_min()");
+        logger(DEBUG_LEVEL, (int) (finish-start) + "ms for get_min()");
 
         return min;
     }
@@ -353,8 +353,8 @@ public class API_common {
         long start = System.currentTimeMillis();
         int max = 0;
 
-        //SLOW???
-        switch (operation.name()) {
+        //SLOWly???
+        /*switch (operation.name()) {
             case "add":
                 max = search_max(add_list);
                 break;
@@ -367,10 +367,10 @@ public class API_common {
             case "purge":
                 max = search_max(purge_list);
                 break;
-        }
+        }*/
 
-        //FAST???
-        /*switch (operation.name()) {
+        //FAST??? to_confirm!
+        switch (operation.name()) {
             case "add":
                 max = a_max;
                 break;
@@ -384,7 +384,7 @@ public class API_common {
                 max = p_max;
                 break;
         }
-        System.out.println("1) max: " + max);
+        logger(INFO_LEVEL, "1) max: " + max);
 
 
         if(max == 0){
@@ -394,7 +394,7 @@ public class API_common {
                 max = current;
             }
         }
-        System.out.println("2) max: " + max);
+        logger(INFO_LEVEL, "2) max: " + max);
 
 
         switch (operation.name()) {
@@ -411,7 +411,7 @@ public class API_common {
                 p_max = max;
                 break;
         }
-        System.out.println("3) max: " + max);*/
+        logger(INFO_LEVEL, "3) max: " + max);
         long finish = System.currentTimeMillis();
         logger(INFO_LEVEL, (int) (finish-start) + "ms for get_max()");
 
