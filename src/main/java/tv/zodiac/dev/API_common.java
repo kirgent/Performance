@@ -218,7 +218,7 @@ public class API_common {
         logger(INFO_LEVEL, (int) (finish-start) + "ms for sort_insertion");
     }
 
-    int get_max(ArrayList list) throws IOException {
+    int search_max(ArrayList list) throws IOException {
         long start = System.currentTimeMillis();
         int max = 0;
         if (list.size() > 0) {
@@ -263,7 +263,17 @@ public class API_common {
         return median;
     }
 
-    int get_min(ArrayList list) throws IOException {
+    int get_min(int x){
+        if (x<min){
+            min=x;
+        } else {
+            
+        }
+
+        return min;
+    }
+
+    int search_min(ArrayList list) throws IOException {
         long start = System.currentTimeMillis();
         int min = 0;
         if (list.size() > 0) {
