@@ -38,8 +38,8 @@ public class API_common {
 
     enum Generation { random, increment }
 
-    enum Sort { bubble, quick, selection, insertion }
-    Sort sort = Sort.quick;
+    enum Sorting { bubble, quick, selection, insertion }
+    Sorting sort = Sorting.quick;
 
     //static Logger log = Logger.getLogger(testAMS.class.getName());
     //FileHandler txtFile = new FileHandler ("log.log", true);
@@ -235,7 +235,7 @@ public class API_common {
         return max;
     }
 
-    int search_median(ArrayList list, Enum<Sort> sort) throws IOException {
+    int search_median(ArrayList list, Enum<Sorting> sort) throws IOException {
         int median;
         if(calc_median) {
             switch (sort.name()) {
@@ -316,8 +316,6 @@ public class API_common {
                 min = p_min;
                 break;
         }
-        logger(DEBUG_LEVEL, "1) min: " + min);
-
 
         if(min == 0){
             min = current;
@@ -326,7 +324,6 @@ public class API_common {
                 min = current;
             }
         }
-        logger(DEBUG_LEVEL, "2) min: " + min);
 
         switch (operation.name()) {
             case "add":
@@ -342,9 +339,8 @@ public class API_common {
                 p_min = min;
                 break;
         }
-        logger(DEBUG_LEVEL, "3) min: " + min);
         long finish = System.currentTimeMillis();
-        logger(DEBUG_LEVEL, (int) (finish-start) + "ms for get_min()");
+        logger(INFO_LEVEL, (int) (finish-start) + "ms for get_min()");
 
         return min;
     }
@@ -384,8 +380,6 @@ public class API_common {
                 max = p_max;
                 break;
         }
-        logger(DEBUG_LEVEL, "1) max: " + max);
-
 
         if(max == 0){
             max = current;
@@ -394,8 +388,6 @@ public class API_common {
                 max = current;
             }
         }
-        logger(DEBUG_LEVEL, "2) max: " + max);
-
 
         switch (operation.name()) {
             case "add":
@@ -411,9 +403,8 @@ public class API_common {
                 p_max = max;
                 break;
         }
-        logger(DEBUG_LEVEL, "3) max: " + max);
         long finish = System.currentTimeMillis();
-        logger(DEBUG_LEVEL, (int) (finish-start) + "ms for get_max()");
+        logger(INFO_LEVEL, (int) (finish-start) + "ms for get_max()");
 
         return max;
     }
