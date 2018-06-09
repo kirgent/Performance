@@ -73,6 +73,8 @@ public class API_common {
     ArrayList<Integer> modify_avg_list = new ArrayList<>();
     ArrayList<Integer> delete_avg_list = new ArrayList<>();
     ArrayList<Integer> purge_avg_list = new ArrayList<>();
+    int max;
+    int min;
 
     private String REMINDERSLOG = "reminders.log";
 
@@ -213,10 +215,11 @@ public class API_common {
             }
         }
         long finish = System.currentTimeMillis();
-        logger(INFO_LEVEL, (int) (finish - start) + "ms for sort_insertion");
+        logger(INFO_LEVEL, (int) (finish-start) + "ms for sort_insertion");
     }
 
-    int get_max(ArrayList list) {
+    int get_max(ArrayList list) throws IOException {
+        long start = System.currentTimeMillis();
         int max = 0;
         if (list.size() > 0) {
             for (int j = 0; j < list.size(); j++) {
@@ -225,6 +228,9 @@ public class API_common {
                 }
             }
         }
+        long finish = System.currentTimeMillis();
+        logger(INFO_LEVEL, (int) (finish-start) + "ms for get_max()");
+
         return max;
     }
 
@@ -257,7 +263,8 @@ public class API_common {
         return median;
     }
 
-    int get_min(ArrayList list) {
+    int get_min(ArrayList list) throws IOException {
+        long start = System.currentTimeMillis();
         int min = 0;
         if (list.size() > 0) {
             min = (int)list.get(0);
@@ -267,6 +274,9 @@ public class API_common {
                 }
             }
         }
+        long finish = System.currentTimeMillis();
+        logger(INFO_LEVEL, (int) (finish-start) + "ms for get_min()");
+
         return min;
     }
 

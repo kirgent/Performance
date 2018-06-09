@@ -40,6 +40,7 @@ class OldAPI_AMS extends API_common {
         int diff = (int)(finish-start);
         logger(DEBUG_LEVEL, "[DBG] " + diff + "ms request");
 
+        start = System.currentTimeMillis();
         ArrayList arrayList = new ArrayList();
         arrayList.add(0, response.getStatusLine().getStatusCode() + " " + response.getStatusLine().getReasonPhrase());
         arrayList.add(1, check_body_response(read_response(new StringBuilder(),response), mac));
@@ -77,6 +78,8 @@ class OldAPI_AMS extends API_common {
         } else {
             logger(INFO_LEVEL, "[INF] return data: [" + arrayList.get(0) + ", " + arrayList.get(1) + "]");
         }
+        finish = System.currentTimeMillis();
+        logger(INFO_LEVEL, (int)(finish-start) + "ms for parsing request");
 
         return arrayList;
     }
@@ -102,6 +105,7 @@ class OldAPI_AMS extends API_common {
         int diff = (int)(finish-start);
         logger(DEBUG_LEVEL, "[DBG] " + diff + "ms request");
 
+        start = System.currentTimeMillis();
         ArrayList arrayList = new ArrayList();
         arrayList.add(0, response.getStatusLine().getStatusCode() + " " + response.getStatusLine().getReasonPhrase());
         arrayList.add(1, check_body_response(read_response(new StringBuilder(),response), mac));
@@ -126,6 +130,9 @@ class OldAPI_AMS extends API_common {
         } else {
             logger(INFO_LEVEL, "[INF] return data: [" + arrayList.get(0) + ", " + arrayList.get(1) + "]");
         }
+        finish = System.currentTimeMillis();
+        logger(INFO_LEVEL, (int)(finish-start) + "ms for parsing request");
+
         return arrayList;
     }
 
