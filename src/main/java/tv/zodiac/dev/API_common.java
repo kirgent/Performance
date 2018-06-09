@@ -384,7 +384,7 @@ public class API_common {
                 max = p_max;
                 break;
         }
-        logger(INFO_LEVEL, "1) max: " + max);
+        logger(DEBUG_LEVEL, "1) max: " + max);
 
 
         if(max == 0){
@@ -394,7 +394,7 @@ public class API_common {
                 max = current;
             }
         }
-        logger(INFO_LEVEL, "2) max: " + max);
+        logger(DEBUG_LEVEL, "2) max: " + max);
 
 
         switch (operation.name()) {
@@ -411,9 +411,9 @@ public class API_common {
                 p_max = max;
                 break;
         }
-        logger(INFO_LEVEL, "3) max: " + max);
+        logger(DEBUG_LEVEL, "3) max: " + max);
         long finish = System.currentTimeMillis();
-        logger(INFO_LEVEL, (int) (finish-start) + "ms for get_max()");
+        logger(DEBUG_LEVEL, (int) (finish-start) + "ms for get_max()");
 
         return max;
     }
