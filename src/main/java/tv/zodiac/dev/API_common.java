@@ -343,7 +343,7 @@ public class API_common {
                 break;
         }
         long finish = System.currentTimeMillis();
-        logger(INFO_LEVEL, (int) (finish-start) + "ms for get_min()");
+        //logger(INFO_LEVEL, (int) (finish-start) + "ms for get_min()");
 
         return min;
     }
@@ -410,7 +410,7 @@ public class API_common {
                 break;
         }
         long finish = System.currentTimeMillis();
-        logger(INFO_LEVEL, (int) (finish-start) + "ms for get_max()");
+        //logger(INFO_LEVEL, (int) (finish-start) + "ms for get_max()");
 
         return max;
     }
