@@ -58,7 +58,6 @@ class testAMS_oldAPI_Performance extends API_common {
     void test10_Add(String ams_ip, String mac, String boxname, int count_reminders, int reminderChannelNumber, int reminderOffset, int reminderOffset_new, int count_iterations) throws IOException, InterruptedException {
         print_start_header(ams_ip, mac, boxname, count_reminders, reminderChannelNumber, reminderOffset, reminderOffset_new, count_iterations);
 
-
         for (int i = 1; i <= count_iterations; i++) {
             print_iteration_header(ams_ip, mac, count_reminders, i, count_iterations);
 
@@ -70,7 +69,9 @@ class testAMS_oldAPI_Performance extends API_common {
                 a_avg = (int) add_list.get(3);
                 a_med = (int) add_list.get(4);
                 a_min = (int) add_list.get(5);
+                a_min_iteration = (int) add_list.get(8);
                 a_max = (int) add_list.get(6);
+                a_max_iteration = (int) add_list.get(9);
                 a_iteration = (int) add_list.get(7);
             }
             add_list.clear();
@@ -78,10 +79,10 @@ class testAMS_oldAPI_Performance extends API_common {
         }
 
         prepare_total_results(mac, boxname, count_reminders, count_iterations,
-                a_avg, a_med, a_min, a_max, a_iteration, a_current,
-                0, 0, 0, 0, 0, null,
-                0, 0, 0, 0, 0, null,
-                0, 0, 0, 0, 0, null);
+                a_avg, a_med, a_min, a_min_iteration, a_max, a_max_iteration, a_iteration, a_current,
+                0, 0, 0, 0, 0, 0, 0, null,
+                d_avg, d_med, d_min, d_min_iteration, d_max, d_max_iteration, d_iteration, d_current,
+                p_avg, p_med, p_min, p_min_iteration, p_max, p_max_iteration, p_iteration, p_current);
         assertNotEquals(0, a_avg, "a_avg");
     }
 
@@ -93,15 +94,15 @@ class testAMS_oldAPI_Performance extends API_common {
         for (int i = 1; i <= count_iterations; i++) {
             print_iteration_header(ams_ip, mac, count_reminders, i, count_iterations);
 
-            //reminderChannelNumber = reminderChannelNumber();
-            //int finalReminderChannelNumber = reminderChannelNumber;
             add_list = AMS.request(ams_ip, mac, Operation.add, count_reminders, reminderChannelNumber, reminderProgramStart, reminderProgramId, reminderOffset);
             if (add_list.get(0).equals(expected200) && add_list.get(1).equals("")) {
                 a_current.add(add_list.get(2));
                 a_avg = (int) add_list.get(3);
                 a_med = (int) add_list.get(4);
                 a_min = (int) add_list.get(5);
+                a_min_iteration = (int) add_list.get(8);
                 a_max = (int) add_list.get(6);
+                a_max_iteration = (int) add_list.get(9);
                 a_iteration = (int) add_list.get(7);
 
                 purge_list = AMS.request(ams_ip, mac, Operation.purge);
@@ -110,7 +111,9 @@ class testAMS_oldAPI_Performance extends API_common {
                     p_avg = (int) purge_list.get(3);
                     p_med = (int) purge_list.get(4);
                     p_min = (int) purge_list.get(5);
+                    p_min_iteration = (int) purge_list.get(8);
                     p_max = (int) purge_list.get(6);
+                    p_max_iteration = (int) purge_list.get(9);
                     p_iteration = (int) purge_list.get(7);
                 }
             }
@@ -120,10 +123,10 @@ class testAMS_oldAPI_Performance extends API_common {
         }
 
         prepare_total_results(mac, boxname, count_reminders, count_iterations,
-                a_avg, a_med, a_min, a_max, a_iteration, a_current,
-                0, 0, 0, 0, 0, null,
-                0, 0, 0, 0, 0, null,
-                p_avg, p_med, p_min, p_max, p_iteration, p_current);
+                a_avg, a_med, a_min, a_min_iteration, a_max, a_max_iteration, a_iteration, a_current,
+                0, 0, 0, 0, 0, 0, 0, null,
+                d_avg, d_med, d_min, d_min_iteration, d_max, d_max_iteration, d_iteration, d_current,
+                p_avg, p_med, p_min, p_min_iteration, p_max, p_max_iteration, p_iteration, p_current);
         assertNotEquals(0, a_avg, "a_avg");
         assertNotEquals(0, p_avg, "p_avg");
     }
@@ -214,9 +217,9 @@ class testAMS_oldAPI_Performance extends API_common {
         }
 
         prepare_total_results(mac, boxname, count_reminders, count_iterations,
-                -1, 0, 0, 0, 0, 0, 0, null,
+                -1, a_med, a_min, a_min_iteration, a_max, a_max_iteration, a_iteration, a_current,
                 0, 0, 0, 0, 0, 0, 0, null,
-                0, 0, 0, 0, 0, 0, 0, null,
+                d_avg, d_med, d_min, d_min_iteration, d_max, d_max_iteration, d_iteration, d_current,
                 p_avg, p_med, p_min, p_min_iteration, p_max, p_max_iteration, p_iteration, p_current);
         assertNotEquals(0, p_avg, "p_avg");
     }

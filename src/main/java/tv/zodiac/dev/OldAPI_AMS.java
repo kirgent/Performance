@@ -65,7 +65,7 @@ class OldAPI_AMS extends API_common {
                 delete_list.add(current);
                 int avg = get_average(delete_list);
                 //use add_list.size() as number of current iteration!
-                int iteration = add_list.size();
+                int iteration = delete_list.size();
                 int[] min = get_min(Operation.delete, current, iteration);
                 int[] max = get_max(Operation.delete, current, iteration);
                 arrayList.add(2, current);
@@ -73,7 +73,7 @@ class OldAPI_AMS extends API_common {
                 arrayList.add(4, search_median(delete_list, sort));
                 arrayList.add(5, min[0]);
                 arrayList.add(6, max[0]);
-                arrayList.add(7, delete_list.size());
+                arrayList.add(7, iteration);
                 arrayList.add(8, min[1]);
                 arrayList.add(9, max[1]);
                 logger(DEBUG_LEVEL, "[DBG] modify avg = " + avg + "ms/" + iteration + ": modify_list:" + delete_list);
