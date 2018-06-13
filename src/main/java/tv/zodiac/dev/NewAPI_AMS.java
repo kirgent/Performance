@@ -56,8 +56,8 @@ class NewAPI_AMS extends API_common {
                 arrayList.add(2, current);
                 arrayList.add(3, avg);
                 arrayList.add(4, search_median(add_list, sort));
-                arrayList.add(5, get_min(Operation.add, current));
-                arrayList.add(6, get_max(Operation.add, current));
+                arrayList.add(5, get_min(Operation.add, current, add_list.size()));
+                arrayList.add(6, get_max(Operation.add, current, add_list.size()));
                 arrayList.add(7, add_list.size());
                 logger(DEBUG_LEVEL, "[DBG] " + new Date() + ": add avg = " + avg + "ms" + add_list.size() + ": add_list:" + add_list);
 
@@ -67,8 +67,8 @@ class NewAPI_AMS extends API_common {
                 arrayList.add(2, current);
                 arrayList.add(3, avg);
                 arrayList.add(4, search_median(modify_list, sort));
-                arrayList.add(5, get_min(Operation.modify, current));
-                arrayList.add(6, get_max(Operation.modify, current));
+                arrayList.add(5, get_min(Operation.modify, current, modify_list.size()));
+                arrayList.add(6, get_max(Operation.modify, current, modify_list.size()));
                 arrayList.add(7, modify_list.size());
                 logger(DEBUG_LEVEL, "[DBG] " + new Date() + ": modify avg = " + avg + "ms/" + modify_list.size() + ": modify_list:" + modify_list);
             }
@@ -122,8 +122,8 @@ class NewAPI_AMS extends API_common {
                 arrayList.add(2, current);
                 arrayList.add(3, avg);
                 arrayList.add(4, search_median(delete_list, sort));
-                arrayList.add(5, get_min(Operation.delete, current));
-                arrayList.add(6, get_max(Operation.delete, current));
+                arrayList.add(5, get_min(Operation.delete, current, delete_list.size()));
+                arrayList.add(6, get_max(Operation.delete, current, delete_list.size()));
                 arrayList.add(7, delete_list.size());
                 logger(DEBUG_LEVEL, "[DBG] " + new Date() + ": delete avg = " + avg + "ms/" + delete_list.size() + ": delete_list:" + delete_list);
             }
@@ -175,8 +175,8 @@ class NewAPI_AMS extends API_common {
             arrayList.add(2, current);
             arrayList.add(3, avg);
             arrayList.add(4, search_median(purge_list, sort));
-            arrayList.add(5, get_min(Operation.purge, current));
-            arrayList.add(6, get_max(Operation.purge, current));
+            arrayList.add(5, get_min(Operation.purge, current, purge_list.size()));
+            arrayList.add(6, get_max(Operation.purge, current, purge_list.size()));
             arrayList.add(7, purge_list.size());
             logger(DEBUG_LEVEL,"[DBG] " + new Date() + ": purge avg = " + avg + "ms/" + purge_list.size() + ": purge_list:" + purge_list);
 
