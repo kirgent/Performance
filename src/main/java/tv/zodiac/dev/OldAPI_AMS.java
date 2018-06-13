@@ -25,7 +25,7 @@ class OldAPI_AMS extends API_common {
      * @return
      * @throws IOException
      */
-    ArrayList request(String ams_ip, String mac, Enum<Operation> operation, int count_reminders, long reminderChannelNumber, String reminderProgramStart, String reminderProgramId, long reminderOffset) throws IOException {
+    ArrayList request(String ams_ip, String mac, Enum<Operation> operation, int i, int count_reminders, long reminderChannelNumber, String reminderProgramStart, String reminderProgramId, long reminderOffset) throws IOException {
         logger(INFO_LEVEL, "[INF] " + new Date() + ": " + operation.toString().toUpperCase() + ":");
 
         HttpPost request = new HttpPost(prepare_url(ams_ip, operation,false));
@@ -41,58 +41,52 @@ class OldAPI_AMS extends API_common {
         logger(DEBUG_LEVEL, "[DBG] " + current + "ms request");
 
         start = System.currentTimeMillis();
-        ArrayList arrayList = new ArrayList();
-        arrayList.add(0, response.getStatusLine().getStatusCode() + " " + response.getStatusLine().getReasonPhrase());
-        arrayList.add(1, check_body_response(read_response(new StringBuilder(),response), mac));
-        if (arrayList.get(1).equals("")) {
+        ArrayList list = new ArrayList();
+        list.add(0, response.getStatusLine().getStatusCode() + " " + response.getStatusLine().getReasonPhrase());
+        list.add(1, check_body_response(read_response(new StringBuilder(),response), mac));
+        if (list.get(1).equals("")) {
             if (operation.name().equals("add")) {
                 add_list.add(current);
                 int avg = get_average(add_list);
-                int iteration = add_list.size();
-                int[] min = get_min(Operation.add, current, iteration);
-                int[] max = get_max(Operation.add, current, iteration);
-                arrayList.add(2, current);
-                arrayList.add(3, avg);
-                arrayList.add(4, search_median(add_list, sort));
-                arrayList.add(5, min[0]);
-                arrayList.add(6, max[0]);
-                arrayList.add(7, iteration);
-                arrayList.add(8, min[1]);
-                arrayList.add(9, max[1]);
-                logger(DEBUG_LEVEL, "[DBG] add avg = " + avg + "ms/" + iteration + ": add_list:" + add_list);
+                int size = add_list.size();
+                int[] min = get_min(Operation.add, current, i);
+                int[] max = get_max(Operation.add, current, i);
+                list.add(2, current);
+                list.add(3, avg);
+                list.add(4, search_median(add_list, sort));
+                list.add(5, min[0]);
+                list.add(6, min[1]);
+
+                list.add(7, max[0]);
+                list.add(8, max[1]);
+
+                list.add(9, size);
+                logger(DEBUG_LEVEL, "[DBG] add avg = " + avg + "ms/" + size + ": add_list:" + add_list);
 
             } else if (operation.name().equals("delete")) {
                 delete_list.add(current);
                 int avg = get_average(delete_list);
                 //use add_list.size() as number of current iteration!
-                int iteration = delete_list.size();
-                int[] min = get_min(Operation.delete, current, iteration);
-                int[] max = get_max(Operation.delete, current, iteration);
-                arrayList.add(2, current);
-                arrayList.add(3, avg);
-                arrayList.add(4, search_median(delete_list, sort));
-                arrayList.add(5, min[0]);
-                arrayList.add(6, max[0]);
-                arrayList.add(7, iteration);
-                arrayList.add(8, min[1]);
-                arrayList.add(9, max[1]);
-                logger(DEBUG_LEVEL, "[DBG] modify avg = " + avg + "ms/" + iteration + ": modify_list:" + delete_list);
-            }
+                int size = delete_list.size();
+                int[] min = get_min(Operation.delete, current, i);
+                int[] max = get_max(Operation.delete, current, i);
+                list.add(2, current);
+                list.add(3, avg);
+                list.add(4, search_median(delete_list, sort));
+                list.add(5, min[0]);
+                list.add(6, min[1]);
 
-            logger(INFO_LEVEL, "[INF] return data: [" + arrayList.get(0) + ", " + arrayList.get(1) + "]"
-                    + " measurements: cur=" + arrayList.get(2)
-                    + ", avg=" + arrayList.get(3)
-                    + ", med=" + arrayList.get(4)
-                    + ", min=" + arrayList.get(5) + "(/" + arrayList.get(8) + ")"
-                    + ", max=" + arrayList.get(6) + "(/" + arrayList.get(9) + ")"
-                    + ", i=" + arrayList.get(7));
-        } else {
-            logger(INFO_LEVEL, "[INF] return data: [" + arrayList.get(0) + ", " + arrayList.get(1) + "]");
+                list.add(7, max[0]);
+                list.add(8, max[1]);
+
+                list.add(9, size);
+                logger(DEBUG_LEVEL, "[DBG] delete avg = " + avg + "ms/" + size + ": delete_list:" + delete_list);
+            }
         }
         finish = System.currentTimeMillis();
         logger(INFO_LEVEL, (int)(finish-start) + "ms for parsing request");
 
-        return arrayList;
+        return list;
     }
 
     /** Purge method
@@ -101,7 +95,7 @@ class OldAPI_AMS extends API_common {
      * @return
      * @throws IOException
      */
-    ArrayList request(String ams_ip, String mac, Enum<Operation> operation) throws IOException {
+    ArrayList request(String ams_ip, String mac, Enum<Operation> operation, int i) throws IOException {
         logger(INFO_LEVEL, "[INF] " + new Date() + ": " + operation.toString().toUpperCase() + ":");
 
         HttpPost request = new HttpPost(prepare_url(ams_ip, Operation.purge, false));
@@ -117,40 +111,32 @@ class OldAPI_AMS extends API_common {
         logger(DEBUG_LEVEL, "[DBG] " + current + "ms request");
 
         start = System.currentTimeMillis();
-        ArrayList arrayList = new ArrayList();
-        arrayList.add(0, response.getStatusLine().getStatusCode() + " " + response.getStatusLine().getReasonPhrase());
-        arrayList.add(1, check_body_response(read_response(new StringBuilder(),response), mac));
-        if (arrayList.get(1).equals("")) {
+        ArrayList list = new ArrayList();
+        list.add(0, response.getStatusLine().getStatusCode() + " " + response.getStatusLine().getReasonPhrase());
+        list.add(1, check_body_response(read_response(new StringBuilder(),response), mac));
+        if (list.get(1).equals("")) {
             purge_list.add(current);
             int avg = get_average(purge_list);
             //use purge_list.size() as current iteration!
-            int iteration = purge_list.size();
-            int[] min = get_min(Operation.purge, current, iteration);
-            int[] max = get_max(Operation.purge, current, iteration);
-            arrayList.add(2, current);
-            arrayList.add(3, avg);
-            arrayList.add(4, search_median(purge_list, sort));
-            arrayList.add(5, min[0]);
-            arrayList.add(6, max[0]);
-            arrayList.add(7, iteration);
-            arrayList.add(8, min[1]);
-            arrayList.add(9, max[1]);
-            logger(DEBUG_LEVEL, "[DBG] purge avg = " + avg + "ms/" + iteration + ": purge_list:" + purge_list);
+            int size = purge_list.size();
+            int[] min = get_min(Operation.purge, current, i);
+            int[] max = get_max(Operation.purge, current, i);
+            list.add(2, current);
+            list.add(3, avg);
+            list.add(4, search_median(purge_list, sort));
+            list.add(5, min[0]);
+            list.add(6, min[1]);
 
-            logger(INFO_LEVEL, "[INF] return data: [" + arrayList.get(0) + ", " + arrayList.get(1) + "]"
-                    + " measurements: cur=" + arrayList.get(2)
-                    + ", avg=" + arrayList.get(3)
-                    + ", med=" + arrayList.get(4)
-                    + ", min=" + arrayList.get(5) + "(/" + arrayList.get(8) + ")"
-                    + ", max=" + arrayList.get(6) + "(/" + arrayList.get(9) + ")"
-                    + ", i=" + arrayList.get(7));
-        } else {
-            logger(INFO_LEVEL, "[INF] return data: [" + arrayList.get(0) + ", " + arrayList.get(1) + "]");
+            list.add(7, max[0]);
+            list.add(8, max[1]);
+
+            list.add(9, size);
+            logger(DEBUG_LEVEL, "[DBG] purge avg = " + avg + "ms/" + size + ": purge_list:" + purge_list);
         }
         finish = System.currentTimeMillis();
         logger(INFO_LEVEL, (int)(finish-start) + "ms for parsing request");
 
-        return arrayList;
+        return list;
     }
 
     private String generate_json_reminder(String mac, int count_reminders, Enum<Operation> operation, long reminderChannelNumber, String reminderProgramStart, String reminderProgramId, long reminderOffset) throws IOException {

@@ -973,12 +973,14 @@ public class API_common {
         String footer = "\n========= ========= ========= ========= ========= ========= ========= =========";
 
         String result = "";
-        if (a_avg != 0) {
+        //if (a_avg != 0) {
             result += header;
-            result += a;
+            //result += a;
+            if (a_avg != 0) {            result += a;        }
             if (m_avg != 0) {            result += m;        }
             if (d_avg != 0) {            result += d;        }
             if (p_avg != 0) {            result += p;        }
+
             if (a_current != null) {
                 //result += a_current;
                 write_to_file("a.log", a_current.toString(), false);
@@ -998,9 +1000,25 @@ public class API_common {
 
             result += footer;
             logger(INFO_LEVEL, result);
-        }
+        //}
     }
 
+
+    void print_preliminary_results(ArrayList list) throws IOException {
+
+        if(list.get(1).equals("")){
+            logger(INFO_LEVEL, "[INF] return data: [" + list.get(0) + ", " + list.get(1) + "]"
+                + " measurements: cur=" + list.get(2)
+                + ", avg=" + list.get(3)
+                + ", med=" + list.get(4)
+                + ", min=" + list.get(5) + "(/" + list.get(6) + ")"
+                + ", max=" + list.get(7) + "(/" + list.get(8) + ")"
+                + ", i=" + list.get(9));
+        } else {
+            logger(INFO_LEVEL, "[INF] return data: [" + list.get(0) + ", " + list.get(1) + "]");
+        }
+
+    }
     void logger(String level, String s) throws IOException {
         boolean append = true;
         if(level.equals("INF") && show_info_level) {
