@@ -48,32 +48,43 @@ class OldAPI_AMS extends API_common {
             if (operation.name().equals("add")) {
                 add_list.add(current);
                 int avg = get_average(add_list);
+                int iteration = add_list.size();
+                int[] min = get_min(Operation.add, current, iteration);
+                int[] max = get_max(Operation.add, current, iteration);
                 arrayList.add(2, current);
                 arrayList.add(3, avg);
                 arrayList.add(4, search_median(add_list, sort));
-                arrayList.add(5, get_min(Operation.add, current));
-                arrayList.add(6, get_max(Operation.add, current));
-                arrayList.add(7, add_list.size());
-                logger(DEBUG_LEVEL, "[DBG] add avg = " + avg + "ms/" + add_list.size() + ": add_list:" + add_list);
+                arrayList.add(5, min[0]);
+                arrayList.add(6, max[0]);
+                arrayList.add(7, iteration);
+                arrayList.add(8, min[1]);
+                arrayList.add(9, max[1]);
+                logger(DEBUG_LEVEL, "[DBG] add avg = " + avg + "ms/" + iteration + ": add_list:" + add_list);
 
             } else if (operation.name().equals("delete")) {
                 delete_list.add(current);
                 int avg = get_average(delete_list);
+                //use add_list.size() as number of current iteration!
+                int iteration = add_list.size();
+                int[] min = get_min(Operation.delete, current, iteration);
+                int[] max = get_max(Operation.delete, current, iteration);
                 arrayList.add(2, current);
                 arrayList.add(3, avg);
                 arrayList.add(4, search_median(delete_list, sort));
-                arrayList.add(5, get_min(Operation.delete, current));
-                arrayList.add(6, get_max(Operation.delete, current));
+                arrayList.add(5, min[0]);
+                arrayList.add(6, max[0]);
                 arrayList.add(7, delete_list.size());
-                logger(DEBUG_LEVEL, "[DBG] modify avg = " + avg + "ms/" + delete_list.size() + ": modify_list:" + delete_list);
+                arrayList.add(8, min[1]);
+                arrayList.add(9, max[1]);
+                logger(DEBUG_LEVEL, "[DBG] modify avg = " + avg + "ms/" + iteration + ": modify_list:" + delete_list);
             }
 
             logger(INFO_LEVEL, "[INF] return data: [" + arrayList.get(0) + ", " + arrayList.get(1) + "]"
                     + " measurements: cur=" + arrayList.get(2)
                     + ", avg=" + arrayList.get(3)
                     + ", med=" + arrayList.get(4)
-                    + ", min=" + arrayList.get(5)
-                    + ", max=" + arrayList.get(6)
+                    + ", min=" + arrayList.get(5) + "(/" + arrayList.get(8) + ")"
+                    + ", max=" + arrayList.get(6) + "(/" + arrayList.get(9) + ")"
                     + ", i=" + arrayList.get(7));
         } else {
             logger(INFO_LEVEL, "[INF] return data: [" + arrayList.get(0) + ", " + arrayList.get(1) + "]");
@@ -112,20 +123,26 @@ class OldAPI_AMS extends API_common {
         if (arrayList.get(1).equals("")) {
             purge_list.add(current);
             int avg = get_average(purge_list);
+            //use purge_list.size() as current iteration!
+            int iteration = purge_list.size();
+            int[] min = get_min(Operation.purge, current, iteration);
+            int[] max = get_max(Operation.purge, current, iteration);
             arrayList.add(2, current);
             arrayList.add(3, avg);
             arrayList.add(4, search_median(purge_list, sort));
-            arrayList.add(5, get_min(Operation.purge, current));
-            arrayList.add(6, get_max(Operation.purge, current));
-            arrayList.add(7, purge_list.size());
-            logger(DEBUG_LEVEL, "[DBG] purge avg = " + avg + "ms/" + purge_list.size() + ": purge_list:" + purge_list);
+            arrayList.add(5, min[0]);
+            arrayList.add(6, max[0]);
+            arrayList.add(7, iteration);
+            arrayList.add(8, min[1]);
+            arrayList.add(9, max[1]);
+            logger(DEBUG_LEVEL, "[DBG] purge avg = " + avg + "ms/" + iteration + ": purge_list:" + purge_list);
 
             logger(INFO_LEVEL, "[INF] return data: [" + arrayList.get(0) + ", " + arrayList.get(1) + "]"
                     + " measurements: cur=" + arrayList.get(2)
                     + ", avg=" + arrayList.get(3)
                     + ", med=" + arrayList.get(4)
-                    + ", min=" + arrayList.get(5)
-                    + ", max=" + arrayList.get(6)
+                    + ", min=" + arrayList.get(5) + "(/" + arrayList.get(8) + ")"
+                    + ", max=" + arrayList.get(6) + "(/" + arrayList.get(9) + ")"
                     + ", i=" + arrayList.get(7));
         } else {
             logger(INFO_LEVEL, "[INF] return data: [" + arrayList.get(0) + ", " + arrayList.get(1) + "]");

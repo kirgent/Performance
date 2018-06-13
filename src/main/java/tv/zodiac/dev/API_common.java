@@ -72,10 +72,10 @@ public class API_common {
             modify_list = new ArrayList<>(),
             delete_list = new ArrayList<>(),
             purge_list = new ArrayList<>();
-    private int a_max, a_min,
-            m_max, m_min,
-            d_max, d_min,
-            p_max, p_min;
+    private int[] a_max = {0, 0}, a_min = {0, 0},
+            m_max = {0, 0}, m_min = {0, 0},
+            d_max = {0, 0}, d_min = {0, 0},
+            p_max = {0, 0}, p_min = {0, 0};
 
     private String REMINDERSLOG = "reminders.log";
 
@@ -223,9 +223,9 @@ public class API_common {
         long start = System.currentTimeMillis();
         int max = 0;
         if (list.size() > 0) {
-            for (int j = 0; j < list.size(); j++) {
-                if ((int)list.get(j) > max) {
-                    max = (int) list.get(j);
+            for (Object aList : list) {
+                if ((int) aList > max) {
+                    max = (int) aList;
                 }
             }
         }
@@ -271,9 +271,9 @@ public class API_common {
         int min = 0;
         if (list.size() > 0) {
             min = (int)list.get(0);
-            for (int j = 0; j < list.size(); j++) {
-                if ((int)list.get(j) < min) {
-                    min = (int) list.get(j);
+            for (Object aList : list) {
+                if ((int) aList < min) {
+                    min = (int) aList;
                 }
             }
         }
@@ -283,7 +283,7 @@ public class API_common {
         return min;
     }
 
-    int get_min(Enum<Operation> operation, int current) throws IOException {
+    int[] get_min(Enum<Operation> operation, int current, int i) throws IOException {
         long start = System.currentTimeMillis();
         // SLOWly ???
         /*switch (operation.name()) {
@@ -301,42 +301,45 @@ public class API_common {
 
 
         // FAST??? to_confirm
-        int min = 0;
+        int min[] = new int[2];
         switch (operation.name()) {
             case "add":
-                min = a_min;
+                min = Arrays.copyOf(a_min, min.length);
                 break;
             case "modify":
-                min = m_min;
+                min = Arrays.copyOf(m_min, min.length);
                 break;
             case "delete":
-                min = d_min;
+                min = Arrays.copyOf(d_min, min.length);
                 break;
             case "purge":
-                min = p_min;
+                min = Arrays.copyOf(p_min, min.length);
                 break;
         }
 
-        if(min == 0){
-            min = current;
+        if(min[0] == 0){
+            min[0] = current;
+            min[1] = 1;
         } else {
-            if (current < min) {
-                min = current;
+            if (current < min[0]) {
+                min[0] = current;
+                min[1] = i;
             }
         }
 
+        //todo TO REMOVE???
         switch (operation.name()) {
             case "add":
-                a_min = min;
+                a_min = Arrays.copyOf(min, min.length);
                 break;
             case "modify":
-                m_min = min;
+                m_min = Arrays.copyOf(min, min.length);
                 break;
             case "delete":
-                d_min = min;
+                d_min = Arrays.copyOf(min, min.length);
                 break;
             case "purge":
-                p_min = min;
+                p_min = Arrays.copyOf(min, min.length);
                 break;
         }
         long finish = System.currentTimeMillis();
@@ -345,9 +348,9 @@ public class API_common {
         return min;
     }
 
-    int get_max(Enum<Operation> operation, int current) throws IOException {
+    int[] get_max(Enum<Operation> operation, int current, int i) throws IOException {
         long start = System.currentTimeMillis();
-        int max = 0;
+        int max[] = new int[2];
 
         //SLOWly???
         /*switch (operation.name()) {
@@ -368,39 +371,42 @@ public class API_common {
         //FAST??? to_confirm!
         switch (operation.name()) {
             case "add":
-                max = a_max;
+                max = Arrays.copyOf(a_max, a_max.length);
                 break;
             case "modify":
-                max = m_max;
+                max = Arrays.copyOf(m_max, m_max.length);
                 break;
             case "delete":
-                max = d_max;
+                max = Arrays.copyOf(d_max, d_max.length);
                 break;
             case "purge":
-                max = p_max;
+                max = Arrays.copyOf(p_max, p_max.length);
                 break;
         }
 
-        if(max == 0){
-            max = current;
+        if(max[0] == 0){
+            max[0] = current;
+            max[1] = 1;
         } else {
-            if (current > max) {
-                max = current;
+            if (current > max[0]) {
+                max[0] = current;
+                max[1] = i;
             }
         }
 
+        //todo TO REMOVE???
         switch (operation.name()) {
             case "add":
-                a_max = max;
+                a_max = Arrays.copyOf(max, max.length);
                 break;
             case "modify":
-                m_max = max;
+                m_max = Arrays.copyOf(max, max.length);
                 break;
             case "delete":
-                d_max = max;
+                d_max = Arrays.copyOf(max, max.length);
                 break;
             case "purge":
-                p_max = max;
+                p_max = Arrays.copyOf(max, max.length);
                 break;
         }
         long finish = System.currentTimeMillis();
@@ -951,8 +957,52 @@ public class API_common {
         }
     }
 
+    void prepare_total_results(String mac, String boxname, int count_reminders, int count_iterations,
+                               int a_avg, int a_med, int a_min, int a_min_iteration, int a_max, int a_max_iteration, int a_iteration, ArrayList a_current,
+                               int m_avg, int m_med, int m_min, int m_min_iteration, int m_max, int m_max_iteration, int m_iteration, ArrayList m_current,
+                               int d_avg, int d_med, int d_min, int d_min_iteration, int d_max, int d_max_iteration, int d_iteration, ArrayList d_current,
+                               int p_avg, int p_med, int p_min, int p_min_iteration, int p_max, int p_max_iteration, int p_iteration, ArrayList p_current
+    ) throws IOException {
+
+        String header = "========= ========= ========= Total measurements ========= ========= ========="
+                + "\n" + new Date() + ", mac=" + mac + "(" + boxname + "), count_reminders=" + count_reminders + ", count_iterations=" + a_iteration + "/" + count_iterations;
+        String a = "\n   add avg=" + a_avg + "ms, med=" + a_med + "ms, min=" + a_min + "ms/" + a_min_iteration + ", max=" + a_max + "ms/" + a_max_iteration + ", i=" + a_iteration;
+        String m = "\nmodify avg=" + m_avg + "ms, med=" + m_med + "ms, min=" + m_min + "ms/" + m_min_iteration + ", max=" + m_max + "ms/" + m_max_iteration + ", i=" + m_iteration;
+        String d = "\ndelete avg=" + d_avg + "ms, med=" + d_med + "ms, min=" + d_min + "ms/" + d_min_iteration + ", max=" + d_max + "ms/" + d_max_iteration + ", i=" + d_iteration;
+        String p = "\n purge avg=" + p_avg + "ms, med=" + p_med + "ms, min=" + p_min + "ms/" + p_min_iteration + ", max=" + p_max + "ms/" + p_max_iteration + ", i=" + p_iteration;
+        String footer = "\n========= ========= ========= ========= ========= ========= ========= =========";
+
+        String result = "";
+        if (a_avg != 0) {
+            result += header;
+            result += a;
+            if (m_avg != 0) {            result += m;        }
+            if (d_avg != 0) {            result += d;        }
+            if (p_avg != 0) {            result += p;        }
+            if (a_current != null) {
+                //result += a_current;
+                write_to_file("a.log", a_current.toString(), false);
+            }
+            if (m_current != null) {
+                //result += m_current;
+                write_to_file("m.log", m_current.toString(), false);
+            }
+            if (d_current != null){
+                //result += d_current;
+                write_to_file("d.log", d_current.toString(), false);
+            }
+            if (p_current != null) {
+                //result += p_current;
+                write_to_file("p.log", p_current.toString(), false);
+            }
+
+            result += footer;
+            logger(INFO_LEVEL, result);
+        }
+    }
+
     void logger(String level, String s) throws IOException {
-         boolean append = true;
+        boolean append = true;
         if(level.equals("INF") && show_info_level) {
             System.out.println(s);
             if (write_file) {
