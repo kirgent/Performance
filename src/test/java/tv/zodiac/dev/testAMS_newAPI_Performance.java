@@ -66,7 +66,7 @@ class testAMS_newAPI_Performance extends API_common {
             long reminderScheduleId = reminderScheduleId(Generation.random);
             long reminderId = reminderId(Generation.random);
 
-            add_list = AMS.request(ams_ip, mac, Operation.add, i, count_reminders, reminderProgramStart, reminderChannelNumber, reminderProgramId, reminderOffset, reminderScheduleId, reminderId);
+            add_list = AMS.request_perf(ams_ip, mac, Operation.add, i, count_reminders, reminderProgramStart, reminderChannelNumber, reminderProgramId, reminderOffset, reminderScheduleId, reminderId);
             print_preliminary_results(add_list);
             if(add_list.get(0).equals(expected200) && add_list.get(1).equals("")) {
                 a_current.add(add_list.get(2));
@@ -104,7 +104,7 @@ class testAMS_newAPI_Performance extends API_common {
             long reminderScheduleId = reminderScheduleId(Generation.random);
             long reminderId = reminderId(Generation.random);
 
-            add_list = AMS.request(ams_ip, mac, Operation.add, i, count_reminders, reminderProgramStart, reminderChannelNumber, reminderProgramId, reminderOffset, reminderScheduleId, reminderId);
+            add_list = AMS.request_perf(ams_ip, mac, Operation.add, i, count_reminders, reminderProgramStart, reminderChannelNumber, reminderProgramId, reminderOffset, reminderScheduleId, reminderId);
             print_preliminary_results(add_list);
             if(add_list.get(0).equals(expected200) && add_list.get(1).equals("")) {
                 a_current.add(add_list.get(2));
@@ -116,7 +116,7 @@ class testAMS_newAPI_Performance extends API_common {
                 a_max_iteration = (int) add_list.get(8);
                 a_size = (int) add_list.get(9);
 
-                purge_list = AMS.request(ams_ip, mac, Operation.purge, i);
+                purge_list = AMS.request_perf(ams_ip, mac, Operation.purge, i);
                 print_preliminary_results(purge_list);
                 if(purge_list.get(1).equals("")) {
                     p_avg = (int) purge_list.get(3);
@@ -156,7 +156,7 @@ class testAMS_newAPI_Performance extends API_common {
             long reminderScheduleId = reminderScheduleId(Generation.random);
             long reminderId = reminderId(Generation.random);
 
-            add_list = AMS.request(ams_ip, mac, Operation.add, i, count_reminders, reminderProgramStart, reminderChannelNumber, reminderProgramId, reminderOffset, reminderScheduleId, reminderId);
+            add_list = AMS.request_perf(ams_ip, mac, Operation.add, i, count_reminders, reminderProgramStart, reminderChannelNumber, reminderProgramId, reminderOffset, reminderScheduleId, reminderId);
             print_preliminary_results(add_list);
             if (add_list.get(0).equals(expected200) && add_list.get(1).equals("")) {
                 a_current.add(add_list.get(2));
@@ -168,7 +168,7 @@ class testAMS_newAPI_Performance extends API_common {
                 a_max_iteration = (int) add_list.get(8);
                 a_size = (int) add_list.get(9);
 
-                delete_list = AMS.request(ams_ip, mac, Operation.delete, i, count_reminders, reminderScheduleId, reminderId);
+                delete_list = AMS.request_perf(ams_ip, mac, Operation.delete, i, count_reminders, reminderScheduleId, reminderId);
                 print_preliminary_results(delete_list);
                 if (delete_list.get(1).equals("")) {
                     d_current.add(delete_list.get(2));
@@ -181,7 +181,7 @@ class testAMS_newAPI_Performance extends API_common {
                     d_size = (int) delete_list.get(9);
                 }
 
-                purge_list = AMS.request(ams_ip, mac, Operation.purge, i);
+                purge_list = AMS.request_perf(ams_ip, mac, Operation.purge, i);
                 print_preliminary_results(purge_list);
                 if (purge_list.get(1).equals("")) {
                     p_avg = (int) purge_list.get(3);
@@ -226,7 +226,7 @@ class testAMS_newAPI_Performance extends API_common {
             //long reminderScheduleId = reminderScheduleId(Generation.increment);
             //long reminderId = reminderId(Generation.increment);
 
-            add_list = AMS.request(ams_ip, mac, Operation.add, i, count_reminders, reminderProgramStart, reminderChannelNumber, reminderProgramId, reminderOffset, reminderScheduleId, reminderId);
+            add_list = AMS.request_perf(ams_ip, mac, Operation.add, i, count_reminders, reminderProgramStart, reminderChannelNumber, reminderProgramId, reminderOffset, reminderScheduleId, reminderId);
             print_preliminary_results(add_list);
             if (add_list.get(0).equals(expected200) && add_list.get(1).equals("")) {
                 a_current.add(add_list.get(2));
@@ -238,7 +238,7 @@ class testAMS_newAPI_Performance extends API_common {
                 a_max_iteration = (int) add_list.get(8);
                 a_size = (int) add_list.get(9);
 
-                modify_list = AMS.request(ams_ip, mac, Operation.modify, i, count_reminders, reminderProgramStart, reminderChannelNumber, reminderProgramId, reminderOffset_new, reminderScheduleId, reminderId);
+                modify_list = AMS.request_perf(ams_ip, mac, Operation.modify, i, count_reminders, reminderProgramStart, reminderChannelNumber, reminderProgramId, reminderOffset_new, reminderScheduleId, reminderId);
                 print_preliminary_results(modify_list);
                 if (modify_list.get(1).equals("")) {
                     m_current.add(modify_list.get(2));
@@ -251,7 +251,7 @@ class testAMS_newAPI_Performance extends API_common {
                     m_size = (int) modify_list.get(9);
                 }
 
-                delete_list = AMS.request(ams_ip, mac, Operation.delete, i, count_reminders, reminderScheduleId, reminderId);
+                delete_list = AMS.request_perf(ams_ip, mac, Operation.delete, i, count_reminders, reminderScheduleId, reminderId);
                 print_preliminary_results(delete_list);
                 if (delete_list.get(1).equals("")) {
                     d_current.add(delete_list.get(2));
@@ -264,7 +264,7 @@ class testAMS_newAPI_Performance extends API_common {
                     d_size = (int) delete_list.get(9);
                 }
 
-                purge_list = AMS.request(ams_ip, mac, Operation.purge, i);
+                purge_list = AMS.request_perf(ams_ip, mac, Operation.purge, i);
                 print_preliminary_results(delete_list);
                 if (purge_list.get(1).equals("")) {
                     p_avg = (int) purge_list.get(3);
@@ -302,14 +302,10 @@ class testAMS_newAPI_Performance extends API_common {
     void test9_Purge(String ams_ip, String mac, String boxname, int count_reminders, int reminderChannelNumber, int reminderOffset, int reminderOffset_new, int count_iterations) throws IOException, InterruptedException {
         print_start_header(ams_ip, mac, boxname, count_reminders, reminderChannelNumber, reminderOffset, reminderOffset_new, count_iterations);
 
-        /*ArrayList purge_list;
-        int p_avg = 0, p_med = 0, p_min = 0, p_max = 0, p_size = 0;
-        ArrayList p_current = new ArrayList();*/
-
         for (int i = 1; i <= count_iterations; i++) {
             print_iteration_header(ams_ip, mac, count_reminders, i, count_iterations);
 
-            purge_list = AMS.request(ams_ip, mac, Operation.purge, i);
+            purge_list = AMS.request_perf(ams_ip, mac, Operation.purge, i);
             print_preliminary_results(purge_list);
             if (purge_list.get(1).equals("")) {
                 p_avg = (int) purge_list.get(3);

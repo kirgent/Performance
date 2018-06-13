@@ -38,7 +38,6 @@ class NewAPI_AMS extends API_common {
         request.setEntity(new StringEntity(generate_json_reminder(mac, count_reminders, operation, reminderProgramStart, reminderChannelNumber, reminderProgramId, reminderOffset, reminderScheduleId, reminderId)));
         logger(DEBUG_LEVEL, "[DBG] request string: " + request);
 
-
         long start = System.currentTimeMillis();
         HttpResponse response = HttpClients.createDefault().execute(request);
         long finish = System.currentTimeMillis();
@@ -94,7 +93,7 @@ class NewAPI_AMS extends API_common {
             logger(INFO_LEVEL, "[INF] return data: [" + list.get(0) + ", " + list.get(1) + "]");
         }
         finish = System.currentTimeMillis();
-        logger(INFO_LEVEL, (int)(finish-start) + "ms for parsing request");
+        //logger(INFO_LEVEL, (int)(finish-start) + "ms for parsing request");
 
         return list;
     }
@@ -112,7 +111,7 @@ class NewAPI_AMS extends API_common {
      * @return list
      * @throws IOException -TBD
      */
-    ArrayList request(String ams_ip, String mac, Enum<Operation> operation, int i, int count_reminders, String reminderProgramStart, long reminderChannelNumber, String reminderProgramId, long reminderOffset, long reminderScheduleId, long reminderId) throws IOException {
+    ArrayList request_perf(String ams_ip, String mac, Enum<Operation> operation, int i, int count_reminders, String reminderProgramStart, long reminderChannelNumber, String reminderProgramId, long reminderOffset, long reminderScheduleId, long reminderId) throws IOException {
         logger(INFO_LEVEL, "[INF] " + new Date() + ": " + operation.toString().toUpperCase() + ":");
 
         HttpPost request = new HttpPost(prepare_url(ams_ip, operation, true));
@@ -120,7 +119,6 @@ class NewAPI_AMS extends API_common {
         request.setHeader("Content-type", "application/json");
         request.setEntity(new StringEntity(generate_json_reminder(mac, count_reminders, operation, reminderProgramStart, reminderChannelNumber, reminderProgramId, reminderOffset, reminderScheduleId, reminderId)));
         logger(DEBUG_LEVEL, "[DBG] request string: " + request);
-
 
         long start = System.currentTimeMillis();
         HttpResponse response = HttpClients.createDefault().execute(request);
@@ -167,7 +165,7 @@ class NewAPI_AMS extends API_common {
             }
         }
         finish = System.currentTimeMillis();
-        logger(INFO_LEVEL, (int)(finish-start) + "ms for parsing request");
+        //logger(INFO_LEVEL, (int)(finish-start) + "ms for parsing request");
 
         return list;
     }
@@ -226,7 +224,7 @@ class NewAPI_AMS extends API_common {
             logger(INFO_LEVEL, "[INF] return data: [" + list.get(0) + ", " + list.get(1) + "]");
         }
         finish = System.currentTimeMillis();
-        logger(INFO_LEVEL, (int)(finish-start) + "ms for parsing request");
+        //logger(INFO_LEVEL, (int)(finish-start) + "ms for parsing request");
 
         return list;
     }
@@ -238,7 +236,7 @@ class NewAPI_AMS extends API_common {
      * @return list
      * @throws IOException -TBD
      */
-    ArrayList request(String ams_ip, String mac, Enum<Operation> operation, int i, int count_reminders, long reminderScheduleId, long reminderId) throws IOException {
+    ArrayList request_perf(String ams_ip, String mac, Enum<Operation> operation, int i, int count_reminders, long reminderScheduleId, long reminderId) throws IOException {
         logger(INFO_LEVEL, "[INF] " + new Date() + ": " + operation.toString().toUpperCase() + ":");
 
         HttpPost request = new HttpPost(prepare_url(ams_ip, Operation.delete, true));
@@ -274,7 +272,7 @@ class NewAPI_AMS extends API_common {
             logger(DEBUG_LEVEL, "[DBG] " + new Date() + ": delete avg = " + avg + "ms/" + size + ": delete_list:" + delete_list);
         }
         finish = System.currentTimeMillis();
-        logger(INFO_LEVEL, (int)(finish-start) + "ms for parsing request");
+        //logger(INFO_LEVEL, (int)(finish-start) + "ms for parsing request");
 
         return list;
     }
@@ -331,7 +329,7 @@ class NewAPI_AMS extends API_common {
             logger(INFO_LEVEL, "[INF] return data: [" + list.get(0) + ", " + list.get(1) + "]");
         }
         finish = System.currentTimeMillis();
-        logger(INFO_LEVEL, (int)(finish-start) + "ms for parsing request");
+        //logger(INFO_LEVEL, (int)(finish-start) + "ms for parsing request");
 
         return list;
     }
@@ -342,7 +340,7 @@ class NewAPI_AMS extends API_common {
      * @return list
      * @throws IOException - TBD
      */
-    ArrayList request(String ams_ip, String mac, Enum<Operation> operation, int i) throws IOException {
+    ArrayList request_perf(String ams_ip, String mac, Enum<Operation> operation, int i) throws IOException {
         logger(INFO_LEVEL, "[INF] " + new Date() + ": " + operation.toString().toUpperCase() + ":");
 
         HttpPost request = new HttpPost(prepare_url(ams_ip, operation, true));
@@ -378,7 +376,7 @@ class NewAPI_AMS extends API_common {
             logger(DEBUG_LEVEL,"[DBG] " + new Date() + ": purge avg = " + avg + "ms/" + size + ": purge_list:" + purge_list);
         }
         finish = System.currentTimeMillis();
-        logger(INFO_LEVEL, (int)(finish-start) + "ms for parsing request");
+        //logger(INFO_LEVEL, (int)(finish-start) + "ms for parsing request");
 
         return list;
     }

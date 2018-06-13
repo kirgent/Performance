@@ -63,7 +63,7 @@ class testAMS_oldAPI_Performance extends API_common {
 
             //reminderChannelNumber = reminderChannelNumber();
             //int finalReminderChannelNumber = reminderChannelNumber;
-            add_list = AMS.request(ams_ip, mac, Operation.add, i, count_reminders, reminderChannelNumber, reminderProgramStart, reminderProgramId, reminderOffset);
+            add_list = AMS.request_perf(ams_ip, mac, Operation.add, i, count_reminders, reminderChannelNumber, reminderProgramStart, reminderProgramId, reminderOffset);
             print_preliminary_results(add_list);
             if (add_list.get(0).equals(expected200) && add_list.get(1).equals("")) {
                 a_current.add(add_list.get(2));
@@ -95,7 +95,7 @@ class testAMS_oldAPI_Performance extends API_common {
         for (int i = 1; i <= count_iterations; i++) {
             print_iteration_header(ams_ip, mac, count_reminders, i, count_iterations);
 
-            add_list = AMS.request(ams_ip, mac, Operation.add, i, count_reminders, reminderChannelNumber, reminderProgramStart, reminderProgramId, reminderOffset);
+            add_list = AMS.request_perf(ams_ip, mac, Operation.add, i, count_reminders, reminderChannelNumber, reminderProgramStart, reminderProgramId, reminderOffset);
             print_preliminary_results(add_list);
             if (add_list.get(0).equals(expected200) && add_list.get(1).equals("")) {
                 a_current.add(add_list.get(2));
@@ -107,7 +107,7 @@ class testAMS_oldAPI_Performance extends API_common {
                 a_max_iteration = (int) add_list.get(9);
                 a_size = (int) add_list.get(7);
 
-                purge_list = AMS.request(ams_ip, mac, Operation.purge, i);
+                purge_list = AMS.request_perf(ams_ip, mac, Operation.purge, i);
                 print_preliminary_results(purge_list);
                 if (purge_list.get(1).equals("")) {
                     p_current.add(purge_list.get(2));
@@ -142,7 +142,7 @@ class testAMS_oldAPI_Performance extends API_common {
         for (int i = 1; i <= count_iterations; i++) {
             print_iteration_header(ams_ip, mac, count_reminders, i, count_iterations);
 
-            add_list = AMS.request(ams_ip, mac, Operation.add, i, count_reminders, reminderChannelNumber, reminderProgramStart, reminderProgramId, reminderOffset);
+            add_list = AMS.request_perf(ams_ip, mac, Operation.add, i, count_reminders, reminderChannelNumber, reminderProgramStart, reminderProgramId, reminderOffset);
             print_preliminary_results(add_list);
             //assertEquals(expected200, add_list.get(0));
             //assertEquals("", add_list.get(1));
@@ -156,7 +156,7 @@ class testAMS_oldAPI_Performance extends API_common {
                 a_max_iteration = (int) add_list.get(8);
                 a_size = (int) add_list.get(9);
 
-                delete_list = AMS.request(ams_ip, mac, Operation.delete, i, count_reminders, reminderChannelNumber, reminderProgramStart, reminderProgramId, reminderOffset);
+                delete_list = AMS.request_perf(ams_ip, mac, Operation.delete, i, count_reminders, reminderChannelNumber, reminderProgramStart, reminderProgramId, reminderOffset);
                 print_preliminary_results(delete_list);
                 if (delete_list.get(1).equals("")) {
                     d_current.add(delete_list.get(2));
@@ -169,7 +169,7 @@ class testAMS_oldAPI_Performance extends API_common {
                     d_size = (int) delete_list.get(9);
                 }
 
-                purge_list = AMS.request(ams_ip, mac, Operation.purge, i);
+                purge_list = AMS.request_perf(ams_ip, mac, Operation.purge, i);
                 print_preliminary_results(purge_list);
                 if (purge_list.get(1).equals("")) {
                     p_current.add(purge_list.get(2));
@@ -206,7 +206,7 @@ class testAMS_oldAPI_Performance extends API_common {
         for (int i = 1; i <= count_iterations; i++) {
             print_iteration_header(ams_ip, mac, count_reminders, i, count_iterations);
 
-            purge_list = AMS.request(ams_ip, mac, Operation.purge, i);
+            purge_list = AMS.request_perf(ams_ip, mac, Operation.purge, i);
             print_preliminary_results(purge_list);
             if (purge_list.get(1).equals("")) {
                 p_current.add(purge_list.get(2));

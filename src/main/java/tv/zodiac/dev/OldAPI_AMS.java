@@ -25,7 +25,7 @@ class OldAPI_AMS extends API_common {
      * @return
      * @throws IOException
      */
-    ArrayList request(String ams_ip, String mac, Enum<Operation> operation, int i, int count_reminders, long reminderChannelNumber, String reminderProgramStart, String reminderProgramId, long reminderOffset) throws IOException {
+    ArrayList request_perf(String ams_ip, String mac, Enum<Operation> operation, int i, int count_reminders, long reminderChannelNumber, String reminderProgramStart, String reminderProgramId, long reminderOffset) throws IOException {
         logger(INFO_LEVEL, "[INF] " + new Date() + ": " + operation.toString().toUpperCase() + ":");
 
         HttpPost request = new HttpPost(prepare_url(ams_ip, operation,false));
@@ -95,7 +95,7 @@ class OldAPI_AMS extends API_common {
      * @return
      * @throws IOException
      */
-    ArrayList request(String ams_ip, String mac, Enum<Operation> operation, int i) throws IOException {
+    ArrayList request_perf(String ams_ip, String mac, Enum<Operation> operation, int i) throws IOException {
         logger(INFO_LEVEL, "[INF] " + new Date() + ": " + operation.toString().toUpperCase() + ":");
 
         HttpPost request = new HttpPost(prepare_url(ams_ip, Operation.purge, false));

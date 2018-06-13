@@ -129,7 +129,7 @@ public class API_common {
             logger(DEBUG_LEVEL, "sorted list: " + list);
         }
         long finish = System.currentTimeMillis();
-        logger(INFO_LEVEL, (int) (finish - start) + "ms for sort_bubble");
+        //logger(INFO_LEVEL, (int) (finish - start) + "ms for sort_bubble");
     }
 
     /** quick sorting
@@ -140,7 +140,7 @@ public class API_common {
         long start = System.currentTimeMillis();
         sort_quick_recursive(list, 0, list.size()-1);
         long finish = System.currentTimeMillis();
-        logger(INFO_LEVEL, (int) (finish-start) + "ms for sort_quick");
+        //logger(INFO_LEVEL, (int) (finish-start) + "ms for sort_quick");
     }
 
     private void sort_quick_recursive(ArrayList list, int lowerIndex, int higherIndex) throws IOException {
@@ -193,7 +193,7 @@ public class API_common {
             int smallerNumber = (int) list.get(index);
             list.set(index, list.get(i));
             list.set(i, smallerNumber);
-            logger(INFO_LEVEL, "sorted list: " + list);
+            //logger(INFO_LEVEL, "sorted list: " + list);
         }
         long finish = System.currentTimeMillis();
         logger(INFO_LEVEL, (int) (finish - start) + "ms for sort_selection");
