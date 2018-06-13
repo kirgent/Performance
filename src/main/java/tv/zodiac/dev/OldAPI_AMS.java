@@ -141,8 +141,8 @@ class OldAPI_AMS extends API_common {
                     + " measurements: cur=" + arrayList.get(2)
                     + ", avg=" + arrayList.get(3)
                     + ", med=" + arrayList.get(4)
-                    + ", min=" + arrayList.get(5) + " /" + arrayList.get(8)
-                    + ", max=" + arrayList.get(6) + " /" + arrayList.get(9)
+                    + ", min=" + arrayList.get(5) + "(/" + arrayList.get(8) + ")"
+                    + ", max=" + arrayList.get(6) + "(/" + arrayList.get(9) + ")"
                     + ", i=" + arrayList.get(7));
         } else {
             logger(INFO_LEVEL, "[INF] return data: [" + arrayList.get(0) + ", " + arrayList.get(1) + "]");

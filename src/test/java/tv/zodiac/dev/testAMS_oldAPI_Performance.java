@@ -144,7 +144,9 @@ class testAMS_oldAPI_Performance extends API_common {
                 a_avg = (int) add_list.get(3);
                 a_med = (int) add_list.get(4);
                 a_min = (int) add_list.get(5);
+                a_min_iteration = (int) add_list.get(8);
                 a_max = (int) add_list.get(6);
+                a_max_iteration = (int) add_list.get(9);
                 a_iteration = (int) add_list.get(7);
 
                 delete_list = AMS.request(ams_ip, mac, Operation.delete, count_reminders, reminderChannelNumber, reminderProgramStart, reminderProgramId, reminderOffset);
@@ -153,7 +155,9 @@ class testAMS_oldAPI_Performance extends API_common {
                     d_avg = (int) delete_list.get(3);
                     d_med = (int) delete_list.get(4);
                     d_min = (int) delete_list.get(5);
+                    d_min_iteration = (int) delete_list.get(8);
                     d_max = (int) delete_list.get(6);
+                    d_max_iteration = (int) delete_list.get(9);
                     d_iteration = (int) delete_list.get(7);
                 }
 
@@ -163,7 +167,9 @@ class testAMS_oldAPI_Performance extends API_common {
                     p_avg = (int) purge_list.get(3);
                     p_med = (int) purge_list.get(4);
                     p_min = (int) purge_list.get(5);
+                    p_min_iteration = (int) purge_list.get(8);
                     p_max = (int) purge_list.get(6);
+                    p_max_iteration = (int) purge_list.get(9);
                     p_iteration = (int) purge_list.get(7);
                 }
             }
@@ -174,10 +180,10 @@ class testAMS_oldAPI_Performance extends API_common {
         }
 
         prepare_total_results(mac, boxname, count_reminders, count_iterations,
-                a_avg, a_med, a_min, a_max, a_iteration, a_current,
-                0, 0, 0, 0, 0, null,
-                d_avg, d_med, d_min, d_max, d_iteration, d_current,
-                p_avg, p_med, p_min, p_max, p_iteration, p_current);
+                a_avg, a_med, a_min, a_min_iteration, a_max, a_max_iteration, a_iteration, a_current,
+                0, 0, 0, 0, 0, 0, 0, null,
+                d_avg, d_med, d_min, d_min_iteration, d_max, d_max_iteration, d_iteration, d_current,
+                p_avg, p_med, p_min, p_min_iteration, p_max, p_max_iteration, p_iteration, p_current);
         assertNotEquals(0, a_avg, "a_avg");
         assertNotEquals(0, d_avg, "d_avg");
         assertNotEquals(0, p_avg, "p_avg");
