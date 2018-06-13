@@ -372,8 +372,8 @@ class NewAPI_AMS extends API_common {
             list.add(4, search_median(purge_list, sort));
             list.add(5, min[0]);
             list.add(6, min[1]);
-            list.add(7, max[1]);
-            list.add(8, max[0]);
+            list.add(7, max[0]);
+            list.add(8, max[1]);
             list.add(9, size);
             logger(DEBUG_LEVEL,"[DBG] " + new Date() + ": purge avg = " + avg + "ms/" + size + ": purge_list:" + purge_list);
         }
