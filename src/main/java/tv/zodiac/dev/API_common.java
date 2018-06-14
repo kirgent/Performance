@@ -1026,9 +1026,7 @@ public class API_common {
             if (write_file) {
                 write_to_file(REMINDERSLOG, s + "\n", append);
             }
-        }
-
-        if(level.equals("DBG") && show_debug_level) {
+        } else if(level.equals("DBG") && show_debug_level) {
             System.out.println(s);
             if (write_file) {
                 write_to_file(REMINDERSLOG, s + "\n", append);

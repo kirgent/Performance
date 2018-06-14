@@ -133,39 +133,37 @@ class NewAPI_AMS extends API_common {
         if (list.get(1).equals("")) {
             if (operation.name().equals("add")) {
                 add_list.add(current);
-                int avg = get_average(add_list);
-                int size = add_list.size();
                 int[] min = get_min(Operation.add, current, i);
                 int[] max = get_max(Operation.add, current, i);
+                int total_i = add_list.size();
                 list.add(2, current);
-                list.add(3, avg);
+                list.add(3, get_average(add_list));
                 list.add(4, search_median(add_list, sort));
                 list.add(5, min[0]);
                 list.add(6, min[1]);
                 list.add(7, max[0]);
                 list.add(8, max[1]);
-                list.add(9, size);
-                logger(DEBUG_LEVEL, "[DBG] " + new Date() + ": add avg = " + avg + "ms/" + size + ": add_list:" + add_list);
+                list.add(9, total_i);
+                //logger(DEBUG_LEVEL, "[DBG] " + new Date() + ": add avg = " + get_average(add_list) + "ms/" + total_i + ": add_list:" + add_list);
 
             } else if (operation.name().equals("modify")) {
                 modify_list.add(current);
-                int avg = get_average(modify_list);
-                int size = modify_list.size();
                 int[] min = get_min(Operation.modify, current, i);
                 int[] max = get_max(Operation.modify, current, i);
+                int total_i = modify_list.size();
                 list.add(2, current);
-                list.add(3, avg);
+                list.add(3, get_average(modify_list));
                 list.add(4, search_median(modify_list, sort));
                 list.add(5, min[0]);
                 list.add(6, min[1]);
                 list.add(7, max[0]);
                 list.add(8, max[1]);
-                list.add(9, size);
-                logger(DEBUG_LEVEL, "[DBG] " + new Date() + ": modify avg = " + avg + "ms/" + size + ": modify_list:" + modify_list);
+                list.add(9, total_i);
+                //logger(DEBUG_LEVEL, "[DBG] " + new Date() + ": modify avg = " + get_average(modify_list) + "ms/" + total_i + ": modify_list:" + modify_list);
             }
         }
         finish = System.currentTimeMillis();
-        //logger(INFO_LEVEL, (int)(finish-start) + "ms for parsing request");
+        logger(INFO_LEVEL, (int)(finish-start) + "ms for parsing request");
 
         return list;
     }
@@ -257,22 +255,21 @@ class NewAPI_AMS extends API_common {
         list.add(1, check_body_response(read_response(new StringBuilder(),response), mac));
         if(list.get(1).equals("")) {
             delete_list.add(current);
-            int avg = get_average(delete_list);
-            int size = delete_list.size();
             int[] min = get_min(Operation.delete, current, i);
             int[] max = get_max(Operation.delete, current, i);
+            int total_i = delete_list.size();
             list.add(2, current);
-            list.add(3, avg);
+            list.add(3, get_average(delete_list));
             list.add(4, search_median(delete_list, sort));
             list.add(5, min[0]);
             list.add(6, min[1]);
             list.add(7, max[0]);
             list.add(8, max[1]);
-            list.add(9, size);
-            logger(DEBUG_LEVEL, "[DBG] " + new Date() + ": delete avg = " + avg + "ms/" + size + ": delete_list:" + delete_list);
+            list.add(9, total_i);
+            //logger(DEBUG_LEVEL, "[DBG] " + new Date() + ": delete avg = " + get_average(delete_list) + "ms/" + total_i + ": delete_list:" + delete_list);
         }
         finish = System.currentTimeMillis();
-        //logger(INFO_LEVEL, (int)(finish-start) + "ms for parsing request");
+        logger(INFO_LEVEL, (int)(finish-start) + "ms for parsing request");
 
         return list;
     }
@@ -361,22 +358,21 @@ class NewAPI_AMS extends API_common {
         list.add(1, check_body_response(read_response(new StringBuilder(),response), mac));
         if (list.get(1).equals("")) {
             purge_list.add(current);
-            int avg = get_average(purge_list);
-            int size = purge_list.size();
             int[] min = get_min(Operation.purge, current, i);
             int[] max = get_max(Operation.purge, current, i);
+            int total_i = purge_list.size();
             list.add(2, current);
-            list.add(3, avg);
+            list.add(3, get_average(purge_list));
             list.add(4, search_median(purge_list, sort));
             list.add(5, min[0]);
             list.add(6, min[1]);
             list.add(7, max[0]);
             list.add(8, max[1]);
-            list.add(9, size);
-            logger(DEBUG_LEVEL,"[DBG] " + new Date() + ": purge avg = " + avg + "ms/" + size + ": purge_list:" + purge_list);
+            list.add(9, total_i);
+            //logger(DEBUG_LEVEL,"[DBG] " + new Date() + ": purge avg = " + get_average(purge_list) + "ms/" + total_i + ": purge_list:" + purge_list);
         }
         finish = System.currentTimeMillis();
-        //logger(INFO_LEVEL, (int)(finish-start) + "ms for parsing request");
+        logger(INFO_LEVEL, (int)(finish-start) + "ms for parsing request");
 
         return list;
     }
