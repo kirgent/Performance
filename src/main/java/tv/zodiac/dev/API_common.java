@@ -15,7 +15,6 @@ import java.util.Date;
 import static java.lang.System.currentTimeMillis;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.junit.jupiter.api.Assertions.assertTimeoutPreemptively;
 
 /**
  * we are as Middle: send requests to AMS and got responses
@@ -25,7 +24,7 @@ public class API_common {
 
     Boolean show_info_level = true;
     Boolean show_debug_level = false;
-    Boolean show_generated_json = true;
+    Boolean show_generated_json = false;
     private Boolean show_response_body = false;
     private Boolean write_file = true;
     private boolean calc_median = true;

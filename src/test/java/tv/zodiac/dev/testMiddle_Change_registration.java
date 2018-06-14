@@ -19,10 +19,10 @@ class testMiddle_Change_registration extends API_Middle {
 
     @ParameterizedTest
     @CsvFileSource(resources = "/reminders_macaddress_registration.csv", numLinesToSkip = 1)
-    void testChange_registration(String charterapi, String macaddress, String ams_ip) throws IOException {
+    void testChange_registration(String ams_ip, String mac, String charterapi) {
         final ArrayList[] actual = new ArrayList[1];
         assertTimeoutPreemptively(ofMillis(timeout), () -> {
-            actual[0] = Middle.Change_registration(charterapi, macaddress, ams_ip);
+            actual[0] = Middle.Change_registration(ams_ip, mac, charterapi);
         });
         assertEquals(expected200, actual[0].get(0));
         assertEquals("", actual[0].get(1));
