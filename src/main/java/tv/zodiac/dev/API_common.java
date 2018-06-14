@@ -1042,8 +1042,13 @@ public class API_common {
     }
 
     void print_iteration_header(String ams_ip, String mac, int count_reminders, int i, int count_iterations, int reminderChannelNumber) throws IOException {
-        String header = "========= ========= Iteration = " + i + "/" + count_iterations
-                + ", mac=" + mac + ", ams=" + ams_ip + ", count_reminders=" + count_reminders + ", reminderChannelNumber=" + reminderChannelNumber + " ========= =========";
+        String header = "========= ========= ========= Iteration = " + i
+                + "/" + count_iterations
+                + ", mac=" + mac
+                + ", ams=" + ams_ip
+                + ", count_reminders=" + count_reminders
+                + ", reminderChannelNumber=" + reminderChannelNumber
+                + " ========= ========= =========";
         logger(INFO_LEVEL, header);
     }
 
