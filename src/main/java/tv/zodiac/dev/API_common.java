@@ -15,6 +15,8 @@ import java.util.*;
 import java.util.Date;
 
 import static java.lang.System.currentTimeMillis;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 /**
  * we are as Middle: send requests to AMS and got responses
@@ -83,8 +85,8 @@ public class API_common {
     String reminderProgramId = "";
     //final String reminderProgramId = "EP002960010113";
     int reminderChannelNumber = reminderChannelNumber();
-    int reminderOffset = reminderOffset();
-    //int reminderOffset_new = reminderOffset();
+    //int reminderOffset = reminderOffset();
+    int reminderOffset = 0;
     long reminderScheduleId;
     long reminderId;
 
@@ -1046,4 +1048,14 @@ public class API_common {
                 + ", mac=" + mac + ", ams=" + ams_ip + ", count_reminders=" + count_reminders + " ========= ========= =========";
         logger(INFO_LEVEL, header);
     }
+
+    void check_csv(String ams_ip, String mac, String boxname, int count_reminders, int count_iterations, int reminderChannelNumber) {
+        assertNotNull(ams_ip);
+        assertNotNull(mac);
+        assertNotNull(boxname);
+        assertNotEquals(0, count_reminders);
+        assertNotEquals(0, count_iterations);
+        assertNotEquals(0, reminderChannelNumber);
+    }
+
 }
