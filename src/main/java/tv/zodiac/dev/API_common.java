@@ -24,7 +24,7 @@ public class API_common {
 
     Boolean show_info_level = true;
     Boolean show_debug_level = false;
-    Boolean show_generated_json = true;
+    Boolean show_generated_json = false;
     private Boolean show_response_body = false;
     private Boolean write_file = true;
     private boolean calc_median = true;
