@@ -47,40 +47,35 @@ class OldAPI_AMS extends API_common {
         if (list.get(1).equals("")) {
             if (operation.name().equals("add")) {
                 add_list.add(current);
-                int avg = get_average(add_list);
-                int size = add_list.size();
                 int[] min = get_min(Operation.add, current, i);
                 int[] max = get_max(Operation.add, current, i);
+                //use add_list.size() = total of success iteration!
+                int total_i = add_list.size();
                 list.add(2, current);
-                list.add(3, avg);
+                list.add(3, get_average(add_list));
                 list.add(4, search_median(add_list, sort));
                 list.add(5, min[0]);
                 list.add(6, min[1]);
-
                 list.add(7, max[0]);
                 list.add(8, max[1]);
-
-                list.add(9, size);
-                logger(DEBUG_LEVEL, "[DBG] add avg = " + avg + "ms/" + size + ": add_list:" + add_list);
+                list.add(9, total_i);
+                logger(DEBUG_LEVEL, "[DBG] add avg = " + get_average(add_list) + "ms/" + total_i + ": add_list:" + add_list);
 
             } else if (operation.name().equals("delete")) {
                 delete_list.add(current);
-                int avg = get_average(delete_list);
-                //use add_list.size() as number of current iteration!
-                int size = delete_list.size();
                 int[] min = get_min(Operation.delete, current, i);
                 int[] max = get_max(Operation.delete, current, i);
+                //use delete_list.size() = total of success iteration!
+                int total_i = delete_list.size();
                 list.add(2, current);
-                list.add(3, avg);
+                list.add(3, get_average(delete_list));
                 list.add(4, search_median(delete_list, sort));
                 list.add(5, min[0]);
                 list.add(6, min[1]);
-
                 list.add(7, max[0]);
                 list.add(8, max[1]);
-
-                list.add(9, size);
-                logger(DEBUG_LEVEL, "[DBG] delete avg = " + avg + "ms/" + size + ": delete_list:" + delete_list);
+                list.add(9, total_i);
+                //logger(DEBUG_LEVEL, "[DBG] delete avg = " + get_average(delete_list) + "ms/" + total_i + ": delete_list:" + delete_list);
             }
         }
         finish = System.currentTimeMillis();
@@ -116,22 +111,19 @@ class OldAPI_AMS extends API_common {
         list.add(1, check_body_response(read_response(new StringBuilder(),response), mac));
         if (list.get(1).equals("")) {
             purge_list.add(current);
-            int avg = get_average(purge_list);
-            //use purge_list.size() as current iteration!
-            int size = purge_list.size();
             int[] min = get_min(Operation.purge, current, i);
             int[] max = get_max(Operation.purge, current, i);
+            //use purge_list.size() = total of success iteration!
+            int total_i = purge_list.size();
             list.add(2, current);
-            list.add(3, avg);
+            list.add(3, get_average(purge_list));
             list.add(4, search_median(purge_list, sort));
             list.add(5, min[0]);
             list.add(6, min[1]);
-
             list.add(7, max[0]);
             list.add(8, max[1]);
-
-            list.add(9, size);
-            logger(DEBUG_LEVEL, "[DBG] purge avg = " + avg + "ms/" + size + ": purge_list:" + purge_list);
+            list.add(9, total_i);
+            //logger(DEBUG_LEVEL, "[DBG] purge avg = " + get_average(purge_list) + "ms/" + total_i + ": purge_list:" + purge_list);
         }
         finish = System.currentTimeMillis();
         logger(INFO_LEVEL, (int)(finish-start) + "ms for parsing request");
