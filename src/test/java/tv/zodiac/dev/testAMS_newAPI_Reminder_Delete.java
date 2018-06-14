@@ -21,7 +21,7 @@ class testAMS_newAPI_Reminder_Delete extends API_common {
     @RepeatedTest(count_iterations)
     void testDelete() throws IOException {
         ArrayList actual;
-        actual = AMS.request(ams_ip, mac, Operation.add, count_reminders, reminderProgramStart, reminderChannelNumber, reminderProgramId, reminderOffset, reminderScheduleId, reminderId);
+        actual = AMS.request(ams_ip, mac, Operation.add, count_reminders, reminderProgramStart, reminderChannelNumber(1000), reminderProgramId, reminderOffset, reminderScheduleId, reminderId);
         assertEquals(expected200, actual.get(0));
         assertEquals("", actual.get(1));
 
@@ -98,7 +98,7 @@ class testAMS_newAPI_Reminder_Delete extends API_common {
         //todo
         int count_reminders = 1;
         ArrayList actual;
-        actual = AMS.request(ams_ip, mac, Operation.add, count_reminders, reminderProgramStart, reminderChannelNumber, reminderProgramId, reminderOffset, reminderScheduleId, Long.MAX_VALUE);
+        actual = AMS.request(ams_ip, mac, Operation.add, count_reminders, reminderProgramStart, reminderChannelNumber(1000), reminderProgramId, reminderOffset, reminderScheduleId, Long.MAX_VALUE);
         assertEquals(expected200, actual.get(0));
         assertEquals("", actual.get(1));
 
@@ -161,7 +161,7 @@ class testAMS_newAPI_Reminder_Delete extends API_common {
         //todo
         int count_reminders = 1;
         ArrayList actual;
-        actual = AMS.request(ams_ip, mac, Operation.add, count_reminders, reminderProgramStart, reminderChannelNumber, reminderProgramId, reminderOffset, Long.MAX_VALUE, reminderId);
+        actual = AMS.request(ams_ip, mac, Operation.add, count_reminders, reminderProgramStart, reminderChannelNumber(1000), reminderProgramId, reminderOffset, Long.MAX_VALUE, reminderId);
         assertEquals(expected200, actual.get(0));
         assertEquals("", actual.get(1));
 
@@ -175,7 +175,7 @@ class testAMS_newAPI_Reminder_Delete extends API_common {
         //todo
         int count_reminders = 1;
         ArrayList actual;
-        actual = AMS.request(ams_ip, mac, Operation.add, count_reminders, reminderProgramStart, reminderChannelNumber, reminderProgramId, reminderOffset, Long.MAX_VALUE, Long.MAX_VALUE);
+        actual = AMS.request(ams_ip, mac, Operation.add, count_reminders, reminderProgramStart, reminderChannelNumber(1000), reminderProgramId, reminderOffset, Long.MAX_VALUE, Long.MAX_VALUE);
         assertEquals(expected200, actual.get(0));
         assertEquals("", actual.get(1));
 

@@ -15,6 +15,7 @@ import java.util.Date;
 import static java.lang.System.currentTimeMillis;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertTimeoutPreemptively;
 
 /**
  * we are as Middle: send requests to AMS and got responses
@@ -24,7 +25,7 @@ public class API_common {
 
     Boolean show_info_level = true;
     Boolean show_debug_level = false;
-    Boolean show_generated_json = false;
+    Boolean show_generated_json = true;
     private Boolean show_response_body = false;
     private Boolean write_file = true;
     private boolean calc_median = true;
@@ -80,6 +81,7 @@ public class API_common {
 
     String reminderProgramStart = "";
     int reminderChannelNumber = reminderChannelNumber(1000);
+    //int reminderChannelNumber;
     String reminderProgramId = "";
     //final String reminderProgramId = "EP002960010113";
     //int reminderOffset = reminderOffset(15);
@@ -1040,9 +1042,9 @@ public class API_common {
         writer.close();
     }
 
-    void print_iteration_header(String ams_ip, String mac, int count_reminders, int i, int count_iterations) throws IOException {
-        String header = "========= ========= ========= Iteration = " + i + "/" + count_iterations
-                + ", mac=" + mac + ", ams=" + ams_ip + ", count_reminders=" + count_reminders + " ========= ========= =========";
+    void print_iteration_header(String ams_ip, String mac, int count_reminders, int i, int count_iterations, int reminderChannelNumber) throws IOException {
+        String header = "========= ========= Iteration = " + i + "/" + count_iterations
+                + ", mac=" + mac + ", ams=" + ams_ip + ", count_reminders=" + count_reminders + ", reminderChannelNumber=" + reminderChannelNumber + " ========= =========";
         logger(INFO_LEVEL, header);
     }
 
