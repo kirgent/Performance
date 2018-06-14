@@ -1,5 +1,6 @@
 package tv.zodiac.dev;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvFileSource;
 
@@ -12,7 +13,7 @@ import static org.junit.jupiter.api.Assertions.*;
 /**
  * We are localhost (Charter Headend). Full chain of requests: localhost -> AMS -> STB -> AMS -> localhost
  */
-class testAMS_newAPI_Performance extends API_common {
+class testAMS_Performance_newAPI extends API_common {
     private NewAPI_AMS AMS = new NewAPI_AMS();
     private int timeout = 20000;
     private int sleep_after_iteration = 1000;

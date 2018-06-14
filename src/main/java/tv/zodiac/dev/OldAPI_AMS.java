@@ -40,7 +40,6 @@ class OldAPI_AMS extends API_common {
         int current = (int)(finish-start);
         logger(DEBUG_LEVEL, "[DBG] " + current + "ms request");
 
-        start = System.currentTimeMillis();
         ArrayList list = new ArrayList();
         list.add(0, response.getStatusLine().getStatusCode() + " " + response.getStatusLine().getReasonPhrase());
         list.add(1, check_body_response(read_response(new StringBuilder(),response), mac));
@@ -59,7 +58,7 @@ class OldAPI_AMS extends API_common {
                 list.add(7, max[0]);
                 list.add(8, max[1]);
                 list.add(9, total_i);
-                logger(DEBUG_LEVEL, "[DBG] add avg = " + get_average(add_list) + "ms/" + total_i + ": add_list:" + add_list);
+                //logger(DEBUG_LEVEL, "[DBG] add avg = " + get_average(add_list) + "ms/" + total_i + ": add_list:" + add_list);
 
             } else if (operation.name().equals("delete")) {
                 delete_list.add(current);
@@ -78,9 +77,6 @@ class OldAPI_AMS extends API_common {
                 //logger(DEBUG_LEVEL, "[DBG] delete avg = " + get_average(delete_list) + "ms/" + total_i + ": delete_list:" + delete_list);
             }
         }
-        finish = System.currentTimeMillis();
-        logger(INFO_LEVEL, (int)(finish-start) + "ms for parsing request");
-
         return list;
     }
 
@@ -105,7 +101,6 @@ class OldAPI_AMS extends API_common {
         int current = (int)(finish-start);
         logger(DEBUG_LEVEL, "[DBG] " + current + "ms request");
 
-        start = System.currentTimeMillis();
         ArrayList list = new ArrayList();
         list.add(0, response.getStatusLine().getStatusCode() + " " + response.getStatusLine().getReasonPhrase());
         list.add(1, check_body_response(read_response(new StringBuilder(),response), mac));
@@ -125,9 +120,6 @@ class OldAPI_AMS extends API_common {
             list.add(9, total_i);
             //logger(DEBUG_LEVEL, "[DBG] purge avg = " + get_average(purge_list) + "ms/" + total_i + ": purge_list:" + purge_list);
         }
-        finish = System.currentTimeMillis();
-        logger(INFO_LEVEL, (int)(finish-start) + "ms for parsing request");
-
         return list;
     }
 

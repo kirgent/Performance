@@ -1,15 +1,11 @@
 package tv.zodiac.dev;
 
+import au.com.bytecode.opencsv.CSVReader;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
-import org.apache.http.entity.StringEntity;
-import org.apache.http.impl.client.HttpClients;
 
-import java.io.BufferedReader;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.io.InputStreamReader;
+import java.io.*;
 import java.nio.charset.StandardCharsets;
 import java.sql.*;
 import java.text.SimpleDateFormat;
@@ -28,7 +24,7 @@ public class API_common {
 
     Boolean show_info_level = true;
     Boolean show_debug_level = false;
-    Boolean show_generated_json = false;
+    Boolean show_generated_json = true;
     private Boolean show_response_body = false;
     private Boolean write_file = true;
     private boolean calc_median = true;
@@ -65,7 +61,6 @@ public class API_common {
     final String mac_wrong = "123456789012";
     final String boxD101 = "A0722CEEC970";//WB20 D101 ???
     final String boxD102 = "3438B7EB2E24";//WB20 D102
-    final String box4210 = "A0722CEEC9B4";// 30.255.241.239  /  10.15.199.182
     final String boxMoto2145_173 =  "000004B9419F"; //"B077AC5D91DD"; // "000004B9419F"; //Moto_2145_Mondo_DCX3200M_17.3_346
     final String boxMoto2147_Rems = "000004D67F70"; //000004d67f70"; //Moto_2147_Mondo_DCX3200M_REMS
     String mac = boxMoto2147_Rems;
@@ -84,10 +79,10 @@ public class API_common {
     private String REMINDERSLOG = "reminders.log";
 
     String reminderProgramStart = "";
+    int reminderChannelNumber = reminderChannelNumber(1000);
     String reminderProgramId = "";
     //final String reminderProgramId = "EP002960010113";
-    int reminderChannelNumber = reminderChannelNumber();
-    //int reminderOffset = reminderOffset();
+    //int reminderOffset = reminderOffset(15);
     int reminderOffset = 0;
     long reminderScheduleId;
     long reminderId;
@@ -133,7 +128,7 @@ public class API_common {
             logger(DEBUG_LEVEL, "sorted list: " + list);
         }
         long finish = System.currentTimeMillis();
-        //logger(INFO_LEVEL, (int) (finish - start) + "ms for sort_bubble");
+        logger(INFO_LEVEL, (int) (finish - start) + "ms for sort_bubble");
     }
 
     /** quick sorting
@@ -144,7 +139,7 @@ public class API_common {
         long start = System.currentTimeMillis();
         sort_quick_recursive(list, 0, list.size()-1);
         long finish = System.currentTimeMillis();
-        //logger(INFO_LEVEL, (int) (finish-start) + "ms for sort_quick");
+        logger(INFO_LEVEL, (int) (finish-start) + "ms for sort_quick");
     }
 
     private void sort_quick_recursive(ArrayList list, int lowerIndex, int higherIndex) throws IOException {
@@ -308,20 +303,21 @@ public class API_common {
         int min[] = new int[2];
         switch (operation.name()) {
             case "add":
-                min = Arrays.copyOf(a_min, min.length);
+                min = Arrays.copyOf(a_min, a_min.length);
                 break;
             case "modify":
-                min = Arrays.copyOf(m_min, min.length);
+                min = Arrays.copyOf(m_min, m_min.length);
                 break;
             case "delete":
-                min = Arrays.copyOf(d_min, min.length);
+                min = Arrays.copyOf(d_min, d_min.length);
                 break;
             case "purge":
-                min = Arrays.copyOf(p_min, min.length);
+                min = Arrays.copyOf(p_min, p_min.length);
                 break;
         }
 
         if(min[0] == 0){
+            // save params of 1st request
             min[0] = current;
             min[1] = 1;
         } else {
@@ -598,14 +594,13 @@ public class API_common {
         BufferedReader reader = new BufferedReader(new InputStreamReader(response.getEntity().getContent(), StandardCharsets.UTF_8));
         //StringBuilder body = new StringBuilder();
         for (String line; (line = reader.readLine()) != null; ) {
-            if(show_response_body) {
-                logger(DEBUG_LEVEL, "[DBG] response body: " + body.append(line));
-            }else{
-                body.append(line);
-            }
-            if (reader.readLine() == null) {
-                logger(DEBUG_LEVEL, "\n");
-            }
+            body.append(line);
+            //if (reader.readLine() == null) {
+                //logger(DEBUG_LEVEL, "\n");
+            //}
+        }
+        if(show_response_body) {
+            logger(DEBUG_LEVEL, "[DBG] response body: " + body);
         }
         return body.toString();
     }
@@ -727,12 +722,12 @@ public class API_common {
         return pattern.format(calendar.getTime());
     }
 
-    int reminderChannelNumber() {
-        return Math.abs(new Random().nextInt(1000));
+    int reminderChannelNumber(int limit) {
+        return Math.abs(new Random().nextInt(limit));
     }
 
-    int reminderOffset() {
-        return Math.abs(new Random().nextInt(100));
+    int reminderOffset(int limit) {
+        return Math.abs(new Random().nextInt(limit));
     }
 
     @Deprecated
@@ -1060,4 +1055,20 @@ public class API_common {
         assertNotEquals(0, reminderChannelNumber);
     }
 
+    void read_csv() throws IOException {
+        //Build reader instance
+        //Read data.csv
+        //Default seperator is comma
+        //Default quote character is double quote
+        //Start reading from line number 2 (line numbers start from zero)
+        CSVReader reader = new CSVReader(new FileReader("common.csv"), ',' , '"' , 1);
+        //Read CSV line by line and use the string array as you want
+        String[] nextLine;
+        while ((nextLine = reader.readNext()) != null) {
+            if (nextLine != null) {
+                //Verifying the read data here
+                System.out.println(Arrays.toString(nextLine));
+            }
+        }
+    }
 }

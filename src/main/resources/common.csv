@@ -1,2 +1,2 @@
-show_info_level,show_debug_level,calc_median
-true,true,true
+show_info_level,show_debug_level,show_generated_json,show_response_body
+"true","true","true","true"

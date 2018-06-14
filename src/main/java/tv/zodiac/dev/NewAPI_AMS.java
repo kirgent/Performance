@@ -37,39 +37,10 @@ class NewAPI_AMS extends API_common {
         int current = (int)(finish-start);
         logger(DEBUG_LEVEL, "[DBG] " + current + "ms request");
 
-        start = System.currentTimeMillis();
         ArrayList list = new ArrayList();
         list.add(0, response.getStatusLine().getStatusCode() + " " + response.getStatusLine().getReasonPhrase());
         list.add(1, check_body_response(read_response(new StringBuilder(),response), mac));
-        if (list.get(1).equals("")) {
-            purge_list.add(current);
-            int avg = get_average(purge_list);
-            int iteration = purge_list.size();
-            int[] min = get_min(Operation.purge, current, iteration);
-            int[] max = get_max(Operation.purge, current, iteration);
-            list.add(2, current);
-            list.add(3, avg);
-            list.add(4, search_median(purge_list, sort));
-            list.add(5, min[0]);
-            list.add(6, max[0]);
-            list.add(7, iteration);
-            list.add(8, min[1]);
-            list.add(9, max[1]);
-            logger(DEBUG_LEVEL,"[DBG] " + new Date() + ": purge avg = " + avg + "ms/" + purge_list.size() + ": purge_list:" + purge_list);
-
-            logger(INFO_LEVEL, "[INF] return data: [" + list.get(0) + ", " + list.get(1) + "]"
-                    + " measurements: cur=" + list.get(2)
-                    + ", avg=" + list.get(3)
-                    + ", med=" + list.get(4)
-                    + ", min=" + list.get(5) + "(/" + list.get(8) + ")"
-                    + ", max=" + list.get(6) + "(/" + list.get(9) + ")"
-                    + ", i=" + list.get(7));
-        } else {
-            logger(INFO_LEVEL, "[INF] return data: [" + list.get(0) + ", " + list.get(1) + "]");
-        }
-        finish = System.currentTimeMillis();
-        //logger(INFO_LEVEL, (int)(finish-start) + "ms for parsing request");
-
+        logger(INFO_LEVEL, "[INF] return data: [" + list.get(0) + ", " + list.get(1) + "]");
         return list;
     }
 
@@ -95,40 +66,10 @@ class NewAPI_AMS extends API_common {
         int current = (int)(finish-start);
         logger(DEBUG_LEVEL, "[DBG] " + current + "ms request");
 
-        start = System.currentTimeMillis();
         ArrayList list = new ArrayList();
         list.add(0, response.getStatusLine().getStatusCode() + " " + response.getStatusLine().getReasonPhrase());
         list.add(1, check_body_response(read_response(new StringBuilder(),response), mac));
-
-        if (list.get(1).equals("")) {
-            delete_list.add(current);
-            int avg = get_average(delete_list);
-            int iteration = delete_list.size();
-            int[] min = get_min(Operation.delete, current, iteration);
-            int[] max = get_max(Operation.delete, current, iteration);
-            list.add(2, current);
-            list.add(3, avg);
-            list.add(4, search_median(delete_list, sort));
-            list.add(5, min[0]);
-            list.add(6, max[0]);
-            list.add(7, iteration);
-            list.add(8, min[1]);
-            list.add(9, max[1]);
-            logger(DEBUG_LEVEL, "[DBG] " + new Date() + ": delete avg = " + avg + "ms/" + delete_list.size() + ": delete_list:" + delete_list);
-
-            logger(INFO_LEVEL, "[INF] return data: [" + list.get(0) + ", " + list.get(1) + "]"
-                    + " measurements: cur=" + list.get(2)
-                    + ", avg=" + list.get(3)
-                    + ", med=" + list.get(4)
-                    + ", min=" + list.get(5) + "(/" + list.get(8) + ")"
-                    + ", max=" + list.get(6) + "(/" + list.get(9) + ")"
-                    + ", i=" + list.get(7));
-        } else {
-            logger(INFO_LEVEL, "[INF] return data: [" + list.get(0) + ", " + list.get(1) + "]");
-        }
-        finish = System.currentTimeMillis();
-        //logger(INFO_LEVEL, (int)(finish-start) + "ms for parsing request");
-
+        logger(INFO_LEVEL, "[INF] return data: [" + list.get(0) + ", " + list.get(1) + "]");
         return list;
     }
 
@@ -160,56 +101,10 @@ class NewAPI_AMS extends API_common {
         int current = (int)(finish-start);
         logger(DEBUG_LEVEL, "[DBG] " + current + "ms request");
 
-        start = System.currentTimeMillis();
         ArrayList list = new ArrayList();
         list.add(0, response.getStatusLine().getStatusCode() + " " + response.getStatusLine().getReasonPhrase());
         list.add(1, check_body_response(read_response(new StringBuilder(),response), mac));
-        if (list.get(1).equals("")) {
-            if (operation.name().equals("add")) {
-                add_list.add(current);
-                int avg = get_average(add_list);
-                int iteration = add_list.size();
-                int[] min = get_min(Operation.add, current, iteration);
-                int[] max = get_max(Operation.add, current, iteration);
-                list.add(2, current);
-                list.add(3, avg);
-                list.add(4, search_median(add_list, sort));
-                list.add(5, min[0]);
-                list.add(6, max[0]);
-                list.add(7, iteration);
-                list.add(8, min[1]);
-                list.add(9, max[1]);
-                logger(DEBUG_LEVEL, "[DBG] " + new Date() + ": add avg = " + avg + "ms/" + iteration + ": add_list:" + add_list);
-
-            } else if (operation.name().equals("modify")) {
-                modify_list.add(current);
-                int avg = get_average(modify_list);
-                int iteration = modify_list.size();
-                int[] min = get_min(Operation.modify, current, iteration);
-                int[] max = get_max(Operation.modify, current, iteration);
-                list.add(2, current);
-                list.add(3, avg);
-                list.add(4, search_median(modify_list, sort));
-                list.add(5, min[0]);
-                list.add(6, max[0]);
-                list.add(7, iteration);
-                list.add(8, min[1]);
-                list.add(9, max[1]);
-                logger(DEBUG_LEVEL, "[DBG] " + new Date() + ": modify avg = " + avg + "ms/" + iteration + ": modify_list:" + modify_list);
-            }
-
-            logger(INFO_LEVEL, "[INF] return data: [" + list.get(0) + ", " + list.get(1) + "]"
-                    + " measurements: cur=" + list.get(2)
-                    + ", avg=" + list.get(3)
-                    + ", med=" + list.get(4)
-                    + ", min=" + list.get(5) + "(/" + list.get(8) + ")"
-                    + ", max=" + list.get(6) + "(/" + list.get(9) + ")"
-                    + ", i=" + list.get(7));
-        } else {
-            logger(INFO_LEVEL, "[INF] return data: [" + list.get(0) + ", " + list.get(1) + "]");
-        }
-        finish = System.currentTimeMillis();
-        //logger(INFO_LEVEL, (int)(finish-start) + "ms for parsing request");
+        logger(INFO_LEVEL, "[INF] return data: [" + list.get(0) + ", " + list.get(1) + "]");
 
         return list;
     }
@@ -235,7 +130,6 @@ class NewAPI_AMS extends API_common {
         int current = (int)(finish-start);
         logger(DEBUG_LEVEL, "[DBG] " + current + "ms request");
 
-        start = System.currentTimeMillis();
         ArrayList list = new ArrayList();
         list.add(0, response.getStatusLine().getStatusCode() + " " + response.getStatusLine().getReasonPhrase());
         list.add(1, check_body_response(read_response(new StringBuilder(),response), mac));
@@ -254,8 +148,6 @@ class NewAPI_AMS extends API_common {
             list.add(9, total_i);
             //logger(DEBUG_LEVEL,"[DBG] " + new Date() + ": purge avg = " + get_average(purge_list) + "ms/" + total_i + ": purge_list:" + purge_list);
         }
-        finish = System.currentTimeMillis();
-        logger(INFO_LEVEL, (int)(finish-start) + "ms for parsing request");
 
         return list;
     }
@@ -282,7 +174,6 @@ class NewAPI_AMS extends API_common {
         int current = (int)(finish-start);
         logger(DEBUG_LEVEL, "[DBG] " + current + "ms request");
 
-        start = System.currentTimeMillis();
         ArrayList list = new ArrayList();
         list.add(0, response.getStatusLine().getStatusCode() + " " + response.getStatusLine().getReasonPhrase());
         list.add(1, check_body_response(read_response(new StringBuilder(),response), mac));
@@ -301,8 +192,6 @@ class NewAPI_AMS extends API_common {
             list.add(9, total_i);
             //logger(DEBUG_LEVEL, "[DBG] " + new Date() + ": delete avg = " + get_average(delete_list) + "ms/" + total_i + ": delete_list:" + delete_list);
         }
-        finish = System.currentTimeMillis();
-        logger(INFO_LEVEL, (int)(finish-start) + "ms for parsing request");
 
         return list;
     }
@@ -335,7 +224,6 @@ class NewAPI_AMS extends API_common {
         int current = (int)(finish-start);
         logger(DEBUG_LEVEL, "[DBG] " + current + "ms request");
 
-        start = System.currentTimeMillis();
         ArrayList list = new ArrayList();
         list.add(0, response.getStatusLine().getStatusCode() + " " + response.getStatusLine().getReasonPhrase());
         list.add(1, check_body_response(read_response(new StringBuilder(),response), mac));
@@ -371,8 +259,6 @@ class NewAPI_AMS extends API_common {
                 //logger(DEBUG_LEVEL, "[DBG] " + new Date() + ": modify avg = " + get_average(modify_list) + "ms/" + total_i + ": modify_list:" + modify_list);
             }
         }
-        finish = System.currentTimeMillis();
-        logger(INFO_LEVEL, (int)(finish-start) + "ms for parsing request");
 
         return list;
     }
