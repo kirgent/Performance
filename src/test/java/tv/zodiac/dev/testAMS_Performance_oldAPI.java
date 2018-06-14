@@ -16,7 +16,7 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 /**
  * We are localhost (Charter Headend). Full chain of requests: localhost -> AMS -> STB -> AMS -> localhost
  */
-class testAMS_oldAPI_Performance extends API_common {
+class testAMS_Performance_oldAPI extends API_common {
     private OldAPI_AMS AMS = new OldAPI_AMS();
     private int timeout = 20000;
     private int sleep_after_iteration = 1000;
@@ -130,6 +130,8 @@ class testAMS_oldAPI_Performance extends API_common {
 
         for (int i = 1; i <= count_iterations; i++) {
             print_iteration_header(ams_ip, mac, count_reminders, i, count_iterations);
+
+            reminderChannelNumber = reminderChannelNumber(1000);
 
             add_list = AMS.request_perf(ams_ip, mac, Operation.add, i, count_reminders, reminderChannelNumber, reminderProgramStart, reminderProgramId, reminderOffset);
             print_preliminary_results(add_list);

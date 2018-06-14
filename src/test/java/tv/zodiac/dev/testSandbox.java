@@ -122,5 +122,9 @@ class testSandbox extends API_common {
         assertTrue(result.isEmpty());
     }
 
+    @Test
+    void test_read_csv() throws IOException {
+        read_csv();
+    }
 
 }

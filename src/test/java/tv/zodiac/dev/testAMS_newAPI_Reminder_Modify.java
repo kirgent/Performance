@@ -163,7 +163,7 @@ class testAMS_newAPI_Reminder_Modify extends API_common {
         assertEquals(expected200, actual.get(0));
         assertEquals("", actual.get(1));
 
-        actual = AMS.request(ams_ip, mac, Operation.modify, count_reminders, reminderProgramStart, reminderChannelNumber, reminderProgramId, reminderOffset(), reminderScheduleId, Long.MAX_VALUE);
+        actual = AMS.request(ams_ip, mac, Operation.modify, count_reminders, reminderProgramStart, reminderChannelNumber, reminderProgramId, reminderOffset(15), reminderScheduleId, Long.MAX_VALUE);
         assertEquals(expected200, actual.get(0));
         assertEquals("", actual.get(1));
         testPurge();
@@ -324,7 +324,7 @@ class testAMS_newAPI_Reminder_Modify extends API_common {
         assertEquals(expected200, actual.get(0));
         assertEquals("", actual.get(1));
 
-        actual = AMS.request(ams_ip, mac, Operation.modify, count_reminders, reminderProgramStart, reminderChannelNumber, reminderProgramId, reminderOffset(), Long.MAX_VALUE, reminderId);
+        actual = AMS.request(ams_ip, mac, Operation.modify, count_reminders, reminderProgramStart, reminderChannelNumber, reminderProgramId, reminderOffset, Long.MAX_VALUE, reminderId);
         assertEquals(expected200, actual.get(0));
         assertEquals("", actual.get(1));
         testPurge();
@@ -339,7 +339,7 @@ class testAMS_newAPI_Reminder_Modify extends API_common {
         assertEquals(expected200, actual.get(0));
         assertEquals("", actual.get(1));
 
-        actual = AMS.request(ams_ip, mac, Operation.modify, count_reminders, reminderProgramStart, reminderChannelNumber, reminderProgramId, reminderOffset(), Long.MAX_VALUE, Long.MAX_VALUE);
+        actual = AMS.request(ams_ip, mac, Operation.modify, count_reminders, reminderProgramStart, reminderChannelNumber, reminderProgramId, reminderOffset, Long.MAX_VALUE, Long.MAX_VALUE);
         assertEquals(expected200, actual.get(0));
         assertEquals("", actual.get(1));
         testPurge();
