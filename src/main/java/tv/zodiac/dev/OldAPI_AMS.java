@@ -52,7 +52,7 @@ class OldAPI_AMS extends API_common {
                 int total_i = add_list.size();
                 list.add(2, current);
                 list.add(3, get_average(add_list));
-                list.add(4, search_median(add_list, sort));
+                list.add(4, search_median(add_list, Sorting.insertion));
                 list.add(5, min[0]);
                 list.add(6, min[1]);
                 list.add(7, max[0]);
@@ -68,7 +68,7 @@ class OldAPI_AMS extends API_common {
                 int total_i = delete_list.size();
                 list.add(2, current);
                 list.add(3, get_average(delete_list));
-                list.add(4, search_median(delete_list, sort));
+                list.add(4, search_median(delete_list, Sorting.insertion));
                 list.add(5, min[0]);
                 list.add(6, min[1]);
                 list.add(7, max[0]);
@@ -112,7 +112,7 @@ class OldAPI_AMS extends API_common {
             int total_i = purge_list.size();
             list.add(2, current);
             list.add(3, get_average(purge_list));
-            list.add(4, search_median(purge_list, sort));
+            list.add(4, search_median(purge_list, Sorting.insertion));
             list.add(5, min[0]);
             list.add(6, min[1]);
             list.add(7, max[0]);
