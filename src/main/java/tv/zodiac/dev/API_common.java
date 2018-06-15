@@ -957,7 +957,7 @@ public class API_common {
         }
     }
 
-    void prepare_total_results(String mac, String boxname, int count_reminders, int count_iterations,
+    void print_total_results(String mac, String boxname, int count_reminders, int count_iterations,
                                int a_avg, int a_med, int a_min, int a_min_iteration, int a_max, int a_max_iteration, int a_iteration, ArrayList a_current,
                                int m_avg, int m_med, int m_min, int m_min_iteration, int m_max, int m_max_iteration, int m_iteration, ArrayList m_current,
                                int d_avg, int d_med, int d_min, int d_min_iteration, int d_max, int d_max_iteration, int d_iteration, ArrayList d_current,
@@ -1003,7 +1003,6 @@ public class API_common {
         //}
     }
 
-
     void print_preliminary_results(ArrayList list) throws IOException {
 
         if(list.get(1).equals("")){
@@ -1042,12 +1041,17 @@ public class API_common {
     }
 
     void print_iteration_header(String ams_ip, String mac, int count_reminders, int i, int count_iterations, int reminderChannelNumber) throws IOException {
-        String header = "========= ========= Iteration = " + i + "/" + count_iterations
-                + ", mac=" + mac + ", ams=" + ams_ip + ", count_reminders=" + count_reminders + ", reminderChannelNumber=" + reminderChannelNumber + " ========= =========";
+        String header = "========= ========= ========= Iteration = " + i
+                + "/" + count_iterations
+                + ", mac=" + mac
+                + ", ams=" + ams_ip
+                + ", count_reminders=" + count_reminders
+                + ", reminderChannelNumber=" + reminderChannelNumber
+                + " ========= ========= =========";
         logger(INFO_LEVEL, header);
     }
 
-    void check_csv(String ams_ip, String mac, String boxname, int count_reminders, int count_iterations, int reminderChannelNumber) {
+    void check_csv(String ams_ip, String mac, String boxname, int sleep_after_iteration, int count_reminders, int count_iterations, int reminderChannelNumber) {
         assertNotNull(ams_ip);
         assertNotNull(mac);
         assertNotNull(boxname);
