@@ -8,4 +8,4 @@ com.intellij.rt.execution.junit.JUnitStarter \
 -junit5 \
 tv.zodiac.dev.testAMS_Performance_newAPI,\
 test0_Add\
-\(java.lang.String,java.lang.String,java.lang.String,int,int,int\)
+\(java.lang.String,java.lang.String,java.lang.String,int,int,int,int\)
