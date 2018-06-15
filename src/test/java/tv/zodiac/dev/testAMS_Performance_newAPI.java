@@ -270,6 +270,7 @@ class testAMS_Performance_newAPI extends API_common {
                 purge_list = AMS.request_perf(ams_ip, mac, Operation.purge, i);
                 print_preliminary_results(purge_list);
                 if (purge_list.get(1).equals("")) {
+                    p_current.add(purge_list.get(2));
                     p_avg = (int) purge_list.get(3);
                     p_med = (int) purge_list.get(4);
                     p_min = (int) purge_list.get(5);
