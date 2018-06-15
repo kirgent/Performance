@@ -31,6 +31,7 @@ public class API_common {
 
     static final String INFO_LEVEL = "INF";
     static final String DEBUG_LEVEL = "DBG";
+    Date starttime;
 
     //private final static Logger log = Logger.getLogger(API.class.getName());
 
@@ -193,8 +194,8 @@ public class API_common {
             int smallerNumber = (int) list.get(index);
             list.set(index, list.get(i));
             list.set(i, smallerNumber);
-            //logger(INFO_LEVEL, "sorted list: " + list);
         }
+        //logger(INFO_LEVEL, "sorted list: " + list);
         long finish = System.currentTimeMillis();
         logger(INFO_LEVEL, (int) (finish - start) + "ms for sort_selection");
     }
@@ -215,6 +216,7 @@ public class API_common {
                 }
             }
         }
+        //logger(INFO_LEVEL, "sorted list: " + list);
         long finish = System.currentTimeMillis();
         logger(INFO_LEVEL, (int) (finish-start) + "ms for sort_insertion");
     }
@@ -912,51 +914,6 @@ public class API_common {
         return result;
     }
 
-
-    void prepare_total_results(String mac, String boxname, int count_reminders, int count_iterations,
-                               int a_avg, int a_med, int a_min, int a_max, int a_iteration, ArrayList a_current,
-                               int m_avg, int m_med, int m_min, int m_max, int m_iteration, ArrayList m_current,
-                               int d_avg, int d_med, int d_min, int d_max, int d_iteration, ArrayList d_current,
-                               int p_avg, int p_med, int p_min, int p_max, int p_iteration, ArrayList p_current
-    ) throws IOException {
-
-        String header = "========= ========= ========= Total measurements ========= ========= ========="
-                + "\n" + new Date() + ", mac=" + mac + "(" + boxname + "), count_reminders=" + count_reminders + ", count_iterations=" + a_iteration + "/" + count_iterations;
-        String a = "\n   add avg=" + a_avg + "ms, med=" + a_med + "ms, min=" + a_min + "ms, max=" + a_max + "ms, i=" + a_iteration;
-        String m = "\nmodify avg=" + m_avg + "ms, med=" + m_med + "ms, min=" + m_min + "ms, max=" + m_max + "ms, i=" + m_iteration;
-        String d = "\ndelete avg=" + d_avg + "ms, med=" + d_med + "ms, min=" + d_min + "ms, max=" + d_max + "ms, i=" + d_iteration;
-        String p = "\n purge avg=" + p_avg + "ms, med=" + p_med + "ms, min=" + p_min + "ms, max=" + p_max + "ms, i=" + p_iteration;
-        String footer = "\n========= ========= ========= ========= ========= ========= ========= =========";
-
-        String result = "";
-        if (a_avg != 0) {
-            result += header;
-            result += a;
-            if (m_avg != 0) {            result += m;        }
-            if (d_avg != 0) {            result += d;        }
-            if (p_avg != 0) {            result += p;        }
-            if (a_current != null) {
-                //result += a_current;
-                write_to_file("a.log", a_current.toString(), false);
-            }
-            if (m_current != null) {
-                //result += m_current;
-                write_to_file("m.log", m_current.toString(), false);
-            }
-            if (d_current != null){
-                //result += d_current;
-                write_to_file("d.log", d_current.toString(), false);
-            }
-            if (p_current != null) {
-                //result += p_current;
-                write_to_file("p.log", p_current.toString(), false);
-            }
-
-            result += footer;
-            logger(INFO_LEVEL, result);
-        }
-    }
-
     void print_total_results(String mac, String boxname, int count_reminders, int count_iterations,
                                int a_avg, int a_med, int a_min, int a_min_iteration, int a_max, int a_max_iteration, int a_iteration, ArrayList a_current,
                                int m_avg, int m_med, int m_min, int m_min_iteration, int m_max, int m_max_iteration, int m_iteration, ArrayList m_current,
@@ -965,6 +922,7 @@ public class API_common {
     ) throws IOException {
 
         String header = "========= ========= ========= Total measurements ========= ========= ========="
+                + "\n" + starttime + " - test was started"
                 + "\n" + new Date() + ", mac=" + mac + "(" + boxname + "), count_reminders=" + count_reminders + ", count_iterations=" + a_iteration + "/" + count_iterations;
         String a = "\n   add avg=" + a_avg + "ms, med=" + a_med + "ms, min=" + a_min + "ms/" + a_min_iteration + ", max=" + a_max + "ms/" + a_max_iteration + ", i=" + a_iteration;
         String m = "\nmodify avg=" + m_avg + "ms, med=" + m_med + "ms, min=" + m_min + "ms/" + m_min_iteration + ", max=" + m_max + "ms/" + m_max_iteration + ", i=" + m_iteration;
