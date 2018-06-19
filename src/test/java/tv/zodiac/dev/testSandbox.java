@@ -13,6 +13,63 @@ class testSandbox extends API_common {
     private NewAPI_AMS AMS = new NewAPI_AMS();
 
     @Test
+    void test_get_median_by_sort_bubble() throws IOException {
+        int[] arr = {10,34,2,56,7,67,88,42};
+        ArrayList list = new ArrayList();
+        for (int i = 0; i < arr.length; i++) {
+            list.add(i,arr[i]);
+        }
+        sort_bubble(list);
+        for (Object aList : list) {
+            System.out.print(aList + " ");
+        }
+        System.out.println();
+    }
+
+    @Test
+    void test_get_median_by_sort_quick() throws IOException {
+        int[] arr = {10,34,2,56,7,67,88,42};
+        ArrayList list = new ArrayList();
+        for (int i = 0; i < arr.length; i++) {
+            list.add(i,arr[i]);
+        }
+        sort_quick(list);
+        for (Object aList : list) {
+            System.out.print(aList + " ");
+        }
+        System.out.println();
+    }
+
+    @Test
+    void test_get_median_by_sort_selection() throws IOException {
+        int[] arr = {10,34,2,56,7,67,88,42};
+        ArrayList list = new ArrayList();
+        for (int i = 0; i < arr.length; i++) {
+            list.add(i,arr[i]);
+        }
+        sort_selection(list);
+        for (Object aList : list) {
+            System.out.print(aList + " ");
+        }
+        System.out.println();
+    }
+
+    @Test
+    void test_get_median_by_sort_insertion() throws IOException {
+        int[] arr = {10,34,2,56,7,67,88,42};
+        ArrayList list = new ArrayList();
+        for (int i = 0; i < arr.length; i++) {
+            list.add(i,arr[i]);
+        }
+        sort_insertion(list);
+        for (Object aList : list) {
+            System.out.print(aList + " ");
+        }
+        System.out.println();
+    }
+
+
+    @Test
     void testDate() {
         assertEquals("2018-05-19", reminderProgramStart());
         assertEquals("2018-05-19", get_date(1));
@@ -65,5 +122,9 @@ class testSandbox extends API_common {
         assertTrue(result.isEmpty());
     }
 
+    @Test
+    void test_read_csv() throws IOException {
+        read_csv();
+    }
 
 }

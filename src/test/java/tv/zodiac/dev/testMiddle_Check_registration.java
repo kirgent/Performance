@@ -19,7 +19,7 @@ class testMiddle_Check_registration extends API_Middle {
 
     @ParameterizedTest
     @CsvFileSource(resources = "/reminders_macaddress_registration.csv", numLinesToSkip = 1)
-    void testCheck_registration(String charterapi, String macaddress) throws IOException {
+    void testCheck_registration(String ams_ip, String charterapi, String macaddress) throws IOException {
         final ArrayList[] actual = new ArrayList[1];
         assertTimeoutPreemptively(ofMillis(timeout), () -> {
             actual[0] = Middle.Check_registration(charterapi, macaddress);

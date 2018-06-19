@@ -7,5 +7,5 @@ com.intellij.rt.execution.junit.JUnitStarter \
 -ideVersion5 \
 -junit5 \
 tv.zodiac.dev.testAMS_Performance_oldAPI,\
-test11_Add_Purge\
+test10_Add\
 \(java.lang.String,java.lang.String,java.lang.String,int,int,int,int\)

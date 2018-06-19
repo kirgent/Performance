@@ -31,7 +31,7 @@ class API_Middle extends API_common {
         ArrayList arrayList = new ArrayList();
         arrayList.add(0, response.getStatusLine().getStatusCode() + " " + response.getStatusLine().getReasonPhrase());
         arrayList.add(1, check_body_response(read_response(new StringBuilder(),response).toString(), mac));
-        System.out.println("[DBG] return codes: " + arrayList);
+        System.out.println("[DBG] return data: " + arrayList);
         return arrayList;
     }
 
@@ -52,7 +52,7 @@ class API_Middle extends API_common {
         ArrayList arrayList = new ArrayList();
         arrayList.add(0, response.getStatusLine().getStatusCode() + " " + response.getStatusLine().getReasonPhrase());
         arrayList.add(1, check_body_response(read_response(new StringBuilder(),response).toString(), mac));
-        System.out.println("[DBG] return codes: " + arrayList);
+        System.out.println("[DBG] return data: " + arrayList);
         return arrayList;
     }
 
@@ -158,7 +158,7 @@ class API_Middle extends API_common {
         ArrayList arrayList = new ArrayList();
         arrayList.add(0, response.getStatusLine().getStatusCode() + " " + response.getStatusLine().getReasonPhrase());
         arrayList.add(1, check_body_response(read_response(new StringBuilder(),response).toString(), deviceId));
-        System.out.println("[DBG] return codes: " + arrayList);
+        System.out.println("[DBG] return data: " + arrayList);
         return arrayList;
     }
 
@@ -172,7 +172,7 @@ class API_Middle extends API_common {
         ArrayList arrayList = new ArrayList();
         arrayList.add(0, response.getStatusLine().getStatusCode() + " " + response.getStatusLine().getReasonPhrase());
         arrayList.add(1, check_body_response(read_response(new StringBuilder(),response).toString(), deviceId));
-        System.out.println("[DBG] return codes: " + arrayList);
+        System.out.println("[DBG] return data: " + arrayList);
         return arrayList;
     }
 
@@ -192,7 +192,7 @@ class API_Middle extends API_common {
         ArrayList arrayList = new ArrayList();
         arrayList.add(0, response.getStatusLine().getStatusCode() + " " + response.getStatusLine().getReasonPhrase());
         arrayList.add(1, check_body_response(read_response(new StringBuilder(),response).toString(), deviceId));
-        System.out.println("[DBG] return codes: " + arrayList);
+        System.out.println("[DBG] return data: " + arrayList);
         return arrayList;
     }
 
@@ -212,7 +212,7 @@ class API_Middle extends API_common {
         ArrayList arrayList = new ArrayList();
         arrayList.add(0, response.getStatusLine().getStatusCode() + " " + response.getStatusLine().getReasonPhrase());
         arrayList.add(1, check_body_response(read_response(new StringBuilder(), response).toString(), deviceId));
-        System.out.println("[DBG] return codes: " + arrayList);
+        System.out.println("[DBG] return data: " + arrayList);
         return arrayList;
     }
 
