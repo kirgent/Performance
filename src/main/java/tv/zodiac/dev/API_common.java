@@ -24,8 +24,8 @@ public class API_common {
 
     Boolean show_info_level = true;
     Boolean show_debug_level = false;
-    Boolean show_generated_json = false;
-    private Boolean show_response_body = false;
+    Boolean show_generated_json = true;
+    private Boolean show_response_body = true;
 
     static final String INFO_LEVEL = "INF";
     static final String DEBUG_LEVEL = "DBG";
@@ -84,8 +84,26 @@ public class API_common {
     //final String reminderProgramId = "EP002960010113";
     //int reminderOffset = reminderOffset(15);
     int reminderOffset = 0;
+
     long reminderScheduleId;
+
+    {
+        try {
+            reminderScheduleId = reminderScheduleId(Generation.random);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
     long reminderId;
+
+    {
+        try {
+            reminderId = reminderId(Generation.random);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 
     private static String[] statuscode = {
             "0 - requested operation with the reminder was accomplished successfully. Always returned for \"Reminders Purge\" request (Request ID=3)",

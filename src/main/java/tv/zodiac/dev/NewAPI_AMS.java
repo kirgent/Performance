@@ -307,7 +307,6 @@ class NewAPI_AMS extends API_common {
             if (Objects.equals(reminderProgramStart, "-1")) {
                 object_in_reminders.put("reminderProgramStart", "");
             } else {
-                //object_in_reminders.put("reminderProgramStart", reminderProgramStart + " " + getTime(count_reminders, i+1));
                 object_in_reminders.put("reminderProgramStart", getDateTime(i));
             }
 
