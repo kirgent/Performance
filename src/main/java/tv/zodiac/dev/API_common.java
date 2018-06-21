@@ -241,16 +241,15 @@ public class API_common {
             case "bubble":
                 sortBubble(list);
                 break;
-
-                case "quick":
-                    sortQuick(list);
-                    break;
-                case "selection":
-                    sortSelection(list);
-                    break;
-                case "insertion":
-                    sortInsertion(list);
-                    break;
+            case "quick":
+                sortQuick(list);
+                break;
+            case "selection":
+                sortSelection(list);
+                break;
+            case "insertion":
+                sortInsertion(list);
+                break;
             }
 
             if (list.size() % 2 == 0) {
@@ -280,7 +279,7 @@ public class API_common {
         return min;
     }
 
-    int[] getMin(Enum<Operation> operation, int current, int i) throws IOException {
+    int[] getMin(Enum<Operation> operation, int current, int i) {
         long start = System.currentTimeMillis();
         // SLOWly ???
         /*switch (operation.name()) {
@@ -346,7 +345,7 @@ public class API_common {
         return min;
     }
 
-    int[] getMax(Enum<Operation> operation, int current, int i) throws IOException {
+    int[] getMax(Enum<Operation> operation, int current, int i) {
         long start = System.currentTimeMillis();
         int max[] = new int[2];
 
