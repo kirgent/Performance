@@ -39,7 +39,7 @@ public class API_common {
 
     enum Generation { random, increment }
 
-    enum Sorting { bubble, quick, selection, insertion }
+    enum Sorting { bubble, quick, selection, insertion, merge }
     Sorting sort = Sorting.quick;
 
     //static Logger log = Logger.getLogger(testAMS.class.getName());
@@ -103,7 +103,7 @@ public class API_common {
     String ams_ip = ams_ip_4;
     int ams_port = 8080;
 
-    int get_average(ArrayList list) {
+    int getAverage(ArrayList list) {
         int sum = 0;
         if (list.size() > 0) {
             for (Object aList : list) {
@@ -117,7 +117,7 @@ public class API_common {
      * @param list
      * @throws IOException
      */
-    void sort_bubble(ArrayList list) throws IOException {
+    void sortBubble(ArrayList list) throws IOException {
         long start = System.currentTimeMillis();
         for (int k = 0; k < list.size() - 1; k++) {
             for (int i = 0; i < list.size() - 1; i++) {
@@ -130,21 +130,21 @@ public class API_common {
             logger(DEBUG_LEVEL, "sorted list: " + list);
         }
         long finish = System.currentTimeMillis();
-        logger(INFO_LEVEL, (int) (finish - start) + "ms for sort_bubble");
+        logger(INFO_LEVEL, (int) (finish - start) + "ms for sortBubble");
     }
 
     /** quick sorting
      * @param list
      * @throws IOException
      */
-    void sort_quick(ArrayList list) throws IOException {
+    void sortQuick(ArrayList list) throws IOException {
         long start = System.currentTimeMillis();
-        sort_quick_recursive(list, 0, list.size()-1);
+        sortQuickRecursive(list, 0, list.size()-1);
         long finish = System.currentTimeMillis();
-        logger(INFO_LEVEL, (int) (finish-start) + "ms for sort_quick");
+        logger(INFO_LEVEL, (int) (finish-start) + "ms for sortQuick");
     }
 
-    private void sort_quick_recursive(ArrayList list, int lowerIndex, int higherIndex) throws IOException {
+    private void sortQuickRecursive(ArrayList list, int lowerIndex, int higherIndex) throws IOException {
         int i = lowerIndex;
         int j = higherIndex;
         //calculate middle of the list
@@ -171,10 +171,10 @@ public class API_common {
         }
         //call quicksort() method recursively
         if (lowerIndex < j) {
-            sort_quick_recursive(list, lowerIndex, j);
+            sortQuickRecursive(list, lowerIndex, j);
         }
         if (i < higherIndex) {
-            sort_quick_recursive(list, i, higherIndex);
+            sortQuickRecursive(list, i, higherIndex);
         }
         logger(DEBUG_LEVEL, "sorted list: " + list);
     }
@@ -183,7 +183,7 @@ public class API_common {
      * @param list
      * @throws IOException
      */
-    void sort_selection(ArrayList list) throws IOException {
+    void sortSelection(ArrayList list) throws IOException {
         long start = System.currentTimeMillis();
         for (int i = 0; i < list.size()-1; i++) {
             int index = i;
@@ -197,14 +197,14 @@ public class API_common {
         }
         //logger(INFO_LEVEL, "sorted list: " + list);
         long finish = System.currentTimeMillis();
-        logger(INFO_LEVEL, (int) (finish - start) + "ms for sort_selection");
+        logger(INFO_LEVEL, (int) (finish - start) + "ms for sortSelection");
     }
 
     /** insertion sorting
      * @param list
      * @throws IOException
      */
-    void sort_insertion(ArrayList list) throws IOException {
+    void sortInsertion(ArrayList list) throws IOException {
         long start = System.currentTimeMillis();
         int temp;
         for (int i=1; i<list.size(); i++) {
@@ -218,10 +218,10 @@ public class API_common {
         }
         //logger(INFO_LEVEL, "sorted list: " + list);
         long finish = System.currentTimeMillis();
-        logger(INFO_LEVEL, (int) (finish-start) + "ms for sort_insertion");
+        logger(INFO_LEVEL, (int) (finish-start) + "ms for sortInsertion");
     }
 
-    private int search_max(ArrayList list) throws IOException {
+    private int searchMax(ArrayList list) throws IOException {
         long start = System.currentTimeMillis();
         int max = 0;
         if (list.size() > 0) {
@@ -232,26 +232,26 @@ public class API_common {
             }
         }
         long finish = System.currentTimeMillis();
-        logger(INFO_LEVEL, (int) (finish-start) + "ms for search_max()");
+        logger(INFO_LEVEL, (int) (finish-start) + "ms for searchMax()");
 
         return max;
     }
 
-    int search_median(ArrayList list, Enum<Sorting> sort) throws IOException {
+    int searchMedian(ArrayList list, Enum<Sorting> sort) throws IOException {
         int median;
         if(calc_median) {
             switch (sort.name()) {
                 case "bubble":
-                    sort_bubble(list);
+                    sortBubble(list);
                     break;
                 case "quick":
-                    sort_quick(list);
+                    sortQuick(list);
                     break;
                 case "selection":
-                    sort_selection(list);
+                    sortSelection(list);
                     break;
                 case "insertion":
-                    sort_insertion(list);
+                    sortInsertion(list);
                     break;
             }
 
@@ -268,7 +268,7 @@ public class API_common {
         return median;
     }
 
-    private int search_min(ArrayList list) throws IOException {
+    private int searchMin(ArrayList list) throws IOException {
         long start = System.currentTimeMillis();
         int min = 0;
         if (list.size() > 0) {
@@ -280,23 +280,23 @@ public class API_common {
             }
         }
         long finish = System.currentTimeMillis();
-        logger(INFO_LEVEL, (int) (finish-start) + "ms for search_min()");
+        logger(INFO_LEVEL, (int) (finish-start) + "ms for searchMin()");
 
         return min;
     }
 
-    int[] get_min(Enum<Operation> operation, int current, int i) throws IOException {
+    int[] getMin(Enum<Operation> operation, int current, int i) throws IOException {
         long start = System.currentTimeMillis();
         // SLOWly ???
         /*switch (operation.name()) {
             case "add":
-                return search_min(add_list);
+                return searchMin(add_list);
             case "modify":
-                return search_min(modify_list);
+                return searchMin(modify_list);
             case "delete":
-                return search_min(delete_list);
+                return searchMin(delete_list);
             case "purge":
-                return search_min(purge_list);
+                return searchMin(purge_list);
             default:
                 return 0;
         }*/
@@ -346,28 +346,28 @@ public class API_common {
                 break;
         }
         long finish = System.currentTimeMillis();
-        //logger(INFO_LEVEL, (int) (finish-start) + "ms for get_min()");
+        //logger(INFO_LEVEL, (int) (finish-start) + "ms for getMin()");
 
         return min;
     }
 
-    int[] get_max(Enum<Operation> operation, int current, int i) throws IOException {
+    int[] getMax(Enum<Operation> operation, int current, int i) throws IOException {
         long start = System.currentTimeMillis();
         int max[] = new int[2];
 
         //SLOWly???
         /*switch (operation.name()) {
             case "add":
-                max = search_max(add_list);
+                max = searchMax(add_list);
                 break;
             case "modify":
-                max = search_max(modify_list);
+                max = searchMax(modify_list);
                 break;
             case "delete":
-                max = search_max(delete_list);
+                max = searchMax(delete_list);
                 break;
             case "purge":
-                max = search_max(purge_list);
+                max = searchMax(purge_list);
                 break;
         }*/
 
@@ -413,7 +413,7 @@ public class API_common {
                 break;
         }
         long finish = System.currentTimeMillis();
-        //logger(INFO_LEVEL, (int) (finish-start) + "ms for get_max()");
+        //logger(INFO_LEVEL, (int) (finish-start) + "ms for getMax()");
 
         return max;
     }
@@ -782,7 +782,7 @@ public class API_common {
         return reminderId;
     }
 
-    String get_date_several(int count) {
+    String getDateSeveral(int count) {
         Calendar calendar = Calendar.getInstance();
         calendar.setTimeZone(TimeZone.getTimeZone("UTC"));
         SimpleDateFormat pattern = new SimpleDateFormat("yyyy-MM-dd");
@@ -823,7 +823,7 @@ public class API_common {
         return result.toString();
     }
 
-    String get_time(int count, int number) {
+    String getTime(int count, int number) {
         int interval_in_minutes;
         if (count<=48){ interval_in_minutes = 30; }
         else if (count<=288){ interval_in_minutes = 5; }
@@ -842,7 +842,7 @@ public class API_common {
         return result;
     }
 
-    String get_time(int i) {
+    String getTime(int i) {
         //Calendar cal = Calendar.getInstance();
         //cal.add(Calendar.DATE, -1);
         //System.out.println("Yesterday's date = "+ cal.getTime());
@@ -866,7 +866,7 @@ public class API_common {
         return result.toString();
     }
 
-    String get_date(int i) {
+    String getDate(int i) {
         Calendar calendar = Calendar.getInstance();
         calendar.setTimeZone(TimeZone.getTimeZone("UTC"));
         SimpleDateFormat pattern = new SimpleDateFormat("yyyy-MM-dd");
@@ -881,16 +881,16 @@ public class API_common {
 
     /**
      * @param i - сколько минут прибавить к дате "завтра" (+сутки от текущего времени),
-     *          например, сейчас "2018-05-18 21:01", тогда вызов get_date_time(10) вернет "2018-05-19 21:11"
+     *          например, сейчас "2018-05-18 21:01", тогда вызов getDateTime(10) вернет "2018-05-19 21:11"
      * @return - возвращаемый формат - "yyyy-mm-dd hh:mm"
      */
-    String get_date_time(int i){
+    String getDateTime(int i){
         //int count_rems_in_day = 1440;
         //int count_full_days = count_reminders / count_rems_in_day;
         //int ostatok = count_reminders - (count_full_days * count_rems_in_day);
         //System.out.println("count_full_days=" + count_full_days + ", ostatok=" + ostatok);
 
-        //String result = get_date((i/count_rems_in_day)+1) + " " + get_time(i);
+        //String result = getDate((i/count_rems_in_day)+1) + " " + getTime(i);
 
         Calendar calendar = Calendar.getInstance();
         calendar.setTimeZone(TimeZone.getTimeZone("UTC"));

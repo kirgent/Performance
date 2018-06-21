@@ -19,7 +19,7 @@ class testSandbox extends API_common {
         for (int i = 0; i < arr.length; i++) {
             list.add(i,arr[i]);
         }
-        sort_bubble(list);
+        sortBubble(list);
         for (Object aList : list) {
             System.out.print(aList + " ");
         }
@@ -33,7 +33,7 @@ class testSandbox extends API_common {
         for (int i = 0; i < arr.length; i++) {
             list.add(i,arr[i]);
         }
-        sort_quick(list);
+        sortQuick(list);
         for (Object aList : list) {
             System.out.print(aList + " ");
         }
@@ -47,7 +47,7 @@ class testSandbox extends API_common {
         for (int i = 0; i < arr.length; i++) {
             list.add(i,arr[i]);
         }
-        sort_selection(list);
+        sortSelection(list);
         for (Object aList : list) {
             System.out.print(aList + " ");
         }
@@ -61,7 +61,7 @@ class testSandbox extends API_common {
         for (int i = 0; i < arr.length; i++) {
             list.add(i,arr[i]);
         }
-        sort_insertion(list);
+        sortInsertion(list);
         for (Object aList : list) {
             System.out.print(aList + " ");
         }
@@ -72,14 +72,14 @@ class testSandbox extends API_common {
     @Test
     void testDate() {
         assertEquals("2018-05-19", reminderProgramStart());
-        assertEquals("2018-05-19", get_date(1));
-        assertEquals("2018-05-19 2018-05-20", get_date_several(2));
-        assertEquals("2018-05-20", get_date(2));
+        assertEquals("2018-05-19", getDate(1));
+        assertEquals("2018-05-19 2018-05-20", getDateSeveral(2));
+        assertEquals("2018-05-20", getDate(2));
     }
 
     @Test
     void test_get_date_time() throws InterruptedException {
-        assertEquals("2018-05-19 00:00", get_date_time(0));
+        assertEquals("2018-05-19 00:00", getDateTime(0));
     }
 
     @Test

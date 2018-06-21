@@ -46,35 +46,35 @@ class OldAPI_AMS extends API_common {
         if (list.get(1).equals("")) {
             if (operation.name().equals("add")) {
                 add_list.add(current);
-                int[] min = get_min(Operation.add, current, i);
-                int[] max = get_max(Operation.add, current, i);
+                int[] min = getMin(Operation.add, current, i);
+                int[] max = getMax(Operation.add, current, i);
                 //use add_list.size() = total of success iteration!
                 int total_i = add_list.size();
                 list.add(2, current);
-                list.add(3, get_average(add_list));
-                list.add(4, search_median(add_list, Sorting.selection));
+                list.add(3, getAverage(add_list));
+                list.add(4, searchMedian(add_list, Sorting.selection));
                 list.add(5, min[0]);
                 list.add(6, min[1]);
                 list.add(7, max[0]);
                 list.add(8, max[1]);
                 list.add(9, total_i);
-                //logger(DEBUG_LEVEL, "[DBG] add avg = " + get_average(add_list) + "ms/" + total_i + ": add_list:" + add_list);
+                //logger(DEBUG_LEVEL, "[DBG] add avg = " + getAverage(add_list) + "ms/" + total_i + ": add_list:" + add_list);
 
             } else if (operation.name().equals("delete")) {
                 delete_list.add(current);
-                int[] min = get_min(Operation.delete, current, i);
-                int[] max = get_max(Operation.delete, current, i);
+                int[] min = getMin(Operation.delete, current, i);
+                int[] max = getMax(Operation.delete, current, i);
                 //use delete_list.size() = total of success iteration!
                 int total_i = delete_list.size();
                 list.add(2, current);
-                list.add(3, get_average(delete_list));
-                list.add(4, search_median(delete_list, Sorting.selection));
+                list.add(3, getAverage(delete_list));
+                list.add(4, searchMedian(delete_list, Sorting.selection));
                 list.add(5, min[0]);
                 list.add(6, min[1]);
                 list.add(7, max[0]);
                 list.add(8, max[1]);
                 list.add(9, total_i);
-                //logger(DEBUG_LEVEL, "[DBG] delete avg = " + get_average(delete_list) + "ms/" + total_i + ": delete_list:" + delete_list);
+                //logger(DEBUG_LEVEL, "[DBG] delete avg = " + getAverage(delete_list) + "ms/" + total_i + ": delete_list:" + delete_list);
             }
         }
         return list;
@@ -106,19 +106,19 @@ class OldAPI_AMS extends API_common {
         list.add(1, check_body_response(read_response(new StringBuilder(),response), mac));
         if (list.get(1).equals("")) {
             purge_list.add(current);
-            int[] min = get_min(Operation.purge, current, i);
-            int[] max = get_max(Operation.purge, current, i);
+            int[] min = getMin(Operation.purge, current, i);
+            int[] max = getMax(Operation.purge, current, i);
             //use purge_list.size() = total of success iteration!
             int total_i = purge_list.size();
             list.add(2, current);
-            list.add(3, get_average(purge_list));
-            list.add(4, search_median(purge_list, Sorting.selection));
+            list.add(3, getAverage(purge_list));
+            list.add(4, searchMedian(purge_list, Sorting.selection));
             list.add(5, min[0]);
             list.add(6, min[1]);
             list.add(7, max[0]);
             list.add(8, max[1]);
             list.add(9, total_i);
-            //logger(DEBUG_LEVEL, "[DBG] purge avg = " + get_average(purge_list) + "ms/" + total_i + ": purge_list:" + purge_list);
+            //logger(DEBUG_LEVEL, "[DBG] purge avg = " + getAverage(purge_list) + "ms/" + total_i + ": purge_list:" + purge_list);
         }
         return list;
     }
@@ -141,8 +141,8 @@ class OldAPI_AMS extends API_common {
             }
 
             object_in_reminders.put("reminderChannelNumber", reminderChannelNumber);
-            //object_in_reminders.put("reminderProgramStart", reminderProgramStart + " " + get_time(count_reminders, i+1));
-            object_in_reminders.put("reminderProgramStart", get_date_time(i));
+            //object_in_reminders.put("reminderProgramStart", reminderProgramStart + " " + getTime(count_reminders, i+1));
+            object_in_reminders.put("reminderProgramStart", getDateTime(i));
             object_in_reminders.put("reminderProgramId", reminderProgramId);
             object_in_reminders.put("reminderOffset", reminderOffset);
 
