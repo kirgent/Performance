@@ -39,7 +39,7 @@ class NewAPI_AMS extends API_common {
 
         ArrayList list = new ArrayList();
         list.add(0, response.getStatusLine().getStatusCode() + " " + response.getStatusLine().getReasonPhrase());
-        list.add(1, check_body_response(read_response(new StringBuilder(),response), mac));
+        list.add(1, checkResponseBody(readResponse(new StringBuilder(),response), mac));
         logger(INFO_LEVEL, "[INF] return data: [" + list.get(0) + ", " + list.get(1) + "]");
         return list;
     }
@@ -68,7 +68,7 @@ class NewAPI_AMS extends API_common {
 
         ArrayList list = new ArrayList();
         list.add(0, response.getStatusLine().getStatusCode() + " " + response.getStatusLine().getReasonPhrase());
-        list.add(1, check_body_response(read_response(new StringBuilder(),response), mac));
+        list.add(1, checkResponseBody(readResponse(new StringBuilder(),response), mac));
         logger(INFO_LEVEL, "[INF] return data: [" + list.get(0) + ", " + list.get(1) + "]");
         return list;
     }
@@ -103,7 +103,7 @@ class NewAPI_AMS extends API_common {
 
         ArrayList list = new ArrayList();
         list.add(0, response.getStatusLine().getStatusCode() + " " + response.getStatusLine().getReasonPhrase());
-        list.add(1, check_body_response(read_response(new StringBuilder(),response), mac));
+        list.add(1, checkResponseBody(readResponse(new StringBuilder(),response), mac));
         logger(INFO_LEVEL, "[INF] return data: [" + list.get(0) + ", " + list.get(1) + "]");
 
         return list;
@@ -132,7 +132,7 @@ class NewAPI_AMS extends API_common {
 
         ArrayList list = new ArrayList();
         list.add(0, response.getStatusLine().getStatusCode() + " " + response.getStatusLine().getReasonPhrase());
-        list.add(1, check_body_response(read_response(new StringBuilder(),response), mac));
+        list.add(1, checkResponseBody(readResponse(new StringBuilder(),response), mac));
         if (list.get(1).equals("")) {
             purge_list.add(current);
             int[] min = getMin(Operation.purge, current, i);
@@ -176,7 +176,7 @@ class NewAPI_AMS extends API_common {
 
         ArrayList list = new ArrayList();
         list.add(0, response.getStatusLine().getStatusCode() + " " + response.getStatusLine().getReasonPhrase());
-        list.add(1, check_body_response(read_response(new StringBuilder(),response), mac));
+        list.add(1, checkResponseBody(readResponse(new StringBuilder(),response), mac));
         if(list.get(1).equals("")) {
             delete_list.add(current);
             int[] min = getMin(Operation.delete, current, i);
@@ -226,7 +226,7 @@ class NewAPI_AMS extends API_common {
 
         ArrayList list = new ArrayList();
         list.add(0, response.getStatusLine().getStatusCode() + " " + response.getStatusLine().getReasonPhrase());
-        list.add(1, check_body_response(read_response(new StringBuilder(),response), mac));
+        list.add(1, checkResponseBody(readResponse(new StringBuilder(),response), mac));
         if (list.get(1).equals("")) {
             if (operation.name().equals("add")) {
                 add_list.add(current);
@@ -486,7 +486,6 @@ class NewAPI_AMS extends API_common {
         request.setHeader("Content-type", "application/json");
 
         request.setEntity(new StringEntity(generateJsonSetting(mac, option, value)));
-
         request.setHeader("Accept", "application/json");
         request.setHeader("Content-type", "application/json");
         logger(DEBUG_LEVEL, "[DBG] request string: " + request);
@@ -500,7 +499,7 @@ class NewAPI_AMS extends API_common {
 
         ArrayList list = new ArrayList();
         list.add(0, response.getStatusLine().getStatusCode() + " " + response.getStatusLine().getReasonPhrase());
-        list.add(1, check_body_response(read_response(new StringBuilder(),response), mac));
+        list.add(1, checkResponseBody(readResponse(new StringBuilder(),response), mac));
         logger(INFO_LEVEL, "[INF] return data: " + list + "\n");
         return list;
     }

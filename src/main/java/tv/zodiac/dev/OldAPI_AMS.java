@@ -42,7 +42,7 @@ class OldAPI_AMS extends API_common {
 
         ArrayList list = new ArrayList();
         list.add(0, response.getStatusLine().getStatusCode() + " " + response.getStatusLine().getReasonPhrase());
-        list.add(1, check_body_response(read_response(new StringBuilder(),response), mac));
+        list.add(1, checkResponseBody(readResponse(new StringBuilder(),response), mac));
         if (list.get(1).equals("")) {
             if (operation.name().equals("add")) {
                 add_list.add(current);
@@ -52,7 +52,7 @@ class OldAPI_AMS extends API_common {
                 int total_i = add_list.size();
                 list.add(2, current);
                 list.add(3, getAverage(add_list));
-                list.add(4, searchMedian(add_list, Sorting.selection));
+                list.add(4, searchMedian(add_list, Sorting.insertion));
                 list.add(5, min[0]);
                 list.add(6, min[1]);
                 list.add(7, max[0]);
@@ -68,7 +68,7 @@ class OldAPI_AMS extends API_common {
                 int total_i = delete_list.size();
                 list.add(2, current);
                 list.add(3, getAverage(delete_list));
-                list.add(4, searchMedian(delete_list, Sorting.selection));
+                list.add(4, searchMedian(delete_list, Sorting.insertion));
                 list.add(5, min[0]);
                 list.add(6, min[1]);
                 list.add(7, max[0]);
@@ -103,7 +103,7 @@ class OldAPI_AMS extends API_common {
 
         ArrayList list = new ArrayList();
         list.add(0, response.getStatusLine().getStatusCode() + " " + response.getStatusLine().getReasonPhrase());
-        list.add(1, check_body_response(read_response(new StringBuilder(),response), mac));
+        list.add(1, checkResponseBody(readResponse(new StringBuilder(),response), mac));
         if (list.get(1).equals("")) {
             purge_list.add(current);
             int[] min = getMin(Operation.purge, current, i);
@@ -112,7 +112,7 @@ class OldAPI_AMS extends API_common {
             int total_i = purge_list.size();
             list.add(2, current);
             list.add(3, getAverage(purge_list));
-            list.add(4, searchMedian(purge_list, Sorting.selection));
+            list.add(4, searchMedian(purge_list, Sorting.insertion));
             list.add(5, min[0]);
             list.add(6, min[1]);
             list.add(7, max[0]);

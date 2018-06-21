@@ -16,38 +16,38 @@ class testMiddle_Reminders_edge_middle_API extends API_Middle {
 
     @Test
     void testGetStbReminder() throws IOException {
-        ArrayList actual = Middle.GetStbReminder(charterapi_a, mac);
+        ArrayList actual = Middle.getStbReminder(charterapi_a, mac);
         assertEquals(expected200, actual.get(0));
         assertEquals("", actual.get(1));
 
-        actual = Middle.GetStbReminder(charterapi_b, mac);
+        actual = Middle.getStbReminder(charterapi_b, mac);
         assertEquals(expected200, actual.get(0));
         assertEquals("", actual.get(1));
 
-        actual = Middle.GetStbReminder(charterapi_c, mac);
+        actual = Middle.getStbReminder(charterapi_c, mac);
         assertEquals(expected200, actual.get(0));
         assertEquals("", actual.get(1));
 
-        actual = Middle.GetStbReminder(charterapi_d, mac);
+        actual = Middle.getStbReminder(charterapi_d, mac);
         assertEquals(expected200, actual.get(0));
         assertEquals("", actual.get(1));
     }
 
     @Test
     void testGetAllReminder() throws IOException {
-        ArrayList actual = Middle.GetAllReminder(charterapi_a, mac, 0);
+        ArrayList actual = Middle.getAllReminder(charterapi_a, mac, 0);
         assertEquals(expected200, actual.get(0));
         assertEquals("", actual.get(1));
 
-        actual = Middle.GetAllReminder(charterapi_b, mac, 0);
+        actual = Middle.getAllReminder(charterapi_b, mac, 0);
         assertEquals(expected200, actual.get(0));
         assertEquals("", actual.get(1));
 
-        actual = Middle.GetAllReminder(charterapi_c, mac, 0);
+        actual = Middle.getAllReminder(charterapi_c, mac, 0);
         assertEquals(expected200, actual.get(0));
         assertEquals("", actual.get(1));
 
-        actual = Middle.GetAllReminder(charterapi_d, mac, 0);
+        actual = Middle.getAllReminder(charterapi_d, mac, 0);
         assertEquals(expected200, actual.get(0));
         assertEquals("", actual.get(1));
     }
@@ -77,40 +77,40 @@ class testMiddle_Reminders_edge_middle_API extends API_Middle {
     @Test
     void testDelete_multiple_reminders() throws IOException {
         ArrayList actual;
-        actual = Middle.Delete_multiple_reminders(charterapi_a, mac,1, 1);
+        actual = Middle.deleteMultipleReminders(charterapi_a, mac,1, 1);
         assertEquals(expected201, actual.get(0));
         assertEquals("", actual.get(1));
 
-        actual = Middle.Delete_multiple_reminders(charterapi_b, mac,1, 1);
+        actual = Middle.deleteMultipleReminders(charterapi_b, mac,1, 1);
         assertEquals(expected201, actual.get(0));
         assertEquals("", actual.get(1));
 
-        actual = Middle.Delete_multiple_reminders(charterapi_c, mac,1, 1);
+        actual = Middle.deleteMultipleReminders(charterapi_c, mac,1, 1);
         assertEquals(expected201, actual.get(0));
         assertEquals("", actual.get(1));
 
-        actual = Middle.Delete_multiple_reminders(charterapi_d, mac,1, 1);
+        actual = Middle.deleteMultipleReminders(charterapi_d, mac,1, 1);
         assertEquals(expected201, actual.get(0));
         assertEquals("", actual.get(1));
     }
 
     @Test
     void testDelete_multiple_reminders__Not_Found() throws IOException {
-        ArrayList actual = Middle.Delete_multiple_reminders(charterapi, mac,0, 0);
+        ArrayList actual = Middle.deleteMultipleReminders(charterapi, mac,0, 0);
         assertEquals(expected404, actual.get(0));
         assertEquals("", actual.get(1));
     }
 
     @Test
     void testSchedule_reminder() throws IOException {
-        ArrayList actual = Middle.Schedule_reminder(charterapi, mac,0);
+        ArrayList actual = Middle.scheduleReminder(charterapi, mac,0);
         assertEquals(expected200, actual.get(0));
         assertEquals("", actual.get(1));
     }
 
     @Test
     void testSchedule_reminder_ERROR_SCHEDULING_REMINDER() throws IOException {
-        ArrayList actual = Middle.Schedule_reminder(charterapi, mac,0);
+        ArrayList actual = Middle.scheduleReminder(charterapi, mac,0);
         assertEquals(expected200, actual.get(0));
         assertEquals("ERROR_SCHEDULING_REMINDER", actual.get(1));
     }

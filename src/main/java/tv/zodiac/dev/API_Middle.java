@@ -13,10 +13,10 @@ import java.util.ArrayList;
 
 class API_Middle extends API_common {
 
-    ArrayList Change_registration(String charterapi, String mac, String ams_ip) throws IOException {
-        System.out.println("[DBG] Change_registration " + mac + " to ams " + ams_ip + " via charterapi: " + charterapi);
+    ArrayList changeRegistration(String charterapi, String mac, String ams_ip) throws IOException {
+        System.out.println("[DBG] changeRegistration " + mac + " to ams " + ams_ip + " via charterapi: " + charterapi);
         HttpPost request = new HttpPost(charterapi + postfix_settings + "?requestor=AMS");
-        request.setEntity(new StringEntity(generate_json_change_registration(mac, ams_ip)));
+        request.setEntity(new StringEntity(generateJsonChangeRegistration(mac, ams_ip)));
         request.setHeader("Content-type", "application/json");
         request.setHeader("Accept", "application/json");
         System.out.println("[DBG] Request string: " + request);
@@ -30,13 +30,13 @@ class API_Middle extends API_common {
 
         ArrayList arrayList = new ArrayList();
         arrayList.add(0, response.getStatusLine().getStatusCode() + " " + response.getStatusLine().getReasonPhrase());
-        arrayList.add(1, check_body_response(read_response(new StringBuilder(),response).toString(), mac));
+        arrayList.add(1, checkResponseBody(readResponse(new StringBuilder(),response), mac));
         System.out.println("[DBG] return data: " + arrayList);
         return arrayList;
     }
 
-    ArrayList Check_registration(String charterapi, String mac) throws IOException {
-        System.out.println("[DBG] Check_registration " + mac + " via charterapi: " + charterapi);
+    ArrayList checkRegistration(String charterapi, String mac) throws IOException {
+        System.out.println("[DBG] checkRegistration " + mac + " via charterapi: " + charterapi);
         HttpGet request = new HttpGet(charterapi + postfix_settings + "/amsIp/" + mac);
         //request.setHeader("Accept", "*/*");
         //request.setHeader("Content-type", "application/json");
@@ -51,12 +51,12 @@ class API_Middle extends API_common {
 
         ArrayList arrayList = new ArrayList();
         arrayList.add(0, response.getStatusLine().getStatusCode() + " " + response.getStatusLine().getReasonPhrase());
-        arrayList.add(1, check_body_response(read_response(new StringBuilder(),response).toString(), mac));
+        arrayList.add(1, checkResponseBody(readResponse(new StringBuilder(),response), mac));
         System.out.println("[DBG] return data: " + arrayList);
         return arrayList;
     }
 
-    private String generate_json_reminder_schedule() {
+    private String generateJsonReminderSchedule() {
         /*Sample Middle cURL (local):
         {"reminderType":"Series",
         "connectorValue":"123456",
@@ -85,7 +85,7 @@ class API_Middle extends API_common {
         return result;
     }
 
-    private String generate_json_change_registration(String mac, String ams_ip) {
+    private String generateJsonChangeRegistration(String mac, String ams_ip) {
         //String json = "{\"setting\":{\"groups\":[{\"options\":[],\"id\":\"STBmacaddress\",\"type\":\"device-stb\",\"amsid\":\"" + ams_ip + "\"}]}}";
         JSONObject json = new JSONObject();
         JSONObject object_in_settings = new JSONObject();
@@ -110,7 +110,7 @@ class API_Middle extends API_common {
     }
 
     //todo
-    private String generate_json_reminder_delete_multiple(String mac, int reminderScheduleId, int reminderId) {
+    private String generateJsonReminderDeleteMultiple(String mac, int reminderScheduleId, int reminderId) {
         JSONObject json = new JSONObject();
         json.put("macAddress", mac);
         JSONArray array = new JSONArray();
@@ -130,7 +130,7 @@ class API_Middle extends API_common {
     }
 
     //todo
-    private String generate_json_reminder_delete_multiple2(String mac, int reminderScheduleId, int reminderId) {
+    private String generateJsonReminderDeleteMultiple2(String mac, int reminderScheduleId, int reminderId) {
         JSONObject json = new JSONObject();
         json.put("macAddress", "STB" + mac);
         JSONArray array = new JSONArray();
@@ -148,8 +148,8 @@ class API_Middle extends API_common {
         return result;
     }
 
-    ArrayList GetAllReminder(String charterapi, String deviceId, int lineupId) throws IOException {
-        System.out.println("GetAllReminder for " +  deviceId + " via charterapi: " + charterapi);
+    ArrayList getAllReminder(String charterapi, String deviceId, int lineupId) throws IOException {
+        System.out.println("getAllReminder for " +  deviceId + " via charterapi: " + charterapi);
         long start = System.currentTimeMillis();
         HttpResponse response = HttpClients.createDefault().execute(prepareGetRequest(charterapi + "/remindersmiddle/v1/reminders?deviceId=" + deviceId + "&lineupId=" + lineupId));
         long finish = System.currentTimeMillis();
@@ -157,13 +157,13 @@ class API_Middle extends API_common {
 
         ArrayList arrayList = new ArrayList();
         arrayList.add(0, response.getStatusLine().getStatusCode() + " " + response.getStatusLine().getReasonPhrase());
-        arrayList.add(1, check_body_response(read_response(new StringBuilder(),response).toString(), deviceId));
+        arrayList.add(1, checkResponseBody(readResponse(new StringBuilder(),response), deviceId));
         System.out.println("[DBG] return data: " + arrayList);
         return arrayList;
     }
 
-    ArrayList GetStbReminder(String charterapi, String deviceId) throws IOException {
-        System.out.println("GetStbReminder for "+ deviceId + " via charterapi: " + charterapi);
+    ArrayList getStbReminder(String charterapi, String deviceId) throws IOException {
+        System.out.println("getStbReminder for "+ deviceId + " via charterapi: " + charterapi);
         long start = System.currentTimeMillis();
         HttpResponse response = HttpClients.createDefault().execute(prepareGetRequest(charterapi + "/remindersmiddle/v1/stbReminders?deviceId=" + deviceId));
         long finish = System.currentTimeMillis();
@@ -171,17 +171,17 @@ class API_Middle extends API_common {
 
         ArrayList arrayList = new ArrayList();
         arrayList.add(0, response.getStatusLine().getStatusCode() + " " + response.getStatusLine().getReasonPhrase());
-        arrayList.add(1, check_body_response(read_response(new StringBuilder(),response).toString(), deviceId));
+        arrayList.add(1, checkResponseBody(readResponse(new StringBuilder(),response), deviceId));
         System.out.println("[DBG] return data: " + arrayList);
         return arrayList;
     }
 
-    ArrayList Delete_multiple_reminders(String charterapi, String deviceId, int reminderScheduleId, int reminderId) throws IOException {
+    ArrayList deleteMultipleReminders(String charterapi, String deviceId, int reminderScheduleId, int reminderId) throws IOException {
         if(show_debug_level) {
-            System.out.println("Delete_multiple_reminders with reminderScheduleId=" + reminderScheduleId + " and reminderId=" + reminderId);
+            System.out.println("deleteMultipleReminders with reminderScheduleId=" + reminderScheduleId + " and reminderId=" + reminderId);
         }
         HttpPost request = new HttpPost(charterapi + "/remindersmiddle/v1/reminders/deleteMultipleReminders");
-        request.setEntity(new StringEntity(generate_json_reminder_delete_multiple2(deviceId, reminderScheduleId, reminderId)));
+        request.setEntity(new StringEntity(generateJsonReminderDeleteMultiple2(deviceId, reminderScheduleId, reminderId)));
         System.out.println("[DBG] Request string: " + request);
 
         long start = System.currentTimeMillis();
@@ -191,17 +191,17 @@ class API_Middle extends API_common {
 
         ArrayList arrayList = new ArrayList();
         arrayList.add(0, response.getStatusLine().getStatusCode() + " " + response.getStatusLine().getReasonPhrase());
-        arrayList.add(1, check_body_response(read_response(new StringBuilder(),response).toString(), deviceId));
+        arrayList.add(1, checkResponseBody(readResponse(new StringBuilder(),response), deviceId));
         System.out.println("[DBG] return data: " + arrayList);
         return arrayList;
     }
 
-    ArrayList Schedule_reminder(String charterapi, String deviceId, int lineupId) throws IOException {
+    ArrayList scheduleReminder(String charterapi, String deviceId, int lineupId) throws IOException {
         System.out.println("Schedule_a_reminder:");
         HttpPost request = new HttpPost(charterapi + "/remindersmiddle/v1/reminders?lineupId=" + lineupId + "&deviceId=" + deviceId);
         request.setHeader("Content-type", "application/json");
         request.setHeader("Cache-Control", "no-cache");
-        request.setEntity(new StringEntity(generate_json_reminder_schedule()));
+        request.setEntity(new StringEntity(generateJsonReminderSchedule()));
         System.out.println("[DBG] Request string: " + request);
 
         long start = System.currentTimeMillis();
@@ -211,7 +211,7 @@ class API_Middle extends API_common {
 
         ArrayList arrayList = new ArrayList();
         arrayList.add(0, response.getStatusLine().getStatusCode() + " " + response.getStatusLine().getReasonPhrase());
-        arrayList.add(1, check_body_response(read_response(new StringBuilder(), response).toString(), deviceId));
+        arrayList.add(1, checkResponseBody(readResponse(new StringBuilder(), response), deviceId));
         System.out.println("[DBG] return data: " + arrayList);
         return arrayList;
     }
