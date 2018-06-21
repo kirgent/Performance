@@ -608,7 +608,7 @@ public class API_common {
         return body.toString();
     }
 
-    HttpGet prepare_get_request(String uri) throws IOException {
+    HttpGet prepareGetRequest(String uri) throws IOException {
         HttpGet request = new HttpGet(uri);
         request.setHeader("Content-type", "application/json");
         request.setHeader("Cache-Control", "no-cache");
@@ -616,7 +616,7 @@ public class API_common {
         return request;
     }
 
-    HttpPost prepare_post_request(String uri) throws IOException {
+    HttpPost preparePostRequest(String uri) throws IOException {
         HttpPost request = new HttpPost(uri);
         logger(DEBUG_LEVEL, "[DBG] request string: " + request);
         return request;
@@ -914,11 +914,11 @@ public class API_common {
         return result;
     }
 
-    void print_total_results(String mac, String boxname, int count_reminders, int count_iterations,
-                               int a_avg, int a_med, int a_min, int a_min_iteration, int a_max, int a_max_iteration, int a_iteration, ArrayList a_current,
-                               int m_avg, int m_med, int m_min, int m_min_iteration, int m_max, int m_max_iteration, int m_iteration, ArrayList m_current,
-                               int d_avg, int d_med, int d_min, int d_min_iteration, int d_max, int d_max_iteration, int d_iteration, ArrayList d_current,
-                               int p_avg, int p_med, int p_min, int p_min_iteration, int p_max, int p_max_iteration, int p_iteration, ArrayList p_current
+    void printTotalResults(String mac, String boxname, int count_reminders, int count_iterations,
+                           int a_avg, int a_med, int a_min, int a_min_iteration, int a_max, int a_max_iteration, int a_iteration, ArrayList a_current,
+                           int m_avg, int m_med, int m_min, int m_min_iteration, int m_max, int m_max_iteration, int m_iteration, ArrayList m_current,
+                           int d_avg, int d_med, int d_min, int d_min_iteration, int d_max, int d_max_iteration, int d_iteration, ArrayList d_current,
+                           int p_avg, int p_med, int p_min, int p_min_iteration, int p_max, int p_max_iteration, int p_iteration, ArrayList p_current
     ) throws IOException {
 
         String header = "========= ========= ========= Total measurements ========= ========= ========="
@@ -961,7 +961,7 @@ public class API_common {
         //}
     }
 
-    void print_preliminary_results(ArrayList list) throws IOException {
+    void printPreliminaryResults(ArrayList list) throws IOException {
 
         if(list.get(1).equals("")){
             logger(INFO_LEVEL, "[INF] return data: [" + list.get(0) + ", " + list.get(1) + "]"
@@ -998,7 +998,7 @@ public class API_common {
         writer.close();
     }
 
-    void print_iteration_header(String ams_ip, String mac, int count_reminders, int i, int count_iterations, int reminderChannelNumber) throws IOException {
+    void printIterationHeader(String ams_ip, String mac, int count_reminders, int i, int count_iterations, int reminderChannelNumber) throws IOException {
         String header = "========= ========= ========= Iteration = " + i
                 + "/" + count_iterations
                 + ", mac=" + mac

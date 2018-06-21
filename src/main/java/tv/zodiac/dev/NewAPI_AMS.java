@@ -115,7 +115,7 @@ class NewAPI_AMS extends API_common {
      * @return list
      * @throws IOException - TBD
      */
-    ArrayList request_perf(String ams_ip, String mac, Enum<Operation> operation, int i) throws IOException {
+    ArrayList requestPerformance(String ams_ip, String mac, Enum<Operation> operation, int i) throws IOException {
         logger(INFO_LEVEL, "[INF] " + new Date() + ": " + operation.toString().toUpperCase() + ":");
 
         HttpPost request = new HttpPost(prepare_url(ams_ip, operation, true));
@@ -159,7 +159,7 @@ class NewAPI_AMS extends API_common {
      * @return list
      * @throws IOException -TBD
      */
-    ArrayList request_perf(String ams_ip, String mac, Enum<Operation> operation, int i, int count_reminders, long reminderScheduleId, long reminderId) throws IOException {
+    ArrayList requestPerformance(String ams_ip, String mac, Enum<Operation> operation, int i, int count_reminders, long reminderScheduleId, long reminderId) throws IOException {
         logger(INFO_LEVEL, "[INF] " + new Date() + ": " + operation.toString().toUpperCase() + ":");
 
         HttpPost request = new HttpPost(prepare_url(ams_ip, Operation.delete, true));
@@ -209,7 +209,7 @@ class NewAPI_AMS extends API_common {
      * @return list
      * @throws IOException -TBD
      */
-    ArrayList request_perf(String ams_ip, String mac, Enum<Operation> operation, int i, int count_reminders, String reminderProgramStart, long reminderChannelNumber, String reminderProgramId, long reminderOffset, long reminderScheduleId, long reminderId) throws IOException {
+    ArrayList requestPerformance(String ams_ip, String mac, Enum<Operation> operation, int i, int count_reminders, String reminderProgramStart, long reminderChannelNumber, String reminderProgramId, long reminderOffset, long reminderScheduleId, long reminderId) throws IOException {
         logger(INFO_LEVEL, "[INF] " + new Date() + ": " + operation.toString().toUpperCase() + ":");
 
         HttpPost request = new HttpPost(prepare_url(ams_ip, operation, true));

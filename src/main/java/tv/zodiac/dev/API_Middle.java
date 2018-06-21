@@ -151,7 +151,7 @@ class API_Middle extends API_common {
     ArrayList GetAllReminder(String charterapi, String deviceId, int lineupId) throws IOException {
         System.out.println("GetAllReminder for " +  deviceId + " via charterapi: " + charterapi);
         long start = System.currentTimeMillis();
-        HttpResponse response = HttpClients.createDefault().execute(prepare_get_request(charterapi + "/remindersmiddle/v1/reminders?deviceId=" + deviceId + "&lineupId=" + lineupId));
+        HttpResponse response = HttpClients.createDefault().execute(prepareGetRequest(charterapi + "/remindersmiddle/v1/reminders?deviceId=" + deviceId + "&lineupId=" + lineupId));
         long finish = System.currentTimeMillis();
         System.out.print("[DBG] " + (finish-start) + "ms request");
 
@@ -165,7 +165,7 @@ class API_Middle extends API_common {
     ArrayList GetStbReminder(String charterapi, String deviceId) throws IOException {
         System.out.println("GetStbReminder for "+ deviceId + " via charterapi: " + charterapi);
         long start = System.currentTimeMillis();
-        HttpResponse response = HttpClients.createDefault().execute(prepare_get_request(charterapi + "/remindersmiddle/v1/stbReminders?deviceId=" + deviceId));
+        HttpResponse response = HttpClients.createDefault().execute(prepareGetRequest(charterapi + "/remindersmiddle/v1/stbReminders?deviceId=" + deviceId));
         long finish = System.currentTimeMillis();
         System.out.print("[DBG] " + (finish-start) + "ms request");
 
