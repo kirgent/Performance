@@ -23,9 +23,9 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 public class API_common {
 
     Boolean show_info_level = true;
-    Boolean show_debug_level = false;
-    Boolean show_generated_json = false;
-    private Boolean show_response_body = false;
+    Boolean show_debug_level = true;
+    Boolean show_generated_json = true;
+    private Boolean show_response_body = true;
     private Boolean write_file = true;
     private boolean calc_median = true;
 
@@ -478,7 +478,7 @@ public class API_common {
     return "";
     }
 
-    String check_body_response(String body, String mac) throws IOException {
+    String checkResponseBody(String body, String mac) throws IOException {
         String result = "";
         if(body.contains("\"statusCode\":1")){
             //log.warning("one or more statusCode's = " + statuscode[1]);
@@ -593,7 +593,7 @@ public class API_common {
         return result;
     }
 
-    final String read_response(StringBuilder body, HttpResponse response) throws IOException {
+    final String readResponse(StringBuilder body, HttpResponse response) throws IOException {
         BufferedReader reader = new BufferedReader(new InputStreamReader(response.getEntity().getContent(), StandardCharsets.UTF_8));
         //StringBuilder body = new StringBuilder();
         for (String line; (line = reader.readLine()) != null; ) {
@@ -608,7 +608,7 @@ public class API_common {
         return body.toString();
     }
 
-    HttpGet prepare_get_request(String uri) throws IOException {
+    HttpGet prepareGetRequest(String uri) throws IOException {
         HttpGet request = new HttpGet(uri);
         request.setHeader("Content-type", "application/json");
         request.setHeader("Cache-Control", "no-cache");
@@ -616,7 +616,7 @@ public class API_common {
         return request;
     }
 
-    HttpPost prepare_post_request(String uri) throws IOException {
+    HttpPost preparePostRequest(String uri) throws IOException {
         HttpPost request = new HttpPost(uri);
         logger(DEBUG_LEVEL, "[DBG] request string: " + request);
         return request;
@@ -914,11 +914,11 @@ public class API_common {
         return result;
     }
 
-    void print_total_results(String mac, String boxname, int count_reminders, int count_iterations,
-                               int a_avg, int a_med, int a_min, int a_min_iteration, int a_max, int a_max_iteration, int a_iteration, ArrayList a_current,
-                               int m_avg, int m_med, int m_min, int m_min_iteration, int m_max, int m_max_iteration, int m_iteration, ArrayList m_current,
-                               int d_avg, int d_med, int d_min, int d_min_iteration, int d_max, int d_max_iteration, int d_iteration, ArrayList d_current,
-                               int p_avg, int p_med, int p_min, int p_min_iteration, int p_max, int p_max_iteration, int p_iteration, ArrayList p_current
+    void printTotalResults(String mac, String boxname, int count_reminders, int count_iterations,
+                           int a_avg, int a_med, int a_min, int a_min_iteration, int a_max, int a_max_iteration, int a_iteration, ArrayList a_current,
+                           int m_avg, int m_med, int m_min, int m_min_iteration, int m_max, int m_max_iteration, int m_iteration, ArrayList m_current,
+                           int d_avg, int d_med, int d_min, int d_min_iteration, int d_max, int d_max_iteration, int d_iteration, ArrayList d_current,
+                           int p_avg, int p_med, int p_min, int p_min_iteration, int p_max, int p_max_iteration, int p_iteration, ArrayList p_current
     ) throws IOException {
 
         String header = "========= ========= ========= Total measurements ========= ========= ========="
@@ -941,19 +941,19 @@ public class API_common {
 
             if (a_current != null) {
                 //result += a_current;
-                write_to_file("a.log", a_current.toString(), false);
+                writeFile("a.log", a_current.toString(), false);
             }
             if (m_current != null) {
                 //result += m_current;
-                write_to_file("m.log", m_current.toString(), false);
+                writeFile("m.log", m_current.toString(), false);
             }
             if (d_current != null){
                 //result += d_current;
-                write_to_file("d.log", d_current.toString(), false);
+                writeFile("d.log", d_current.toString(), false);
             }
             if (p_current != null) {
                 //result += p_current;
-                write_to_file("p.log", p_current.toString(), false);
+                writeFile("p.log", p_current.toString(), false);
             }
 
             result += footer;
@@ -961,7 +961,7 @@ public class API_common {
         //}
     }
 
-    void print_preliminary_results(ArrayList list) throws IOException {
+    void printPreliminaryResults(ArrayList list) throws IOException {
 
         if(list.get(1).equals("")){
             logger(INFO_LEVEL, "[INF] return data: [" + list.get(0) + ", " + list.get(1) + "]"
@@ -981,24 +981,24 @@ public class API_common {
         if(level.equals("INF") && show_info_level) {
             System.out.println(s);
             if (write_file) {
-                write_to_file(REMINDERSLOG, s + "\n", append);
+                writeFile(REMINDERSLOG, s + "\n", append);
             }
         } else if(level.equals("DBG") && show_debug_level) {
             System.out.println(s);
             if (write_file) {
-                write_to_file(REMINDERSLOG, s + "\n", append);
+                writeFile(REMINDERSLOG, s + "\n", append);
             }
         }
     }
 
-    private void write_to_file(String filename, String s, boolean append) throws IOException {
+    private void writeFile(String filename, String s, boolean append) throws IOException {
         FileWriter writer = new FileWriter(filename, append);
         writer.write(s);
         writer.flush();
         writer.close();
     }
 
-    void print_iteration_header(String ams_ip, String mac, int count_reminders, int i, int count_iterations, int reminderChannelNumber) throws IOException {
+    void printIterationHeader(String ams_ip, String mac, int count_reminders, int i, int count_iterations, int reminderChannelNumber) throws IOException {
         String header = "========= ========= ========= Iteration = " + i
                 + "/" + count_iterations
                 + ", mac=" + mac

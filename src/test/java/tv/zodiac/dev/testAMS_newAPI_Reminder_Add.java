@@ -18,7 +18,7 @@ class testAMS_newAPI_Reminder_Add extends API_common {
     final private int count_iterations = 10;
     final private int count_reminders = 2;
 
-    /** common test for Adding
+    /** commonPerformance test for Adding
      * @throws IOException - TBD
      */
     @RepeatedTest(count_iterations)

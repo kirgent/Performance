@@ -157,11 +157,11 @@ public class Main {
         switch (operation){
             case "Check":
             case "check":
-                Middle.Check_registration(charterapi, macaddress);
+                Middle.checkRegistration(charterapi, macaddress);
                 break;
             case "Change":
             case "change":
-                Middle.Change_registration(macaddress, charterapi, ams_ip);
+                Middle.changeRegistration(macaddress, charterapi, ams_ip);
                 break;
             case "Purge":
             case "purge":
@@ -181,7 +181,7 @@ public class Main {
             //case "delete": api.Operation("Delete", mac, count, count_iterations, ams_ip_default); break;
 
             default:
-                Middle.Check_registration(charterapi, macaddress);
+                Middle.checkRegistration(charterapi, macaddress);
         }
     }
 }

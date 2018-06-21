@@ -3,7 +3,6 @@ package tv.zodiac.dev;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvFileSource;
 
-import java.io.IOException;
 import java.util.ArrayList;
 
 import static java.time.Duration.ofMillis;
@@ -22,7 +21,7 @@ class testMiddle_Change_registration extends API_Middle {
     void testChange_registration(String ams_ip, String mac, String charterapi) {
         final ArrayList[] actual = new ArrayList[1];
         assertTimeoutPreemptively(ofMillis(timeout), () -> {
-            actual[0] = Middle.Change_registration(ams_ip, mac, charterapi);
+            actual[0] = Middle.changeRegistration(ams_ip, mac, charterapi);
         });
         assertEquals(expected200, actual[0].get(0));
         assertEquals("", actual[0].get(1));

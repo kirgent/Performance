@@ -25,13 +25,13 @@ class OldAPI_AMS extends API_common {
      * @return
      * @throws IOException
      */
-    ArrayList request_perf(String ams_ip, String mac, Enum<Operation> operation, int i, int count_reminders, long reminderChannelNumber, String reminderProgramStart, String reminderProgramId, long reminderOffset) throws IOException {
+    ArrayList requestPerformance(String ams_ip, String mac, Enum<Operation> operation, int i, int count_reminders, long reminderChannelNumber, String reminderProgramStart, String reminderProgramId, long reminderOffset) throws IOException {
         logger(INFO_LEVEL, "[INF] " + new Date() + ": " + operation.toString().toUpperCase() + ":");
 
         HttpPost request = new HttpPost(prepare_url(ams_ip, operation,false));
         request.setHeader("Accept", "application/json");
         request.setHeader("Content-type", "application/json");
-        request.setEntity(new StringEntity(generate_json_reminder(mac, count_reminders, operation, reminderChannelNumber, reminderProgramStart, reminderProgramId, reminderOffset)));
+        request.setEntity(new StringEntity(generateJsonReminder(mac, count_reminders, operation, reminderChannelNumber, reminderProgramStart, reminderProgramId, reminderOffset)));
         logger(DEBUG_LEVEL, "[DBG] request string: " + request);
 
         long start = System.currentTimeMillis();
@@ -42,7 +42,7 @@ class OldAPI_AMS extends API_common {
 
         ArrayList list = new ArrayList();
         list.add(0, response.getStatusLine().getStatusCode() + " " + response.getStatusLine().getReasonPhrase());
-        list.add(1, check_body_response(read_response(new StringBuilder(),response), mac));
+        list.add(1, checkResponseBody(readResponse(new StringBuilder(),response), mac));
         if (list.get(1).equals("")) {
             if (operation.name().equals("add")) {
                 add_list.add(current);
@@ -52,7 +52,7 @@ class OldAPI_AMS extends API_common {
                 int total_i = add_list.size();
                 list.add(2, current);
                 list.add(3, getAverage(add_list));
-                list.add(4, searchMedian(add_list, Sorting.selection));
+                list.add(4, searchMedian(add_list, Sorting.insertion));
                 list.add(5, min[0]);
                 list.add(6, min[1]);
                 list.add(7, max[0]);
@@ -68,7 +68,7 @@ class OldAPI_AMS extends API_common {
                 int total_i = delete_list.size();
                 list.add(2, current);
                 list.add(3, getAverage(delete_list));
-                list.add(4, searchMedian(delete_list, Sorting.selection));
+                list.add(4, searchMedian(delete_list, Sorting.insertion));
                 list.add(5, min[0]);
                 list.add(6, min[1]);
                 list.add(7, max[0]);
@@ -86,13 +86,13 @@ class OldAPI_AMS extends API_common {
      * @return
      * @throws IOException
      */
-    ArrayList request_perf(String ams_ip, String mac, Enum<Operation> operation, int i) throws IOException {
+    ArrayList requestPerformance(String ams_ip, String mac, Enum<Operation> operation, int i) throws IOException {
         logger(INFO_LEVEL, "[INF] " + new Date() + ": " + operation.toString().toUpperCase() + ":");
 
         HttpPost request = new HttpPost(prepare_url(ams_ip, Operation.purge, false));
         request.setHeader("Accept", "application/json");
         request.setHeader("Content-type", "application/json");
-        request.setEntity(new StringEntity(generate_json_reminder_purge(mac)));
+        request.setEntity(new StringEntity(generateJsonReminderPurge(mac)));
         logger(DEBUG_LEVEL, "[DBG] request string: " + request);
 
         long start = System.currentTimeMillis();
@@ -103,7 +103,7 @@ class OldAPI_AMS extends API_common {
 
         ArrayList list = new ArrayList();
         list.add(0, response.getStatusLine().getStatusCode() + " " + response.getStatusLine().getReasonPhrase());
-        list.add(1, check_body_response(read_response(new StringBuilder(),response), mac));
+        list.add(1, checkResponseBody(readResponse(new StringBuilder(),response), mac));
         if (list.get(1).equals("")) {
             purge_list.add(current);
             int[] min = getMin(Operation.purge, current, i);
@@ -112,7 +112,7 @@ class OldAPI_AMS extends API_common {
             int total_i = purge_list.size();
             list.add(2, current);
             list.add(3, getAverage(purge_list));
-            list.add(4, searchMedian(purge_list, Sorting.selection));
+            list.add(4, searchMedian(purge_list, Sorting.insertion));
             list.add(5, min[0]);
             list.add(6, min[1]);
             list.add(7, max[0]);
@@ -123,7 +123,7 @@ class OldAPI_AMS extends API_common {
         return list;
     }
 
-    private String generate_json_reminder(String mac, int count_reminders, Enum<Operation> operation, long reminderChannelNumber, String reminderProgramStart, String reminderProgramId, long reminderOffset) throws IOException {
+    private String generateJsonReminder(String mac, int count_reminders, Enum<Operation> operation, long reminderChannelNumber, String reminderProgramStart, String reminderProgramId, long reminderOffset) throws IOException {
         if (count_reminders < 0) { count_reminders = 0; }
         //if (count_reminders > 1440) { count_reminders = 1440; }
 
@@ -155,7 +155,7 @@ class OldAPI_AMS extends API_common {
         return json.toString();
     }
 
-    private String generate_json_reminder_purge(String mac) throws IOException {
+    private String generateJsonReminderPurge(String mac) throws IOException {
         JSONObject json = new JSONObject();
         json.put("deviceId", mac);
         JSONArray array_reminders = new JSONArray();
