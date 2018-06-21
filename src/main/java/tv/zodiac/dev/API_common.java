@@ -26,8 +26,6 @@ public class API_common {
     Boolean show_debug_level = false;
     Boolean show_generated_json = false;
     private Boolean show_response_body = false;
-    private Boolean write_file = true;
-    private boolean calc_median = true;
 
     static final String INFO_LEVEL = "INF";
     static final String DEBUG_LEVEL = "DBG";
@@ -239,11 +237,11 @@ public class API_common {
 
     int searchMedian(ArrayList list, Enum<Sorting> sort) throws IOException {
         int median;
-        if(calc_median) {
-            switch (sort.name()) {
-                case "bubble":
-                    sortBubble(list);
-                    break;
+        switch (sort.name()) {
+            case "bubble":
+                sortBubble(list);
+                break;
+
                 case "quick":
                     sortQuick(list);
                     break;
@@ -262,9 +260,6 @@ public class API_common {
                 //if nechetnoe - just take middle element
                 median = (int) list.get(list.size() / 2);
             }
-        } else {
-            median = 0;
-        }
         return median;
     }
 
@@ -980,14 +975,10 @@ public class API_common {
         boolean append = true;
         if(level.equals("INF") && show_info_level) {
             System.out.println(s);
-            if (write_file) {
-                writeFile(REMINDERSLOG, s + "\n", append);
-            }
+            writeFile(REMINDERSLOG, s + "\n", append);
         } else if(level.equals("DBG") && show_debug_level) {
             System.out.println(s);
-            if (write_file) {
-                writeFile(REMINDERSLOG, s + "\n", append);
-            }
+            writeFile(REMINDERSLOG, s + "\n", append);
         }
     }
 

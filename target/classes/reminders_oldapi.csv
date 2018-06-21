@@ -1,7 +1,3 @@
 ams_ip,mac,boxname,sleep_after_iteration,count_reminders,count_iterations,reminderChannelNumber
 #comments are here
-<<<<<<< HEAD
-"172.30.81.5","000004B9419F","boxMoto2145_173",1000,1,1000,5
-=======
-"172.30.81.5","000004B9419F","boxMoto2145_173",1,1,3,5
->>>>>>> c4dc44c4402516cc66e1a3d18eeca93e5e6110ab
+"172.30.81.5","000004B9419F","boxMoto2145_173",1000,1,3,5
