@@ -4,6 +4,7 @@ import au.com.bytecode.opencsv.CSVReader;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
+import org.apache.http.impl.client.HttpClients;
 
 import java.io.*;
 import java.nio.charset.StandardCharsets;
@@ -23,8 +24,8 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 public class API_common {
 
     Boolean show_info_level = true;
-    Boolean show_debug_level = false;
-    Boolean show_generated_json = true;
+    Boolean show_debug_level = true;
+    Boolean show_generated_json = false;
     private Boolean show_response_body = true;
 
     static final String INFO_LEVEL = "INF";
@@ -33,7 +34,7 @@ public class API_common {
 
     //private final static Logger log = Logger.getLogger(API.class.getName());
 
-    enum Operation { add, modify, delete, purge, blablabla }
+    enum Operation { add, modify, delete, purge, blablabla, www }
 
     enum Generation { random, increment }
 
@@ -69,7 +70,9 @@ public class API_common {
     ArrayList<Integer> add_list = new ArrayList<>(),
             modify_list = new ArrayList<>(),
             delete_list = new ArrayList<>(),
-            purge_list = new ArrayList<>();
+            purge_list = new ArrayList<>(),
+            request_list = new ArrayList<>();
+
     private int[] a_max = {0, 0}, a_min = {0, 0},
             m_max = {0, 0}, m_min = {0, 0},
             d_max = {0, 0}, d_min = {0, 0},
@@ -604,6 +607,14 @@ public class API_common {
         //System.out.println("[DBG] check_body_for_statuscode: result: " + result);
         return result;
     }
+    String checkResponseBody2(String body, String template) throws IOException {
+        String result = "";
+
+        if(body.contains(template)){
+            result += template;
+        }
+        return result;
+    }
 
     final String readResponse(StringBuilder body, HttpResponse response) throws IOException {
         BufferedReader reader = new BufferedReader(new InputStreamReader(response.getEntity().getContent(), StandardCharsets.UTF_8));
@@ -916,12 +927,16 @@ public class API_common {
         return result.toString();
     }
 
-    String prepare_url(String ams_ip, Enum<Operation> operation, boolean newapi) {
+    String prepare_url(String server, Enum<Operation> operation, boolean newapi) {
         String result;
-        if (newapi) {
-            result = "http://" + ams_ip + ":" + ams_port + "/ams/Reminders2?req=" + operation;
+        if(!operation.name().equals("www")) {
+            if (newapi) {
+                result = "http://" + server + ":" + ams_port + "/ams/Reminders2?req=" + operation;
+            } else {
+                result = "http://" + server + ":" + ams_port + "/ams/Reminders?req=ChangeReminders";
+            }
         } else {
-            result = "http://" + ams_ip + ":" + ams_port + "/ams/Reminders?req=ChangeReminders";
+            result = "http://" + server;
         }
         return result;
     }
@@ -973,9 +988,34 @@ public class API_common {
         //}
     }
 
+    void printTotalResults(String server, int count_iterations,
+                           int avg, int med, int min, int min_iteration, int max, int max_iteration, int iteration, ArrayList current) throws IOException {
+
+        String header = "========= ========= ========= Total measurements ========= ========= ========="
+                + "\n" + starttime + " - test was started"
+                + "\n" + new Date() + " - test is done for server=" + server + ", count_iterations=" + iteration + "/" + count_iterations;
+        String a = "\nrequest avg=" + avg + "ms, med=" + med + "ms, min=" + min + "ms/" + min_iteration + ", max=" + max + "ms/" + max_iteration + ", i=" + iteration;
+        String footer = "\n========= ========= ========= ========= ========= ========= ========= =========";
+
+        String result = "";
+        //if (a_avg != 0) {
+        result += header;
+        //result += a;
+        if (avg != 0) {            result += a;        }
+
+        if (current != null) {
+            //result += a_current;
+            writeFile("a.log", current.toString(), false);
+        }
+
+        result += footer;
+        logger(INFO_LEVEL, result);
+        //}
+    }
+
     void printPreliminaryResults(ArrayList list) throws IOException {
 
-        if(list.get(1).equals("")){
+        if(list.get(0).equals(expected200)){
             logger(INFO_LEVEL, "[INF] return data: [" + list.get(0) + ", " + list.get(1) + "]"
                 + " measurements: cur=" + list.get(2)
                 + ", avg=" + list.get(3)
@@ -1017,6 +1057,19 @@ public class API_common {
         logger(INFO_LEVEL, header);
     }
 
+    void printStartHeader(String server) throws IOException {
+        starttime = new Date();
+        logger(INFO_LEVEL, "[INF] " + starttime + ": New start for server=" + server);
+    }
+
+    void printIterationHeader(String server, int i, int count_iterations) throws IOException {
+        String header = "========= ========= ========= Iteration = " + i
+                + "/" + count_iterations
+                + ", server=" + server
+                + " ========= ========= =========";
+        logger(INFO_LEVEL, header);
+    }
+
     void check_csv(String ams_ip, String mac, String boxname, int sleep_after_iteration, int count_reminders, int count_iterations, int reminderChannelNumber) {
         assertNotNull(ams_ip);
         assertNotNull(mac);
@@ -1042,4 +1095,39 @@ public class API_common {
             }
         }
     }
+
+    ArrayList request(String server, int i, String template) throws IOException {
+        logger(INFO_LEVEL, "[INF] " + new Date());
+
+        HttpGet request = new HttpGet(prepare_url(server, API_common.Operation.www,false));
+        logger(DEBUG_LEVEL, "[DBG] request string: " + request);
+
+        long start = System.currentTimeMillis();
+        HttpResponse response = HttpClients.createDefault().execute(request);
+        long finish = System.currentTimeMillis();
+        int current = (int)(finish-start);
+        logger(DEBUG_LEVEL, "[DBG] " + current + "ms request");
+
+        ArrayList list = new ArrayList();
+        list.add(0, response.getStatusLine().getStatusCode() + " " + response.getStatusLine().getReasonPhrase());
+        list.add(1, checkResponseBody2(readResponse(new StringBuilder(),response), template));
+        if (list.get(0).equals(expected200)) {
+            request_list.add(current);
+            int[] min = getMin(Operation.add, current, i);
+            int[] max = getMax(Operation.add, current, i);
+            list.add(2, current);
+            list.add(3, getAverage(request_list));
+            list.add(4, searchMedian(request_list, Sorting.insertion));
+            list.add(5, min[0]);
+            list.add(6, min[1]);
+            list.add(7, max[0]);
+            list.add(8, max[1]);
+
+            //use request_list.size() = total of success iteration!
+            list.add(9, request_list.size());
+            //logger(DEBUG_LEVEL, "[DBG] add avg = " + getAverage(add_list) + "ms/" + total_i + ": add_list:" + add_list);
+        }
+        return list;
+    }
+
 }
