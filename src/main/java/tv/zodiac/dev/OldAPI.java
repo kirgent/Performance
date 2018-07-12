@@ -1,6 +1,7 @@
 package tv.zodiac.dev;
 
 import org.apache.http.HttpResponse;
+import org.apache.http.HttpStatus;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.entity.StringEntity;
@@ -12,7 +13,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Date;
 
-class OldAPI_AMS extends API_common {
+class OldAPI extends API_common {
 
     /** Add / Delete method
      * @param ams_ip
@@ -42,9 +43,10 @@ class OldAPI_AMS extends API_common {
         logger(DEBUG_LEVEL, "[DBG] " + current + "ms request");
 
         ArrayList list = new ArrayList();
-        list.add(0, response.getStatusLine().getStatusCode() + " " + response.getStatusLine().getReasonPhrase());
-        list.add(1, checkResponseBody(readResponse(new StringBuilder(),response), mac));
-        if (list.get(1).equals("")) {
+        //list.add(0, response.getStatusLine().getStatusCode() + " " + response.getStatusLine().getReasonPhrase());
+        list.add(0, response.getStatusLine().getStatusCode());
+        list.add(1, checkResponseBody(readResponse(new StringBuilder(),response)));
+        if (list.get(0).equals(HttpStatus.SC_OK)) {
             if (operation.name().equals("add")) {
                 add_list.add(current);
                 int[] min = getMin(Operation.add, current, i);
@@ -103,9 +105,10 @@ class OldAPI_AMS extends API_common {
         logger(DEBUG_LEVEL, "[DBG] " + current + "ms request");
 
         ArrayList list = new ArrayList();
-        list.add(0, response.getStatusLine().getStatusCode() + " " + response.getStatusLine().getReasonPhrase());
-        list.add(1, checkResponseBody(readResponse(new StringBuilder(),response), mac));
-        if (list.get(1).equals("")) {
+        //list.add(0, response.getStatusLine().getStatusCode() + " " + response.getStatusLine().getReasonPhrase());
+        list.add(0, response.getStatusLine().getStatusCode());
+        list.add(1, checkResponseBody(readResponse(new StringBuilder(),response)));
+        if (list.get(0).equals(HttpStatus.SC_OK)) {
             purge_list.add(current);
             int[] min = getMin(Operation.purge, current, i);
             int[] max = getMax(Operation.purge, current, i);

@@ -2,9 +2,17 @@ package tv.zodiac.dev;
 
 import au.com.bytecode.opencsv.CSVReader;
 import org.apache.http.HttpResponse;
+import org.apache.http.HttpStatus;
+import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
+import org.apache.http.entity.StringEntity;
+import org.apache.http.impl.client.HttpClientBuilder;
 import org.apache.http.impl.client.HttpClients;
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
 
 import java.io.*;
 import java.nio.charset.StandardCharsets;
@@ -24,9 +32,9 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 public class API_common {
 
     Boolean show_info_level = true;
-    Boolean show_debug_level = true;
+    Boolean show_debug_level = false;
     Boolean show_generated_json = false;
-    private Boolean show_response_body = true;
+    private Boolean show_response_body = false;
 
     static final String INFO_LEVEL = "INF";
     static final String DEBUG_LEVEL = "DBG";
@@ -39,7 +47,7 @@ public class API_common {
     enum Generation { random, increment }
 
     enum Sorting { bubble, quick, selection, insertion, merge }
-    Sorting sort = Sorting.quick;
+    Sorting sorting = Sorting.quick;
 
     //static Logger log = Logger.getLogger(testAMS.class.getName());
     //FileHandler txtFile = new FileHandler ("log.log", true);
@@ -51,13 +59,6 @@ public class API_common {
     final String postfix_settings = "/networksettingsmiddle/ns/settings";
     final String charterapi = charterapi_b;
 
-    final String expected200 = "200 OK";
-    final String expected201 = "201 Created";
-    final String expected400 = "400 Bad Request";
-    final String expected404 = "404 Not Found";
-    final String expected500 = "500 Internal Server Error";
-    final String expected504 = "504 Server data timeout";
-
     final String mac_wrong = "123456789012";
     final String boxD101 = "A0722CEEC970";//WB20 D101 ???
     final String boxD102 = "3438B7EB2E24";//WB20 D102
@@ -67,29 +68,47 @@ public class API_common {
 
     ArrayList reminderScheduleId_list = new ArrayList(),
             reminderId_list = new ArrayList();
-    ArrayList<Integer> add_list = new ArrayList<>(),
-            modify_list = new ArrayList<>(),
-            delete_list = new ArrayList<>(),
-            purge_list = new ArrayList<>(),
-            request_list = new ArrayList<>();
 
-    private int[] a_max = {0, 0}, a_min = {0, 0},
-            m_max = {0, 0}, m_min = {0, 0},
-            d_max = {0, 0}, d_min = {0, 0},
-            p_max = {0, 0}, p_min = {0, 0};
+    ArrayList add_list = new ArrayList(),
+            modify_list = new ArrayList(),
+            delete_list = new ArrayList(),
+            purge_list = new ArrayList(),
+            request_list = new ArrayList();
+
+    ArrayList a_current = new ArrayList(),
+            m_current = new ArrayList(),
+            d_current = new ArrayList(),
+            p_current = new ArrayList(),
+            current = new ArrayList();
+
+    private int[] a_max_array = {0, 0}, a_min_array = {0, 0},
+            m_max_array = {0, 0}, m_min_array = {0, 0},
+            d_max_array = {0, 0}, d_min_array = {0, 0},
+            p_max_array = {0, 0}, p_min_array = {0, 0};
+
+    int a_avg = 0, a_med = 0, a_min = 0, a_min_iteration = 0, a_max = 0, a_max_iteration = 0, a_total_i = 0,
+            m_avg = 0, m_med = 0, m_min = 0, m_min_iteration = 0, m_max = 0, m_max_iteration = 0, m_total_i = 0,
+            d_avg = 0, d_med = 0, d_min = 0, d_min_iteration = 0, d_max = 0, d_max_iteration = 0, d_total_i = 0,
+            p_avg = 0, p_med = 0, p_min = 0, p_min_iteration = 0, p_max = 0, p_max_iteration = 0, p_total_i = 0,
+            avg = 0, med = 0, min = 0, min_iteration = 0, max = 0, max_iteration = 0, total_i = 0;
+
+    boolean use_random = false;
+    private int timeout = 20000;
 
     private String REMINDERSLOG = "reminders.log";
 
     String reminderProgramStart = "";
+
     int reminderChannelNumber = reminderChannelNumber(1000);
     //int reminderChannelNumber;
+
     String reminderProgramId = "";
-    //final String reminderProgramId = "EP002960010113";
+    //String reminderProgramId = "EP002960010113";
+
     //int reminderOffset = reminderOffset(15);
     int reminderOffset = 0;
 
     long reminderScheduleId;
-
     {
         try {
             reminderScheduleId = reminderScheduleId(Generation.random);
@@ -99,7 +118,6 @@ public class API_common {
     }
 
     long reminderId;
-
     {
         try {
             reminderId = reminderId(Generation.random);
@@ -321,16 +339,16 @@ public class API_common {
         int min[] = new int[2];
         switch (operation.name()) {
             case "add":
-                min = Arrays.copyOf(a_min, a_min.length);
+                min = Arrays.copyOf(a_min_array, a_min_array.length);
                 break;
             case "modify":
-                min = Arrays.copyOf(m_min, m_min.length);
+                min = Arrays.copyOf(m_min_array, m_min_array.length);
                 break;
             case "delete":
-                min = Arrays.copyOf(d_min, d_min.length);
+                min = Arrays.copyOf(d_min_array, d_min_array.length);
                 break;
             case "purge":
-                min = Arrays.copyOf(p_min, p_min.length);
+                min = Arrays.copyOf(p_min_array, p_min_array.length);
                 break;
         }
 
@@ -348,16 +366,16 @@ public class API_common {
         //todo TO REMOVE???
         switch (operation.name()) {
             case "add":
-                a_min = Arrays.copyOf(min, min.length);
+                a_min_array = Arrays.copyOf(min, min.length);
                 break;
             case "modify":
-                m_min = Arrays.copyOf(min, min.length);
+                m_min_array = Arrays.copyOf(min, min.length);
                 break;
             case "delete":
-                d_min = Arrays.copyOf(min, min.length);
+                d_min_array = Arrays.copyOf(min, min.length);
                 break;
             case "purge":
-                p_min = Arrays.copyOf(min, min.length);
+                p_min_array = Arrays.copyOf(min, min.length);
                 break;
         }
         long finish = System.currentTimeMillis();
@@ -389,16 +407,16 @@ public class API_common {
         //FAST??? to_confirm!
         switch (operation.name()) {
             case "add":
-                max = Arrays.copyOf(a_max, a_max.length);
+                max = Arrays.copyOf(a_max_array, a_max_array.length);
                 break;
             case "modify":
-                max = Arrays.copyOf(m_max, m_max.length);
+                max = Arrays.copyOf(m_max_array, m_max_array.length);
                 break;
             case "delete":
-                max = Arrays.copyOf(d_max, d_max.length);
+                max = Arrays.copyOf(d_max_array, d_max_array.length);
                 break;
             case "purge":
-                max = Arrays.copyOf(p_max, p_max.length);
+                max = Arrays.copyOf(p_max_array, p_max_array.length);
                 break;
         }
 
@@ -415,16 +433,16 @@ public class API_common {
         //todo TO REMOVE???
         switch (operation.name()) {
             case "add":
-                a_max = Arrays.copyOf(max, max.length);
+                a_max_array = Arrays.copyOf(max, max.length);
                 break;
             case "modify":
-                m_max = Arrays.copyOf(max, max.length);
+                m_max_array = Arrays.copyOf(max, max.length);
                 break;
             case "delete":
-                d_max = Arrays.copyOf(max, max.length);
+                d_max_array = Arrays.copyOf(max, max.length);
                 break;
             case "purge":
-                p_max = Arrays.copyOf(max, max.length);
+                p_max_array = Arrays.copyOf(max, max.length);
                 break;
         }
         long finish = System.currentTimeMillis();
@@ -493,7 +511,7 @@ public class API_common {
     return "";
     }
 
-    String checkResponseBody(String body, String mac) throws IOException {
+    String checkResponseBody(String body) throws IOException {
         String result = "";
         if(body.contains("\"statusCode\":1")){
             //log.warning("one or more statusCode's = " + statuscode[1]);
@@ -533,7 +551,7 @@ public class API_common {
             result += "STB not available";
         }
         if(body.contains("\"status\":\"Failed\"") && body.contains("\"errorMessage\":\"REM-002 Reminders Service error: REM-112\"")){
-            result += "REM-002 Reminders Service error: REM-012 [" + mac + "] Request not accomplished";
+            result += "REM-002 Reminders Service error: REM-012 [mac] Request not accomplished";
         }
         if(body.contains("\"status\":\"Failed\"") && body.contains("\"errorMessage\":\"Timeout detected by BoxResponseTracker")){
             result += "Timeout detected by BoxResponseTracker";
@@ -571,8 +589,8 @@ public class API_common {
         if(body.contains("\"status\":\"Failed\"") && body.contains("\"errorMessage\":\"name cannot be null\"")){
             result += "name cannot be null";
         }
-        if(body.contains("REM-002 Reminders Service error: Can not connect to STB with stbId=" + mac)){
-            result += "REM-002 Reminders Service error: Can not connect to STB with stbId=" + mac;
+        if(body.contains("REM-002 Reminders Service error: Can not connect to STB with stbId=[mac]")){
+            result += "REM-002 Reminders Service error: Can not connect to STB with stbId=[mac]";
         }
         if(body.contains("REM-008 Reminders parsing error: wrong deviceId")){
             result += "REM-008 Reminders parsing error: wrong deviceId";
@@ -586,11 +604,11 @@ public class API_common {
         if(body.contains("REM-008 Reminders parsing error: incorrect reminderId")){
             result += "REM-008 Reminders parsing error: incorrect reminderId";
         }
-        if(body.contains("Failed to getAmsIpBymac for : " + mac + ", with error: No amsIp found for mac: STB" +mac)){
+        if(body.contains("Failed to getAmsIpBymac for : [mac], with error: No amsIp found for mac: STB[mac]")){
             result += "No amsIp found for mac";
         }
-        if(body.contains("STB MAC not found: " + mac)){
-            result += "STB MAC not found: " + mac;
+        if(body.contains("STB MAC not found: [mac]")){
+            result += "STB MAC not found: [mac]";
         }
         if(body.contains("incorrect value")){
             result += "incorrect value";
@@ -607,11 +625,12 @@ public class API_common {
         //System.out.println("[DBG] check_body_for_statuscode: result: " + result);
         return result;
     }
-    String checkResponseBody2(String body, String template) throws IOException {
+
+    String checkResponseBody(String body, ArrayList template){
         String result = "";
 
-        if(body.contains(template)){
-            result += template;
+        if(body.contains((CharSequence) template.get(0))){
+            result += template.get(0);
         }
         return result;
     }
@@ -756,7 +775,6 @@ public class API_common {
         return Math.abs(new Random().nextInt(limit));
     }
 
-    @Deprecated
     void printArrayList(ArrayList list){
         if(list != null)
         {
@@ -765,8 +783,7 @@ public class API_common {
         }
     }
 
-    @Deprecated
-    static Boolean ContainsAllNulls(ArrayList list)
+    static Boolean checkContainsAllNulls(ArrayList list)
     {
         if(list != null)
         {
@@ -778,8 +795,7 @@ public class API_common {
 
     long reminderScheduleId(Enum<Generation> generation) throws IOException {
         if(generation.name().equals("random")) {
-            Random random = new Random();
-            reminderScheduleId = Math.abs(random.nextLong());
+            reminderScheduleId = Math.abs(new Random().nextLong());
             //long reminderScheduleId = Math.abs(random.nextInt(1000));
         } else if(generation.name().equals("increment")){
             reminderScheduleId = 1;
@@ -787,21 +803,20 @@ public class API_common {
         }
 
         reminderScheduleId_list.add(reminderScheduleId);
-        logger(DEBUG_LEVEL, "reminderScheduleId_list<-add = " + reminderScheduleId);
+        //logger(DEBUG_LEVEL, "reminderScheduleId_list<-add = " + reminderScheduleId);
         return reminderScheduleId;
     }
 
     long reminderId(Enum<Generation> generation) throws IOException {
         if(generation.name().equals("random")) {
-            Random random = new Random();
-            reminderId = Math.abs(random.nextLong());
+            reminderId = Math.abs(new Random().nextLong());
             //long reminderId = Math.abs(random.nextInt(1000));
         } else if (generation.name().equals("increment")) {
             reminderId = (int)reminderId_list.get(reminderId_list.size()) + 1;
         }
 
         reminderId_list.add(reminderId);
-        logger(DEBUG_LEVEL, "reminderId_list<-add         = " + reminderId);
+        //logger(DEBUG_LEVEL, "reminderId_list<-add         = " + reminderId);
         return reminderId;
     }
 
@@ -1014,8 +1029,7 @@ public class API_common {
     }
 
     void printPreliminaryResults(ArrayList list) throws IOException {
-
-        if(list.get(0).equals(expected200)){
+        if(list.get(0).equals(HttpStatus.SC_OK)){
             logger(INFO_LEVEL, "[INF] return data: [" + list.get(0) + ", " + list.get(1) + "]"
                 + " measurements: cur=" + list.get(2)
                 + ", avg=" + list.get(3)
@@ -1096,38 +1110,145 @@ public class API_common {
         }
     }
 
-    ArrayList request(String server, int i, String template) throws IOException {
-        logger(INFO_LEVEL, "[INF] " + new Date());
+    void before(String ams_ip, String mac, String boxname, int sleep_after_iteration, int count_reminders, int count_iterations, int reminderChannelNumber) throws IOException {
+        check_csv(ams_ip, mac, boxname, sleep_after_iteration, count_reminders, count_iterations, reminderChannelNumber);
 
-        HttpGet request = new HttpGet(prepare_url(server, API_common.Operation.www,false));
-        logger(DEBUG_LEVEL, "[DBG] request string: " + request);
+        printStartHeader(ams_ip, mac, boxname, count_reminders, reminderChannelNumber);
+
+        if(reminderChannelNumber == -1){
+            use_random = true;
+        }
+    }
+
+    private void printStartHeader(String ams_ip, String mac, String boxname, int count_reminders, int reminderChannelNumber) throws IOException {
+        starttime = new Date();
+        logger(INFO_LEVEL, "[INF] " + starttime + ": New start for mac=" + mac + "(" + boxname + ") to ams=" + ams_ip + ", "
+                + "count_reminders=" + count_reminders + ", "
+                + "reminderProgramStart=" + reminderProgramStart + ", "
+                + "reminderChannelNumber=" + reminderChannelNumber + ", "
+                + "reminderProgramId=" + reminderProgramId + ", "
+                + "reminderOffset=" + reminderOffset + ", "
+                + "reminderScheduleId=, "
+                + "reminderId=");
+    }
+
+
+    ArrayList post(String url, String json, ArrayList patterns, boolean parse_json) throws IOException {
+        //logger(CLIENTLOG, INFO_LEVEL, "post request to: " + url);
+        HttpClient client = HttpClientBuilder.create().build();
+        HttpPost request = new HttpPost(url);
+        //request.setHeader("User-Agent", USER_AGENT);
+        request.setHeader("Accept", "application/json");
+        request.setHeader("Content-type", "application/json");
+
+        /*List<NameValuePair> urlParameters = new ArrayList<NameValuePair>();
+        urlParameters.add(new BasicNameValuePair("sn", "C02G8416DRJM"));
+        urlParameters.add(new BasicNameValuePair("cn", ""));
+        urlParameters.add(new BasicNameValuePair("locale", ""));
+        urlParameters.add(new BasicNameValuePair("caller", ""));
+        urlParameters.add(new BasicNameValuePair("num", "12345"));*/
+        //request.setEntity(new UrlEncodedFormEntity(urlParameters));
+        //if(show_generated_json) {
+        //    logger(CLIENTLOG, INFO_LEVEL, "generated json: " + json);
+        //}
+        request.setEntity(new StringEntity(json));
 
         long start = System.currentTimeMillis();
-        HttpResponse response = HttpClients.createDefault().execute(request);
+        HttpResponse response = client.execute(request);
         long finish = System.currentTimeMillis();
         int current = (int)(finish-start);
-        logger(DEBUG_LEVEL, "[DBG] " + current + "ms request");
+        //logger(CLIENTLOG, INFO_LEVEL, "[DBG] " + current + "ms request");
 
+        String responseBody = read_response(response);
+        //if(show_response_body){
+        //    logger(CLIENTLOG, INFO_LEVEL, "responseBody: " + responseBody);
+        //}
+        //todo
         ArrayList list = new ArrayList();
-        list.add(0, response.getStatusLine().getStatusCode() + " " + response.getStatusLine().getReasonPhrase());
-        list.add(1, checkResponseBody2(readResponse(new StringBuilder(),response), template));
-        if (list.get(0).equals(expected200)) {
-            request_list.add(current);
-            int[] min = getMin(Operation.add, current, i);
-            int[] max = getMax(Operation.add, current, i);
-            list.add(2, current);
-            list.add(3, getAverage(request_list));
-            list.add(4, searchMedian(request_list, Sorting.insertion));
-            list.add(5, min[0]);
-            list.add(6, min[1]);
-            list.add(7, max[0]);
-            list.add(8, max[1]);
+        list.add(0, response.getStatusLine().getStatusCode());
+        check_responsebody(responseBody, patterns, list);
+        /*String responsebody = EntityUtils.toString(response.getEntity(), StandardCharsets.UTF_8);
+        if(show_response_json){
+            logger(INFO_LEVEL,"response body: " + responsebody);
+        }*/
 
-            //use request_list.size() = total of success iteration!
-            list.add(9, request_list.size());
-            //logger(DEBUG_LEVEL, "[DBG] add avg = " + getAverage(add_list) + "ms/" + total_i + ": add_list:" + add_list);
+        if(parse_json) {
+            ArrayList arrayList_parsed = new ArrayList();
+            try {
+                JSONParser parser = new JSONParser();
+                Object resultObject = parser.parse(responseBody);
+
+                if (resultObject instanceof JSONArray) {
+                    JSONArray array = (JSONArray) resultObject;
+                    for (Object object : array) {
+                        JSONObject obj = (JSONObject) object;
+                        arrayList_parsed.add(obj.get("measurements"));
+                        //parsed.add(obj.get("date"));
+                        //logger(CLIENTLOG, INFO_LEVEL, "JSONArray JSONParser-ed data: " + arrayList_parsed);
+                    }
+                } else if (resultObject instanceof JSONObject) {
+                    JSONObject obj = (JSONObject) resultObject;
+                    arrayList_parsed.add(obj.get("measurements"));
+                    //parsed.add(obj.get("date"));
+                    //logger(CLIENTLOG, INFO_LEVEL, "JSONObject JSONParser-ed data: " + arrayList_parsed);
+                }
+            } catch (ParseException e) {
+                //todo: handle exception
+                System.out.println("catch exception: JSONParser: seems not json format");
+                e.printStackTrace();
+            }
+
+            //logger(CLIENTLOG, INFO_LEVEL, "filtered data parsed: " + arrayList_parsed);
         }
+
+        //logger(CLIENTLOG, INFO_LEVEL, "filtered data: " + arrayList + "\n");
         return list;
+    }
+
+    private String read_response(HttpResponse response) throws IOException {
+        BufferedReader reader = new BufferedReader(new InputStreamReader(response.getEntity().getContent(), StandardCharsets.UTF_8));
+        StringBuilder builder = new StringBuilder();
+        for (String line; (line = reader.readLine()) != null;) {
+            builder.append(line);
+            //todo
+            /*if (reader.readLine() == null) {
+                logger(INFO_LEVEL, "\n");
+            }*/
+        }
+        return builder.toString();
+    }
+
+    private void check_responsebody(String responseBody, ArrayList patterns, ArrayList arrayList) {
+        for (int i=1; i<patterns.size(); i++){
+            if(responseBody.contains(patterns.get(i).toString())) {
+                int a = responseBody.indexOf(patterns.get(i).toString());
+                int l = patterns.get(i).toString().length();
+                arrayList.add(i,responseBody.substring(a, a+l));
+            } else {
+                arrayList.add(i,"<>");
+            }
+        }
+    }
+
+    String generate_json(int count_pairs) {
+        JSONObject json = new JSONObject();
+        JSONArray array_measurements = new JSONArray();
+        json.put("measurements", array_measurements);
+        for (int i = 0; i < count_pairs; i++) {
+            JSONObject object_in_measurements = new JSONObject();
+
+            object_in_measurements.put("date", (int) (System.currentTimeMillis() / 1000L));
+            object_in_measurements.put("temperature", generate_t_value());
+            object_in_measurements.put("unit", "C");
+            //object_in_measurements.put("unit", "K");
+            //object_in_measurements.put("unit", "F");
+            array_measurements.add(object_in_measurements);
+        }
+        return json.toString();
+    }
+
+    private int generate_t_value() {
+        return Math.abs(new Random().nextInt(1000));
     }
 
 }

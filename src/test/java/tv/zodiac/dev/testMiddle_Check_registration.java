@@ -1,5 +1,6 @@
 package tv.zodiac.dev;
 
+import org.apache.http.HttpStatus;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvFileSource;
 
@@ -24,7 +25,7 @@ class testMiddle_Check_registration extends API_Middle {
         assertTimeoutPreemptively(ofMillis(timeout), () -> {
             actual[0] = Middle.checkRegistration(charterapi, macaddress);
         });
-        assertEquals(expected200, actual[0].get(0));
+        assertEquals(HttpStatus.SC_OK, actual[0].get(0));
         assertEquals("", actual[0].get(1));
     }
 
@@ -35,7 +36,7 @@ class testMiddle_Check_registration extends API_Middle {
         assertTimeoutPreemptively(ofMillis(timeout), () -> {
             actual[0] = Middle.checkRegistration(charterapi, "123456789012");
         });
-        assertEquals(expected500, actual[0].get(0));
+        assertEquals(HttpStatus.SC_INTERNAL_SERVER_ERROR, actual[0].get(0));
         assertEquals("No amsIp found for mac", actual[0].get(1));
     }
 

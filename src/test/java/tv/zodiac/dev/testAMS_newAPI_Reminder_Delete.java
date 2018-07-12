@@ -1,5 +1,6 @@
 package tv.zodiac.dev;
 
+import org.apache.http.HttpStatus;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.RepeatedTest;
 import org.junit.jupiter.api.Test;
@@ -14,7 +15,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
  */
 class testAMS_newAPI_Reminder_Delete extends API_common {
 
-    private NewAPI_AMS AMS = new NewAPI_AMS();
+    private NewAPI AMS = new NewAPI();
     final private int count_iterations = 10;
     final private int count_reminders = 2;
 
@@ -22,11 +23,11 @@ class testAMS_newAPI_Reminder_Delete extends API_common {
     void testDelete() throws IOException {
         ArrayList actual;
         actual = AMS.request(ams_ip, mac, Operation.add, count_reminders, reminderProgramStart, reminderChannelNumber(1000), reminderProgramId, reminderOffset, reminderScheduleId, reminderId);
-        assertEquals(expected200, actual.get(0));
+        assertEquals(HttpStatus.SC_OK, actual.get(0));
         assertEquals("", actual.get(1));
 
         actual = AMS.request(ams_ip, mac, Operation.delete, count_reminders, reminderScheduleId, reminderId);
-        assertEquals(expected200, actual.get(0));
+        assertEquals(HttpStatus.SC_OK, actual.get(0));
         assertEquals("", actual.get(1));
     }
 
@@ -35,7 +36,7 @@ class testAMS_newAPI_Reminder_Delete extends API_common {
         //todo
         int count_reminders = 1;
         ArrayList actual = AMS.request(ams_ip, mac, Operation.delete, count_reminders, reminderScheduleId, reminderId);
-        assertEquals(expected200, actual.get(0));
+        assertEquals(HttpStatus.SC_OK, actual.get(0));
         assertEquals("3", actual.get(1));
     }
 
@@ -43,7 +44,7 @@ class testAMS_newAPI_Reminder_Delete extends API_common {
     void testDelete_count_is_0() throws IOException {
         int count_reminders = 0;
         ArrayList actual = AMS.request(ams_ip, mac, Operation.delete, count_reminders, reminderScheduleId, reminderId);
-        assertEquals(expected400, actual.get(0));
+        assertEquals(HttpStatus.SC_BAD_REQUEST, actual.get(0));
         assertEquals("REM-008 Reminders parsing error: wrong number of reminders", actual.get(1));
     }
 
@@ -52,7 +53,7 @@ class testAMS_newAPI_Reminder_Delete extends API_common {
         //todo
         int count_reminders = 1;
         ArrayList actual = AMS.request(ams_ip, "", Operation.delete, count_reminders, reminderScheduleId, reminderId);
-        assertEquals(expected400, actual.get(0));
+        assertEquals(HttpStatus.SC_BAD_REQUEST, actual.get(0));
         assertEquals("REM-008 Reminders parsing error: wrong deviceId", actual.get(1));
     }
 
@@ -61,7 +62,7 @@ class testAMS_newAPI_Reminder_Delete extends API_common {
         //todo
         int count_reminders = 1;
         ArrayList actual = AMS.request(ams_ip, mac_wrong, Operation.delete, count_reminders, reminderScheduleId, reminderId);
-        assertEquals(expected200, actual.get(0));
+        assertEquals(HttpStatus.SC_OK, actual.get(0));
         assertEquals("unknown MAC", actual.get(1));
     }
 
@@ -71,7 +72,7 @@ class testAMS_newAPI_Reminder_Delete extends API_common {
         //todo
         int count_reminders = 1;
         ArrayList actual = AMS.request(ams_ip, mac_wrong, Operation.delete, count_reminders, reminderScheduleId, reminderId);
-        assertEquals(expected200, actual.get(0));
+        assertEquals(HttpStatus.SC_OK, actual.get(0));
         assertEquals("REM-ST-001 Box is not registered", actual.get(1));
     }
 
@@ -80,7 +81,7 @@ class testAMS_newAPI_Reminder_Delete extends API_common {
         //todo
         int count_reminders = 1;
         ArrayList actual = AMS.request(ams_ip, mac, Operation.delete, count_reminders, reminderScheduleId, 0);
-        assertEquals(expected400, actual.get(0));
+        assertEquals(HttpStatus.SC_BAD_REQUEST, actual.get(0));
         assertEquals("REM-008 Reminders parsing error: incorrect reminderId", actual.get(1));
     }
 
@@ -89,7 +90,7 @@ class testAMS_newAPI_Reminder_Delete extends API_common {
         //todo
         int count_reminders = 1;
         ArrayList actual = AMS.request(ams_ip, mac, Operation.delete, count_reminders, reminderScheduleId, -1);
-        assertEquals(expected500, actual.get(0));
+        assertEquals(HttpStatus.SC_INTERNAL_SERVER_ERROR, actual.get(0));
         assertEquals("name cannot be null", actual.get(1));
     }
 
@@ -99,11 +100,11 @@ class testAMS_newAPI_Reminder_Delete extends API_common {
         int count_reminders = 1;
         ArrayList actual;
         actual = AMS.request(ams_ip, mac, Operation.add, count_reminders, reminderProgramStart, reminderChannelNumber(1000), reminderProgramId, reminderOffset, reminderScheduleId, Long.MAX_VALUE);
-        assertEquals(expected200, actual.get(0));
+        assertEquals(HttpStatus.SC_OK, actual.get(0));
         assertEquals("", actual.get(1));
 
         actual = AMS.request(ams_ip, mac, Operation.delete, count_reminders, reminderScheduleId, Long.MAX_VALUE);
-        assertEquals(expected200, actual.get(0));
+        assertEquals(HttpStatus.SC_OK, actual.get(0));
         assertEquals("", actual.get(1));
     }
 
@@ -113,7 +114,7 @@ class testAMS_newAPI_Reminder_Delete extends API_common {
         //todo
         int count_reminders = 1;
         ArrayList actual = AMS.request(ams_ip, mac, Operation.delete, count_reminders, reminderScheduleId, Long.MIN_VALUE);
-        assertEquals(expected400, actual.get(0));
+        assertEquals(HttpStatus.SC_BAD_REQUEST, actual.get(0));
         assertEquals("REM-008 Reminders parsing error: incorrect reminderId", actual.get(1));
     }
 
@@ -122,7 +123,7 @@ class testAMS_newAPI_Reminder_Delete extends API_common {
         //todo
         int count_reminders = 1;
         ArrayList actual = AMS.request(ams_ip, mac, Operation.delete, count_reminders, 0, reminderId);
-        assertEquals(expected200, actual.get(0));
+        assertEquals(HttpStatus.SC_OK, actual.get(0));
         assertEquals("4", actual.get(1));
     }
 
@@ -131,7 +132,7 @@ class testAMS_newAPI_Reminder_Delete extends API_common {
         //todo
         int count_reminders = 1;
         ArrayList actual = AMS.request(ams_ip, mac, Operation.delete, count_reminders, 0, 0);
-        assertEquals(expected200, actual.get(0));
+        assertEquals(HttpStatus.SC_OK, actual.get(0));
         assertEquals("4", actual.get(1));
     }
 
@@ -140,7 +141,7 @@ class testAMS_newAPI_Reminder_Delete extends API_common {
         //todo
         int count_reminders = 1;
         ArrayList actual = AMS.request(ams_ip, mac, Operation.delete, count_reminders, -1, reminderId);
-        assertEquals(expected500, actual.get(0));
+        assertEquals(HttpStatus.SC_INTERNAL_SERVER_ERROR, actual.get(0));
         assertEquals("name cannot be null", actual.get(1));
     }
 
@@ -152,7 +153,7 @@ class testAMS_newAPI_Reminder_Delete extends API_common {
         //todo
         int count_reminders = 1;
         ArrayList actual = AMS.request(ams_ip, mac, Operation.delete, count_reminders, -1, -1);
-        assertEquals(expected500, actual.get(0));
+        assertEquals(HttpStatus.SC_INTERNAL_SERVER_ERROR, actual.get(0));
         assertEquals("name cannot be null", actual.get(1));
     }
 
@@ -162,11 +163,11 @@ class testAMS_newAPI_Reminder_Delete extends API_common {
         int count_reminders = 1;
         ArrayList actual;
         actual = AMS.request(ams_ip, mac, Operation.add, count_reminders, reminderProgramStart, reminderChannelNumber(1000), reminderProgramId, reminderOffset, Long.MAX_VALUE, reminderId);
-        assertEquals(expected200, actual.get(0));
+        assertEquals(HttpStatus.SC_OK, actual.get(0));
         assertEquals("", actual.get(1));
 
         actual = AMS.request(ams_ip, mac, Operation.delete, count_reminders, Long.MAX_VALUE, reminderId);
-        assertEquals(expected200, actual.get(0));
+        assertEquals(HttpStatus.SC_OK, actual.get(0));
         assertEquals("", actual.get(1));
     }
 
@@ -176,11 +177,11 @@ class testAMS_newAPI_Reminder_Delete extends API_common {
         int count_reminders = 1;
         ArrayList actual;
         actual = AMS.request(ams_ip, mac, Operation.add, count_reminders, reminderProgramStart, reminderChannelNumber(1000), reminderProgramId, reminderOffset, Long.MAX_VALUE, Long.MAX_VALUE);
-        assertEquals(expected200, actual.get(0));
+        assertEquals(HttpStatus.SC_OK, actual.get(0));
         assertEquals("", actual.get(1));
 
         actual = AMS.request(ams_ip, mac, Operation.delete, count_reminders, Long.MAX_VALUE, Long.MAX_VALUE);
-        assertEquals(expected200, actual.get(0));
+        assertEquals(HttpStatus.SC_OK, actual.get(0));
         assertEquals("", actual.get(1));
     }
 
@@ -189,7 +190,7 @@ class testAMS_newAPI_Reminder_Delete extends API_common {
         //todo
         int count_reminders = 1;
         ArrayList actual = AMS.request(ams_ip, mac, Operation.delete, count_reminders, Long.MIN_VALUE, reminderId);
-        assertEquals(expected400, actual.get(0));
+        assertEquals(HttpStatus.SC_BAD_REQUEST, actual.get(0));
         assertEquals("REM-008 Reminders parsing error: incorrect reminderScheduleId", actual.get(1));
     }
 
@@ -198,7 +199,7 @@ class testAMS_newAPI_Reminder_Delete extends API_common {
         //todo
         int count_reminders = 1;
         ArrayList actual = AMS.request(ams_ip, mac, Operation.delete, count_reminders, Long.MIN_VALUE, Long.MIN_VALUE);
-        assertEquals(expected400, actual.get(0));
+        assertEquals(HttpStatus.SC_BAD_REQUEST, actual.get(0));
         assertEquals("REM-008 Reminders parsing error: incorrect reminderScheduleId", actual.get(1));
     }
 

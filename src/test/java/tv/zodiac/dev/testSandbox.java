@@ -1,5 +1,6 @@
 package tv.zodiac.dev;
 
+import org.apache.http.HttpStatus;
 import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
@@ -10,7 +11,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class testSandbox extends API_common {
 
-    private NewAPI_AMS AMS = new NewAPI_AMS();
+    private NewAPI AMS = new NewAPI();
 
     @Test
     void test_get_median_by_sort_bubble() throws IOException {
@@ -85,7 +86,7 @@ class testSandbox extends API_common {
     @Test
     void testOperation_NewAPI_400_Bad_request() throws IOException {
         ArrayList actual = AMS.request(ams_ip, mac, Operation.blablabla, 2, reminderProgramStart, reminderChannelNumber, reminderProgramId, reminderOffset, reminderScheduleId, reminderId);
-        assertEquals(expected400, actual.get(0));
+        assertEquals(HttpStatus.SC_BAD_REQUEST, actual.get(0));
         assertEquals("", actual.get(1));
     }
 

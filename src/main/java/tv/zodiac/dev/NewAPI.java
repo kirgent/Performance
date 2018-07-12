@@ -1,6 +1,7 @@
 package tv.zodiac.dev;
 
 import org.apache.http.HttpResponse;
+import org.apache.http.HttpStatus;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.HttpClients;
@@ -14,7 +15,7 @@ import java.util.Objects;
 
 import static java.lang.System.currentTimeMillis;
 
-class NewAPI_AMS extends API_common {
+class NewAPI extends API_common {
 
     /** Purge method
      * @param mac - TBD
@@ -38,8 +39,9 @@ class NewAPI_AMS extends API_common {
         logger(DEBUG_LEVEL, "[DBG] " + current + "ms request");
 
         ArrayList list = new ArrayList();
-        list.add(0, response.getStatusLine().getStatusCode() + " " + response.getStatusLine().getReasonPhrase());
-        list.add(1, checkResponseBody(readResponse(new StringBuilder(),response), mac));
+        //list.add(0, response.getStatusLine().getStatusCode() + " " + response.getStatusLine().getReasonPhrase());
+        list.add(0, response.getStatusLine().getStatusCode());
+        list.add(1, checkResponseBody(readResponse(new StringBuilder(),response)));
         logger(INFO_LEVEL, "[INF] return data: [" + list.get(0) + ", " + list.get(1) + "]");
         return list;
     }
@@ -67,8 +69,9 @@ class NewAPI_AMS extends API_common {
         logger(DEBUG_LEVEL, "[DBG] " + current + "ms request");
 
         ArrayList list = new ArrayList();
-        list.add(0, response.getStatusLine().getStatusCode() + " " + response.getStatusLine().getReasonPhrase());
-        list.add(1, checkResponseBody(readResponse(new StringBuilder(),response), mac));
+        //list.add(0, response.getStatusLine().getStatusCode() + " " + response.getStatusLine().getReasonPhrase());
+        list.add(0, response.getStatusLine().getStatusCode());
+        list.add(1, checkResponseBody(readResponse(new StringBuilder(),response)));
         logger(INFO_LEVEL, "[INF] return data: [" + list.get(0) + ", " + list.get(1) + "]");
         return list;
     }
@@ -102,166 +105,14 @@ class NewAPI_AMS extends API_common {
         logger(DEBUG_LEVEL, "[DBG] " + current + "ms request");
 
         ArrayList list = new ArrayList();
-        list.add(0, response.getStatusLine().getStatusCode() + " " + response.getStatusLine().getReasonPhrase());
-        list.add(1, checkResponseBody(readResponse(new StringBuilder(),response), mac));
+        //list.add(0, response.getStatusLine().getStatusCode() + " " + response.getStatusLine().getReasonPhrase());
+        list.add(0, response.getStatusLine().getStatusCode());
+        list.add(1, checkResponseBody(readResponse(new StringBuilder(),response)));
         logger(INFO_LEVEL, "[INF] return data: [" + list.get(0) + ", " + list.get(1) + "]");
 
         return list;
     }
 
-    /** Purge method
-     * @param mac - TBD
-     * @param operation - TBD
-     * @return list
-     * @throws IOException - TBD
-     */
-    ArrayList requestPerformance(String ams_ip, String mac, Enum<Operation> operation, int i) throws IOException {
-        logger(INFO_LEVEL, "[INF] " + new Date() + ": " + operation.toString().toUpperCase() + ":");
-
-        HttpPost request = new HttpPost(prepare_url(ams_ip, operation, true));
-        request.setHeader("Accept", "application/json");
-        request.setHeader("Content-type", "application/json");
-        request.setEntity(new StringEntity(generateJsonReminderPurge(mac)));
-        logger(DEBUG_LEVEL, "[DBG] request string: " + request);
-
-        long start = currentTimeMillis();
-        HttpResponse response = HttpClients.createDefault().execute(request);
-        long finish = System.currentTimeMillis();
-        int current = (int)(finish-start);
-        logger(DEBUG_LEVEL, "[DBG] " + current + "ms request");
-
-        ArrayList list = new ArrayList();
-        list.add(0, response.getStatusLine().getStatusCode() + " " + response.getStatusLine().getReasonPhrase());
-        list.add(1, checkResponseBody(readResponse(new StringBuilder(),response), mac));
-        if (list.get(1).equals("")) {
-            purge_list.add(current);
-            int[] min = getMin(Operation.purge, current, i);
-            int[] max = getMax(Operation.purge, current, i);
-            int total_i = purge_list.size();
-            list.add(2, current);
-            list.add(3, getAverage(purge_list));
-            list.add(4, searchMedian(purge_list, sort));
-            list.add(5, min[0]);
-            list.add(6, min[1]);
-            list.add(7, max[0]);
-            list.add(8, max[1]);
-            list.add(9, total_i);
-            //logger(DEBUG_LEVEL,"[DBG] " + new Date() + ": purge avg = " + getAverage(purge_list) + "ms/" + total_i + ": purge_list:" + purge_list);
-        }
-
-        return list;
-    }
-
-    /** Delete method
-     * @param mac      - mac of the box
-     * @param reminderScheduleId - TBD
-     * @param reminderId - TBD
-     * @return list
-     * @throws IOException -TBD
-     */
-    ArrayList requestPerformance(String ams_ip, String mac, Enum<Operation> operation, int i, int count_reminders, long reminderScheduleId, long reminderId) throws IOException {
-        logger(INFO_LEVEL, "[INF] " + new Date() + ": " + operation.toString().toUpperCase() + ":");
-
-        HttpPost request = new HttpPost(prepare_url(ams_ip, Operation.delete, true));
-        request.setHeader("Accept", "application/json");
-        request.setHeader("Content-type", "application/json");
-        request.setEntity(new StringEntity(generateJsonReminderDelete(mac, count_reminders, reminderScheduleId, reminderId)));
-        logger(DEBUG_LEVEL, "[DBG] request string: " + request);
-
-        long start = System.currentTimeMillis();
-        HttpResponse response = HttpClients.createDefault().execute(request);
-        long finish = System.currentTimeMillis();
-        int current = (int)(finish-start);
-        logger(DEBUG_LEVEL, "[DBG] " + current + "ms request");
-
-        ArrayList list = new ArrayList();
-        list.add(0, response.getStatusLine().getStatusCode() + " " + response.getStatusLine().getReasonPhrase());
-        list.add(1, checkResponseBody(readResponse(new StringBuilder(),response), mac));
-        if(list.get(1).equals("")) {
-            delete_list.add(current);
-            int[] min = getMin(Operation.delete, current, i);
-            int[] max = getMax(Operation.delete, current, i);
-            int total_i = delete_list.size();
-            list.add(2, current);
-            list.add(3, getAverage(delete_list));
-            list.add(4, searchMedian(delete_list, sort));
-            list.add(5, min[0]);
-            list.add(6, min[1]);
-            list.add(7, max[0]);
-            list.add(8, max[1]);
-            list.add(9, total_i);
-            //logger(DEBUG_LEVEL, "[DBG] " + new Date() + ": delete avg = " + getAverage(delete_list) + "ms/" + total_i + ": delete_list:" + delete_list);
-        }
-
-        return list;
-    }
-
-    /** Add / Modify method
-     * @param mac      - mac of the box
-     * @param operation       - can be Add / Modify / Delete / Purge
-     * @param count_reminders - count_reminders of reminders to generate in json {..}
-     * @param reminderProgramStart - TBD
-     * @param reminderChannelNumber - TBD
-     * @param reminderProgramId - TBD
-     * @param reminderOffset - TBD
-     * @param reminderScheduleId - TBD
-     * @param reminderId - TBD
-     * @return list
-     * @throws IOException -TBD
-     */
-    ArrayList requestPerformance(String ams_ip, String mac, Enum<Operation> operation, int i, int count_reminders, String reminderProgramStart, long reminderChannelNumber, String reminderProgramId, long reminderOffset, long reminderScheduleId, long reminderId) throws IOException {
-        logger(INFO_LEVEL, "[INF] " + new Date() + ": " + operation.toString().toUpperCase() + ":");
-
-        HttpPost request = new HttpPost(prepare_url(ams_ip, operation, true));
-        request.setHeader("Accept", "application/json");
-        request.setHeader("Content-type", "application/json");
-        request.setEntity(new StringEntity(generateJsonReminder(mac, count_reminders, operation, reminderProgramStart, reminderChannelNumber, reminderProgramId, reminderOffset, reminderScheduleId, reminderId)));
-        logger(DEBUG_LEVEL, "[DBG] request string: " + request);
-
-        long start = System.currentTimeMillis();
-        HttpResponse response = HttpClients.createDefault().execute(request);
-        long finish = System.currentTimeMillis();
-        int current = (int)(finish-start);
-        logger(DEBUG_LEVEL, "[DBG] " + current + "ms request");
-
-        ArrayList list = new ArrayList();
-        list.add(0, response.getStatusLine().getStatusCode() + " " + response.getStatusLine().getReasonPhrase());
-        list.add(1, checkResponseBody(readResponse(new StringBuilder(),response), mac));
-        if (list.get(1).equals("")) {
-            if (operation.name().equals("add")) {
-                add_list.add(current);
-                int[] min = getMin(Operation.add, current, i);
-                int[] max = getMax(Operation.add, current, i);
-                int total_i = add_list.size();
-                list.add(2, current);
-                list.add(3, getAverage(add_list));
-                list.add(4, searchMedian(add_list, sort));
-                list.add(5, min[0]);
-                list.add(6, min[1]);
-                list.add(7, max[0]);
-                list.add(8, max[1]);
-                list.add(9, total_i);
-                //logger(DEBUG_LEVEL, "[DBG] " + new Date() + ": add avg = " + getAverage(add_list) + "ms/" + total_i + ": add_list:" + add_list);
-
-            } else if (operation.name().equals("modify")) {
-                modify_list.add(current);
-                int[] min = getMin(Operation.modify, current, i);
-                int[] max = getMax(Operation.modify, current, i);
-                int total_i = modify_list.size();
-                list.add(2, current);
-                list.add(3, getAverage(modify_list));
-                list.add(4, searchMedian(modify_list, sort));
-                list.add(5, min[0]);
-                list.add(6, min[1]);
-                list.add(7, max[0]);
-                list.add(8, max[1]);
-                list.add(9, total_i);
-                //logger(DEBUG_LEVEL, "[DBG] " + new Date() + ": modify avg = " + getAverage(modify_list) + "ms/" + total_i + ": modify_list:" + modify_list);
-            }
-        }
-
-        return list;
-    }
 
     private String generateJsonSetting(String mac, String option, String value) throws IOException {
         //String json = "{\"settings\":{\"groups\":[{\"id\":\"STBmac\",\"type\":\"device-stb\",\"options\":[{\"name\":\"Audio Output\",\"value\":\"HDMI\"}]}]}}";
@@ -497,10 +348,169 @@ class NewAPI_AMS extends API_common {
         logger(DEBUG_LEVEL, "[DBG] " + current + "ms request");
 
         ArrayList list = new ArrayList();
-        list.add(0, response.getStatusLine().getStatusCode() + " " + response.getStatusLine().getReasonPhrase());
-        list.add(1, checkResponseBody(readResponse(new StringBuilder(),response), mac));
+        //list.add(0, response.getStatusLine().getStatusCode() + " " + response.getStatusLine().getReasonPhrase());
+        list.add(0, response.getStatusLine().getStatusCode());
+        list.add(1, checkResponseBody(readResponse(new StringBuilder(),response)));
         logger(INFO_LEVEL, "[INF] return data: " + list + "\n");
         return list;
     }
+
+    /** Purge method
+     * @param mac - TBD
+     * @param operation - TBD
+     * @return list
+     * @throws IOException - TBD
+     */
+    ArrayList requestPerformance(String ams_ip, String mac, Enum<Operation> operation, int i) throws IOException {
+        logger(INFO_LEVEL, "[INF] " + new Date() + ": " + operation.toString().toUpperCase() + ":");
+
+        HttpPost request = new HttpPost(prepare_url(ams_ip, operation, true));
+        request.setHeader("Accept", "application/json");
+        request.setHeader("Content-type", "application/json");
+        request.setEntity(new StringEntity(generateJsonReminderPurge(mac)));
+        logger(DEBUG_LEVEL, "[DBG] request string: " + request);
+
+        long start = currentTimeMillis();
+        HttpResponse response = HttpClients.createDefault().execute(request);
+        long finish = System.currentTimeMillis();
+        int current = (int)(finish-start);
+        logger(DEBUG_LEVEL, "[DBG] " + current + "ms request");
+
+        ArrayList list = new ArrayList();
+        //list.add(0, response.getStatusLine().getStatusCode() + " " + response.getStatusLine().getReasonPhrase());
+        list.add(0, response.getStatusLine().getStatusCode());
+        list.add(1, checkResponseBody(readResponse(new StringBuilder(),response)));
+        if (list.get(0).equals(HttpStatus.SC_NOT_FOUND)) {
+            purge_list.add(current);
+            int[] min = getMin(Operation.purge, current, i);
+            int[] max = getMax(Operation.purge, current, i);
+            int total_i = purge_list.size();
+            list.add(2, current);
+            list.add(3, getAverage(purge_list));
+            list.add(4, searchMedian(purge_list, sorting));
+            list.add(5, min[0]);
+            list.add(6, min[1]);
+            list.add(7, max[0]);
+            list.add(8, max[1]);
+            list.add(9, total_i);
+            //logger(DEBUG_LEVEL,"[DBG] " + new Date() + ": purge avg = " + getAverage(purge_list) + "ms/" + total_i + ": purge_list:" + purge_list);
+        }
+
+        return list;
+    }
+
+    /** Delete method
+     * @param mac      - mac of the box
+     * @param reminderScheduleId - TBD
+     * @param reminderId - TBD
+     * @return list
+     * @throws IOException -TBD
+     */
+    ArrayList requestPerformance(String ams_ip, String mac, Enum<Operation> operation, int i, int count_reminders, long reminderScheduleId, long reminderId) throws IOException {
+        logger(INFO_LEVEL, "[INF] " + new Date() + ": " + operation.toString().toUpperCase() + ":");
+
+        HttpPost request = new HttpPost(prepare_url(ams_ip, Operation.delete, true));
+        request.setHeader("Accept", "application/json");
+        request.setHeader("Content-type", "application/json");
+        request.setEntity(new StringEntity(generateJsonReminderDelete(mac, count_reminders, reminderScheduleId, reminderId)));
+        logger(DEBUG_LEVEL, "[DBG] request string: " + request);
+
+        long start = System.currentTimeMillis();
+        HttpResponse response = HttpClients.createDefault().execute(request);
+        long finish = System.currentTimeMillis();
+        int current = (int)(finish-start);
+        logger(DEBUG_LEVEL, "[DBG] " + current + "ms request");
+
+        ArrayList list = new ArrayList();
+        //list.add(0, response.getStatusLine().getStatusCode() + " " + response.getStatusLine().getReasonPhrase());
+        list.add(0, response.getStatusLine().getStatusCode());
+        list.add(1, checkResponseBody(readResponse(new StringBuilder(),response)));
+        if (list.get(0).equals(HttpStatus.SC_OK)) {
+            delete_list.add(current);
+            int[] min = getMin(Operation.delete, current, i);
+            int[] max = getMax(Operation.delete, current, i);
+            int total_i = delete_list.size();
+            list.add(2, current);
+            list.add(3, getAverage(delete_list));
+            list.add(4, searchMedian(delete_list, sorting));
+            list.add(5, min[0]);
+            list.add(6, min[1]);
+            list.add(7, max[0]);
+            list.add(8, max[1]);
+            list.add(9, total_i);
+            //logger(DEBUG_LEVEL, "[DBG] " + new Date() + ": delete avg = " + getAverage(delete_list) + "ms/" + total_i + ": delete_list:" + delete_list);
+        }
+
+        return list;
+    }
+
+    /** Add / Modify method
+     * @param mac      - mac of the box
+     * @param operation       - can be Add / Modify / Delete / Purge
+     * @param count_reminders - count_reminders of reminders to generate in json {..}
+     * @param reminderProgramStart - TBD
+     * @param reminderChannelNumber - TBD
+     * @param reminderProgramId - TBD
+     * @param reminderOffset - TBD
+     * @param reminderScheduleId - TBD
+     * @param reminderId - TBD
+     * @return list
+     * @throws IOException -TBD
+     */
+    ArrayList requestPerformance(String ams_ip, String mac, Enum<Operation> operation, int i, int count_reminders, String reminderProgramStart, long reminderChannelNumber, String reminderProgramId, long reminderOffset, long reminderScheduleId, long reminderId) throws IOException {
+        logger(INFO_LEVEL, "[INF] " + new Date() + ": " + operation.toString().toUpperCase() + ":");
+
+        HttpPost request = new HttpPost(prepare_url(ams_ip, operation, true));
+        request.setHeader("Accept", "application/json");
+        request.setHeader("Content-type", "application/json");
+        request.setEntity(new StringEntity(generateJsonReminder(mac, count_reminders, operation, reminderProgramStart, reminderChannelNumber, reminderProgramId, reminderOffset, reminderScheduleId, reminderId)));
+        logger(DEBUG_LEVEL, "[DBG] request string: " + request);
+
+        long start = System.currentTimeMillis();
+        HttpResponse response = HttpClients.createDefault().execute(request);
+        long finish = System.currentTimeMillis();
+        int current = (int)(finish-start);
+        logger(DEBUG_LEVEL, "[DBG] " + current + "ms request");
+
+        ArrayList list = new ArrayList();
+        //list.add(0, response.getStatusLine().getStatusCode() + " " + response.getStatusLine().getReasonPhrase());
+        list.add(0, response.getStatusLine().getStatusCode());
+        list.add(1, checkResponseBody(readResponse(new StringBuilder(),response)));
+        if (list.get(0).equals(HttpStatus.SC_OK)) {
+            if (operation.name().equals("add")) {
+                add_list.add(current);
+                int[] min = getMin(Operation.add, current, i);
+                int[] max = getMax(Operation.add, current, i);
+                int total_i = add_list.size();
+                list.add(2, current);
+                list.add(3, getAverage(add_list));
+                list.add(4, searchMedian(add_list, sorting));
+                list.add(5, min[0]);
+                list.add(6, min[1]);
+                list.add(7, max[0]);
+                list.add(8, max[1]);
+                list.add(9, total_i);
+                //logger(DEBUG_LEVEL, "[DBG] " + new Date() + ": add avg = " + getAverage(add_list) + "ms/" + total_i + ": add_list:" + add_list);
+
+            } else if (operation.name().equals("modify")) {
+                modify_list.add(current);
+                int[] min = getMin(Operation.modify, current, i);
+                int[] max = getMax(Operation.modify, current, i);
+                int total_i = modify_list.size();
+                list.add(2, current);
+                list.add(3, getAverage(modify_list));
+                list.add(4, searchMedian(modify_list, sorting));
+                list.add(5, min[0]);
+                list.add(6, min[1]);
+                list.add(7, max[0]);
+                list.add(8, max[1]);
+                list.add(9, total_i);
+                //logger(DEBUG_LEVEL, "[DBG] " + new Date() + ": modify avg = " + getAverage(modify_list) + "ms/" + total_i + ": modify_list:" + modify_list);
+            }
+        }
+
+        return list;
+    }
+
 
 }

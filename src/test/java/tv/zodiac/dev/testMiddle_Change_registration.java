@@ -1,5 +1,6 @@
 package tv.zodiac.dev;
 
+import org.apache.http.HttpStatus;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvFileSource;
 
@@ -23,7 +24,7 @@ class testMiddle_Change_registration extends API_Middle {
         assertTimeoutPreemptively(ofMillis(timeout), () -> {
             actual[0] = Middle.changeRegistration(ams_ip, mac, charterapi);
         });
-        assertEquals(expected200, actual[0].get(0));
+        assertEquals(HttpStatus.SC_OK, actual[0].get(0));
         assertEquals("", actual[0].get(1));
     }
 

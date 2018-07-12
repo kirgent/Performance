@@ -1,6 +1,6 @@
 package tv.zodiac.dev;
 
-import org.junit.jupiter.api.AfterEach;
+import org.apache.http.HttpStatus;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.RepeatedTest;
 import org.junit.jupiter.api.Test;
@@ -15,7 +15,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
  */
 class testAMS_newAPI_Reminder_Modify extends API_common {
 
-    private NewAPI_AMS AMS = new NewAPI_AMS();
+    private NewAPI AMS = new NewAPI();
     final private int count_iterations = 10;
     final private int count_reminders = 1;
 
@@ -24,12 +24,12 @@ class testAMS_newAPI_Reminder_Modify extends API_common {
         ArrayList actual;
         actual = AMS.request(ams_ip, mac, Operation.add, count_reminders,
                 reminderProgramStart, reminderChannelNumber, reminderProgramId, reminderOffset, reminderScheduleId, reminderId);
-        assertEquals(expected200, actual.get(0));
+        assertEquals(HttpStatus.SC_OK, actual.get(0));
         assertEquals("", actual.get(1));
 
         actual = AMS.request(ams_ip, mac, Operation.modify, count_reminders,
                 reminderProgramStart, reminderChannelNumber, reminderProgramId, reminderOffset, reminderScheduleId, reminderId);
-        assertEquals(expected200, actual.get(0));
+        assertEquals(HttpStatus.SC_OK, actual.get(0));
         assertEquals("", actual.get(1));
         testPurge();
     }
@@ -39,7 +39,7 @@ class testAMS_newAPI_Reminder_Modify extends API_common {
         //todo!!!
         ArrayList actual = AMS.request(ams_ip, mac, Operation.modify, 1,
                 reminderProgramStart, reminderChannelNumber, reminderProgramId, reminderOffset, reminderScheduleId, reminderId);
-        assertEquals(expected200, actual.get(0));
+        assertEquals(HttpStatus.SC_OK, actual.get(0));
         assertEquals("4", actual.get(1));
     }
 
@@ -48,7 +48,7 @@ class testAMS_newAPI_Reminder_Modify extends API_common {
         //todo!!!
         ArrayList actual = AMS.request(ams_ip, "", Operation.modify, 1,
                 reminderProgramStart, reminderChannelNumber, reminderProgramId, reminderOffset, reminderScheduleId, reminderId);
-        assertEquals(expected400, actual.get(0));
+        assertEquals(HttpStatus.SC_BAD_REQUEST, actual.get(0));
         assertEquals("REM-008 Reminders parsing error: wrong deviceId", actual.get(1));
     }
 
@@ -58,7 +58,7 @@ class testAMS_newAPI_Reminder_Modify extends API_common {
         //todo!!!
         ArrayList actual = AMS.request(ams_ip, mac_wrong, Operation.modify, 1,
                 reminderProgramStart, reminderChannelNumber, reminderProgramId, reminderOffset, reminderScheduleId, reminderId);
-        assertEquals(expected200, actual.get(0));
+        assertEquals(HttpStatus.SC_OK, actual.get(0));
         assertEquals("REM-ST-001 Box is not registered", actual.get(1));
     }
 
@@ -67,7 +67,7 @@ class testAMS_newAPI_Reminder_Modify extends API_common {
         //todo!!!
         ArrayList actual = AMS.request(ams_ip, mac_wrong, Operation.modify, 1,
                 reminderProgramStart, reminderChannelNumber, reminderProgramId, reminderOffset, reminderScheduleId, reminderId);
-        assertEquals(expected200, actual.get(0));
+        assertEquals(HttpStatus.SC_OK, actual.get(0));
         assertEquals("unknown MAC", actual.get(1));
     }
 
@@ -75,7 +75,7 @@ class testAMS_newAPI_Reminder_Modify extends API_common {
     void testModify_count_is_0() throws IOException {
         ArrayList actual = AMS.request(ams_ip, mac, Operation.modify, 0,
                 reminderProgramStart, reminderChannelNumber, reminderProgramId, reminderOffset, reminderScheduleId, reminderId);
-        assertEquals(expected400, actual.get(0));
+        assertEquals(HttpStatus.SC_BAD_REQUEST, actual.get(0));
         assertEquals("REM-008 Reminders parsing error: wrong number of reminders", actual.get(1));
     }
 
@@ -84,7 +84,7 @@ class testAMS_newAPI_Reminder_Modify extends API_common {
         //todo!!!
         ArrayList actual = AMS.request(ams_ip, mac, Operation.modify, 1,
                 reminderProgramStart, 0, reminderProgramId, reminderOffset, reminderScheduleId, reminderId);
-        assertEquals(expected200, actual.get(0));
+        assertEquals(HttpStatus.SC_OK, actual.get(0));
         assertEquals("3", actual.get(1));
     }
 
@@ -93,7 +93,7 @@ class testAMS_newAPI_Reminder_Modify extends API_common {
         //todo!!!
         ArrayList actual = AMS.request(ams_ip, mac, Operation.modify, 1,
                 reminderProgramStart, -1, reminderProgramId, reminderOffset, reminderScheduleId, reminderId);
-        assertEquals(expected400, actual.get(0));
+        assertEquals(HttpStatus.SC_BAD_REQUEST, actual.get(0));
         assertEquals("REM-008 Reminders parsing error: incorrect message format", actual.get(1));
     }
 
@@ -102,7 +102,7 @@ class testAMS_newAPI_Reminder_Modify extends API_common {
         //todo!!!
         ArrayList actual = AMS.request(ams_ip, mac, Operation.modify, 1,
                 reminderProgramStart, Long.MAX_VALUE, reminderProgramId, reminderOffset, reminderScheduleId, reminderId);
-        assertEquals(expected400, actual.get(0));
+        assertEquals(HttpStatus.SC_BAD_REQUEST, actual.get(0));
         assertEquals("REM-008 Reminders parsing error: incorrect message format", actual.get(1));
     }
 
@@ -111,7 +111,7 @@ class testAMS_newAPI_Reminder_Modify extends API_common {
         //todo
         ArrayList actual = AMS.request(ams_ip, mac, Operation.modify, 1,
                 reminderProgramStart, Integer.MAX_VALUE, reminderProgramId, reminderOffset, reminderScheduleId, reminderId);
-        assertEquals(expected200, actual.get(0));
+        assertEquals(HttpStatus.SC_OK, actual.get(0));
         assertEquals("4", actual.get(1));
     }
 
@@ -120,7 +120,7 @@ class testAMS_newAPI_Reminder_Modify extends API_common {
         //todo!!!
         ArrayList actual = AMS.request(ams_ip, mac, Operation.modify, 1,
                 reminderProgramStart, Integer.MIN_VALUE, reminderProgramId, reminderOffset, reminderScheduleId, reminderId);
-        assertEquals(expected400, actual.get(0));
+        assertEquals(HttpStatus.SC_BAD_REQUEST, actual.get(0));
         assertEquals("REM-008 Reminders parsing error: invalid channel number", actual.get(1));
     }
 
@@ -129,7 +129,7 @@ class testAMS_newAPI_Reminder_Modify extends API_common {
         //todo
         ArrayList actual = AMS.request(ams_ip, mac, Operation.modify, 1,
                 reminderProgramStart, reminderChannelNumber, reminderProgramId, reminderOffset, reminderScheduleId, 0);
-        assertEquals(expected200, actual.get(0));
+        assertEquals(HttpStatus.SC_OK, actual.get(0));
         assertEquals("4", actual.get(1));
     }
 
@@ -138,7 +138,7 @@ class testAMS_newAPI_Reminder_Modify extends API_common {
         //todo!!!
         ArrayList actual = AMS.request(ams_ip, mac, Operation.modify, 1,
                 reminderProgramStart, reminderChannelNumber, reminderProgramId, reminderOffset, reminderScheduleId, -1);
-        assertEquals(expected400, actual.get(0));
+        assertEquals(HttpStatus.SC_BAD_REQUEST, actual.get(0));
         assertEquals("REM-008 Reminders parsing error: incorrect message format", actual.get(1));
     }
 
@@ -150,12 +150,12 @@ class testAMS_newAPI_Reminder_Modify extends API_common {
         ArrayList actual;
         actual = AMS.request(ams_ip, mac, Operation.add, count_reminders,
                 reminderProgramStart, reminderChannelNumber, reminderProgramId, reminderOffset, reminderScheduleId, Long.MAX_VALUE);
-        assertEquals(expected200, actual.get(0));
+        assertEquals(HttpStatus.SC_OK, actual.get(0));
         assertEquals("", actual.get(1));
 
         actual = AMS.request(ams_ip, mac, Operation.modify, count_reminders,
                 reminderProgramStart, reminderChannelNumber, reminderProgramId, reminderOffset(15), reminderScheduleId, Long.MAX_VALUE);
-        assertEquals(expected200, actual.get(0));
+        assertEquals(HttpStatus.SC_OK, actual.get(0));
         assertEquals("", actual.get(1));
         testPurge();
     }
@@ -165,7 +165,7 @@ class testAMS_newAPI_Reminder_Modify extends API_common {
         //todo
         ArrayList actual = AMS.request(ams_ip, mac, Operation.modify, 1,
                 reminderProgramStart, reminderChannelNumber, reminderProgramId, reminderOffset, reminderScheduleId, Long.MIN_VALUE);
-        assertEquals(expected400, actual.get(0));
+        assertEquals(HttpStatus.SC_BAD_REQUEST, actual.get(0));
         assertEquals("REM-008 Reminders parsing error: incorrect reminderId", actual.get(1));
     }
 
@@ -174,7 +174,7 @@ class testAMS_newAPI_Reminder_Modify extends API_common {
         //todo!!!
         ArrayList actual = AMS.request(ams_ip, mac, Operation.modify, 1,
                 reminderProgramStart, reminderChannelNumber, reminderProgramId, -1, reminderScheduleId, reminderId);
-        assertEquals(expected400, actual.get(0));
+        assertEquals(HttpStatus.SC_BAD_REQUEST, actual.get(0));
         assertEquals("REM-008 Reminders parsing error: incorrect message format", actual.get(1));
     }
 
@@ -183,7 +183,7 @@ class testAMS_newAPI_Reminder_Modify extends API_common {
         //todo
         ArrayList actual = AMS.request(ams_ip, mac, Operation.modify, 1,
                 reminderProgramStart, reminderChannelNumber, reminderProgramId, Long.MAX_VALUE, reminderScheduleId, reminderId);
-        assertEquals(expected400, actual.get(0));
+        assertEquals(HttpStatus.SC_BAD_REQUEST, actual.get(0));
         assertEquals("REM-008 Reminders parsing error: incorrect message format", actual.get(1));
     }
 
@@ -193,12 +193,12 @@ class testAMS_newAPI_Reminder_Modify extends API_common {
         ArrayList actual;
         actual = AMS.request(ams_ip, mac, Operation.add, count_reminders,
                 reminderProgramStart, reminderChannelNumber, reminderProgramId, reminderOffset, reminderScheduleId, reminderId);
-        assertEquals(expected200, actual.get(0));
+        assertEquals(HttpStatus.SC_OK, actual.get(0));
         assertEquals("", actual.get(1));
 
         actual = AMS.request(ams_ip, mac, Operation.modify, count_reminders,
                 reminderProgramStart, reminderChannelNumber, reminderProgramId, Integer.MAX_VALUE, reminderScheduleId, reminderId);
-        assertEquals(expected200, actual.get(0));
+        assertEquals(HttpStatus.SC_OK, actual.get(0));
         assertEquals("", actual.get(1));
         testPurge();
     }
@@ -208,7 +208,7 @@ class testAMS_newAPI_Reminder_Modify extends API_common {
         //todo!!!
         ArrayList actual = AMS.request(ams_ip, mac, Operation.modify, 1,
                 reminderProgramStart, reminderChannelNumber, reminderProgramId, Integer.MIN_VALUE, reminderScheduleId, reminderId);
-        assertEquals(expected400, actual.get(0));
+        assertEquals(HttpStatus.SC_BAD_REQUEST, actual.get(0));
         assertEquals("REM-008 Reminders parsing error: invalid offset", actual.get(1));
     }
 
@@ -220,12 +220,12 @@ class testAMS_newAPI_Reminder_Modify extends API_common {
         ArrayList actual;
         actual = AMS.request(ams_ip, mac, Operation.add, count_reminders,
                 reminderProgramStart, reminderChannelNumber, reminderProgramId, reminderOffset, reminderScheduleId, reminderId);
-        assertEquals(expected200, actual.get(0));
+        assertEquals(HttpStatus.SC_OK, actual.get(0));
         assertEquals("", actual.get(1));
         //todo!!!
         actual = AMS.request(ams_ip, mac, Operation.modify, count_reminders,
                 reminderProgramStart, reminderChannelNumber, "", reminderOffset, reminderScheduleId, reminderId);
-        assertEquals(expected200, actual.get(0));
+        assertEquals(HttpStatus.SC_OK, actual.get(0));
         assertEquals("", actual.get(1));
         testPurge();
     }
@@ -238,12 +238,12 @@ class testAMS_newAPI_Reminder_Modify extends API_common {
         ArrayList actual;
         actual = AMS.request(ams_ip, mac, Operation.add, count_reminders,
                 reminderProgramStart, reminderChannelNumber, reminderProgramId, reminderOffset, reminderScheduleId, reminderId);
-        assertEquals(expected200, actual.get(0));
+        assertEquals(HttpStatus.SC_OK, actual.get(0));
         assertEquals("", actual.get(1));
         //todo!!!
         actual = AMS.request(ams_ip, mac, Operation.modify, count_reminders,
                 reminderProgramStart, reminderChannelNumber, "EP#@$%#$%@#$^$#%^#$%^", reminderOffset, reminderScheduleId, reminderId);
-        assertEquals(expected200, actual.get(0));
+        assertEquals(HttpStatus.SC_OK, actual.get(0));
         assertEquals("", actual.get(1));
         testPurge();
     }
@@ -255,12 +255,12 @@ class testAMS_newAPI_Reminder_Modify extends API_common {
         long reminderId = reminderId(Generation.random);
         actual = AMS.request(ams_ip, mac, Operation.add, count_reminders,
                 reminderProgramStart, 5, reminderProgramId, reminderOffset, reminderScheduleId, reminderId);
-        assertEquals(expected200, actual.get(0));
+        assertEquals(HttpStatus.SC_OK, actual.get(0));
         assertEquals("", actual.get(1));
 
         actual = AMS.request(ams_ip, mac, Operation.modify, count_reminders,
                 "-1", 5, reminderProgramId, reminderOffset, reminderScheduleId, reminderId);
-        assertEquals(expected200, actual.get(0));
+        assertEquals(HttpStatus.SC_OK, actual.get(0));
         assertEquals("", actual.get(1));
 
         testPurge();
@@ -271,7 +271,7 @@ class testAMS_newAPI_Reminder_Modify extends API_common {
         //todo!!!
         ArrayList actual = AMS.request(ams_ip, mac, Operation.modify, 1,
                 "2000-01-01", reminderChannelNumber, reminderProgramId, reminderOffset, reminderScheduleId, reminderId);
-        assertEquals(expected200, actual.get(0));
+        assertEquals(HttpStatus.SC_OK, actual.get(0));
         assertEquals("2", actual.get(1));
     }
 
@@ -280,7 +280,7 @@ class testAMS_newAPI_Reminder_Modify extends API_common {
         //todo!!!
         ArrayList actual = AMS.request(ams_ip, mac, Operation.modify, 1,
                 "YYYY-mm-dd", reminderChannelNumber, reminderProgramId, reminderOffset, reminderScheduleId, reminderId);
-        assertEquals(expected400, actual.get(0));
+        assertEquals(HttpStatus.SC_BAD_REQUEST, actual.get(0));
         assertEquals("REM-008 Reminders parsing error: incorrect message format", actual.get(1));
     }
 
@@ -289,7 +289,7 @@ class testAMS_newAPI_Reminder_Modify extends API_common {
         //todo!!!
         ArrayList actual = AMS.request(ams_ip, mac, Operation.modify, 1,
                 "0000-00-00", reminderChannelNumber, reminderProgramId, reminderOffset, reminderScheduleId, reminderId);
-        assertEquals(expected400, actual.get(0));
+        assertEquals(HttpStatus.SC_BAD_REQUEST, actual.get(0));
         assertEquals("REM-008 Reminders parsing error: invalid program start", actual.get(1));
         //testPurge();
     }
@@ -302,7 +302,7 @@ class testAMS_newAPI_Reminder_Modify extends API_common {
         //todo
         ArrayList actual = AMS.request(ams_ip, mac, Operation.modify, 1,
                 reminderProgramStart, reminderChannelNumber, reminderProgramId, reminderOffset, 0, reminderId);
-        assertEquals(expected200, actual.get(0));
+        assertEquals(HttpStatus.SC_OK, actual.get(0));
         assertEquals("4", actual.get(1));
     }
 
@@ -311,7 +311,7 @@ class testAMS_newAPI_Reminder_Modify extends API_common {
         //todo
         ArrayList actual = AMS.request(ams_ip, mac, Operation.modify, 1,
                 reminderProgramStart, reminderChannelNumber, reminderProgramId, reminderOffset, -1, reminderId);
-        assertEquals(expected400, actual.get(0));
+        assertEquals(HttpStatus.SC_BAD_REQUEST, actual.get(0));
         assertEquals("REM-008 Reminders parsing error: incorrect message format", actual.get(1));
     }
 
@@ -322,12 +322,12 @@ class testAMS_newAPI_Reminder_Modify extends API_common {
         ArrayList actual;
         actual = AMS.request(ams_ip, mac, Operation.add, count_reminders,
                 reminderProgramStart, reminderChannelNumber, reminderProgramId, reminderOffset, Long.MAX_VALUE, reminderId);
-        assertEquals(expected200, actual.get(0));
+        assertEquals(HttpStatus.SC_OK, actual.get(0));
         assertEquals("", actual.get(1));
 
         actual = AMS.request(ams_ip, mac, Operation.modify, count_reminders,
                 reminderProgramStart, reminderChannelNumber, reminderProgramId, reminderOffset, Long.MAX_VALUE, reminderId);
-        assertEquals(expected200, actual.get(0));
+        assertEquals(HttpStatus.SC_OK, actual.get(0));
         assertEquals("", actual.get(1));
         testPurge();
     }
@@ -339,12 +339,12 @@ class testAMS_newAPI_Reminder_Modify extends API_common {
         ArrayList actual;
         actual = AMS.request(ams_ip, mac, Operation.add, count_reminders,
                 reminderProgramStart, reminderChannelNumber, reminderProgramId, reminderOffset, Long.MAX_VALUE, Long.MAX_VALUE);
-        assertEquals(expected200, actual.get(0));
+        assertEquals(HttpStatus.SC_OK, actual.get(0));
         assertEquals("", actual.get(1));
 
         actual = AMS.request(ams_ip, mac, Operation.modify, count_reminders,
                 reminderProgramStart, reminderChannelNumber, reminderProgramId, reminderOffset, Long.MAX_VALUE, Long.MAX_VALUE);
-        assertEquals(expected200, actual.get(0));
+        assertEquals(HttpStatus.SC_OK, actual.get(0));
         assertEquals("", actual.get(1));
         testPurge();
     }
@@ -354,7 +354,7 @@ class testAMS_newAPI_Reminder_Modify extends API_common {
         //todo
         ArrayList actual = AMS.request(ams_ip, mac, Operation.modify, 1,
                 reminderProgramStart, reminderChannelNumber, reminderProgramId, reminderOffset, Long.MIN_VALUE, reminderId);
-        assertEquals(expected400, actual.get(0));
+        assertEquals(HttpStatus.SC_BAD_REQUEST, actual.get(0));
         assertEquals("REM-008 Reminders parsing error: incorrect reminderScheduleId", actual.get(1));
     }
 
@@ -366,7 +366,7 @@ class testAMS_newAPI_Reminder_Modify extends API_common {
         //todo
         ArrayList actual = AMS.request(ams_ip, mac, Operation.modify, 1,
                 reminderProgramStart, reminderChannelNumber, reminderProgramId, reminderOffset, 0, 0);
-        assertEquals(expected200, actual.get(0));
+        assertEquals(HttpStatus.SC_OK, actual.get(0));
         assertEquals("4", actual.get(1));
     }
 
@@ -374,7 +374,7 @@ class testAMS_newAPI_Reminder_Modify extends API_common {
     void testModify_reminderScheduleId_reminderId_empty() throws IOException {
         ArrayList actual = AMS.request(ams_ip, mac, Operation.modify, count_reminders,
                 reminderProgramStart, reminderChannelNumber, reminderProgramId, reminderOffset, -1, -1);
-        assertEquals(expected400, actual.get(0));
+        assertEquals(HttpStatus.SC_BAD_REQUEST, actual.get(0));
         assertEquals("REM-008 Reminders parsing error: incorrect message format", actual.get(1));
     }
 
@@ -383,13 +383,13 @@ class testAMS_newAPI_Reminder_Modify extends API_common {
         //todo
         ArrayList actual = AMS.request(ams_ip, mac, Operation.modify, 1,
                 reminderProgramStart, reminderChannelNumber, reminderProgramId, reminderOffset, Long.MIN_VALUE,  Long.MIN_VALUE);
-        assertEquals(expected400, actual.get(0));
+        assertEquals(HttpStatus.SC_BAD_REQUEST, actual.get(0));
         assertEquals("REM-008 Reminders parsing error: incorrect reminderScheduleId", actual.get(1));
     }
 
     private void testPurge() throws IOException {
         ArrayList actual = AMS.request(ams_ip, mac, Operation.purge);
-        assertEquals(expected200, actual.get(0));
+        assertEquals(HttpStatus.SC_OK, actual.get(0));
         assertEquals("", actual.get(1));
     }
 
