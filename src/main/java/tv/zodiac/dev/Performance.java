@@ -20,10 +20,10 @@ import java.util.Random;
 
 class Performance extends API_common{
 
-    ArrayList request_get(String server, ArrayList template, int i) throws IOException {
+    ArrayList request_get(String url, ArrayList expected_list, int i) throws IOException {
         logger(INFO_LEVEL, "[INF] " + new Date());
 
-        HttpGet request = new HttpGet(prepare_url(server, API_common.Operation.www,false));
+        HttpGet request = new HttpGet(prepare_url(url, API_common.Operation.www,false));
         logger(DEBUG_LEVEL, "[DBG] request string: " + request);
 
         long start = System.currentTimeMillis();
@@ -35,7 +35,7 @@ class Performance extends API_common{
         ArrayList list = new ArrayList();
         //list.add(0, response.getStatusLine().getStatusCode() + " " + response.getStatusLine().getReasonPhrase());
         list.add(0, response.getStatusLine().getStatusCode());
-        list.add(1, checkResponseBody(readResponse(new StringBuilder(),response), template));
+        list.add(1, checkResponseBody(readResponse(new StringBuilder(),response), expected_list));
         if (list.get(0).equals(HttpStatus.SC_OK)) {
             request_list.add(current);
             int[] min = getMin(API_common.Operation.add, current, i);

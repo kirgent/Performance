@@ -22,6 +22,7 @@ import java.util.*;
 import java.util.Date;
 
 import static java.lang.System.currentTimeMillis;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
@@ -66,26 +67,32 @@ public class API_common {
     final String boxMoto2147_Rems = "000004D67F70"; //000004d67f70"; //Moto_2147_Mondo_DCX3200M_REMS
     String mac = boxMoto2147_Rems;
 
+    //todo
     ArrayList reminderScheduleId_list = new ArrayList(),
             reminderId_list = new ArrayList();
 
+    //lists for saving all according request in ms in each iteration
     ArrayList add_list = new ArrayList(),
             modify_list = new ArrayList(),
             delete_list = new ArrayList(),
             purge_list = new ArrayList(),
             request_list = new ArrayList();
 
+    //2-dimensional array for saving min/max value and iteration where this value were last time updated
+    private int[] a_max_array = {0, 0}, a_min_array = {0, 0},
+            m_max_array = {0, 0}, m_min_array = {0, 0},
+            d_max_array = {0, 0}, d_min_array = {0, 0},
+            p_max_array = {0, 0}, p_min_array = {0, 0},
+            max_array = {0, 0}, min_array = {0, 0};
+
+
+    //lists for saving all according requests in ms in each iteration
     ArrayList a_current = new ArrayList(),
             m_current = new ArrayList(),
             d_current = new ArrayList(),
             p_current = new ArrayList(),
             current = new ArrayList();
-
-    private int[] a_max_array = {0, 0}, a_min_array = {0, 0},
-            m_max_array = {0, 0}, m_min_array = {0, 0},
-            d_max_array = {0, 0}, d_min_array = {0, 0},
-            p_max_array = {0, 0}, p_min_array = {0, 0};
-
+    //save all measurements for according request: add/modify/delete/purge
     int a_avg = 0, a_med = 0, a_min = 0, a_min_iteration = 0, a_max = 0, a_max_iteration = 0, a_total_i = 0,
             m_avg = 0, m_med = 0, m_min = 0, m_min_iteration = 0, m_max = 0, m_max_iteration = 0, m_total_i = 0,
             d_avg = 0, d_med = 0, d_min = 0, d_min_iteration = 0, d_max = 0, d_max_iteration = 0, d_total_i = 0,
@@ -318,6 +325,12 @@ public class API_common {
         return min;
     }
 
+    /**
+     * @param operation
+     * @param current
+     * @param i
+     * @return
+     */
     int[] getMin(Enum<Operation> operation, int current, int i) {
         long start = System.currentTimeMillis();
         // SLOWly ???
@@ -350,6 +363,9 @@ public class API_common {
             case "purge":
                 min = Arrays.copyOf(p_min_array, p_min_array.length);
                 break;
+            case "www":
+                min = Arrays.copyOf(min_array, min_array.length);
+                break;
         }
 
         if(min[0] == 0){
@@ -376,6 +392,9 @@ public class API_common {
                 break;
             case "purge":
                 p_min_array = Arrays.copyOf(min, min.length);
+                break;
+            case "www":
+                min_array = Arrays.copyOf(min, min.length);
                 break;
         }
         long finish = System.currentTimeMillis();
@@ -418,6 +437,9 @@ public class API_common {
             case "purge":
                 max = Arrays.copyOf(p_max_array, p_max_array.length);
                 break;
+            case "www":
+                max = Arrays.copyOf(max_array, max_array.length);
+                break;
         }
 
         if(max[0] == 0){
@@ -443,6 +465,9 @@ public class API_common {
                 break;
             case "purge":
                 p_max_array = Arrays.copyOf(max, max.length);
+                break;
+            case "www":
+                max_array = Arrays.copyOf(max, max.length);
                 break;
         }
         long finish = System.currentTimeMillis();
@@ -626,13 +651,16 @@ public class API_common {
         return result;
     }
 
-    String checkResponseBody(String body, ArrayList template){
-        String result = "";
+    String checkResponseBody(String body, ArrayList expected_list){
+        StringBuilder result = new StringBuilder();
 
-        if(body.contains((CharSequence) template.get(0))){
-            result += template.get(0);
+        for(int j = 1; j<expected_list.size(); j++){
+            if(body.contains((CharSequence) expected_list.get(j))){
+                result.append(expected_list.get(j));
+            }
         }
-        return result;
+
+        return result.toString();
     }
 
     final String readResponse(StringBuilder body, HttpResponse response) throws IOException {
@@ -956,21 +984,21 @@ public class API_common {
         return result;
     }
 
-    void printTotalResults(String mac, String boxname, int count_reminders, int count_iterations,
+    void printTotalMeasurements(String mac, String boxname, int count_reminders, int count_iterations,
                            int a_avg, int a_med, int a_min, int a_min_iteration, int a_max, int a_max_iteration, int a_iteration, ArrayList a_current,
                            int m_avg, int m_med, int m_min, int m_min_iteration, int m_max, int m_max_iteration, int m_iteration, ArrayList m_current,
                            int d_avg, int d_med, int d_min, int d_min_iteration, int d_max, int d_max_iteration, int d_iteration, ArrayList d_current,
                            int p_avg, int p_med, int p_min, int p_min_iteration, int p_max, int p_max_iteration, int p_iteration, ArrayList p_current
     ) throws IOException {
 
-        String header = "========= ========= ========= Total measurements ========= ========= ========="
+        String header = "========= ========= Total measurements ========= ========="
                 + "\n" + starttime + " - test was started"
-                + "\n" + new Date() + ", mac=" + mac + "(" + boxname + "), count_reminders=" + count_reminders + ", count_iterations=" + a_iteration + "/" + count_iterations;
+                + "\n" + new Date() + " - test is done, mac=" + mac + "(" + boxname + "), count_reminders=" + count_reminders + ", count_iterations=" + a_iteration + "/" + count_iterations;
         String a = "\n   add avg=" + a_avg + "ms, med=" + a_med + "ms, min=" + a_min + "ms/" + a_min_iteration + ", max=" + a_max + "ms/" + a_max_iteration + ", i=" + a_iteration;
         String m = "\nmodify avg=" + m_avg + "ms, med=" + m_med + "ms, min=" + m_min + "ms/" + m_min_iteration + ", max=" + m_max + "ms/" + m_max_iteration + ", i=" + m_iteration;
         String d = "\ndelete avg=" + d_avg + "ms, med=" + d_med + "ms, min=" + d_min + "ms/" + d_min_iteration + ", max=" + d_max + "ms/" + d_max_iteration + ", i=" + d_iteration;
         String p = "\n purge avg=" + p_avg + "ms, med=" + p_med + "ms, min=" + p_min + "ms/" + p_min_iteration + ", max=" + p_max + "ms/" + p_max_iteration + ", i=" + p_iteration;
-        String footer = "\n========= ========= ========= ========= ========= ========= ========= =========";
+        String footer = "\n========= ========= ========= ========= ========= =========";
 
         String result = "";
         //if (a_avg != 0) {
@@ -1003,7 +1031,7 @@ public class API_common {
         //}
     }
 
-    void printTotalResults(String server, int count_iterations,
+    void printTotalMeasurements(String server, int count_iterations,
                            int avg, int med, int min, int min_iteration, int max, int max_iteration, int iteration, ArrayList current) throws IOException {
 
         String header = "========= ========= ========= Total measurements ========= ========= ========="
@@ -1028,7 +1056,7 @@ public class API_common {
         //}
     }
 
-    void printPreliminaryResults(ArrayList list) throws IOException {
+    void printPreliminaryMeasurements(ArrayList list) throws IOException {
         if(list.get(0).equals(HttpStatus.SC_OK)){
             logger(INFO_LEVEL, "[INF] return data: [" + list.get(0) + ", " + list.get(1) + "]"
                 + " measurements: cur=" + list.get(2)
@@ -1060,31 +1088,31 @@ public class API_common {
         writer.close();
     }
 
+    void printStartHeader(String url) throws IOException {
+        starttime = new Date();
+        logger(INFO_LEVEL, "[INF] " + starttime + ": New start for url=" + url);
+    }
+
     void printIterationHeader(String ams_ip, String mac, int count_reminders, int i, int count_iterations, int reminderChannelNumber) throws IOException {
-        String header = "========= ========= ========= Iteration = " + i
+        String header = "========= ========= Iteration = " + i
                 + "/" + count_iterations
                 + ", mac=" + mac
                 + ", ams=" + ams_ip
                 + ", count_reminders=" + count_reminders
                 + ", reminderChannelNumber=" + reminderChannelNumber
-                + " ========= ========= =========";
+                + " ========= =========";
         logger(INFO_LEVEL, header);
     }
 
-    void printStartHeader(String server) throws IOException {
-        starttime = new Date();
-        logger(INFO_LEVEL, "[INF] " + starttime + ": New start for server=" + server);
-    }
-
-    void printIterationHeader(String server, int i, int count_iterations) throws IOException {
-        String header = "========= ========= ========= Iteration = " + i
+    void printIterationHeader(String url, int i, int count_iterations) throws IOException {
+        String header = "========= ========= Iteration = " + i
                 + "/" + count_iterations
-                + ", server=" + server
-                + " ========= ========= =========";
+                + ", server=" + url
+                + " ========= =========";
         logger(INFO_LEVEL, header);
     }
 
-    void check_csv(String ams_ip, String mac, String boxname, int sleep_after_iteration, int count_reminders, int count_iterations, int reminderChannelNumber) {
+    private void check_csv(String ams_ip, String mac, String boxname, int sleep_after_iteration, int count_reminders, int count_iterations, int reminderChannelNumber) {
         assertNotNull(ams_ip);
         assertNotNull(mac);
         assertNotNull(boxname);

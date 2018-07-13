@@ -380,7 +380,7 @@ class NewAPI extends API_common {
         //list.add(0, response.getStatusLine().getStatusCode() + " " + response.getStatusLine().getReasonPhrase());
         list.add(0, response.getStatusLine().getStatusCode());
         list.add(1, checkResponseBody(readResponse(new StringBuilder(),response)));
-        if (list.get(0).equals(HttpStatus.SC_NOT_FOUND)) {
+        if (list.get(0).equals(HttpStatus.SC_OK)) {
             purge_list.add(current);
             int[] min = getMin(Operation.purge, current, i);
             int[] max = getMax(Operation.purge, current, i);
