@@ -16,7 +16,7 @@ import java.util.Date;
 class OldAPI extends API_common {
 
     /** Add / Delete method
-     * @param ams_ip
+     * @param server
      * @param mac
      * @param operation
      * @param count_reminders
@@ -27,10 +27,10 @@ class OldAPI extends API_common {
      * @return
      * @throws IOException
      */
-    ArrayList requestPerformance(String ams_ip, String mac, Enum<Operation> operation, int i, int count_reminders, long reminderChannelNumber, String reminderProgramStart, String reminderProgramId, long reminderOffset) throws IOException {
+    ArrayList requestPerformance(String server, String mac, Enum<Operation> operation, int i, int count_reminders, long reminderChannelNumber, String reminderProgramStart, String reminderProgramId, long reminderOffset) throws IOException {
         logger(INFO_LEVEL, "[INF] " + new Date() + ": " + operation.toString().toUpperCase() + ":");
 
-        HttpPost request = new HttpPost(prepare_url(ams_ip, operation,false));
+        HttpPost request = new HttpPost(prepareUrl(server, operation,false));
         request.setHeader("Accept", "application/json");
         request.setHeader("Content-type", "application/json");
         request.setEntity(new StringEntity(generateJsonReminder(mac, count_reminders, operation, reminderChannelNumber, reminderProgramStart, reminderProgramId, reminderOffset)));
@@ -49,34 +49,32 @@ class OldAPI extends API_common {
         if (list.get(0).equals(HttpStatus.SC_OK)) {
             if (operation.name().equals("add")) {
                 add_list.add(current);
-                int[] min = getMin(Operation.add, current, i);
-                int[] max = getMax(Operation.add, current, i);
-                //use add_list.size() = total of success iteration!
-                int total_i = add_list.size();
                 list.add(2, current);
                 list.add(3, getAverage(add_list));
                 list.add(4, searchMedian(add_list, Sorting.insertion));
+                int[] min = getMin(Operation.add, current, i);
                 list.add(5, min[0]);
                 list.add(6, min[1]);
+                int[] max = getMax(Operation.add, current, i);
                 list.add(7, max[0]);
                 list.add(8, max[1]);
-                list.add(9, total_i);
+                //use add_list.size() = total of success iteration!
+                list.add(9, add_list.size());
                 //logger(DEBUG_LEVEL, "[DBG] add avg = " + getAverage(add_list) + "ms/" + total_i + ": add_list:" + add_list);
 
             } else if (operation.name().equals("delete")) {
                 delete_list.add(current);
-                int[] min = getMin(Operation.delete, current, i);
-                int[] max = getMax(Operation.delete, current, i);
-                //use delete_list.size() = total of success iteration!
-                int total_i = delete_list.size();
                 list.add(2, current);
                 list.add(3, getAverage(delete_list));
                 list.add(4, searchMedian(delete_list, Sorting.insertion));
+                int[] min = getMin(Operation.delete, current, i);
                 list.add(5, min[0]);
                 list.add(6, min[1]);
+                int[] max = getMax(Operation.delete, current, i);
                 list.add(7, max[0]);
                 list.add(8, max[1]);
-                list.add(9, total_i);
+                //use delete_list.size() = total of success iteration!
+                list.add(9, delete_list.size());
                 //logger(DEBUG_LEVEL, "[DBG] delete avg = " + getAverage(delete_list) + "ms/" + total_i + ": delete_list:" + delete_list);
             }
         }
@@ -84,15 +82,15 @@ class OldAPI extends API_common {
     }
 
     /** Purge method
-     * @param ams_ip
+     * @param server
      * @param mac
      * @return
      * @throws IOException
      */
-    ArrayList requestPerformance(String ams_ip, String mac, Enum<Operation> operation, int i) throws IOException {
+    ArrayList requestPerformance(String server, String mac, Enum<Operation> operation, int i) throws IOException {
         logger(INFO_LEVEL, "[INF] " + new Date() + ": " + operation.toString().toUpperCase() + ":");
 
-        HttpPost request = new HttpPost(prepare_url(ams_ip, Operation.purge, false));
+        HttpPost request = new HttpPost(prepareUrl(server, operation, false));
         request.setHeader("Accept", "application/json");
         request.setHeader("Content-type", "application/json");
         request.setEntity(new StringEntity(generateJsonReminderPurge(mac)));
@@ -110,18 +108,17 @@ class OldAPI extends API_common {
         list.add(1, checkResponseBody(readResponse(new StringBuilder(),response)));
         if (list.get(0).equals(HttpStatus.SC_OK)) {
             purge_list.add(current);
-            int[] min = getMin(Operation.purge, current, i);
-            int[] max = getMax(Operation.purge, current, i);
-            //use purge_list.size() = total of success iteration!
-            int total_i = purge_list.size();
             list.add(2, current);
             list.add(3, getAverage(purge_list));
             list.add(4, searchMedian(purge_list, Sorting.insertion));
+            int[] min = getMin(Operation.purge, current, i);
             list.add(5, min[0]);
             list.add(6, min[1]);
+            int[] max = getMax(Operation.purge, current, i);
             list.add(7, max[0]);
             list.add(8, max[1]);
-            list.add(9, total_i);
+            //use purge_list.size() = total of success iteration!
+            list.add(9, purge_list.size());
             //logger(DEBUG_LEVEL, "[DBG] purge avg = " + getAverage(purge_list) + "ms/" + total_i + ": purge_list:" + purge_list);
         }
         return list;

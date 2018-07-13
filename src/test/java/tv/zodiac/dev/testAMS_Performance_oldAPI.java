@@ -32,7 +32,6 @@ class testAMS_Performance_oldAPI extends API_common {
             add_list = AMS.requestPerformance(ams_ip, mac, Operation.add, i, count_reminders, reminderChannelNumber, reminderProgramStart, reminderProgramId, reminderOffset);
             printPreliminaryMeasurements(add_list);
             if (add_list.get(0).equals(HttpStatus.SC_OK)) {
-                a_current.add(add_list.get(2));
                 a_avg = (int) add_list.get(3);
                 a_med = (int) add_list.get(4);
                 a_min = (int) add_list.get(5);
@@ -65,7 +64,6 @@ class testAMS_Performance_oldAPI extends API_common {
             add_list = AMS.requestPerformance(ams_ip, mac, Operation.add, i, count_reminders, reminderChannelNumber, reminderProgramStart, reminderProgramId, reminderOffset);
             printPreliminaryMeasurements(add_list);
             if (add_list.get(0).equals(HttpStatus.SC_OK)) {
-                a_current.add(add_list.get(2));
                 a_avg = (int) add_list.get(3);
                 a_med = (int) add_list.get(4);
                 a_min = (int) add_list.get(5);
@@ -77,7 +75,6 @@ class testAMS_Performance_oldAPI extends API_common {
                 purge_list = AMS.requestPerformance(ams_ip, mac, Operation.purge, i);
                 printPreliminaryMeasurements(purge_list);
                 if (purge_list.get(0).equals(HttpStatus.SC_OK)) {
-                    p_current.add(purge_list.get(2));
                     p_avg = (int) purge_list.get(3);
                     p_med = (int) purge_list.get(4);
                     p_min = (int) purge_list.get(5);
@@ -113,7 +110,6 @@ class testAMS_Performance_oldAPI extends API_common {
             add_list = AMS.requestPerformance(ams_ip, mac, Operation.add, i, count_reminders, reminderChannelNumber, reminderProgramStart, reminderProgramId, reminderOffset);
             printPreliminaryMeasurements(add_list);
             if (add_list.get(0).equals(HttpStatus.SC_OK)) {
-                a_current.add(add_list.get(2));
                 a_avg = (int) add_list.get(3);
                 a_med = (int) add_list.get(4);
                 a_min = (int) add_list.get(5);
@@ -125,7 +121,6 @@ class testAMS_Performance_oldAPI extends API_common {
                 delete_list = AMS.requestPerformance(ams_ip, mac, Operation.delete, i, count_reminders, reminderChannelNumber, reminderProgramStart, reminderProgramId, reminderOffset);
                 printPreliminaryMeasurements(delete_list);
                 if (delete_list.get(0).equals(HttpStatus.SC_OK)) {
-                    d_current.add(delete_list.get(2));
                     d_avg = (int) delete_list.get(3);
                     d_med = (int) delete_list.get(4);
                     d_min = (int) delete_list.get(5);
@@ -138,7 +133,6 @@ class testAMS_Performance_oldAPI extends API_common {
                 purge_list = AMS.requestPerformance(ams_ip, mac, Operation.purge, i);
                 printPreliminaryMeasurements(purge_list);
                 if (purge_list.get(0).equals(HttpStatus.SC_OK)) {
-                    p_current.add(purge_list.get(2));
                     p_avg = (int) purge_list.get(3);
                     p_med = (int) purge_list.get(4);
                     p_min = (int) purge_list.get(5);
@@ -176,7 +170,6 @@ class testAMS_Performance_oldAPI extends API_common {
             printPreliminaryMeasurements(purge_list);
 
             if (purge_list.get(0).equals(HttpStatus.SC_OK)) {
-                p_current.add(purge_list.get(2));
                 p_avg = (int) purge_list.get(3);
                 p_med = (int) purge_list.get(4);
                 p_min = (int) purge_list.get(5);

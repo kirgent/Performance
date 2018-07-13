@@ -86,7 +86,7 @@ public class API_common {
             max_array = {0, 0}, min_array = {0, 0};
 
 
-    //lists for saving all according requests in ms in each iteration
+    //lists for saving all requests in ms (add/modify/delte/purge) for each iteration
     ArrayList a_current = new ArrayList(),
             m_current = new ArrayList(),
             d_current = new ArrayList(),
@@ -970,15 +970,15 @@ public class API_common {
         return result.toString();
     }
 
-    String prepare_url(String server, Enum<Operation> operation, boolean newapi) {
-        String result;
+    String prepareUrl(String server, Enum<Operation> operation, boolean newapi) {
+        String result = null;
         if(!operation.name().equals("www")) {
             if (newapi) {
                 result = "http://" + server + ":" + ams_port + "/ams/Reminders2?req=" + operation;
             } else {
                 result = "http://" + server + ":" + ams_port + "/ams/Reminders?req=ChangeReminders";
             }
-        } else {
+        } else if(operation.name().equals("www")){
             result = "http://" + server;
         }
         return result;
@@ -1187,7 +1187,7 @@ public class API_common {
         int current = (int)(finish-start);
         //logger(CLIENTLOG, INFO_LEVEL, "[DBG] " + current + "ms request");
 
-        String responseBody = read_response(response);
+        String responseBody = readResponse(response);
         //if(show_response_body){
         //    logger(CLIENTLOG, INFO_LEVEL, "responseBody: " + responseBody);
         //}
@@ -1233,7 +1233,7 @@ public class API_common {
         return list;
     }
 
-    private String read_response(HttpResponse response) throws IOException {
+    private String readResponse(HttpResponse response) throws IOException {
         BufferedReader reader = new BufferedReader(new InputStreamReader(response.getEntity().getContent(), StandardCharsets.UTF_8));
         StringBuilder builder = new StringBuilder();
         for (String line; (line = reader.readLine()) != null;) {

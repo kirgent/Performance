@@ -23,10 +23,10 @@ class NewAPI extends API_common {
      * @return list
      * @throws IOException - TBD
      */
-    ArrayList request(String ams_ip, String mac, Enum<Operation> operation) throws IOException {
+    ArrayList request(String server, String mac, Enum<Operation> operation) throws IOException {
         logger(INFO_LEVEL, "[INF] " + new Date() + ": " + operation.toString().toUpperCase() + ":");
 
-        HttpPost request = new HttpPost(prepare_url(ams_ip, operation, true));
+        HttpPost request = new HttpPost(prepareUrl(server, operation, true));
         request.setHeader("Accept", "application/json");
         request.setHeader("Content-type", "application/json");
         request.setEntity(new StringEntity(generateJsonReminderPurge(mac)));
@@ -53,10 +53,10 @@ class NewAPI extends API_common {
      * @return list
      * @throws IOException -TBD
      */
-    ArrayList request(String ams_ip, String mac, Enum<Operation> operation, int count_reminders, long reminderScheduleId, long reminderId) throws IOException {
+    ArrayList request(String server, String mac, Enum<Operation> operation, int count_reminders, long reminderScheduleId, long reminderId) throws IOException {
         logger(INFO_LEVEL, "[INF] " + new Date() + ": " + operation.toString().toUpperCase() + ":");
 
-        HttpPost request = new HttpPost(prepare_url(ams_ip, Operation.delete, true));
+        HttpPost request = new HttpPost(prepareUrl(server, operation, true));
         request.setHeader("Accept", "application/json");
         request.setHeader("Content-type", "application/json");
         request.setEntity(new StringEntity(generateJsonReminderDelete(mac, count_reminders, reminderScheduleId, reminderId)));
@@ -89,10 +89,10 @@ class NewAPI extends API_common {
      * @return list
      * @throws IOException -TBD
      */
-    ArrayList request(String ams_ip, String mac, Enum<Operation> operation, int count_reminders, String reminderProgramStart, long reminderChannelNumber, String reminderProgramId, long reminderOffset, long reminderScheduleId, long reminderId) throws IOException {
+    ArrayList request(String server, String mac, Enum<Operation> operation, int count_reminders, String reminderProgramStart, long reminderChannelNumber, String reminderProgramId, long reminderOffset, long reminderScheduleId, long reminderId) throws IOException {
         logger(INFO_LEVEL, "[INF] " + new Date() + ": " + operation.toString().toUpperCase() + ":");
 
-        HttpPost request = new HttpPost(prepare_url(ams_ip, operation, true));
+        HttpPost request = new HttpPost(prepareUrl(server, operation, true));
         request.setHeader("Accept", "application/json");
         request.setHeader("Content-type", "application/json");
         request.setEntity(new StringEntity(generateJsonReminder(mac, count_reminders, operation, reminderProgramStart, reminderChannelNumber, reminderProgramId, reminderOffset, reminderScheduleId, reminderId)));
@@ -331,7 +331,7 @@ class NewAPI extends API_common {
     }
 
     ArrayList changeSettings(String mac, String option, String value) throws IOException {
-        logger(INFO_LEVEL, "Change settings for macaddress=" + mac + ", ams_ip=" + ams_ip + " option=" + option + ", value=" + value);
+        logger(INFO_LEVEL, "Change settings for macaddress=" + mac + ", server=" + ams_ip + " option=" + option + ", value=" + value);
         HttpPost request = new HttpPost("http://" + ams_ip + ":" + ams_port + "/ams/settings");
         request.setHeader("Content-type", "application/json");
 
@@ -364,7 +364,7 @@ class NewAPI extends API_common {
     ArrayList requestPerformance(String ams_ip, String mac, Enum<Operation> operation, int i) throws IOException {
         logger(INFO_LEVEL, "[INF] " + new Date() + ": " + operation.toString().toUpperCase() + ":");
 
-        HttpPost request = new HttpPost(prepare_url(ams_ip, operation, true));
+        HttpPost request = new HttpPost(prepareUrl(ams_ip, operation, true));
         request.setHeader("Accept", "application/json");
         request.setHeader("Content-type", "application/json");
         request.setEntity(new StringEntity(generateJsonReminderPurge(mac)));
@@ -382,17 +382,16 @@ class NewAPI extends API_common {
         list.add(1, checkResponseBody(readResponse(new StringBuilder(),response)));
         if (list.get(0).equals(HttpStatus.SC_OK)) {
             purge_list.add(current);
-            int[] min = getMin(Operation.purge, current, i);
-            int[] max = getMax(Operation.purge, current, i);
-            int total_i = purge_list.size();
             list.add(2, current);
             list.add(3, getAverage(purge_list));
             list.add(4, searchMedian(purge_list, sorting));
+            int[] min = getMin(Operation.purge, current, i);
             list.add(5, min[0]);
             list.add(6, min[1]);
+            int[] max = getMax(Operation.purge, current, i);
             list.add(7, max[0]);
             list.add(8, max[1]);
-            list.add(9, total_i);
+            list.add(9, purge_list.size());
             //logger(DEBUG_LEVEL,"[DBG] " + new Date() + ": purge avg = " + getAverage(purge_list) + "ms/" + total_i + ": purge_list:" + purge_list);
         }
 
@@ -409,7 +408,7 @@ class NewAPI extends API_common {
     ArrayList requestPerformance(String ams_ip, String mac, Enum<Operation> operation, int i, int count_reminders, long reminderScheduleId, long reminderId) throws IOException {
         logger(INFO_LEVEL, "[INF] " + new Date() + ": " + operation.toString().toUpperCase() + ":");
 
-        HttpPost request = new HttpPost(prepare_url(ams_ip, Operation.delete, true));
+        HttpPost request = new HttpPost(prepareUrl(ams_ip, operation, true));
         request.setHeader("Accept", "application/json");
         request.setHeader("Content-type", "application/json");
         request.setEntity(new StringEntity(generateJsonReminderDelete(mac, count_reminders, reminderScheduleId, reminderId)));
@@ -427,18 +426,17 @@ class NewAPI extends API_common {
         list.add(1, checkResponseBody(readResponse(new StringBuilder(),response)));
         if (list.get(0).equals(HttpStatus.SC_OK)) {
             delete_list.add(current);
-            int[] min = getMin(Operation.delete, current, i);
-            int[] max = getMax(Operation.delete, current, i);
-            int total_i = delete_list.size();
             list.add(2, current);
             list.add(3, getAverage(delete_list));
             list.add(4, searchMedian(delete_list, sorting));
+            int[] min = getMin(Operation.delete, current, i);
             list.add(5, min[0]);
             list.add(6, min[1]);
+            int[] max = getMax(Operation.delete, current, i);
             list.add(7, max[0]);
             list.add(8, max[1]);
-            list.add(9, total_i);
-            //logger(DEBUG_LEVEL, "[DBG] " + new Date() + ": delete avg = " + getAverage(delete_list) + "ms/" + total_i + ": delete_list:" + delete_list);
+            list.add(9, delete_list.size());
+            //logger(DEBUG_LEVEL, "[DBG] " + new Date() + ": delete avg = " + getAverage(delete_list) + "ms/" + delete_list.size() + ": delete_list:" + delete_list);
         }
 
         return list;
@@ -460,7 +458,7 @@ class NewAPI extends API_common {
     ArrayList requestPerformance(String ams_ip, String mac, Enum<Operation> operation, int i, int count_reminders, String reminderProgramStart, long reminderChannelNumber, String reminderProgramId, long reminderOffset, long reminderScheduleId, long reminderId) throws IOException {
         logger(INFO_LEVEL, "[INF] " + new Date() + ": " + operation.toString().toUpperCase() + ":");
 
-        HttpPost request = new HttpPost(prepare_url(ams_ip, operation, true));
+        HttpPost request = new HttpPost(prepareUrl(ams_ip, operation, true));
         request.setHeader("Accept", "application/json");
         request.setHeader("Content-type", "application/json");
         request.setEntity(new StringEntity(generateJsonReminder(mac, count_reminders, operation, reminderProgramStart, reminderChannelNumber, reminderProgramId, reminderOffset, reminderScheduleId, reminderId)));
@@ -479,32 +477,30 @@ class NewAPI extends API_common {
         if (list.get(0).equals(HttpStatus.SC_OK)) {
             if (operation.name().equals("add")) {
                 add_list.add(current);
-                int[] min = getMin(Operation.add, current, i);
-                int[] max = getMax(Operation.add, current, i);
-                int total_i = add_list.size();
                 list.add(2, current);
                 list.add(3, getAverage(add_list));
                 list.add(4, searchMedian(add_list, sorting));
+                int[] min = getMin(Operation.add, current, i);
                 list.add(5, min[0]);
                 list.add(6, min[1]);
+                int[] max = getMax(Operation.add, current, i);
                 list.add(7, max[0]);
                 list.add(8, max[1]);
-                list.add(9, total_i);
+                list.add(9, add_list.size());
                 //logger(DEBUG_LEVEL, "[DBG] " + new Date() + ": add avg = " + getAverage(add_list) + "ms/" + total_i + ": add_list:" + add_list);
 
             } else if (operation.name().equals("modify")) {
                 modify_list.add(current);
-                int[] min = getMin(Operation.modify, current, i);
-                int[] max = getMax(Operation.modify, current, i);
-                int total_i = modify_list.size();
                 list.add(2, current);
                 list.add(3, getAverage(modify_list));
                 list.add(4, searchMedian(modify_list, sorting));
+                int[] min = getMin(Operation.modify, current, i);
                 list.add(5, min[0]);
                 list.add(6, min[1]);
+                int[] max = getMax(Operation.modify, current, i);
                 list.add(7, max[0]);
                 list.add(8, max[1]);
-                list.add(9, total_i);
+                list.add(9, modify_list.size());
                 //logger(DEBUG_LEVEL, "[DBG] " + new Date() + ": modify avg = " + getAverage(modify_list) + "ms/" + total_i + ": modify_list:" + modify_list);
             }
         }

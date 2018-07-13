@@ -7,6 +7,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
 class testPerformance extends API_common{
 
@@ -25,7 +26,7 @@ class testPerformance extends API_common{
         for (int i = 1; i <= count_iterations; i++) {
             printIterationHeader(url, i, count_iterations);
 
-            request_list = performance.request_get(url, expected_list, i);
+            request_list = performance.get(url, expected_list, i);
             printPreliminaryMeasurements(request_list);
 
             for(int j = 0; j<expected_list.size(); j++){
@@ -61,7 +62,7 @@ class testPerformance extends API_common{
         for (int i = 1; i <= count_iterations; i++) {
             printIterationHeader(url, i, count_iterations);
 
-            request_list = performance.request_get(url, expected_list, i);
+            request_list = performance.get(url, expected_list, i);
             printPreliminaryMeasurements(request_list);
 
             for(int j = 0; j<expected_list.size(); j++){
@@ -91,15 +92,15 @@ class testPerformance extends API_common{
         String url = "127.0.0.1:8080/temperature";
         expected_list.add(0, HttpStatus.SC_OK);
         expected_list.add(1, "{\"success\":true}");
-        int count_iterations = 10000;
+        int count_iterations = 100;
 
-        String json = generate_json(3);
+        String json = generate_json(100);
 
         printStartHeader(url);
         for (int i = 1; i <= count_iterations; i++) {
             printIterationHeader(url, i, count_iterations);
 
-            request_list = performance.request_post(url, json, expected_list, i);
+            request_list = performance.post(url, json, expected_list, i);
             //request_list = post(url, json, expected_list, false);
             printPreliminaryMeasurements(request_list);
 
@@ -122,7 +123,7 @@ class testPerformance extends API_common{
 
         printTotalMeasurements(url, count_iterations,
                 avg, med, min, min_iteration, max, max_iteration, total_i, current);
-        //assertNotEquals(0, avg, "a_avg");
+        assertNotEquals(0, avg, "avg");
     }
 
 }

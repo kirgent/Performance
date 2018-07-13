@@ -20,10 +20,10 @@ import java.util.Random;
 
 class Performance extends API_common{
 
-    ArrayList request_get(String url, ArrayList expected_list, int i) throws IOException {
+    ArrayList get(String server, ArrayList expected_list, int i) throws IOException {
         logger(INFO_LEVEL, "[INF] " + new Date());
 
-        HttpGet request = new HttpGet(prepare_url(url, API_common.Operation.www,false));
+        HttpGet request = new HttpGet(prepareUrl(server, API_common.Operation.www,false));
         logger(DEBUG_LEVEL, "[DBG] request string: " + request);
 
         long start = System.currentTimeMillis();
@@ -55,10 +55,10 @@ class Performance extends API_common{
         return list;
     }
 
-    ArrayList request_post(String url, String json, ArrayList template, int i) throws IOException {
+    ArrayList post(String server, String json, ArrayList template, int i) throws IOException {
         logger(INFO_LEVEL, "[INF] " + new Date());
 
-        HttpPost request = new HttpPost(prepare_url(url, API_common.Operation.www,false));
+        HttpPost request = new HttpPost(prepareUrl(server, API_common.Operation.www,false));
         request.setHeader("Accept", "application/json");
         request.setHeader("Content-type", "application/json");
         request.setEntity(new StringEntity(json));
