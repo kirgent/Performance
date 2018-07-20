@@ -266,60 +266,59 @@ public class API_common {
         logger(INFO_LEVEL, (int) (finish-start) + "ms for sortInsertion");
     }
 
-    void sortMerge(ArrayList list) throws IOException {
-        ArrayList tempMergArr = new ArrayList(list.size());
+    void sortMerge(int list[]) throws IOException {
+        int array[] = list;
+        int length = list.length;
+        int tempMergArr[] = new int[length];
 
         long start = System.currentTimeMillis();
-        sortMerge_doMergeSort(0, list.size() - 1, tempMergArr, list);
+        sortMerge_doMergeSort(0, length - 1, tempMergArr, list);
         long finish = System.currentTimeMillis();
 
         logger(INFO_LEVEL, "sortMerge: sorted list: " + list);
         logger(INFO_LEVEL, (int) (finish-start) + "ms for sortMerge");
     }
 
-    private void sortMerge_doMergeSort(int lowerIndex, int higherIndex, ArrayList tempMergArr, ArrayList list) throws IOException {
+    private void sortMerge_doMergeSort(int lowerIndex, int higherIndex, int tempMergArr[], int list[]) throws IOException {
         if (lowerIndex < higherIndex) {
             int middle = lowerIndex + (higherIndex - lowerIndex) / 2;
 
             // Below step sorts the left side of the array
             sortMerge_doMergeSort(lowerIndex, middle, tempMergArr, list);
-            logger(INFO_LEVEL, "sortMerge_doMergeSort: sorted list: " + list);
+            //logger(INFO_LEVEL, "sortMerge_doMergeSort: sorted list: " + list);
 
             // Below step sorts the right side of the array
             sortMerge_doMergeSort(middle + 1, higherIndex, tempMergArr, list);
-            logger(INFO_LEVEL, "sortMerge_doMergeSort: sorted list: " + list);
+            //logger(INFO_LEVEL, "sortMerge_doMergeSort: sorted list: " + list);
 
             // Now merge both sides
             sortMerge_mergeParts(lowerIndex, middle, higherIndex, tempMergArr, list);
-            logger(INFO_LEVEL, "sortMerge_doMergeSort: sorted list: " + list);
+            //logger(INFO_LEVEL, "sortMerge_doMergeSort: sorted list: " + list);
         }
     }
 
-    private void sortMerge_mergeParts(int lowerIndex, int middle, int higherIndex, ArrayList tempMergArr, ArrayList list) {
+    private void sortMerge_mergeParts(int lowerIndex, int middle, int higherIndex, int tempMergArr[], int list[]) {
         for (int i = lowerIndex; i <= higherIndex; i++) {
-            tempMergArr.set(i, list.get(i));
+            tempMergArr[i] = list[i];
         }
         int i = lowerIndex;
         int j = middle + 1;
         int k = lowerIndex;
         while (i <= middle && j <= higherIndex) {
-            //todo
-            //if (tempMergArr.get(i) <= tempMergArr.get(j)) {
-            if ((int)tempMergArr.get(i) <= (int)tempMergArr.get(j)) {
-                list.set(k, tempMergArr.get(i));
+            if (tempMergArr[i] <= tempMergArr[j]) {
+                list[k] = tempMergArr[i];
                 i++;
             } else {
-                list.set(k, tempMergArr.get(j));
+                list[k] = tempMergArr[j];
                 j++;
             }
             k++;
         }
         while (i <= middle) {
-            list.set(k, tempMergArr.get(i));
+            list[k] = tempMergArr[i];
             k++;
             i++;
         }
-
     }
 
     private int searchMax(ArrayList list) throws IOException {

@@ -76,14 +76,19 @@ class testSandbox extends API_common {
     @Test
     void testSortMerge() throws IOException {
         //int[] arr = {42,1,40,3,7,88,67,10};
-        int[] arr = {10,34,2,56,7,67,88,42};
-        ArrayList list = new ArrayList();
-        for (int i = 0; i < arr.length; i++) {
-            list.add(i,arr[i]);
-        }
-        sortMerge(list);
-        for (Object aList : list) {
+        int[] inputArr = {10,34,2,56,7,67,88,42};
+        //ArrayList list = new ArrayList();
+        //ArrayList tempMergArr = new ArrayList(list.size());
+        //for (int i = 0; i < arr.length; i++) {
+        //    list.add(i,arr[i]);
+        //}
+        sortMerge(inputArr);
+        /*for (Object aList : list) {
             System.out.print(aList + " ");
+        }*/
+        for(int i:inputArr){
+            System.out.print(i);
+            System.out.print(" ");
         }
         System.out.println();
     }
