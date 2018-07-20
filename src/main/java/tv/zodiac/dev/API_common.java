@@ -33,22 +33,20 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 public class API_common {
 
     Boolean show_info_level = true;
-    Boolean show_debug_level = false;
+    Boolean show_debug_level = true;
     Boolean show_generated_json = false;
     private Boolean show_response_body = false;
 
     static final String INFO_LEVEL = "INF";
     static final String DEBUG_LEVEL = "DBG";
-    Date starttime;
-
-    //private final static Logger log = Logger.getLogger(API.class.getName());
+    private Date starttime;
 
     enum Operation { add, modify, delete, purge, blablabla, www }
 
     enum Generation { random, increment }
 
     enum Sorting { bubble, quick, selection, insertion, merge }
-    Sorting sorting = Sorting.quick;
+    Sorting sorting = Sorting.insertion;
 
     //static Logger log = Logger.getLogger(testAMS.class.getName());
     //FileHandler txtFile = new FileHandler ("log.log", true);
@@ -231,15 +229,18 @@ public class API_common {
         long start = System.currentTimeMillis();
         for (int i = 0; i < list.size()-1; i++) {
             int index = i;
-            for (int j = i + 1; j < list.size(); j++)
-                if ((int)list.get(j) < (int)list.get(index))
+            for (int j = i + 1; j < list.size(); j++) {
+                if ((int) list.get(j) < (int) list.get(index))
                     index = j;
+                logger(INFO_LEVEL, "sorted list: " + list);
+            }
 
             int smallerNumber = (int) list.get(index);
             list.set(index, list.get(i));
             list.set(i, smallerNumber);
+
         }
-        //logger(INFO_LEVEL, "sorted list: " + list);
+
         long finish = System.currentTimeMillis();
         logger(INFO_LEVEL, (int) (finish - start) + "ms for sortSelection");
     }
@@ -259,10 +260,66 @@ public class API_common {
                     list.set(j-1, temp);
                 }
             }
+            logger(INFO_LEVEL, "sorted list: " + list);
         }
-        //logger(INFO_LEVEL, "sorted list: " + list);
         long finish = System.currentTimeMillis();
         logger(INFO_LEVEL, (int) (finish-start) + "ms for sortInsertion");
+    }
+
+    void sortMerge(ArrayList list) throws IOException {
+        ArrayList tempMergArr = new ArrayList(list.size());
+
+        long start = System.currentTimeMillis();
+        sortMerge_doMergeSort(0, list.size() - 1, tempMergArr, list);
+        long finish = System.currentTimeMillis();
+
+        logger(INFO_LEVEL, "sortMerge: sorted list: " + list);
+        logger(INFO_LEVEL, (int) (finish-start) + "ms for sortMerge");
+    }
+
+    private void sortMerge_doMergeSort(int lowerIndex, int higherIndex, ArrayList tempMergArr, ArrayList list) throws IOException {
+        if (lowerIndex < higherIndex) {
+            int middle = lowerIndex + (higherIndex - lowerIndex) / 2;
+
+            // Below step sorts the left side of the array
+            sortMerge_doMergeSort(lowerIndex, middle, tempMergArr, list);
+            logger(INFO_LEVEL, "sortMerge_doMergeSort: sorted list: " + list);
+
+            // Below step sorts the right side of the array
+            sortMerge_doMergeSort(middle + 1, higherIndex, tempMergArr, list);
+            logger(INFO_LEVEL, "sortMerge_doMergeSort: sorted list: " + list);
+
+            // Now merge both sides
+            sortMerge_mergeParts(lowerIndex, middle, higherIndex, tempMergArr, list);
+            logger(INFO_LEVEL, "sortMerge_doMergeSort: sorted list: " + list);
+        }
+    }
+
+    private void sortMerge_mergeParts(int lowerIndex, int middle, int higherIndex, ArrayList tempMergArr, ArrayList list) {
+        for (int i = lowerIndex; i <= higherIndex; i++) {
+            tempMergArr.set(i, list.get(i));
+        }
+        int i = lowerIndex;
+        int j = middle + 1;
+        int k = lowerIndex;
+        while (i <= middle && j <= higherIndex) {
+            //todo
+            //if (tempMergArr.get(i) <= tempMergArr.get(j)) {
+            if ((int)tempMergArr.get(i) <= (int)tempMergArr.get(j)) {
+                list.set(k, tempMergArr.get(i));
+                i++;
+            } else {
+                list.set(k, tempMergArr.get(j));
+                j++;
+            }
+            k++;
+        }
+        while (i <= middle) {
+            list.set(k, tempMergArr.get(i));
+            k++;
+            i++;
+        }
+
     }
 
     private int searchMax(ArrayList list) throws IOException {
@@ -281,9 +338,9 @@ public class API_common {
         return max;
     }
 
-    int searchMedian(ArrayList list, Enum<Sorting> sort) throws IOException {
+    int searchMedian(ArrayList list, Enum<Sorting> sorting) throws IOException {
         int median;
-        switch (sort.name()) {
+        switch (sorting.name()) {
             case "bubble":
                 sortBubble(list);
                 break;

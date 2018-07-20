@@ -51,7 +51,7 @@ class API_old extends API_common {
                 add_list.add(current);
                 list.add(2, current);
                 list.add(3, getAverage(add_list));
-                list.add(4, searchMedian(add_list, Sorting.insertion));
+                list.add(4, searchMedian(add_list, sorting));
                 int[] min = getMin(Operation.add, current, i);
                 list.add(5, min[0]);
                 list.add(6, min[1]);
@@ -110,7 +110,7 @@ class API_old extends API_common {
             purge_list.add(current);
             list.add(2, current);
             list.add(3, getAverage(purge_list));
-            list.add(4, searchMedian(purge_list, Sorting.insertion));
+            list.add(4, searchMedian(purge_list, sorting));
             int[] min = getMin(Operation.purge, current, i);
             list.add(5, min[0]);
             list.add(6, min[1]);
