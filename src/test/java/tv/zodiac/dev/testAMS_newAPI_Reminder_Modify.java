@@ -15,7 +15,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
  */
 class testAMS_newAPI_Reminder_Modify extends API_common {
 
-    private NewAPI AMS = new NewAPI();
+    private API_new AMS = new API_new();
     final private int count_iterations = 10;
     final private int count_reminders = 1;
 

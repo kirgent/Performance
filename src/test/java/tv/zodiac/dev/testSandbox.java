@@ -11,7 +11,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class testSandbox extends API_common {
 
-    private NewAPI AMS = new NewAPI();
+    private API_new AMS = new API_new();
 
     @Test
     void test_get_median_by_sort_bubble() throws IOException {

@@ -13,7 +13,7 @@ import static org.junit.Assert.assertEquals;
  */
 class testAMS_newAPI_Reminder_Purge extends API_common {
 
-    private NewAPI AMS = new NewAPI();
+    private API_new AMS = new API_new();
 
     @Test
     void testPurge() throws IOException {

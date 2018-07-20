@@ -14,7 +14,7 @@ import static org.junit.jupiter.api.Assertions.assertNotEquals;
  */
 class testAMS_Performance_oldAPI extends API_common {
 
-    OldAPI AMS = new OldAPI();
+    API_old AMS = new API_old();
 
     @ParameterizedTest
     @CsvFileSource(resources = "/reminders_oldapi.csv", numLinesToSkip = 1)

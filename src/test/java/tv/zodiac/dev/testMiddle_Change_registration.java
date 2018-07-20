@@ -13,8 +13,8 @@ import static org.junit.jupiter.api.Assertions.assertTimeoutPreemptively;
 /**
  * We are localhost (Charter Headend). Full chain of requests: localhost -> AMS -> STB -> AMS -> localhost
  */
-class testMiddle_Change_registration extends API_Middle {
-    private API_Middle Middle = new API_Middle();
+class testMiddle_Change_registration extends API_middle {
+    private API_middle Middle = new API_middle();
     private int timeout = 20000;
 
     @ParameterizedTest

@@ -14,7 +14,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
  */
 class testAMS_Settings extends API_common {
 
-    private NewAPI AMS = new NewAPI();
+    private API_new AMS = new API_new();
 
     @Test
     @Disabled

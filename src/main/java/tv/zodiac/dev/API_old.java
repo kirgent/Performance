@@ -13,7 +13,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Date;
 
-class OldAPI extends API_common {
+class API_old extends API_common {
 
     /** Add / Delete method
      * @param server

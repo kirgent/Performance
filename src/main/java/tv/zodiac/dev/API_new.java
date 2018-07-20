@@ -15,7 +15,7 @@ import java.util.Objects;
 
 import static java.lang.System.currentTimeMillis;
 
-class NewAPI extends API_common {
+class API_new extends API_common {
 
     /** Purge method
      * @param mac - TBD
@@ -389,7 +389,7 @@ class NewAPI extends API_common {
             list.add(5, min[0]);
             list.add(6, min[1]);
             int[] max = getMax(Operation.purge, current, i);
-            list.add(7, max[0]);
+            list.add(7, max[0]);javascript:;
             list.add(8, max[1]);
             list.add(9, purge_list.size());
             //logger(DEBUG_LEVEL,"[DBG] " + new Date() + ": purge avg = " + getAverage(purge_list) + "ms/" + total_i + ": purge_list:" + purge_list);

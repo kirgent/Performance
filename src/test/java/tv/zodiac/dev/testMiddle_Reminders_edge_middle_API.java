@@ -11,9 +11,9 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 /**
  * We are localhost (Charter Headend). Full chain of requests: localhost -> AMS -> STB -> AMS -> localhost
  */
-class testMiddle_Reminders_edge_middle_API extends API_Middle {
+class testMiddle_Reminders_edge_middle_API extends API_middle {
 
-    private API_Middle Middle = new API_Middle();
+    private API_middle Middle = new API_middle();
 
     @Test
     void testGetStbReminder() throws IOException {

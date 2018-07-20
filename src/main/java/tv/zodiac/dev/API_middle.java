@@ -11,7 +11,7 @@ import org.json.simple.JSONObject;
 import java.io.IOException;
 import java.util.ArrayList;
 
-class API_Middle extends API_common {
+class API_middle extends API_common {
 
     ArrayList changeRegistration(String charterapi, String mac, String ams_ip) throws IOException {
         System.out.println("[DBG] changeRegistration " + mac + " to ams " + ams_ip + " via charterapi: " + charterapi);

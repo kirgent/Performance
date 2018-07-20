@@ -12,7 +12,7 @@ import static org.junit.jupiter.api.Assertions.*;
  * We are localhost (Charter Headend). Full chain of requests: localhost -> AMS -> STB -> AMS -> localhost
  */
 class testAMS_Performance_newAPI extends API_common {
-    NewAPI AMS = new NewAPI();
+    API_new AMS = new API_new();
 
     @ParameterizedTest
     @CsvFileSource(resources = "/reminders.csv", numLinesToSkip = 1)

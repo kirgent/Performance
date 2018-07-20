@@ -152,7 +152,7 @@ public class Main {
 
         System.out.println("[DBG] used mac=" + macaddress + ", operation=" + operation + ", param=" + param);
 
-        API_Middle Middle = new API_Middle();
+        API_middle Middle = new API_middle();
 
         switch (operation){
             case "Check":
