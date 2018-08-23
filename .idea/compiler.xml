@@ -6,11 +6,11 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="Reminders" />
+        <module name="Performance" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
-      <module name="Reminders" target="1.8" />
+      <module name="Performance" target="1.8" />
     </bytecodeTargetLevel>
   </component>
 </project>
