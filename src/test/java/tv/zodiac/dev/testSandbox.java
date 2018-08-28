@@ -14,7 +14,8 @@ class testSandbox extends API_common {
     private API_new AMS = new API_new();
 
     @Test
-    void test_get_median_by_sort_bubble() throws IOException {
+    void testSortBubble() throws IOException {
+        //int[] arr = {42,1,40,3,7,88,67,10};
         int[] arr = {10,34,2,56,7,67,88,42};
         ArrayList list = new ArrayList();
         for (int i = 0; i < arr.length; i++) {
@@ -28,7 +29,23 @@ class testSandbox extends API_common {
     }
 
     @Test
-    void test_get_median_by_sort_quick() throws IOException {
+    void testSortInsertion() throws IOException {
+        //int[] arr = {42,1,40,3,7,88,67,10};
+        int[] arr = {10,34,2,56,7,67,88,42};
+        ArrayList list = new ArrayList();
+        for (int i = 0; i < arr.length; i++) {
+            list.add(i,arr[i]);
+        }
+        sortInsertion(list);
+        for (Object aList : list) {
+            System.out.print(aList + " ");
+        }
+        System.out.println();
+    }
+
+    @Test
+    void testSortQuick() throws IOException {
+        //int[] arr = {42,1,40,3,7,88,67,10};
         int[] arr = {10,34,2,56,7,67,88,42};
         ArrayList list = new ArrayList();
         for (int i = 0; i < arr.length; i++) {
@@ -42,7 +59,8 @@ class testSandbox extends API_common {
     }
 
     @Test
-    void test_get_median_by_sort_selection() throws IOException {
+    void testSortSelection() throws IOException {
+        //int[] arr = {42,1,40,3,7,88,67,10};
         int[] arr = {10,34,2,56,7,67,88,42};
         ArrayList list = new ArrayList();
         for (int i = 0; i < arr.length; i++) {
@@ -56,15 +74,21 @@ class testSandbox extends API_common {
     }
 
     @Test
-    void test_get_median_by_sort_insertion() throws IOException {
-        int[] arr = {10,34,2,56,7,67,88,42};
-        ArrayList list = new ArrayList();
-        for (int i = 0; i < arr.length; i++) {
-            list.add(i,arr[i]);
-        }
-        sortInsertion(list);
-        for (Object aList : list) {
+    void testSortMerge() throws IOException {
+        //int[] arr = {42,1,40,3,7,88,67,10};
+        int[] inputArr = {10,34,2,56,7,67,88,42};
+        //ArrayList list = new ArrayList();
+        //ArrayList tempMergArr = new ArrayList(list.size());
+        //for (int i = 0; i < arr.length; i++) {
+        //    list.add(i,arr[i]);
+        //}
+        sortMerge(inputArr);
+        /*for (Object aList : list) {
             System.out.print(aList + " ");
+        }*/
+        for(int i:inputArr){
+            System.out.print(i);
+            System.out.print(" ");
         }
         System.out.println();
     }
