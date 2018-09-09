@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/Performance.iml" filepath="$PROJECT_DIR$/Performance.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Reminders.iml" filepath="$PROJECT_DIR$/Reminders.iml" />
     </modules>
   </component>
 </project>
