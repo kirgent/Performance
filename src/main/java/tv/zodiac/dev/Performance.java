@@ -37,19 +37,19 @@ class Performance extends API_common{
         list.add(0, response.getStatusLine().getStatusCode());
         list.add(1, checkResponseBody(readResponse(new StringBuilder(),response), expected_list));
         if (list.get(0).equals(HttpStatus.SC_OK)) {
-            request_list.add(current);
+            actual_list.add(current);
             int[] min = getMin(API_common.Operation.add, current, i);
             int[] max = getMax(API_common.Operation.add, current, i);
             list.add(2, current);
-            list.add(3, getAverage(request_list));
-            list.add(4, searchMedian(request_list, API_common.Sorting.insertion));
+            list.add(3, getAverage(actual_list));
+            list.add(4, searchMedian(actual_list, Sorting.quick));
             list.add(5, min[0]);
             list.add(6, min[1]);
             list.add(7, max[0]);
             list.add(8, max[1]);
 
             //use request_list.size() = total of success iteration!
-            list.add(9, request_list.size());
+            list.add(9, actual_list.size());
             //logger(DEBUG_LEVEL, "[DBG] add avg = " + getAverage(add_list) + "ms/" + total_i + ": add_list:" + add_list);
         }
         return list;
@@ -75,19 +75,19 @@ class Performance extends API_common{
         list.add(0, response.getStatusLine().getStatusCode());
         list.add(1, checkResponseBody(readResponse(new StringBuilder(),response), template));
         if (list.get(0).equals(HttpStatus.SC_OK)) {
-            request_list.add(current);
+            actual_list.add(current);
             int[] min = getMin(API_common.Operation.add, current, i);
             int[] max = getMax(API_common.Operation.add, current, i);
             list.add(2, current);
-            list.add(3, getAverage(request_list));
-            list.add(4, searchMedian(request_list, API_common.Sorting.insertion));
+            list.add(3, getAverage(actual_list));
+            list.add(4, searchMedian(actual_list, API_common.Sorting.insertion));
             list.add(5, min[0]);
             list.add(6, min[1]);
             list.add(7, max[0]);
             list.add(8, max[1]);
 
             //use request_list.size() = total of success iteration!
-            list.add(9, request_list.size());
+            list.add(9, actual_list.size());
             //logger(DEBUG_LEVEL, "[DBG] add avg = " + getAverage(add_list) + "ms/" + total_i + ": add_list:" + add_list);
         }
         return list;

@@ -1,0 +1,6 @@
+count_internal_iterations,sleep_after_iterations,url
+100,0,"http://localhost:8080/unidata-frontend/#main?section=home"
+100,0,"http://localhost:8080/unidata-frontend/#main?section=data"
+100,0,"http://localhost:8080/unidata-frontend/#main?section=cluster"
+100,0,"http://localhost:8080/unidata-frontend/#main?section=tasks"
+100,0,"http://localhost:8080/unidata-frontend/#main?section=classifierviewer"

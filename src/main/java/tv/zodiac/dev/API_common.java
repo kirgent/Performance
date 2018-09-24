@@ -22,9 +22,7 @@ import java.util.*;
 import java.util.Date;
 
 import static java.lang.System.currentTimeMillis;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.Assert.assertNotNull;
 
 /**
  * we are as Middle: send requests to AMS and got responses
@@ -33,7 +31,7 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 public class API_common {
 
     Boolean show_info_level = true;
-    Boolean show_debug_level = true;
+    Boolean show_debug_level = false;
     Boolean show_generated_json = false;
     private Boolean show_response_body = false;
 
@@ -74,7 +72,7 @@ public class API_common {
             modify_list = new ArrayList(),
             delete_list = new ArrayList(),
             purge_list = new ArrayList(),
-            request_list = new ArrayList();
+            actual_list = new ArrayList();
 
     //2-dimensional array for saving min/max value and iteration where this value were last time updated
     private int[] a_max_array = {0, 0}, a_min_array = {0, 0},
@@ -155,10 +153,6 @@ public class API_common {
         return sum / list.size();
     }
 
-    /** bubble sorting
-     * @param list
-     * @throws IOException
-     */
     void sortBubble(ArrayList list) throws IOException {
         long start = System.currentTimeMillis();
         for (int k = 0; k < list.size() - 1; k++) {
@@ -175,14 +169,11 @@ public class API_common {
         logger(INFO_LEVEL, (int) (finish - start) + "ms for sortBubble");
     }
 
-    /** quick sorting
-     * @param list
-     * @throws IOException
-     */
     void sortQuick(ArrayList list) throws IOException {
         long start = System.currentTimeMillis();
         sortQuickRecursive(list, 0, list.size()-1);
         long finish = System.currentTimeMillis();
+        logger(DEBUG_LEVEL, "sorted list: " + list);
         logger(INFO_LEVEL, (int) (finish-start) + "ms for sortQuick");
     }
 
@@ -221,10 +212,6 @@ public class API_common {
         logger(DEBUG_LEVEL, "sorted list: " + list);
     }
 
-    /** selection sorting
-     * @param list
-     * @throws IOException
-     */
     void sortSelection(ArrayList list) throws IOException {
         long start = System.currentTimeMillis();
         for (int i = 0; i < list.size()-1; i++) {
@@ -239,16 +226,13 @@ public class API_common {
             list.set(index, list.get(i));
             list.set(i, smallerNumber);
 
+            logger(DEBUG_LEVEL, "sorted list: " + list);
         }
 
         long finish = System.currentTimeMillis();
         logger(INFO_LEVEL, (int) (finish - start) + "ms for sortSelection");
     }
 
-    /** insertion sorting
-     * @param list
-     * @throws IOException
-     */
     void sortInsertion(ArrayList list) throws IOException {
         long start = System.currentTimeMillis();
         int temp;
@@ -260,7 +244,7 @@ public class API_common {
                     list.set(j-1, temp);
                 }
             }
-            logger(INFO_LEVEL, "sorted list: " + list);
+            logger(DEBUG_LEVEL, "sorted list: " + list);
         }
         long finish = System.currentTimeMillis();
         logger(INFO_LEVEL, (int) (finish-start) + "ms for sortInsertion");
@@ -275,7 +259,7 @@ public class API_common {
         sortMerge_doMergeSort(0, length - 1, tempMergArr, list);
         long finish = System.currentTimeMillis();
 
-        logger(INFO_LEVEL, "sortMerge: sorted list: " + list);
+        logger(DEBUG_LEVEL, "sortMerge: sorted list: " + list);
         logger(INFO_LEVEL, (int) (finish-start) + "ms for sortMerge");
     }
 
@@ -351,6 +335,9 @@ public class API_common {
                 break;
             case "insertion":
                 sortInsertion(list);
+                break;
+            default:
+                sortQuick(list);
                 break;
             }
 
@@ -1030,12 +1017,12 @@ public class API_common {
         String result = null;
         if(!operation.name().equals("www")) {
             if (newapi) {
-                result = "http://" + server + ":" + ams_port + "/ams/Reminders2?req=" + operation;
+                result = server + ":" + ams_port + "/ams/Reminders2?req=" + operation;
             } else {
-                result = "http://" + server + ":" + ams_port + "/ams/Reminders?req=ChangeReminders";
+                result = server + ":" + ams_port + "/ams/Reminders?req=ChangeReminders";
             }
         } else if(operation.name().equals("www")){
-            result = "http://" + server;
+            result = server;
         }
         return result;
     }
@@ -1172,9 +1159,9 @@ public class API_common {
         assertNotNull(ams_ip);
         assertNotNull(mac);
         assertNotNull(boxname);
-        assertNotEquals(0, count_reminders);
-        assertNotEquals(0, count_iterations);
-        assertNotEquals(0, reminderChannelNumber);
+        //assertNotEquals(0, count_reminders);
+        //assertNotEquals(0, count_iterations);
+        //assertNotEquals(0, reminderChannelNumber);
     }
 
     void read_csv() throws IOException {
