@@ -7,7 +7,7 @@ import org.junit.jupiter.params.provider.CsvFileSource;
 import java.util.ArrayList;
 
 import static java.time.Duration.ofMillis;
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTimeoutPreemptively;
 
 /**
