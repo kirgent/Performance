@@ -1,4 +1,4 @@
-package tv.zodiac.dev;
+package com.perf.my;
 
 import org.apache.http.HttpStatus;
 import org.junit.jupiter.api.Test;
