@@ -44,10 +44,10 @@ RACK_CHANNELS=( $RANDOM )
 #reminderChannelNumber=$RANDOM
 #let "reminderChannelNumber %= 1000"
 
-charterapi_a="http://spec.partnerapi.engprod-charter.net/api/pub"
-charterapi_b="http://specb.partnerapi.engprod-charter.net/api/pub"
-charterapi_c="http://specc.partnerapi.engprod-charter.net/api/pub"
-charterapi_d="http://specd.partnerapi.engprod-charter.net/api/pub"
+charterapi_a="http://spec.partnerapi.engprod-charter.net/common/pub"
+charterapi_b="http://specb.partnerapi.engprod-charter.net/common/pub"
+charterapi_c="http://specc.partnerapi.engprod-charter.net/common/pub"
+charterapi_d="http://specd.partnerapi.engprod-charter.net/common/pub"
 #charterapi_d="http://specd.partnerapi.engprod-charter.net/api/pub"
 postfix_settings="networksettingsmiddle/ns/settings"
 

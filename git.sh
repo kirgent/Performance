@@ -2,6 +2,8 @@
 # written by Kirill Grushin (kirgent@gmail.com)
 
 git status
+sleep 3
+
 git pull
 echo "======================="
 

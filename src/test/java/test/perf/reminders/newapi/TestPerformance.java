@@ -1,18 +1,18 @@
-package com.perf.my;
+package test.perf.reminders.newapi;
+
+import java.io.IOException;
 
 import org.apache.http.HttpStatus;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvFileSource;
 
-import java.io.IOException;
-
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
 /**
  * We are localhost (Charter Headend). Full chain of requests: localhost -> AMS -> STB -> AMS -> localhost
  */
-class testAMS_Performance_newAPI extends API_common {
-    API_new AMS = new API_new();
+class TestPerformance extends NewAPI {
+    private NewAPI AMS = new NewAPI();
 
     @ParameterizedTest
     @CsvFileSource(resources = "/reminders.csv", numLinesToSkip = 1)

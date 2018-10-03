@@ -1,21 +1,21 @@
-package com.perf.my;
+package test.perf.reminders.newapi;
+
+import java.io.IOException;
+import java.util.ArrayList;
 
 import org.apache.http.HttpStatus;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.RepeatedTest;
 import org.junit.jupiter.api.Test;
 
-import java.io.IOException;
-import java.util.ArrayList;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 /**
  * We are localhost (Charter Headend). Full chain of requests: localhost -> AMS -> STB -> AMS -> localhost
  */
-class testAMS_newAPI_Reminder_Add extends API_common {
+class TestReminderAdd extends NewAPI {
 
-    private API_new AMS = new API_new();
+    private NewAPI AMS = new NewAPI();
     final private int count_iterations = 10;
     final private int count_reminders = 2;
 

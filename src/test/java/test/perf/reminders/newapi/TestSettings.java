@@ -1,20 +1,21 @@
-package com.perf.my;
+package test.perf.reminders.newapi;
+
+import java.io.IOException;
+import java.util.ArrayList;
 
 import org.apache.http.HttpStatus;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
-
-import java.io.IOException;
-import java.util.ArrayList;
+import test.perf.common.CommonAPI;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 /**
  * We are localhost (Charter Headend). Full chain of requests: localhost -> AMS -> STB -> AMS -> localhost
  */
-class testAMS_Settings extends API_common {
+class TestSettings extends CommonAPI {
 
-    private API_new AMS = new API_new();
+    private NewAPI AMS = new NewAPI();
 
     @Test
     @Disabled

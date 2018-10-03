@@ -1,4 +1,23 @@
-package com.perf.my;
+package test.perf.common;
+
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.nio.charset.StandardCharsets;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.Random;
+import java.util.TimeZone;
 
 import au.com.bytecode.opencsv.CSVReader;
 import org.apache.http.HttpResponse;
@@ -13,13 +32,6 @@ import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
-import java.io.*;
-import java.nio.charset.StandardCharsets;
-import java.sql.*;
-import java.text.SimpleDateFormat;
-import java.util.*;
-import java.util.Date;
-
 import static java.lang.System.currentTimeMillis;
 import static org.junit.Assert.assertNotNull;
 
@@ -27,51 +39,51 @@ import static org.junit.Assert.assertNotNull;
  * we are as Middle: send requests to AMS and got responses
  * Middle -> AMS -> box -> AMS -> Middle
  */
-public class API_common {
+public class CommonAPI {
 
-    Boolean show_info_level = true;
-    Boolean show_debug_level = false;
-    Boolean show_generated_json = false;
+    protected Boolean show_info_level = true;
+    protected Boolean show_debug_level = false;
+    protected Boolean show_generated_json = false;
     private Boolean show_response_body = false;
 
-    static final String INFO_LEVEL = "INF";
-    static final String DEBUG_LEVEL = "DBG";
+    protected static final String INFO_LEVEL = "INF";
+    protected static final String DEBUG_LEVEL = "DBG";
     private Date starttime;
 
-    enum Operation { add, modify, delete, purge, blablabla, www }
+    protected enum Operation { add, modify, delete, purge, blablabla, www }
 
-    enum Generation { random, increment }
+    protected enum Generation { random, increment }
 
-    enum Sorting { bubble, quick, selection, insertion, merge }
-    Sorting sorting = Sorting.insertion;
+    protected enum Sorting { bubble, quick, selection, insertion, merge }
+    protected Sorting sorting = Sorting.insertion;
 
     //static Logger log = Logger.getLogger(testAMS.class.getName());
     //FileHandler txtFile = new FileHandler ("log.log", true);
 
-    final String charterapi_a = "http://spec.partnerapi.engprod-charter.net/api/pub";
-    final String charterapi_b = "http://specb.partnerapi.engprod-charter.net/api/pub";
-    final String charterapi_c = "http://specc.partnerapi.engprod-charter.net/api/pub";
-    final String charterapi_d = "http://specd.partnerapi.engprod-charter.net/api/pub";
-    final String postfix_settings = "/networksettingsmiddle/ns/settings";
-    final String charterapi = charterapi_b;
+    protected final String charterapi_a = "http://spec.partnerapi.engprod-charter.net/common/pub";
+    protected final String charterapi_b = "http://specb.partnerapi.engprod-charter.net/common/pub";
+    protected final String charterapi_c = "http://specc.partnerapi.engprod-charter.net/common/pub";
+    protected final String charterapi_d = "http://specd.partnerapi.engprod-charter.net/common/pub";
+    protected final String postfix_settings = "/networksettingsmiddle/ns/settings";
+    protected final String charterapi = charterapi_b;
 
-    final String mac_wrong = "123456789012";
+    protected final String mac_wrong = "123456789012";
     final String boxD101 = "A0722CEEC970";//WB20 D101 ???
     final String boxD102 = "3438B7EB2E24";//WB20 D102
     final String boxMoto2145_173 =  "000004B9419F"; //"B077AC5D91DD"; // "000004B9419F"; //Moto_2145_Mondo_DCX3200M_17.3_346
     final String boxMoto2147_Rems = "000004D67F70"; //000004d67f70"; //Moto_2147_Mondo_DCX3200M_REMS
-    String mac = boxMoto2147_Rems;
+    protected String mac = boxMoto2147_Rems;
 
     //todo
-    ArrayList reminderScheduleId_list = new ArrayList(),
-            reminderId_list = new ArrayList();
+    protected ArrayList reminderScheduleId_list = new ArrayList();
+    public ArrayList reminderId_list = new ArrayList();
 
     //lists for saving all according request in ms in each iteration
-    ArrayList add_list = new ArrayList(),
-            modify_list = new ArrayList(),
-            delete_list = new ArrayList(),
-            purge_list = new ArrayList(),
-            actual_list = new ArrayList();
+    protected ArrayList add_list = new ArrayList();
+    protected ArrayList modify_list = new ArrayList();
+    protected ArrayList delete_list = new ArrayList();
+    protected ArrayList purge_list = new ArrayList();
+    protected ArrayList actual_list = new ArrayList();
 
     //2-dimensional array for saving min/max value and iteration where this value were last time updated
     private int[] a_max_array = {0, 0}, a_min_array = {0, 0},
@@ -82,35 +94,65 @@ public class API_common {
 
 
     //lists for saving all requests in ms (add/modify/delte/purge) for each iteration
-    ArrayList a_current = new ArrayList(),
-            m_current = new ArrayList(),
-            d_current = new ArrayList(),
-            p_current = new ArrayList(),
-            current = new ArrayList();
+    protected ArrayList a_current = new ArrayList();
+    protected ArrayList m_current = new ArrayList();
+    protected ArrayList d_current = new ArrayList();
+    protected ArrayList p_current = new ArrayList();
+    protected ArrayList current = new ArrayList();
     //save all measurements for according request: add/modify/delete/purge
-    int a_avg = 0, a_med = 0, a_min = 0, a_min_iteration = 0, a_max = 0, a_max_iteration = 0, a_total_i = 0,
-            m_avg = 0, m_med = 0, m_min = 0, m_min_iteration = 0, m_max = 0, m_max_iteration = 0, m_total_i = 0,
-            d_avg = 0, d_med = 0, d_min = 0, d_min_iteration = 0, d_max = 0, d_max_iteration = 0, d_total_i = 0,
-            p_avg = 0, p_med = 0, p_min = 0, p_min_iteration = 0, p_max = 0, p_max_iteration = 0, p_total_i = 0,
-            avg = 0, med = 0, min = 0, min_iteration = 0, max = 0, max_iteration = 0, total_i = 0;
+    protected int a_avg = 0;
+    protected int a_med = 0;
+    protected int a_min = 0;
+    protected int a_min_iteration = 0;
+    protected int a_max = 0;
+    protected int a_max_iteration = 0;
+    protected int a_total_i = 0;
+    protected int m_avg = 0;
+    protected int m_med = 0;
+    protected int m_min = 0;
+    protected int m_min_iteration = 0;
+    protected int m_max = 0;
+    protected int m_max_iteration = 0;
+    protected int m_total_i = 0;
+    protected int d_avg = 0;
+    protected int d_med = 0;
+    protected int d_min = 0;
+    protected int d_min_iteration = 0;
+    protected int d_max = 0;
+    protected int d_max_iteration = 0;
+    protected int d_total_i = 0;
+    protected int p_avg = 0;
+    protected int p_med = 0;
+    protected int p_min = 0;
+    protected int p_min_iteration = 0;
+    protected int p_max = 0;
+    protected int p_max_iteration = 0;
+    protected int p_total_i = 0;
+    protected int avg = 0;
+    protected int med = 0;
+    protected int min = 0;
+    protected int min_iteration = 0;
+    protected int max = 0;
+    protected int max_iteration = 0;
+    protected int total_i = 0;
 
-    boolean use_random = false;
+    protected boolean use_random = false;
     private int timeout = 20000;
 
     private String REMINDERSLOG = "reminders.log";
 
-    String reminderProgramStart = "";
+    protected String reminderProgramStart = "";
 
-    int reminderChannelNumber = reminderChannelNumber(1000);
+    protected int reminderChannelNumber = reminderChannelNumber(1000);
     //int reminderChannelNumber;
 
-    String reminderProgramId = "";
+    protected String reminderProgramId = "";
     //String reminderProgramId = "EP002960010113";
 
     //int reminderOffset = reminderOffset(15);
-    int reminderOffset = 0;
+    protected int reminderOffset = 0;
 
-    long reminderScheduleId;
+    protected long reminderScheduleId;
     {
         try {
             reminderScheduleId = reminderScheduleId(Generation.random);
@@ -119,7 +161,7 @@ public class API_common {
         }
     }
 
-    long reminderId;
+    protected long reminderId;
     {
         try {
             reminderId = reminderId(Generation.random);
@@ -139,10 +181,10 @@ public class API_common {
     private final String ams_ip_4 = "172.30.81.4";
     private final String ams_ip_19 = "172.30.112.19";
     private final String ams_ip_132 = "172.30.82.132";
-    String ams_ip = ams_ip_4;
-    int ams_port = 8080;
+    protected String ams_ip = ams_ip_4;
+    protected int ams_port = 8080;
 
-    int getAverage(ArrayList list) {
+    protected int getAverage(ArrayList list) {
         int sum = 0;
         if (list.size() > 0) {
             for (Object aList : list) {
@@ -152,7 +194,7 @@ public class API_common {
         return sum / list.size();
     }
 
-    void sortBubble(ArrayList list) throws IOException {
+    protected void sortBubble(ArrayList list) throws IOException {
         long start = System.currentTimeMillis();
         for (int k = 0; k < list.size() - 1; k++) {
             for (int i = 0; i < list.size() - 1; i++) {
@@ -168,7 +210,7 @@ public class API_common {
         logger(INFO_LEVEL, (int) (finish - start) + "ms for sortBubble");
     }
 
-    void sortQuick(ArrayList list) throws IOException {
+    protected void sortQuick(ArrayList list) throws IOException {
         long start = System.currentTimeMillis();
         sortQuickRecursive(list, 0, list.size()-1);
         long finish = System.currentTimeMillis();
@@ -211,7 +253,7 @@ public class API_common {
         logger(DEBUG_LEVEL, "sorted list: " + list);
     }
 
-    void sortSelection(ArrayList list) throws IOException {
+    public void sortSelection(ArrayList list) throws IOException {
         long start = System.currentTimeMillis();
         for (int i = 0; i < list.size()-1; i++) {
             int index = i;
@@ -232,7 +274,7 @@ public class API_common {
         logger(INFO_LEVEL, (int) (finish - start) + "ms for sortSelection");
     }
 
-    void sortInsertion(ArrayList list) throws IOException {
+    protected void sortInsertion(ArrayList list) throws IOException {
         long start = System.currentTimeMillis();
         int temp;
         for (int i=1; i<list.size(); i++) {
@@ -249,7 +291,7 @@ public class API_common {
         logger(INFO_LEVEL, (int) (finish-start) + "ms for sortInsertion");
     }
 
-    void sortMerge(int list[]) throws IOException {
+    protected void sortMerge(int list[]) throws IOException {
         int array[] = list;
         int length = list.length;
         int tempMergArr[] = new int[length];
@@ -320,7 +362,7 @@ public class API_common {
         return max;
     }
 
-    int searchMedian(ArrayList list, Enum<Sorting> sorting) throws IOException {
+    protected int searchMedian(ArrayList list, Enum<Sorting> sorting) throws IOException {
         int median;
         switch (sorting.name()) {
             case "bubble":
@@ -373,7 +415,7 @@ public class API_common {
      * @param i
      * @return
      */
-    int[] getMin(Enum<Operation> operation, int current, int i) {
+    protected int[] getMin(Enum<Operation> operation, int current, int i) {
         long start = System.currentTimeMillis();
         // SLOWly ???
         /*switch (operation.name()) {
@@ -405,7 +447,7 @@ public class API_common {
             case "purge":
                 min = Arrays.copyOf(p_min_array, p_min_array.length);
                 break;
-            case "www":
+            case "common":
                 min = Arrays.copyOf(min_array, min_array.length);
                 break;
         }
@@ -435,7 +477,7 @@ public class API_common {
             case "purge":
                 p_min_array = Arrays.copyOf(min, min.length);
                 break;
-            case "www":
+            case "common":
                 min_array = Arrays.copyOf(min, min.length);
                 break;
         }
@@ -445,7 +487,7 @@ public class API_common {
         return min;
     }
 
-    int[] getMax(Enum<Operation> operation, int current, int i) {
+    protected int[] getMax(Enum<Operation> operation, int current, int i) {
         long start = System.currentTimeMillis();
         int max[] = new int[2];
 
@@ -479,7 +521,7 @@ public class API_common {
             case "purge":
                 max = Arrays.copyOf(p_max_array, p_max_array.length);
                 break;
-            case "www":
+            case "common":
                 max = Arrays.copyOf(max_array, max_array.length);
                 break;
         }
@@ -508,7 +550,7 @@ public class API_common {
             case "purge":
                 p_max_array = Arrays.copyOf(max, max.length);
                 break;
-            case "www":
+            case "common":
                 max_array = Arrays.copyOf(max, max.length);
                 break;
         }
@@ -578,7 +620,7 @@ public class API_common {
     return "";
     }
 
-    String checkResponseBody(String body) throws IOException {
+    protected String checkResponseBody(String body) throws IOException {
         String result = "";
         if(body.contains("\"statusCode\":1")){
             //log.warning("one or more statusCode's = " + statuscode[1]);
@@ -693,7 +735,7 @@ public class API_common {
         return result;
     }
 
-    String checkResponseBody(String body, ArrayList expected_list){
+    protected String checkResponseBody(String body, ArrayList expected_list){
         StringBuilder result = new StringBuilder();
 
         for(int j = 1; j<expected_list.size(); j++){
@@ -705,7 +747,7 @@ public class API_common {
         return result.toString();
     }
 
-    final String readResponse(StringBuilder body, HttpResponse response) throws IOException {
+    protected final String readResponse(StringBuilder body, HttpResponse response) throws IOException {
         BufferedReader reader = new BufferedReader(new InputStreamReader(response.getEntity().getContent(), StandardCharsets.UTF_8));
         //StringBuilder body = new StringBuilder();
         for (String line; (line = reader.readLine()) != null; ) {
@@ -720,7 +762,7 @@ public class API_common {
         return body.toString();
     }
 
-    HttpGet prepareGetRequest(String uri) throws IOException {
+    protected HttpGet prepareGetRequest(String uri) throws IOException {
         HttpGet request = new HttpGet(uri);
         request.setHeader("Content-type", "application/json");
         request.setHeader("Cache-Control", "no-cache");
@@ -789,7 +831,7 @@ public class API_common {
         return arrayList;
     }*/
 
-    ArrayList QueryDB(String ams_ip, String mac) throws ClassNotFoundException, SQLException {
+    public ArrayList QueryDB(String ams_ip, String mac) throws ClassNotFoundException, SQLException {
         //ResultSet QueryDB(String mac) throws ClassNotFoundException, SQLException {
         System.out.println("QueryDB for mac=" + mac + " to DB on AMS=" + ams_ip);
 
@@ -829,7 +871,7 @@ public class API_common {
     /**
      * @return just return the day=tomorrow: yyyy-mm-dd
      */
-    String reminderProgramStart() {
+    protected String reminderProgramStart() {
         Calendar calendar = Calendar.getInstance();
         calendar.setTimeZone(TimeZone.getTimeZone("UTC"));
         SimpleDateFormat pattern = new SimpleDateFormat("yyyy-MM-dd");
@@ -837,11 +879,11 @@ public class API_common {
         return pattern.format(calendar.getTime());
     }
 
-    int reminderChannelNumber(int limit) {
+    protected int reminderChannelNumber(int limit) {
         return Math.abs(new Random().nextInt(limit));
     }
 
-    int reminderOffset(int limit) {
+    protected int reminderOffset(int limit) {
         return Math.abs(new Random().nextInt(limit));
     }
 
@@ -863,7 +905,7 @@ public class API_common {
         return true;
     }
 
-    long reminderScheduleId(Enum<Generation> generation) throws IOException {
+    protected long reminderScheduleId(Enum<Generation> generation) throws IOException {
         if(generation.name().equals("random")) {
             reminderScheduleId = Math.abs(new Random().nextLong());
             //long reminderScheduleId = Math.abs(random.nextInt(1000));
@@ -877,7 +919,7 @@ public class API_common {
         return reminderScheduleId;
     }
 
-    long reminderId(Enum<Generation> generation) throws IOException {
+    protected long reminderId(Enum<Generation> generation) throws IOException {
         if(generation.name().equals("random")) {
             reminderId = Math.abs(new Random().nextLong());
             //long reminderId = Math.abs(random.nextInt(1000));
@@ -890,7 +932,7 @@ public class API_common {
         return reminderId;
     }
 
-    String getDateSeveral(int count) {
+    protected String getDateSeveral(int count) {
         Calendar calendar = Calendar.getInstance();
         calendar.setTimeZone(TimeZone.getTimeZone("UTC"));
         SimpleDateFormat pattern = new SimpleDateFormat("yyyy-MM-dd");
@@ -974,7 +1016,7 @@ public class API_common {
         return result.toString();
     }
 
-    String getDate(int i) {
+    protected String getDate(int i) {
         Calendar calendar = Calendar.getInstance();
         calendar.setTimeZone(TimeZone.getTimeZone("UTC"));
         SimpleDateFormat pattern = new SimpleDateFormat("yyyy-MM-dd");
@@ -992,7 +1034,7 @@ public class API_common {
      *          например, сейчас "2018-05-18 21:01", тогда вызов getDateTime(10) вернет "2018-05-19 21:11"
      * @return - возвращаемый формат - "yyyy-mm-dd hh:mm"
      */
-    String getDateTime(int i){
+    protected String getDateTime(int i){
         //int count_rems_in_day = 1440;
         //int count_full_days = count_reminders / count_rems_in_day;
         //int ostatok = count_reminders - (count_full_days * count_rems_in_day);
@@ -1012,25 +1054,25 @@ public class API_common {
         return result.toString();
     }
 
-    String prepareUrl(String server, Enum<Operation> operation, boolean newapi) {
+    protected String prepareUrl(String server, Operation operation, boolean newapi) {
         String result = null;
-        if(!operation.name().equals("www")) {
+        if(operation.name().equals("www")) {
+            result = server;
+        } else if (operation.name().equals("www")) {
             if (newapi) {
                 result = server + ":" + ams_port + "/ams/Reminders2?req=" + operation;
             } else {
                 result = server + ":" + ams_port + "/ams/Reminders?req=ChangeReminders";
             }
-        } else if(operation.name().equals("www")){
-            result = server;
         }
         return result;
     }
 
-    void printTotalMeasurements(String mac, String boxname, int count_reminders, int count_iterations,
-                           int a_avg, int a_med, int a_min, int a_min_iteration, int a_max, int a_max_iteration, int a_iteration, ArrayList a_current,
-                           int m_avg, int m_med, int m_min, int m_min_iteration, int m_max, int m_max_iteration, int m_iteration, ArrayList m_current,
-                           int d_avg, int d_med, int d_min, int d_min_iteration, int d_max, int d_max_iteration, int d_iteration, ArrayList d_current,
-                           int p_avg, int p_med, int p_min, int p_min_iteration, int p_max, int p_max_iteration, int p_iteration, ArrayList p_current
+    protected void printTotalMeasurements(String mac, String boxname, int count_reminders, int count_iterations,
+                                          int a_avg, int a_med, int a_min, int a_min_iteration, int a_max, int a_max_iteration, int a_iteration, ArrayList a_current,
+                                          int m_avg, int m_med, int m_min, int m_min_iteration, int m_max, int m_max_iteration, int m_iteration, ArrayList m_current,
+                                          int d_avg, int d_med, int d_min, int d_min_iteration, int d_max, int d_max_iteration, int d_iteration, ArrayList d_current,
+                                          int p_avg, int p_med, int p_min, int p_min_iteration, int p_max, int p_max_iteration, int p_iteration, ArrayList p_current
     ) throws IOException {
 
         String header = "========= ========= Total measurements ========= ========="
@@ -1073,8 +1115,8 @@ public class API_common {
         //}
     }
 
-    void printTotalMeasurements(String server, int count_iterations,
-                           int avg, int med, int min, int min_iteration, int max, int max_iteration, int iteration, ArrayList current) throws IOException {
+    protected void printTotalMeasurements(String server, int count_iterations,
+                                          int avg, int med, int min, int min_iteration, int max, int max_iteration, int iteration, ArrayList current) throws IOException {
 
         String header = "========= ========= ========= Total measurements ========= ========= ========="
                 + "\n" + starttime + " - test was started"
@@ -1098,7 +1140,7 @@ public class API_common {
         //}
     }
 
-    void printPreliminaryMeasurements(ArrayList list) throws IOException {
+    protected void printPreliminaryMeasurements(ArrayList list) throws IOException {
         if(list.get(0).equals(HttpStatus.SC_OK)){
             logger(INFO_LEVEL, "[INF] return data: [" + list.get(0) + ", " + list.get(1) + "]"
                 + " measurements: cur=" + list.get(2)
@@ -1112,7 +1154,7 @@ public class API_common {
         }
 
     }
-    void logger(String level, String s) throws IOException {
+    protected void logger(String level, String s) throws IOException {
         boolean append = true;
         if(level.equals("INF") && show_info_level) {
             System.out.println(s);
@@ -1135,7 +1177,7 @@ public class API_common {
         logger(INFO_LEVEL, "[INF] " + starttime + ": New start for url=" + url);
     }
 
-    void printIterationHeader(String ams_ip, String mac, int count_reminders, int i, int count_iterations, int reminderChannelNumber) throws IOException {
+    protected void printIterationHeader(String ams_ip, String mac, int count_reminders, int i, int count_iterations, int reminderChannelNumber) throws IOException {
         String header = "========= ========= Iteration = " + i
                 + "/" + count_iterations
                 + ", mac=" + mac
@@ -1146,7 +1188,7 @@ public class API_common {
         logger(INFO_LEVEL, header);
     }
 
-    void printIterationHeader(String url, int i, int count_iterations) throws IOException {
+    protected void printIterationHeader(String url, int i, int count_iterations) throws IOException {
         String header = "========= ========= Iteration = " + i
                 + "/" + count_iterations
                 + ", server=" + url
@@ -1163,7 +1205,7 @@ public class API_common {
         //assertNotEquals(0, reminderChannelNumber);
     }
 
-    void read_csv() throws IOException {
+    protected void read_csv() throws IOException {
         //Build reader instance
         //Read data.csv
         //Default seperator is comma
@@ -1180,7 +1222,7 @@ public class API_common {
         }
     }
 
-    void before(String ams_ip, String mac, String boxname, int sleep_after_iteration, int count_reminders, int count_iterations, int reminderChannelNumber) throws IOException {
+    protected void before(String ams_ip, String mac, String boxname, int sleep_after_iteration, int count_reminders, int count_iterations, int reminderChannelNumber) throws IOException {
         check_csv(ams_ip, mac, boxname, sleep_after_iteration, count_reminders, count_iterations, reminderChannelNumber);
 
         printStartHeader(ams_ip, mac, boxname, count_reminders, reminderChannelNumber);
@@ -1300,7 +1342,7 @@ public class API_common {
         }
     }
 
-    String generate_json(int count_pairs) {
+    protected String generate_json(int count_pairs) {
         JSONObject json = new JSONObject();
         JSONArray array_measurements = new JSONArray();
         json.put("measurements", array_measurements);

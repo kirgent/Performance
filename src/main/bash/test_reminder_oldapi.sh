@@ -30,10 +30,10 @@ RACK_DATE=( `date +%Y-%m-%d -d "tomorrow"` )
 RACK_CHANNELS=( 2 )
 #RACK_CHANNELS=( 2 3 4 5 6 7 8 9 12 13 14 16 18 19 22 23 25 28 30 31 32 33 37 38 41 44 46 49 50 51 )
 
-charterapi_a="http://spec.partnerapi.engprod-charter.net/api/pub"
-charterapi_b="http://specb.partnerapi.engprod-charter.net/api/pub"
-charterapi_c="http://specc.partnerapi.engprod-charter.net/api/pub"
-charterapi_d="http://specd.partnerapi.engprod-charter.net/api/pub"
+charterapi_a="http://spec.partnerapi.engprod-charter.net/common/pub"
+charterapi_b="http://specb.partnerapi.engprod-charter.net/common/pub"
+charterapi_c="http://specc.partnerapi.engprod-charter.net/common/pub"
+charterapi_d="http://specd.partnerapi.engprod-charter.net/common/pub"
 #charterapi_d="http://specd.partnerapi.engprod-charter.net/api/pub"
 postfix_settings="networksettingsmiddle/ns/settings"
 charterapi="$charterapi_b"

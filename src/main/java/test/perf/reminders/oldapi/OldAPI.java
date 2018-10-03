@@ -1,5 +1,10 @@
-package com.perf.my;
+package test.perf.reminders.oldapi;
 
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Date;
+
+import test.perf.common.CommonAPI;
 import org.apache.http.HttpResponse;
 import org.apache.http.HttpStatus;
 import org.apache.http.client.methods.HttpPost;
@@ -8,11 +13,7 @@ import org.apache.http.impl.client.HttpClients;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Date;
-
-class API_old extends API_common {
+class OldAPI extends CommonAPI {
 
     /** Add / Delete method
      * @param server
@@ -26,7 +27,7 @@ class API_old extends API_common {
      * @return
      * @throws IOException
      */
-    ArrayList requestPerformance(String server, String mac, Enum<Operation> operation, int i, int count_reminders, long reminderChannelNumber, String reminderProgramStart, String reminderProgramId, long reminderOffset) throws IOException {
+    ArrayList requestPerformance(String server, String mac, Operation operation, int i, int count_reminders, long reminderChannelNumber, String reminderProgramStart, String reminderProgramId, long reminderOffset) throws IOException {
         logger(INFO_LEVEL, "[INF] " + new Date() + ": " + operation.toString().toUpperCase() + ":");
 
         HttpPost request = new HttpPost(prepareUrl(server, operation,false));
@@ -86,7 +87,7 @@ class API_old extends API_common {
      * @return
      * @throws IOException
      */
-    ArrayList requestPerformance(String server, String mac, Enum<Operation> operation, int i) throws IOException {
+    ArrayList requestPerformance(String server, String mac, Operation operation, int i) throws IOException {
         logger(INFO_LEVEL, "[INF] " + new Date() + ": " + operation.toString().toUpperCase() + ":");
 
         HttpPost request = new HttpPost(prepareUrl(server, operation, false));

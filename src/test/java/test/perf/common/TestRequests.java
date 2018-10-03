@@ -1,19 +1,22 @@
-package com.perf.my;
-
-import org.apache.http.HttpStatus;
-import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.CsvFileSource;
+package test.perf.common;
 
 import java.io.IOException;
 import java.util.ArrayList;
 
+import org.apache.http.HttpStatus;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvFileSource;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
-class testPerformance extends API_common{
+class TestRequests extends CommonAPI {
 
     private Performance performance = new Performance();
     private ArrayList expected_list = new ArrayList();
+    private int count_internal_iterations = 10;
+    private long sleep_after_iteration = 1000;
     //private int sleep_after_iteration = 0;
 
 
@@ -59,9 +62,10 @@ class testPerformance extends API_common{
         //assertNotEquals(0, avg, "a_avg");
     }
 
-    @ParameterizedTest
-    @CsvFileSource(resources = "/performance.csv", numLinesToSkip = 1)
-    void test1_google_com(int count_internal_iterations, int sleep_after_iteration) throws IOException, InterruptedException {
+    //@ParameterizedTest
+    //@CsvFileSource(resources = "/performance.csv", numLinesToSkip = 1)
+    @Test
+    void test1_google_com() throws IOException, InterruptedException {
         String url = "google.com";
         expected_list.add(0, HttpStatus.SC_OK);
         expected_list.add(1, "<title>Google</title>");

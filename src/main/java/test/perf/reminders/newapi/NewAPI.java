@@ -1,4 +1,9 @@
-package com.perf.my;
+package test.perf.reminders.newapi;
+
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.Objects;
 
 import org.apache.http.HttpResponse;
 import org.apache.http.HttpStatus;
@@ -7,15 +12,11 @@ import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.HttpClients;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
-
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.Objects;
+import test.perf.common.CommonAPI;
 
 import static java.lang.System.currentTimeMillis;
 
-class API_new extends API_common {
+public class NewAPI extends CommonAPI {
 
     /** Purge method
      * @param mac - TBD
@@ -23,7 +24,7 @@ class API_new extends API_common {
      * @return list
      * @throws IOException - TBD
      */
-    ArrayList request(String server, String mac, Enum<Operation> operation) throws IOException {
+    ArrayList request(String server, String mac, Operation operation) throws IOException {
         logger(INFO_LEVEL, "[INF] " + new Date() + ": " + operation.toString().toUpperCase() + ":");
 
         HttpPost request = new HttpPost(prepareUrl(server, operation, true));
@@ -53,7 +54,7 @@ class API_new extends API_common {
      * @return list
      * @throws IOException -TBD
      */
-    ArrayList request(String server, String mac, Enum<Operation> operation, int count_reminders, long reminderScheduleId, long reminderId) throws IOException {
+    ArrayList request(String server, String mac, Operation operation, int count_reminders, long reminderScheduleId, long reminderId) throws IOException {
         logger(INFO_LEVEL, "[INF] " + new Date() + ": " + operation.toString().toUpperCase() + ":");
 
         HttpPost request = new HttpPost(prepareUrl(server, operation, true));
@@ -89,7 +90,7 @@ class API_new extends API_common {
      * @return list
      * @throws IOException -TBD
      */
-    ArrayList request(String server, String mac, Enum<Operation> operation, int count_reminders, String reminderProgramStart, long reminderChannelNumber, String reminderProgramId, long reminderOffset, long reminderScheduleId, long reminderId) throws IOException {
+    ArrayList request(String server, String mac, Operation operation, int count_reminders, String reminderProgramStart, long reminderChannelNumber, String reminderProgramId, long reminderOffset, long reminderScheduleId, long reminderId) throws IOException {
         logger(INFO_LEVEL, "[INF] " + new Date() + ": " + operation.toString().toUpperCase() + ":");
 
         HttpPost request = new HttpPost(prepareUrl(server, operation, true));
@@ -330,7 +331,7 @@ class API_new extends API_common {
         return json.toString();
     }
 
-    ArrayList changeSettings(String mac, String option, String value) throws IOException {
+    public ArrayList changeSettings(String mac, String option, String value) throws IOException {
         logger(INFO_LEVEL, "Change settings for macaddress=" + mac + ", server=" + ams_ip + " option=" + option + ", value=" + value);
         HttpPost request = new HttpPost("http://" + ams_ip + ":" + ams_port + "/ams/settings");
         request.setHeader("Content-type", "application/json");
@@ -361,7 +362,7 @@ class API_new extends API_common {
      * @return list
      * @throws IOException - TBD
      */
-    ArrayList requestPerformance(String ams_ip, String mac, Enum<Operation> operation, int i) throws IOException {
+    ArrayList requestPerformance(String ams_ip, String mac, Operation operation, int i) throws IOException {
         logger(INFO_LEVEL, "[INF] " + new Date() + ": " + operation.toString().toUpperCase() + ":");
 
         HttpPost request = new HttpPost(prepareUrl(ams_ip, operation, true));
@@ -405,7 +406,7 @@ class API_new extends API_common {
      * @return list
      * @throws IOException -TBD
      */
-    ArrayList requestPerformance(String ams_ip, String mac, Enum<Operation> operation, int i, int count_reminders, long reminderScheduleId, long reminderId) throws IOException {
+    ArrayList requestPerformance(String ams_ip, String mac, Operation operation, int i, int count_reminders, long reminderScheduleId, long reminderId) throws IOException {
         logger(INFO_LEVEL, "[INF] " + new Date() + ": " + operation.toString().toUpperCase() + ":");
 
         HttpPost request = new HttpPost(prepareUrl(ams_ip, operation, true));
@@ -455,7 +456,7 @@ class API_new extends API_common {
      * @return list
      * @throws IOException -TBD
      */
-    ArrayList requestPerformance(String ams_ip, String mac, Enum<Operation> operation, int i, int count_reminders, String reminderProgramStart, long reminderChannelNumber, String reminderProgramId, long reminderOffset, long reminderScheduleId, long reminderId) throws IOException {
+    ArrayList requestPerformance(String ams_ip, String mac, Operation operation, int i, int count_reminders, String reminderProgramStart, long reminderChannelNumber, String reminderProgramId, long reminderOffset, long reminderScheduleId, long reminderId) throws IOException {
         logger(INFO_LEVEL, "[INF] " + new Date() + ": " + operation.toString().toUpperCase() + ":");
 
         HttpPost request = new HttpPost(prepareUrl(ams_ip, operation, true));

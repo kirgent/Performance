@@ -1,17 +1,18 @@
-package com.perf.my;
-
-import org.apache.http.HttpStatus;
-import org.junit.jupiter.api.Test;
+package test.perf.reminders.newapi;
 
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+import org.apache.http.HttpStatus;
+import org.junit.jupiter.api.Test;
+import test.perf.common.CommonAPI;
+
 import static org.junit.jupiter.api.Assertions.*;
 
-class testSandbox extends API_common {
+class TestSandbox extends CommonAPI {
 
-    private API_new AMS = new API_new();
+    private NewAPI AMS = new NewAPI();
 
     @Test
     void testSortBubble() throws IOException {

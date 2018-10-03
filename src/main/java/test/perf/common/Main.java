@@ -1,4 +1,4 @@
-package com.perf.my;
+package test.perf.common;
 
 import java.io.IOException;
 import java.text.ParseException;
@@ -152,7 +152,7 @@ public class Main {
 
         System.out.println("[DBG] used mac=" + macaddress + ", operation=" + operation + ", param=" + param);
 
-        API_middle Middle = new API_middle();
+        MiddleAPI Middle = new MiddleAPI();
 
         switch (operation){
             case "Check":
@@ -165,20 +165,20 @@ public class Main {
                 break;
             case "Purge":
             case "purge":
-                //api.Operation(ams_ip_by_default, mac[0], "Purge", false);
+                //common.Operation(ams_ip_by_default, mac[0], "Purge", false);
                 break;
             case "Purge2":
             case "purge2":
-                //api.Operation(ams_ip_by_default, mac[0], "Purge", false);
+                //common.Operation(ams_ip_by_default, mac[0], "Purge", false);
                 break;
             //case "Add":
-            //case "add": api.Operation("Add", mac, count, count_iterations, ams_ip_default); break;
+            //case "add": common.Operation("Add", mac, count, count_iterations, ams_ip_default); break;
             case "Modify":
             case "modify":
-                //api.Operation(ams_ip_by_default, mac[0], "Modify", true, count_by_default, reminderProgramStart, reminderChannelNumber, reminderProgramId, reminderOffset, reminderScheduleId, reminderId);
+                //common.Operation(ams_ip_by_default, mac[0], "Modify", true, count_by_default, reminderProgramStart, reminderChannelNumber, reminderProgramId, reminderOffset, reminderScheduleId, reminderId);
                 break;
             //case "Delete":
-            //case "delete": api.Operation("Delete", mac, count, count_iterations, ams_ip_default); break;
+            //case "delete": common.Operation("Delete", mac, count, count_iterations, ams_ip_default); break;
 
             default:
                 Middle.checkRegistration(charterapi, macaddress);

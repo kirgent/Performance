@@ -1,19 +1,19 @@
-package com.perf.my;
-
-import org.apache.http.HttpStatus;
-import org.junit.jupiter.api.Test;
+package test.perf.reminders.newapi;
 
 import java.io.IOException;
 import java.util.ArrayList;
+
+import org.apache.http.HttpStatus;
+import org.junit.jupiter.api.Test;
 
 import static org.junit.Assert.assertEquals;
 
 /**
  * We are localhost (Charter Headend). Full chain of requests: localhost -> AMS -> STB -> AMS -> localhost
  */
-class testAMS_newAPI_Reminder_Purge extends API_common {
+class TestReminderPurge extends NewAPI {
 
-    private API_new AMS = new API_new();
+    private NewAPI AMS = new NewAPI();
 
     @Test
     void testPurge() throws IOException {
