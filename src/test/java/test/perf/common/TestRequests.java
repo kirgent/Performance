@@ -19,7 +19,6 @@ class TestRequests extends CommonAPI {
         String url = "http://localhost:8080/unidata-frontend";
         //String url = "http://localhost:8080/unidata-frontend/#main?section=home";
         expectedList.add(0, HttpStatus.SC_OK);
-        //expectedList.ADD(1, "<title>Google</title>");
 
         printStartHeader(url);
         for (int i = 1; i <= countIterations; i++) {
@@ -28,7 +27,7 @@ class TestRequests extends CommonAPI {
             actualList = get(url, expectedList, i);
             printPreliminaryMeasurements(actualList);
 
-            for(int j = 0; j< expectedList.size(); j++){
+            for (int j = 0; j < expectedList.size(); j++) {
                 assertEquals(expectedList.get(j), actualList.get(j));
             }
 
@@ -51,12 +50,11 @@ class TestRequests extends CommonAPI {
     }
 
     @ParameterizedTest
-    @CsvFileSource(resources = "/remindersPerformance.csv", numLinesToSkip = 1)
+    @CsvFileSource(resources = "/performance.csv", numLinesToSkip = 1)
     void test1_google_com(int count_iterations, int sleep_after_iteration) throws IOException, InterruptedException {
-        String url = "google.com";
+        String url = "http://google.com";
         expectedList.add(0, HttpStatus.SC_OK);
         expectedList.add(1, "<title>Google</title>");
-        //int count_iterations = 5;
 
         printStartHeader(url);
         for (int i = 1; i <= count_iterations; i++) {
@@ -65,9 +63,9 @@ class TestRequests extends CommonAPI {
             actualList = get(url, expectedList, i);
             printPreliminaryMeasurements(actualList);
 
-            //for(int j = 0; j<expectedList.size(); j++){
-                //assertEquals(expectedList.get(j), actualList.get(j));
-            //}
+            for (int j = 0; j < expectedList.size(); j++) {
+                assertEquals(expectedList.get(j), actualList.get(j));
+            }
 
             current.add(actualList.get(2));
             avg = (int) actualList.get(3);
@@ -88,12 +86,11 @@ class TestRequests extends CommonAPI {
     }
 
     @ParameterizedTest
-    @CsvFileSource(resources = "/remindersPerformance.csv", numLinesToSkip = 1)
+    @CsvFileSource(resources = "/performance.csv", numLinesToSkip = 1)
     void test2_yandex_ru(int count_iterations, int sleep_after_iteration) throws IOException, InterruptedException {
-        String url = "yandex.ru";
+        String url = "http://yandex.ru";
         expectedList.add(0, HttpStatus.SC_OK);
         expectedList.add(1, "<title>Яндекс</title>");
-        //int count_iterations = 5;
 
         printStartHeader(url);
         for (int i = 1; i <= count_iterations; i++) {
@@ -102,7 +99,7 @@ class TestRequests extends CommonAPI {
             actualList = get(url, expectedList, i);
             printPreliminaryMeasurements(actualList);
 
-            for(int j = 0; j< expectedList.size(); j++){
+            for (int j = 0; j < expectedList.size(); j++) {
                 assertEquals(expectedList.get(j), actualList.get(j));
             }
 

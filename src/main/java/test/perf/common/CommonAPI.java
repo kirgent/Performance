@@ -1038,10 +1038,10 @@ public class CommonAPI {
     }
 
     protected String prepareUrl(String server, Operation operation, boolean newapi) {
-        String result = null;
-        if (operation.name().equals("WWW")) {
+        String result;
+        if (operation.equals(Operation.WWW)) {
             result = server;
-        } else if (operation.name().equals("WWW")) {
+        } else {
             if (newapi) {
                 result = server + ":" + amsPort + "/ams/Reminders2?req=" + operation;
             } else {
@@ -1430,7 +1430,6 @@ public class CommonAPI {
     }
 
     protected enum Operation {ADD, MODIFY, DELETE, PURGE, BLABLABLA, WWW}
-
 
     protected enum Generation {RANDOM, INCREMENT}
 

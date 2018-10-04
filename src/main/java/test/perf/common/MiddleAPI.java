@@ -11,9 +11,9 @@ import org.apache.http.impl.client.HttpClients;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
-public class MiddleAPI extends CommonAPI {
+class MiddleAPI extends CommonAPI {
 
-    public ArrayList changeRegistration(String charterapi, String mac, String ams_ip) throws IOException {
+    ArrayList changeRegistration(String charterapi, String mac, String ams_ip) throws IOException {
         System.out.println("[DBG] changeRegistration " + mac + " to ams " + ams_ip + " via charterapi: " + charterapi);
         HttpPost request = new HttpPost(charterapi + postfixSettings + "?requestor=AMS");
         request.setEntity(new StringEntity(generateJsonChangeRegistration(mac, ams_ip)));
@@ -35,7 +35,7 @@ public class MiddleAPI extends CommonAPI {
         return arrayList;
     }
 
-    public ArrayList checkRegistration(String charterapi, String mac) throws IOException {
+    ArrayList checkRegistration(String charterapi, String mac) throws IOException {
         System.out.println("[DBG] checkRegistration " + mac + " via charterapi: " + charterapi);
         HttpGet request = new HttpGet(charterapi + postfixSettings + "/amsIp/" + mac);
         //request.setHeader("Accept", "*/*");
