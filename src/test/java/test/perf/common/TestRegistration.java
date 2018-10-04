@@ -1,11 +1,10 @@
-package test.perf.reminders.middle;
+package test.perf.common;
 
 import java.util.ArrayList;
 
 import org.apache.http.HttpStatus;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvFileSource;
-import test.perf.common.MiddleAPI;
 
 import static java.time.Duration.ofMillis;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -20,7 +19,7 @@ class TestRegistration extends MiddleAPI {
     private int timeout = 20000;
 
     @ParameterizedTest
-    @CsvFileSource(resources = "/reminders_macaddress_registration.csv", numLinesToSkip = 1)
+    @CsvFileSource(resources = "/remindersRegistration.csv", numLinesToSkip = 1)
     void testChangeRegistration(String ams_ip, String mac, String charterapi) {
         final ArrayList[] actual = new ArrayList[1];
         assertTimeoutPreemptively(ofMillis(timeout), () -> {
@@ -32,7 +31,7 @@ class TestRegistration extends MiddleAPI {
 
 
     @ParameterizedTest
-    @CsvFileSource(resources = "/reminders_macaddress_registration.csv", numLinesToSkip = 1)
+    @CsvFileSource(resources = "/remindersRegistration.csv", numLinesToSkip = 1)
     void testCheckRegistration(String ams_ip, String charterapi, String macaddress) {
         final ArrayList[] actual = new ArrayList[1];
         assertTimeoutPreemptively(ofMillis(timeout), () -> {
@@ -43,7 +42,7 @@ class TestRegistration extends MiddleAPI {
     }
 
     @ParameterizedTest
-    @CsvFileSource(resources = "/reminders_macaddress_registration.csv", numLinesToSkip = 1)
+    @CsvFileSource(resources = "/remindersRegistration.csv", numLinesToSkip = 1)
     void testCheckRegistrationNoAmsIpFoundForMAC(String charterapi) {
         final ArrayList[] actual = new ArrayList[1];
         assertTimeoutPreemptively(ofMillis(timeout), () -> {

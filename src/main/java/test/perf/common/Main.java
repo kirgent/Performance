@@ -8,11 +8,11 @@ public class Main {
     private static String macaddress;
     private static String charterapi;
     private static String operation;
-    private static String ams_ip;
+    private static String amsIp;
     private static String param;
 
-    private static String mac_by_default = "172.30.81.4";
-    private static String operation_by_default = "Check";
+    private static String macByDefault = "172.30.81.4";
+    private static String operationByDefault = "Check";
     private static int count;
 
     String synopsys="\nNAME" +
@@ -27,12 +27,12 @@ public class Main {
             "\n\tReminders - print this help" +
             "\n\tReminders mac                - send curl for checking registration" +
             "\n\tReminders mac check          - send curl for checking registration" +
-            "\n\tReminders mac change ams_ip  - send curl for changing registration to ams_ip" +
-            "\n\tReminders mac purge          - clear all reminders" +
-            "\n\tReminders mac add [count]    - add reminders (accordingly 48/288/720)" +
-            "\n\tReminders mac modify [count] - modify reminders" +
-            "\n\tReminders mac delete [count] - delete reminders" +
-            "\n\tReminders mac all [count]    - add + modify + delete reminders" +
+            "\n\tReminders mac change amsIp  - send curl for changing registration to amsIp" +
+            "\n\tReminders mac PURGE          - clear all reminders" +
+            "\n\tReminders mac ADD [count]    - ADD reminders (accordingly 48/288/720)" +
+            "\n\tReminders mac MODIFY [count] - MODIFY reminders" +
+            "\n\tReminders mac DELETE [count] - DELETE reminders" +
+            "\n\tReminders mac all [count]    - ADD + MODIFY + DELETE reminders" +
             "\nCURRENT SETTINGS" +
             "\n\tused AMS: " +
             "\n\tused charterapi: " +
@@ -96,7 +96,7 @@ public class Main {
             macaddress = args[0];
         }
         else {
-            macaddress = mac_by_default;
+            macaddress = macByDefault;
         }
 
 
@@ -104,20 +104,20 @@ public class Main {
             operation = args[1];
         }
         else {
-            operation = operation_by_default;
+            operation = operationByDefault;
         }
 
 
         if (args.length >= 3) {
             param = args[2];
             if (operation.equalsIgnoreCase("Change")) {
-                ams_ip = param;
+                amsIp = param;
             }
         }
 
         if (operation.equalsIgnoreCase("all")
-                || operation.equalsIgnoreCase("add")
-                || operation.equalsIgnoreCase("delete")) {
+                || operation.equalsIgnoreCase("ADD")
+                || operation.equalsIgnoreCase("DELETE")) {
             switch (param) {
                 case "48":
                     count = 48;
@@ -161,10 +161,10 @@ public class Main {
                 break;
             case "Change":
             case "change":
-                Middle.changeRegistration(macaddress, charterapi, ams_ip);
+                Middle.changeRegistration(macaddress, charterapi, amsIp);
                 break;
             case "Purge":
-            case "purge":
+            case "PURGE":
                 //common.Operation(ams_ip_by_default, mac[0], "Purge", false);
                 break;
             case "Purge2":
@@ -172,13 +172,13 @@ public class Main {
                 //common.Operation(ams_ip_by_default, mac[0], "Purge", false);
                 break;
             //case "Add":
-            //case "add": common.Operation("Add", mac, count, count_iterations, ams_ip_default); break;
+            //case "ADD": common.Operation("Add", mac, count, count_iterations, ams_ip_default); break;
             case "Modify":
-            case "modify":
+            case "MODIFY":
                 //common.Operation(ams_ip_by_default, mac[0], "Modify", true, count_by_default, reminderProgramStart, reminderChannelNumber, reminderProgramId, reminderOffset, reminderScheduleId, reminderId);
                 break;
             //case "Delete":
-            //case "delete": common.Operation("Delete", mac, count, count_iterations, ams_ip_default); break;
+            //case "DELETE": common.Operation("Delete", mac, count, count_iterations, ams_ip_default); break;
 
             default:
                 Middle.checkRegistration(charterapi, macaddress);

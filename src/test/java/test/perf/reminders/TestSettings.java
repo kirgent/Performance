@@ -1,4 +1,4 @@
-package test.perf.reminders.newapi;
+package test.perf.reminders;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -68,7 +68,7 @@ class TestSettings extends CommonAPI {
 
     @Test
     void testSettings_Audio_Output_to_value_wrong() throws IOException {
-        ArrayList actual = AMS.changeSettings(mac, "Audio Output", "blablabla");
+        ArrayList actual = AMS.changeSettings(mac, "Audio Output", "BLABLABLA");
         assertEquals(HttpStatus.SC_OK, actual.get(0));
         assertEquals("incorrect value", actual.get(1));
     }

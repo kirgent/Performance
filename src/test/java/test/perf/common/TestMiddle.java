@@ -1,11 +1,10 @@
-package test.perf.reminders.middle;
+package test.perf.common;
 
 import java.io.IOException;
 import java.util.ArrayList;
 
 import org.apache.http.HttpStatus;
 import org.junit.jupiter.api.Test;
-import test.perf.common.MiddleAPI;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -18,38 +17,38 @@ class TestMiddle extends MiddleAPI {
 
     @Test
     void testGetStbReminder() throws IOException {
-        ArrayList actual = Middle.getStbReminder(charterapi_a, mac);
+        ArrayList actual = Middle.getStbReminder(charterapiA, mac);
         assertEquals(HttpStatus.SC_OK, actual.get(0));
         assertEquals("", actual.get(1));
 
-        actual = Middle.getStbReminder(charterapi_b, mac);
+        actual = Middle.getStbReminder(charterapiB, mac);
         assertEquals(HttpStatus.SC_OK, actual.get(0));
         assertEquals("", actual.get(1));
 
-        actual = Middle.getStbReminder(charterapi_c, mac);
+        actual = Middle.getStbReminder(charterapiC, mac);
         assertEquals(HttpStatus.SC_OK, actual.get(0));
         assertEquals("", actual.get(1));
 
-        actual = Middle.getStbReminder(charterapi_d, mac);
+        actual = Middle.getStbReminder(charterapiD, mac);
         assertEquals(HttpStatus.SC_OK, actual.get(0));
         assertEquals("", actual.get(1));
     }
 
     @Test
     void testGetAllReminder() throws IOException {
-        ArrayList actual = Middle.getAllReminder(charterapi_a, mac, 0);
+        ArrayList actual = Middle.getAllReminder(charterapiA, mac, 0);
         assertEquals(HttpStatus.SC_OK, actual.get(0));
         assertEquals("", actual.get(1));
 
-        actual = Middle.getAllReminder(charterapi_b, mac, 0);
+        actual = Middle.getAllReminder(charterapiB, mac, 0);
         assertEquals(HttpStatus.SC_OK, actual.get(0));
         assertEquals("", actual.get(1));
 
-        actual = Middle.getAllReminder(charterapi_c, mac, 0);
+        actual = Middle.getAllReminder(charterapiC, mac, 0);
         assertEquals(HttpStatus.SC_OK, actual.get(0));
         assertEquals("", actual.get(1));
 
-        actual = Middle.getAllReminder(charterapi_d, mac, 0);
+        actual = Middle.getAllReminder(charterapiD, mac, 0);
         assertEquals(HttpStatus.SC_OK, actual.get(0));
         assertEquals("", actual.get(1));
     }
@@ -77,41 +76,41 @@ class TestMiddle extends MiddleAPI {
     //Successful Http Response code: 201 Created (with no LOCATION Header)
     //Failure response code: Not equal to 201 (for example: 500, 401)
     @Test
-    void testDelete_multiple_reminders() throws IOException {
+    void testDeleteMultipleReminders() throws IOException {
         ArrayList actual;
-        actual = Middle.deleteMultipleReminders(charterapi_a, mac,1, 1);
+        actual = Middle.deleteMultipleReminders(charterapiA, mac,1, 1);
         assertEquals(HttpStatus.SC_CREATED, actual.get(0));
         assertEquals("", actual.get(1));
 
-        actual = Middle.deleteMultipleReminders(charterapi_b, mac,1, 1);
+        actual = Middle.deleteMultipleReminders(charterapiB, mac,1, 1);
         assertEquals(HttpStatus.SC_CREATED, actual.get(0));
         assertEquals("", actual.get(1));
 
-        actual = Middle.deleteMultipleReminders(charterapi_c, mac,1, 1);
+        actual = Middle.deleteMultipleReminders(charterapiC, mac,1, 1);
         assertEquals(HttpStatus.SC_CREATED, actual.get(0));
         assertEquals("", actual.get(1));
 
-        actual = Middle.deleteMultipleReminders(charterapi_d, mac,1, 1);
+        actual = Middle.deleteMultipleReminders(charterapiD, mac,1, 1);
         assertEquals(HttpStatus.SC_CREATED, actual.get(0));
         assertEquals("", actual.get(1));
     }
 
     @Test
-    void testDelete_multiple_reminders__Not_Found() throws IOException {
+    void testDeleteMultipleRemindersNotFound() throws IOException {
         ArrayList actual = Middle.deleteMultipleReminders(charterapi, mac,0, 0);
         assertEquals(HttpStatus.SC_NOT_FOUND, actual.get(0));
         assertEquals("", actual.get(1));
     }
 
     @Test
-    void testSchedule_reminder() throws IOException {
+    void testScheduleReminder() throws IOException {
         ArrayList actual = Middle.scheduleReminder(charterapi, mac,0);
         assertEquals(HttpStatus.SC_OK, actual.get(0));
         assertEquals("", actual.get(1));
     }
 
     @Test
-    void testSchedule_reminder_ERROR_SCHEDULING_REMINDER() throws IOException {
+    void testScheduleReminderERRORSCHEDULINGREMINDER() throws IOException {
         ArrayList actual = Middle.scheduleReminder(charterapi, mac,0);
         assertEquals(HttpStatus.SC_OK, actual.get(0));
         assertEquals("ERROR_SCHEDULING_REMINDER", actual.get(1));

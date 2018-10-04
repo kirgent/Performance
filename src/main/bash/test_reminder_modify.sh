@@ -1,4 +1,4 @@
-url_modify="ams/Reminders?req=modify"
+url_modify="ams/Reminders?req=MODIFY"
 
 function modify1(){
 macaddress="$1"
@@ -13,7 +13,7 @@ if [ "$show_extra_info" = true ]; then
 echo "[DBG] `date "+%a %b %d %T %N %Z %Y"`: Modify $count_reminders rem(s) in iteration=$i/$count_iterations with reminderProgramStart=$reminderProgramStart, reminderChannelNumber=$reminderChannelNumber, reminderScheduleId=$reminderScheduleId, reminderId=$reminderId"|$logwrap
 fi
 
-#/usr/bin/time -f 'real %Es' -o $logfile -a $curlwrap 'http://'$ams_ip':'$ams_port'/'url_modify'' -H 'Content-type: application/json' \
+#/usr/bin/time -f 'real %Es' -o $logfile -a $curlwrap 'http://'$amsIp':'$amsPort'/'url_modify'' -H 'Content-type: application/json' \
 /usr/bin/time -f 'real %Es' -o ${logfile} -a ${curlwrap} -s 'http://'${ams_ip}':'${ams_port}'/'${url_modify}'' -H 'Content-type: application/json' \
 -d '{
 "deviceId": '${macaddress}',

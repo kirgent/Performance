@@ -15,8 +15,8 @@ action="$2"
 param="$3"
 count_reminders="$4"
 
-#ams_ip="172.30.81.4"
-#ams_ip="172.30.82.132"
+#amsIp="172.30.81.4"
+#amsIp="172.30.82.132"
 ams_ip="172.30.112.19"
 ams_port="8080"
 
@@ -50,7 +50,7 @@ fi
 
 logfile="test_reminder.log"
 logwrap="tee -a $logfile"
-startmessage="[DBG] `date "+%a %b %d %T %N %Z %Y"`: NEW START: ams_ip=$ams_ip, count_reminders=$param, count_iterations=$count_iterations, RACK_DATE=( ${RACK_DATE[@]} ), RACK_CHANNELS=( ${RACK_CHANNELS[@]} )"
+startmessage="[DBG] `date "+%a %b %d %T %N %Z %Y"`: NEW START: amsIp=$ams_ip, count_reminders=$param, count_iterations=$count_iterations, RACK_DATE=( ${RACK_DATE[@]} ), RACK_CHANNELS=( ${RACK_CHANNELS[@]} )"
 
 synopsys="\nNAME
 \ttest_reminder.sh - script for Add / Edit / Delete / Purge reminders on mac and also check registration / registration on AMS.
@@ -66,10 +66,10 @@ OPTIONS
 \ttest_reminder.sh mac Check  - send curl for checking registration
 \ttest_reminder.sh mac Change - send curl for changing registration to new AMS
 \ttest_reminder.sh mac Purge  - clear all reminders
-\ttest_reminder.sh mac Add    - add reminders (cyclically)
-\ttest_reminder.sh mac Edit   - delete reminders with current reminderOffset + add reminders with reminderOffset_new (cyclically)
-\ttest_reminder.sh mac Delete - delete reminders (cyclically)
-\ttest_reminder.sh mac All    - add + edit + delete reminders (cyclically)
+\ttest_reminder.sh mac Add    - ADD reminders (cyclically)
+\ttest_reminder.sh mac Edit   - DELETE reminders with current reminderOffset + ADD reminders with reminderOffset_new (cyclically)
+\ttest_reminder.sh mac Delete - DELETE reminders (cyclically)
+\ttest_reminder.sh mac All    - ADD + edit + DELETE reminders (cyclically)
 DEFAULT CURRENT SETTINGS:
 \tAMS: $ams_ip
 \tcharterapi: $charterapi
@@ -129,9 +129,9 @@ ${curlwrap} -H 'Content-Type:application/json' -d ${json_change} "$charterapi_d/
 
 
 elif [ "$action" == "Purge" ]; then
-echo "[DBG] `date "+%a %b %d %T %N %Z %Y"`: NEW START: ams_ip=$ams_ip, Purge ---> (_|_)"|${logwrap}
+echo "[DBG] `date "+%a %b %d %T %N %Z %Y"`: NEW START: amsIp=$ams_ip, Purge ---> (_|_)"|${logwrap}
 /usr/bin/time -f 'real %Es' -o ${logfile} -a ${curlwrap} 'http://'${ams_ip}':'${ams_port}'/'$url'' -H 'Content-type: application/json' -d '{ "deviceId": '${mac}', "reminders": [{"operation": "Purge"}]}'; echo
-#/usr/bin/time -f 'real %Es' curl -s 'http://'$ams_ip':'$ams_port'/'$url'' -H 'Content-type: text/plain' --data '{ "deviceId": '$mac', "reminders": [{"operation": "Purge"}]}' 2>&1|tee -a $logfile; echo
+#/usr/bin/time -f 'real %Es' curl -s 'http://'$amsIp':'$amsPort'/'$url'' -H 'Content-type: text/plain' --data '{ "deviceId": '$mac', "reminders": [{"operation": "Purge"}]}' 2>&1|tee -a $logfile; echo
 
 
 elif [ "$action" == "All" ]; then

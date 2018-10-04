@@ -1,4 +1,4 @@
-package test.perf.reminders.newapi;
+package test.perf.reminders;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -40,7 +40,7 @@ public class NewAPI extends CommonAPI {
         logger(DEBUG_LEVEL, "[DBG] " + current + "ms request");
 
         ArrayList list = new ArrayList();
-        //list.add(0, response.getStatusLine().getStatusCode() + " " + response.getStatusLine().getReasonPhrase());
+        //list.ADD(0, response.getStatusLine().getStatusCode() + " " + response.getStatusLine().getReasonPhrase());
         list.add(0, response.getStatusLine().getStatusCode());
         list.add(1, checkResponseBody(readResponse(new StringBuilder(),response)));
         logger(INFO_LEVEL, "[INF] return data: [" + list.get(0) + ", " + list.get(1) + "]");
@@ -70,7 +70,7 @@ public class NewAPI extends CommonAPI {
         logger(DEBUG_LEVEL, "[DBG] " + current + "ms request");
 
         ArrayList list = new ArrayList();
-        //list.add(0, response.getStatusLine().getStatusCode() + " " + response.getStatusLine().getReasonPhrase());
+        //list.ADD(0, response.getStatusLine().getStatusCode() + " " + response.getStatusLine().getReasonPhrase());
         list.add(0, response.getStatusLine().getStatusCode());
         list.add(1, checkResponseBody(readResponse(new StringBuilder(),response)));
         logger(INFO_LEVEL, "[INF] return data: [" + list.get(0) + ", " + list.get(1) + "]");
@@ -90,7 +90,7 @@ public class NewAPI extends CommonAPI {
      * @return list
      * @throws IOException -TBD
      */
-    ArrayList request(String server, String mac, Operation operation, int count_reminders, String reminderProgramStart, long reminderChannelNumber, String reminderProgramId, long reminderOffset, long reminderScheduleId, long reminderId) throws IOException {
+    public ArrayList request(String server, String mac, Operation operation, int count_reminders, String reminderProgramStart, long reminderChannelNumber, String reminderProgramId, long reminderOffset, long reminderScheduleId, long reminderId) throws IOException {
         logger(INFO_LEVEL, "[INF] " + new Date() + ": " + operation.toString().toUpperCase() + ":");
 
         HttpPost request = new HttpPost(prepareUrl(server, operation, true));
@@ -106,7 +106,7 @@ public class NewAPI extends CommonAPI {
         logger(DEBUG_LEVEL, "[DBG] " + current + "ms request");
 
         ArrayList list = new ArrayList();
-        //list.add(0, response.getStatusLine().getStatusCode() + " " + response.getStatusLine().getReasonPhrase());
+        //list.ADD(0, response.getStatusLine().getStatusCode() + " " + response.getStatusLine().getReasonPhrase());
         list.add(0, response.getStatusLine().getStatusCode());
         list.add(1, checkResponseBody(readResponse(new StringBuilder(),response)));
         logger(INFO_LEVEL, "[INF] return data: [" + list.get(0) + ", " + list.get(1) + "]");
@@ -136,7 +136,7 @@ public class NewAPI extends CommonAPI {
         object_in_options.put("name", option);
         object_in_options.put("value", value);
 
-        if(show_generated_json) {
+        if(SHOW_GENERATED_JSON) {
             logger(INFO_LEVEL, "[JSON] generated json: " + json);
         }
         return json.toString();
@@ -192,26 +192,26 @@ public class NewAPI extends CommonAPI {
             } else if (reminderScheduleId == -2) {
                 object_in_reminders.put("reminderScheduleId", null);
             } else if (reminderScheduleId == 1) {
-                if (operation.name().equals("add")) {
-                    object_in_reminders.put("reminderScheduleId", reminderScheduleId(Generation.increment));
-                } else if (operation.name().equals("modify")){
-                    object_in_reminders.put("reminderScheduleId", reminderScheduleId_list.get(i));
+                if (operation.name().equals("ADD")) {
+                    object_in_reminders.put("reminderScheduleId", reminderScheduleId(Generation.INCREMENT));
+                } else if (operation.name().equals("MODIFY")){
+                    object_in_reminders.put("reminderScheduleId", reminderScheduleIdList.get(i));
                 }
             } else if (reminderScheduleId == Long.MAX_VALUE) {
                 object_in_reminders.put("reminderScheduleId", Long.MAX_VALUE);
             } else if (reminderScheduleId == Long.MIN_VALUE) {
                 object_in_reminders.put("reminderScheduleId", Long.MIN_VALUE);
-            } else if (count_reminders>1 && operation.name().equals("add")) {
+            } else if (count_reminders>1 && operation.name().equals("ADD")) {
                 //todo//todo//todo FIXME
                 if(first_clean_reminderScheduleId_list) {
-                    reminderScheduleId_list.clear();
-                    logger(DEBUG_LEVEL, "[DBG] preliminary clean reminderScheduleId_list !!!");
+                    reminderScheduleIdList.clear();
+                    logger(DEBUG_LEVEL, "[DBG] preliminary clean reminderScheduleIdList !!!");
                     first_clean_reminderScheduleId_list = false;
                 }
-                object_in_reminders.put("reminderScheduleId", reminderScheduleId(Generation.random));
-            } else if (count_reminders>1 && operation.name().equals("modify")) {
+                object_in_reminders.put("reminderScheduleId", reminderScheduleId(Generation.RANDOM));
+            } else if (count_reminders>1 && operation.name().equals("MODIFY")) {
                 //todo//todo//todo FIXME
-                object_in_reminders.put("reminderScheduleId", reminderScheduleId_list.get(i));
+                object_in_reminders.put("reminderScheduleId", reminderScheduleIdList.get(i));
             } else {
                 object_in_reminders.put("reminderScheduleId", reminderScheduleId);
             }
@@ -225,26 +225,26 @@ public class NewAPI extends CommonAPI {
             } else if (reminderId == -2) {
                 object_in_reminders.put("reminderId", null);
             } else if (reminderId == 1) {
-                if (operation.name().equals("add")) {
-                    object_in_reminders.put("reminderId", reminderId(Generation.increment));
-                } else if (operation.name().equals("modify")){
-                    object_in_reminders.put("reminderId", reminderId_list.get(i));
+                if (operation.name().equals("ADD")) {
+                    object_in_reminders.put("reminderId", reminderId(Generation.INCREMENT));
+                } else if (operation.name().equals("MODIFY")){
+                    object_in_reminders.put("reminderId", reminderIdList.get(i));
                 }
             } else if (reminderId == Long.MAX_VALUE) {
                 object_in_reminders.put("reminderId", Long.MAX_VALUE);
             } else if (reminderId == Long.MIN_VALUE) {
                 object_in_reminders.put("reminderId", Long.MIN_VALUE);
-            } else if (count_reminders>1 && operation.name().equals("add")) {
+            } else if (count_reminders>1 && operation.name().equals("ADD")) {
                 if(first_clean_reminderId_list) {
                     //todo//todo//todo FIXME
-                    reminderId_list.clear();
-                    logger(DEBUG_LEVEL,"[DBG] preliminary clean reminderId_list !!!");
+                    reminderIdList.clear();
+                    logger(DEBUG_LEVEL,"[DBG] preliminary clean reminderIdList !!!");
                     first_clean_reminderId_list = false;
                 }
-                object_in_reminders.put("reminderId", reminderId(Generation.random));
-            } else if (count_reminders>1 && operation.name().equals("modify")) {
+                object_in_reminders.put("reminderId", reminderId(Generation.RANDOM));
+            } else if (count_reminders>1 && operation.name().equals("MODIFY")) {
                 //todo//todo//todo FIXME
-                object_in_reminders.put("reminderId", reminderId_list.get(i));
+                object_in_reminders.put("reminderId", reminderIdList.get(i));
             } else {
                 object_in_reminders.put("reminderId", reminderId);
             }
@@ -253,14 +253,14 @@ public class NewAPI extends CommonAPI {
         }
 
 
-        if(reminderScheduleId_list.size()<=10) {
-            logger(DEBUG_LEVEL,"reminderScheduleId_list : size=" + reminderScheduleId_list.size() + " : " + reminderScheduleId_list);
+        if(reminderScheduleIdList.size()<=10) {
+            logger(DEBUG_LEVEL,"reminderScheduleIdList : size=" + reminderScheduleIdList.size() + " : " + reminderScheduleIdList);
         }
-        if(reminderId_list.size()<=10) {
-            logger(DEBUG_LEVEL,"reminderId_list         : size=" + reminderId_list.size() + " : " + reminderId_list);
+        if(reminderIdList.size()<=10) {
+            logger(DEBUG_LEVEL,"reminderIdList         : size=" + reminderIdList.size() + " : " + reminderIdList);
         }
 
-        if(show_generated_json) {
+        if(SHOW_GENERATED_JSON) {
             logger(INFO_LEVEL, "[JSON] generated json: " + json);
         }
         return json.toString();
@@ -283,7 +283,7 @@ public class NewAPI extends CommonAPI {
             } else if (reminderScheduleId == Long.MIN_VALUE) {
                 object_in_reminders.put("reminderScheduleId", Long.MIN_VALUE);
             } else if (count_reminders > 1) {
-                object_in_reminders.put("reminderScheduleId", reminderScheduleId_list.get(i));
+                object_in_reminders.put("reminderScheduleId", reminderScheduleIdList.get(i));
             } else {
                 object_in_reminders.put("reminderScheduleId", reminderScheduleId);
             }
@@ -297,23 +297,23 @@ public class NewAPI extends CommonAPI {
             } else if (reminderId == Long.MIN_VALUE) {
                 object_in_reminders.put("reminderId", Long.MIN_VALUE);
             } else if (count_reminders > 1) {
-                object_in_reminders.put("reminderId", reminderId_list.get(i));
+                object_in_reminders.put("reminderId", reminderIdList.get(i));
             } else {
                 object_in_reminders.put("reminderId", reminderId);
             }
             array_reminders.add(object_in_reminders);
         }
 
-        if(show_debug_level) {
-            if(reminderScheduleId_list.size()<=10) {
-                logger(DEBUG_LEVEL, "reminderScheduleId_list : size=" + reminderScheduleId_list.size() + " : " + reminderScheduleId_list);
+        if(SHOW_DEBUG_LEVEL) {
+            if(reminderScheduleIdList.size()<=10) {
+                logger(DEBUG_LEVEL, "reminderScheduleIdList : size=" + reminderScheduleIdList.size() + " : " + reminderScheduleIdList);
             }
-            if(reminderId_list.size()<=10) {
-                logger(DEBUG_LEVEL, "reminderId_list         : size=" + reminderId_list.size() + " : " + reminderId_list);
+            if(reminderIdList.size()<=10) {
+                logger(DEBUG_LEVEL, "reminderIdList         : size=" + reminderIdList.size() + " : " + reminderIdList);
             }
         }
 
-        if(show_generated_json && show_info_level) {
+        if(SHOW_GENERATED_JSON && SHOW_INFO_LEVEL) {
             logger(INFO_LEVEL, "[JSON] generated json: " + json);
         }
         return json.toString();
@@ -325,15 +325,15 @@ public class NewAPI extends CommonAPI {
         JSONArray array_reminders = new JSONArray();
         json.put("reminders", array_reminders);
 
-        if(show_generated_json && show_info_level) {
+        if(SHOW_GENERATED_JSON && SHOW_INFO_LEVEL) {
             logger(INFO_LEVEL, "[JSON] generated json: " + json);
         }
         return json.toString();
     }
 
     public ArrayList changeSettings(String mac, String option, String value) throws IOException {
-        logger(INFO_LEVEL, "Change settings for macaddress=" + mac + ", server=" + ams_ip + " option=" + option + ", value=" + value);
-        HttpPost request = new HttpPost("http://" + ams_ip + ":" + ams_port + "/ams/settings");
+        logger(INFO_LEVEL, "Change settings for macaddress=" + mac + ", server=" + amsIp + " option=" + option + ", value=" + value);
+        HttpPost request = new HttpPost("http://" + amsIp + ":" + amsPort + "/ams/settings");
         request.setHeader("Content-type", "application/json");
 
         request.setEntity(new StringEntity(generateJsonSetting(mac, option, value)));
@@ -349,7 +349,7 @@ public class NewAPI extends CommonAPI {
         logger(DEBUG_LEVEL, "[DBG] " + current + "ms request");
 
         ArrayList list = new ArrayList();
-        //list.add(0, response.getStatusLine().getStatusCode() + " " + response.getStatusLine().getReasonPhrase());
+        //list.ADD(0, response.getStatusLine().getStatusCode() + " " + response.getStatusLine().getReasonPhrase());
         list.add(0, response.getStatusLine().getStatusCode());
         list.add(1, checkResponseBody(readResponse(new StringBuilder(),response)));
         logger(INFO_LEVEL, "[INF] return data: " + list + "\n");
@@ -378,22 +378,22 @@ public class NewAPI extends CommonAPI {
         logger(DEBUG_LEVEL, "[DBG] " + current + "ms request");
 
         ArrayList list = new ArrayList();
-        //list.add(0, response.getStatusLine().getStatusCode() + " " + response.getStatusLine().getReasonPhrase());
+        //list.ADD(0, response.getStatusLine().getStatusCode() + " " + response.getStatusLine().getReasonPhrase());
         list.add(0, response.getStatusLine().getStatusCode());
         list.add(1, checkResponseBody(readResponse(new StringBuilder(),response)));
         if (list.get(0).equals(HttpStatus.SC_OK)) {
-            purge_list.add(current);
+            purgeList.add(current);
             list.add(2, current);
-            list.add(3, getAverage(purge_list));
-            list.add(4, searchMedian(purge_list, sorting));
-            int[] min = getMin(Operation.purge, current, i);
+            list.add(3, getAverage(purgeList));
+            list.add(4, searchMedian(purgeList, sorting));
+            int[] min = getMin(Operation.PURGE, current, i);
             list.add(5, min[0]);
             list.add(6, min[1]);
-            int[] max = getMax(Operation.purge, current, i);
+            int[] max = getMax(Operation.PURGE, current, i);
             list.add(7, max[0]);javascript:;
             list.add(8, max[1]);
-            list.add(9, purge_list.size());
-            //logger(DEBUG_LEVEL,"[DBG] " + new Date() + ": purge avg = " + getAverage(purge_list) + "ms/" + total_i + ": purge_list:" + purge_list);
+            list.add(9, purgeList.size());
+            //logger(DEBUG_LEVEL,"[DBG] " + new Date() + ": PURGE avg = " + getAverage(purgeList) + "ms/" + totalI + ": purgeList:" + purgeList);
         }
 
         return list;
@@ -422,22 +422,22 @@ public class NewAPI extends CommonAPI {
         logger(DEBUG_LEVEL, "[DBG] " + current + "ms request");
 
         ArrayList list = new ArrayList();
-        //list.add(0, response.getStatusLine().getStatusCode() + " " + response.getStatusLine().getReasonPhrase());
+        //list.ADD(0, response.getStatusLine().getStatusCode() + " " + response.getStatusLine().getReasonPhrase());
         list.add(0, response.getStatusLine().getStatusCode());
         list.add(1, checkResponseBody(readResponse(new StringBuilder(),response)));
         if (list.get(0).equals(HttpStatus.SC_OK)) {
-            delete_list.add(current);
+            deleteList.add(current);
             list.add(2, current);
-            list.add(3, getAverage(delete_list));
-            list.add(4, searchMedian(delete_list, sorting));
-            int[] min = getMin(Operation.delete, current, i);
+            list.add(3, getAverage(deleteList));
+            list.add(4, searchMedian(deleteList, sorting));
+            int[] min = getMin(Operation.DELETE, current, i);
             list.add(5, min[0]);
             list.add(6, min[1]);
-            int[] max = getMax(Operation.delete, current, i);
+            int[] max = getMax(Operation.DELETE, current, i);
             list.add(7, max[0]);
             list.add(8, max[1]);
-            list.add(9, delete_list.size());
-            //logger(DEBUG_LEVEL, "[DBG] " + new Date() + ": delete avg = " + getAverage(delete_list) + "ms/" + delete_list.size() + ": delete_list:" + delete_list);
+            list.add(9, deleteList.size());
+            //logger(DEBUG_LEVEL, "[DBG] " + new Date() + ": DELETE avg = " + getAverage(deleteList) + "ms/" + deleteList.size() + ": deleteList:" + deleteList);
         }
 
         return list;
@@ -472,37 +472,37 @@ public class NewAPI extends CommonAPI {
         logger(DEBUG_LEVEL, "[DBG] " + current + "ms request");
 
         ArrayList list = new ArrayList();
-        //list.add(0, response.getStatusLine().getStatusCode() + " " + response.getStatusLine().getReasonPhrase());
+        //list.ADD(0, response.getStatusLine().getStatusCode() + " " + response.getStatusLine().getReasonPhrase());
         list.add(0, response.getStatusLine().getStatusCode());
         list.add(1, checkResponseBody(readResponse(new StringBuilder(),response)));
         if (list.get(0).equals(HttpStatus.SC_OK)) {
-            if (operation.name().equals("add")) {
-                add_list.add(current);
+            if (operation.name().equals("ADD")) {
+                addList.add(current);
                 list.add(2, current);
-                list.add(3, getAverage(add_list));
-                list.add(4, searchMedian(add_list, sorting));
-                int[] min = getMin(Operation.add, current, i);
+                list.add(3, getAverage(addList));
+                list.add(4, searchMedian(addList, sorting));
+                int[] min = getMin(Operation.ADD, current, i);
                 list.add(5, min[0]);
                 list.add(6, min[1]);
-                int[] max = getMax(Operation.add, current, i);
+                int[] max = getMax(Operation.ADD, current, i);
                 list.add(7, max[0]);
                 list.add(8, max[1]);
-                list.add(9, add_list.size());
-                //logger(DEBUG_LEVEL, "[DBG] " + new Date() + ": add avg = " + getAverage(add_list) + "ms/" + total_i + ": add_list:" + add_list);
+                list.add(9, addList.size());
+                //logger(DEBUG_LEVEL, "[DBG] " + new Date() + ": ADD avg = " + getAverage(addList) + "ms/" + totalI + ": addList:" + addList);
 
-            } else if (operation.name().equals("modify")) {
-                modify_list.add(current);
+            } else if (operation.name().equals("MODIFY")) {
+                modifyList.add(current);
                 list.add(2, current);
-                list.add(3, getAverage(modify_list));
-                list.add(4, searchMedian(modify_list, sorting));
-                int[] min = getMin(Operation.modify, current, i);
+                list.add(3, getAverage(modifyList));
+                list.add(4, searchMedian(modifyList, sorting));
+                int[] min = getMin(Operation.MODIFY, current, i);
                 list.add(5, min[0]);
                 list.add(6, min[1]);
-                int[] max = getMax(Operation.modify, current, i);
+                int[] max = getMax(Operation.MODIFY, current, i);
                 list.add(7, max[0]);
                 list.add(8, max[1]);
-                list.add(9, modify_list.size());
-                //logger(DEBUG_LEVEL, "[DBG] " + new Date() + ": modify avg = " + getAverage(modify_list) + "ms/" + total_i + ": modify_list:" + modify_list);
+                list.add(9, modifyList.size());
+                //logger(DEBUG_LEVEL, "[DBG] " + new Date() + ": MODIFY avg = " + getAverage(modifyList) + "ms/" + totalI + ": modifyList:" + modifyList);
             }
         }
 

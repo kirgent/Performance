@@ -1,4 +1,4 @@
-url_delete="ams/Reminders?req=delete"
+url_delete="ams/Reminders?req=DELETE"
 
 ID=( 2 3 4 5 6 7 8 9 12 13 14 16 18 19 22 23 25 28 30 31 32 33 37 38 41 44 46 49 50 51 )
 #for (( i=1; i<=$count_iterations; i++)); do for reminderProgramStart in ${RACK_DATE[@]}; do
@@ -12,7 +12,7 @@ if [ "$show_extra_info" = true ]; then
 echo "[DBG] `date "+%a %b %d %T %N %Z %Y"`: Delete $count_reminders rem(s) in iteration=$i/$count_iterations with reminderScheduleId=$reminderScheduleId, reminderId=$reminderId"|$logwrap
 fi
 
-#/usr/bin/time -f 'real %Es' -o $logfile -a $curlwrap 'http://'$ams_ip':'$ams_port'/'url_delete'' -H 'Content-type: application/json' \
+#/usr/bin/time -f 'real %Es' -o $logfile -a $curlwrap 'http://'$amsIp':'$amsPort'/'url_delete'' -H 'Content-type: application/json' \
 /usr/bin/time -f 'real %Es' -o ${logfile} -a ${curlwrap} -s 'http://'${ams_ip}':'${ams_port}'/'${url_delete}'' -H 'Content-type: application/json' \
 -d '{
 "deviceId": '${macaddress}',

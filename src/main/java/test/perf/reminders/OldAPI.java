@@ -1,4 +1,4 @@
-package test.perf.reminders.oldapi;
+package test.perf.reminders;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -43,39 +43,39 @@ class OldAPI extends CommonAPI {
         logger(DEBUG_LEVEL, "[DBG] " + current + "ms request");
 
         ArrayList list = new ArrayList();
-        //list.add(0, response.getStatusLine().getStatusCode() + " " + response.getStatusLine().getReasonPhrase());
+        //list.ADD(0, response.getStatusLine().getStatusCode() + " " + response.getStatusLine().getReasonPhrase());
         list.add(0, response.getStatusLine().getStatusCode());
         list.add(1, checkResponseBody(readResponse(new StringBuilder(),response)));
         if (list.get(0).equals(HttpStatus.SC_OK)) {
-            if (operation.name().equals("add")) {
-                add_list.add(current);
+            if (operation.name().equals("ADD")) {
+                addList.add(current);
                 list.add(2, current);
-                list.add(3, getAverage(add_list));
-                list.add(4, searchMedian(add_list, sorting));
-                int[] min = getMin(Operation.add, current, i);
+                list.add(3, getAverage(addList));
+                list.add(4, searchMedian(addList, sorting));
+                int[] min = getMin(Operation.ADD, current, i);
                 list.add(5, min[0]);
                 list.add(6, min[1]);
-                int[] max = getMax(Operation.add, current, i);
+                int[] max = getMax(Operation.ADD, current, i);
                 list.add(7, max[0]);
                 list.add(8, max[1]);
-                //use add_list.size() = total of success iteration!
-                list.add(9, add_list.size());
-                //logger(DEBUG_LEVEL, "[DBG] add avg = " + getAverage(add_list) + "ms/" + total_i + ": add_list:" + add_list);
+                //use addList.size() = total of success iteration!
+                list.add(9, addList.size());
+                //logger(DEBUG_LEVEL, "[DBG] ADD avg = " + getAverage(addList) + "ms/" + totalI + ": addList:" + addList);
 
-            } else if (operation.name().equals("delete")) {
-                delete_list.add(current);
+            } else if (operation.name().equals("DELETE")) {
+                deleteList.add(current);
                 list.add(2, current);
-                list.add(3, getAverage(delete_list));
-                list.add(4, searchMedian(delete_list, Sorting.insertion));
-                int[] min = getMin(Operation.delete, current, i);
+                list.add(3, getAverage(deleteList));
+                list.add(4, searchMedian(deleteList, Sorting.INSERTION));
+                int[] min = getMin(Operation.DELETE, current, i);
                 list.add(5, min[0]);
                 list.add(6, min[1]);
-                int[] max = getMax(Operation.delete, current, i);
+                int[] max = getMax(Operation.DELETE, current, i);
                 list.add(7, max[0]);
                 list.add(8, max[1]);
-                //use delete_list.size() = total of success iteration!
-                list.add(9, delete_list.size());
-                //logger(DEBUG_LEVEL, "[DBG] delete avg = " + getAverage(delete_list) + "ms/" + total_i + ": delete_list:" + delete_list);
+                //use deleteList.size() = total of success iteration!
+                list.add(9, deleteList.size());
+                //logger(DEBUG_LEVEL, "[DBG] DELETE avg = " + getAverage(deleteList) + "ms/" + totalI + ": deleteList:" + deleteList);
             }
         }
         return list;
@@ -103,23 +103,23 @@ class OldAPI extends CommonAPI {
         logger(DEBUG_LEVEL, "[DBG] " + current + "ms request");
 
         ArrayList list = new ArrayList();
-        //list.add(0, response.getStatusLine().getStatusCode() + " " + response.getStatusLine().getReasonPhrase());
+        //list.ADD(0, response.getStatusLine().getStatusCode() + " " + response.getStatusLine().getReasonPhrase());
         list.add(0, response.getStatusLine().getStatusCode());
         list.add(1, checkResponseBody(readResponse(new StringBuilder(),response)));
         if (list.get(0).equals(HttpStatus.SC_OK)) {
-            purge_list.add(current);
+            purgeList.add(current);
             list.add(2, current);
-            list.add(3, getAverage(purge_list));
-            list.add(4, searchMedian(purge_list, sorting));
-            int[] min = getMin(Operation.purge, current, i);
+            list.add(3, getAverage(purgeList));
+            list.add(4, searchMedian(purgeList, sorting));
+            int[] min = getMin(Operation.PURGE, current, i);
             list.add(5, min[0]);
             list.add(6, min[1]);
-            int[] max = getMax(Operation.purge, current, i);
+            int[] max = getMax(Operation.PURGE, current, i);
             list.add(7, max[0]);
             list.add(8, max[1]);
-            //use purge_list.size() = total of success iteration!
-            list.add(9, purge_list.size());
-            //logger(DEBUG_LEVEL, "[DBG] purge avg = " + getAverage(purge_list) + "ms/" + total_i + ": purge_list:" + purge_list);
+            //use purgeList.size() = total of success iteration!
+            list.add(9, purgeList.size());
+            //logger(DEBUG_LEVEL, "[DBG] PURGE avg = " + getAverage(purgeList) + "ms/" + totalI + ": purgeList:" + purgeList);
         }
         return list;
     }
@@ -135,9 +135,9 @@ class OldAPI extends CommonAPI {
         for (int i = 0; i < count_reminders; i++) {
             JSONObject object_in_reminders = new JSONObject();
 
-            if(operation.name().equals("add")) {
+            if(operation.name().equals("ADD")) {
                 object_in_reminders.put("operation", "Add");
-            } else if (operation.name().equals("delete")){
+            } else if (operation.name().equals("DELETE")){
                 object_in_reminders.put("operation", "Delete");
             }
 
@@ -150,7 +150,7 @@ class OldAPI extends CommonAPI {
             array_reminders.add(object_in_reminders);
         }
 
-        if(show_generated_json && show_info_level) {
+        if(SHOW_GENERATED_JSON && SHOW_INFO_LEVEL) {
             logger(INFO_LEVEL, "[JSON] generated json: " + json);
         }
         return json.toString();
@@ -165,7 +165,7 @@ class OldAPI extends CommonAPI {
         object_in_reminders.put("operation", "Purge");
         array_reminders.add(object_in_reminders);
 
-        if(show_generated_json && show_info_level) {
+        if(SHOW_GENERATED_JSON && SHOW_INFO_LEVEL) {
             logger(INFO_LEVEL, "[JSON] generated json: " + json);
         }
         return json.toString();

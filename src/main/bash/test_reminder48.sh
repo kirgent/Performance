@@ -7,7 +7,7 @@ reminderOffset_new="$3"
 echo "[DBG] `date "+%a %b %d %T %N %Z %Y"`: $operation 48rems with reminderOffset=$reminderOffset, reminderOffset_new=$reminderOffset_new): iteration="$i"/"$count_iterations", mac=$mac, reminderProgramStart=$reminderProgramStart, reminderChannelNumber=$reminderChannelNumber)"|$logwrap
 
 if [ "$operation" != "Edit" ]; then
-#/usr/bin/time -f 'real %Es' -o $logfile -a $curlwrap 'http://'$ams_ip':'$ams_port'/'$url'' -H 'Content-type: application/json' \
+#/usr/bin/time -f 'real %Es' -o $logfile -a $curlwrap 'http://'$amsIp':'$amsPort'/'$url'' -H 'Content-type: application/json' \
 /usr/bin/time -f 'real %Es' -o ${logfile} -a ${curlwrap} -s 'http://'${ams_ip}':'${ams_port}'/'${url}'' -H 'Content-type: application/json' \
 -d '{
 "deviceId": '${mac}',

@@ -17,8 +17,8 @@ action="$2"
 param="$3"
 
 ams_ip="172.30.81.4"
-#ams_ip="172.30.82.132"
-#ams_ip="172.30.112.19"
+#amsIp="172.30.82.132"
+#amsIp="172.30.112.19"
 ams_port="8080"
 
 count_iterations=3
@@ -89,7 +89,7 @@ fi
 }
 
 
-# If you need a random int within a certain range, use the 'modulo' operator.
+# If you need a RANDOM int within a certain range, use the 'modulo' operator.
 # This returns the remainder of a division operation.
 #RANGE=500
 #number=$RANDOM
@@ -100,8 +100,8 @@ fi
 
 logfile="test_reminder.log"
 logwrap="tee -a $logfile"
-#startmessage="[DBG] `date "+%a %b %d %T %N %Z %Y"`: NEW START: ams_ip=$ams_ip, count_reminders=$count_reminders, count_iterations=$count_iterations, RACK_DATE=( ${RACK_DATE[@]} ), RACK_CHANNELS=( ${RACK_CHANNELS[@]} ), reminderProgramId=$reminderProgramId, reminderOffset=$reminderOffset, reminderOffset_new=$reminderOffset_new, reminderScheduleId=$reminderScheduleId, reminderId=$reminderId"
-startmessage="[DBG] `date "+%a %b %d %T %N %Z %Y"`: NEW START: ams_ip=$ams_ip, count_reminders=$count_reminders, count_iterations=$count_iterations, RACK_DATE=( ${RACK_DATE[@]} ), reminderProgramId=$reminderProgramId, reminderOffset=$reminderOffset, reminderOffset_new=$reminderOffset_new, reminderScheduleId=$reminderScheduleId, reminderId=$reminderId"
+#startmessage="[DBG] `date "+%a %b %d %T %N %Z %Y"`: NEW START: amsIp=$amsIp, count_reminders=$count_reminders, count_iterations=$count_iterations, RACK_DATE=( ${RACK_DATE[@]} ), RACK_CHANNELS=( ${RACK_CHANNELS[@]} ), reminderProgramId=$reminderProgramId, reminderOffset=$reminderOffset, reminderOffset_new=$reminderOffset_new, reminderScheduleId=$reminderScheduleId, reminderId=$reminderId"
+startmessage="[DBG] `date "+%a %b %d %T %N %Z %Y"`: NEW START: amsIp=$ams_ip, count_reminders=$count_reminders, count_iterations=$count_iterations, RACK_DATE=( ${RACK_DATE[@]} ), reminderProgramId=$reminderProgramId, reminderOffset=$reminderOffset, reminderOffset_new=$reminderOffset_new, reminderScheduleId=$reminderScheduleId, reminderId=$reminderId"
 
 synopsys="\nNAME
 \ttest_reminder.sh - script for Add / Edit / Delete / Purge reminders on macaddress and also check registration / registration on AMS.
@@ -117,10 +117,10 @@ OPTIONS
 \ttest_reminder.sh macaddress Check  - send curl for checking registration
 \ttest_reminder.sh macaddress Change - send curl for changing registration to new AMS
 \ttest_reminder.sh macaddress Purge  - clear all reminders
-\ttest_reminder.sh macaddress Add    - add reminders (cyclically)
-\ttest_reminder.sh macaddress Edit   - delete reminders with current offset + add reminders with new_offset (cyclically)
-\ttest_reminder.sh macaddress Delete - delete reminders (cyclically)
-\ttest_reminder.sh macaddress All    - add + edit + delete reminders (cyclically)
+\ttest_reminder.sh macaddress Add    - ADD reminders (cyclically)
+\ttest_reminder.sh macaddress Edit   - DELETE reminders with current offset + ADD reminders with new_offset (cyclically)
+\ttest_reminder.sh macaddress Delete - DELETE reminders (cyclically)
+\ttest_reminder.sh macaddress All    - ADD + edit + DELETE reminders (cyclically)
 CURRENT SETTINGS
 \tAMS: $ams_ip
 \tcount of reminders in one request: $param
@@ -187,8 +187,8 @@ ${curlwrap} -H 'Content-Type:application/json' -d ${json_change} "$charterapi_d/
 
 elif [ "$action" == "Purge" ]; then
 for (( i=1; i<=$count_iterations; i++)); do
-url="ams/Reminders?req=purge"
-echo "[DBG] `date "+%a %b %d %T %N %Z %Y"`: ams_ip=$ams_ip, iteration=$i/$count_iterations, Purge ---> (_|_)"|${logwrap}
+url="ams/Reminders?req=PURGE"
+echo "[DBG] `date "+%a %b %d %T %N %Z %Y"`: amsIp=$ams_ip, iteration=$i/$count_iterations, Purge ---> (_|_)"|${logwrap}
 /usr/bin/time -f 'real %Es' -o ${logfile} -a ${curlwrap} 'http://'${ams_ip}':'${ams_port}'/'${url}'' -H 'Content-type: application/json' -d '{ "deviceId": '$macaddress', "reminders": []}'; echo; done
 
 

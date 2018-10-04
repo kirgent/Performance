@@ -1,4 +1,4 @@
-package test.perf.reminders.newapi;
+package test.perf.common;
 
 import java.io.IOException;
 import java.sql.SQLException;
@@ -6,7 +6,7 @@ import java.util.ArrayList;
 
 import org.apache.http.HttpStatus;
 import org.junit.jupiter.api.Test;
-import test.perf.common.CommonAPI;
+import test.perf.reminders.NewAPI;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -81,7 +81,7 @@ class TestSandbox extends CommonAPI {
         //ArrayList list = new ArrayList();
         //ArrayList tempMergArr = new ArrayList(list.size());
         //for (int i = 0; i < arr.length; i++) {
-        //    list.add(i,arr[i]);
+        //    list.ADD(i,arr[i]);
         //}
         sortMerge(inputArr);
         /*for (Object aList : list) {
@@ -104,20 +104,20 @@ class TestSandbox extends CommonAPI {
     }
 
     @Test
-    void test_get_date_time() throws InterruptedException {
+    void testGetDateTime() throws InterruptedException {
         assertEquals("2018-05-19 00:00", getDateTime(0));
     }
 
     @Test
     void testOperation_NewAPI_400_Bad_request() throws IOException {
-        ArrayList actual = AMS.request(ams_ip, mac, Operation.blablabla, 2, reminderProgramStart, reminderChannelNumber, reminderProgramId, reminderOffset, reminderScheduleId, reminderId);
+        ArrayList actual = AMS.request(amsIp, mac, Operation.BLABLABLA, 2, reminderProgramStart, reminderChannelNumber, reminderProgramId, reminderOffset, reminderScheduleId, reminderId);
         assertEquals(HttpStatus.SC_BAD_REQUEST, actual.get(0));
         assertEquals("", actual.get(1));
     }
 
     @Test
     void testOracleDB_Query() throws SQLException, ClassNotFoundException {
-        ArrayList actual = AMS.QueryDB(ams_ip, mac);
+        ArrayList actual = AMS.queryDB(amsIp, mac);
         assertFalse(actual.isEmpty());
 
         assertEquals(Long.class, actual.get(0).getClass());
@@ -138,19 +138,19 @@ class TestSandbox extends CommonAPI {
 
     @Test
     void testOracleDB_Query_macaddress_empty() throws SQLException, ClassNotFoundException {
-        ArrayList result = AMS.QueryDB(ams_ip, "");
+        ArrayList result = AMS.queryDB(amsIp, "");
         assertTrue(result.isEmpty());
     }
 
     @Test
     void testOracleDB_Query_macaddress_wrong() throws SQLException, ClassNotFoundException {
-        ArrayList result = AMS.QueryDB(ams_ip, mac_wrong);
+        ArrayList result = AMS.queryDB(amsIp, mac_wrong);
         assertTrue(result.isEmpty());
     }
 
     @Test
-    void test_read_csv() throws IOException {
-        read_csv();
+    void testReadCsv() throws IOException {
+        readCsv();
     }
 
 }

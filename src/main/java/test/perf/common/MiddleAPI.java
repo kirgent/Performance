@@ -15,7 +15,7 @@ public class MiddleAPI extends CommonAPI {
 
     public ArrayList changeRegistration(String charterapi, String mac, String ams_ip) throws IOException {
         System.out.println("[DBG] changeRegistration " + mac + " to ams " + ams_ip + " via charterapi: " + charterapi);
-        HttpPost request = new HttpPost(charterapi + postfix_settings + "?requestor=AMS");
+        HttpPost request = new HttpPost(charterapi + postfixSettings + "?requestor=AMS");
         request.setEntity(new StringEntity(generateJsonChangeRegistration(mac, ams_ip)));
         request.setHeader("Content-type", "application/json");
         request.setHeader("Accept", "application/json");
@@ -37,7 +37,7 @@ public class MiddleAPI extends CommonAPI {
 
     public ArrayList checkRegistration(String charterapi, String mac) throws IOException {
         System.out.println("[DBG] checkRegistration " + mac + " via charterapi: " + charterapi);
-        HttpGet request = new HttpGet(charterapi + postfix_settings + "/amsIp/" + mac);
+        HttpGet request = new HttpGet(charterapi + postfixSettings + "/amsIp/" + mac);
         //request.setHeader("Accept", "*/*");
         //request.setHeader("Content-type", "application/json");
         //request.setHeader("Content-type", "text/plain");
@@ -79,14 +79,14 @@ public class MiddleAPI extends CommonAPI {
         json.put("reminderPresetTime", 5);
         json.put("newOnly", true);
         String result = json.toJSONString();
-        if(show_generated_json) {
+        if(SHOW_GENERATED_JSON) {
             System.out.println("generated json: " + result);
         }
         return result;
     }
 
     private String generateJsonChangeRegistration(String mac, String ams_ip) {
-        //String json = "{\"setting\":{\"groups\":[{\"options\":[],\"id\":\"STBmacaddress\",\"type\":\"device-stb\",\"amsid\":\"" + ams_ip + "\"}]}}";
+        //String json = "{\"setting\":{\"groups\":[{\"options\":[],\"id\":\"STBmacaddress\",\"type\":\"device-stb\",\"amsid\":\"" + amsIp + "\"}]}}";
         JSONObject json = new JSONObject();
         JSONObject object_in_settings = new JSONObject();
         JSONArray array_groups = new JSONArray();
@@ -103,7 +103,7 @@ public class MiddleAPI extends CommonAPI {
         object_in_groups.put("options", array_options);
 
         String result = json.toString();
-        if(show_generated_json) {
+        if(SHOW_GENERATED_JSON) {
             System.out.println("generated json: " + result);
         }
         return result;
@@ -123,7 +123,7 @@ public class MiddleAPI extends CommonAPI {
         object_in_array.put("reminderId", reminderId);
         //}
         String result = json.toJSONString();
-        if(show_generated_json) {
+        if(SHOW_GENERATED_JSON) {
             System.out.println("generated json: " + result);
         }
         return result;
@@ -142,7 +142,7 @@ public class MiddleAPI extends CommonAPI {
         object_in_array.put("reminderId", reminderId);
         //}
         String result = json.toJSONString();
-        if(show_generated_json) {
+        if(SHOW_GENERATED_JSON) {
             System.out.println("generated json: " + result);
         }
         return result;
@@ -177,7 +177,7 @@ public class MiddleAPI extends CommonAPI {
     }
 
     public ArrayList deleteMultipleReminders(String charterapi, String deviceId, int reminderScheduleId, int reminderId) throws IOException {
-        if(show_debug_level) {
+        if(SHOW_DEBUG_LEVEL) {
             System.out.println("deleteMultipleReminders with reminderScheduleId=" + reminderScheduleId + " and reminderId=" + reminderId);
         }
         HttpPost request = new HttpPost(charterapi + "/remindersmiddle/v1/reminders/deleteMultipleReminders");
